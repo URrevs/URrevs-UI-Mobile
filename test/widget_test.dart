@@ -7,6 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:urrevs_ui_mobile/app/app.dart';
 
 import 'package:urrevs_ui_mobile/main.dart';
 

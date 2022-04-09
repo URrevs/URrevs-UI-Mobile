@@ -1,0 +1,28 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:urrevs_ui_mobile/app/app.dart';
+
+class Routes {
+  static const String home = "/home";
+}
+
+class RouteGenerator {
+  static Route<dynamic> getRoute(RouteSettings routeSettings) {
+    switch (routeSettings.name) {
+      case Routes.home:
+        return MaterialPageRoute(builder: (_) => Home());
+      default:
+        return unDefinedRoute();
+    }
+  }
+
+  static Route<dynamic> unDefinedRoute() {
+    return MaterialPageRoute(
+        builder: (_) => Scaffold(
+              appBar: AppBar(
+                title: Text(''),
+              ),
+              body: Center(child: Text('')),
+            ));
+  }
+}
