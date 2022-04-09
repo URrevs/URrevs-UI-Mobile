@@ -1,5 +1,18 @@
 {
-  "hello": "Hello",
-  "toggleLocale": "Toggle Locale",
-  "click": "click"
+  "usedSince": "Used since",
+  "urrevs": "urrevs",
+  "battery": "Battery",
+  "callsQuality": "Calls Quality",
+  "camera": "Camera",
+  "comment": "Comment",
+  "cons": "Cons",
+  "generalProductRating": "General Rating",
+  "like": "Like",
+  "manufacturingQuality": "Manufacturing Quality",
+  "priceQuality": "Price Quality",
+  "pros": "Pros",
+  "seeLess": "see less",
+  "seeMore": "see more",
+  "share": "Share",
+  "userInterface": "User Interface"
 }

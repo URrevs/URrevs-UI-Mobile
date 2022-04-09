@@ -1,5 +1,18 @@
 {
-  "hello": "أهلا",
-  "toggleLocale": "غيِّر اللغة",
-  "click": "اضغط"
+  "usedSince": "استخدمه منذ",
+  "urrevs": "urrevs",
+  "generalProductRating": "التقييم العام للمنتج",
+  "userInterface": "واجهة المستخدم",
+  "manufacturingQuality": "جودة التصنيع",
+  "priceQuality": "القيمة للسعر",
+  "camera": "الكاميرا",
+  "callsQuality": "جودة المكالمات",
+  "battery": "البطارية",
+  "pros": "المميزات",
+  "cons": "العيوب",
+  "like": "أعجبني",
+  "comment": "تعليق",
+  "share": "مشاركة",
+  "seeMore": "المزيد",
+  "seeLess": "أقل"
 }
