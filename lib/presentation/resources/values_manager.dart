@@ -24,6 +24,6 @@ class AppRadius {
   static double r10 = 10.r;
 }
 
-class DurationConstant {
-  static const int d300 = 300;
+class DurationManager {
+  static const Duration d300 = Duration(milliseconds: 300);
 }
