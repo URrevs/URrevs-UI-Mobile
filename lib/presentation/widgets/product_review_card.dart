@@ -27,11 +27,12 @@ class ProductReviewCard extends StatelessWidget {
   /// Profile image url of the current logged in user.
   final String imageUrl;
 
-  /// Name of product on the review was posted.
+  /// Name of product on which the review was posted.
   final String productName;
 
   /// List of scores the product is given by the review author.
-  /// It is a list of 7 integers representing the rating from 1 to 5.
+  /// It is a list of 7 integers representing the rating from 1 to 5 for each
+  /// rating criteria.
   final List<int> scores;
 
   /// The text which the user written in the pros section when submitting the
@@ -72,21 +73,21 @@ class ProductReviewCard extends StatelessWidget {
   }) : super(key: key);
 
   /// An instance of [ProductReviewCard] filled with dummy data.
-  static ProductReviewCard dummyInstance = ProductReviewCard(
-    postedDate: DateTime.now(),
-    usedSinceDate: DateTime.now().subtract(Duration(days: 200)),
-    views: 100,
-    authorName: 'Fady',
-    imageUrl: 'https://picsum.photos/200',
-    productName: 'Oppo Reno 5',
-    scores: List.generate(7, (_) => Random().nextInt(5) + 1),
-    prosText: StringsManager.lorem,
-    consText: StringsManager.lorem,
-    likeCount: 100,
-    commentCount: 5,
-    shareCount: 20,
-    liked: Random().nextBool(),
-  );
+  static ProductReviewCard get dummyInstance => ProductReviewCard(
+        postedDate: DateTime.now(),
+        usedSinceDate: DateTime.now().subtract(Duration(days: 200)),
+        views: 100,
+        authorName: 'Fady',
+        imageUrl: 'https://picsum.photos/200',
+        productName: 'Oppo Reno 5',
+        scores: List.generate(7, (_) => Random().nextInt(5) + 1),
+        prosText: StringsManager.lorem,
+        consText: StringsManager.lorem,
+        likeCount: 100,
+        commentCount: 5,
+        shareCount: 20,
+        liked: Random().nextBool(),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -317,15 +318,16 @@ class _RatingBlockState extends State<_RatingBlock> {
   /// of the product.
   /// The 7 rows are collapsed into 1 row at the collapsed state of the review
   /// card.
-  Table _buildRatingTable(BuildContext context) {
+  Column _buildRatingTable(BuildContext context) {
     /// Number of star rows shown in review card.
     /// If review card is expanded, all 7 star rows are shown.
     /// If review card is not expanded, only 1 star row is shown.
     int shownStarRows = _expanded ? widget.scores.length : 1;
-    return Table(
+    return Column(
       children: [
         for (int i = 0; i < shownStarRows; i++) ...[
-          TableRow(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 _ratingCriteria[i].tr() + ":",
@@ -453,6 +455,22 @@ class _RatingBlockState extends State<_RatingBlock> {
     }
   }
 
+  /// Invoked when user presses on see more button.
+  /// * If the review card is collapsed, expand it.
+  /// * If the review card is expanded:
+  ///   * If the pros and cons text is completely shown, collapse the card.
+  ///   * If the pros and cons text is not completely shown, go to fullscreen
+  ///     review screen.
+  void _seeMoreOnPressed() {
+    if (!_expanded) {
+      return setState(() => _expanded = true);
+    }
+    if (!prosAndConsCut) {
+      return setState(() => _expanded = false);
+    }
+    // TODO: go to review full screen
+  }
+
   /// Returns see more button.
   TextButton _seeMoreButton(BuildContext context) {
     /// Adjust the alignment according to the locale.
@@ -467,15 +485,7 @@ class _RatingBlockState extends State<_RatingBlock> {
         padding: EdgeInsets.all(0),
         alignment: alignment,
       ),
-      onPressed: () {
-        if (!_expanded) {
-          return setState(() => _expanded = true);
-        }
-        if (!prosAndConsCut) {
-          return setState(() => _expanded = false);
-        }
-        // TODO: go to review full screen
-      },
+      onPressed: _seeMoreOnPressed,
       child: Text(seeMoreButtonText),
     );
   }
