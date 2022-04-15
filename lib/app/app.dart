@@ -21,6 +21,7 @@ class MyApp extends ConsumerWidget {
         title: LocaleKeys.urrevs.tr(),
         initialRoute: Routes.development,
         onGenerateRoute: RouteGenerator.getRoute,
+        debugShowCheckedModeBanner: false,
         themeMode: ref.watch(themeModeProvider),
         // theme: lightThemeData,
         darkTheme: ThemeManager.dark,

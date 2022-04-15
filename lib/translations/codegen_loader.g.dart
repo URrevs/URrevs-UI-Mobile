@@ -30,7 +30,8 @@ class CodegenLoader extends AssetLoader{
   "comment": "تعليق",
   "share": "مشاركة",
   "seeMore": "المزيد",
-  "seeLess": "أقل"
+  "seeLess": "أقل",
+  "iDontLikeThis": "لا يعجبني هذا"
 };
 static const Map<String,dynamic> en = {
   "usedSince": "Used since",
@@ -48,7 +49,8 @@ static const Map<String,dynamic> en = {
   "seeLess": "see less",
   "seeMore": "see more",
   "share": "Share",
-  "userInterface": "User Interface"
+  "userInterface": "User Interface",
+  "iDontLikeThis": "I don't like this"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

@@ -17,5 +17,6 @@ abstract class  LocaleKeys {
   static const share = 'share';
   static const seeMore = 'seeMore';
   static const seeLess = 'seeLess';
+  static const iDontLikeThis = 'iDontLikeThis';
 
 }

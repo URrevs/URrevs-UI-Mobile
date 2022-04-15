@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/font_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/review_card.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/product_review_card.dart';
 
 class DevelopmentScreen extends StatefulWidget {
   const DevelopmentScreen({Key? key}) : super(key: key);
@@ -93,7 +93,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
         child: ListView(
           padding: EdgeInsets.all(10.sp),
           children: [
-            ReviewCard(),
+            ProductReviewCard.dummyInstance,
           ],
         ),
       ),
