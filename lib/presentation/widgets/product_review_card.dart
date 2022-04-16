@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:urrevs_ui_mobile/app/extensions.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
@@ -78,7 +79,7 @@ class ProductReviewCard extends StatelessWidget {
         usedSinceDate: DateTime.now().subtract(Duration(days: 200)),
         views: 100,
         authorName: 'Fady',
-        imageUrl: 'https://picsum.photos/200',
+        imageUrl: StringsManager.picsum200x200,
         productName: 'Oppo Reno 5',
         scores: List.generate(7, (_) => Random().nextInt(5) + 1),
         prosText: StringsManager.lorem,
