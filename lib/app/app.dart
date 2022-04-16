@@ -19,7 +19,7 @@ class MyApp extends ConsumerWidget {
       designSize: Size(411, 731),
       minTextAdapt: true,
       splitScreenMode: false,
-      builder: () => MaterialApp(
+      builder: (_) => MaterialApp(
         title: LocaleKeys.urrevs.tr(),
         initialRoute: Routes.development,
         onGenerateRoute: RouteGenerator.getRoute,

@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 Dio get getDio {
   Dio dio = Dio();
@@ -17,13 +19,15 @@ Dio get getDio {
     headers: headers,
   );
 
-  // dio.interceptors.add(
-  //   PrettyDioLogger(
-  //       // requestHeader: true,
-  //       // requestBody: true,
-  //       // responseHeader: true,
-  //   ),
-  // );
+  // if (kDebugMode) {
+  //   dio.interceptors.add(
+  //     PrettyDioLogger(
+  //         // requestHeader: true,
+  //         // requestBody: true,
+  //         // responseHeader: true,
+  //         ),
+  //   );
+  // }
 
   return dio;
 }
