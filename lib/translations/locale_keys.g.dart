@@ -19,5 +19,6 @@ abstract class  LocaleKeys {
   static const seeLess = 'seeLess';
   static const iDontLikeThis = 'iDontLikeThis';
   static const reply = 'reply';
+  static const moreComments = 'moreComments';
 
 }

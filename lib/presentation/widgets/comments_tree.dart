@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
+import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -10,6 +11,27 @@ import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/styles_manager.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
+
+class CommentsList extends StatelessWidget {
+  const CommentsList({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        for (int i = 0; i < Random().nextInt(3) + 1; i++) ...[CommentsTree()],
+        TextButton(
+          onPressed: () {},
+          child: Text(
+            LocaleKeys.moreComments.tr(),
+            style: TextStyleManager.s16w800.copyWith(color: ColorManager.black),
+          ),
+        ),
+      ],
+    );
+  }
+}
 
 class CommentsTree extends StatelessWidget {
   const CommentsTree({Key? key}) : super(key: key);
@@ -21,10 +43,15 @@ class CommentsTree extends StatelessWidget {
         _Comment.dummyInstance(),
         Padding(
           padding: EdgeInsets.only(
-            left: context.isArabic ? 0 : 50.w,
-            right: context.isArabic ? 50.w : 0,
+            left: context.isArabic ? 0 : 80.sp,
+            right: context.isArabic ? 80.sp : 0,
           ),
-          child: _Comment.dummyInstance(isReply: true),
+          child: Column(
+            children: List.generate(
+              Random().nextInt(3) + 1,
+              (_) => _Comment.dummyInstance(isReply: true),
+            ),
+          ),
         ),
       ],
     );
@@ -32,7 +59,7 @@ class CommentsTree extends StatelessWidget {
 }
 
 class _Comment extends StatelessWidget {
-  final String imageUrl;
+  final String authorImageUrl;
   final String authorName;
   final String commentText;
   final int likeCount;
@@ -41,7 +68,7 @@ class _Comment extends StatelessWidget {
 
   const _Comment({
     Key? key,
-    required this.imageUrl,
+    required this.authorImageUrl,
     required this.authorName,
     required this.commentText,
     required this.likeCount,
@@ -51,9 +78,9 @@ class _Comment extends StatelessWidget {
 
   static _Comment dummyInstance({bool isReply = false}) {
     return _Comment(
-      imageUrl: StringsManager.picsum200x200,
-      authorName: 'Fady Ahmed',
-      commentText: 'comment text comment text comment text comment text ',
+      authorImageUrl: StringsManager.picsum200x200,
+      authorName: faker.person.name(),
+      commentText: faker.lorem.sentence() * 5,
       likeCount: Random().nextInt(1000000) + 1,
       datePosted: DateTime.now().subtract(
         Duration(hours: Random().nextInt(10000) + 1),
@@ -70,13 +97,13 @@ class _Comment extends StatelessWidget {
         radius: radius,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(radius),
-          child: Image.network(imageUrl),
+          child: Image.network(authorImageUrl),
         ),
       ),
     );
   }
 
-  Stack _commentBody(BuildContext context) {
+  Stack _commentBody(BuildContext context, BoxConstraints constraints) {
     return Stack(
       clipBehavior: Clip.none,
       children: [
@@ -93,7 +120,7 @@ class _Comment extends StatelessWidget {
               right: 12.w,
               bottom: 16.h,
             ),
-            width: isReply ? 143.w : 224.w,
+            constraints: BoxConstraints(maxWidth: constraints.maxWidth - 10.w),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12.r),
             ),
@@ -124,7 +151,7 @@ class _Comment extends StatelessWidget {
           style: TextStyleManager.s14w400.copyWith(
             color: ColorManager.grey,
           ),
-          textAlign: TextAlign.justify,
+          softWrap: true,
         ),
       ],
     );
@@ -158,7 +185,10 @@ class _Comment extends StatelessWidget {
     );
   }
 
-  SizedBox _commentFooter(BuildContext context) {
+  ConstrainedBox _commentFooter(
+    BuildContext context,
+    BoxConstraints constraints,
+  ) {
     var textButtonThemeData = TextButtonThemeData(
       style: Theme.of(context).textButtonTheme.style!.copyWith(
             textStyle: MaterialStateProperty.all(
@@ -169,20 +199,22 @@ class _Comment extends StatelessWidget {
             ),
           ),
     );
-    return SizedBox(
-      width: isReply ? 143.w : 224.w,
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxWidth: constraints.maxWidth - 10.w),
       child: TextButtonTheme(
         data: textButtonThemeData,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _sizedBox_50x25(
+            SizedBox(
+              height: 25.h,
               child: TextButton(
                 onPressed: () {},
                 child: Text(LocaleKeys.like.tr()),
               ),
             ),
-            _sizedBox_50x25(
+            SizedBox(
+              height: 25.h,
               child: TextButton(
                 onPressed: () {},
                 child: Text(LocaleKeys.reply.tr()),
@@ -200,13 +232,13 @@ class _Comment extends StatelessWidget {
     );
   }
 
-  SizedBox _sizedBox_50x25({required Widget child}) {
-    return SizedBox(
-      height: 25.h,
-      width: 50.w,
-      child: child,
-    );
-  }
+  // SizedBox _sizedBoxH25({required Widget child}) {
+  //   return SizedBox(
+  //     height: 25.h,
+  //     // width: 50.w,
+  //     child: child,
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -216,12 +248,17 @@ class _Comment extends StatelessWidget {
       children: [
         _commentAvatar(),
         6.horizontalSpace,
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _commentBody(context),
-            _commentFooter(context),
-          ],
+        Expanded(
+          child: LayoutBuilder(builder: (context, BoxConstraints constraints) {
+            print(constraints);
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _commentBody(context, constraints),
+                _commentFooter(context, constraints),
+              ],
+            );
+          }),
         )
       ],
     );

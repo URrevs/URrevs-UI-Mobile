@@ -94,7 +94,10 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
         child: ListView(
           padding: EdgeInsets.all(10.sp),
           children: [
-            CommentsTree(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CommentsList(),
+            ),
           ],
         ),
       ),
