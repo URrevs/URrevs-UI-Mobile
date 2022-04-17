@@ -25,7 +25,7 @@ class MyApp extends ConsumerWidget {
         onGenerateRoute: RouteGenerator.getRoute,
         debugShowCheckedModeBanner: false,
         themeMode: ref.watch(themeModeProvider),
-        // theme: lightThemeData,
+        theme: ThemeManager.light,
         darkTheme: ThemeManager.dark,
         builder: (context, widget) {
           ScreenUtil.setContext(context);

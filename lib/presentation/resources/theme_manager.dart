@@ -4,30 +4,59 @@ import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/font_manager.dart';
 
 class ThemeManager {
-  static ThemeData light = ThemeData(
-    scaffoldBackgroundColor: Colors.white,
-    fontFamily: FontConstants.tajawal,
-    iconTheme: IconThemeData(color: ColorManager.black),
-    colorScheme: ColorScheme.light().copyWith(
-      primary: ColorManager.blue,
-    ),
-    listTileTheme: ListTileThemeData(
-      iconColor: ColorManager.grey,
-    ),
-    textTheme: TextTheme(
-      headline1: ThemeData.light()
-          .textTheme
-          .headline1!
-          .copyWith(fontSize: 16, fontWeight: FontWeight.w700),
-      subtitle1: TextStyle(fontSize: 14.sp),
-    ),
-  );
+  static TextStyle get headline1 => TextStyle(
+        fontSize: 16.sp,
+        fontWeight: FontWeight.w700,
+        color: ColorManager.black,
+        overflow: TextOverflow.ellipsis,
+      );
 
-  static ThemeData dark = ThemeData(
-    scaffoldBackgroundColor: Colors.black12,
-    fontFamily: FontConstants.tajawal,
-    colorScheme: ColorScheme.dark().copyWith(
-      primary: Colors.blue[300],
-    ),
-  );
+  static ThemeData get light => ThemeData(
+        scaffoldBackgroundColor: Colors.white,
+        fontFamily: FontConstants.tajawal,
+        colorScheme: ColorScheme.light().copyWith(
+          primary: ColorManager.blue,
+        ),
+        iconTheme: IconThemeData(
+          color: ColorManager.grey,
+          size: 18.sp,
+        ),
+        listTileTheme: ListTileThemeData(
+          iconColor: ColorManager.grey,
+        ),
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            primary: ColorManager.grey,
+            textStyle: ThemeManager.headline1,
+            // minimumSize: Size(80.w, 30.h),
+            // maximumSize: Size(100.w, 40.h),
+          ),
+        ),
+        textTheme: TextTheme(
+          headline1: ThemeManager.headline1,
+          headline2: TextStyle(
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w500,
+            color: ColorManager.black,
+          ),
+          bodyText1: TextStyle(
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w400,
+            color: ColorManager.black,
+          ),
+          subtitle1: TextStyle(
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w400,
+            color: ColorManager.grey,
+          ),
+        ),
+      );
+
+  static ThemeData get dark => ThemeData(
+        scaffoldBackgroundColor: Colors.black12,
+        fontFamily: FontConstants.tajawal,
+        colorScheme: ColorScheme.dark().copyWith(
+          primary: Colors.blue[300],
+        ),
+      );
 }

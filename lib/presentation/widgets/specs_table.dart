@@ -189,7 +189,10 @@ class SpecsTable extends StatelessWidget {
             specValue,
             textAlign: TextAlign.center,
             textDirection: textDirection,
-            style: TextStyleManager.s16w400,
+            style: TextStyle(
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w400,
+            ),
           ),
         ),
       ),
@@ -249,6 +252,9 @@ class SpecsTable extends StatelessWidget {
       right: 16.w,
       left: 16.w,
     );
+
+    print('rebuilt');
+
     return Card(
       elevation: 3,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
