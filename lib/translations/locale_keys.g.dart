@@ -19,6 +19,36 @@ abstract class  LocaleKeys {
   static const seeLess = 'seeLess';
   static const iDontLikeThis = 'iDontLikeThis';
   static const reply = 'reply';
+  static const price = 'price';
+  static const manufacturingCompany = 'manufacturingCompany';
+  static const releaseDate = 'releaseDate';
+  static const productDimensions = 'productDimensions';
+  static const networkType = 'networkType';
+  static const productWeight = 'productWeight';
+  static const simCard = 'simCard';
+  static const displayType = 'displayType';
+  static const displaySize = 'displaySize';
+  static const displayResolution = 'displayResolution';
+  static const screenProtection = 'screenProtection';
+  static const operatingSystem = 'operatingSystem';
+  static const chipset = 'chipset';
+  static const CPU = 'CPU';
+  static const GPU = 'GPU';
+  static const externalMemory = 'externalMemory';
+  static const internalMemory = 'internalMemory';
+  static const mainCamera = 'mainCamera';
+  static const frontCamera = 'frontCamera';
+  static const loudSpeakers = 'loudSpeakers';
+  static const wlan = 'wlan';
+  static const bluetooth = 'bluetooth';
+  static const GPS = 'GPS';
+  static const NFC = 'NFC';
+  static const radio = 'radio';
+  static const USB = 'USB';
+  static const sensors = 'sensors';
+  static const charging = 'charging';
   static const moreComments = 'moreComments';
+  static const jack3_5 = 'jack3_5';
+  static const egyptianPound = 'egyptianPound';
 
 }

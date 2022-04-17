@@ -6,8 +6,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/font_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/comments_tree.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/comments_list.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/product_review_card.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/specs_comparison_table.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/specs_table.dart';
 
 class DevelopmentScreen extends StatefulWidget {
   const DevelopmentScreen({Key? key}) : super(key: key);
@@ -92,12 +94,8 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
       body: Theme(
         data: lightThemeData,
         child: ListView(
-          padding: EdgeInsets.all(10.sp),
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CommentsList(),
-            ),
+            SpecsTable.dummyInstance,
           ],
         ),
       ),
