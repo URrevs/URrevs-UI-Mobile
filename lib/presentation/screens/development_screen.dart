@@ -39,7 +39,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
       ),
       body: ListView(
         children: [
-          ProductReviewCard.dummyInstance,
+          CompanyReviewCard.dummyInstance,
         ],
       ),
     );
