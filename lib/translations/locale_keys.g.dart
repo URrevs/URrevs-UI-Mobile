@@ -13,6 +13,7 @@ abstract class  LocaleKeys {
   static const pros = 'pros';
   static const cons = 'cons';
   static const like = 'like';
+  static const liked = 'liked';
   static const comment = 'comment';
   static const share = 'share';
   static const seeMore = 'seeMore';

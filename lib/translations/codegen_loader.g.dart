@@ -26,7 +26,8 @@ class CodegenLoader extends AssetLoader{
   "battery": "البطارية",
   "pros": "المميزات",
   "cons": "العيوب",
-  "like": "أعجبني",
+  "like": "إعجاب",
+  "liked": "أعجبني",
   "comment": "تعليق",
   "share": "مشاركة",
   "seeMore": "المزيد",
@@ -120,7 +121,8 @@ static const Map<String,dynamic> en = {
   "egyptianPound": "EGP",
   "productName": "Product Name",
   "productImage": "Product Image",
-  "companyRating": "Company Rating"
+  "companyRating": "Company Rating",
+  "liked": "Liked"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

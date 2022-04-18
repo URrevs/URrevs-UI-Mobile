@@ -50,5 +50,6 @@
   "egyptianPound": "EGP",
   "productName": "Product Name",
   "productImage": "Product Image",
-  "companyRating": "Company Rating"
+  "companyRating": "Company Rating",
+  "liked": "Liked"
 }

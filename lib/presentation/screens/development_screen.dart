@@ -37,7 +37,11 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
           // ),
         ],
       ),
-      body: CompanyReviewCard.dummyInstance,
+      body: ListView(
+        children: [
+          ProductReviewCard.dummyInstance,
+        ],
+      ),
     );
   }
 }
