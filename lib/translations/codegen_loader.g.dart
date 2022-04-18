@@ -63,7 +63,9 @@ class CodegenLoader extends AssetLoader{
   "charging": "الشحن",
   "moreComments": "المزيد من التعليقات",
   "jack3_5": "مخرج السماعات 3.5 mm",
-  "egyptianPound": "جنيه مصري"
+  "egyptianPound": "جنيه مصري",
+  "productName": "اسم المنتج",
+  "productImage": "صورة المنتج"
 };
 static const Map<String,dynamic> en = {
   "usedSince": "Used since",
@@ -114,7 +116,9 @@ static const Map<String,dynamic> en = {
   "simCard": "Sim Card",
   "wlan": "WLAN",
   "jack3_5": "3.5 mm jack",
-  "egyptianPound": "EGP"
+  "egyptianPound": "EGP",
+  "productName": "Product Name",
+  "productImage": "Product Image"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

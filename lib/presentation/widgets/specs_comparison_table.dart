@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
-import 'package:urrevs_ui_mobile/presentation/resources/font_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/styles_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/specs_table.dart';
@@ -37,56 +36,127 @@ class SpecsComparisonTable extends StatelessWidget {
       );
 
   /// Returns a [TableRow] that contains both the specification name and value
-  /// of the phone.
-  TableRow _tableRow({
+  /// of that specification for both phones.
+  TableRow _specsTableRow({
     required String specName,
     required String firstSpecValue,
     required String secondSpecValue,
   }) {
     return TableRow(
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(width: 0.2, color: ColorManager.black),
-        ),
-      ),
       children: <Widget>[
-        _specName(specName),
+        _pointOfComparisonCell(specName.tr(), TextStyleManager.s16w500),
         if (specName == LocaleKeys.manufacturingCompany) ...[
           _companyName(firstSpecValue),
           _companyName(secondSpecValue),
         ],
         if (specName != LocaleKeys.manufacturingCompany) ...[
-          _specValue(firstSpecValue, specName),
-          _specValue(secondSpecValue, specName),
+          _specValue(
+            firstSpecValue,
+            _getTextDirection(specName),
+            TextStyleManager.s16w400,
+          ),
+          _specValue(
+            secondSpecValue,
+            _getTextDirection(specName),
+            TextStyleManager.s16w400,
+          ),
         ],
       ],
     );
   }
 
-  /// Returns a [TableCell] that contains the specification value of the phone.
-  TableCell _specValue(String specValue, String specName) {
+  /// Returns the suitable [TextDirection] corresponding to a specification
+  /// name.
+  ///
+  /// Always the text direction would be from left to right except in the case
+  /// of price, the text direction would be left to be determined by the
+  /// locale. This is because the price value is the only cell that contains
+  /// both arabic letters and english numbers (in the arabic locale).
+  TextDirection? _getTextDirection(String specName) {
     final bool isPrice = specName == LocaleKeys.price;
-
-    /// Always the text direction would be from left to right except in the case
-    /// of price, the text direction would be left to be determined by the
-    /// locale. This is because the price value is the only cell that contains
-    /// both arabic letters and english numbers (in the arabic locale)
     final TextDirection? textDirection = isPrice ? null : TextDirection.ltr;
+    return textDirection;
+  }
+
+  /// Returns a TableRow containing the names of the 2 products.
+  TableRow _productsNamesRow() {
+    return TableRow(
+      children: <Widget>[
+        _pointOfComparisonCell(
+          LocaleKeys.productName.tr(),
+          TextStyleManager.s20w500,
+        ),
+        _specValue(
+          firstProductName,
+          TextDirection.ltr,
+          TextStyleManager.s20w500,
+        ),
+        _specValue(
+          secondProductName,
+          TextDirection.ltr,
+          TextStyleManager.s20w500,
+        ),
+      ],
+    );
+  }
+
+  /// Returns a table row containing the images of the two products.
+  TableRow _productsImagesRow() {
+    return TableRow(
+      children: <Widget>[
+        _pointOfComparisonCell(
+          LocaleKeys.productImage.tr(),
+          TextStyleManager.s20w500,
+        ),
+        _organizedTableCell(
+          child: _organizedProductImage(imageUrl: firstProductImageUrl),
+        ),
+        _organizedTableCell(
+          child: _organizedProductImage(imageUrl: secondProductImageIrl),
+        ),
+      ],
+    );
+  }
+
+  /// Returns the product image after clipping and with the suitable size.
+  SizedBox _organizedProductImage({required String imageUrl}) {
+    return SizedBox(
+      width: 115.w,
+      height: 95.h,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(15),
+        child: Image.network(
+          imageUrl,
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+
+  /// Returns a [TableCell] that contains the specification value of the phone.
+  TableCell _specValue(
+    String specValue,
+    TextDirection? textDirection,
+    TextStyle textStyle,
+  ) {
+    return _organizedTableCell(
+      child: Text(
+        specValue,
+        textAlign: TextAlign.center,
+        textDirection: textDirection,
+        style: textStyle,
+      ),
+    );
+  }
+
+  /// A wrapper method around a widget put in the cell
+  TableCell _organizedTableCell({required Widget child}) {
     return TableCell(
       verticalAlignment: TableCellVerticalAlignment.middle,
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 8.h),
+        padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
         child: Center(
-          child: Text(
-            specValue,
-            textAlign: TextAlign.center,
-            textDirection: textDirection,
-            // TODO: use TextStyle manager
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeightManager.w400,
-            ),
-          ),
+          child: child,
         ),
       ),
     );
@@ -95,18 +165,13 @@ class SpecsComparisonTable extends StatelessWidget {
   /// Returns a [TableCell] that contains a [TextButton] navigating to the
   /// company profile screen.
   TableCell _companyName(String specValue) {
-    return TableCell(
-      verticalAlignment: TableCellVerticalAlignment.middle,
+    return _organizedTableCell(
       child: TextButton(
         onPressed: _navigateToCompanyScreen,
         child: Text(
           specValue,
           textAlign: TextAlign.center,
-          // TODO: use TextStyle manager
-          style: TextStyle(
-            fontSize: 16.sp,
-            fontWeight: FontWeightManager.w900,
-          ).copyWith(
+          style: TextStyleManager.s16w900.copyWith(
             decoration: TextDecoration.underline,
             color: ColorManager.black,
           ),
@@ -118,30 +183,18 @@ class SpecsComparisonTable extends StatelessWidget {
   /// Navigates to company profile screen.
   void _navigateToCompanyScreen() {}
 
-  /// Returns a [TableCell] that contains the name of the specification of the
-  /// phone.
-  TableCell _specName(String specName) {
-    print('spec name rebuilt');
-    print(TextStyleManager.s16w500);
-    print(16.sp);
-    return TableCell(
-      verticalAlignment: TableCellVerticalAlignment.middle,
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 8.h),
-        child: Center(
-          child: Text(
-            specName.tr() + ":",
-            textAlign: TextAlign.center,
-            // TODO: use TextStyle manager
-            style: TextStyleManager.s16w500,
-          ),
-        ),
+  TableCell _pointOfComparisonCell(String text, TextStyle textStyle) {
+    return _organizedTableCell(
+      child: Text(
+        text,
+        textAlign: TextAlign.center,
+        style: textStyle,
       ),
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
+  /// Returns the table containing all the spcifications on the 2 products.
+  Table _buildTable(BuildContext context) {
     final String languageCode = context.locale.languageCode;
     final List<String> specNames =
         firstProductSpecs.toMap(languageCode: languageCode).keys.toList();
@@ -149,31 +202,47 @@ class SpecsComparisonTable extends StatelessWidget {
         firstProductSpecs.toMap(languageCode: languageCode).values.toList();
     final List<String> secondProductSpecsValues =
         secondProductSpecs.toMap(languageCode: languageCode).values.toList();
+    final borderSide = BorderSide(width: 0.2, color: ColorManager.black);
 
-    EdgeInsets cardPadding = EdgeInsets.only(
-      bottom: 15.h,
-      top: 7.h,
-      right: 16.w,
-      left: 16.w,
-    );
-
-    return Card(
-      elevation: 3,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
-      child: Padding(
-        padding: cardPadding,
-        child: Table(
-          children: [
-            for (int i = 0; i < specNames.length; i++) ...[
-              _tableRow(
-                specName: specNames[i],
-                firstSpecValue: firstProductSpecsValues[i],
-                secondSpecValue: secondProductSpecsValues[i],
-              ),
-            ],
-          ],
-        ),
+    return Table(
+      border: TableBorder(
+        verticalInside: borderSide,
+        horizontalInside: borderSide,
       ),
+      children: [
+        _productsNamesRow(),
+        _productsImagesRow(),
+        for (int i = 0; i < specNames.length; i++) ...[
+          _specsTableRow(
+            specName: specNames[i],
+            firstSpecValue: firstProductSpecsValues[i],
+            secondSpecValue: secondProductSpecsValues[i],
+          ),
+        ],
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      scrollDirection: Axis.horizontal,
+      children: [
+        SizedBox(
+          width: 1.2.sw,
+          child: Card(
+            elevation: 3,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16.r),
+            ),
+            child: ListView(
+              children: [
+                _buildTable(context),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

@@ -1,6 +1,6 @@
 {
   "usedSince": "Used since",
-  "urrevs": "urrevs",
+  "urrevs": "URrevs",
   "battery": "Battery",
   "callsQuality": "Calls Quality",
   "camera": "Camera",
@@ -47,5 +47,7 @@
   "simCard": "Sim Card",
   "wlan": "WLAN",
   "jack3_5": "3.5 mm jack",
-  "egyptianPound": "EGP"
+  "egyptianPound": "EGP",
+  "productName": "Product Name",
+  "productImage": "Product Image"
 }
