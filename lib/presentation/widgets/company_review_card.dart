@@ -98,7 +98,7 @@ class CompanyReviewCard extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            CardHeader(
+            _CardHeader(
               postedDate: postedDate,
               usedSinceDate: usedSinceDate,
               views: views,
@@ -127,8 +127,8 @@ class CompanyReviewCard extends StatelessWidget {
 }
 
 /// Topmost part of the review card.
-class CardHeader extends StatelessWidget {
-  const CardHeader({
+class _CardHeader extends StatelessWidget {
+  const _CardHeader({
     Key? key,
     required this.postedDate,
     required this.usedSinceDate,

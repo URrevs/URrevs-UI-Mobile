@@ -1,16 +1,10 @@
-import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
-import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/card_body_expand_circle.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/card_body_rating_bloc.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/card_body_rating_block.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/card_body_review_text.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/card_body_see_more_button.dart';
-
-import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 /// Middle block of the review card.
 /// Contains star ratings and pros and cons of the product.
@@ -21,13 +15,18 @@ class CardBody extends StatefulWidget {
     required this.scores,
     required this.prosText,
     required this.consText,
-  })  : assert(scores.length == 7),
-        super(key: key);
+    required this.ratingCriteria,
+    required this.showExpandCircle,
+    required this.hideSeeMoreIfNoNeedForExpansion,
+  }) : super(key: key);
 
   // defined before in ProductReviewCard
   final List<int> scores;
+  final List<String> ratingCriteria;
   final String prosText;
   final String consText;
+  final bool showExpandCircle;
+  final bool hideSeeMoreIfNoNeedForExpansion;
 
   @override
   State<CardBody> createState() => _CardBodyState();
@@ -47,6 +46,19 @@ class _CardBodyState extends State<CardBody> {
   bool get prosAndConsCut =>
       widget.prosText.length + widget.consText.length > maxLetters;
 
+  /// Returns true when the card is at a state in which we don't need to make
+  /// an expansion. This state is when the sum of pros text length and cons text
+  /// length is less than or equal collapsedMaxLetters.
+  bool get noNeedForExpansion =>
+      widget.prosText.length + widget.consText.length <=
+      AppNumericValues.collapsedMaxLetters;
+
+  void setExpandedState(bool value) {
+    setState(() {
+      _expanded = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -58,9 +70,15 @@ class _CardBodyState extends State<CardBody> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CardBodyRatingBlock(expanded: _expanded, scores: widget.scores),
-            10.verticalSpace,
-            CardBodyExpandCircle(expanded: _expanded),
+            CardBodyRatingBlock(
+              expanded: _expanded,
+              scores: widget.scores,
+              ratingCriteria: widget.ratingCriteria,
+            ),
+            if (widget.showExpandCircle) ...[
+              10.verticalSpace,
+              CardBodyExpandCircle(expanded: _expanded),
+            ],
             10.verticalSpace,
             CardBodyReviewText(
               prosText: widget.prosText,
@@ -70,6 +88,10 @@ class _CardBodyState extends State<CardBody> {
             CardBodySeeMoreButton(
               expanded: _expanded,
               prosAndConsCut: prosAndConsCut,
+              setExpandedState: setExpandedState,
+              noNeedForExpansion: noNeedForExpansion,
+              hideSeeMoreIfNoNeedForExpansion:
+                  widget.hideSeeMoreIfNoNeedForExpansion,
             ),
           ],
         ),

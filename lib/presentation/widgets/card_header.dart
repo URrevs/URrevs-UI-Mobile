@@ -15,6 +15,7 @@ class CardHeader extends StatelessWidget {
     required this.authorName,
     required this.imageUrl,
     required this.productName,
+    this.showUsedSincePart = true,
   }) : super(key: key);
 
   // Declared before in the ProductReviewCard
@@ -24,6 +25,7 @@ class CardHeader extends StatelessWidget {
   final String authorName;
   final String imageUrl;
   final String productName;
+  final bool showUsedSincePart;
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +47,7 @@ class CardHeader extends StatelessWidget {
                   postedDate: postedDate,
                   usedSinceDate: usedSinceDate,
                   views: views,
+                  showUsedSincePart: showUsedSincePart,
                 ),
               ],
             ),

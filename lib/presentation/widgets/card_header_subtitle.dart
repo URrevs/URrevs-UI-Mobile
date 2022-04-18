@@ -12,11 +12,13 @@ class CardHeaderSubtitle extends StatelessWidget {
     required this.postedDate,
     required this.usedSinceDate,
     required this.views,
+    required this.showUsedSincePart,
   }) : super(key: key);
 
   final DateTime postedDate;
   final DateTime usedSinceDate;
   final int views;
+  final bool showUsedSincePart;
 
   @override
   Widget build(BuildContext context) {
@@ -40,14 +42,16 @@ class CardHeaderSubtitle extends StatelessWidget {
           padding: EdgeInsets.all(1.sp),
           child: Icon(Icons.circle, size: 6.sp),
         ),
-        Text(
-          LocaleKeys.usedSince.tr() + " " + usedSinceDateStr,
-          style: style,
-        ),
-        Padding(
-          padding: EdgeInsets.all(1.sp),
-          child: Icon(Icons.circle, size: 6.sp),
-        ),
+        if (showUsedSincePart) ...[
+          Text(
+            LocaleKeys.usedSince.tr() + " " + usedSinceDateStr,
+            style: style,
+          ),
+          Padding(
+            padding: EdgeInsets.all(1.sp),
+            child: Icon(Icons.circle, size: 6.sp),
+          ),
+        ],
         Icon(Icons.remove_red_eye),
         1.horizontalSpace,
         Text(views.toString(), style: style)

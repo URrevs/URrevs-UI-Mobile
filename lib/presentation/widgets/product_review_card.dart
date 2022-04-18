@@ -6,8 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/card_body.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/card_footer.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/company_review_card.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/card_header.dart';
 
+import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 /// A card showing a review for a product.
 class ProductReviewCard extends StatelessWidget {
@@ -54,6 +55,17 @@ class ProductReviewCard extends StatelessWidget {
   /// Is the review liked by the current logged in user or not.
   final bool liked;
 
+  /// The seven rating criteria show in a product review card.
+  final List<String> _ratingCriteria = const [
+    LocaleKeys.generalProductRating,
+    LocaleKeys.userInterface,
+    LocaleKeys.manufacturingQuality,
+    LocaleKeys.priceQuality,
+    LocaleKeys.camera,
+    LocaleKeys.callsQuality,
+    LocaleKeys.battery,
+  ];
+
   const ProductReviewCard({
     Key? key,
     required this.postedDate,
@@ -97,18 +109,22 @@ class ProductReviewCard extends StatelessWidget {
         child: Column(
           children: [
             CardHeader(
+              imageUrl: imageUrl,
+              authorName: authorName,
+              productName: productName,
               postedDate: postedDate,
               usedSinceDate: usedSinceDate,
               views: views,
-              authorName: authorName,
-              imageUrl: imageUrl,
-              productName: productName,
+              showUsedSincePart: true,
             ),
             10.verticalSpace,
             CardBody(
-              scores: scores,
               prosText: prosText,
               consText: consText,
+              ratingCriteria: _ratingCriteria,
+              scores: scores,
+              showExpandCircle: true,
+              hideSeeMoreIfNoNeedForExpansion: false,
             ),
             10.verticalSpace,
             CardFooter(
