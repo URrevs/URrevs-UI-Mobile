@@ -235,10 +235,13 @@ class SpecsComparisonTable extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16.r),
             ),
-            child: ListView(
-              children: [
-                _buildTable(context),
-              ],
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16.r),
+              child: ListView(
+                children: [
+                  _buildTable(context),
+                ],
+              ),
             ),
           ),
         ),

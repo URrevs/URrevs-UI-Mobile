@@ -5,15 +5,15 @@ import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:urrevs_ui_mobile/app/extensions.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 /// A card showing a review for a product.
-class ProductReviewCard extends StatelessWidget {
+class CompanyReviewCard extends StatelessWidget {
   /// The date where the review was posted.
   final DateTime postedDate;
 
@@ -30,12 +30,10 @@ class ProductReviewCard extends StatelessWidget {
   final String imageUrl;
 
   /// Name of product on which the review was posted.
-  final String productName;
+  final String companyName;
 
-  /// List of scores the product is given by the review author.
-  /// It is a list of 7 integers representing the rating from 1 to 5 for each
-  /// rating criteria.
-  final List<int> scores;
+  /// An integer from 1 to 5 representing the company general rating
+  final int generalRating;
 
   /// The text which the user written in the pros section when submitting the
   /// review.
@@ -57,15 +55,15 @@ class ProductReviewCard extends StatelessWidget {
   /// Is the review liked by the current logged in user or not.
   final bool liked;
 
-  const ProductReviewCard({
+  const CompanyReviewCard({
     Key? key,
     required this.postedDate,
     required this.usedSinceDate,
     required this.views,
     required this.authorName,
     required this.imageUrl,
-    required this.productName,
-    required this.scores,
+    required this.companyName,
+    required this.generalRating,
     required this.prosText,
     required this.consText,
     required this.likeCount,
@@ -74,15 +72,15 @@ class ProductReviewCard extends StatelessWidget {
     required this.liked,
   }) : super(key: key);
 
-  /// An instance of [ProductReviewCard] filled with dummy data.
-  static ProductReviewCard get dummyInstance => ProductReviewCard(
+  /// An instance of [CompanyReviewCard] filled with dummy data.
+  static CompanyReviewCard get dummyInstance => CompanyReviewCard(
         postedDate: DateTime.now(),
         usedSinceDate: DateTime.now().subtract(Duration(days: 200)),
         views: 100,
         authorName: faker.person.name(),
         imageUrl: StringsManager.picsum200x200,
-        productName: 'Oppo Reno 5',
-        scores: List.generate(7, (_) => Random().nextInt(5) + 1),
+        companyName: faker.company.name(),
+        generalRating: Random().nextInt(5) + 1,
         prosText: StringsManager.lorem,
         consText: StringsManager.lorem,
         likeCount: 100,
@@ -98,6 +96,7 @@ class ProductReviewCard extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 8.h),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             _CardHeader(
               postedDate: postedDate,
@@ -105,11 +104,11 @@ class ProductReviewCard extends StatelessWidget {
               views: views,
               authorName: authorName,
               imageUrl: imageUrl,
-              productName: productName,
+              productName: companyName,
             ),
             10.verticalSpace,
             _RatingBlock(
-              scores: scores,
+              generalRating: generalRating,
               prosText: prosText,
               consText: consText,
             ),
@@ -266,14 +265,14 @@ class _RatingBlock extends StatefulWidget {
   /// Must take an array of scores of 7 items.
   const _RatingBlock({
     Key? key,
-    required this.scores,
+    required this.generalRating,
     required this.prosText,
     required this.consText,
-  })  : assert(scores.length == 7),
+  })  : assert(generalRating >= 1 && generalRating <= 5),
         super(key: key);
 
   // defined before in ProductReviewCard
-  final List<int> scores;
+  final int generalRating;
   final String prosText;
   final String consText;
 
@@ -284,28 +283,11 @@ class _RatingBlock extends StatefulWidget {
 class _RatingBlockState extends State<_RatingBlock> {
   bool _expanded = false;
 
-  /// Number of letters show in a review card in the section of pros & cons when
-  /// the card is collapsed.
-  final int _collapsedMaxLetters = 600;
-
-  /// Number of letters show in a review card in the section of pros & cons when
-  /// the card is expanded.
-  final int _expandedMaxLetters = 1200;
-
   /// The max letters limit applied at any moment to the review card.
   /// It is based on the [_expanded] condition of the review card.
-  int get maxLetters => _expanded ? _expandedMaxLetters : _collapsedMaxLetters;
-
-  /// The seven rating criteria show in a product review card.
-  final List<String> _ratingCriteria = const [
-    LocaleKeys.generalProductRating,
-    LocaleKeys.userInterface,
-    LocaleKeys.manufacturingQuality,
-    LocaleKeys.priceQuality,
-    LocaleKeys.camera,
-    LocaleKeys.callsQuality,
-    LocaleKeys.battery,
-  ];
+  int get maxLetters => _expanded
+      ? AppNumericValues.expandedMaxLetters
+      : AppNumericValues.collapsedMaxLetters;
 
   /// The cyan circle with the arrow at the middle of the review card indicating
   /// that the card is expandable.
@@ -326,45 +308,31 @@ class _RatingBlockState extends State<_RatingBlock> {
     );
   }
 
-  /// Rating table which contains 7 rows of star ratings of different aspects
-  /// of the product.
-  /// The 7 rows are collapsed into 1 row at the collapsed state of the review
-  /// card.
-  Column _buildRatingTable(BuildContext context) {
-    /// Number of star rows shown in review card.
-    /// If review card is expanded, all 7 star rows are shown.
-    /// If review card is not expanded, only 1 star row is shown.
-    int shownStarRows = _expanded ? widget.scores.length : 1;
-    return Column(
+  Row _buildRatingBar(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        for (int i = 0; i < shownStarRows; i++) ...[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                _ratingCriteria[i].tr() + ":",
-                style: Theme.of(context).textTheme.headline2,
-              ),
-              RatingBar.builder(
-                itemSize: 24.sp,
-                ignoreGestures: true,
-                initialRating: widget.scores[i].toDouble(),
-                minRating: 1,
-                direction: Axis.horizontal,
-                allowHalfRating: false,
-                itemCount: 5,
-                itemPadding: EdgeInsets.symmetric(horizontal: 4.sp),
-                itemBuilder: (context, _) => Icon(
-                  Icons.star_rate_rounded,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-                onRatingUpdate: (rating) {
-                  print(rating);
-                },
-              )
-            ],
+        Text(
+          LocaleKeys.companyRating.tr() + ":",
+          style: Theme.of(context).textTheme.headline2,
+        ),
+        RatingBar.builder(
+          itemSize: 24.sp,
+          ignoreGestures: true,
+          initialRating: widget.generalRating.toDouble(),
+          minRating: 1,
+          direction: Axis.horizontal,
+          allowHalfRating: false,
+          itemCount: 5,
+          itemPadding: EdgeInsets.symmetric(horizontal: 4.sp),
+          itemBuilder: (context, _) => Icon(
+            Icons.star_rate_rounded,
+            color: Theme.of(context).colorScheme.primary,
           ),
-        ]
+          onRatingUpdate: (rating) {
+            print(rating);
+          },
+        )
       ],
     );
   }
@@ -483,13 +451,20 @@ class _RatingBlockState extends State<_RatingBlock> {
     // TODO: go to review full screen
   }
 
+  /// Returns true when the card is at a state in which we don't need to make
+  /// an expansion. This state is when the card is collapsed and both pros and
+  /// cons texts are completely shown.
+  bool get noNeedForExpansion => !_expanded && !prosAndConsCut;
+
   /// Returns see more button.
-  TextButton _seeMoreButton(BuildContext context) {
+  Widget _seeMoreButton(BuildContext context) {
     /// Adjust the alignment according to the locale.
     final Alignment alignment =
         context.locale.countryCode == LanguageType.en.name
             ? Alignment.centerLeft
             : Alignment.centerRight;
+
+    if (noNeedForExpansion) return Container();
 
     return TextButton(
       style: TextButton.styleFrom(
@@ -506,16 +481,17 @@ class _RatingBlockState extends State<_RatingBlock> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => setState(() {
-        _expanded = !_expanded;
+        print('hideSeeMore: $noNeedForExpansion');
+        if (!noNeedForExpansion) {
+          _expanded = !_expanded;
+        }
       }),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildRatingTable(context),
-            10.verticalSpace,
-            _expandCircle(),
+            _buildRatingBar(context),
             10.verticalSpace,
             _reviewText(context),
             _seeMoreButton(context),

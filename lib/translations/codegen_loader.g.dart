@@ -16,7 +16,7 @@ class CodegenLoader extends AssetLoader{
 
   static const Map<String,dynamic> ar = {
   "usedSince": "استخدمه منذ",
-  "urrevs": "urrevs",
+  "urrevs": "URrevs",
   "generalProductRating": "التقييم العام للمنتج",
   "userInterface": "واجهة المستخدم",
   "manufacturingQuality": "جودة التصنيع",
@@ -65,11 +65,12 @@ class CodegenLoader extends AssetLoader{
   "jack3_5": "مخرج السماعات 3.5 mm",
   "egyptianPound": "جنيه مصري",
   "productName": "اسم المنتج",
-  "productImage": "صورة المنتج"
+  "productImage": "صورة المنتج",
+  "companyRating": "التقييم للشركة"
 };
 static const Map<String,dynamic> en = {
   "usedSince": "Used since",
-  "urrevs": "urrevs",
+  "urrevs": "URrevs",
   "battery": "Battery",
   "callsQuality": "Calls Quality",
   "camera": "Camera",
@@ -118,7 +119,8 @@ static const Map<String,dynamic> en = {
   "jack3_5": "3.5 mm jack",
   "egyptianPound": "EGP",
   "productName": "Product Name",
-  "productImage": "Product Image"
+  "productImage": "Product Image",
+  "companyRating": "Company Rating"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

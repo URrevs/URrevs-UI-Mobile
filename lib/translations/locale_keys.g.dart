@@ -52,5 +52,6 @@ abstract class  LocaleKeys {
   static const egyptianPound = 'egyptianPound';
   static const productName = 'productName';
   static const productImage = 'productImage';
+  static const companyRating = 'companyRating';
 
 }

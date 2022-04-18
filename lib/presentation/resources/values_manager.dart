@@ -24,6 +24,16 @@ class AppRadius {
   static double get r10 => 10.r;
 }
 
+class AppNumericValues {
+  /// Number of letters show in a review card in the section of pros & cons when
+  /// the card is collapsed.
+  static int get collapsedMaxLetters => 600;
+
+  /// Number of letters show in a review card in the section of pros & cons when
+  /// the card is expanded.
+  static int get expandedMaxLetters => 700;
+}
+
 class DurationManager {
   static const Duration d300 = Duration(milliseconds: 300);
 }
