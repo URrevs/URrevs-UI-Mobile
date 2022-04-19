@@ -13,8 +13,16 @@ class CardBodyReviewText extends StatelessWidget {
     required this.maxLetters,
   }) : super(key: key);
 
+  /// The text which the user written in the pros section when submitting the
+  /// review.
   final String prosText;
+
+  /// The text which the user written in the cons section when submitting the
+  /// review.
   final String consText;
+
+  /// The max letters limit applied at any moment to the review card.
+  /// It is based on the [_expanded] condition of the review card.
   final int maxLetters;
 
   /// Cut the pros text according to the [_expanded] state and [maxLetters] of

@@ -11,7 +11,10 @@ class CardBodyReviewBlockStarBar extends StatelessWidget {
     required this.score,
   }) : super(key: key);
 
+  /// Rating criteria name to be shown in the star bar.
   final String ratingCriteria;
+
+  /// The corresponding name of received [ratingCriteria].
   final int score;
 
   @override

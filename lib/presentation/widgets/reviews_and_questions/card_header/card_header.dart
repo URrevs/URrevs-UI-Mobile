@@ -1,31 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/card_header_avatar.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/card_header_subtitle.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/card_header_title.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/card_header_trailer.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_header/card_header_avatar.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_header/card_header_subtitle.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_header/card_header_title.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_header/card_header_trailer.dart';
 
 /// Topmost part of the review.
 class CardHeader extends StatelessWidget {
   const CardHeader({
     Key? key,
     required this.postedDate,
-    required this.usedSinceDate,
+    this.usedSinceDate,
     required this.views,
     required this.authorName,
     required this.imageUrl,
     required this.productName,
-    this.showUsedSincePart = true,
   }) : super(key: key);
 
-  // Declared before in the ProductReviewCard
-  final DateTime postedDate;
-  final DateTime usedSinceDate;
-  final int views;
-  final String authorName;
+  /// Profile image url of the current logged in user.
   final String imageUrl;
+
+  /// Name of review author.
+  final String authorName;
+
+  /// Name of product on which the review was posted.
   final String productName;
-  final bool showUsedSincePart;
+
+  /// The date where the review was posted.
+  final DateTime postedDate;
+
+  /// The date from which the user started using the product.
+  final DateTime? usedSinceDate;
+
+  /// How many times this review was viewed.
+  final int views;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +55,6 @@ class CardHeader extends StatelessWidget {
                   postedDate: postedDate,
                   usedSinceDate: usedSinceDate,
                   views: views,
-                  showUsedSincePart: showUsedSincePart,
                 ),
               ],
             ),

@@ -7,11 +7,11 @@ import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 class CardBodyExpandCircle extends StatelessWidget {
   const CardBodyExpandCircle({
     Key? key,
-    required bool expanded,
-  })  : _expanded = expanded,
-        super(key: key);
+    required this.expanded,
+  }) : super(key: key);
 
-  final bool _expanded;
+  /// Whether the card is expanded or not.
+  final bool expanded;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class CardBodyExpandCircle extends StatelessWidget {
       shape: CircleBorder(),
       child: Center(
         child: Icon(
-          _expanded
+          expanded
               ? Icons.arrow_drop_up_rounded
               : Icons.arrow_drop_down_rounded,
           size: 40.sp,

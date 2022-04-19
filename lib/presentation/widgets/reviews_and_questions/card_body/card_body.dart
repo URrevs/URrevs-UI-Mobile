@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/card_body_expand_circle.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/card_body_rating_block.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/card_body_review_text.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/card_body_see_more_button.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body_expand_circle.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body_rating_block.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body_review_text.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body_see_more_button.dart';
 
 /// Middle block of the review card.
 /// Contains star ratings and pros and cons of the product.
 class CardBody extends StatefulWidget {
-  /// Must take an array of scores of 7 items.
   const CardBody({
     Key? key,
     required this.scores,
@@ -20,12 +19,30 @@ class CardBody extends StatefulWidget {
     required this.hideSeeMoreIfNoNeedForExpansion,
   }) : super(key: key);
 
-  // defined before in ProductReviewCard
-  final List<int> scores;
+  /// List of rating criteria to be show in the [CardBodyRatingBlock].
   final List<String> ratingCriteria;
+
+  /// List of scores corresponding to the [ratingCriteria] list to be also shown
+  /// in the [CardBodyRatingBlock].
+  final List<int> scores;
+
+  /// The text which the user written in the pros section when submitting the
+  /// review.
   final String prosText;
+
+  /// The text which the user written in the cons section when submitting the
+  /// review.
   final String consText;
+
+  /// Whether to show expand circle or not.
   final bool showExpandCircle;
+
+  /// If set to true, [CardBodySeeMoreButton] would be hidden at the state of
+  /// the card where both pros and cons text are both shown completely. This
+  /// case only occurs when the the sum of pros text length and cons text length
+  /// is less than or equal to collapsedMaxLetters.
+  ///
+  /// This is set to true at the case of company review card.
   final bool hideSeeMoreIfNoNeedForExpansion;
 
   @override
@@ -33,6 +50,7 @@ class CardBody extends StatefulWidget {
 }
 
 class _CardBodyState extends State<CardBody> {
+  /// Whether the card is expanded or not.
   bool _expanded = false;
 
   /// The max letters limit applied at any moment to the review card.

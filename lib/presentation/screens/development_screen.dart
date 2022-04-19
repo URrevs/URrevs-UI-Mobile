@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/company_review_card.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/product_review_card.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/company_review_card.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/product_review_card.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/specs_comparison_table.dart';
 
 class DevelopmentScreen extends StatefulWidget {

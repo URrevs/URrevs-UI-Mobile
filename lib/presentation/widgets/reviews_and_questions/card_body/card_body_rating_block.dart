@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/card_body_review_block_star_bar.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body_review_block_star_bar.dart';
 
 /// Rating table which contains 7 rows of star ratings of different aspects
 /// of the product.
@@ -15,9 +15,15 @@ class CardBodyRatingBlock extends StatelessWidget {
   })  : assert(scores.length == ratingCriteria.length),
         super(key: key);
 
+  /// Whether the card is expanded or not.
   final bool expanded;
-  final List<int> scores;
+
+  /// List of rating criteria to be show in the [CardBodyRatingBlock].
   final List<String> ratingCriteria;
+
+  /// List of scores corresponding to the [ratingCriteria] list to be also shown
+  /// in the [CardBodyRatingBlock].
+  final List<int> scores;
 
   @override
   Widget build(BuildContext context) {

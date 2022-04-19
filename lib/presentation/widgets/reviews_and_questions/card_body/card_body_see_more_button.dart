@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
@@ -18,9 +16,24 @@ class CardBodySeeMoreButton extends StatelessWidget {
     required this.hideSeeMoreIfNoNeedForExpansion,
   }) : super(key: key);
 
+  /// Whether the card is expanded or not.
   final bool expanded;
+
+  /// Returns a boolean value representing whether the whole pros and cons texts
+  /// are shown or substrings of them.
   final bool prosAndConsCut;
+
+  /// If set to true, [CardBodySeeMoreButton] would be hidden at the state of
+  /// the card where both pros and cons text are both shown completely. This
+  /// case only occurs when the the sum of pros text length and cons text length
+  /// is less than or equal to collapsedMaxLetters.
+  ///
+  /// This is set to true at the case of company review card.
   final bool hideSeeMoreIfNoNeedForExpansion;
+
+  /// Returns true when the card is at a state in which we don't need to make
+  /// an expansion. This state is when the sum of pros text length and cons text
+  /// length is less than or equal collapsedMaxLetters.
   final bool noNeedForExpansion;
   final void Function(bool) setExpandedState;
 

@@ -10,6 +10,7 @@ class CardHeaderAvatar extends StatelessWidget {
     required this.imageUrl,
   }) : super(key: key);
 
+  /// Profile image url of the current logged in user.
   final String imageUrl;
 
   @override

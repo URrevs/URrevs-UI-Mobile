@@ -8,7 +8,10 @@ class CardHeaderTitle extends StatelessWidget {
     required this.productName,
   }) : super(key: key);
 
+  /// Name of review author.
   final String authorName;
+
+  /// Name of product on which the review was posted.
   final String productName;
 
   @override

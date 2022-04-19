@@ -12,9 +12,16 @@ class CardFooterButton extends StatelessWidget {
     required this.onPressed,
   }) : super(key: key);
 
+  /// Is the review liked by the current logged in user or not.
   final bool? liked;
+
+  /// Icon to be shown by the button.
   final IconData iconData;
+
+  /// Text to be shown on the button.
   final String text;
+
+  /// Callback function executed on pressing on the button.
   final VoidCallback onPressed;
 
   /// Returns a [SizedBox] with the fixed size 100x40.

@@ -12,7 +12,10 @@ class CardFooterInteractionItem extends StatelessWidget {
     required this.iconData,
   }) : super(key: key);
 
+  /// Text to be shown by the item (usually a number).
   final String text;
+
+  /// Icon to be shown bu the item.
   final IconData iconData;
 
   @override

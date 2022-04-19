@@ -10,15 +10,18 @@ class CardHeaderSubtitle extends StatelessWidget {
   const CardHeaderSubtitle({
     Key? key,
     required this.postedDate,
-    required this.usedSinceDate,
+    this.usedSinceDate,
     required this.views,
-    required this.showUsedSincePart,
   }) : super(key: key);
 
+  /// The date where the review was posted.
   final DateTime postedDate;
-  final DateTime usedSinceDate;
+
+  /// The date from which the user started using the product.
+  final DateTime? usedSinceDate;
+
+  /// How many times this review was viewed.
   final int views;
-  final bool showUsedSincePart;
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +35,12 @@ class CardHeaderSubtitle extends StatelessWidget {
 
     final String postedDateStr =
         DateFormat.yMMMMd(context.locale.languageCode).format(postedDate);
-    final String usedSinceDateStr =
-        DateFormat.yMMMM(context.locale.languageCode).format(usedSinceDate);
+    String? usedSinceDateStr;
+    if (usedSinceDate != null) {
+      usedSinceDateStr =
+          DateFormat.yMMMM(context.locale.languageCode).format(usedSinceDate!);
+    }
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -42,7 +49,7 @@ class CardHeaderSubtitle extends StatelessWidget {
           padding: EdgeInsets.all(1.sp),
           child: Icon(Icons.circle, size: 6.sp),
         ),
-        if (showUsedSincePart) ...[
+        if (usedSinceDateStr != null) ...[
           Text(
             LocaleKeys.usedSince.tr() + " " + usedSinceDateStr,
             style: style,
