@@ -51,5 +51,7 @@
   "productName": "Product Name",
   "productImage": "Product Image",
   "companyRating": "Company Rating",
-  "liked": "Liked"
+  "liked": "Liked",
+  "vote": "Vote",
+  "answer": "Answer"
 }

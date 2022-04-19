@@ -22,10 +22,10 @@ class CardBodyReviewText extends StatelessWidget {
   final String consText;
 
   /// The max letters limit applied at any moment to the review card.
-  /// It is based on the [_expanded] condition of the review card.
+  /// It is based on the expanded condition of the review card.
   final int maxLetters;
 
-  /// Cut the pros text according to the [_expanded] state and [maxLetters] of
+  /// Cut the pros text according to the expanded state and [maxLetters] of
   /// the review card.
   ///
   /// We would take a substring of the pros text if its length is more than or

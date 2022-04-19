@@ -4,7 +4,7 @@ import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/review_card_body.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_footer/card_footer.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_header/card_header.dart';
 
@@ -85,9 +85,9 @@ class ProductReviewCard extends StatelessWidget {
 
   /// An instance of [ProductReviewCard] filled with dummy data.
   static ProductReviewCard get dummyInstance => ProductReviewCard(
-        postedDate: DateTime.now(),
-        usedSinceDate: DateTime.now().subtract(Duration(days: 200)),
-        views: 100,
+        postedDate: faker.date.dateTime(minYear: 2000, maxYear: 2022),
+        usedSinceDate: faker.date.dateTime(minYear: 2000, maxYear: 2021),
+        views: Random().nextInt(10000000),
         authorName: faker.person.name(),
         imageUrl: StringsManager.picsum200x200,
         productName: 'Oppo Reno 5',
@@ -100,6 +100,21 @@ class ProductReviewCard extends StatelessWidget {
         liked: Random().nextBool(),
       );
 
+  /// Callback invoked when like (or upvote) buttons are pressed.
+  void _onLike() {
+    // TODO: implememnt _onLike
+  }
+
+  /// Callback invoked when comment (or answer) buttons are pressed.
+  void _onComment() {
+    // TODO: implememnt _onComment
+  }
+
+  /// Callback invoked when share button is pressed.
+  void _onShare() {
+    // TODO: implememnt _onShare
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -111,13 +126,13 @@ class ProductReviewCard extends StatelessWidget {
             CardHeader(
               imageUrl: imageUrl,
               authorName: authorName,
-              productName: productName,
+              targetName: productName,
               postedDate: postedDate,
               usedSinceDate: usedSinceDate,
               views: views,
             ),
             10.verticalSpace,
-            CardBody(
+            ReviewCardBody(
               ratingCriteria: _ratingCriteria,
               scores: scores,
               prosText: prosText,
@@ -131,6 +146,10 @@ class ProductReviewCard extends StatelessWidget {
               commentCount: commentCount,
               shareCount: shareCount,
               liked: liked,
+              useInReviewCard: true,
+              onLike: _onLike,
+              onComment: _onComment,
+              onShare: _onShare,
             ),
           ],
         ),
