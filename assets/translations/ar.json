@@ -51,5 +51,7 @@
   "egyptianPound": "جنيه مصري",
   "productName": "اسم المنتج",
   "productImage": "صورة المنتج",
-  "companyRating": "التقييم للشركة"
+  "companyRating": "التقييم للشركة",
+  "vote": "تصويت",
+  "answer": "أجب"
 }

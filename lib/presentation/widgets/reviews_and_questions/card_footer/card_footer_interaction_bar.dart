@@ -10,6 +10,7 @@ class CardFooterInteractionBar extends StatelessWidget {
     required this.likeCount,
     required this.commentCount,
     required this.shareCount,
+    required this.useInReviewCard,
   }) : super(key: key);
 
   /// Number of likes given to the review.
@@ -21,13 +22,19 @@ class CardFooterInteractionBar extends StatelessWidget {
   /// Number of shares to the review
   final int shareCount;
 
+  /// Whether the [CardFooterInteractionBar] would be used in a review card or
+  /// not.
+  final bool useInReviewCard;
+
   @override
   Widget build(BuildContext context) {
+    IconData firstIcon = useInReviewCard ? Icons.thumb_up : Icons.arrow_upward;
+
     return Row(
       children: [
         CardFooterInteractionItem(
           text: likeCount.toString(),
-          iconData: Icons.thumb_up,
+          iconData: firstIcon,
         ),
         Spacer(),
         CardFooterInteractionItem(

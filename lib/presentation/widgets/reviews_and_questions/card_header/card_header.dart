@@ -10,11 +10,11 @@ class CardHeader extends StatelessWidget {
   const CardHeader({
     Key? key,
     required this.postedDate,
-    this.usedSinceDate,
+    required this.usedSinceDate,
     required this.views,
     required this.authorName,
     required this.imageUrl,
-    required this.productName,
+    required this.targetName,
   }) : super(key: key);
 
   /// Profile image url of the current logged in user.
@@ -23,8 +23,8 @@ class CardHeader extends StatelessWidget {
   /// Name of review author.
   final String authorName;
 
-  /// Name of product on which the review was posted.
-  final String productName;
+  /// Name of product or company on which the review was posted.
+  final String targetName;
 
   /// The date where the review was posted.
   final DateTime postedDate;
@@ -33,7 +33,7 @@ class CardHeader extends StatelessWidget {
   final DateTime? usedSinceDate;
 
   /// How many times this review was viewed.
-  final int views;
+  final int? views;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class CardHeader extends StatelessWidget {
               children: [
                 CardHeaderTitle(
                   authorName: authorName,
-                  productName: productName,
+                  productName: targetName,
                 ),
                 CardHeaderSubtitle(
                   postedDate: postedDate,

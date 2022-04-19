@@ -8,8 +8,8 @@ import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card
 
 /// Middle block of the review card.
 /// Contains star ratings and pros and cons of the product.
-class CardBody extends StatefulWidget {
-  const CardBody({
+class ReviewCardBody extends StatefulWidget {
+  const ReviewCardBody({
     Key? key,
     required this.scores,
     required this.prosText,
@@ -46,10 +46,10 @@ class CardBody extends StatefulWidget {
   final bool hideSeeMoreIfNoNeedForExpansion;
 
   @override
-  State<CardBody> createState() => _CardBodyState();
+  State<ReviewCardBody> createState() => _ReviewCardBodyState();
 }
 
-class _CardBodyState extends State<CardBody> {
+class _ReviewCardBodyState extends State<ReviewCardBody> {
   /// Whether the card is expanded or not.
   bool _expanded = false;
 

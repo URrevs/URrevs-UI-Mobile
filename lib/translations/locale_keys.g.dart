@@ -54,5 +54,7 @@ abstract class  LocaleKeys {
   static const productName = 'productName';
   static const productImage = 'productImage';
   static const companyRating = 'companyRating';
+  static const vote = 'vote';
+  static const answer = 'answer';
 
 }

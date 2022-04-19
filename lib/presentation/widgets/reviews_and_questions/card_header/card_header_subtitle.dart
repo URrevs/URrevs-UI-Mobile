@@ -10,7 +10,7 @@ class CardHeaderSubtitle extends StatelessWidget {
   const CardHeaderSubtitle({
     Key? key,
     required this.postedDate,
-    this.usedSinceDate,
+    required this.usedSinceDate,
     required this.views,
   }) : super(key: key);
 
@@ -21,7 +21,7 @@ class CardHeaderSubtitle extends StatelessWidget {
   final DateTime? usedSinceDate;
 
   /// How many times this review was viewed.
-  final int views;
+  final int? views;
 
   @override
   Widget build(BuildContext context) {
@@ -45,23 +45,25 @@ class CardHeaderSubtitle extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(postedDateStr, style: style),
-        Padding(
-          padding: EdgeInsets.all(1.sp),
-          child: Icon(Icons.circle, size: 6.sp),
-        ),
         if (usedSinceDateStr != null) ...[
-          Text(
-            LocaleKeys.usedSince.tr() + " " + usedSinceDateStr,
-            style: style,
-          ),
           Padding(
             padding: EdgeInsets.all(1.sp),
             child: Icon(Icons.circle, size: 6.sp),
           ),
+          Text(
+            LocaleKeys.usedSince.tr() + " " + usedSinceDateStr,
+            style: style,
+          ),
         ],
-        Icon(Icons.remove_red_eye),
-        1.horizontalSpace,
-        Text(views.toString(), style: style)
+        if (views != null) ...[
+          Padding(
+            padding: EdgeInsets.all(1.sp),
+            child: Icon(Icons.circle, size: 6.sp),
+          ),
+          Icon(Icons.remove_red_eye),
+          1.horizontalSpace,
+          Text(views.toString(), style: style)
+        ]
       ],
     );
   }

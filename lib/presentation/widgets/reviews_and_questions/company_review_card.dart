@@ -4,7 +4,7 @@ import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/review_card_body.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_footer/card_footer.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_header/card_header.dart';
 
@@ -90,6 +90,21 @@ class CompanyReviewCard extends StatelessWidget {
         liked: Random().nextBool(),
       );
 
+  /// Callback invoked when like (or upvote) buttons are pressed.
+  void _onLike() {
+    // TODO: implememnt _onLike
+  }
+
+  /// Callback invoked when comment (or answer) buttons are pressed.
+  void _onComment() {
+    // TODO: implememnt _onComment
+  }
+
+  /// Callback invoked when share button is pressed.
+  void _onShare() {
+    // TODO: implememnt _onShare
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -101,12 +116,13 @@ class CompanyReviewCard extends StatelessWidget {
             CardHeader(
               imageUrl: imageUrl,
               authorName: authorName,
-              productName: companyName,
+              targetName: companyName,
               postedDate: postedDate,
+              usedSinceDate: null,
               views: views,
             ),
             10.verticalSpace,
-            CardBody(
+            ReviewCardBody(
               prosText: prosText,
               consText: consText,
               ratingCriteria: _ratingCriteria,
@@ -120,6 +136,10 @@ class CompanyReviewCard extends StatelessWidget {
               commentCount: commentCount,
               shareCount: shareCount,
               liked: liked,
+              useInReviewCard: true,
+              onLike: _onLike,
+              onComment: _onComment,
+              onShare: _onShare,
             ),
           ],
         ),
