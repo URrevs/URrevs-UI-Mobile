@@ -12,7 +12,7 @@ class ThemeManager {
       );
 
   static ThemeData get light => ThemeData(
-        scaffoldBackgroundColor: Colors.white,
+        scaffoldBackgroundColor: ColorManager.backgroundGrey,
         fontFamily: FontConstants.tajawal,
         colorScheme: ColorScheme.light().copyWith(
           primary: ColorManager.blue,

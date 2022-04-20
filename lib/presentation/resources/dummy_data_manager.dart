@@ -2,11 +2,15 @@ import 'dart:math';
 
 import 'package:faker/faker.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/comments_list.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/reply.dart';
 
 class DummyDataManager {
   static bool get randomBool => Random().nextBool();
   static int get randomInt => Random().nextInt(100000000);
   static String get randomText => StringsManager.lorem;
+  static String get sentenceOrMore =>
+      faker.lorem.sentences(Random().nextInt(3) + 1).join(' ');
 
   static String get authorName => faker.person.name();
 
@@ -32,4 +36,12 @@ class DummyDataManager {
   static int get commentCount => DummyDataManager.randomInt;
 
   static int get shareCount => DummyDataManager.randomInt;
+
+  static String get reply =>
+      faker.lorem.sentences(Random().nextInt(3) + 1).join(' ');
+
+  static List<Reply> get replies => List.generate(
+        Random().nextInt(3) + 1,
+        (_) => Reply.dummyInstance,
+      );
 }

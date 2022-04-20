@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_header/card_header_avatar.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_header/card_header_subtitle.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_header/card_header_title.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_header/card_header_trailer.dart';
@@ -41,7 +42,10 @@ class CardHeader extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Row(
         children: [
-          CardHeaderAvatar(imageUrl: imageUrl),
+          Avatar(
+            imageUrl: imageUrl,
+            radius: AppRadius.cardHeaderAvatarRadius,
+          ),
           10.horizontalSpace,
           Expanded(
             child: Column(

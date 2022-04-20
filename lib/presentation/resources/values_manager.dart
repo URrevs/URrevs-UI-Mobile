@@ -1,7 +1,8 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AppHeight {
+class AppHeights {
   static double get h8 => 8.h;
+  static double get verticalSpaceBetweenReplies => 9.h;
 }
 
 class AppWidth {
@@ -22,6 +23,11 @@ class AppSize {
 
 class AppRadius {
   static double get r10 => 10.r;
+  static double get appBarAvatarRadius => 12.5.r;
+  static double get cardHeaderAvatarRadius => 20.r;
+  static double get commentTreeAvatarRadius => 16.r;
+  static double get replyAvatarRadius => 12.r;
+  static double get interactionBodyRadius => 12.r;
 }
 
 class AppNumericValues {
@@ -34,6 +40,6 @@ class AppNumericValues {
   static int get expandedMaxLetters => 1200;
 }
 
-class DurationManager {
+class AppDuration {
   static const Duration d300 = Duration(milliseconds: 300);
 }
