@@ -48,6 +48,8 @@ class ReplyFooter extends StatelessWidget {
         data: textButtonThemeData,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.baseline,
+          textBaseline: TextBaseline.alphabetic,
           children: [
             10.horizontalSpace,
             TextButton(
@@ -63,17 +65,12 @@ class ReplyFooter extends StatelessWidget {
               child: Text(LocaleKeys.reply.tr()),
             ),
             20.horizontalSpace,
-            Container(
-              margin: AppMargins.replyFooterDate,
-              child: Padding(
-                padding: footerElementsPadding,
-                child: Text(
-                  timeago.format(datePosted,
-                      locale: context.locale.languageCode),
-                  style: TextStyleManager.s13w400.copyWith(
-                    color: ColorManager.grey,
-                  ),
-                  
+            Padding(
+              padding: footerElementsPadding,
+              child: Text(
+                timeago.format(datePosted, locale: context.locale.languageCode),
+                style: TextStyleManager.s13w400.copyWith(
+                  color: ColorManager.grey,
                 ),
               ),
             )
