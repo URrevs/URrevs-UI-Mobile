@@ -58,7 +58,7 @@ class ReplyBody extends StatelessWidget {
         Positioned(
           left: context.isArabic ? -16.w : null,
           right: context.isArabic ? null : -16.w,
-          bottom: -8.h,
+          bottom: -9.h,
           child: InteractionLikeCounter(likeCount: likeCount),
         )
       ],

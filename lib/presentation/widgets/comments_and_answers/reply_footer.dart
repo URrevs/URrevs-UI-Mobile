@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/app_margins.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
@@ -62,12 +63,17 @@ class ReplyFooter extends StatelessWidget {
               child: Text(LocaleKeys.reply.tr()),
             ),
             20.horizontalSpace,
-            Padding(
-              padding: footerElementsPadding,
-              child: Text(
-                timeago.format(datePosted, locale: context.locale.languageCode),
-                style: TextStyleManager.s13w400.copyWith(
-                  color: ColorManager.grey,
+            Container(
+              margin: AppMargins.replyFooterDate,
+              child: Padding(
+                padding: footerElementsPadding,
+                child: Text(
+                  timeago.format(datePosted,
+                      locale: context.locale.languageCode),
+                  style: TextStyleManager.s13w400.copyWith(
+                    color: ColorManager.grey,
+                  ),
+                  
                 ),
               ),
             )

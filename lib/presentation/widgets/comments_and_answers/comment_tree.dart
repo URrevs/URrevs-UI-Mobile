@@ -31,6 +31,7 @@ class CommentTree extends StatefulWidget {
   final List<Reply> replies;
 
   static CommentTree get dummyInstance => CommentTree(
+        key: UniqueKey(),
         imageUrl: DummyDataManager.imageUrl,
         authorName: DummyDataManager.authorName,
         commentText: DummyDataManager.sentenceOrMore,
