@@ -1,16 +1,16 @@
-import 'dart:math';
-
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:urrevs_ui_mobile/app/extensions.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/text_button_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/reply.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/reply_body.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/reply_footer.dart';
+import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
-class CommentTree extends StatelessWidget {
+class CommentTree extends StatefulWidget {
   const CommentTree({
     Key? key,
     required this.imageUrl,
@@ -41,12 +41,27 @@ class CommentTree extends StatelessWidget {
       );
 
   @override
+  State<CommentTree> createState() => _CommentTreeState();
+}
+
+class _CommentTreeState extends State<CommentTree> {
+  bool _expandReplies = false;
+
+  void _onPressingShowReplies() {
+    setState(() {
+      _expandReplies = true;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Avatar(imageUrl: imageUrl, radius: AppRadius.commentTreeAvatarRadius),
+        Avatar(
+            imageUrl: widget.imageUrl,
+            radius: AppRadius.commentTreeAvatarRadius),
         6.horizontalSpace,
         Expanded(
           child: LayoutBuilder(builder: (context, BoxConstraints constraints) {
@@ -54,21 +69,30 @@ class CommentTree extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ReplyBody(
-                  authorName: authorName,
-                  replyText: commentText,
-                  likeCount: likeCount,
+                  authorName: widget.authorName,
+                  replyText: widget.commentText,
+                  likeCount: widget.likeCount,
                   maxWidth: constraints.maxWidth - 16.w,
                 ),
                 ReplyFooter(
-                  datePosted: datePosted,
+                  datePosted: widget.datePosted,
                   maxWidth: constraints.maxWidth - 16.w,
-                  liked: liked,
+                  liked: widget.liked,
                 ),
-                AppHeights.verticalSpaceBetweenReplies.verticalSpace,
-                for (Reply reply in replies) ...[
-                  reply,
-                  AppHeights.verticalSpaceBetweenReplies.verticalSpace,
-                ],
+                VerticalSpacesBetween.replies,
+                if (!_expandReplies)
+                  TextButton(
+                    onPressed: _onPressingShowReplies,
+                    style: TextButtonStyleManager.showReplies,
+                    child: Text(
+                        '${widget.replies.length} ${LocaleKeys.reply.tr()}'),
+                  ),
+                if (_expandReplies)
+                  for (int i = 0; i < widget.replies.length; i++) ...[
+                    widget.replies[i],
+                    if (i != widget.replies.length - 1)
+                      VerticalSpacesBetween.replies,
+                  ],
               ],
             );
           }),

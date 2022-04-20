@@ -4,7 +4,7 @@ import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
-import 'package:urrevs_ui_mobile/presentation/resources/styles_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 class SpecsDummyData {

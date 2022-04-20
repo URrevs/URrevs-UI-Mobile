@@ -43,7 +43,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
       ),
       body: ListView(
         children: [
-          CommentTree.dummyInstance,
+          CommentsList.dummyInstance,
         ],
       ),
     );

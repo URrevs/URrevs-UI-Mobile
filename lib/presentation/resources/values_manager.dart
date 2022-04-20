@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AppHeights {
-  static double get h8 => 8.h;
-  static double get verticalSpaceBetweenReplies => 9.h;
+class VerticalSpacesBetween {
+  static Widget get replies => 9.verticalSpace;
+  static Widget get commentTrees => 9.verticalSpace;
+  static Widget get commentsListAndMoreCommentsButton => 9.verticalSpace;
 }
 
 class AppWidth {

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
-import 'package:urrevs_ui_mobile/presentation/resources/styles_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 
 class InteractionBodyText extends StatelessWidget {
   const InteractionBodyText({
