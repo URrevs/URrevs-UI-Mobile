@@ -40,6 +40,8 @@ class AppNumericValues {
   /// Number of letters show in a review card in the section of pros & cons when
   /// the card is expanded.
   static int get expandedMaxLetters => 1200;
+
+  static int get interactionsMaxLetters => 50;
 }
 
 class AppDuration {
