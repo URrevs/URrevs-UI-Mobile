@@ -102,14 +102,11 @@ class _ReviewCardBodyState extends State<ReviewCardBody> {
               prosText: widget.prosText,
               consText: widget.consText,
               maxLetters: maxLetters,
-            ),
-            CardBodySeeMoreButton(
               expanded: _expanded,
               prosAndConsCut: prosAndConsCut,
               setExpandedState: setExpandedState,
               noNeedForExpansion: noNeedForExpansion,
-              hideSeeMoreIfNoNeedForExpansion:
-                  widget.hideSeeMoreIfNoNeedForExpansion,
+              hideSeeMoreIfNoNeedForExpansion: false,
             ),
           ],
         ),
