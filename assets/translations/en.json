@@ -53,5 +53,9 @@
   "companyRating": "Company Rating",
   "liked": "Liked",
   "vote": "Vote",
-  "answer": "Answer"
+  "answer": "Answer",
+  "usedThisProductFor": "Used this product for",
+  "acceptAnswer": "Accept answer",
+  "acceptedAnswer": "Accepted answer",
+  "moreAnswers": "More answers"
 }

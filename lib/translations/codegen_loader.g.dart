@@ -69,7 +69,11 @@ class CodegenLoader extends AssetLoader{
   "productImage": "صورة المنتج",
   "companyRating": "التقييم للشركة",
   "vote": "تصويت",
-  "answer": "أجب"
+  "answer": "أجب",
+  "usedThisProductFor": "امتلك هذا المنتج لمدة",
+  "acceptAnswer": "أقبل الإجابة",
+  "acceptedAnswer": "إجابة مقبولة",
+  "moreAnswers": "المزيد من الاجابات"
 };
 static const Map<String,dynamic> en = {
   "usedSince": "Used since",
@@ -126,7 +130,11 @@ static const Map<String,dynamic> en = {
   "companyRating": "Company Rating",
   "liked": "Liked",
   "vote": "Vote",
-  "answer": "Answer"
+  "answer": "Answer",
+  "usedThisProductFor": "Used this product for",
+  "acceptAnswer": "Accept answer",
+  "acceptedAnswer": "Accepted answer",
+  "moreAnswers": "More answers"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

@@ -6,6 +6,7 @@ class FontConstants {
 }
 
 class FontSizeManager {
+  static double get s12 => 12.sp;
   static double get s13 => 13.sp;
   static double get s14 => 14.sp;
   static double get s15 => 15.sp;

@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:faker/faker.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/answer_tree.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/comment_tree.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/comments_list.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/reply.dart';
 
 class DummyDataManager {
@@ -48,5 +48,9 @@ class DummyDataManager {
   static List<CommentTree> get comments => List.generate(
         Random().nextInt(3) + 1,
         (_) => CommentTree.dummyInstance,
+      );
+  static List<AnswerTree> get answers => List.generate(
+        Random().nextInt(3) + 1,
+        (_) => AnswerTree.dummyInstance,
       );
 }

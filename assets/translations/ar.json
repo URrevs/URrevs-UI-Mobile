@@ -53,5 +53,9 @@
   "productImage": "صورة المنتج",
   "companyRating": "التقييم للشركة",
   "vote": "تصويت",
-  "answer": "أجب"
+  "answer": "أجب",
+  "usedThisProductFor": "امتلك هذا المنتج لمدة",
+  "acceptAnswer": "أقبل الإجابة",
+  "acceptedAnswer": "إجابة مقبولة",
+  "moreAnswers": "المزيد من الاجابات"
 }

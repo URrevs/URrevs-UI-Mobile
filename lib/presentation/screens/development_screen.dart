@@ -2,6 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/answer_tree.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/answers_list.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/comment_tree.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/comments_list.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/reply.dart';
@@ -46,7 +48,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
       ),
       body: ListView(
         children: [
-          CommentsList.dummyInstance,
+          AnswersList.dummyInstance,
         ],
       ),
     );

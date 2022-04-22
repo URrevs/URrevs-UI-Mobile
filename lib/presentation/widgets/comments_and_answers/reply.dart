@@ -51,11 +51,13 @@ class Reply extends StatelessWidget {
                   replyText: replyText,
                   likeCount: likeCount,
                   maxWidth: constraints.maxWidth - 16.w,
+                  inQuestionCard: false,
                 ),
                 ReplyFooter(
                   datePosted: datePosted,
                   maxWidth: constraints.maxWidth - 16.w,
                   liked: liked,
+                  firstButtonType: InteractionFooterFirstButtonText.like,
                 ),
               ],
             );

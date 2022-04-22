@@ -10,48 +10,86 @@ import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/reply
 import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/reply_footer.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
-class CommentTree extends StatefulWidget {
-  const CommentTree({
+class AnswerTree extends StatefulWidget {
+  const AnswerTree({
     Key? key,
     required this.imageUrl,
     required this.authorName,
+    required this.usedSinceDate,
     required this.commentText,
     required this.likeCount,
     required this.datePosted,
     required this.replies,
     required this.liked,
-  }) : super(key: key);
+    required this.isQuestionAuthor,
+    required this.inQuestionCard,
+    this.onTappingAnswerInCard,
+  })  : assert(
+          !inQuestionCard || onTappingAnswerInCard != null,
+          'onTappingAnswerInCard cannot be null if inQuestionCard is true.',
+        ),
+        super(key: key);
 
   final String imageUrl;
   final String authorName;
+  final DateTime usedSinceDate;
   final String commentText;
   final int likeCount;
   final DateTime datePosted;
   final bool liked;
+  final bool isQuestionAuthor;
+  final bool inQuestionCard;
   final List<Reply> replies;
+  final VoidCallback? onTappingAnswerInCard;
 
-  static CommentTree get dummyInstance => CommentTree(
+  static AnswerTree get dummyInstance => AnswerTree(
         key: UniqueKey(),
         imageUrl: DummyDataManager.imageUrl,
         authorName: DummyDataManager.authorName,
+        usedSinceDate: DummyDataManager.usedSinceDate,
         commentText: DummyDataManager.sentenceOrMore,
         likeCount: DummyDataManager.randomInt,
         datePosted: DummyDataManager.postedDate,
         liked: DummyDataManager.randomBool,
+        isQuestionAuthor: DummyDataManager.randomBool,
+        inQuestionCard: false,
         replies: DummyDataManager.replies,
       );
 
+  static AnswerTree get dummyInstanceInQuestionCard => AnswerTree(
+        key: UniqueKey(),
+        imageUrl: DummyDataManager.imageUrl,
+        authorName: DummyDataManager.authorName,
+        usedSinceDate: DummyDataManager.usedSinceDate,
+        commentText: DummyDataManager.sentenceOrMore,
+        likeCount: DummyDataManager.randomInt,
+        datePosted: DummyDataManager.postedDate,
+        liked: DummyDataManager.randomBool,
+        isQuestionAuthor: DummyDataManager.randomBool,
+        inQuestionCard: true,
+        replies: DummyDataManager.replies,
+        onTappingAnswerInCard: () {},
+      );
+
   @override
-  State<CommentTree> createState() => _CommentTreeState();
+  State<AnswerTree> createState() => _AnswerTreeState();
 }
 
-class _CommentTreeState extends State<CommentTree> {
+class _AnswerTreeState extends State<AnswerTree> {
   bool _expandReplies = false;
 
   void _onPressingShowReplies() {
     setState(() {
       _expandReplies = true;
     });
+  }
+
+  InteractionFooterFirstButtonText get firstButtonType {
+    if (widget.isQuestionAuthor) {
+      return InteractionFooterFirstButtonText.acceptAnswer;
+    } else {
+      return InteractionFooterFirstButtonText.vote;
+    }
   }
 
   @override
@@ -74,13 +112,15 @@ class _CommentTreeState extends State<CommentTree> {
                   replyText: widget.commentText,
                   likeCount: widget.likeCount,
                   maxWidth: constraints.maxWidth - 16.w,
-                  inQuestionCard: false,
+                  usedSinceDate: widget.usedSinceDate,
+                  inQuestionCard: widget.inQuestionCard,
+                  onTappingAnswerInCard: widget.onTappingAnswerInCard,
                 ),
                 ReplyFooter(
                   datePosted: widget.datePosted,
                   maxWidth: constraints.maxWidth - 16.w,
                   liked: widget.liked,
-                  firstButtonType: InteractionFooterFirstButtonText.like,
+                  firstButtonType: firstButtonType,
                 ),
                 VerticalSpacesBetween.replies,
                 if (!_expandReplies)

@@ -1,8 +1,10 @@
-import 'package:flutter/cupertino.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/interaction_see_more_button.dart';
+import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 class InteractionBodyText extends StatelessWidget {
   const InteractionBodyText({
@@ -10,10 +12,18 @@ class InteractionBodyText extends StatelessWidget {
     required this.interactionText,
     required this.expanded,
     required this.setExpandedState,
-  }) : super(key: key);
+    required this.inQuestionCard,
+    required this.onTappingAnswerInCard,
+  })  : assert(
+          !inQuestionCard || onTappingAnswerInCard != null,
+          'onTappingAnswerInCard cannot be null if inQuestionCard is true.',
+        ),
+        super(key: key);
 
   final String interactionText;
   final bool expanded;
+  final bool inQuestionCard;
+  final VoidCallback? onTappingAnswerInCard;
 
   /// A function that is invoked to set the expanded state of the parent.
   final void Function(bool) setExpandedState;
@@ -37,6 +47,24 @@ class InteractionBodyText extends StatelessWidget {
     return text;
   }
 
+  Widget _buildSpecialAnswerSeeMoreButton() {
+    if (noNeedForExpansion) {
+      return SizedBox();
+    }
+
+    String seeMoreButtonText =
+        interactionTextCut ? LocaleKeys.seeMore.tr() : LocaleKeys.seeLess.tr();
+    return TextButton(
+      style: TextButton.styleFrom(
+        primary: ColorManager.black,
+        minimumSize: Size.zero,
+        padding: EdgeInsets.all(0),
+      ),
+      onPressed: onTappingAnswerInCard,
+      child: Text(seeMoreButtonText, style: TextStyleManager.s16w800),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return RichText(
@@ -52,12 +80,14 @@ class InteractionBodyText extends StatelessWidget {
           WidgetSpan(
             alignment: PlaceholderAlignment.baseline,
             baseline: TextBaseline.alphabetic,
-            child: InteractionSeeMoreButton(
-              expanded: expanded,
-              parentTextCut: interactionTextCut,
-              setExpandedState: setExpandedState,
-              noNeedForExpansion: noNeedForExpansion,
-            ),
+            child: inQuestionCard
+                ? _buildSpecialAnswerSeeMoreButton()
+                : InteractionSeeMoreButton(
+                    expanded: expanded,
+                    parentTextCut: interactionTextCut,
+                    setExpandedState: setExpandedState,
+                    noNeedForExpansion: noNeedForExpansion,
+                  ),
           ),
         ],
       ),

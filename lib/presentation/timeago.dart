@@ -63,7 +63,7 @@ class MyCustomArMessages implements timeago.LookupMessages {
   @override
   String months(int months) => '$months شهور';
   @override
-  String aboutAYear(int year) => '$year سنة';
+  String aboutAYear(int year) => '$year شهراً';
   @override
   String years(int years) => '$years سنين';
   @override

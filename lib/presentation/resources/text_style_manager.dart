@@ -2,6 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/font_manager.dart';
 
 class TextStyleManager {
+  static TextStyle get s12w400 => TextStyle(
+        fontSize: FontSizeManager.s12,
+        fontWeight: FontWeightManager.w400,
+      );
   static TextStyle get s13w400 => TextStyle(
         fontSize: FontSizeManager.s13,
         fontWeight: FontWeightManager.w400,

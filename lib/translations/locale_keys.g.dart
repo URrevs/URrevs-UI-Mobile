@@ -56,5 +56,9 @@ abstract class  LocaleKeys {
   static const companyRating = 'companyRating';
   static const vote = 'vote';
   static const answer = 'answer';
+  static const usedThisProductFor = 'usedThisProductFor';
+  static const acceptAnswer = 'acceptAnswer';
+  static const acceptedAnswer = 'acceptedAnswer';
+  static const moreAnswers = 'moreAnswers';
 
 }

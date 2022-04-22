@@ -5,25 +5,25 @@ import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/comment_tree.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/answer_tree.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
-class CommentsList extends StatelessWidget {
-  const CommentsList({Key? key, required this.comments}) : super(key: key);
+class AnswersList extends StatelessWidget {
+  const AnswersList({Key? key, required this.answers}) : super(key: key);
 
-  final List<CommentTree> comments;
+  final List<AnswerTree> answers;
 
-  static CommentsList get dummyInstance =>
-      CommentsList(comments: DummyDataManager.comments);
+  static AnswersList get dummyInstance =>
+      AnswersList(answers: DummyDataManager.answers);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        for (int i = 0; i < comments.length; i++) ...[
-          comments[i],
-          if (i != comments.length - 1) VerticalSpacesBetween.commentTrees,
+        for (int i = 0; i < answers.length; i++) ...[
+          answers[i],
+          if (i != answers.length - 1) VerticalSpacesBetween.commentTrees,
         ],
         VerticalSpacesBetween.commentsListAndMoreCommentsButton,
         TextButton(
@@ -33,7 +33,7 @@ class CommentsList extends StatelessWidget {
             padding: EdgeInsets.all(0),
           ),
           child: Text(
-            LocaleKeys.moreComments.tr(),
+            LocaleKeys.moreAnswers.tr(),
             style: TextStyleManager.s16w800.copyWith(color: ColorManager.black),
           ),
         ),
