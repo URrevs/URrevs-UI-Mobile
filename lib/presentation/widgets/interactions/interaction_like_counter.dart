@@ -8,9 +8,13 @@ class InteractionLikeCounter extends StatelessWidget {
   const InteractionLikeCounter({
     Key? key,
     required this.likeCount,
+    required this.isLike,
+    required this.inQuestionCard,
   }) : super(key: key);
 
   final int likeCount;
+  final bool isLike;
+  final bool inQuestionCard;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +28,8 @@ class InteractionLikeCounter extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
         decoration: BoxDecoration(
-          color: ColorManager.white,
+          color:
+              inQuestionCard ? ColorManager.backgroundGrey : ColorManager.white,
           borderRadius: BorderRadius.circular(50.r),
         ),
         child: Row(
@@ -38,7 +43,7 @@ class InteractionLikeCounter extends StatelessWidget {
             ),
             2.horizontalSpace,
             Icon(
-              Icons.thumb_up,
+              isLike ? Icons.thumb_up : Icons.arrow_upward,
               color: ColorManager.blue,
               size: 14.sp,
             ),

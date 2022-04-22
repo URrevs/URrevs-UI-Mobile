@@ -1,13 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_button_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/reply.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/interaction_body.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/interaction_footer.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/interactions/reply.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/interactions/interaction_body.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/interactions/interaction_footer.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 class AnswerTree extends StatefulWidget {
@@ -21,6 +22,7 @@ class AnswerTree extends StatefulWidget {
     required this.datePosted,
     required this.replies,
     required this.liked,
+    required this.accepted,
     required this.isQuestionAuthor,
     required this.inQuestionCard,
     this.onTappingAnswerInCard,
@@ -37,6 +39,7 @@ class AnswerTree extends StatefulWidget {
   final int likeCount;
   final DateTime datePosted;
   final bool liked;
+  final bool accepted;
   final bool isQuestionAuthor;
   final bool inQuestionCard;
   final List<Reply> replies;
@@ -51,6 +54,7 @@ class AnswerTree extends StatefulWidget {
         likeCount: DummyDataManager.randomInt,
         datePosted: DummyDataManager.postedDate,
         liked: DummyDataManager.randomBool,
+        accepted: DummyDataManager.randomBool,
         isQuestionAuthor: DummyDataManager.randomBool,
         inQuestionCard: false,
         replies: DummyDataManager.replies,
@@ -65,6 +69,7 @@ class AnswerTree extends StatefulWidget {
         likeCount: DummyDataManager.randomInt,
         datePosted: DummyDataManager.postedDate,
         liked: DummyDataManager.randomBool,
+        accepted: true,
         isQuestionAuthor: DummyDataManager.randomBool,
         inQuestionCard: true,
         replies: DummyDataManager.replies,
@@ -98,6 +103,13 @@ class _AnswerTreeState extends State<AnswerTree> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        if (widget.liked)
+          Icon(
+            Icons.check,
+            size: 30.sp,
+            color: ColorManager.blue,
+          ),
+        8.horizontalSpace,
         Avatar(
             imageUrl: widget.imageUrl,
             radius: AppRadius.commentTreeAvatarRadius),
@@ -123,7 +135,7 @@ class _AnswerTreeState extends State<AnswerTree> {
                   firstButtonType: firstButtonType,
                 ),
                 VerticalSpacesBetween.replies,
-                if (!_expandReplies)
+                if (!widget.inQuestionCard && !_expandReplies)
                   TextButton(
                     onPressed: _onPressingShowReplies,
                     style: TextButtonStyleManager.showReplies,

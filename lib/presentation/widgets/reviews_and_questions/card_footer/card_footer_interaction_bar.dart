@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_footer/card_footer_interaction_item.dart';
@@ -29,21 +30,23 @@ class CardFooterInteractionBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     IconData firstIcon = useInReviewCard ? Icons.thumb_up : Icons.arrow_upward;
+    NumberFormat numberFormat =
+        NumberFormat.compact(locale: context.locale.languageCode);
 
     return Row(
       children: [
         CardFooterInteractionItem(
-          text: likeCount.toString(),
+          text: numberFormat.format(likeCount),
           iconData: firstIcon,
         ),
         Spacer(),
         CardFooterInteractionItem(
-          text: commentCount.toString(),
+          text: numberFormat.format(commentCount),
           iconData: Icons.comment,
         ),
         7.horizontalSpace,
         CardFooterInteractionItem(
-          text: shareCount.toString(),
+          text: numberFormat.format(shareCount),
           iconData: Icons.share,
         ),
       ],

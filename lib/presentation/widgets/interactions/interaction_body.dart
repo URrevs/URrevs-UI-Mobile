@@ -53,6 +53,8 @@ class _InteractionBodyState extends State<InteractionBody> {
   bool get noNeedForExpansion =>
       widget.replyText.length <= AppNumericValues.interactionsMaxLetters;
 
+  bool get isAnswer => widget.usedSinceDate != null;
+
   void _setExpandedState(bool val) => setState(() => _expanded = val);
 
   void _onTappingReplyBody() {
@@ -85,7 +87,9 @@ class _InteractionBodyState extends State<InteractionBody> {
             borderRadius:
                 BorderRadius.circular(AppRadius.interactionBodyRadius),
           ),
-          color: ColorManager.white,
+          color: widget.inQuestionCard
+              ? ColorManager.backgroundGrey
+              : ColorManager.white,
           child: InkWell(
             onTap: noNeedForExpansion ? null : _onTappingReplyBody,
             borderRadius:
@@ -130,7 +134,11 @@ class _InteractionBodyState extends State<InteractionBody> {
           left: context.isArabic ? -16.w : null,
           right: context.isArabic ? null : -16.w,
           bottom: -9.h,
-          child: InteractionLikeCounter(likeCount: widget.likeCount),
+          child: InteractionLikeCounter(
+            likeCount: widget.likeCount,
+            inQuestionCard: widget.inQuestionCard,
+            isLike: !isAnswer,
+          ),
         )
       ],
     );

@@ -57,7 +57,7 @@ class CardFooter extends StatelessWidget {
             useInReviewCard: useInReviewCard,
           ),
         ),
-        Divider(),
+        Divider(height: 10.h),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: CardFooterButtonBar(

@@ -2,9 +2,9 @@ import 'dart:math';
 
 import 'package:faker/faker.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/answer_tree.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/comment_tree.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/reply.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answer_tree.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/interactions/comment_tree.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/interactions/reply.dart';
 
 class DummyDataManager {
   static bool get randomBool => Random().nextBool();

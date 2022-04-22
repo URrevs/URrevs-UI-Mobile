@@ -62,7 +62,12 @@ class CardHeaderSubtitle extends StatelessWidget {
           ),
           Icon(Icons.remove_red_eye),
           1.horizontalSpace,
-          Text(views.toString(), style: style)
+          Text(
+            NumberFormat.compact(locale: context.locale.languageCode)
+                .format(views)
+                .toString(),
+            style: style,
+          )
         ]
       ],
     );

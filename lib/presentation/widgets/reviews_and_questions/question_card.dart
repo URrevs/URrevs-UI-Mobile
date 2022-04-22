@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answer_tree.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/question_card_body.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_footer/card_footer.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_header/card_header.dart';
@@ -34,6 +35,8 @@ class QuestionCard extends StatelessWidget {
   /// Number of shares to the review
   final int shareCount;
 
+  final AnswerTree? answer;
+
   const QuestionCard({
     Key? key,
     required this.imageUrl,
@@ -45,6 +48,7 @@ class QuestionCard extends StatelessWidget {
     required this.answerCount,
     required this.shareCount,
     required this.upvoted,
+    this.answer,
   }) : super(key: key);
 
   /// An instance of [QuestionCard] filled with dummy data.
@@ -58,6 +62,7 @@ class QuestionCard extends StatelessWidget {
         answerCount: DummyDataManager.randomInt,
         shareCount: DummyDataManager.randomInt,
         upvoted: DummyDataManager.randomBool,
+        answer: AnswerTree.dummyInstanceInQuestionCard,
       );
 
   /// Callback invoked when upvote button is pressed.
@@ -103,6 +108,11 @@ class QuestionCard extends StatelessWidget {
               onLike: _onUpvote,
               onComment: _onAnswer,
               onShare: _onShare,
+            ),
+            Divider(height: 10.h),
+            Padding(
+              padding: EdgeInsets.only(top: 25.h),
+              child: answer!,
             ),
           ],
         ),
