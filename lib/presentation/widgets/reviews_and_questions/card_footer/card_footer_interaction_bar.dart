@@ -29,7 +29,9 @@ class CardFooterInteractionBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    IconData firstIcon = useInReviewCard ? Icons.thumb_up : Icons.arrow_upward;
+    IconData firstIcon = useInReviewCard
+        ? Icons.thumb_up_alt_outlined
+        : Icons.arrow_upward_outlined;
     NumberFormat numberFormat =
         NumberFormat.compact(locale: context.locale.languageCode);
 
@@ -42,12 +44,12 @@ class CardFooterInteractionBar extends StatelessWidget {
         Spacer(),
         CardFooterInteractionItem(
           text: numberFormat.format(commentCount),
-          iconData: Icons.comment,
+          iconData: Icons.mode_comment_outlined,
         ),
         8.horizontalSpace,
         CardFooterInteractionItem(
           text: numberFormat.format(shareCount),
-          iconData: Icons.share,
+          iconData: Icons.share_outlined,
         ),
       ],
     );

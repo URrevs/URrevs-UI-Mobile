@@ -35,14 +35,16 @@ class CardFooterButtonBar extends StatelessWidget {
   Widget build(BuildContext context) {
     String likedText = liked ? LocaleKeys.liked.tr() : LocaleKeys.like.tr();
 
-    IconData firstIcon = useInReviewCard ? Icons.thumb_up : Icons.arrow_upward;
+    IconData firstIcon = useInReviewCard
+        ? Icons.thumb_up_alt_outlined
+        : Icons.arrow_upward_outlined;
 
     String firstText = useInReviewCard ? likedText : LocaleKeys.vote.tr();
     String secondText =
         useInReviewCard ? LocaleKeys.comment.tr() : LocaleKeys.answer.tr();
 
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         CardFooterButton(
           iconData: firstIcon,
@@ -51,12 +53,12 @@ class CardFooterButtonBar extends StatelessWidget {
           onPressed: onLike,
         ),
         CardFooterButton(
-          iconData: Icons.comment,
+          iconData: Icons.mode_comment_outlined,
           text: secondText,
           onPressed: onComment,
         ),
         CardFooterButton(
-          iconData: Icons.share,
+          iconData: Icons.share_outlined,
           text: LocaleKeys.share.tr(),
           onPressed: onShare,
         ),

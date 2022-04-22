@@ -103,7 +103,7 @@ class CardBodyReviewText extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          LocaleKeys.pros.tr(),
+          LocaleKeys.pros.tr() + ':',
           style: TextStyleManager.s18w500,
         ),
         RichText(
@@ -137,7 +137,7 @@ class CardBodyReviewText extends StatelessWidget {
             children: [
               10.verticalSpace,
               Text(
-                LocaleKeys.cons.tr(),
+                LocaleKeys.cons.tr() + ':',
                 style: TextStyleManager.s18w500,
               ),
               RichText(

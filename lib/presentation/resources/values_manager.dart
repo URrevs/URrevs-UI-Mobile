@@ -36,7 +36,7 @@ class AppRadius {
 class AppNumericValues {
   /// Number of letters show in a review card in the section of pros & cons when
   /// the card is collapsed.
-  static int get collapsedMaxLetters => 300;
+  static int get collapsedMaxLetters => 600;
 
   /// Number of letters show in a review card in the section of pros & cons when
   /// the card is expanded.
