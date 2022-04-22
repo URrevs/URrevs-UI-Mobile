@@ -4,6 +4,7 @@ import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/review_card_body.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_footer/card_footer.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_header/card_header.dart';
@@ -88,7 +89,7 @@ class ProductReviewCard extends StatelessWidget {
         postedDate: faker.date.dateTime(minYear: 2000, maxYear: 2022),
         usedSinceDate: faker.date.dateTime(minYear: 2000, maxYear: 2021),
         views: Random().nextInt(10000000),
-        authorName: faker.person.name(),
+        authorName: 'Fady Ahmed', // faker.person.name(),
         imageUrl: StringsManager.picsum200x200,
         productName: 'Oppo Reno 5',
         scores: List.generate(7, (_) => Random().nextInt(5) + 1),
@@ -119,6 +120,11 @@ class ProductReviewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 3,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(
+          AppRadius.interactionBodyRadius,
+        ),
+      ),
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 8.h),
         child: Column(

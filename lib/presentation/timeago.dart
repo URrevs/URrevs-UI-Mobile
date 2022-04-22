@@ -47,25 +47,25 @@ class MyCustomArMessages implements timeago.LookupMessages {
   @override
   String lessThanOneMinute(int seconds) => 'الآن';
   @override
-  String aboutAMinute(int minutes) => '$minutes دقائق';
+  String aboutAMinute(int minutes) => '$minutes دقيقة';
   @override
-  String minutes(int minutes) => '$minutes دقائق';
+  String minutes(int minutes) => '$minutes دقيقة';
   @override
-  String aboutAnHour(int minutes) => '$minutes دقائق';
+  String aboutAnHour(int minutes) => '$minutes دقيقة';
   @override
-  String hours(int hours) => '$hours ساعات';
+  String hours(int hours) => '$hours ساعة';
   @override
-  String aDay(int hours) => '$hours ساعات';
+  String aDay(int hours) => '$hours ساعة';
   @override
-  String days(int days) => '$days أيام';
+  String days(int days) => '$days يوم';
   @override
-  String aboutAMonth(int days) => '$days أيام';
+  String aboutAMonth(int days) => '$days يوم';
   @override
-  String months(int months) => '$months شهور';
+  String months(int months) => '$months شهر';
   @override
-  String aboutAYear(int year) => '$year شهراً';
+  String aboutAYear(int year) => '$year شهر';
   @override
-  String years(int years) => '$years سنين';
+  String years(int years) => '$years سنة';
   @override
   String wordSeparator() => ' ';
 }

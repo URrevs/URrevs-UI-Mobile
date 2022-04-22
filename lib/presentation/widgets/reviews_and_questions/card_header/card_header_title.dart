@@ -19,22 +19,20 @@ class CardHeaderTitle extends StatelessWidget {
     return Row(
       children: [
         Flexible(
-          child: FittedBox(
-            fit: BoxFit.scaleDown,
-            child: Text(
-              authorName,
-              style: Theme.of(context).textTheme.headline1,
-            ),
+          child: Text(
+            authorName,
+            style: Theme.of(context).textTheme.headline1,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
         ),
         Icon(Icons.arrow_right),
         Flexible(
-          child: FittedBox(
-            fit: BoxFit.scaleDown,
-            child: Text(
-              productName,
-              style: Theme.of(context).textTheme.headline1,
-            ),
+          child: Text(
+            productName,
+            style: Theme.of(context).textTheme.headline1,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
         ),
       ],

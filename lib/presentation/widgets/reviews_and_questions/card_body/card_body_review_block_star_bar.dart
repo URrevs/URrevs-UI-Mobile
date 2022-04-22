@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 
 /// A signle star bar consisting of a rating criteria and the corresponding
 /// score that the product or the company have.
@@ -24,7 +25,7 @@ class CardBodyReviewBlockStarBar extends StatelessWidget {
       children: [
         Text(
           ratingCriteria + ":",
-          style: Theme.of(context).textTheme.headline2,
+          style: TextStyleManager.s14w500,
         ),
         RatingBar.builder(
           itemSize: 24.sp,

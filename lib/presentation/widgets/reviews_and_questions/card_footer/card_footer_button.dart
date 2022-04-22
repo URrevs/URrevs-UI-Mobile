@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 
 /// Button used in CardFooterButtonBar
 class CardFooterButton extends StatelessWidget {
@@ -38,21 +39,17 @@ class CardFooterButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _sizedBox_100x40(
-      child: TextButton.icon(
-        onPressed: () {},
-        icon: Icon(iconData),
-        label: FittedBox(
-          fit: BoxFit.scaleDown,
-          child: Text(text),
-        ),
-        style: (liked != null && liked!)
-            ? Theme.of(context).textButtonTheme.style!.copyWith(
-                  foregroundColor: MaterialStateProperty.all(
-                    ColorManager.blue,
-                  ),
-                )
-            : null,
+    return TextButton.icon(
+      onPressed: () {},
+      icon: Icon(iconData, size: 23.sp),
+      label: Text(
+        text,
+        style: TextStyleManager.s16w700,
+      ),
+      style: TextButton.styleFrom(
+        maximumSize: Size(double.infinity, double.infinity),
+        primary:
+            (liked != null && liked!) ? ColorManager.blue : ColorManager.grey,
       ),
     );
   }

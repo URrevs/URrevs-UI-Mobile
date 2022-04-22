@@ -104,7 +104,7 @@ class CardBodyReviewText extends StatelessWidget {
       children: [
         Text(
           LocaleKeys.pros.tr(),
-          style: Theme.of(context).textTheme.headline2,
+          style: TextStyleManager.s18w500,
         ),
         RichText(
           textAlign: TextAlign.justify,
@@ -138,7 +138,7 @@ class CardBodyReviewText extends StatelessWidget {
               10.verticalSpace,
               Text(
                 LocaleKeys.cons.tr(),
-                style: Theme.of(context).textTheme.headline2,
+                style: TextStyleManager.s18w500,
               ),
               RichText(
                 textAlign: TextAlign.justify,

@@ -84,7 +84,7 @@ class _ReviewCardBodyState extends State<ReviewCardBody> {
         _expanded = !_expanded;
       }),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        padding: EdgeInsets.only(right: 16.w, left: 16.w, top: 20.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -1,5 +1,4 @@
 {
-  "usedSince": "استخدمه منذ",
   "urrevs": "URrevs",
   "generalProductRating": "التقييم العام للمنتج",
   "userInterface": "واجهة المستخدم",
@@ -57,5 +56,6 @@
   "usedThisProductFor": "امتلك هذا المنتج لمدة",
   "acceptAnswer": "أقبل الإجابة",
   "acceptedAnswer": "إجابة مقبولة",
-  "moreAnswers": "المزيد من الاجابات"
+  "moreAnswers": "المزيد من الاجابات",
+  "usedThisFor": "استخدمه لمدة"
 }

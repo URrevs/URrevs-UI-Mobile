@@ -1,5 +1,4 @@
 {
-  "usedSince": "Used since",
   "urrevs": "URrevs",
   "battery": "Battery",
   "callsQuality": "Calls Quality",
@@ -57,5 +56,6 @@
   "usedThisProductFor": "Used this product for",
   "acceptAnswer": "Accept answer",
   "acceptedAnswer": "Accepted answer",
-  "moreAnswers": "More answers"
+  "moreAnswers": "More answers",
+  "usedThisFor": "Used this for"
 }

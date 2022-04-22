@@ -30,6 +30,7 @@ class AppRadius {
   static double get commentTreeAvatarRadius => 16.r;
   static double get replyAvatarRadius => 12.r;
   static double get interactionBodyRadius => 12.r;
+  static double get postCardRadius => 15.r;
 }
 
 class AppNumericValues {

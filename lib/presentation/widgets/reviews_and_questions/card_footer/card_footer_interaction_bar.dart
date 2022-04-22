@@ -44,7 +44,7 @@ class CardFooterInteractionBar extends StatelessWidget {
           text: numberFormat.format(commentCount),
           iconData: Icons.comment,
         ),
-        7.horizontalSpace,
+        8.horizontalSpace,
         CardFooterInteractionItem(
           text: numberFormat.format(shareCount),
           iconData: Icons.share,
