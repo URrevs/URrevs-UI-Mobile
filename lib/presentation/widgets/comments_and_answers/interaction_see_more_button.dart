@@ -50,7 +50,7 @@ class InteractionSeeMoreButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (noNeedForExpansion) {
+    if (expanded || noNeedForExpansion) {
       return SizedBox();
     }
 

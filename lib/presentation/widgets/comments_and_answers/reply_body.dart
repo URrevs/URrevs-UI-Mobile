@@ -77,7 +77,7 @@ class _ReplyBodyState extends State<ReplyBody> {
           ),
           color: ColorManager.white,
           child: InkWell(
-            onTap: _onTappingReplyBody,
+            onTap: noNeedForExpansion ? null : _onTappingReplyBody,
             borderRadius:
                 BorderRadius.circular(AppRadius.interactionBodyRadius),
             child: Container(

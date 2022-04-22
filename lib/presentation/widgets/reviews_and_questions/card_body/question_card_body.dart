@@ -48,7 +48,9 @@ class _QuestionCardBodyState extends State<QuestionCardBody> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => setState(() {
+      onTap: noNeedForExpansion
+          ? null
+          : () => setState(() {
         _expanded = !_expanded;
       }),
       child: Padding(

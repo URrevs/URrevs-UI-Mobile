@@ -48,7 +48,7 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
       ),
       body: ListView(
         children: [
-          AnswersList.dummyInstance,
+          QuestionCard.dummyInstance,
         ],
       ),
     );
