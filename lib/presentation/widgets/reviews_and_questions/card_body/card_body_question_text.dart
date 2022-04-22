@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body_see_more_button.dart';
 
 /// Returns the block containing the pros and cons text.
 class CardBodyQuestionText extends StatelessWidget {
@@ -6,6 +9,12 @@ class CardBodyQuestionText extends StatelessWidget {
     Key? key,
     required this.questionText,
     required this.maxLetters,
+    required this.expanded,
+    required this.questionTextCut,
+    required this.setExpandedState,
+    required this.noNeedForExpansion,
+    required this.hideSeeMoreIfNoNeedForExpansion,
+    required this.cutTextIfExceededLimit,
   }) : super(key: key);
 
   /// The question written by the user
@@ -14,6 +23,32 @@ class CardBodyQuestionText extends StatelessWidget {
   /// The max letters limit applied at any moment to the review card.
   /// It is based on the expanded condition of the review card.
   final int maxLetters;
+
+  /// Whether the card is expanded or not.
+  final bool expanded;
+
+  /// Returns a boolean value representing whether the whole question text
+  /// us shown or substrings of it.
+  final bool questionTextCut;
+
+  /// If set to true, [CardBodySeeMoreButton] would be hidden at the state of
+  /// the card where both pros and cons text are both shown completely. This
+  /// case only occurs when the the sum of pros text length and cons text length
+  /// is less than or equal to collapsedMaxLetters.
+  ///
+  /// This is set to true at the case of company review card.
+  final bool hideSeeMoreIfNoNeedForExpansion;
+
+  /// Returns true when the card is at a state in which we don't need to make
+  /// an expansion. This state is when the sum of pros text length and cons text
+  /// length is less than or equal collapsedMaxLetters.
+  final bool noNeedForExpansion;
+
+  /// A function that is invoked to set the expanded state of the parent.
+  final void Function(bool) setExpandedState;
+
+  /// If true, the received text would be cut if its length exceeds [maxLetters]
+  final bool cutTextIfExceededLimit;
 
   /// Cut the question text according to the expanded state and [maxLetters] of
   /// the review card.
@@ -43,10 +78,30 @@ class CardBodyQuestionText extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          cutQuestionText(questionText),
+        RichText(
           textAlign: TextAlign.justify,
-          style: Theme.of(context).textTheme.bodyText1,
+          text: TextSpan(
+            children: [
+              TextSpan(
+                text: cutQuestionText(questionText),
+                style: TextStyleManager.s16w400.copyWith(
+                  color: ColorManager.black,
+                ),
+              ),
+              WidgetSpan(
+                alignment: PlaceholderAlignment.baseline,
+                baseline: TextBaseline.alphabetic,
+                child: CardBodySeeMoreButton(
+                  expanded: expanded,
+                  parentTextCut: questionTextCut,
+                  setExpandedState: setExpandedState,
+                  noNeedForExpansion: noNeedForExpansion,
+                  hideSeeMoreIfNoNeedForExpansion:
+                      hideSeeMoreIfNoNeedForExpansion,
+                ),
+              )
+            ],
+          ),
         ),
       ],
     );

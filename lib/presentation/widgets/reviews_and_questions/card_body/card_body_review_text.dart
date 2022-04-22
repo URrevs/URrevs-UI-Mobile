@@ -52,6 +52,8 @@ class CardBodyReviewText extends StatelessWidget {
   /// an expansion. This state is when the sum of pros text length and cons text
   /// length is less than or equal collapsedMaxLetters.
   final bool noNeedForExpansion;
+
+  /// A function that is invoked to set the expanded state of the parent.
   final void Function(bool) setExpandedState;
 
   /// Cut the pros text according to the expanded state and [maxLetters] of
@@ -119,7 +121,7 @@ class CardBodyReviewText extends StatelessWidget {
                 baseline: TextBaseline.alphabetic,
                 child: CardBodySeeMoreButton(
                   expanded: expanded,
-                  prosAndConsCut: prosAndConsCut,
+                  parentTextCut: prosAndConsCut,
                   setExpandedState: setExpandedState,
                   noNeedForExpansion: noNeedForExpansion,
                   hideSeeMoreIfNoNeedForExpansion:
@@ -152,7 +154,7 @@ class CardBodyReviewText extends StatelessWidget {
                       baseline: TextBaseline.alphabetic,
                       child: CardBodySeeMoreButton(
                         expanded: expanded,
-                        prosAndConsCut: prosAndConsCut,
+                        parentTextCut: prosAndConsCut,
                         setExpandedState: setExpandedState,
                         noNeedForExpansion: noNeedForExpansion,
                         hideSeeMoreIfNoNeedForExpansion:

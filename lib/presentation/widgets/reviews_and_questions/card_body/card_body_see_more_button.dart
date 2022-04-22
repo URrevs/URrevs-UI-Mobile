@@ -11,7 +11,7 @@ class CardBodySeeMoreButton extends StatelessWidget {
   const CardBodySeeMoreButton({
     Key? key,
     required this.expanded,
-    required this.prosAndConsCut,
+    required this.parentTextCut,
     required this.setExpandedState,
     required this.noNeedForExpansion,
     required this.hideSeeMoreIfNoNeedForExpansion,
@@ -20,9 +20,9 @@ class CardBodySeeMoreButton extends StatelessWidget {
   /// Whether the card is expanded or not.
   final bool expanded;
 
-  /// Returns a boolean value representing whether the whole pros and cons texts
-  /// are shown or substrings of them.
-  final bool prosAndConsCut;
+  /// Returns a boolean value representing whether the whole parent text
+  /// are shown or substrings of it.
+  final bool parentTextCut;
 
   /// If set to true, [CardBodySeeMoreButton] would be hidden at the state of
   /// the card where both pros and cons text are both shown completely. This
@@ -36,6 +36,8 @@ class CardBodySeeMoreButton extends StatelessWidget {
   /// an expansion. This state is when the sum of pros text length and cons text
   /// length is less than or equal collapsedMaxLetters.
   final bool noNeedForExpansion;
+
+  /// A function that is invoked to set the expanded state of the parent.
   final void Function(bool) setExpandedState;
 
   /// Decide what would be shown on the [TextButton] shown after pros & cons
@@ -49,7 +51,7 @@ class CardBodySeeMoreButton extends StatelessWidget {
   String get seeMoreButtonText {
     if (!expanded) {
       return LocaleKeys.seeMore.tr();
-    } else if (!prosAndConsCut) {
+    } else if (!parentTextCut) {
       return LocaleKeys.seeLess.tr();
     } else {
       return LocaleKeys.seeMore.tr();
@@ -66,7 +68,7 @@ class CardBodySeeMoreButton extends StatelessWidget {
     if (!expanded) {
       return setExpandedState(true);
     }
-    if (!prosAndConsCut) {
+    if (!parentTextCut) {
       return setExpandedState(false);
     }
     // TODO: go to review full screen
@@ -81,7 +83,7 @@ class CardBodySeeMoreButton extends StatelessWidget {
             : Alignment.centerRight;
 
     if (hideSeeMoreIfNoNeedForExpansion && noNeedForExpansion) {
-      return Container();
+      return SizedBox();
     }
 
     return TextButton(

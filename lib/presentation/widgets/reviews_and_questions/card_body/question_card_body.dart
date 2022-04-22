@@ -59,13 +59,12 @@ class _QuestionCardBodyState extends State<QuestionCardBody> {
             CardBodyQuestionText(
               questionText: widget.questionText,
               maxLetters: maxLetters,
-            ),
-            CardBodySeeMoreButton(
               expanded: _expanded,
-              prosAndConsCut: questionTextCut,
+              questionTextCut: questionTextCut,
               setExpandedState: setExpandedState,
               noNeedForExpansion: noNeedForExpansion,
               hideSeeMoreIfNoNeedForExpansion: true,
+              cutTextIfExceededLimit: true,
             ),
           ],
         ),
