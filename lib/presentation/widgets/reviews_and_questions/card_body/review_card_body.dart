@@ -4,7 +4,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body_expand_circle.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body_rating_block.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body_review_text.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body_see_more_button.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/see_more_button.dart';
 
 /// Middle block of the review card.
 /// Contains star ratings and pros and cons of the product.
@@ -37,7 +37,7 @@ class ReviewCardBody extends StatefulWidget {
   /// Whether to show expand circle or not.
   final bool showExpandCircle;
 
-  /// If set to true, [CardBodySeeMoreButton] would be hidden at the state of
+  /// If set to true, [SeeMoreButton] would be hidden at the state of
   /// the card where both pros and cons text are both shown completely. This
   /// case only occurs when the the sum of pros text length and cons text length
   /// is less than or equal to collapsedMaxLetters.

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/interaction_see_more_button.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/see_more_button.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 class InteractionBodyText extends StatelessWidget {
@@ -82,11 +82,13 @@ class InteractionBodyText extends StatelessWidget {
             baseline: TextBaseline.alphabetic,
             child: inQuestionCard
                 ? _buildSpecialAnswerSeeMoreButton()
-                : InteractionSeeMoreButton(
+                : SeeMoreButton(
                     expanded: expanded,
                     parentTextCut: interactionTextCut,
                     setExpandedState: setExpandedState,
                     noNeedForExpansion: noNeedForExpansion,
+                    hideSeeMoreIfNoNeedForExpansion: true,
+                    usedInInteraction: true,
                   ),
           ),
         ],

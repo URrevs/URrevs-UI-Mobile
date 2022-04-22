@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/reply_body.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/reply_footer.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/interaction_body.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/interaction_footer.dart';
 
 class Reply extends StatelessWidget {
   final String imageUrl;
@@ -46,14 +46,14 @@ class Reply extends StatelessWidget {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ReplyBody(
+                InteractionBody(
                   authorName: authorName,
                   replyText: replyText,
                   likeCount: likeCount,
                   maxWidth: constraints.maxWidth - 16.w,
                   inQuestionCard: false,
                 ),
-                ReplyFooter(
+                InteractionFooter(
                   datePosted: datePosted,
                   maxWidth: constraints.maxWidth - 16.w,
                   liked: liked,

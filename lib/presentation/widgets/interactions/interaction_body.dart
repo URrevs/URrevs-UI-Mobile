@@ -6,13 +6,13 @@ import 'package:urrevs_ui_mobile/app/extensions.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/interaction_body_text.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/interaction_body_title.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/interaction_like_counter.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/interactions/interaction_body_text.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/interactions/interaction_body_title.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/interactions/interaction_like_counter.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
-class ReplyBody extends StatefulWidget {
-  const ReplyBody({
+class InteractionBody extends StatefulWidget {
+  const InteractionBody({
     Key? key,
     required this.authorName,
     required this.replyText,
@@ -36,10 +36,10 @@ class ReplyBody extends StatefulWidget {
   final VoidCallback? onTappingAnswerInCard;
 
   @override
-  State<ReplyBody> createState() => _ReplyBodyState();
+  State<InteractionBody> createState() => _InteractionBodyState();
 }
 
-class _ReplyBodyState extends State<ReplyBody> {
+class _InteractionBodyState extends State<InteractionBody> {
   bool _expanded = false;
 
   /// Returns a boolean value representing whether the whole question text
@@ -65,6 +65,16 @@ class _ReplyBodyState extends State<ReplyBody> {
 
   @override
   Widget build(BuildContext context) {
+    String? usedSinceStr;
+    if (widget.usedSinceDate != null) {
+      usedSinceStr = LocaleKeys.usedThisProductFor.tr() +
+          ' ' +
+          timeago.format(
+            widget.usedSinceDate!,
+            locale: context.locale.languageCode,
+          );
+    }
+
     return Stack(
       clipBehavior: Clip.none,
       children: [
@@ -97,14 +107,9 @@ class _ReplyBodyState extends State<ReplyBody> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   InteractionBodyTitle(authorName: widget.authorName),
-                  if (widget.usedSinceDate != null)
+                  if (usedSinceStr != null)
                     Text(
-                      LocaleKeys.usedThisProductFor.tr() +
-                          ' ' +
-                          timeago.format(
-                            widget.usedSinceDate!,
-                            locale: context.locale.languageCode,
-                          ),
+                      usedSinceStr,
                       style: TextStyleManager.s12w400.copyWith(
                         color: ColorManager.grey,
                       ),

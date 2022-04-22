@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body_question_text.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body_see_more_button.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/see_more_button.dart';
 
 /// Middle block of the review card.
 /// Contains star ratings and pros and cons of the product.
@@ -28,10 +28,6 @@ class _QuestionCardBodyState extends State<QuestionCardBody> {
   int get maxLetters => _expanded
       ? AppNumericValues.expandedMaxLetters
       : AppNumericValues.collapsedMaxLetters;
-
-  /// Returns a boolean value representing whether the whole question text
-  /// us shown or substrings of it.
-  bool get questionTextCut => widget.questionText.length > maxLetters;
 
   /// Returns true when the card is at a state in which we don't need to make
   /// an expansion. This state is when the question text
@@ -60,13 +56,8 @@ class _QuestionCardBodyState extends State<QuestionCardBody> {
           children: [
             CardBodyQuestionText(
               questionText: widget.questionText,
-              maxLetters: maxLetters,
               expanded: _expanded,
-              questionTextCut: questionTextCut,
               setExpandedState: setExpandedState,
-              noNeedForExpansion: noNeedForExpansion,
-              hideSeeMoreIfNoNeedForExpansion: true,
-              cutTextIfExceededLimit: true,
             ),
           ],
         ),

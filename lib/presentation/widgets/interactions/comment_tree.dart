@@ -6,8 +6,8 @@ import 'package:urrevs_ui_mobile/presentation/resources/text_button_style_manage
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/reply.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/reply_body.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/reply_footer.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/interaction_body.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/interaction_footer.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 class CommentTree extends StatefulWidget {
@@ -69,14 +69,14 @@ class _CommentTreeState extends State<CommentTree> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ReplyBody(
+                InteractionBody(
                   authorName: widget.authorName,
                   replyText: widget.commentText,
                   likeCount: widget.likeCount,
                   maxWidth: constraints.maxWidth - 16.w,
                   inQuestionCard: false,
                 ),
-                ReplyFooter(
+                InteractionFooter(
                   datePosted: widget.datePosted,
                   maxWidth: constraints.maxWidth - 16.w,
                   liked: widget.liked,

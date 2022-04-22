@@ -2,12 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/answer_tree.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/answers_list.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/comment_tree.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/comments_list.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/reply.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body_see_more_button.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answer_tree.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answers_list.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/interactions/comment_tree.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/interactions/comments_list.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/interactions/reply.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/see_more_button.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/review_card_body.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/company_review_card.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/product_review_card.dart';
@@ -48,7 +48,11 @@ class _DevelopmentScreenState extends State<DevelopmentScreen> {
       ),
       body: ListView(
         children: [
+          // ProductReviewCard.dummyInstance,
+          // CompanyReviewCard.dummyInstance,
           QuestionCard.dummyInstance,
+          // CommentTree.dummyInstance,
+          // AnswerTree.dummyInstance,
         ],
       ),
     );

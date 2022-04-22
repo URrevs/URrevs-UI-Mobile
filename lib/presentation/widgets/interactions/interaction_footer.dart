@@ -9,8 +9,8 @@ import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 enum InteractionFooterFirstButtonText { like, vote, acceptAnswer }
 
-class ReplyFooter extends StatelessWidget {
-  const ReplyFooter({
+class InteractionFooter extends StatelessWidget {
+  const InteractionFooter({
     Key? key,
     required this.datePosted,
     required this.maxWidth,

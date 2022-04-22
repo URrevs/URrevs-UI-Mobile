@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body_see_more_button.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/see_more_button.dart';
 
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
@@ -40,7 +40,7 @@ class CardBodyReviewText extends StatelessWidget {
   /// are shown or substrings of them.
   final bool prosAndConsCut;
 
-  /// If set to true, [CardBodySeeMoreButton] would be hidden at the state of
+  /// If set to true, [SeeMoreButton] would be hidden at the state of
   /// the card where both pros and cons text are both shown completely. This
   /// case only occurs when the the sum of pros text length and cons text length
   /// is less than or equal to collapsedMaxLetters.
@@ -119,13 +119,14 @@ class CardBodyReviewText extends StatelessWidget {
               WidgetSpan(
                 alignment: PlaceholderAlignment.baseline,
                 baseline: TextBaseline.alphabetic,
-                child: CardBodySeeMoreButton(
+                child: SeeMoreButton(
                   expanded: expanded,
                   parentTextCut: prosAndConsCut,
                   setExpandedState: setExpandedState,
                   noNeedForExpansion: noNeedForExpansion,
                   hideSeeMoreIfNoNeedForExpansion:
                       hideSeeMoreIfNoNeedForExpansion,
+                  usedInInteraction: false,
                 ),
               )
           ]),
@@ -152,13 +153,14 @@ class CardBodyReviewText extends StatelessWidget {
                     WidgetSpan(
                       alignment: PlaceholderAlignment.baseline,
                       baseline: TextBaseline.alphabetic,
-                      child: CardBodySeeMoreButton(
+                      child: SeeMoreButton(
                         expanded: expanded,
                         parentTextCut: prosAndConsCut,
                         setExpandedState: setExpandedState,
                         noNeedForExpansion: noNeedForExpansion,
                         hideSeeMoreIfNoNeedForExpansion:
                             hideSeeMoreIfNoNeedForExpansion,
+                        usedInInteraction: false,
                       ),
                     )
                   ],

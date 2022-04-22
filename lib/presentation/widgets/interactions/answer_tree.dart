@@ -6,8 +6,8 @@ import 'package:urrevs_ui_mobile/presentation/resources/text_button_style_manage
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/reply.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/reply_body.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/reply_footer.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/interaction_body.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/comments_and_answers/interaction_footer.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 class AnswerTree extends StatefulWidget {
@@ -107,7 +107,7 @@ class _AnswerTreeState extends State<AnswerTree> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ReplyBody(
+                InteractionBody(
                   authorName: widget.authorName,
                   replyText: widget.commentText,
                   likeCount: widget.likeCount,
@@ -116,7 +116,7 @@ class _AnswerTreeState extends State<AnswerTree> {
                   inQuestionCard: widget.inQuestionCard,
                   onTappingAnswerInCard: widget.onTappingAnswerInCard,
                 ),
-                ReplyFooter(
+                InteractionFooter(
                   datePosted: widget.datePosted,
                   maxWidth: constraints.maxWidth - 16.w,
                   liked: widget.liked,
