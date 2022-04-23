@@ -7,4 +7,6 @@ class AssetsPaths {
 class ImageAssets {
   static const String splashLogo = "${AssetsPaths.images}/splash_logo.png";
   static const String fullLogo = "${AssetsPaths.images}/full_logo.png";
+  static const String googleLogo = "${AssetsPaths.images}/google_logo.png";
+  static const String facebookLogo = "${AssetsPaths.images}/facebook_logo.png";
 }

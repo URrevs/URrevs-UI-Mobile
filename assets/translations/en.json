@@ -58,5 +58,7 @@
   "acceptedAnswer": "Accepted answer",
   "moreAnswers": "More answers",
   "usedThisFor": "Used this for",
-  "brandBriefing": "First customer reviews platform in MENA region"
+  "brandBriefing": "First customer reviews platform in MENA region",
+  "googleAuth": "Continue using Google",
+  "facebookAuth": "Continue using Facebook"
 }

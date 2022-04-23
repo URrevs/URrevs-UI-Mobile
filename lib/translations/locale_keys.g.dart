@@ -61,5 +61,7 @@ abstract class  LocaleKeys {
   static const moreAnswers = 'moreAnswers';
   static const usedThisFor = 'usedThisFor';
   static const brandBriefing = 'brandBriefing';
+  static const googleAuth = 'googleAuth';
+  static const facebookAuth = 'facebookAuth';
 
 }

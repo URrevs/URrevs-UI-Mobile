@@ -16,7 +16,6 @@ class URrevsLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var textStyleManager = TextStyleManager;
     return Center(
       child: Column(
         children: [
