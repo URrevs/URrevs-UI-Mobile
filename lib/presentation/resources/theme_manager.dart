@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/font_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 
 class ThemeManager {
+  static bool get isLight =>
+      ProviderContainer().read(themeModeProvider) == ThemeMode.light;
+
   static TextStyle get headline1 => TextStyle(
         fontSize: 16.sp,
         fontWeight: FontWeight.w700,
