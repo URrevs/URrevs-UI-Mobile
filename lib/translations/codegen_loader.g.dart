@@ -73,7 +73,8 @@ class CodegenLoader extends AssetLoader{
   "acceptAnswer": "أقبل الإجابة",
   "acceptedAnswer": "إجابة مقبولة",
   "moreAnswers": "المزيد من الاجابات",
-  "usedThisFor": "استخدمه لمدة"
+  "usedThisFor": "استخدمه لمدة",
+  "brandBriefing": "أول منصة لمراجعات المستخدمين في الشرق الأوسط"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -134,7 +135,8 @@ static const Map<String,dynamic> en = {
   "acceptAnswer": "Accept answer",
   "acceptedAnswer": "Accepted answer",
   "moreAnswers": "More answers",
-  "usedThisFor": "Used this for"
+  "usedThisFor": "Used this for",
+  "brandBriefing": "First customer reviews platform in MENA region"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

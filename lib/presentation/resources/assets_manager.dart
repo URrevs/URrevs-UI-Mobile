@@ -1,4 +1,3 @@
-const String imagePath = "assets/images";
 
 class AssetsPaths {
   static const String images = "assets/images";
@@ -6,5 +5,6 @@ class AssetsPaths {
 }
 
 class ImageAssets {
-  static const String splashLogo = "$imagePath/splash_logo.png";
+  static const String splashLogo = "${AssetsPaths.images}/splash_logo.png";
+  static const String fullLogo = "${AssetsPaths.images}/full_logo.png";
 }

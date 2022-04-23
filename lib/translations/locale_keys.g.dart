@@ -60,5 +60,6 @@ abstract class  LocaleKeys {
   static const acceptedAnswer = 'acceptedAnswer';
   static const moreAnswers = 'moreAnswers';
   static const usedThisFor = 'usedThisFor';
+  static const brandBriefing = 'brandBriefing';
 
 }
