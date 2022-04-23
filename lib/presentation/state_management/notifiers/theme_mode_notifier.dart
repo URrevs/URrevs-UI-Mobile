@@ -7,6 +7,7 @@ class ThemeModeNotifier extends StateNotifier<ThemeMode> {
   ThemeModeNotifier() : super(GetIt.I<AppPreferences>().getThemeMode());
 
   void setThemeMode(ThemeMode themeMode) {
+    print('theme mode provide state is set');
     state = themeMode;
     GetIt.I<AppPreferences>().setThemeMode(themeMode);
   }

@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/review_card_body.dart';
@@ -88,16 +89,16 @@ class ProductReviewCard extends StatelessWidget {
   static ProductReviewCard get dummyInstance => ProductReviewCard(
         postedDate: faker.date.dateTime(minYear: 2000, maxYear: 2022),
         usedSinceDate: faker.date.dateTime(minYear: 2000, maxYear: 2021),
-        views: Random().nextInt(10000000),
-        authorName: 'Fady Ahmed', // faker.person.name(),
+        views: DummyDataManager.randomInt,
+        authorName: faker.person.name(),
         imageUrl: StringsManager.picsum200x200,
         productName: 'Oppo Reno 5',
         scores: List.generate(7, (_) => Random().nextInt(5) + 1),
         prosText: StringsManager.lorem,
         consText: StringsManager.lorem,
-        likeCount: 100,
-        commentCount: 5,
-        shareCount: 20,
+        likeCount: DummyDataManager.randomInt,
+        commentCount: DummyDataManager.randomInt,
+        shareCount: DummyDataManager.randomInt,
         liked: Random().nextBool(),
       );
 

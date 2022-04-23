@@ -26,7 +26,7 @@ class ColorManager {
 
   static Color get pink => ColorPair(
         light: Color(0xffFF6C89),
-        dark: Color(0xffFF6C89),
+        dark: Colors.red,
       ).pickColor();
 
   static Color get orange => ColorPair(

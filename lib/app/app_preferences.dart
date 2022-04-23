@@ -13,7 +13,7 @@ class AppPreferences {
     String? themeMode =
         _sharedPreferences.getString(SharedPreferencesKeys.themeMode);
     if (themeMode == null) {
-      return ThemeMode.system;
+      return ThemeMode.light;
     }
     switch (themeMode) {
       case kDark:
@@ -21,7 +21,7 @@ class AppPreferences {
       case kLight:
         return ThemeMode.light;
       default:
-        return ThemeMode.system;
+        return ThemeMode.light;
     }
   }
 

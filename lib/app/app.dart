@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/development_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/theme_mode_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/routes_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/theme_manager.dart';
@@ -21,10 +23,10 @@ class MyApp extends ConsumerWidget {
       splitScreenMode: false,
       builder: (_) => MaterialApp(
         title: LocaleKeys.urrevs.tr(),
-        initialRoute: Routes.development,
+        initialRoute: DevelopmentScreen.routeName,
         onGenerateRoute: RouteGenerator.getRoute,
         debugShowCheckedModeBanner: false,
-        themeMode: ThemeMode.light, // ref.watch(themeModeProvider),
+        themeMode: ref.watch(themeModeProvider),
         theme: ThemeManager.light,
         darkTheme: ThemeManager.dark,
         builder: (context, widget) {
