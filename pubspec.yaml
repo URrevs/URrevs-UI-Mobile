@@ -46,6 +46,7 @@ dependencies:
   timeago: ^3.2.2
   faker: ^2.0.0
   custom_pop_up_menu: ^1.2.3+1
+  gradient_widgets: ^0.6.0
 
 dev_dependencies:
   flutter_test:
