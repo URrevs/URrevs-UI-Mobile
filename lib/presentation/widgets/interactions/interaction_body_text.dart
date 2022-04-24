@@ -67,9 +67,8 @@ class InteractionBodyText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RichText(
-      softWrap: true,
-      text: TextSpan(
+    return Text.rich(
+      TextSpan(
         children: [
           TextSpan(
             text: cutText(interactionText),

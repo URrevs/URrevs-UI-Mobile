@@ -32,7 +32,9 @@ class ThemeManager {
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
             primary: ColorManager.grey,
-            textStyle: ThemeManager.headline1,
+            textStyle: ThemeManager.headline1.copyWith(
+              fontFamily: FontConstants.tajawal,
+            ),
             // minimumSize: Size(80.w, 30.h),
             // maximumSize: Size(100.w, 40.h),
           ),

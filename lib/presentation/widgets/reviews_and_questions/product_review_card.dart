@@ -95,7 +95,7 @@ class ProductReviewCard extends StatelessWidget {
         productName: 'Oppo Reno 5',
         scores: List.generate(7, (_) => Random().nextInt(5) + 1),
         prosText: StringsManager.lorem,
-        consText: StringsManager.lorem,
+        consText: StringsManager.longestReviewCons,
         likeCount: DummyDataManager.randomInt,
         commentCount: DummyDataManager.randomInt,
         shareCount: DummyDataManager.randomInt,

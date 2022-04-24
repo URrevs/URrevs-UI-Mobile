@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body_review_block_star_bar.dart';
 
 /// Rating table which contains 7 rows of star ratings of different aspects
@@ -38,6 +39,7 @@ class CardBodyRatingBlock extends StatelessWidget {
             ratingCriteria: ratingCriteria[i].tr(),
             score: scores[i],
           ),
+          9.verticalSpace,
         ]
       ],
     );

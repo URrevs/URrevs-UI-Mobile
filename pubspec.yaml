@@ -47,6 +47,8 @@ dependencies:
   faker: ^2.0.0
   custom_pop_up_menu: ^1.2.3+1
   gradient_widgets: ^0.6.0
+  font_awesome_flutter: ^10.1.0
+  flutter_svg: ^1.0.3
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +75,8 @@ flutter:
   assets:
     - assets/translations/
     - assets/images/
+    - assets/images/svg/star-solid.svg
+    - assets/images/svg/upvote.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

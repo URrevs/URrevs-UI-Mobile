@@ -1,7 +1,10 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/assets_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
@@ -16,6 +19,7 @@ import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/comp
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/product_review_card.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/question_card.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/specs_comparison_table.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/specs_table.dart';
 
 class DevelopmentScreen extends ConsumerStatefulWidget {
   const DevelopmentScreen({Key? key}) : super(key: key);
@@ -65,11 +69,25 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
       ),
       body: ListView(
         children: [
-          // ProductReviewCard.dummyInstance,
+          ProductReviewCard.dummyInstance,
           // CompanyReviewCard.dummyInstance,
           // QuestionCard.dummyInstance,
           // CommentTree.dummyInstance,
           // AnswerTree.dummyInstance,
+          // SpecsTable.dummyInstance,
+          // SvgPicture.asset(SvgAssets.upvote, color: Colors.red),
+
+          // RichText(
+          //   textDirection: TextDirection.rtl,
+          //   text: TextSpan(
+          //     children: [
+          //       TextSpan(
+          //         text: 'ابجد abc بلا',
+          //         style: TextStyle(color: Colors.black),
+          //       ),
+          //     ],
+          //   ),
+          // ),
         ],
       ),
     );

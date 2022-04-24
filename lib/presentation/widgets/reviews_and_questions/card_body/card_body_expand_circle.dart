@@ -16,7 +16,7 @@ class CardBodyExpandCircle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 3,
+      elevation: 1.5,
       color: ColorManager.cyan,
       shape: CircleBorder(),
       child: Center(
@@ -24,7 +24,7 @@ class CardBodyExpandCircle extends StatelessWidget {
           expanded
               ? Icons.arrow_drop_up_rounded
               : Icons.arrow_drop_down_rounded,
-          size: 40.sp,
+          size: 28.sp,
           color: ColorManager.white,
         ),
       ),

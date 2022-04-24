@@ -79,7 +79,7 @@ class CardHeaderSubtitle extends StatelessWidget {
         if (views != null) ...[
           _buildDot(),
           Icon(Icons.remove_red_eye),
-          1.horizontalSpace,
+          3.horizontalSpace,
           Flexible(
             flex: 20,
             child: FittedBox(

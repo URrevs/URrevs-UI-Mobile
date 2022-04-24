@@ -106,30 +106,31 @@ class CardBodyReviewText extends StatelessWidget {
           LocaleKeys.pros.tr() + ':',
           style: TextStyleManager.s18w500,
         ),
-        RichText(
-          textAlign: TextAlign.justify,
-          text: TextSpan(children: [
-            TextSpan(
-              text: cutPros(prosText),
-              style: TextStyleManager.s16w400.copyWith(
-                color: ColorManager.black,
-              ),
-            ),
-            if (!showCons)
-              WidgetSpan(
-                alignment: PlaceholderAlignment.baseline,
-                baseline: TextBaseline.alphabetic,
-                child: SeeMoreButton(
-                  expanded: expanded,
-                  parentTextCut: prosAndConsCut,
-                  setExpandedState: setExpandedState,
-                  noNeedForExpansion: noNeedForExpansion,
-                  hideSeeMoreIfNoNeedForExpansion:
-                      hideSeeMoreIfNoNeedForExpansion,
-                  usedInInteraction: false,
+        Text.rich(
+          TextSpan(
+            children: [
+              TextSpan(
+                text: cutPros(prosText),
+                style: TextStyleManager.s16w400.copyWith(
+                  color: ColorManager.black,
                 ),
-              )
-          ]),
+              ),
+              if (!showCons)
+                WidgetSpan(
+                  alignment: PlaceholderAlignment.baseline,
+                  baseline: TextBaseline.alphabetic,
+                  child: SeeMoreButton(
+                    expanded: expanded,
+                    parentTextCut: prosAndConsCut,
+                    setExpandedState: setExpandedState,
+                    noNeedForExpansion: noNeedForExpansion,
+                    hideSeeMoreIfNoNeedForExpansion:
+                        hideSeeMoreIfNoNeedForExpansion,
+                    usedInInteraction: false,
+                  ),
+                )
+            ],
+          ),
         ),
         if (showCons)
           Column(
@@ -140,9 +141,8 @@ class CardBodyReviewText extends StatelessWidget {
                 LocaleKeys.cons.tr() + ':',
                 style: TextStyleManager.s18w500,
               ),
-              RichText(
-                textAlign: TextAlign.justify,
-                text: TextSpan(
+              Text.rich(
+                TextSpan(
                   children: [
                     TextSpan(
                       text: cutCons(consText),

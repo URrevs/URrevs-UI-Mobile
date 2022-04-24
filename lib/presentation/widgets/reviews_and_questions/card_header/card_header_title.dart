@@ -1,4 +1,10 @@
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:urrevs_ui_mobile/app/extensions.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 
 /// Build the line containing the author's name and the product name.
 class CardHeaderTitle extends StatelessWidget {
@@ -16,21 +22,36 @@ class CardHeaderTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(context.textDirection);
     return Row(
       children: [
         Flexible(
           child: Text(
             authorName,
-            style: Theme.of(context).textTheme.headline1,
+            style: TextStyleManager.s16w700.copyWith(
+              color: ColorManager.black,
+              overflow: TextOverflow.ellipsis,
+            ),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
         ),
-        Icon(Icons.arrow_right),
+        8.horizontalSpace,
+        FaIcon(
+          context.isArabic
+              ? FontAwesomeIcons.caretLeft
+              : FontAwesomeIcons.caretRight,
+          textDirection: TextDirection.ltr,
+          size: 16.sp,
+        ),
+        8.horizontalSpace,
         Flexible(
           child: Text(
             productName,
-            style: Theme.of(context).textTheme.headline1,
+            style: TextStyleManager.s16w700.copyWith(
+              color: ColorManager.black,
+              overflow: TextOverflow.ellipsis,
+            ),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
