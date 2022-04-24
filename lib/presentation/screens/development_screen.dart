@@ -69,25 +69,13 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
       ),
       body: ListView(
         children: [
-          ProductReviewCard.dummyInstance,
+          // ProductReviewCard.dummyInstance,
           // CompanyReviewCard.dummyInstance,
-          // QuestionCard.dummyInstance,
+          QuestionCard.dummyInstance,
           // CommentTree.dummyInstance,
           // AnswerTree.dummyInstance,
           // SpecsTable.dummyInstance,
           // SvgPicture.asset(SvgAssets.upvote, color: Colors.red),
-
-          // RichText(
-          //   textDirection: TextDirection.rtl,
-          //   text: TextSpan(
-          //     children: [
-          //       TextSpan(
-          //         text: 'ابجد abc بلا',
-          //         style: TextStyle(color: Colors.black),
-          //       ),
-          //     ],
-          //   ),
-          // ),
         ],
       ),
     );

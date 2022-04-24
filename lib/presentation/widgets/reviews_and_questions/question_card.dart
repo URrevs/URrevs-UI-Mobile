@@ -1,6 +1,12 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:urrevs_ui_mobile/app/extensions.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answer_tree.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/question_card_body.dart';
@@ -58,7 +64,7 @@ class QuestionCard extends StatelessWidget {
         authorName: DummyDataManager.authorName,
         imageUrl: DummyDataManager.imageUrl,
         targetName: DummyDataManager.targetName,
-        questionText: DummyDataManager.randomText,
+        questionText: StringsManager.longestReviewPros,
         upvoteCount: DummyDataManager.randomInt,
         answerCount: DummyDataManager.randomInt,
         shareCount: DummyDataManager.randomInt,
@@ -81,48 +87,69 @@ class QuestionCard extends StatelessWidget {
     // TODO: implememnt _onShare
   }
 
+  Positioned _buildQuestionMark(BuildContext context) {
+    return Positioned(
+      top: 0,
+      left: context.isArabic ? 0 : null,
+      right: context.isArabic ? null : 0,
+      child: Transform.rotate(
+        angle: 24 / 180 * math.pi * (context.isArabic ? -1 : 1),
+        child: FaIcon(
+          FontAwesomeIcons.circleQuestion,
+          color: ColorManager.blue,
+          size: 22.sp,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 3,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(
-          AppRadius.interactionBodyRadius,
+    return Stack(
+      children: [
+        Card(
+          elevation: 3,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(
+              AppRadius.interactionBodyRadius,
+            ),
+          ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 8.h),
+            child: Column(
+              children: [
+                CardHeader(
+                  imageUrl: imageUrl,
+                  authorName: authorName,
+                  targetName: targetName,
+                  postedDate: postedDate,
+                  usedSinceDate: null,
+                  views: null,
+                ),
+                10.verticalSpace,
+                QuestionCardBody(questionText: questionText),
+                10.verticalSpace,
+                CardFooter(
+                  likeCount: upvoteCount,
+                  commentCount: answerCount,
+                  shareCount: shareCount,
+                  liked: upvoted,
+                  useInReviewCard: false,
+                  onLike: _onUpvote,
+                  onComment: _onAnswer,
+                  onShare: _onShare,
+                ),
+                Divider(height: 10.h),
+                Padding(
+                  padding: EdgeInsets.only(top: 25.h),
+                  child: answer!,
+                ),
+              ],
+            ),
+          ),
         ),
-      ),
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 8.h),
-        child: Column(
-          children: [
-            CardHeader(
-              imageUrl: imageUrl,
-              authorName: authorName,
-              targetName: targetName,
-              postedDate: postedDate,
-              usedSinceDate: null,
-              views: null,
-            ),
-            10.verticalSpace,
-            QuestionCardBody(questionText: questionText),
-            10.verticalSpace,
-            CardFooter(
-              likeCount: upvoteCount,
-              commentCount: answerCount,
-              shareCount: shareCount,
-              liked: upvoted,
-              useInReviewCard: false,
-              onLike: _onUpvote,
-              onComment: _onAnswer,
-              onShare: _onShare,
-            ),
-            Divider(height: 10.h),
-            Padding(
-              padding: EdgeInsets.only(top: 25.h),
-              child: answer!,
-            ),
-          ],
-        ),
-      ),
+        _buildQuestionMark(context),
+      ],
     );
   }
 }
