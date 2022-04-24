@@ -136,20 +136,23 @@ class _AnswerTreeState extends State<AnswerTree> {
                   liked: widget.liked,
                   firstButtonType: firstButtonType,
                 ),
-                VerticalSpacesBetween.replies,
-                if (!widget.inQuestionCard && !_expandReplies)
+                if (!widget.inQuestionCard && !_expandReplies) ...[
+                  VerticalSpacesBetween.interactionBodyAndShowRepliesButton,
                   TextButton(
                     onPressed: _onPressingShowReplies,
                     style: TextButtonStyleManager.showReplies,
                     child: Text(
                         '${widget.replies.length} ${LocaleKeys.reply.tr()}'),
                   ),
-                if (_expandReplies)
+                ],
+                if (_expandReplies) ...[
+                  VerticalSpacesBetween.interactionBodyAndReplies,
                   for (int i = 0; i < widget.replies.length; i++) ...[
                     widget.replies[i],
                     if (i != widget.replies.length - 1)
                       VerticalSpacesBetween.replies,
                   ],
+                ],
               ],
             );
           }),

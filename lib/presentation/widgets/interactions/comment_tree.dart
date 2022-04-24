@@ -83,7 +83,7 @@ class _CommentTreeState extends State<CommentTree> {
                   firstButtonType: InteractionFooterFirstButtonText.like,
                 ),
                 if (!_expandReplies) ...[
-                  VerticalSpacesBetween.commentBodyAndShowRepliesButton,
+                  VerticalSpacesBetween.interactionBodyAndShowRepliesButton,
                   TextButton(
                     onPressed: _onPressingShowReplies,
                     style: TextButtonStyleManager.showReplies,
@@ -92,7 +92,7 @@ class _CommentTreeState extends State<CommentTree> {
                   ),
                 ],
                 if (_expandReplies) ...[
-                  VerticalSpacesBetween.commentBodyAndReplies,
+                  VerticalSpacesBetween.interactionBodyAndReplies,
                   for (int i = 0; i < widget.replies.length; i++) ...[
                     widget.replies[i],
                     if (i != widget.replies.length - 1)
