@@ -27,6 +27,7 @@ class CardHeaderTitle extends StatelessWidget {
         Flexible(
           child: Text(
             authorName,
+            textAlign: TextAlign.center,
             style: TextStyleManager.s16w700.copyWith(
               color: ColorManager.black,
               overflow: TextOverflow.ellipsis,
@@ -47,6 +48,7 @@ class CardHeaderTitle extends StatelessWidget {
         Flexible(
           child: Text(
             productName,
+            textAlign: TextAlign.center,
             style: TextStyleManager.s16w700.copyWith(
               color: ColorManager.black,
               overflow: TextOverflow.ellipsis,

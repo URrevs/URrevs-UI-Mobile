@@ -92,12 +92,16 @@ class QuestionCard extends StatelessWidget {
       top: 0,
       left: context.isArabic ? 0 : null,
       right: context.isArabic ? null : 0,
-      child: Transform.rotate(
-        angle: 24 / 180 * math.pi * (context.isArabic ? -1 : 1),
-        child: FaIcon(
-          FontAwesomeIcons.circleQuestion,
-          color: ColorManager.blue,
-          size: 22.sp,
+      child: CircleAvatar(
+        radius: 14.sp,
+        backgroundColor: ColorManager.backgroundGrey,
+        child: Transform.rotate(
+          angle: 24 / 180 * math.pi * (context.isArabic ? -1 : 1),
+          child: FaIcon(
+            FontAwesomeIcons.circleQuestion,
+            color: ColorManager.blue,
+            size: 22.sp,
+          ),
         ),
       ),
     );
