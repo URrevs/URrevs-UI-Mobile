@@ -39,6 +39,11 @@ class ColorManager {
         dark: Color(0xff65676B),
       ).pickColor();
 
+  static Color get dividerGrey => ColorPair(
+        light: Color(0xffCED0D4),
+        dark: Color(0xffCED0D4),
+      ).pickColor();
+
   static Color get buttonGrey => ColorPair(
         light: Color(0xff606266),
         dark: Color(0xff606266),

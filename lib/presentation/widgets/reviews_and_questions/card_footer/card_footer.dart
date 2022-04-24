@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_footer/card_footer_button_bar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_footer/card_footer_interaction_bar.dart';
 
@@ -57,7 +58,7 @@ class CardFooter extends StatelessWidget {
             useInReviewCard: useInReviewCard,
           ),
         ),
-        Divider(height: 10.h),
+        Divider(height: 10.h, thickness: 1.h, color: ColorManager.dividerGrey),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: CardFooterButtonBar(

@@ -26,7 +26,10 @@ class CardFooterInteractionItem extends StatelessWidget {
       children: [
         Text(text, style: TextStyleManager.s14w400),
         5.horizontalSpace,
-        icon,
+        Padding(
+          padding: EdgeInsets.only(bottom: 5.h),
+          child: icon,
+        ),
       ],
     );
   }

@@ -143,7 +143,11 @@ class QuestionCard extends StatelessWidget {
                   onComment: _onAnswer,
                   onShare: _onShare,
                 ),
-                Divider(height: 10.h),
+                Divider(
+                  height: 10.h,
+                  thickness: 1.h,
+                  color: ColorManager.dividerGrey,
+                ),
                 Padding(
                   padding: EdgeInsets.only(top: 25.h, right: 12.w, left: 12.w),
                   child: answer!,

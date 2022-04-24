@@ -35,6 +35,8 @@ class InteractionLikeCounter extends StatelessWidget {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.baseline,
+          textBaseline: TextBaseline.alphabetic,
           mainAxisSize: MainAxisSize.min,
           textDirection: TextDirection.ltr,
           children: [
@@ -47,6 +49,7 @@ class InteractionLikeCounter extends StatelessWidget {
               isLike ? Icons.thumb_up : FontAwesomeIcons.upLong,
               color: ColorManager.blue,
               size: 14.sp,
+              
             ),
           ],
         ),

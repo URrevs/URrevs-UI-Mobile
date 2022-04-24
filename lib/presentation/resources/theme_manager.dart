@@ -22,6 +22,7 @@ class ThemeManager {
         colorScheme: ColorScheme.light().copyWith(
           primary: ColorManager.blue,
         ),
+        visualDensity: VisualDensity.standard,
         iconTheme: IconThemeData(
           color: ColorManager.grey,
           size: 18.sp,

@@ -44,12 +44,23 @@ class CardFooterButton extends StatelessWidget {
     Color buttonColor =
         (liked != null && liked!) ? ColorManager.blue : ColorManager.buttonGrey;
 
-    return TextButton.icon(
+    return TextButton(
       onPressed: () {},
-      icon: icon,
-      label: Text(text),
       style: TextButtonStyleManager.footerButton.copyWith(
         foregroundColor: MaterialStateProperty.all(buttonColor),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        textBaseline: TextBaseline.alphabetic,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(bottom: 5.h),
+            child: icon,
+          ),
+          4.horizontalSpace,
+          Text(text),
+        ],
       ),
     );
   }
