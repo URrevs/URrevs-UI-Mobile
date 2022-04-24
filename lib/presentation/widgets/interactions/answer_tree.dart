@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_button_style_manager.dart';
@@ -103,13 +104,14 @@ class _AnswerTreeState extends State<AnswerTree> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (widget.liked)
-          Icon(
-            Icons.check,
+        if (widget.liked) ...[
+          FaIcon(
+            FontAwesomeIcons.check,
             size: 30.sp,
             color: ColorManager.blue,
           ),
-        8.horizontalSpace,
+          12.horizontalSpace,
+        ],
         Avatar(
             imageUrl: widget.imageUrl,
             radius: AppRadius.commentTreeAvatarRadius),
