@@ -64,7 +64,7 @@ class QuestionCard extends StatelessWidget {
         authorName: DummyDataManager.authorName,
         imageUrl: DummyDataManager.imageUrl,
         targetName: DummyDataManager.targetName,
-        questionText: StringsManager.longestReviewPros,
+        questionText: StringsManager.lorem,
         upvoteCount: DummyDataManager.randomInt,
         answerCount: DummyDataManager.randomInt,
         shareCount: DummyDataManager.randomInt,

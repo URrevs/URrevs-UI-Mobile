@@ -141,29 +141,10 @@ class CardBodyReviewText extends StatelessWidget {
                 LocaleKeys.cons.tr() + ':',
                 style: TextStyleManager.s18w500,
               ),
-              Text.rich(
-                TextSpan(
-                  children: [
-                    TextSpan(
-                      text: cutCons(consText),
-                      style: TextStyleManager.s16w400.copyWith(
-                        color: ColorManager.black,
-                      ),
-                    ),
-                    WidgetSpan(
-                      alignment: PlaceholderAlignment.baseline,
-                      baseline: TextBaseline.alphabetic,
-                      child: SeeMoreButton(
-                        expanded: expanded,
-                        parentTextCut: prosAndConsCut,
-                        setExpandedState: setExpandedState,
-                        noNeedForExpansion: noNeedForExpansion,
-                        hideSeeMoreIfNoNeedForExpansion:
-                            hideSeeMoreIfNoNeedForExpansion,
-                        usedInInteraction: false,
-                      ),
-                    )
-                  ],
+              Text(
+                cutCons(consText),
+                style: TextStyleManager.s16w400.copyWith(
+                  color: ColorManager.black,
                 ),
               ),
             ],

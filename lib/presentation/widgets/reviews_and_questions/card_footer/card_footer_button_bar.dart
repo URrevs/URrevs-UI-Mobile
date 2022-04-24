@@ -59,21 +59,27 @@ class CardFooterButtonBar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        CardFooterButton(
-          icon: firstIcon,
-          text: firstText,
-          liked: liked,
-          onPressed: onLike,
+        Expanded(
+          child: CardFooterButton(
+            icon: firstIcon,
+            text: firstText,
+            liked: liked,
+            onPressed: onLike,
+          ),
         ),
-        CardFooterButton(
-          icon: Icon(Icons.mode_comment_outlined),
-          text: secondText,
-          onPressed: onComment,
+        Expanded(
+          child: CardFooterButton(
+            icon: Icon(Icons.mode_comment_outlined),
+            text: secondText,
+            onPressed: onComment,
+          ),
         ),
-        CardFooterButton(
-          icon: Icon(Icons.share_outlined),
-          text: LocaleKeys.share.tr(),
-          onPressed: onShare,
+        Expanded(
+          child: CardFooterButton(
+            icon: Icon(Icons.share_outlined),
+            text: LocaleKeys.share.tr(),
+            onPressed: onShare,
+          ),
         ),
       ],
     );

@@ -58,7 +58,7 @@ class InteractionBodyText extends StatelessWidget {
     return TextButton(
       style: TextButtonStyleManager.seeMoreButton,
       onPressed: onTappingAnswerInCard,
-      child: Text(seeMoreButtonText, style: TextStyleManager.s16w800),
+      child: Text(seeMoreButtonText, style: TextStyleManager.s14w800),
     );
   }
 

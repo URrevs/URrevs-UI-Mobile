@@ -29,6 +29,10 @@ class _QuestionCardBodyState extends State<QuestionCardBody> {
       ? AppNumericValues.expandedMaxLetters
       : AppNumericValues.collapsedMaxLetters;
 
+  /// Returns a boolean value representing whether the whole question text
+  /// us shown or substrings of it.
+  bool get questionTextCut => widget.questionText.length > maxLetters;
+
   /// Returns true when the card is at a state in which we don't need to make
   /// an expansion. This state is when the question text
   /// length is less than or equal collapsedMaxLetters.
@@ -47,8 +51,8 @@ class _QuestionCardBodyState extends State<QuestionCardBody> {
       onTap: noNeedForExpansion
           ? null
           : () => setState(() {
-        _expanded = !_expanded;
-      }),
+                _expanded = !_expanded;
+              }),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: Column(
@@ -59,6 +63,14 @@ class _QuestionCardBodyState extends State<QuestionCardBody> {
               expanded: _expanded,
               setExpandedState: setExpandedState,
             ),
+            SeeMoreButton(
+              expanded: _expanded,
+              parentTextCut: questionTextCut,
+              setExpandedState: setExpandedState,
+              noNeedForExpansion: noNeedForExpansion,
+              hideSeeMoreIfNoNeedForExpansion: true,
+              usedInInteraction: false,
+            )
           ],
         ),
       ),

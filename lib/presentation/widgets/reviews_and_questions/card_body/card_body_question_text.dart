@@ -19,13 +19,12 @@ class CardBodyQuestionText extends StatelessWidget {
   /// Whether the card is expanded or not.
   final bool expanded;
 
-
   /// A function that is invoked to set the expanded state of the parent.
   final void Function(bool) setExpandedState;
 
   /// If true, the received text would be cut if its length exceeds [maxLetters]
   // final bool cutTextIfExceededLimit;
-  
+
   /// Returns true when the card is at a state in which we don't need to make
   /// an expansion. This state is when the question text
   /// length is less than or equal collapsedMaxLetters.
@@ -37,10 +36,6 @@ class CardBodyQuestionText extends StatelessWidget {
   int get maxLetters => expanded
       ? AppNumericValues.expandedMaxLetters
       : AppNumericValues.collapsedMaxLetters;
-
-  /// Returns a boolean value representing whether the whole question text
-  /// us shown or substrings of it.
-  bool get questionTextCut => questionText.length > maxLetters;
 
   /// Cut the question text according to the expanded state and [maxLetters] of
   /// the review card.
@@ -67,29 +62,10 @@ class CardBodyQuestionText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text.rich(
-      TextSpan(
-        children: [
-          TextSpan(
-            text: cutQuestionText(questionText),
-            style: TextStyleManager.s16w400.copyWith(
-              color: ColorManager.black,
-            ),
-          ),
-          WidgetSpan(
-            alignment: PlaceholderAlignment.baseline,
-            baseline: TextBaseline.alphabetic,
-            child: SeeMoreButton(
-              expanded: expanded,
-              parentTextCut: questionTextCut,
-              setExpandedState: setExpandedState,
-              noNeedForExpansion: noNeedForExpansion,
-              hideSeeMoreIfNoNeedForExpansion:
-                  true,
-              usedInInteraction: false,
-            ),
-          )
-        ],
+    return Text(
+      cutQuestionText(questionText),
+      style: TextStyleManager.s16w400.copyWith(
+        color: ColorManager.black,
       ),
     );
   }

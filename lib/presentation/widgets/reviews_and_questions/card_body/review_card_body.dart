@@ -80,7 +80,9 @@ class _ReviewCardBodyState extends State<ReviewCardBody> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => setState(() {
+      onTap: noNeedForExpansion
+          ? null
+          : () => setState(() {
         _expanded = !_expanded;
       }),
       child: Padding(
@@ -108,6 +110,15 @@ class _ReviewCardBodyState extends State<ReviewCardBody> {
               noNeedForExpansion: noNeedForExpansion,
               hideSeeMoreIfNoNeedForExpansion: false,
             ),
+            SeeMoreButton(
+              expanded: _expanded,
+              parentTextCut: prosAndConsCut,
+              setExpandedState: setExpandedState,
+              noNeedForExpansion: noNeedForExpansion,
+              hideSeeMoreIfNoNeedForExpansion:
+                  widget.hideSeeMoreIfNoNeedForExpansion,
+              usedInInteraction: false,
+            )
           ],
         ),
       ),
