@@ -189,10 +189,7 @@ class SpecsTable extends StatelessWidget {
             specValue,
             textAlign: TextAlign.center,
             textDirection: textDirection,
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w400,
-            ),
+            style: TextStyleManager.s16w400,
           ),
         ),
       ),
@@ -227,13 +224,10 @@ class SpecsTable extends StatelessWidget {
     return TableCell(
       verticalAlignment: TableCellVerticalAlignment.middle,
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 8.h),
-        child: Center(
-          child: Text(
-            specName.tr() + ":",
-            textAlign: TextAlign.center,
-            style: TextStyleManager.s16w500,
-          ),
+        padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 25.w),
+        child: Text(
+          specName.tr() + ":",
+          style: TextStyleManager.s16w500,
         ),
       ),
     );
