@@ -130,10 +130,20 @@ class ProductReviewCard extends StatelessWidget {
         backgroundColor: ColorManager.backgroundGrey,
         child: Transform.rotate(
           angle: 24 / 180 * pi * (context.isArabic ? -1 : 1),
-          child: FaIcon(
-            Icons.rate_review_outlined,
-            color: ColorManager.blue,
-            size: 22.sp,
+          child: Container(
+            height: 22.sp,
+            width: 22.sp,
+            alignment: Alignment.center,
+            padding: EdgeInsets.all(3.r),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: Colors.blue, width: 2.r),
+            ),
+            child: Icon(
+              Icons.rate_review_outlined,
+              color: ColorManager.blue,
+              size: 12.sp,
+            ),
           ),
         ),
       ),

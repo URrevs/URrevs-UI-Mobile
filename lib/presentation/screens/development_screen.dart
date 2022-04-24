@@ -8,6 +8,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/assets_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/bottom_navigation_bar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answer_tree.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answers_list.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/comment_tree.dart';
@@ -69,13 +70,13 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
       ),
       body: ListView(
         children: [
-          // ProductReviewCard.dummyInstance,
+          ProductReviewCard.dummyInstance,
           // CompanyReviewCard.dummyInstance,
           QuestionCard.dummyInstance,
           // CommentTree.dummyInstance,
           // AnswerTree.dummyInstance,
           // CommentsList.dummyInstance,
-          AnswersList.dummyInstance,
+          // AnswersList.dummyInstance,
           // SpecsTable.dummyInstance,
           // SpecsComparisonTable.dummyInstance,
           // SvgPicture.asset(SvgAssets.upvote, color: Colors.red),
