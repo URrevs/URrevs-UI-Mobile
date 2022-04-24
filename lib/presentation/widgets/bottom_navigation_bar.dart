@@ -8,7 +8,14 @@ import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
     Key? key,
+    required this.currentIndex,
+    required this.onTap,
   }) : super(key: key);
+  /// The index of the current selected tab.
+  final int currentIndex;
+
+  /// The callback called when the user selects a tab.
+  final ValueChanged<int>? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +34,8 @@ class BottomNavBar extends StatelessWidget {
           topRight: Radius.circular(10.r),
         ),
         child: BottomNavigationBar(
+          currentIndex: currentIndex,
+          onTap: onTap,
           type: BottomNavigationBarType.fixed,
           backgroundColor: ColorManager.white,
           elevation: 30,
