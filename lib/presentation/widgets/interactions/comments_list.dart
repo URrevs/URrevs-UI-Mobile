@@ -24,9 +24,9 @@ class CommentsList extends StatelessWidget {
       children: [
         for (int i = 0; i < comments.length; i++) ...[
           comments[i],
-          if (i != comments.length - 1) VerticalSpacesBetween.commentTrees,
+          if (i != comments.length - 1) VerticalSpacesBetween.interactionTrees,
         ],
-        VerticalSpacesBetween.commentsListAndMoreCommentsButton,
+        VerticalSpacesBetween.interactionsListAndMoreCommentsButton,
         TextButton(
           onPressed: () {},
           style: TextButtonStyleManager.showMoreAnswers,

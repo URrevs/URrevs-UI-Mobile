@@ -8,6 +8,7 @@ class GeneralTextButtonStyleManager {
         primary: ColorManager.black,
         minimumSize: Size.zero,
         padding: EdgeInsets.all(0),
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       );
 }
 

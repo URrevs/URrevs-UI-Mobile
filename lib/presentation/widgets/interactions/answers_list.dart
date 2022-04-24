@@ -24,9 +24,9 @@ class AnswersList extends StatelessWidget {
       children: [
         for (int i = 0; i < answers.length; i++) ...[
           answers[i],
-          if (i != answers.length - 1) VerticalSpacesBetween.commentTrees,
+          if (i != answers.length - 1) VerticalSpacesBetween.interactionTrees,
         ],
-        VerticalSpacesBetween.commentsListAndMoreCommentsButton,
+        VerticalSpacesBetween.interactionsListAndMoreCommentsButton,
         TextButton(
           onPressed: () {},
           style: TextButtonStyleManager.showMoreAnswers,

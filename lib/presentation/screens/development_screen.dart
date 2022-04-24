@@ -71,11 +71,11 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
         children: [
           // ProductReviewCard.dummyInstance,
           // CompanyReviewCard.dummyInstance,
-          QuestionCard.dummyInstance,
+          // QuestionCard.dummyInstance,
           // CommentTree.dummyInstance,
           // AnswerTree.dummyInstance,
           // CommentsList.dummyInstance,
-          // AnswersList.dummyInstance,
+          AnswersList.dummyInstance,
           // SpecsTable.dummyInstance,
           // SpecsComparisonTable.dummyInstance,
           // SvgPicture.asset(SvgAssets.upvote, color: Colors.red),
