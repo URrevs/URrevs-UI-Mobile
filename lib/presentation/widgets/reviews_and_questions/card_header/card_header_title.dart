@@ -22,7 +22,6 @@ class CardHeaderTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(context.textDirection);
     return Row(
       children: [
         Flexible(

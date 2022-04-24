@@ -69,9 +69,9 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
       ),
       body: ListView(
         children: [
-          // ProductReviewCard.dummyInstance,
+          ProductReviewCard.dummyInstance,
           // CompanyReviewCard.dummyInstance,
-          QuestionCard.dummyInstance,
+          // QuestionCard.dummyInstance,
           // CommentTree.dummyInstance,
           // AnswerTree.dummyInstance,
           // CommentsList.dummyInstance,
