@@ -42,7 +42,7 @@ class CardFooterButtonBar extends StatelessWidget {
 
     Widget firstIcon = useInReviewCard
         ? Icon(
-            Icons.thumb_up_alt_outlined,
+            liked ? Icons.thumb_up : Icons.thumb_up_alt_outlined,
             size: 23.sp,
             color: buttonColor,
           )
