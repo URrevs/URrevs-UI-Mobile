@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_footer/card_footer_interaction_item.dart';
 
 /// Part of a card footer. Contains statistics about users interaction with the
@@ -29,9 +31,18 @@ class CardFooterInteractionBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    IconData firstIcon = useInReviewCard
-        ? Icons.thumb_up_alt_outlined
-        : Icons.arrow_upward_outlined;
+    Widget firstIcon = useInReviewCard
+        ? Icon(
+            Icons.thumb_up_alt_outlined,
+            size: 16.sp,
+            color: ColorManager.grey,
+          )
+        : FaIcon(
+            FontAwesomeIcons.upLong,
+            size: 16.sp,
+            color: ColorManager.grey,
+          );
+
     NumberFormat numberFormat =
         NumberFormat.compact(locale: context.locale.languageCode);
 
@@ -39,17 +50,25 @@ class CardFooterInteractionBar extends StatelessWidget {
       children: [
         CardFooterInteractionItem(
           text: numberFormat.format(likeCount),
-          iconData: firstIcon,
+          icon: firstIcon,
         ),
         Spacer(),
         CardFooterInteractionItem(
           text: numberFormat.format(commentCount),
-          iconData: Icons.mode_comment_outlined,
+          icon: Icon(
+            Icons.mode_comment_outlined,
+            size: 16.sp,
+            color: ColorManager.grey,
+          ),
         ),
         8.horizontalSpace,
         CardFooterInteractionItem(
           text: numberFormat.format(shareCount),
-          iconData: Icons.share_outlined,
+          icon: Icon(
+            Icons.share_outlined,
+            size: 16.sp,
+            color: ColorManager.grey,
+          ),
         ),
       ],
     );

@@ -10,7 +10,7 @@ class CardFooterButton extends StatelessWidget {
   const CardFooterButton({
     Key? key,
     this.liked,
-    required this.iconData,
+    required this.icon,
     required this.text,
     required this.onPressed,
   }) : super(key: key);
@@ -19,7 +19,7 @@ class CardFooterButton extends StatelessWidget {
   final bool? liked;
 
   /// Icon to be shown by the button.
-  final IconData iconData;
+  final Widget icon;
 
   /// Text to be shown on the button.
   final String text;
@@ -46,7 +46,7 @@ class CardFooterButton extends StatelessWidget {
 
     return TextButton.icon(
       onPressed: () {},
-      icon: Icon(iconData, size: 23.sp, color: buttonColor),
+      icon: icon,
       label: Text(text),
       style: TextButtonStyleManager.footerButton.copyWith(
         foregroundColor: MaterialStateProperty.all(buttonColor),

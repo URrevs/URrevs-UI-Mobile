@@ -1,5 +1,8 @@
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_footer/card_footer_button.dart';
 
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
@@ -35,9 +38,19 @@ class CardFooterButtonBar extends StatelessWidget {
   Widget build(BuildContext context) {
     String likedText = liked ? LocaleKeys.liked.tr() : LocaleKeys.like.tr();
 
-    IconData firstIcon = useInReviewCard
-        ? Icons.thumb_up_alt_outlined
-        : Icons.arrow_upward_outlined;
+    Color buttonColor = (liked) ? ColorManager.blue : ColorManager.buttonGrey;
+
+    Widget firstIcon = useInReviewCard
+        ? Icon(
+            Icons.thumb_up_alt_outlined,
+            size: 23.sp,
+            color: buttonColor,
+          )
+        : FaIcon(
+            FontAwesomeIcons.upLong,
+            size: 23.sp,
+            color: buttonColor,
+          );
 
     String firstText = useInReviewCard ? likedText : LocaleKeys.vote.tr();
     String secondText =
@@ -47,18 +60,18 @@ class CardFooterButtonBar extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         CardFooterButton(
-          iconData: firstIcon,
+          icon: firstIcon,
           text: firstText,
           liked: liked,
           onPressed: onLike,
         ),
         CardFooterButton(
-          iconData: Icons.mode_comment_outlined,
+          icon: Icon(Icons.mode_comment_outlined),
           text: secondText,
           onPressed: onComment,
         ),
         CardFooterButton(
-          iconData: Icons.share_outlined,
+          icon: Icon(Icons.share_outlined),
           text: LocaleKeys.share.tr(),
           onPressed: onShare,
         ),
