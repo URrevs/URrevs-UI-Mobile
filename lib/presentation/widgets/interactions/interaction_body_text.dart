@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/text_button_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/see_more_button.dart';
@@ -55,11 +56,7 @@ class InteractionBodyText extends StatelessWidget {
     String seeMoreButtonText =
         interactionTextCut ? LocaleKeys.seeMore.tr() : LocaleKeys.seeLess.tr();
     return TextButton(
-      style: TextButton.styleFrom(
-        primary: ColorManager.black,
-        minimumSize: Size.zero,
-        padding: EdgeInsets.all(0),
-      ),
+      style: TextButtonStyleManager.seeMoreButton,
       onPressed: onTappingAnswerInCard,
       child: Text(seeMoreButtonText, style: TextStyleManager.s16w800),
     );

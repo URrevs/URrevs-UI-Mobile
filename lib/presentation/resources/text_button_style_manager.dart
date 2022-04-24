@@ -14,6 +14,14 @@ class GeneralTextButtonStyleManager {
 class TextButtonStyleManager {
   static ButtonStyle get showReplies =>
       GeneralTextButtonStyleManager.thinButton;
+  static ButtonStyle get seeMoreButton =>
+      GeneralTextButtonStyleManager.thinButton;
+  static ButtonStyle get showMoreAnswers =>
+      GeneralTextButtonStyleManager.thinButton;
+  static ButtonStyle get showMoreComments =>
+      GeneralTextButtonStyleManager.thinButton;
+  static ButtonStyle get interactionFooterButton =>
+      GeneralTextButtonStyleManager.thinButton;
   static ButtonStyle get footerButton => TextButton.styleFrom(
         maximumSize: Size(double.infinity, double.infinity),
         primary: ColorManager.buttonGrey,

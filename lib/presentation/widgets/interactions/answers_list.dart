@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/text_button_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answer_tree.dart';
@@ -28,10 +29,7 @@ class AnswersList extends StatelessWidget {
         VerticalSpacesBetween.commentsListAndMoreCommentsButton,
         TextButton(
           onPressed: () {},
-          style: TextButton.styleFrom(
-            minimumSize: Size.zero,
-            padding: EdgeInsets.all(0),
-          ),
+          style: TextButtonStyleManager.showMoreAnswers,
           child: Text(
             LocaleKeys.moreAnswers.tr(),
             style: TextStyleManager.s16w800.copyWith(color: ColorManager.black),
