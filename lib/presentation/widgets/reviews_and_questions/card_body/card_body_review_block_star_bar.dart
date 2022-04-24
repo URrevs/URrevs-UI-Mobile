@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/assets_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 
 /// A signle star bar consisting of a rating criteria and the corresponding
@@ -29,7 +31,7 @@ class CardBodyReviewBlockStarBar extends StatelessWidget {
       children: [
         Text(
           ratingCriteria + ":",
-          style: TextStyleManager.s14w500.copyWith(fontSize: 14.sp),
+          style: TextStyleManager.s14w500.copyWith(fontSize: context.locale.languageCode == LanguageType.en.name ? 16.sp : 14.sp),
         ),
         RatingBar.builder(
           itemSize: 18.sp,

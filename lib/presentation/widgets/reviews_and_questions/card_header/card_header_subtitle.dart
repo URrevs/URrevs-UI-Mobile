@@ -38,7 +38,7 @@ class CardHeaderSubtitle extends StatelessWidget {
     // so english font size should be 12 px
     // while arabic font size should be the regular 14 px
     double size =
-        context.locale.languageCode == LanguageType.en.name ? 12.sp : 14.sp;
+        context.locale.languageCode == LanguageType.en.name ? 14.sp : 14.sp;
     TextStyle style =
         Theme.of(context).textTheme.subtitle1!.copyWith(fontSize: size);
 
@@ -53,42 +53,36 @@ class CardHeaderSubtitle extends StatelessWidget {
     NumberFormat numberFormat =
         NumberFormat.compact(locale: context.locale.languageCode);
 
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Flexible(
-          flex: 33,
-          child: FittedBox(
-            fit: BoxFit.scaleDown,
+    return FittedBox(
+      fit: BoxFit.scaleDown,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Flexible(
+            flex: 33,
             child: Text(postedDateStr, style: style),
           ),
-        ),
-        if (usedSinceDateStr != null) ...[
-          _buildDot(),
-          Flexible(
-            flex: 47,
-            child: FittedBox(
-              fit: BoxFit.scaleDown,
+          if (usedSinceDateStr != null) ...[
+            _buildDot(),
+            Flexible(
+              flex: 47,
               child: Text(
                 LocaleKeys.usedThisFor.tr() + " " + usedSinceDateStr,
                 style: style,
               ),
             ),
-          ),
-        ],
-        if (views != null) ...[
-          _buildDot(),
-          Icon(Icons.remove_red_eye),
-          3.horizontalSpace,
-          Flexible(
-            flex: 20,
-            child: FittedBox(
-              fit: BoxFit.scaleDown,
+          ],
+          if (views != null) ...[
+            _buildDot(),
+            Icon(Icons.remove_red_eye),
+            3.horizontalSpace,
+            Flexible(
+              flex: 20,
               child: Text(numberFormat.format(views), style: style),
-            ),
-          )
-        ]
-      ],
+            )
+          ]
+        ],
+      ),
     );
   }
 }
