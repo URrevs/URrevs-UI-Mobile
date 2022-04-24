@@ -93,7 +93,7 @@ class QuestionCard extends StatelessWidget {
       left: context.isArabic ? 0 : null,
       right: context.isArabic ? null : 0,
       child: CircleAvatar(
-        radius: 14.sp,
+        radius: AppRadius.questionMarkNotchRadius,
         backgroundColor: ColorManager.backgroundGrey,
         child: Transform.rotate(
           angle: 24 / 180 * math.pi * (context.isArabic ? -1 : 1),

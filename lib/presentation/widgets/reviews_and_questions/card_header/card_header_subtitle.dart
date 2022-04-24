@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:urrevs_ui_mobile/app/extensions.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
 
@@ -37,8 +38,11 @@ class CardHeaderSubtitle extends StatelessWidget {
     // english font is already bigger than arabic font
     // so english font size should be 12 px
     // while arabic font size should be the regular 14 px
-    double size =
-        context.locale.languageCode == LanguageType.en.name ? 14.sp : 14.sp;
+    // update
+    // ------
+    // actually, there is no overflow anymore, arabic and english fonts seem
+    // to have the same sizes now
+    double size = context.isArabic ? 14.sp : 14.sp;
     TextStyle style =
         Theme.of(context).textTheme.subtitle1!.copyWith(fontSize: size);
 

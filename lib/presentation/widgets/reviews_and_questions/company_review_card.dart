@@ -3,6 +3,9 @@ import 'dart:math';
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:urrevs_ui_mobile/app/extensions.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/review_card_body.dart';
@@ -106,50 +109,75 @@ class CompanyReviewCard extends StatelessWidget {
     // TODO: implememnt _onShare
   }
 
+  Positioned _buildQuestionMark(BuildContext context) {
+    return Positioned(
+      top: 0,
+      left: context.isArabic ? 0 : null,
+      right: context.isArabic ? null : 0,
+      child: CircleAvatar(
+        radius: AppRadius.questionMarkNotchRadius,
+        backgroundColor: ColorManager.backgroundGrey,
+        child: Transform.rotate(
+          angle: 24 / 180 * pi * (context.isArabic ? -1 : 1),
+          child: FaIcon(
+            FontAwesomeIcons.circleQuestion,
+            color: ColorManager.blue,
+            size: 22.sp,
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 3,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(
-          AppRadius.interactionBodyRadius,
+    return Stack(
+      children: [
+        Card(
+          elevation: 3,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(
+              AppRadius.interactionBodyRadius,
+            ),
+          ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 8.h),
+            child: Column(
+              children: [
+                CardHeader(
+                  imageUrl: imageUrl,
+                  authorName: authorName,
+                  targetName: companyName,
+                  postedDate: postedDate,
+                  usedSinceDate: null,
+                  views: views,
+                ),
+                10.verticalSpace,
+                ReviewCardBody(
+                  prosText: prosText,
+                  consText: consText,
+                  ratingCriteria: _ratingCriteria,
+                  scores: [generalRating],
+                  showExpandCircle: false,
+                  hideSeeMoreIfNoNeedForExpansion: true,
+                ),
+                10.verticalSpace,
+                CardFooter(
+                  likeCount: likeCount,
+                  commentCount: commentCount,
+                  shareCount: shareCount,
+                  liked: liked,
+                  useInReviewCard: true,
+                  onLike: _onLike,
+                  onComment: _onComment,
+                  onShare: _onShare,
+                ),
+              ],
+            ),
+          ),
         ),
-      ),
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 8.h),
-        child: Column(
-          children: [
-            CardHeader(
-              imageUrl: imageUrl,
-              authorName: authorName,
-              targetName: companyName,
-              postedDate: postedDate,
-              usedSinceDate: null,
-              views: views,
-            ),
-            10.verticalSpace,
-            ReviewCardBody(
-              prosText: prosText,
-              consText: consText,
-              ratingCriteria: _ratingCriteria,
-              scores: [generalRating],
-              showExpandCircle: false,
-              hideSeeMoreIfNoNeedForExpansion: true,
-            ),
-            10.verticalSpace,
-            CardFooter(
-              likeCount: likeCount,
-              commentCount: commentCount,
-              shareCount: shareCount,
-              liked: liked,
-              useInReviewCard: true,
-              onLike: _onLike,
-              onComment: _onComment,
-              onShare: _onShare,
-            ),
-          ],
-        ),
-      ),
+        _buildQuestionMark(context)
+      ],
     );
   }
 }

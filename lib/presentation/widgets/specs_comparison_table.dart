@@ -106,7 +106,7 @@ class SpecsComparisonTable extends StatelessWidget {
       children: <Widget>[
         _pointOfComparisonCell(
           LocaleKeys.productImage.tr(),
-          TextStyleManager.s20w500,
+          TextStyleManager.s16w500,
         ),
         _organizedTableCell(
           child: _organizedProductImage(imageUrl: firstProductImageUrl),
@@ -240,6 +240,7 @@ class SpecsComparisonTable extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16.r),
                 child: ListView(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
                   children: [
                     _buildTable(context),
                   ],

@@ -31,7 +31,10 @@ class _CardHeaderTrailerState extends State<CardHeaderTrailer> {
       controller: controller,
       pressType: PressType.singleClick,
       verticalMargin: -6.h,
+      barrierColor: ColorManager.transparent,
+      showArrow: false,
       menuBuilder: () => Card(
+        elevation: 3,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.r),
         ),

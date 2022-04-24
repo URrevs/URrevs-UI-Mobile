@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class VerticalSpacesBetween {
   static Widget get replies => 9.verticalSpace;
+  static Widget get commentBodyAndShowRepliesButton => 0.verticalSpace;
+  static Widget get commentBodyAndReplies => 6.verticalSpace;
   static Widget get commentTrees => 9.verticalSpace;
   static Widget get commentsListAndMoreCommentsButton => 9.verticalSpace;
 }
@@ -26,6 +28,7 @@ class AppSize {
 class AppRadius {
   static double get r10 => 10.r;
   static double get appBarAvatarRadius => 12.5.r;
+  static double get questionMarkNotchRadius => 14.r;
   static double get cardHeaderAvatarRadius => 20;
   static double get commentTreeAvatarRadius => 16.r;
   static double get replyAvatarRadius => 12.r;

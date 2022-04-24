@@ -69,7 +69,7 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
       ),
       body: ListView(
         children: [
-          ProductReviewCard.dummyInstance,
+          // ProductReviewCard.dummyInstance,
           // CompanyReviewCard.dummyInstance,
           // QuestionCard.dummyInstance,
           // CommentTree.dummyInstance,
@@ -77,7 +77,7 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
           // CommentsList.dummyInstance,
           // AnswersList.dummyInstance,
           // SpecsTable.dummyInstance,
-          // SpecsComparisonTable.dummyInstance,
+          SpecsComparisonTable.dummyInstance,
           // SvgPicture.asset(SvgAssets.upvote, color: Colors.red),
         ],
       ),

@@ -82,20 +82,23 @@ class _CommentTreeState extends State<CommentTree> {
                   liked: widget.liked,
                   firstButtonType: InteractionFooterFirstButtonText.like,
                 ),
-                VerticalSpacesBetween.replies,
-                if (!_expandReplies)
+                if (!_expandReplies) ...[
+                  VerticalSpacesBetween.commentBodyAndShowRepliesButton,
                   TextButton(
                     onPressed: _onPressingShowReplies,
                     style: TextButtonStyleManager.showReplies,
                     child: Text(
                         '${widget.replies.length} ${LocaleKeys.reply.tr()}'),
                   ),
-                if (_expandReplies)
+                ],
+                if (_expandReplies) ...[
+                  VerticalSpacesBetween.commentBodyAndReplies,
                   for (int i = 0; i < widget.replies.length; i++) ...[
                     widget.replies[i],
                     if (i != widget.replies.length - 1)
                       VerticalSpacesBetween.replies,
                   ],
+                ],
               ],
             );
           }),

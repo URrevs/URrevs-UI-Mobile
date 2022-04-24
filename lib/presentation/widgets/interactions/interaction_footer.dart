@@ -41,7 +41,7 @@ class InteractionFooter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     EdgeInsets footerElementsPadding =
-        EdgeInsets.symmetric(vertical: 3.h, horizontal: 3.w);
+        EdgeInsets.only(top: 3.h, left: 3.w, right: 3.w);
     Color firstButtonColor = liked ? ColorManager.blue : ColorManager.black;
 
     return Row(
