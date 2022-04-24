@@ -132,7 +132,7 @@ class QuestionCard extends StatelessWidget {
                 ),
                 10.verticalSpace,
                 QuestionCardBody(questionText: questionText),
-                10.verticalSpace,
+                8.verticalSpace,
                 CardFooter(
                   likeCount: upvoteCount,
                   commentCount: answerCount,
@@ -145,7 +145,7 @@ class QuestionCard extends StatelessWidget {
                 ),
                 Divider(height: 10.h),
                 Padding(
-                  padding: EdgeInsets.only(top: 25.h),
+                  padding: EdgeInsets.only(top: 25.h, right: 12.w, left: 12.w),
                   child: answer!,
                 ),
               ],

@@ -172,7 +172,7 @@ class ProductReviewCard extends StatelessWidget {
                   showExpandCircle: true,
                   hideSeeMoreIfNoNeedForExpansion: false,
                 ),
-                10.verticalSpace,
+                8.verticalSpace,
                 CardFooter(
                   likeCount: likeCount,
                   commentCount: commentCount,

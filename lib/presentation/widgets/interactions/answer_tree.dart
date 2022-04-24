@@ -104,7 +104,7 @@ class _AnswerTreeState extends State<AnswerTree> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (widget.liked) ...[
+        if (widget.accepted) ...[
           FaIcon(
             FontAwesomeIcons.check,
             size: 30.sp,

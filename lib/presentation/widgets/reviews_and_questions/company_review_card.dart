@@ -161,7 +161,7 @@ class CompanyReviewCard extends StatelessWidget {
                   showExpandCircle: false,
                   hideSeeMoreIfNoNeedForExpansion: true,
                 ),
-                10.verticalSpace,
+                8.verticalSpace,
                 CardFooter(
                   likeCount: likeCount,
                   commentCount: commentCount,
