@@ -76,7 +76,12 @@ class CodegenLoader extends AssetLoader{
   "usedThisFor": "استخدمه لمدة",
   "brandBriefing": "أول منصة لمراجعات المستخدمين في الشرق الأوسط",
   "googleAuth": "أكمل باستخدام جوجل",
-  "facebookAuth": "أكمل باستخدام فيسبوك"
+  "facebookAuth": "أكمل باستخدام فيسبوك",
+  "homeNavBarItem": "الرئيسية",
+  "AddNavBarItem": "أضف",
+  "categoryNavBarItem": "المنتجات",
+  "leaderboardNavBarItem": "المتصدرين",
+  "menuNavBarItem": "القائمة"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -140,7 +145,12 @@ static const Map<String,dynamic> en = {
   "usedThisFor": "Used this for",
   "brandBriefing": "First customer reviews platform in MENA region",
   "googleAuth": "Continue using Google",
-  "facebookAuth": "Continue using Facebook"
+  "facebookAuth": "Continue using Facebook",
+  "homeNavBarItem": "Home",
+  "AddNavBarItem": "Add",
+  "categoryNavBarItem": "Products",
+  "leaderboardNavBarItem": "Leaderboard",
+  "menuNavBarItem": "Menu"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

@@ -60,5 +60,10 @@
   "usedThisFor": "استخدمه لمدة",
   "brandBriefing": "أول منصة لمراجعات المستخدمين في الشرق الأوسط",
   "googleAuth": "أكمل باستخدام جوجل",
-  "facebookAuth": "أكمل باستخدام فيسبوك"
+  "facebookAuth": "أكمل باستخدام فيسبوك",
+  "homeNavBarItem": "الرئيسية",
+  "AddNavBarItem": "أضف",
+  "categoryNavBarItem": "المنتجات",
+  "leaderboardNavBarItem": "المتصدرين",
+  "menuNavBarItem": "القائمة"
 }

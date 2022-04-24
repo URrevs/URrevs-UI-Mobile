@@ -63,5 +63,10 @@ abstract class  LocaleKeys {
   static const brandBriefing = 'brandBriefing';
   static const googleAuth = 'googleAuth';
   static const facebookAuth = 'facebookAuth';
+  static const homeNavBarItem = 'homeNavBarItem';
+  static const AddNavBarItem = 'AddNavBarItem';
+  static const categoryNavBarItem = 'categoryNavBarItem';
+  static const leaderboardNavBarItem = 'leaderboardNavBarItem';
+  static const menuNavBarItem = 'menuNavBarItem';
 
 }

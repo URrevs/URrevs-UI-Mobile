@@ -60,5 +60,10 @@
   "usedThisFor": "Used this for",
   "brandBriefing": "First customer reviews platform in MENA region",
   "googleAuth": "Continue using Google",
-  "facebookAuth": "Continue using Facebook"
+  "facebookAuth": "Continue using Facebook",
+  "homeNavBarItem": "Home",
+  "AddNavBarItem": "Add",
+  "categoryNavBarItem": "Products",
+  "leaderboardNavBarItem": "Leaderboard",
+  "menuNavBarItem": "Menu"
 }
