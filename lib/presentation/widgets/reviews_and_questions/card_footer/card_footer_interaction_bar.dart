@@ -33,14 +33,14 @@ class CardFooterInteractionBar extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget firstIcon = useInReviewCard
         ? Icon(
-            Icons.thumb_up_alt_outlined,
+            Icons.thumb_up,
             size: 16.sp,
-            color: ColorManager.grey,
+            color: ColorManager.blue,
           )
         : FaIcon(
             FontAwesomeIcons.upLong,
             size: 16.sp,
-            color: ColorManager.grey,
+            color: ColorManager.blue,
           );
 
     NumberFormat numberFormat =

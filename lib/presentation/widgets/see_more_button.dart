@@ -99,8 +99,8 @@ class SeeMoreButton extends StatelessWidget {
       onPressed: _onPressingSeeMore,
       child: Text(seeMoreButtonText,
           style: usedInInteraction
-              ? TextStyleManager.s14w800
-              : TextStyleManager.s16w800),
+              ? TextStyleManager.s14w700
+              : TextStyleManager.s16w700),
     );
   }
 }
