@@ -33,7 +33,7 @@ class BottomNavBar extends StatelessWidget {
           iconSize: 30.sp,
           selectedItemColor: ColorManager.blue,
           selectedLabelStyle: TextStyleManager.s14w700,
-          unselectedItemColor: ColorManager.black,
+          unselectedItemColor: ColorManager.buttonGrey,
           unselectedLabelStyle: TextStyleManager.s14w400,
           showUnselectedLabels: true,
           items: [

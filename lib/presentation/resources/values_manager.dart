@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class VerticalSpacesBetween {
   static Widget get replies => 9.verticalSpace;
-  static Widget get interactionBodyAndShowRepliesButton => 0.verticalSpace;
+  static Widget get interactionBodyAndShowRepliesButton => 6.verticalSpace;
   static Widget get interactionBodyAndReplies => 6.verticalSpace;
   static Widget get interactionTrees => 9.verticalSpace;
   static Widget get interactionsListAndMoreCommentsButton => 9.verticalSpace;
