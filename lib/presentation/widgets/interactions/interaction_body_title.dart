@@ -13,7 +13,7 @@ class InteractionBodyTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       authorName,
-      style: TextStyleManager.s14w700,
+      style: TextStyleManager.s15w700,
     );
   }
 }

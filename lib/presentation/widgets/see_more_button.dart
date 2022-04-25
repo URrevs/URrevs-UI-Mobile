@@ -101,7 +101,7 @@ class SeeMoreButton extends StatelessWidget {
       child: Text(
         seeMoreButtonText,
         style: usedInInteraction
-            ? TextStyleManager.s14w700
+            ? TextStyleManager.s15w700
             : TextStyleManager.s16w700,
       ),
     );

@@ -58,7 +58,7 @@ class InteractionBodyText extends StatelessWidget {
     return TextButton(
       style: TextButtonStyleManager.seeMoreButton,
       onPressed: onTappingAnswerInCard,
-      child: Text(seeMoreButtonText, style: TextStyleManager.s14w800),
+      child: Text(seeMoreButtonText, style: TextStyleManager.s15w800),
     );
   }
 
@@ -69,7 +69,7 @@ class InteractionBodyText extends StatelessWidget {
         children: [
           TextSpan(
             text: cutText(interactionText),
-            style: TextStyleManager.s14w400.copyWith(
+            style: TextStyleManager.s15w400.copyWith(
               color: ColorManager.commentBlack,
             ),
           ),
