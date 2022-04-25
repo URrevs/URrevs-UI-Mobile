@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
@@ -52,7 +53,7 @@ class _CardHeaderTrailerState extends State<CardHeaderTrailer> {
           ),
         ),
       ),
-      child: Icon(Icons.more_vert, size: 26.sp),
+      child: Icon(IconsManager.more, size: 26.sp),
     );
   }
 

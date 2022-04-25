@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_button_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
@@ -106,7 +107,7 @@ class _AnswerTreeState extends State<AnswerTree> {
       children: [
         if (widget.accepted) ...[
           FaIcon(
-            FontAwesomeIcons.check,
+            IconsManager.acceptedAnswer,
             size: 30.sp,
             color: ColorManager.blue,
           ),

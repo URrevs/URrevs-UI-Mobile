@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:urrevs_ui_mobile/app/extensions.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answer_tree.dart';
@@ -98,7 +99,7 @@ class QuestionCard extends StatelessWidget {
         child: Transform.rotate(
           angle: 24 / 180 * math.pi * (context.isArabic ? -1 : 1),
           child: FaIcon(
-            FontAwesomeIcons.circleQuestion,
+            IconsManager.question,
             color: ColorManager.blue,
             size: 22.sp,
           ),

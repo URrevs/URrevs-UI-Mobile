@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_footer/card_footer_interaction_item.dart';
 
 /// Part of a card footer. Contains statistics about users interaction with the
@@ -33,12 +34,12 @@ class CardFooterInteractionBar extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget firstIcon = useInReviewCard
         ? Icon(
-            Icons.thumb_up,
+            IconsManager.likeFilled,
             size: 16.sp,
             color: ColorManager.blue,
           )
         : FaIcon(
-            FontAwesomeIcons.upLong,
+            IconsManager.upvote,
             size: 16.sp,
             color: ColorManager.blue,
           );
@@ -56,7 +57,7 @@ class CardFooterInteractionBar extends StatelessWidget {
         CardFooterInteractionItem(
           text: numberFormat.format(commentCount),
           icon: Icon(
-            Icons.mode_comment_outlined,
+            IconsManager.comment,
             size: 16.sp,
             color: ColorManager.grey,
           ),
@@ -65,7 +66,7 @@ class CardFooterInteractionBar extends StatelessWidget {
         CardFooterInteractionItem(
           text: numberFormat.format(shareCount),
           icon: Icon(
-            Icons.share_outlined,
+            IconsManager.share,
             size: 16.sp,
             color: ColorManager.grey,
           ),

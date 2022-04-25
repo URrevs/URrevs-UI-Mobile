@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:urrevs_ui_mobile/app/extensions.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 
 /// Build the line containing the author's name and the product name.
@@ -39,8 +40,7 @@ class CardHeaderTitle extends StatelessWidget {
         8.horizontalSpace,
         FaIcon(
           context.isArabic
-              ? FontAwesomeIcons.caretLeft
-              : FontAwesomeIcons.caretRight,
+              ? IconsManager.caretLeft : IconsManager.caretRight,
           textDirection: TextDirection.ltr,
           size: 16.sp,
         ),

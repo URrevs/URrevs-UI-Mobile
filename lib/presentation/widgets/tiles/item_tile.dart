@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/updated_list_tile.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
@@ -20,11 +21,11 @@ class ItemTile extends StatelessWidget {
   IconData chooseSuitableItemIcon(ItemDescription itemDescription) {
     switch (itemDescription) {
       case ItemDescription.Smartphone:
-        return Icons.smartphone_rounded;
+        return IconsManager.smartPhone;
       case ItemDescription.Company:
-        return Icons.business_rounded;
+        return IconsManager.company;
       default:
-        return Icons.smartphone_rounded;
+        return IconsManager.smartPhone;
     }
     ;
   }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 
 class InteractionLikeCounter extends StatelessWidget {
@@ -46,7 +47,7 @@ class InteractionLikeCounter extends StatelessWidget {
             ),
             2.horizontalSpace,
             Icon(
-              isLike ? Icons.thumb_up : FontAwesomeIcons.upLong,
+              isLike ? IconsManager.likeFilled : IconsManager.upvote,
               color: ColorManager.blue,
               size: 14.sp,
               

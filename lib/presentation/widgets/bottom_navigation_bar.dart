@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
@@ -11,6 +12,7 @@ class BottomNavBar extends StatelessWidget {
     required this.currentIndex,
     required this.onTap,
   }) : super(key: key);
+
   /// The index of the current selected tab.
   final int currentIndex;
 
@@ -24,8 +26,7 @@ class BottomNavBar extends StatelessWidget {
         borderRadius: BorderRadius.only(
             topRight: Radius.circular(10.r), topLeft: Radius.circular(10.r)),
         boxShadow: [
-          BoxShadow(
-              color: ColorManager.black, spreadRadius: 0, blurRadius: 1),
+          BoxShadow(color: ColorManager.black, spreadRadius: 0, blurRadius: 1),
         ],
       ),
       child: ClipRRect(
@@ -47,25 +48,23 @@ class BottomNavBar extends StatelessWidget {
           showUnselectedLabels: true,
           items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.category_outlined),
+              icon: Icon(IconsManager.products),
               label: LocaleKeys.categoryNavBarItem.tr(),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.add),
+              icon: Icon(IconsManager.add),
               label: LocaleKeys.AddNavBarItem.tr(),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: Icon(IconsManager.home),
               label: LocaleKeys.homeNavBarItem.tr(),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.stars_rounded),
+              icon: Icon(IconsManager.leaderboard),
               label: LocaleKeys.leaderboardNavBarItem.tr(),
             ),
             BottomNavigationBarItem(
-              icon: Icon(
-                Icons.menu,
-              ),
+              icon: Icon(IconsManager.menu),
               label: LocaleKeys.menuNavBarItem.tr(),
             ),
           ],

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_footer/card_footer_button.dart';
 
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
@@ -42,12 +43,12 @@ class CardFooterButtonBar extends StatelessWidget {
 
     Widget firstIcon = useInReviewCard
         ? Icon(
-            liked ? Icons.thumb_up : Icons.thumb_up_alt_outlined,
+            liked ? IconsManager.likeFilled : IconsManager.likeEmpty,
             size: 23.sp,
             color: buttonColor,
           )
         : FaIcon(
-            FontAwesomeIcons.upLong,
+            IconsManager.upvote,
             size: 23.sp,
             color: buttonColor,
           );
@@ -69,14 +70,14 @@ class CardFooterButtonBar extends StatelessWidget {
         ),
         Expanded(
           child: CardFooterButton(
-            icon: Icon(Icons.mode_comment_outlined),
+            icon: Icon(IconsManager.comment),
             text: secondText,
             onPressed: onComment,
           ),
         ),
         Expanded(
           child: CardFooterButton(
-            icon: Icon(Icons.share_outlined),
+            icon: Icon(IconsManager.share),
             text: LocaleKeys.share.tr(),
             onPressed: onShare,
           ),

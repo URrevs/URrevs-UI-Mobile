@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/item_tile.dart';
@@ -49,8 +50,8 @@ class _UpdatedListTileState extends State<UpdatedListTile> {
             iconColor: ColorManager.black,
             trailing: Icon(
               !_customTileExpanded
-                  ? Icons.arrow_drop_down_rounded
-                  : Icons.arrow_drop_up_rounded,
+                  ? IconsManager.expand
+                  : IconsManager.collapse,
               size: 32.sp,
             ),
             onExpansionChanged: (bool expanded) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 
 /// The cyan circle with the arrow at the middle of the review card indicating
 /// that the card is expandable.
@@ -21,9 +22,7 @@ class CardBodyExpandCircle extends StatelessWidget {
       shape: CircleBorder(),
       child: Center(
         child: Icon(
-          expanded
-              ? Icons.arrow_drop_up_rounded
-              : Icons.arrow_drop_down_rounded,
+          expanded ? IconsManager.collapse : IconsManager.expand,
           size: 28.sp,
           color: ColorManager.white,
         ),

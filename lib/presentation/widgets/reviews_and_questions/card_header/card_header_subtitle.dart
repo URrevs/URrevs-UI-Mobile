@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:urrevs_ui_mobile/app/extensions.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
 
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
@@ -29,7 +30,7 @@ class CardHeaderSubtitle extends StatelessWidget {
   Padding _buildDot() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 4.w),
-      child: Icon(Icons.circle, size: 4.sp, color: ColorManager.black),
+      child: Icon(IconsManager.dot, size: 4.sp, color: ColorManager.black),
     );
   }
 
@@ -78,7 +79,7 @@ class CardHeaderSubtitle extends StatelessWidget {
           ],
           if (views != null) ...[
             _buildDot(),
-            Icon(Icons.remove_red_eye),
+            Icon(IconsManager.views),
             3.horizontalSpace,
             Flexible(
               flex: 20,
