@@ -21,6 +21,7 @@ import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/prod
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/question_card.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/specs_comparison_table.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/specs_table.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/tiles/updated_list_tile.dart';
 
 class DevelopmentScreen extends ConsumerStatefulWidget {
   const DevelopmentScreen({Key? key}) : super(key: key);
@@ -70,6 +71,7 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
       ),
       body: ListView(
         children: [
+          UpdatedListTile(),
           ProductReviewCard.dummyInstance,
           // CompanyReviewCard.dummyInstance,
           QuestionCard.dummyInstance,

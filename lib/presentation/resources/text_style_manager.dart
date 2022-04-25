@@ -71,11 +71,6 @@ class TextStyleManager {
         fontSize: FontSizeManager.s18,
         fontWeight: FontWeightManager.w400,
       );
-  static TextStyle get s18w400SubTitle => TextStyle(
-        fontSize: FontSizeManager.s18,
-        fontWeight: FontWeightManager.w400,
-        color: ColorManager.grey,
-      );
   static TextStyle get s18w500 => TextStyle(
         fontSize: FontSizeManager.s18,
         fontWeight: FontWeightManager.w500,

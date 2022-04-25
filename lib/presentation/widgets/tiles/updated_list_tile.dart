@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/tiles/item_tile.dart';
 
 class UpdatedListTile extends StatefulWidget {
   const UpdatedListTile({ Key? key }) : super(key: key);
@@ -15,13 +16,13 @@ class _UpdatedListTileState extends State<UpdatedListTile> {
   bool _customTileExpanded =false;
   @override
   Widget build(BuildContext context) {  
-    return Card(
-          elevation: 3,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(
-              AppRadius.interactionBodyRadius,
-            ),
-            child: ExpansionTile(
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(
+             30.r,
+          ),
+      child: Card(
+        elevation: 3,        
+        child: ExpansionTile(
                 title: Row(
                   children: [
                     Text('قائمة المنتجات المضافة حديثاً',
@@ -46,22 +47,15 @@ class _UpdatedListTileState extends State<UpdatedListTile> {
                 backgroundColor: ColorManager.white,
                 collapsedBackgroundColor: ColorManager.white,
                 children: [
-                  ListTile(
-                    title: Text(
-                      'Xiaomi Redmi Note 6',
-                      style: TextStyleManager.s20w700,
-                    ),
-                    textColor: ColorManager.black,
-                    iconColor: ColorManager.buttonGrey,
-                    subtitle: Text('هاتف ذكي',
-                        style: TextStyleManager.s18w400SubTitle),
-                    leading: Icon(
-                      Icons.smartphone_rounded,
-                      size: 40.sp,
-                    ),
+                  SizedBox(
+                    height: 400.h,
+                    child: ListView.builder(itemBuilder: (context, index) {
+                      return ItemTile();
+                    },itemCount: 10,),
                   ),
                 ]),
-          ),
-        );
+      ),
+    );
   }
 }
+
