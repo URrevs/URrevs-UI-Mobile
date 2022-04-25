@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/font_manager.dart';
 
 class TextStyleManager {
@@ -69,6 +70,11 @@ class TextStyleManager {
   static TextStyle get s18w400 => TextStyle(
         fontSize: FontSizeManager.s18,
         fontWeight: FontWeightManager.w400,
+      );
+  static TextStyle get s18w400SubTitle => TextStyle(
+        fontSize: FontSizeManager.s18,
+        fontWeight: FontWeightManager.w400,
+        color: ColorManager.grey,
       );
   static TextStyle get s18w500 => TextStyle(
         fontSize: FontSizeManager.s18,
