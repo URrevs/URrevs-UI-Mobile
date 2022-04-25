@@ -65,5 +65,7 @@
   "AddNavBarItem": "Add",
   "categoryNavBarItem": "Products",
   "leaderboardNavBarItem": "Leaderboard",
-  "menuNavBarItem": "Menu"
+  "menuNavBarItem": "Menu",
+  "smartphone": "Smartphone",
+  "company": "Company"
 }

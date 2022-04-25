@@ -68,5 +68,7 @@ abstract class  LocaleKeys {
   static const categoryNavBarItem = 'categoryNavBarItem';
   static const leaderboardNavBarItem = 'leaderboardNavBarItem';
   static const menuNavBarItem = 'menuNavBarItem';
+  static const smartphone = 'smartphone';
+  static const company = 'company';
 
 }

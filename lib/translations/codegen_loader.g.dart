@@ -81,7 +81,9 @@ class CodegenLoader extends AssetLoader{
   "AddNavBarItem": "أضف",
   "categoryNavBarItem": "المنتجات",
   "leaderboardNavBarItem": "المتصدرين",
-  "menuNavBarItem": "القائمة"
+  "menuNavBarItem": "القائمة",
+  "smartphone": "هاتف ذكي",
+  "company": "شركة"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -150,7 +152,9 @@ static const Map<String,dynamic> en = {
   "AddNavBarItem": "Add",
   "categoryNavBarItem": "Products",
   "leaderboardNavBarItem": "Leaderboard",
-  "menuNavBarItem": "Menu"
+  "menuNavBarItem": "Menu",
+  "smartphone": "Smartphone",
+  "company": "Company"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

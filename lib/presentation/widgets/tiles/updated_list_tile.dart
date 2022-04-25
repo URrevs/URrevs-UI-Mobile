@@ -5,11 +5,11 @@ import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart'
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/item_tile.dart';
 
-enum itemDescription { Smartphone, Company }
+enum ItemDescription { Smartphone, Company }
 
 class Item {
   final String itemName;
-  final itemDescription type;
+  final ItemDescription type;
 
   Item({required this.itemName, required this.type});
 }
@@ -30,7 +30,7 @@ class _UpdatedListTileState extends State<UpdatedListTile> {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(
-        30.r,
+        24.r,
       ),
       child: Card(
         elevation: 3,
@@ -65,7 +65,8 @@ class _UpdatedListTileState extends State<UpdatedListTile> {
                   itemBuilder: (context, index) {
                     return ItemTile(
                         itemName: widget.items[index].itemName,
-                        itemDescription: widget.items[index].type.name);
+                        type: widget.items[index].type,
+                        onTap: () {});
                   },
                   itemCount: widget.items.length,
                 ),
@@ -75,3 +76,4 @@ class _UpdatedListTileState extends State<UpdatedListTile> {
     );
   }
 }
+

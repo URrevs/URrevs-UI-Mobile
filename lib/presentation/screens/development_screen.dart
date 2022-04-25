@@ -32,8 +32,8 @@ class DevelopmentScreen extends ConsumerStatefulWidget {
   ConsumerState<DevelopmentScreen> createState() => _DevelopmentScreenState();
 }
 List<Item> items = [
-  Item(itemName: 'Xiaomi Redmi Note 6', type: itemDescription.Smartphone),
-  Item(itemName: 'Xiaomi', type: itemDescription.Company),
+  Item(itemName: 'Xiaomi Redmi Note 6', type: ItemDescription.Smartphone),
+  Item(itemName: 'Xiaomi', type: ItemDescription.Company),
 ];
 class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
   @override
