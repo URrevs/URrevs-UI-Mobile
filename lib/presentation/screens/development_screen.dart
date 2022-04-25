@@ -31,7 +31,10 @@ class DevelopmentScreen extends ConsumerStatefulWidget {
   @override
   ConsumerState<DevelopmentScreen> createState() => _DevelopmentScreenState();
 }
-
+List<Item> items = [
+  Item(itemName: 'Xiaomi Redmi Note 6', type: itemDescription.Smartphone),
+  Item(itemName: 'Xiaomi', type: itemDescription.Company),
+];
 class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
   @override
   Widget build(BuildContext context) {
@@ -71,7 +74,7 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
       ),
       body: ListView(
         children: [
-          UpdatedListTile(),
+          UpdatedListTile(items: items,),
           ProductReviewCard.dummyInstance,
           // CompanyReviewCard.dummyInstance,
           QuestionCard.dummyInstance,

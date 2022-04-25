@@ -14,25 +14,10 @@ class Item {
   Item({required this.itemName, required this.type});
 }
 
-List<Item> items = [
-  Item(itemName: 'Xiaomi Redmi Note 6', type: itemDescription.Smartphone),
-  Item(itemName: 'Xiaomi', type: itemDescription.Company),
-  Item(itemName: 'Xiaomi Redmi Note 6', type: itemDescription.Smartphone),
-  Item(itemName: 'Xiaomi Redmi Note 6', type: itemDescription.Smartphone),
-  Item(itemName: 'Xiaomi Redmi Note 6', type: itemDescription.Smartphone),
-  Item(itemName: 'Xiaomi Redmi Note 6', type: itemDescription.Smartphone),
-  Item(itemName: 'Xiaomi Redmi Note 6', type: itemDescription.Smartphone),
-  Item(itemName: 'Xiaomi Redmi Note 6', type: itemDescription.Smartphone),
-  Item(itemName: 'Xiaomi Redmi Note 6', type: itemDescription.Smartphone),
-  Item(itemName: 'Xiaomi Redmi Note 6', type: itemDescription.Smartphone),
-  Item(itemName: 'Xiaomi Redmi Note 6', type: itemDescription.Smartphone),
-  Item(itemName: 'Xiaomi Redmi Note 6', type: itemDescription.Smartphone),
-  Item(itemName: 'Xiaomi Redmi Note 6', type: itemDescription.Smartphone),
-];
 
 class UpdatedListTile extends StatefulWidget {
-  const UpdatedListTile({Key? key}) : super(key: key);
-
+  const UpdatedListTile({Key? key, required this.items}) : super(key: key);
+  final List<Item> items;
   @override
   State<UpdatedListTile> createState() => _UpdatedListTileState();
 }
@@ -53,7 +38,7 @@ class _UpdatedListTileState extends State<UpdatedListTile> {
                 Text('قائمة المنتجات المضافة حديثاً',
                     style: TextStyleManager.s20w500),
                 SizedBox(width: 10),
-                Text('(${items.length})', style: TextStyleManager.s20w500),
+                Text('(${widget.items.length})', style: TextStyleManager.s20w500),
               ],
             ),
             collapsedTextColor: ColorManager.black,
@@ -73,14 +58,14 @@ class _UpdatedListTileState extends State<UpdatedListTile> {
             collapsedBackgroundColor: ColorManager.white,
             children: [
               SizedBox(
-                height: items.length <=5? items.length * (90.h): 5 * (90.h),
+                height: widget.items.length <=4? widget.items.length * (90.h): 4 * (90.h),
                 child: ListView.builder(
                   itemBuilder: (context, index) {
                     return ItemTile(
-                        itemName: items[index].itemName,
-                        itemDescription: items[index].type.name);
+                        itemName: widget.items[index].itemName,
+                        itemDescription: widget.items[index].type.name);
                   },
-                  itemCount: items.length,
+                  itemCount: widget.items.length,
                 ),
               ),
             ]),
