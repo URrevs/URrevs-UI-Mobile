@@ -15,9 +15,9 @@ class Item {
   Item({required this.itemName, required this.type});
 }
 
-
 class UpdatedListTile extends StatefulWidget {
-  const UpdatedListTile({Key? key,required this.title ,required this.items}) : super(key: key);
+  const UpdatedListTile({Key? key, required this.title, required this.items})
+      : super(key: key);
 
   final String title;
   final List<Item> items;
@@ -29,19 +29,22 @@ class _UpdatedListTileState extends State<UpdatedListTile> {
   bool _customTileExpanded = false;
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(
-        24.r,
+    return Card(
+      elevation: 3,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(
+          AppRadius.updatedListTile,
+        ),
       ),
-      child: Card(
-        elevation: 3,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(AppRadius.updatedListTile),
         child: ExpansionTile(
             title: Row(
               children: [
-                Text(widget.title,
-                    style: TextStyleManager.s20w500),
+                Text(widget.title, style: TextStyleManager.s20w500),
                 SizedBox(width: 10),
-                Text('(${widget.items.length})', style: TextStyleManager.s20w500),
+                Text('(${widget.items.length})',
+                    style: TextStyleManager.s20w500),
               ],
             ),
             collapsedTextColor: ColorManager.black,
@@ -61,7 +64,9 @@ class _UpdatedListTileState extends State<UpdatedListTile> {
             collapsedBackgroundColor: ColorManager.white,
             children: [
               SizedBox(
-                height: widget.items.length <=4? widget.items.length * (90.h): 4 * (90.h),
+                height: widget.items.length <= 4
+                    ? widget.items.length * (90.h)
+                    : 4 * (90.h),
                 child: ListView.builder(
                   itemBuilder: (context, index) {
                     return ItemTile(
@@ -77,4 +82,3 @@ class _UpdatedListTileState extends State<UpdatedListTile> {
     );
   }
 }
-

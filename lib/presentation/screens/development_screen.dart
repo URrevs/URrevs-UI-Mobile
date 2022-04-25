@@ -76,7 +76,7 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
         children: [
           UpdatedListTile(title:'قائمة المنتجات المضافة حديثاً',items: items,),
           SizedBox(height: 20),
-          UpdatedListTile(title: 'قائمة الشركات المضافة حديثاً', items: items),
+          // UpdatedListTile(title: 'قائمة الشركات المضافة حديثاً', items: items),
           ProductReviewCard.dummyInstance,
           // CompanyReviewCard.dummyInstance,
           QuestionCard.dummyInstance,

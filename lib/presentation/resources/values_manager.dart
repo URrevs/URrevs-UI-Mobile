@@ -34,6 +34,7 @@ class AppRadius {
   static double get replyAvatarRadius => 12.r;
   static double get interactionBodyRadius => 12.r;
   static double get postCardRadius => 15.r;
+  static double get updatedListTile => 12.r;
 }
 
 class AppNumericValues {
