@@ -16,7 +16,9 @@ class Item {
 
 
 class UpdatedListTile extends StatefulWidget {
-  const UpdatedListTile({Key? key, required this.items}) : super(key: key);
+  const UpdatedListTile({Key? key,required this.title ,required this.items}) : super(key: key);
+
+  final String title;
   final List<Item> items;
   @override
   State<UpdatedListTile> createState() => _UpdatedListTileState();
@@ -35,7 +37,7 @@ class _UpdatedListTileState extends State<UpdatedListTile> {
         child: ExpansionTile(
             title: Row(
               children: [
-                Text('قائمة المنتجات المضافة حديثاً',
+                Text(widget.title,
                     style: TextStyleManager.s20w500),
                 SizedBox(width: 10),
                 Text('(${widget.items.length})', style: TextStyleManager.s20w500),
