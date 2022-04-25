@@ -21,6 +21,7 @@ class ThemeManager {
         fontFamily: FontConstants.tajawal,
         colorScheme: ColorScheme.light().copyWith(
           primary: ColorManager.blue,
+          secondary: ColorManager.blue,
         ),
         visualDensity: VisualDensity.standard,
         iconTheme: IconThemeData(
