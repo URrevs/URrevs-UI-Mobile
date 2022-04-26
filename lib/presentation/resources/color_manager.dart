@@ -49,6 +49,11 @@ class ColorManager {
         dark: Color(0xff606266),
       ).pickColor();
 
+  static Color get strokeGrey => ColorPair(
+        light: Color(0xff606266),
+        dark: Color(0xff606266),
+      ).pickColor();
+
   static Color get backgroundGrey => ColorPair(
         light: Color(0xffF0F2F5),
         dark: Color(0xffF0F2F5),
