@@ -158,7 +158,7 @@ class SpecsTable extends StatelessWidget {
     return TableRow(
       decoration: BoxDecoration(
         border: Border(
-          bottom: BorderSide(width: 0.2, color: ColorManager.black),
+          bottom: BorderSide(width: 1, color: ColorManager.dividerGrey),
         ),
       ),
       children: <Widget>[

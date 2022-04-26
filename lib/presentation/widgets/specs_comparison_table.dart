@@ -202,7 +202,7 @@ class SpecsComparisonTable extends StatelessWidget {
         firstProductSpecs.toMap(languageCode: languageCode).values.toList();
     final List<String> secondProductSpecsValues =
         secondProductSpecs.toMap(languageCode: languageCode).values.toList();
-    final borderSide = BorderSide(width: 0.2, color: ColorManager.black);
+    final borderSide = BorderSide(width: 1, color: ColorManager.dividerGrey);
 
     return Table(
       border: TableBorder(
