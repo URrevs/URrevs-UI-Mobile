@@ -20,6 +20,13 @@ class ThemeManager {
   static ThemeData get light => ThemeData(
         scaffoldBackgroundColor: ColorManager.backgroundGrey,
         fontFamily: FontConstants.tajawal,
+        dialogTheme: DialogTheme(
+          backgroundColor: ColorManager.white,
+          contentTextStyle: TextStyleManager.s16w500.copyWith(
+            color: ColorManager.black,
+            fontFamily: FontConstants.tajawal,
+          ),
+        ),
         colorScheme: ColorScheme.light().copyWith(
           primary: ColorManager.blue,
           secondary: ColorManager.blue,

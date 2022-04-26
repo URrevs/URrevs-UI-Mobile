@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class HomeSubscreen extends StatefulWidget {
@@ -12,7 +11,23 @@ class _HomeSubscreenState extends State<HomeSubscreen> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('Home'),
+      child: ElevatedButton(
+        onPressed: () async {
+          bool? b = await showDialog<bool>(
+            context: context,
+            builder: (context) => AlertDialog(
+              content: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop(true);
+                },
+                child: Text('hello'),
+              ),
+            ),
+          );
+          print(b);
+        },
+        child: Text('CLICK'),
+      ),
     );
   }
 }

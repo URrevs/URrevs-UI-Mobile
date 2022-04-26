@@ -1,0 +1,1 @@
+/// a prompt that navigates to specs compare screen to compare between 2 products
