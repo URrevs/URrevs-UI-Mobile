@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/company_profile/subscreens/company_profile_q_a_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/company_profile/subscreens/company_profile_reviews_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
@@ -14,19 +16,42 @@ class CompanyProfileScreen extends StatefulWidget {
   State<CompanyProfileScreen> createState() => _CompanyProfileScreenState();
 }
 
-class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
+class _CompanyProfileScreenState extends State<CompanyProfileScreen>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  FloatingActionButton? get floatingActionButton {
+    switch (_tabController.index) {
+      case 1:
+        return FloatingActionButton.extended(
+          onPressed: () {},
+          label: Text(LocaleKeys.addQuestion.tr()),
+          icon: Icon(FontAwesomeIcons.plus, size: AppSize.s16),
+        );
+      default:
+        return null;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+    _tabController.addListener(() => setState(() {}));
+  }
+
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: AppBars.appBarOfCompnayProfile(context: context),
-        body: TabBarView(
-          children: [
-            CompanyProfileReviewsSubscreen(),
-            CompanyProfileQASubscreen(),
-          ],
-        ),
+    return Scaffold(
+      appBar: AppBars.appBarOfCompnayProfile(
+          context: context, controller: _tabController, text: 'Nokia'),
+      floatingActionButton: floatingActionButton,
+      body: TabBarView(
+        controller: _tabController,
+        children: [
+          CompanyProfileReviewsSubscreen(),
+          CompanyProfileQASubscreen(),
+        ],
       ),
     );
   }

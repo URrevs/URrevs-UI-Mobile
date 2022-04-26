@@ -79,6 +79,7 @@ flutter:
     - assets/images/svg/upvote.svg
     - assets/images/svg/facebook_logo.svg
     - assets/images/svg/google_logo.svg
+    - assets/images/svg/compare.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -12,6 +12,10 @@ class _ProductProfileSpecsSubscreenState
     extends State<ProductProfileSpecsSubscreen> {
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('specs'));
+    return ListView(
+      children: [
+        Center(child: Text('specs')),
+      ],
+    );
   }
 }

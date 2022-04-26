@@ -23,6 +23,7 @@ class AppSize {
   static double get s16 => 16.sp * 1.1;
   static double get s18 => 18.sp * 1.1;
   static double get s20 => 20.sp * 1.1;
+  static double get s22 => 22.sp * 1.1;
 }
 
 class AppRadius {

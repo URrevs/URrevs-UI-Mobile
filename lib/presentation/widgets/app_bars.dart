@@ -50,10 +50,16 @@ class AppBars {
     return AppBar(title: Text(title));
   }
 
-  static AppBar appBarOfProductProfile({required BuildContext context}) {
+  static AppBar appBarOfProductProfile({
+    required BuildContext context,
+    required TabController controller,
+    required String text,
+  }) {
     return AppBar(
       title: Row(children: AppBars.actions(context)),
+      actions: [Text(text)],
       bottom: TabBar(
+        controller: controller,
         tabs: [
           Tab(text: LocaleKeys.tabBarReviews.tr()),
           Tab(text: LocaleKeys.tabBarSpecs.tr()),
@@ -63,10 +69,16 @@ class AppBars {
     );
   }
 
-  static AppBar appBarOfCompnayProfile({required BuildContext context}) {
+  static AppBar appBarOfCompnayProfile({
+    required BuildContext context,
+    required TabController controller,
+    required String text,
+  }) {
     return AppBar(
       title: Row(children: AppBars.actions(context)),
+      actions: [Text(text)],
       bottom: TabBar(
+        controller: controller,
         tabs: [
           Tab(text: LocaleKeys.tabBarReviews.tr()),
           Tab(text: LocaleKeys.tabBarQuestionsAndAnswers.tr()),

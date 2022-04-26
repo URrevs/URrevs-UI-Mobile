@@ -16,6 +16,7 @@ void main() async {
     EasyLocalization(
       supportedLocales:
           LanguageType.values.map((langType) => langType.locale).toList(),
+      startLocale: LanguageType.ar.locale,
       path: AssetsPaths.translations,
       fallbackLocale: LanguageType.en.locale,
       assetLoader: CodegenLoader(),

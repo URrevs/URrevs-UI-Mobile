@@ -88,7 +88,11 @@ class CodegenLoader extends AssetLoader{
   "tabBarSpecs": "المواصفات",
   "tabBarReview": "مراجعة",
   "tabBarQuestion": "سؤال",
-  "tabBarQuestionsAndAnswers": "الأسئلة والأجوبة"
+  "tabBarQuestionsAndAnswers": "الأسئلة والأجوبة",
+  "addReview": "أضف مراجعة",
+  "addOwnedProduct": "أضف منتج ممتلك",
+  "addQuestion": "أضف سؤال",
+  "compareWithAnotherProduct": "قارن مع منتج آخر"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -164,7 +168,11 @@ static const Map<String,dynamic> en = {
   "tabBarReview": "Review",
   "tabBarReviews": "Reviews",
   "tabBarSpecs": "Specs",
-  "tabBarQuestionsAndAnswers": "Questions and Answers"
+  "tabBarQuestionsAndAnswers": "Questions and Answers",
+  "addOwnedProduct": "Add owned product",
+  "addQuestion": "Add question",
+  "addReview": "Add review",
+  "compareWithAnotherProduct": "Compare with another product"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

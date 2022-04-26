@@ -11,6 +11,10 @@ class ProductProfileQASubscreen extends StatefulWidget {
 class _ProductProfileQASubscreenState extends State<ProductProfileQASubscreen> {
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('q a'));
+    return ListView(
+      children: [
+        Center(child: Text('q a')),
+      ],
+    );
   }
 }

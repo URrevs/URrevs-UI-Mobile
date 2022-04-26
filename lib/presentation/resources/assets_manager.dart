@@ -14,4 +14,5 @@ class SvgAssets {
   static const String upvote = '${AssetsPaths.svg}/upvote.svg';
   static const String googleLogo = '${AssetsPaths.svg}/google_logo.svg';
   static const String facebookLogo = '${AssetsPaths.svg}/facebook_logo.svg';
+  static const String compare = '${AssetsPaths.svg}/compare.svg';
 }

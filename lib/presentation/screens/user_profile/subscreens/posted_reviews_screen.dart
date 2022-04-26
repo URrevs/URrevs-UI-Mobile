@@ -1,9 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/scaffold_with_hiding_fab.dart';
+import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 class PostedReviewsScreen extends StatefulWidget {
   const PostedReviewsScreen({Key? key}) : super(key: key);
@@ -15,41 +18,22 @@ class PostedReviewsScreen extends StatefulWidget {
 }
 
 class _PostedReviewsScreenState extends State<PostedReviewsScreen> {
-  bool _showFab = true;
-
-  Widget? get fab => _showFab
-      ? FloatingActionButton.extended(
-          onPressed: () {},
-          icon: Icon(FontAwesomeIcons.plus, size: AppSize.s16),
-          label: Text('أضف سؤال'),
-        )
-      : null;
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ScaffoldWithHidingFab(
       appBar: AppBar(),
-      body: NotificationListener<UserScrollNotification>(
-        onNotification: (notification) {
-          if (notification.direction == ScrollDirection.forward) {
-            if (!_showFab) setState(() => _showFab = true);
-          } else if (notification.direction == ScrollDirection.reverse) {
-            if (_showFab) setState(() => _showFab = false);
-          }
-          return true;
-        },
-        child: ListView(
-          children: [
-            SizedBox(
-              height: 1000,
-              child: Center(
-                child: Text('hello'),
-              ),
-            )
-          ],
-        ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {},
+        label: Text(LocaleKeys.addReview.tr()),
+        icon: Icon(FontAwesomeIcons.plus, size: AppSize.s16),
       ),
-      floatingActionButton: fab,
+      body: ListView(
+        children: [
+          Center(
+            child: Text('posted reviews'),
+          )
+        ],
+      ),
     );
   }
 }

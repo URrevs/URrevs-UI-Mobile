@@ -75,5 +75,9 @@ abstract class  LocaleKeys {
   static const tabBarReview = 'tabBarReview';
   static const tabBarQuestion = 'tabBarQuestion';
   static const tabBarQuestionsAndAnswers = 'tabBarQuestionsAndAnswers';
+  static const addReview = 'addReview';
+  static const addOwnedProduct = 'addOwnedProduct';
+  static const addQuestion = 'addQuestion';
+  static const compareWithAnotherProduct = 'compareWithAnotherProduct';
 
 }

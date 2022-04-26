@@ -72,5 +72,9 @@
   "tabBarSpecs": "المواصفات",
   "tabBarReview": "مراجعة",
   "tabBarQuestion": "سؤال",
-  "tabBarQuestionsAndAnswers": "الأسئلة والأجوبة"
+  "tabBarQuestionsAndAnswers": "الأسئلة والأجوبة",
+  "addReview": "أضف مراجعة",
+  "addOwnedProduct": "أضف منتج ممتلك",
+  "addQuestion": "أضف سؤال",
+  "compareWithAnotherProduct": "قارن مع منتج آخر"
 }

@@ -72,5 +72,9 @@
   "tabBarReview": "Review",
   "tabBarReviews": "Reviews",
   "tabBarSpecs": "Specs",
-  "tabBarQuestionsAndAnswers": "Questions and Answers"
+  "tabBarQuestionsAndAnswers": "Questions and Answers",
+  "addOwnedProduct": "Add owned product",
+  "addQuestion": "Add question",
+  "addReview": "Add review",
+  "compareWithAnotherProduct": "Compare with another product"
 }
