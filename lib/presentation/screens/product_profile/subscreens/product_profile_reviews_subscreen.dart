@@ -12,6 +12,6 @@ class _ProductProfileReviewsSubscreenState
     extends State<ProductProfileReviewsSubscreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Center(child: Text('Reviews'));
   }
 }

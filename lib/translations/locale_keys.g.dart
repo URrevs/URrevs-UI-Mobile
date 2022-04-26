@@ -70,5 +70,10 @@ abstract class  LocaleKeys {
   static const menuNavBarItem = 'menuNavBarItem';
   static const smartphone = 'smartphone';
   static const company = 'company';
+  static const tabBarReviews = 'tabBarReviews';
+  static const tabBarSpecs = 'tabBarSpecs';
+  static const tabBarReview = 'tabBarReview';
+  static const tabBarQuestion = 'tabBarQuestion';
+  static const tabBarQuestionsAndAnswers = 'tabBarQuestionsAndAnswers';
 
 }

@@ -67,5 +67,10 @@
   "leaderboardNavBarItem": "Leaderboard",
   "menuNavBarItem": "Menu",
   "smartphone": "Smartphone",
-  "company": "Company"
+  "company": "Company",
+  "tabBarQuestion": "Question",
+  "tabBarReview": "Review",
+  "tabBarReviews": "Reviews",
+  "tabBarSpecs": "Specs",
+  "tabBarQuestionsAndAnswers": "Questions and Answers"
 }

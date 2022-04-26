@@ -10,6 +10,8 @@ class AllProductsSubscreen extends StatefulWidget {
 class _AllProductsSubscreenState extends State<AllProductsSubscreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Center(
+      child: Text('all products'),
+    );
   }
 }

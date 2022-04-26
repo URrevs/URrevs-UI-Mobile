@@ -12,6 +12,6 @@ class _ProductProfileSpecsSubscreenState
     extends State<ProductProfileSpecsSubscreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Center(child: Text('specs'));
   }
 }

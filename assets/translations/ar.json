@@ -67,5 +67,10 @@
   "leaderboardNavBarItem": "المتصدرين",
   "menuNavBarItem": "القائمة",
   "smartphone": "هاتف ذكي",
-  "company": "شركة"
+  "company": "شركة",
+  "tabBarReviews": "المراجعات",
+  "tabBarSpecs": "المواصفات",
+  "tabBarReview": "مراجعة",
+  "tabBarQuestion": "سؤال",
+  "tabBarQuestionsAndAnswers": "الأسئلة والأجوبة"
 }

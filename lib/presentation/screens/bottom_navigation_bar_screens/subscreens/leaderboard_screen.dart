@@ -10,6 +10,8 @@ class LeaderboardSubscreen extends StatefulWidget {
 class _LeaderboardSubscreenState extends State<LeaderboardSubscreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Center(
+      child: Text('Leaderboard'),
+    );
   }
 }

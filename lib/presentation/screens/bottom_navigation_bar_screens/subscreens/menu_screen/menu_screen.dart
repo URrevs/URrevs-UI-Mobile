@@ -10,6 +10,8 @@ class MenuSubscreen extends StatefulWidget {
 class _MenuSubscreenState extends State<MenuSubscreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Center(
+      child: Text('Menu'),
+    );
   }
 }

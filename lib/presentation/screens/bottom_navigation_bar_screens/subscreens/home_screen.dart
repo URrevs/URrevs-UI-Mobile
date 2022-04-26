@@ -11,6 +11,8 @@ class HomeSubscreen extends StatefulWidget {
 class _HomeSubscreenState extends State<HomeSubscreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Center(
+      child: Text('Home'),
+    );
   }
 }
