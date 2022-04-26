@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/company_profile/subscreens/company_profile_q_a_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/company_profile/subscreens/company_profile_reviews_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 class CompanyProfileScreen extends StatefulWidget {
@@ -19,14 +20,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: AppBar(
-          bottom: TabBar(
-            tabs: [
-              Tab(text: LocaleKeys.tabBarReviews.tr()),
-              Tab(text: LocaleKeys.tabBarQuestionsAndAnswers.tr()),
-            ],
-          ),
-        ),
+        appBar: AppBars.appBarOfCompnayProfile(context: context),
         body: TabBarView(
           children: [
             CompanyProfileReviewsSubscreen(),

@@ -15,6 +15,11 @@ import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_product_review_
 import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_question_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/product_profile/product_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/search_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/user_profile/other_user_profile_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/owned_products_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/posted_questions_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/posted_reviews_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/user_profile/user_profile_screen.dart';
 
 class Routes {
   static const String development = "/development";
@@ -28,6 +33,26 @@ class RouteGenerator {
       case BottomNavigationBarContainerScreen.routeName:
         return MaterialPageRoute(
           builder: (_) => BottomNavigationBarContainerScreen(),
+        );
+      case UserProfileScreen.routeName:
+        return MaterialPageRoute(
+          builder: (_) => UserProfileScreen(),
+        );
+      case OtherUserProfileScreen.routeName:
+        return MaterialPageRoute(
+          builder: (_) => OtherUserProfileScreen(),
+        );
+      case PostedReviewsScreen.routeName:
+        return MaterialPageRoute(
+          builder: (_) => PostedReviewsScreen(),
+        );
+      case PostedQuestionsScreen.routeName:
+        return MaterialPageRoute(
+          builder: (_) => PostedQuestionsScreen(),
+        );
+      case OwnedProductsScreen.routeName:
+        return MaterialPageRoute(
+          builder: (_) => OwnedProductsScreen(),
         );
       case AboutUsScreen.routeName:
         return MaterialPageRoute(
@@ -86,17 +111,17 @@ class RouteGenerator {
           builder: (_) => SearchScreen(),
         );
       default:
-        return unDefinedRoute();
+        return unDefinedRoute(routeSettings.name);
     }
   }
 
-  static Route<dynamic> unDefinedRoute() {
+  static Route<dynamic> unDefinedRoute(String? routeName) {
     return MaterialPageRoute(
         builder: (_) => Scaffold(
               appBar: AppBar(
-                title: Text(''),
+                title: Text('Route not found'),
               ),
-              body: Center(child: Text('')),
+              body: Center(child: Text('$routeName is not found')),
             ));
   }
 }

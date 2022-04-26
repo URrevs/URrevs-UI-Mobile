@@ -6,14 +6,14 @@ class FontConstants {
 }
 
 class FontSizeManager {
-  static double get s12 => 1.2* 12.sp;
-  static double get s13 => 1.2* 13.sp;
-  static double get s14 => 1.1* 14.sp;
-  static double get s15 => 1.1* 15.sp;
-  static double get s16 => 1.1* 16.sp;
-  static double get s18 => 1.1* 18.sp;
-  static double get s20 => 1.1* 20.sp;
-  static double get s22 => 1.1* 22.sp;
+  static double get s12 => 1.1 * 12.sp;
+  static double get s13 => 1.1 * 13.sp;
+  static double get s14 => 1.1 * 14.sp;
+  static double get s15 => 1.1 * 15.sp;
+  static double get s16 => 1.1 * 16.sp;
+  static double get s18 => 1.1 * 18.sp;
+  static double get s20 => 1.1 * 20.sp;
+  static double get s22 => 1.1 * 22.sp;
 }
 
 class FontWeightManager {

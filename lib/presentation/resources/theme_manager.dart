@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/font_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 
 class ThemeManager {
@@ -22,6 +23,14 @@ class ThemeManager {
         colorScheme: ColorScheme.light().copyWith(
           primary: ColorManager.blue,
           secondary: ColorManager.blue,
+        ),
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: ColorManager.blue,
+          foregroundColor: ColorManager.white,
+          extendedTextStyle: TextStyleManager.s14w700.copyWith(
+            fontFamily: FontConstants.tajawal,
+          ),
+          extendedIconLabelSpacing: 9.w,
         ),
         visualDensity: VisualDensity.standard,
         iconTheme: IconThemeData(

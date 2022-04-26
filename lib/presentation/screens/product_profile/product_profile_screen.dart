@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/product_profile/subscreens/product_profile_q_a_subscreen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/product_profile/subscreens/product_profile_reviews_subscreen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/product_profile/subscreens/product_profile_specs_subscreen.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 class ProductProfileScreen extends StatefulWidget {
@@ -20,15 +21,7 @@ class _ProductProfileScreenState extends State<ProductProfileScreen> {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        appBar: AppBar(
-          bottom: TabBar(
-            tabs: [
-              Tab(text: LocaleKeys.tabBarReviews.tr()),
-              Tab(text: LocaleKeys.tabBarSpecs.tr()),
-              Tab(text: LocaleKeys.tabBarQuestionsAndAnswers.tr()),
-            ],
-          ),
-        ),
+        appBar: AppBars.appBarOfProductProfile(context: context),
         body: TabBarView(
           children: [
             ProductProfileReviewsSubscreen(),

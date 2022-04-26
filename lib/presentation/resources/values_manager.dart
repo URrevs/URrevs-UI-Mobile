@@ -15,14 +15,14 @@ class AppWidth {
 }
 
 class AppSize {
-  static double get s0 => 0.sp;
-  static double get s4 => 4.sp;
-  static double get s6 => 6.sp;
-  static double get s8 => 8.sp;
-  static double get s14 => 14.sp;
-  static double get s16 => 16.sp;
-  static double get s18 => 18.sp;
-  static double get s20 => 20.sp;
+  static double get s0 => 0.sp * 1.1;
+  static double get s4 => 4.sp * 1.1;
+  static double get s6 => 6.sp * 1.1;
+  static double get s8 => 8.sp * 1.1;
+  static double get s14 => 14.sp * 1.1;
+  static double get s16 => 16.sp * 1.1;
+  static double get s18 => 18.sp * 1.1;
+  static double get s20 => 20.sp * 1.1;
 }
 
 class AppRadius {

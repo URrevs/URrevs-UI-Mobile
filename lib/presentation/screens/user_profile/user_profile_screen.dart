@@ -14,7 +14,14 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Container(),
+      body: ListView(
+        children: [
+          SizedBox(
+            height: 1000,
+            child: Center(child: Text('user profile')),
+          )
+        ],
+      ),
     );
   }
 }

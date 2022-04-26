@@ -49,7 +49,10 @@ class _BottomNavigationBarContainerScreenState
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: AppBars.appBarWithURrevsLogo(showTabBar),
+        appBar: AppBars.appBarWithURrevsLogo(
+          context: context,
+          showTabBar: showTabBar,
+        ),
         body: currentPage,
         bottomNavigationBar: BottomNavBar(
           currentIndex: _currentIndex,
