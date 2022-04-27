@@ -7,6 +7,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart'
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/updated_list_tile.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
+/// A widget that displays the name and category of a product, on tapping it routes you to the item profile.
 class ItemTile extends StatelessWidget {
   const ItemTile({
     required this.itemName,
@@ -15,9 +16,16 @@ class ItemTile extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  /// The name of the item.
   final String itemName;
+
+  /// The type of the item.
   final ItemDescription type;
+
+  /// The function that is called when the item is tapped.
   final VoidCallback onTap;
+
+  /// Function that chooses the icon of the item, eihter it's smartphone or company.
   IconData chooseSuitableItemIcon(ItemDescription itemDescription) {
     switch (itemDescription) {
       case ItemDescription.Smartphone:
@@ -30,7 +38,7 @@ class ItemTile extends StatelessWidget {
     ;
   }
 
-  /// A function for translating items description.
+  /// A function for translating items description as for localization.
   String getItemDescription(ItemDescription type) {
     switch (type) {
       case ItemDescription.Smartphone:

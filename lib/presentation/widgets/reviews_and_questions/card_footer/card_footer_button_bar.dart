@@ -44,12 +44,12 @@ class CardFooterButtonBar extends StatelessWidget {
     Widget firstIcon = useInReviewCard
         ? Icon(
             liked ? IconsManager.likeFilled : IconsManager.likeEmpty,
-            size: 23.sp,
+            size: 24.sp,
             color: buttonColor,
           )
         : FaIcon(
             IconsManager.upvote,
-            size: 23.sp,
+            size: 24.sp,
             color: buttonColor,
           );
 
@@ -70,14 +70,14 @@ class CardFooterButtonBar extends StatelessWidget {
         ),
         Expanded(
           child: CardFooterButton(
-            icon: Icon(IconsManager.comment),
+            icon: Icon(IconsManager.comment, size: 24.sp),
             text: secondText,
             onPressed: onComment,
           ),
         ),
         Expanded(
           child: CardFooterButton(
-            icon: Icon(IconsManager.share),
+            icon: Icon(IconsManager.share, size: 24.sp),
             text: LocaleKeys.share.tr(),
             onPressed: onShare,
           ),

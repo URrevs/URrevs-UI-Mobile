@@ -93,6 +93,10 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
           ],
         ),
       ),
+      bottomNavigationBar: BottomNavBar(
+        currentIndex: 2,
+        onTap: (int i) => {},
+      ),
     );
   }
 }

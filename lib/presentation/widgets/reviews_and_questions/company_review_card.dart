@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -122,15 +123,28 @@ class CompanyReviewCard extends StatelessWidget {
       top: 0,
       left: context.isArabic ? 0 : null,
       right: context.isArabic ? null : 0,
-      child: CircleAvatar(
-        radius: AppRadius.questionMarkNotchRadius,
-        backgroundColor: ColorManager.backgroundGrey,
-        child: Transform.rotate(
-          angle: 24 / 180 * pi * (context.isArabic ? -1 : 1),
-          child: FaIcon(
-            IconsManager.review,
-            color: ColorManager.blue,
-            size: 22.sp,
+      child: Tooltip(
+        message: LocaleKeys.companyReview.tr(),
+        child: CircleAvatar(
+          radius: AppRadius.questionMarkNotchRadius,
+          backgroundColor: ColorManager.backgroundGrey,
+          child: Transform.rotate(
+            angle: 24 / 180 * pi * (context.isArabic ? -1 : 1),
+            child: Container(
+              height: 22.sp,
+              width: 22.sp,
+              alignment: Alignment.center,
+              padding: EdgeInsets.all(1.r),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: Colors.blue, width: 2.r),
+              ),
+              child: Icon(
+                IconsManager.review,
+                color: ColorManager.blue,
+                size: 14.sp,
+              ),
+            ),
           ),
         ),
       ),

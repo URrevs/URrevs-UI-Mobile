@@ -79,5 +79,8 @@ abstract class  LocaleKeys {
   static const addOwnedProduct = 'addOwnedProduct';
   static const addQuestion = 'addQuestion';
   static const compareWithAnotherProduct = 'compareWithAnotherProduct';
+  static const companyReview = 'companyReview';
+  static const productReview = 'productReview';
+  static const askedQuestion = 'askedQuestion';
 
 }

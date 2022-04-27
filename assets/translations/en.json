@@ -76,5 +76,8 @@
   "addOwnedProduct": "Add owned product",
   "addQuestion": "Add question",
   "addReview": "Add review",
-  "compareWithAnotherProduct": "Compare with another product"
+  "compareWithAnotherProduct": "Compare with another product",
+  "companyReview": "Company Review",
+  "productReview": "Prodcut Review",
+  "askedQuestion": "Asked Question"
 }

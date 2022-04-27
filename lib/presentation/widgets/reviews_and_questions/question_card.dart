@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -16,6 +17,7 @@ import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answer_tree.d
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/question_card_body.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_footer/card_footer.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_header/card_header.dart';
+import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 /// A card showing a question.
 class QuestionCard extends StatelessWidget {
@@ -110,15 +112,18 @@ class QuestionCard extends StatelessWidget {
       top: 0,
       left: context.isArabic ? 0 : null,
       right: context.isArabic ? null : 0,
-      child: CircleAvatar(
-        radius: AppRadius.questionMarkNotchRadius,
-        backgroundColor: ColorManager.backgroundGrey,
-        child: Transform.rotate(
-          angle: 24 / 180 * math.pi * (context.isArabic ? -1 : 1),
-          child: FaIcon(
-            IconsManager.question,
-            color: ColorManager.blue,
-            size: 22.sp,
+      child: Tooltip(
+        message: LocaleKeys.askedQuestion.tr(),
+        child: CircleAvatar(
+          radius: AppRadius.questionMarkNotchRadius,
+          backgroundColor: ColorManager.backgroundGrey,
+          child: Transform.rotate(
+            angle: 24 / 180 * math.pi * (context.isArabic ? -1 : 1),
+            child: FaIcon(
+              IconsManager.question,
+              color: ColorManager.blue,
+              size: 22.sp,
+            ),
           ),
         ),
       ),
