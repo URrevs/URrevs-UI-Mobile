@@ -77,6 +77,8 @@ class ProductReviewCard extends StatelessWidget {
 
   final bool fullscreen;
 
+  final VoidCallback onPressingComment;
+
   const ProductReviewCard({
     Key? key,
     required this.postedDate,
@@ -93,6 +95,7 @@ class ProductReviewCard extends StatelessWidget {
     required this.shareCount,
     required this.liked,
     required this.fullscreen,
+    required this.onPressingComment,
   }) : super(key: key);
 
   /// An instance of [ProductReviewCard] filled with dummy data.
@@ -112,7 +115,43 @@ class ProductReviewCard extends StatelessWidget {
         shareCount: DummyDataManager.randomInt,
         liked: Random().nextBool(),
         fullscreen: fullscreen,
+          onPressingComment: () {}
       );
+
+  ProductReviewCard copyWith({
+    String? imageUrl,
+    String? authorName,
+    String? productName,
+    DateTime? postedDate,
+    DateTime? usedSinceDate,
+    int? views,
+    List<int>? scores,
+    String? prosText,
+    String? consText,
+    bool? liked,
+    int? likeCount,
+    int? commentCount,
+    int? shareCount,
+    bool? fullscreen,
+    VoidCallback? onPressingComment,
+  }) {
+    return ProductReviewCard(
+        postedDate: postedDate ?? this.postedDate,
+        usedSinceDate: usedSinceDate ?? this.usedSinceDate,
+        views: views ?? this.views,
+        authorName: authorName ?? this.authorName,
+        imageUrl: imageUrl ?? this.imageUrl,
+        productName: productName ?? this.productName,
+        scores: scores ?? this.scores,
+        prosText: prosText ?? this.prosText,
+        consText: consText ?? this.consText,
+        likeCount: likeCount ?? this.likeCount,
+        commentCount: commentCount ?? this.commentCount,
+        shareCount: shareCount ?? this.shareCount,
+        liked: liked ?? this.liked,
+        fullscreen: fullscreen ?? this.fullscreen,
+        onPressingComment: onPressingComment ?? this.onPressingComment);
+  }
 
   /// Callback invoked when like (or upvote) buttons are pressed.
   void _onLike() {
@@ -184,22 +223,18 @@ class ProductReviewCard extends StatelessWidget {
                   postedDate: postedDate,
                   usedSinceDate: usedSinceDate,
                   views: views,
-                  onPressingTarget: () {
-                    Navigator.of(context)
-                        .pushNamed(ProductProfileScreen.routeName);
-                  },
+                  cardType: CardType.productReview,
                 ),
                 10.verticalSpace,
                 ReviewCardBody(
-                  ratingCriteria: _ratingCriteria,
-                  scores: scores,
-                  prosText: prosText,
-                  consText: consText,
-                  showExpandCircle: true,
-                  hideSeeMoreIfNoNeedForExpansion: false,
-                  cardType: CardType.productReview,
-                    fullscreen: fullscreen
-                ),
+                    ratingCriteria: _ratingCriteria,
+                    scores: scores,
+                    prosText: prosText,
+                    consText: consText,
+                    showExpandCircle: true,
+                    hideSeeMoreIfNoNeedForExpansion: false,
+                    cardType: CardType.productReview,
+                    fullscreen: fullscreen),
                 8.verticalSpace,
                 CardFooter(
                   likeCount: likeCount,
@@ -208,8 +243,10 @@ class ProductReviewCard extends StatelessWidget {
                   liked: liked,
                   useInReviewCard: true,
                   onLike: _onLike,
-                  onComment: _onComment,
+                  onComment: onPressingComment,
                   onShare: _onShare,
+                  cardType: CardType.productReview,
+                  fullscreen: fullscreen,
                 ),
               ],
             ),

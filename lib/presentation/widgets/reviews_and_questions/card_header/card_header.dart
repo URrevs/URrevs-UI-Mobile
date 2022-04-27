@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_header/card_header_subtitle.dart';
@@ -16,7 +17,7 @@ class CardHeader extends StatelessWidget {
     required this.authorName,
     required this.imageUrl,
     required this.targetName,
-    required this.onPressingTarget,
+      required this.cardType
   }) : super(key: key);
 
   /// Profile image url of the current logged in user.
@@ -37,7 +38,7 @@ class CardHeader extends StatelessWidget {
   /// How many times this review was viewed.
   final int? views;
 
-  final VoidCallback onPressingTarget;
+  final CardType cardType;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +58,7 @@ class CardHeader extends StatelessWidget {
                 CardHeaderTitle(
                   authorName: authorName,
                   productName: targetName,
-                  onPressingTarget: onPressingTarget,
+                  cardType: cardType,
                 ),
                 CardHeaderSubtitle(
                   postedDate: postedDate,

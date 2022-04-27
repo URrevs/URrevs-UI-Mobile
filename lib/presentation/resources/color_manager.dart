@@ -59,6 +59,11 @@ class ColorManager {
         dark: Color(0xffF0F2F5),
       ).pickColor();
 
+  static Color get textFieldGrey => ColorPair(
+        light: Color(0xffE3E3E3),
+        dark: Color(0xffE3E3E3),
+      ).pickColor();
+
   static Color get black => ColorPair(
         light: Color(0xff050505),
         dark: Color(0xff050505),

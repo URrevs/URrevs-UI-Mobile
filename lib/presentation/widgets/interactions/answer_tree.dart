@@ -78,6 +78,37 @@ class AnswerTree extends StatefulWidget {
         onTappingAnswerInCard: () {},
       );
 
+  AnswerTree copyWith({
+    String? imageUrl,
+    String? authorName,
+    DateTime? usedSinceDate,
+    String? commentText,
+    int? likeCount,
+    DateTime? datePosted,
+    bool? liked,
+    bool? accepted,
+    bool? isQuestionAuthor,
+    bool? inQuestionCard,
+    List<Reply>? replies,
+    VoidCallback? onTappingAnswerInCard,
+  }) {
+    return AnswerTree(
+      imageUrl: imageUrl ?? this.imageUrl,
+      authorName: authorName ?? this.authorName,
+      usedSinceDate: usedSinceDate ?? this.usedSinceDate,
+      commentText: commentText ?? this.commentText,
+      likeCount: likeCount ?? this.likeCount,
+      datePosted: datePosted ?? this.datePosted,
+      liked: liked ?? this.liked,
+      accepted: accepted ?? this.accepted,
+      isQuestionAuthor: isQuestionAuthor ?? this.isQuestionAuthor,
+      inQuestionCard: inQuestionCard ?? this.inQuestionCard,
+      replies: replies ?? this.replies,
+      onTappingAnswerInCard:
+          onTappingAnswerInCard ?? this.onTappingAnswerInCard,
+    );
+  }
+
   @override
   State<AnswerTree> createState() => _AnswerTreeState();
 }

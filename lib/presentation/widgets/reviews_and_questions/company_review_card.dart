@@ -66,6 +66,8 @@ class CompanyReviewCard extends StatelessWidget {
 
   final bool fullscreen;
 
+  final VoidCallback onPressingComment;
+
   const CompanyReviewCard({
     Key? key,
     required this.postedDate,
@@ -82,6 +84,7 @@ class CompanyReviewCard extends StatelessWidget {
     required this.shareCount,
     required this.liked,
     required this.fullscreen,
+    required this.onPressingComment,
   }) : super(key: key);
 
   /// An instance of [CompanyReviewCard] filled with dummy data.
@@ -101,7 +104,44 @@ class CompanyReviewCard extends StatelessWidget {
         shareCount: 20,
         liked: Random().nextBool(),
         fullscreen: fullscreen,
+        onPressingComment: () {},
       );
+
+  CompanyReviewCard copyWith({
+    String? imageUrl,
+    String? authorName,
+    String? companyName,
+    DateTime? postedDate,
+    DateTime? usedSinceDate,
+    int? views,
+    int? generalRating,
+    String? prosText,
+    String? consText,
+    bool? liked,
+    int? likeCount,
+    int? commentCount,
+    int? shareCount,
+    bool? fullscreen,
+    VoidCallback? onPressingComment,
+  }) {
+    return CompanyReviewCard(
+      postedDate: postedDate ?? this.postedDate,
+      usedSinceDate: usedSinceDate ?? this.usedSinceDate,
+      views: views ?? this.views,
+      authorName: authorName ?? this.authorName,
+      imageUrl: imageUrl ?? this.imageUrl,
+      companyName: companyName ?? this.companyName,
+      generalRating: generalRating ?? this.generalRating,
+      prosText: prosText ?? this.prosText,
+      consText: consText ?? this.consText,
+      likeCount: likeCount ?? this.likeCount,
+      commentCount: commentCount ?? this.commentCount,
+      shareCount: shareCount ?? this.shareCount,
+      liked: liked ?? this.liked,
+      fullscreen: fullscreen ?? this.fullscreen,
+      onPressingComment: onPressingComment ?? this.onPressingComment,
+    );
+  }
 
   /// Callback invoked when like (or upvote) buttons are pressed.
   void _onLike() {
@@ -173,10 +213,7 @@ class CompanyReviewCard extends StatelessWidget {
                   postedDate: postedDate,
                   usedSinceDate: null,
                   views: views,
-                  onPressingTarget: () {
-                    Navigator.of(context)
-                        .pushNamed(CompanyProfileScreen.routeName);
-                  },
+                  cardType: CardType.companyReview,
                 ),
                 10.verticalSpace,
                 ReviewCardBody(
@@ -197,8 +234,10 @@ class CompanyReviewCard extends StatelessWidget {
                   liked: liked,
                   useInReviewCard: true,
                   onLike: _onLike,
-                  onComment: _onComment,
+                  onComment: onPressingComment,
                   onShare: _onShare,
+                  cardType: CardType.companyReview,
+                  fullscreen: fullscreen,
                 ),
               ],
             ),

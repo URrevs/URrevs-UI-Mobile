@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_post_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/question_card_body.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/company_review_card.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/product_review_card.dart';
@@ -14,9 +16,52 @@ class HomeSubscreen extends StatefulWidget {
 
 class _HomeSubscreenState extends State<HomeSubscreen> {
   Widget get listItem => (<Widget>[
-        ProductReviewCard.dummyInstance(),
-        CompanyReviewCard.dummyInstance(),
-        QuestionCard.dummyInstance(context),
+        ProductReviewCard.dummyInstance().copyWith(
+          onPressingComment: () {
+            Navigator.of(context).pushNamed(
+              FullscreenPostScreen.routeName,
+              arguments: FullscreenPostScreenArgs(
+                cardType: CardType.productReview,
+                focusOnTextField: true,
+              ),
+            );
+          },
+        ),
+        CompanyReviewCard.dummyInstance().copyWith(
+          onPressingComment: () {
+            Navigator.of(context).pushNamed(
+              FullscreenPostScreen.routeName,
+              arguments: FullscreenPostScreenArgs(
+                cardType: CardType.companyReview,
+                focusOnTextField: true,
+              ),
+            );
+          },
+        ),
+        QuestionCard.dummyInstance(context).copyWith(
+          cardType: CardType.productQuestion,
+          onPressingAnswer: () {
+            Navigator.of(context).pushNamed(
+              FullscreenPostScreen.routeName,
+              arguments: FullscreenPostScreenArgs(
+                cardType: CardType.productQuestion,
+                focusOnTextField: true,
+              ),
+            );
+          },
+        ),
+        QuestionCard.dummyInstance(context).copyWith(
+          cardType: CardType.companyQuestion,
+          onPressingAnswer: () {
+            Navigator.of(context).pushNamed(
+              FullscreenPostScreen.routeName,
+              arguments: FullscreenPostScreenArgs(
+                cardType: CardType.companyQuestion,
+                focusOnTextField: true,
+              ),
+            );
+          },
+        ),
       ]..shuffle())
           .first;
 
@@ -25,7 +70,7 @@ class _HomeSubscreenState extends State<HomeSubscreen> {
     return ListView.builder(
       padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 20.h),
       itemBuilder: (context, index) => listItem,
-      itemCount: 5,
+      itemCount: 10,
     );
   }
 }

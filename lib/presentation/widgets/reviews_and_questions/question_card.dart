@@ -12,6 +12,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/company_profile/company_profile_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_post_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/product_profile/product_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answer_tree.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/question_card_body.dart';
@@ -54,6 +55,8 @@ class QuestionCard extends StatelessWidget {
 
   final bool fullscreen;
 
+  final VoidCallback onPressingAnswer;
+
   const QuestionCard({
     Key? key,
     required this.imageUrl,
@@ -67,6 +70,7 @@ class QuestionCard extends StatelessWidget {
     required this.upvoted,
     required this.cardType,
     required this.fullscreen,
+    required this.onPressingAnswer,
     this.answer,
   }) : super(key: key);
 
@@ -90,7 +94,41 @@ class QuestionCard extends StatelessWidget {
             ? CardType.productReview
             : CardType.companyReview,
         fullscreen: fullscreen,
+        onPressingAnswer: () {},
       );
+
+  QuestionCard copyWith({
+    String? imageUrl,
+    String? authorName,
+    String? targetName,
+    DateTime? postedDate,
+    int? generalRating,
+    String? questionText,
+    bool? upvoted,
+    int? upvoteCount,
+    int? answerCount,
+    int? shareCount,
+    bool? fullscreen,
+    CardType? cardType,
+    AnswerTree? answer,
+    VoidCallback? onPressingAnswer,
+  }) {
+    return QuestionCard(
+      postedDate: postedDate ?? this.postedDate,
+      authorName: authorName ?? this.authorName,
+      imageUrl: imageUrl ?? this.imageUrl,
+      targetName: targetName ?? this.targetName,
+      questionText: questionText ?? this.questionText,
+      upvoteCount: upvoteCount ?? this.upvoteCount,
+      answerCount: answerCount ?? this.answerCount,
+      shareCount: shareCount ?? this.shareCount,
+      upvoted: upvoted ?? this.upvoted,
+      fullscreen: fullscreen ?? this.fullscreen,
+      cardType: cardType ?? this.cardType,
+      answer: answer ?? this.answer,
+      onPressingAnswer: onPressingAnswer ?? this.onPressingAnswer,
+    );
+  }
 
   /// Callback invoked when upvote button is pressed.
   void _onUpvote() {
@@ -152,18 +190,13 @@ class QuestionCard extends StatelessWidget {
                   postedDate: postedDate,
                   usedSinceDate: null,
                   views: null,
-                  onPressingTarget: () {
-                    Navigator.of(context).pushNamed(
-                      cardType == CardType.productQuestion
-                          ? ProductProfileScreen.routeName
-                          : CompanyProfileScreen.routeName,
-                    );
-                  },
+                  cardType: cardType,
                 ),
                 10.verticalSpace,
                 QuestionCardBody(
                   questionText: questionText,
                   fullscreen: fullscreen,
+                  cardType: cardType,
                 ),
                 8.verticalSpace,
                 CardFooter(
@@ -173,8 +206,10 @@ class QuestionCard extends StatelessWidget {
                   liked: upvoted,
                   useInReviewCard: false,
                   onLike: _onUpvote,
-                  onComment: _onAnswer,
+                  onComment: onPressingAnswer,
                   onShare: _onShare,
+                  cardType: cardType,
+                  fullscreen: fullscreen,
                 ),
                 if (!fullscreen && answer != null) ...[
                   Divider(
@@ -185,7 +220,12 @@ class QuestionCard extends StatelessWidget {
                   Padding(
                     padding:
                         EdgeInsets.only(top: 25.h, right: 12.w, left: 12.w),
-                    child: answer!,
+                    child: answer!.copyWith(onTappingAnswerInCard: () {
+                      Navigator.of(context).pushNamed(
+                        FullscreenPostScreen.routeName,
+                        arguments: FullscreenPostScreenArgs(cardType: cardType),
+                      );
+                    }),
                   ),
                 ],
               ],
