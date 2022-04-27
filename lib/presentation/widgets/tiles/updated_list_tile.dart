@@ -6,21 +6,27 @@ import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart'
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/item_tile.dart';
 
+///Enum that defines the type of the tile's item.
 enum ItemDescription { Smartphone, Company }
 
+///A class that represents a tile that contains an item.
 class Item {
   final String itemName;
   final ItemDescription type;
 
   Item({required this.itemName, required this.type});
 }
-
+///Expanable list tile that contains newely updated items, it may contain a products or companies.
 class UpdatedListTile extends StatefulWidget {
   const UpdatedListTile({Key? key, required this.title, required this.items})
       : super(key: key);
 
+  ///The title of the updated list tile.
   final String title;
+
+  ///The items that are contained in the updated list tile.
   final List<Item> items;
+  
   @override
   State<UpdatedListTile> createState() => _UpdatedListTileState();
 }
