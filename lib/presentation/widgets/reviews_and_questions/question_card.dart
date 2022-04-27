@@ -54,6 +54,8 @@ class QuestionCard extends StatelessWidget {
 
   final bool fullscreen;
 
+  final VoidCallback onPressingAnswer;
+
   const QuestionCard({
     Key? key,
     required this.imageUrl,
@@ -67,6 +69,7 @@ class QuestionCard extends StatelessWidget {
     required this.upvoted,
     required this.cardType,
     required this.fullscreen,
+    required this.onPressingAnswer,
     this.answer,
   }) : super(key: key);
 
@@ -90,7 +93,41 @@ class QuestionCard extends StatelessWidget {
             ? CardType.productReview
             : CardType.companyReview,
         fullscreen: fullscreen,
+        onPressingAnswer: () {},
       );
+
+  QuestionCard copyWith({
+    String? imageUrl,
+    String? authorName,
+    String? targetName,
+    DateTime? postedDate,
+    int? generalRating,
+    String? questionText,
+    bool? upvoted,
+    int? upvoteCount,
+    int? answerCount,
+    int? shareCount,
+    bool? fullscreen,
+    CardType? cardType,
+    AnswerTree? answer,
+    VoidCallback? onPressingAnswer,
+  }) {
+    return QuestionCard(
+      postedDate: postedDate ?? this.postedDate,
+      authorName: authorName ?? this.authorName,
+      imageUrl: imageUrl ?? this.imageUrl,
+      targetName: targetName ?? this.targetName,
+      questionText: questionText ?? this.questionText,
+      upvoteCount: upvoteCount ?? this.upvoteCount,
+      answerCount: answerCount ?? this.answerCount,
+      shareCount: shareCount ?? this.shareCount,
+      upvoted: upvoted ?? this.upvoted,
+      fullscreen: fullscreen ?? this.fullscreen,
+      cardType: cardType ?? this.cardType,
+      answer: answer ?? this.answer,
+      onPressingAnswer: onPressingAnswer ?? this.onPressingAnswer,
+    );
+  }
 
   /// Callback invoked when upvote button is pressed.
   void _onUpvote() {
@@ -173,8 +210,10 @@ class QuestionCard extends StatelessWidget {
                   liked: upvoted,
                   useInReviewCard: false,
                   onLike: _onUpvote,
-                  onComment: _onAnswer,
+                  onComment: onPressingAnswer,
                   onShare: _onShare,
+                  cardType: cardType,
+                  fullscreen: fullscreen,
                 ),
                 if (!fullscreen && answer != null) ...[
                   Divider(

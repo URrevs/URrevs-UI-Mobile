@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_product_review_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_footer/card_footer_interaction_item.dart';
 
 /// Part of a card footer. Contains statistics about users interaction with the
@@ -15,6 +17,8 @@ class CardFooterInteractionBar extends StatelessWidget {
     required this.commentCount,
     required this.shareCount,
     required this.useInReviewCard,
+    required this.cardType,
+    required this.fullscreen,
   }) : super(key: key);
 
   /// Number of likes given to the review.
@@ -29,6 +33,10 @@ class CardFooterInteractionBar extends StatelessWidget {
   /// Whether the [CardFooterInteractionBar] would be used in a review card or
   /// not.
   final bool useInReviewCard;
+
+  final CardType cardType;
+
+  final bool fullscreen;
 
   @override
   Widget build(BuildContext context) {
@@ -56,10 +64,20 @@ class CardFooterInteractionBar extends StatelessWidget {
         Spacer(),
         CardFooterInteractionItem(
           text: numberFormat.format(commentCount),
-          icon: Icon(
-            IconsManager.comment,
-            size: 16.sp,
-            color: ColorManager.grey,
+          icon: GestureDetector(
+            onTap: () {
+              if (fullscreen) return;
+              print(cardType);
+              Navigator.of(context).pushNamed(
+                FullscreenProductReviewScreen.routeName,
+                arguments: cardType,
+              );
+            },
+            child: Icon(
+              IconsManager.comment,
+              size: 16.sp,
+              color: ColorManager.grey,
+            ),
           ),
         ),
         8.horizontalSpace,

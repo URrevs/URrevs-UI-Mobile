@@ -101,9 +101,10 @@ class RouteGenerator {
         );
       case FullscreenProductReviewScreen.routeName:
         // TODO: pass CardType to FullscreenProductReviewScreen
+        CardType cardType = routeSettings.arguments as CardType;
         return MaterialPageRoute(
           builder: (_) =>
-              FullscreenProductReviewScreen(cardType: CardType.productQuestion),
+              FullscreenProductReviewScreen(cardType: cardType),
         );
       case FullscreenQuestionScreen.routeName:
         return MaterialPageRoute(

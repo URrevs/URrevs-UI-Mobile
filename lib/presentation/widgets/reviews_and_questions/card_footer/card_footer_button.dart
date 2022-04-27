@@ -45,7 +45,7 @@ class CardFooterButton extends StatelessWidget {
         (liked != null && liked!) ? ColorManager.blue : ColorManager.buttonGrey;
 
     return TextButton(
-      onPressed: () {},
+      onPressed: onPressed,
       style: TextButtonStyleManager.footerButton.copyWith(
         foregroundColor: MaterialStateProperty.all(buttonColor),
       ),

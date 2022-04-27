@@ -31,12 +31,19 @@ class _FullscreenProductReviewScreenState
   Widget get expandedCard {
     switch (widget.cardType) {
       case CardType.productReview:
-        return ProductReviewCard.dummyInstance(fullscreen: true);
+        return ProductReviewCard.dummyInstance().copyWith(
+          fullscreen: true,
+          onPressingComment: focusNode.requestFocus,
+        );
       case CardType.companyReview:
-        return CompanyReviewCard.dummyInstance(fullscreen: true);
+        return CompanyReviewCard.dummyInstance().copyWith(
+            fullscreen: true, onPressingComment: focusNode.requestFocus);
       case CardType.productQuestion:
       case CardType.companyQuestion:
-        return QuestionCard.dummyInstance(context, fullscreen: true);
+        return QuestionCard.dummyInstance(context).copyWith(
+          fullscreen: true,
+          onPressingAnswer: focusNode.requestFocus,
+        );
       default:
         return ProductReviewCard.dummyInstance(fullscreen: true);
     }

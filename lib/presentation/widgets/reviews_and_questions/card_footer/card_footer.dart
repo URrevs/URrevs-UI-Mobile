@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_footer/card_footer_button_bar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_footer/card_footer_interaction_bar.dart';
 
@@ -18,6 +19,8 @@ class CardFooter extends StatelessWidget {
     required this.onLike,
     required this.onComment,
     required this.onShare,
+    required this.cardType,
+    required this.fullscreen,
   }) : super(key: key);
 
   /// Is the review liked by the current logged in user or not.
@@ -45,6 +48,10 @@ class CardFooter extends StatelessWidget {
   /// Callback invoked when share button is pressed.
   final VoidCallback onShare;
 
+  final bool fullscreen;
+
+  final CardType cardType;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -56,6 +63,8 @@ class CardFooter extends StatelessWidget {
             commentCount: commentCount,
             shareCount: shareCount,
             useInReviewCard: useInReviewCard,
+            cardType: cardType,
+            fullscreen: fullscreen,
           ),
         ),
         Divider(height: 16.h, thickness: 1.h, color: ColorManager.dividerGrey),
