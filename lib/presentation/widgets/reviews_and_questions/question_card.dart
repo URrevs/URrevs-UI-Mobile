@@ -12,6 +12,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/company_profile/company_profile_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_post_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/product_profile/product_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answer_tree.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/question_card_body.dart';
@@ -219,7 +220,12 @@ class QuestionCard extends StatelessWidget {
                   Padding(
                     padding:
                         EdgeInsets.only(top: 25.h, right: 12.w, left: 12.w),
-                    child: answer!,
+                    child: answer!.copyWith(onTappingAnswerInCard: () {
+                      Navigator.of(context).pushNamed(
+                        FullscreenPostScreen.routeName,
+                        arguments: FullscreenPostScreenArgs(cardType: cardType),
+                      );
+                    }),
                   ),
                 ],
               ],
