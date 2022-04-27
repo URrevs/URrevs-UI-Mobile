@@ -76,9 +76,9 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
         children: [
           UpdatedListTile(title:'قائمة المنتجات المضافة حديثاً',items: items,),
           SizedBox(height: 20),
-          // UpdatedListTile(title: 'قائمة الشركات المضافة حديثاً', items: items),
+          UpdatedListTile(title: 'قائمة الشركات المضافة حديثاً', items: items),
           ProductReviewCard.dummyInstance(),
-          // CompanyReviewCard.dummyInstance,
+          CompanyReviewCard.dummyInstance(),
           QuestionCard.dummyInstance(context),
            CommentTree.dummyInstance,
            AnswerTree.dummyInstance,
@@ -89,6 +89,7 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
           // SvgPicture.asset(SvgAssets.upvote, color: Colors.red),
         ],
       ),
+      bottomNavigationBar: BottomNavBar(currentIndex: 2,onTap: (int i)=>{},),
     );
   }
 }

@@ -26,7 +26,7 @@ class UpdatedListTile extends StatefulWidget {
 
   ///The items that are contained in the updated list tile.
   final List<Item> items;
-  
+
   @override
   State<UpdatedListTile> createState() => _UpdatedListTileState();
 }
@@ -35,55 +35,58 @@ class _UpdatedListTileState extends State<UpdatedListTile> {
   bool _customTileExpanded = false;
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 3,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(
-          AppRadius.updatedListTile,
+    return ScrollConfiguration(
+      behavior: const ScrollBehavior().copyWith(overscroll: false),
+      child: Card(
+        elevation: 3,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+            AppRadius.updatedListTile,
+          ),
         ),
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(AppRadius.updatedListTile),
-        child: ExpansionTile(
-            title: Row(
-              children: [
-                Text(widget.title, style: TextStyleManager.s20w500),
-                SizedBox(width: 10),
-                Text('(${widget.items.length})',
-                    style: TextStyleManager.s20w500),
-              ],
-            ),
-            collapsedTextColor: ColorManager.black,
-            collapsedIconColor: ColorManager.black,
-            textColor: ColorManager.black,
-            iconColor: ColorManager.black,
-            trailing: Icon(
-              !_customTileExpanded
-                  ? IconsManager.expand
-                  : IconsManager.collapse,
-              size: 32.sp,
-            ),
-            onExpansionChanged: (bool expanded) {
-              setState(() => _customTileExpanded = expanded);
-            },
-            backgroundColor: ColorManager.white,
-            collapsedBackgroundColor: ColorManager.white,
-            children: [
-              SizedBox(
-                height: widget.items.length <= 4
-                    ? widget.items.length * (90.h)
-                    : 4 * (90.h),
-                child: ListView.builder(
-                  itemBuilder: (context, index) {
-                    return ItemTile(
-                        itemName: widget.items[index].itemName,
-                        type: widget.items[index].type,
-                        onTap: () {});
-                  },
-                  itemCount: widget.items.length,
-                ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(AppRadius.updatedListTile),
+          child: ExpansionTile(
+              title: Row(
+                children: [
+                  Text(widget.title, style: TextStyleManager.s20w500),
+                  SizedBox(width: 10),
+                  Text('(${widget.items.length})',
+                      style: TextStyleManager.s20w500),
+                ],
               ),
-            ]),
+              collapsedTextColor: ColorManager.black,
+              collapsedIconColor: ColorManager.black,
+              textColor: ColorManager.black,
+              iconColor: ColorManager.black,
+              trailing: Icon(
+                !_customTileExpanded
+                    ? IconsManager.expand
+                    : IconsManager.collapse,
+                size: 32.sp,
+              ),
+              onExpansionChanged: (bool expanded) {
+                setState(() => _customTileExpanded = expanded);
+              },
+              backgroundColor: ColorManager.white,
+              collapsedBackgroundColor: ColorManager.white,
+              children: [
+                SizedBox(
+                  height: widget.items.length <= 4
+                      ? widget.items.length * (90.h)
+                      : 4 * (90.h),
+                  child: ListView.builder(
+                    itemBuilder: (context, index) {
+                      return ItemTile(
+                          itemName: widget.items[index].itemName,
+                          type: widget.items[index].type,
+                          onTap: () {});
+                    },
+                    itemCount: widget.items.length,
+                  ),
+                ),
+              ]),
+        ),
       ),
     );
   }

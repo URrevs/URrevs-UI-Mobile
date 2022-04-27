@@ -76,5 +76,8 @@
   "addReview": "أضف مراجعة",
   "addOwnedProduct": "أضف منتج ممتلك",
   "addQuestion": "أضف سؤال",
-  "compareWithAnotherProduct": "قارن مع منتج آخر"
+  "compareWithAnotherProduct": "قارن مع منتج آخر",
+  "companyReview": "مراجعة شركة",
+  "productReview": "مراجعة منتج",
+  "askedQuestion": "سؤال مطروح"
 }
