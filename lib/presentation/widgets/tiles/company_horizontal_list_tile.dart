@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
-import 'package:urrevs_ui_mobile/presentation/screens/development_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/company_logo_tile.dart';
 
 ///A class that contains data for a company logo tile.
@@ -59,11 +58,13 @@ List<CompanyItem> companyItems = [
 ];
 
 class CompanyHorizontalListTile extends StatefulWidget {
-  const CompanyHorizontalListTile({required this.companyItems, Key? key }) : super(key: key);
+  const CompanyHorizontalListTile({required this.companyItems, Key? key})
+      : super(key: key);
 
   final List<CompanyItem> companyItems;
   @override
-  State<CompanyHorizontalListTile> createState() => _CompanyHorizontalListTileState();
+  State<CompanyHorizontalListTile> createState() =>
+      _CompanyHorizontalListTileState();
 }
 
 class _CompanyHorizontalListTileState extends State<CompanyHorizontalListTile> {
@@ -71,60 +72,56 @@ class _CompanyHorizontalListTileState extends State<CompanyHorizontalListTile> {
   @override
   Widget build(BuildContext context) {
     return Card(
-          elevation: 3,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-              10,
-            ),
+      elevation: 3,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(
+          10,
+        ),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(10.r),
+          bottomRight: Radius.circular(10.r),
+        ),
+        child: Container(
+          color: ColorManager.white,
+          height: 95.h,
+          child: ScrollConfiguration(
+            behavior: const ScrollBehavior().copyWith(overscroll: false),
+            child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: companyItems.length,
+                itemBuilder: (context, index) {
+                  return InkWell(
+                    onTap: () {
+                      setState(() {
+                        if (_selectedIndex == index) {
+                          _selectedIndex = -1;
+                        } else {
+                          _selectedIndex = index;
+                        }
+                      });
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: _selectedIndex == index
+                            ? ColorManager.blue.withOpacity(0.8)
+                            : ColorManager.white,
+                        borderRadius:
+                            BorderRadius.all(Radius.elliptical(10.r, 10.r)),
+                      ),
+                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      child: CompanyLogoTile(
+                        companyName: companyItems[index].name,
+                        imageUrl: companyItems[index].imageUrl,
+                        isSelected: _selectedIndex == index ? true : false,
+                      ),
+                    ),
+                  );
+                }),
           ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(10.r),
-              bottomRight: Radius.circular(10.r),
-            ),
-            child: Container(
-              color: ColorManager.white,
-              height: 95.h,
-              child: ScrollConfiguration(
-                behavior: const ScrollBehavior().copyWith(overscroll: false),
-                child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: companyItems.length,
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          setState(() {
-                            if (_selectedIndex == index) {
-                              _selectedIndex = -1;
-                            } else {
-                              _selectedIndex = index;
-                            }
-                          });
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 3, right: 3),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: _selectedIndex == index
-                                  ? ColorManager.blue.withOpacity(0.8)
-                                  : ColorManager.white,
-                              borderRadius: BorderRadius.all(
-                                  Radius.elliptical(10.r, 10.r)),
-                            ),
-                            padding: EdgeInsets.symmetric(horizontal: 8),
-                            child: CompanyLogoTile(
-                              companyName: companyItems[index].name,
-                              imageUrl: companyItems[index].imageUrl,
-                              isSelected:
-                                  _selectedIndex == index ? true : false,
-                            ),
-                          ),
-                        ),
-                      );
-                    }),
-              ),
-            ),
-          ),
-        );
+        ),
+      ),
+    );
   }
 }
