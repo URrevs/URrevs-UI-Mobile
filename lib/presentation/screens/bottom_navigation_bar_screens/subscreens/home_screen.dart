@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/question_card_body.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/company_review_card.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/product_review_card.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/question_card.dart';
 
 class HomeSubscreen extends StatefulWidget {
   const HomeSubscreen({Key? key}) : super(key: key);
@@ -8,26 +13,19 @@ class HomeSubscreen extends StatefulWidget {
 }
 
 class _HomeSubscreenState extends State<HomeSubscreen> {
+  Widget get listItem => ([
+        ProductReviewCard.dummyInstance,
+        CompanyReviewCard.dummyInstance,
+        QuestionCard.dummyInstance(context),
+      ]..shuffle())
+          .first;
+
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ElevatedButton(
-        onPressed: () async {
-          bool? b = await showDialog<bool>(
-            context: context,
-            builder: (context) => AlertDialog(
-              content: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop(true);
-                },
-                child: Text('hello'),
-              ),
-            ),
-          );
-          print(b);
-        },
-        child: Text('CLICK'),
-      ),
+    return ListView.builder(
+      padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 20.h),
+      itemBuilder: (context, index) => listItem,
+      itemCount: 5,
     );
   }
 }

@@ -6,9 +6,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:urrevs_ui_mobile/app/extensions.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/company_profile/company_profile_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/product_profile/product_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answer_tree.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/question_card_body.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_footer/card_footer.dart';
@@ -45,6 +48,8 @@ class QuestionCard extends StatelessWidget {
 
   final AnswerTree? answer;
 
+  final CardType cardType;
+
   const QuestionCard({
     Key? key,
     required this.imageUrl,
@@ -56,11 +61,12 @@ class QuestionCard extends StatelessWidget {
     required this.answerCount,
     required this.shareCount,
     required this.upvoted,
+    required this.cardType,
     this.answer,
   }) : super(key: key);
 
   /// An instance of [QuestionCard] filled with dummy data.
-  static QuestionCard get dummyInstance => QuestionCard(
+  static QuestionCard dummyInstance(BuildContext context) => QuestionCard(
         postedDate: DummyDataManager.postedDate,
         authorName: DummyDataManager.authorName,
         imageUrl: DummyDataManager.imageUrl,
@@ -71,6 +77,9 @@ class QuestionCard extends StatelessWidget {
         shareCount: DummyDataManager.randomInt,
         upvoted: DummyDataManager.randomBool,
         answer: AnswerTree.dummyInstanceInQuestionCard,
+        cardType: DummyDataManager.randomBool
+            ? CardType.productReview
+            : CardType.companyReview,
       );
 
   /// Callback invoked when upvote button is pressed.
@@ -130,6 +139,13 @@ class QuestionCard extends StatelessWidget {
                   postedDate: postedDate,
                   usedSinceDate: null,
                   views: null,
+                  onPressingTarget: () {
+                    Navigator.of(context).pushNamed(
+                      cardType == CardType.productQuestion
+                          ? ProductProfileScreen.routeName
+                          : CompanyProfileScreen.routeName,
+                    );
+                  },
                 ),
                 10.verticalSpace,
                 QuestionCardBody(questionText: questionText),

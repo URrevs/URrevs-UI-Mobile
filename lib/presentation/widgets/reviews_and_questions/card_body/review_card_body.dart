@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_company_review_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_product_review_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body_expand_circle.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body_rating_block.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body_review_text.dart';
@@ -17,6 +20,7 @@ class ReviewCardBody extends StatefulWidget {
     required this.ratingCriteria,
     required this.showExpandCircle,
     required this.hideSeeMoreIfNoNeedForExpansion,
+    required this.cardType,
   }) : super(key: key);
 
   /// List of rating criteria to be show in the [CardBodyRatingBlock].
@@ -36,6 +40,8 @@ class ReviewCardBody extends StatefulWidget {
 
   /// Whether to show expand circle or not.
   final bool showExpandCircle;
+
+  final CardType cardType;
 
   /// If set to true, [SeeMoreButton] would be hidden at the state of
   /// the card where both pros and cons text are both shown completely. This
@@ -83,8 +89,8 @@ class _ReviewCardBodyState extends State<ReviewCardBody> {
       onTap: noNeedForExpansion
           ? null
           : () => setState(() {
-        _expanded = !_expanded;
-      }),
+                _expanded = !_expanded;
+              }),
       child: Padding(
         padding: EdgeInsets.only(right: 16.w, left: 16.w, top: 20.h),
         child: Column(
@@ -118,6 +124,15 @@ class _ReviewCardBodyState extends State<ReviewCardBody> {
               hideSeeMoreIfNoNeedForExpansion:
                   widget.hideSeeMoreIfNoNeedForExpansion,
               usedInInteraction: false,
+              onPressingFullscreen: () {
+                if (widget.cardType == CardType.companyReview) {
+                  Navigator.of(context)
+                      .pushNamed(FullscreenCompanyReviewScreen.routeName);
+                } else if (widget.cardType == CardType.productReview) {
+                  Navigator.of(context)
+                      .pushNamed(FullscreenProductReviewScreen.routeName);
+                }
+              },
             )
           ],
         ),

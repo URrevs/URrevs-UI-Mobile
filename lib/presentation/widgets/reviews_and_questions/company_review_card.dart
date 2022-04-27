@@ -6,9 +6,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:urrevs_ui_mobile/app/extensions.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/company_profile/company_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/review_card_body.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_footer/card_footer.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_header/card_header.dart';
@@ -152,6 +154,10 @@ class CompanyReviewCard extends StatelessWidget {
                   postedDate: postedDate,
                   usedSinceDate: null,
                   views: views,
+                  onPressingTarget: () {
+                    Navigator.of(context)
+                        .pushNamed(CompanyProfileScreen.routeName);
+                  },
                 ),
                 10.verticalSpace,
                 ReviewCardBody(
@@ -161,6 +167,7 @@ class CompanyReviewCard extends StatelessWidget {
                   scores: [generalRating],
                   showExpandCircle: false,
                   hideSeeMoreIfNoNeedForExpansion: true,
+                  cardType: CardType.companyReview,
                 ),
                 8.verticalSpace,
                 CardFooter(

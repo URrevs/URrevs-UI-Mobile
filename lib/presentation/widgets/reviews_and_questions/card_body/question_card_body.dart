@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_question_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body_question_text.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/see_more_button.dart';
 
@@ -70,6 +71,10 @@ class _QuestionCardBodyState extends State<QuestionCardBody> {
               noNeedForExpansion: noNeedForExpansion,
               hideSeeMoreIfNoNeedForExpansion: true,
               usedInInteraction: false,
+              onPressingFullscreen: () {
+                Navigator.of(context)
+                    .pushNamed(FullscreenQuestionScreen.routeName);
+              },
             )
           ],
         ),

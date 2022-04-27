@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_button_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_product_review_screen.dart';
 
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
@@ -17,6 +18,7 @@ class SeeMoreButton extends StatelessWidget {
     required this.noNeedForExpansion,
     required this.hideSeeMoreIfNoNeedForExpansion,
     required this.usedInInteraction,
+    required this.onPressingFullscreen,
   }) : super(key: key);
 
   /// Whether the card is expanded or not.
@@ -45,6 +47,8 @@ class SeeMoreButton extends StatelessWidget {
 
   /// A function that is invoked to set the expanded state of the parent.
   final void Function(bool) setExpandedState;
+
+  final VoidCallback? onPressingFullscreen;
 
   /// Decide what would be shown on the [TextButton] shown after pros & cons
   /// section:
@@ -83,7 +87,7 @@ class SeeMoreButton extends StatelessWidget {
     if (!parentTextCut) {
       return setExpandedState(false);
     }
-    // TODO: go to review full screen
+    onPressingFullscreen!();
   }
 
   @override

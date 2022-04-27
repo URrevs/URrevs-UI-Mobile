@@ -85,6 +85,7 @@ class InteractionBodyText extends StatelessWidget {
                     noNeedForExpansion: noNeedForExpansion,
                     hideSeeMoreIfNoNeedForExpansion: true,
                     usedInInteraction: true,
+                    onPressingFullscreen: null,
                   ),
           ),
         ],

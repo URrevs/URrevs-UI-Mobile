@@ -79,7 +79,7 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
           // UpdatedListTile(title: 'قائمة الشركات المضافة حديثاً', items: items),
           ProductReviewCard.dummyInstance,
           // CompanyReviewCard.dummyInstance,
-          QuestionCard.dummyInstance,
+          QuestionCard.dummyInstance(context),
            CommentTree.dummyInstance,
            AnswerTree.dummyInstance,
           // CommentsList.dummyInstance,

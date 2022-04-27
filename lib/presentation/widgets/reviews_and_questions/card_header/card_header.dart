@@ -16,6 +16,7 @@ class CardHeader extends StatelessWidget {
     required this.authorName,
     required this.imageUrl,
     required this.targetName,
+    required this.onPressingTarget,
   }) : super(key: key);
 
   /// Profile image url of the current logged in user.
@@ -36,6 +37,8 @@ class CardHeader extends StatelessWidget {
   /// How many times this review was viewed.
   final int? views;
 
+  final VoidCallback onPressingTarget;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -54,6 +57,7 @@ class CardHeader extends StatelessWidget {
                 CardHeaderTitle(
                   authorName: authorName,
                   productName: targetName,
+                  onPressingTarget: onPressingTarget,
                 ),
                 CardHeaderSubtitle(
                   postedDate: postedDate,

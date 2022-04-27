@@ -7,9 +7,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:urrevs_ui_mobile/app/extensions.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/product_profile/product_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/review_card_body.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_footer/card_footer.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_header/card_header.dart';
@@ -173,6 +175,10 @@ class ProductReviewCard extends StatelessWidget {
                   postedDate: postedDate,
                   usedSinceDate: usedSinceDate,
                   views: views,
+                  onPressingTarget: () {
+                    Navigator.of(context)
+                        .pushNamed(ProductProfileScreen.routeName);
+                  },
                 ),
                 10.verticalSpace,
                 ReviewCardBody(
@@ -182,6 +188,7 @@ class ProductReviewCard extends StatelessWidget {
                   consText: consText,
                   showExpandCircle: true,
                   hideSeeMoreIfNoNeedForExpansion: false,
+                  cardType: CardType.productReview,
                 ),
                 8.verticalSpace,
                 CardFooter(
