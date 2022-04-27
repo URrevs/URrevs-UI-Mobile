@@ -35,6 +35,7 @@ class AuthButton extends StatelessWidget {
             onPressed: onPressed,
             style: ElevatedButtonStyleManager.authButton.copyWith(
                 shadowColor: MaterialStateProperty.all<Color>(color),
+                backgroundColor: MaterialStateProperty.all(ColorManager.white),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(26.r),

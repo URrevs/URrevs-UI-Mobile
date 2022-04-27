@@ -82,12 +82,13 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
         ],
       ),
       body: ListView(
+        padding: EdgeInsets.all(20),
         children: [
-          CompanyHorizontalListTile(companyItems: companyItems),
+          // CompanyHorizontalListTile(companyItems: companyItems),
           //UpdatedListTile(title:'قائمة المنتجات المضافة حديثاً',items: items,),
           // SizedBox(height: 20),
           //UpdatedListTile(title: 'قائمة الشركات المضافة حديثاً', items: items),
-          //ProductReviewCard.dummyInstance(),
+          ProductReviewCard.dummyInstance(),
           //CompanyReviewCard.dummyInstance(),
           //QuestionCard.dummyInstance(context),
           // CommentTree.dummyInstance,

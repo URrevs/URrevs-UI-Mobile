@@ -26,7 +26,6 @@ class URrevsLogo extends StatelessWidget {
           SizedBox(height: 10.h),
           SizedBox(
             width: 256.w,
-            height: 50.h,
             child: Text(
               LocaleKeys.brandBriefing.tr(),
               style: TextStyleManager.s18w500.copyWith(color: ColorManager.grey), 
