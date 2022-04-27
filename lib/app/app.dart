@@ -11,6 +11,7 @@ import 'package:urrevs_ui_mobile/presentation/screens/development_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_post_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/product_profile/product_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/owned_products_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/posted_questions_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/posted_reviews_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/user_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/theme_mode_notifier.dart';
@@ -31,7 +32,7 @@ class MyApp extends ConsumerWidget {
       splitScreenMode: false,
       builder: (_) => MaterialApp(
         title: LocaleKeys.urrevs.tr(),
-        initialRoute: PostedReviewsScreen.routeName,
+        initialRoute: FullscreenPostScreen.routeName,
         // initialRoute: DevelopmentScreen.routeName,
         onGenerateRoute: RouteGenerator.getRoute,
         debugShowCheckedModeBanner: false,

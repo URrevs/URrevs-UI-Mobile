@@ -26,13 +26,12 @@ class _ProductProfileScreenState extends State<ProductProfileScreen>
   late TabController _tabController;
 
   FloatingActionButton get floatingActionButton {
-    print('index: ${_tabController.index}');
     switch (_tabController.index) {
       case 1:
         return FloatingActionButton.extended(
           onPressed: () {},
-          label: Text(LocaleKeys.addReview.tr()),
-          icon: Icon(FontAwesomeIcons.plus, size: AppSize.s16),
+          label: Text(LocaleKeys.compareWithAnotherProduct.tr()),
+          icon: Icon(Icons.compare, size: AppSize.s22),
         );
       case 2:
         return FloatingActionButton.extended(
@@ -43,8 +42,8 @@ class _ProductProfileScreenState extends State<ProductProfileScreen>
       default:
         return FloatingActionButton.extended(
           onPressed: () {},
-          label: Text(LocaleKeys.addOwnedProduct.tr()),
-          icon: Icon(Icons.compare, size: AppSize.s22),
+          label: Text(LocaleKeys.addReview.tr()),
+          icon: Icon(FontAwesomeIcons.plus, size: AppSize.s16),
         );
     }
   }
@@ -52,7 +51,7 @@ class _ProductProfileScreenState extends State<ProductProfileScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 3, vsync: this, initialIndex: 1);
     _tabController.addListener(() => setState(() {}));
   }
 

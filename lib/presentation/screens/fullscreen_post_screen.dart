@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answers_list.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/comments_list.dart';
@@ -97,9 +98,38 @@ class _FullscreenPostScreenState extends State<FullscreenPostScreen> {
               ),
             ),
             Container(
-              color: ColorManager.white,
-              child: TextField(
-                focusNode: focusNode,
+              height: 60.h,
+              decoration: BoxDecoration(
+                color: ColorManager.white,
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 2,
+                    color: ColorManager.grey.withOpacity(0.2),
+                    spreadRadius: 1,
+                    offset: Offset(0, -1),
+                  ),
+                ],
+              ),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+                child: TextField(
+                  focusNode: focusNode,
+                  style: TextStyleManager.s16w300,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: ColorManager.textFieldGrey,
+                    focusColor: Colors.red,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(40.r),
+                      borderSide: BorderSide.none,
+                    ),
+                    suffixIcon: Icon(
+                      Icons.send,
+                      color: ColorManager.blue,
+                      size: 26.sp,
+                    ),
+                  ),
+                ),
               ),
             )
           ],
