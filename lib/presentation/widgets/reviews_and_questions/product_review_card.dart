@@ -223,10 +223,7 @@ class ProductReviewCard extends StatelessWidget {
                   postedDate: postedDate,
                   usedSinceDate: usedSinceDate,
                   views: views,
-                  onPressingTarget: () {
-                    Navigator.of(context)
-                        .pushNamed(ProductProfileScreen.routeName);
-                  },
+                  cardType: CardType.productReview,
                 ),
                 10.verticalSpace,
                 ReviewCardBody(

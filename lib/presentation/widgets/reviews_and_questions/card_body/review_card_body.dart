@@ -129,12 +129,7 @@ class _ReviewCardBodyState extends State<ReviewCardBody> {
                 hideSeeMoreIfNoNeedForExpansion:
                     widget.hideSeeMoreIfNoNeedForExpansion,
                 usedInInteraction: false,
-                onPressingFullscreen: () {
-                  Navigator.of(context).pushNamed(
-                    FullscreenPostScreen.routeName,
-                    arguments: widget.cardType,
-                  );
-                },
+                cardType: widget.cardType,
               )
           ],
         ),

@@ -189,13 +189,7 @@ class QuestionCard extends StatelessWidget {
                   postedDate: postedDate,
                   usedSinceDate: null,
                   views: null,
-                  onPressingTarget: () {
-                    Navigator.of(context).pushNamed(
-                      cardType == CardType.productQuestion
-                          ? ProductProfileScreen.routeName
-                          : CompanyProfileScreen.routeName,
-                    );
-                  },
+                  cardType: cardType,
                 ),
                 10.verticalSpace,
                 QuestionCardBody(

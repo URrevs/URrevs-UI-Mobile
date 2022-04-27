@@ -79,11 +79,7 @@ class _QuestionCardBodyState extends State<QuestionCardBody> {
                 noNeedForExpansion: noNeedForExpansion,
                 hideSeeMoreIfNoNeedForExpansion: true,
                 usedInInteraction: false,
-                onPressingFullscreen: () {
-                  Navigator.of(context).pushNamed(
-                      FullscreenPostScreen.routeName,
-                      arguments: widget.cardType);
-                },
+                cardType: widget.cardType,
               )
           ],
         ),

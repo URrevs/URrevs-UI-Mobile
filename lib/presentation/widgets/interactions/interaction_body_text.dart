@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_button_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
@@ -85,7 +86,7 @@ class InteractionBodyText extends StatelessWidget {
                     noNeedForExpansion: noNeedForExpansion,
                     hideSeeMoreIfNoNeedForExpansion: true,
                     usedInInteraction: true,
-                    onPressingFullscreen: null,
+                    cardType: CardType.reply,
                   ),
           ),
         ],

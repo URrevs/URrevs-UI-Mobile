@@ -4,8 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:urrevs_ui_mobile/app/extensions.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/company_profile/company_profile_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/product_profile/product_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/other_user_profile_screen.dart';
 
 /// Build the line containing the author's name and the product name.
@@ -14,7 +17,7 @@ class CardHeaderTitle extends StatelessWidget {
     Key? key,
     required this.authorName,
     required this.productName,
-    required this.onPressingTarget,
+    required this.cardType,
   }) : super(key: key);
 
   /// Name of review author.
@@ -23,7 +26,18 @@ class CardHeaderTitle extends StatelessWidget {
   /// Name of product on which the review was posted.
   final String productName;
 
-  final VoidCallback onPressingTarget;
+  final CardType cardType;
+
+  void _onPressingTarget(BuildContext context) {
+    switch (cardType) {
+      case CardType.companyReview:
+      case CardType.companyQuestion:
+        Navigator.of(context).pushNamed(CompanyProfileScreen.routeName);
+        break;
+      default:
+        Navigator.of(context).pushNamed(ProductProfileScreen.routeName);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +69,7 @@ class CardHeaderTitle extends StatelessWidget {
         8.horizontalSpace,
         Flexible(
           child: GestureDetector(
-            onTap: onPressingTarget,
+            onTap: () => _onPressingTarget(context),
             child: Text(
               productName,
               textAlign: TextAlign.center,

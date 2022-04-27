@@ -213,10 +213,7 @@ class CompanyReviewCard extends StatelessWidget {
                   postedDate: postedDate,
                   usedSinceDate: null,
                   views: views,
-                  onPressingTarget: () {
-                    Navigator.of(context)
-                        .pushNamed(CompanyProfileScreen.routeName);
-                  },
+                  cardType: CardType.companyReview,
                 ),
                 10.verticalSpace,
                 ReviewCardBody(
