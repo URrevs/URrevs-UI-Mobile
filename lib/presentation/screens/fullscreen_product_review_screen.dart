@@ -26,6 +26,8 @@ class FullscreenProductReviewScreen extends StatefulWidget {
 
 class _FullscreenProductReviewScreenState
     extends State<FullscreenProductReviewScreen> {
+  FocusNode focusNode = FocusNode();
+
   Widget get expandedCard {
     switch (widget.cardType) {
       case CardType.productReview:
@@ -72,7 +74,9 @@ class _FullscreenProductReviewScreenState
           ),
           Container(
             color: ColorManager.white,
-            child: TextField(),
+            child: TextField(
+              focusNode: focusNode,
+            ),
           )
         ],
       ),

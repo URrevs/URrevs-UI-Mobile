@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/text_button_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
@@ -201,14 +202,17 @@ class SpecsTable extends StatelessWidget {
   TableCell _companyName(String specValue) {
     return TableCell(
       verticalAlignment: TableCellVerticalAlignment.middle,
-      child: TextButton(
-        onPressed: _navigateToCompanyScreen,
-        child: Text(
-          specValue,
-          textAlign: TextAlign.center,
-          style: TextStyleManager.s16w900.copyWith(
-            decoration: TextDecoration.underline,
-            color: ColorManager.black,
+      child: Center(
+        child: TextButton(
+          onPressed: _navigateToCompanyScreen,
+          style: TextButtonStyleManager.specsCompanyName,
+          child: Text(
+            specValue,
+            textAlign: TextAlign.center,
+            style: TextStyleManager.s16w900.copyWith(
+              decoration: TextDecoration.underline,
+              color: ColorManager.black,
+            ),
           ),
         ),
       ),

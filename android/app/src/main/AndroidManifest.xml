@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.urrevs_ui_mobile">
-   <application
-        android:label="urrevs_ui_mobile"
+    <application
+        android:label="URrevs"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

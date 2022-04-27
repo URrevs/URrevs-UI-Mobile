@@ -23,6 +23,8 @@ class TextButtonStyleManager {
       GeneralTextButtonStyleManager.thinButton;
   static ButtonStyle get interactionFooterButton =>
       GeneralTextButtonStyleManager.thinButton;
+  static ButtonStyle get specsCompanyName =>
+      GeneralTextButtonStyleManager.thinButton;
   static ButtonStyle get footerButton => TextButton.styleFrom(
         maximumSize: Size(double.infinity, double.infinity),
         primary: ColorManager.buttonGrey,

@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
@@ -36,8 +35,7 @@ class InteractionLikeCounter extends StatelessWidget {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.baseline,
-          textBaseline: TextBaseline.alphabetic,
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           textDirection: TextDirection.ltr,
           children: [
@@ -46,11 +44,13 @@ class InteractionLikeCounter extends StatelessWidget {
               style: TextStyleManager.s14w400,
             ),
             2.horizontalSpace,
-            Icon(
-              isLike ? IconsManager.likeFilled : IconsManager.upvote,
-              color: ColorManager.blue,
-              size: 14.sp,
-              
+            Container(
+              margin: EdgeInsets.only(bottom: isLike ? 5.h : 8.h),
+              child: Icon(
+                isLike ? IconsManager.likeFilled : IconsManager.upvote,
+                color: ColorManager.blue,
+                size: 14.sp,
+              ),
             ),
           ],
         ),

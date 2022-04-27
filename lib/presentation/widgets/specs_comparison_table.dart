@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/text_button_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/specs_table.dart';
 
@@ -168,6 +169,7 @@ class SpecsComparisonTable extends StatelessWidget {
     return _organizedTableCell(
       child: TextButton(
         onPressed: _navigateToCompanyScreen,
+        style: TextButtonStyleManager.specsCompanyName,
         child: Text(
           specValue,
           textAlign: TextAlign.center,
