@@ -7,7 +7,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/assets_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/bottom_navigation_bar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answer_tree.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answers_list.dart';
@@ -21,6 +24,8 @@ import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/prod
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/question_card.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/specs_comparison_table.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/specs_table.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/tiles/company_horizontal_list_tile.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/tiles/company_logo_tile.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/updated_list_tile.dart';
 
 class DevelopmentScreen extends ConsumerStatefulWidget {
@@ -38,6 +43,8 @@ List<Item> items = [
 ];
 
 class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
+  bool isSelected = false;
+  int selectedIndex = -1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,29 +81,26 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
           // ),
         ],
       ),
-      body: SafeArea(
-        child: ListView(
-          children: [
-            // UpdatedListTile(title:'قائمة المنتجات المضافة حديثاً',items: items,),
-            // SizedBox(height: 20),
-            // UpdatedListTile(title: 'قائمة الشركات المضافة حديثاً', items: items),
-            ProductReviewCard.dummyInstance(),
-            // CompanyReviewCard.dummyInstance,
-            // QuestionCard.dummyInstance(context),
-            //  CommentTree.dummyInstance,
-            //  AnswerTree.dummyInstance,
-            // CommentsList.dummyInstance,
-            // AnswersList.dummyInstance,
-            // SpecsTable.dummyInstance,
-            // SpecsComparisonTable.dummyInstance,
-            // SvgPicture.asset(SvgAssets.upvote, color: Colors.red),
-          ],
-        ),
+      body: ListView(
+        children: [
+          CompanyHorizontalListTile(companyItems: companyItems),
+          //UpdatedListTile(title:'قائمة المنتجات المضافة حديثاً',items: items,),
+          // SizedBox(height: 20),
+          //UpdatedListTile(title: 'قائمة الشركات المضافة حديثاً', items: items),
+          //ProductReviewCard.dummyInstance(),
+          //CompanyReviewCard.dummyInstance(),
+          //QuestionCard.dummyInstance(context),
+          // CommentTree.dummyInstance,
+          // AnswerTree.dummyInstance,
+          // CommentsList.dummyInstance,
+          // AnswersList.dummyInstance,
+          // SpecsTable.dummyInstance,
+          // SpecsComparisonTable.dummyInstance,
+          // SvgPicture.asset(SvgAssets.upvote, color: Colors.red),
+        ],
       ),
-      bottomNavigationBar: BottomNavBar(
-        currentIndex: 2,
-        onTap: (int i) => {},
-      ),
+      //bottomNavigationBar: BottomNavBar(currentIndex: 2,onTap: (int i)=>{},),
     );
   }
-}
+
+} 
