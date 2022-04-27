@@ -11,10 +11,13 @@ class QuestionCardBody extends StatefulWidget {
   const QuestionCardBody({
     Key? key,
     required this.questionText,
+    required this.fullscreen,
   }) : super(key: key);
 
   /// Question text viewed by the card.
   final String questionText;
+
+  final bool fullscreen;
 
   @override
   State<QuestionCardBody> createState() => _QuestionCardBodyState();
@@ -63,19 +66,21 @@ class _QuestionCardBodyState extends State<QuestionCardBody> {
               questionText: widget.questionText,
               expanded: _expanded,
               setExpandedState: setExpandedState,
+              fullscreen: widget.fullscreen,
             ),
-            SeeMoreButton(
-              expanded: _expanded,
-              parentTextCut: questionTextCut,
-              setExpandedState: setExpandedState,
-              noNeedForExpansion: noNeedForExpansion,
-              hideSeeMoreIfNoNeedForExpansion: true,
-              usedInInteraction: false,
-              onPressingFullscreen: () {
-                Navigator.of(context)
-                    .pushNamed(FullscreenQuestionScreen.routeName);
-              },
-            )
+            if (!widget.fullscreen)
+              SeeMoreButton(
+                expanded: _expanded,
+                parentTextCut: questionTextCut,
+                setExpandedState: setExpandedState,
+                noNeedForExpansion: noNeedForExpansion,
+                hideSeeMoreIfNoNeedForExpansion: true,
+                usedInInteraction: false,
+                onPressingFullscreen: () {
+                  Navigator.of(context)
+                      .pushNamed(FullscreenQuestionScreen.routeName);
+                },
+              )
           ],
         ),
       ),

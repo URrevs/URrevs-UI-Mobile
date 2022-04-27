@@ -13,9 +13,9 @@ class HomeSubscreen extends StatefulWidget {
 }
 
 class _HomeSubscreenState extends State<HomeSubscreen> {
-  Widget get listItem => ([
-        ProductReviewCard.dummyInstance,
-        CompanyReviewCard.dummyInstance,
+  Widget get listItem => (<Widget>[
+        ProductReviewCard.dummyInstance(),
+        CompanyReviewCard.dummyInstance(),
         QuestionCard.dummyInstance(context),
       ]..shuffle())
           .first;

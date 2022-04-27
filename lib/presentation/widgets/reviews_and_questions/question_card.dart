@@ -50,6 +50,8 @@ class QuestionCard extends StatelessWidget {
 
   final CardType cardType;
 
+  final bool fullscreen;
+
   const QuestionCard({
     Key? key,
     required this.imageUrl,
@@ -62,11 +64,16 @@ class QuestionCard extends StatelessWidget {
     required this.shareCount,
     required this.upvoted,
     required this.cardType,
+    required this.fullscreen,
     this.answer,
   }) : super(key: key);
 
   /// An instance of [QuestionCard] filled with dummy data.
-  static QuestionCard dummyInstance(BuildContext context) => QuestionCard(
+  static QuestionCard dummyInstance(
+    BuildContext context, {
+    bool fullscreen = false,
+  }) =>
+      QuestionCard(
         postedDate: DummyDataManager.postedDate,
         authorName: DummyDataManager.authorName,
         imageUrl: DummyDataManager.imageUrl,
@@ -80,6 +87,7 @@ class QuestionCard extends StatelessWidget {
         cardType: DummyDataManager.randomBool
             ? CardType.productReview
             : CardType.companyReview,
+        fullscreen: fullscreen,
       );
 
   /// Callback invoked when upvote button is pressed.
@@ -148,7 +156,10 @@ class QuestionCard extends StatelessWidget {
                   },
                 ),
                 10.verticalSpace,
-                QuestionCardBody(questionText: questionText),
+                QuestionCardBody(
+                  questionText: questionText,
+                  fullscreen: fullscreen,
+                ),
                 8.verticalSpace,
                 CardFooter(
                   likeCount: upvoteCount,
@@ -160,15 +171,18 @@ class QuestionCard extends StatelessWidget {
                   onComment: _onAnswer,
                   onShare: _onShare,
                 ),
-                Divider(
-                  height: 10.h,
-                  thickness: 1.h,
-                  color: ColorManager.dividerGrey,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 25.h, right: 12.w, left: 12.w),
-                  child: answer!,
-                ),
+                if (!fullscreen && answer != null) ...[
+                  Divider(
+                    height: 10.h,
+                    thickness: 1.h,
+                    color: ColorManager.dividerGrey,
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsets.only(top: 25.h, right: 12.w, left: 12.w),
+                    child: answer!,
+                  ),
+                ],
               ],
             ),
           ),

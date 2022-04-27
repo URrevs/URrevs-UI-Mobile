@@ -11,6 +11,7 @@ class CardBodyQuestionText extends StatelessWidget {
     required this.questionText,
     required this.expanded,
     required this.setExpandedState,
+    required this.fullscreen,
   }) : super(key: key);
 
   /// The question written by the user
@@ -21,6 +22,8 @@ class CardBodyQuestionText extends StatelessWidget {
 
   /// A function that is invoked to set the expanded state of the parent.
   final void Function(bool) setExpandedState;
+
+  final bool fullscreen;
 
   /// If true, the received text would be cut if its length exceeds [maxLetters]
   // final bool cutTextIfExceededLimit;
@@ -53,6 +56,7 @@ class CardBodyQuestionText extends StatelessWidget {
   /// it so that the user know about the cons section that follows the pros
   /// section.
   String cutQuestionText(String qText) {
+    if (fullscreen) return qText;
     if (qText.length > maxLetters) {
       String substr = qText.substring(0, maxLetters);
       return substr + "...";

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/authentication_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/bottom_navigation_bar_container_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/menu_screen/subscreens/about_us_screen.dart';
@@ -99,8 +100,10 @@ class RouteGenerator {
           builder: (_) => FullscreenCompanyReviewScreen(),
         );
       case FullscreenProductReviewScreen.routeName:
+        // TODO: pass CardType to FullscreenProductReviewScreen
         return MaterialPageRoute(
-          builder: (_) => FullscreenProductReviewScreen(),
+          builder: (_) =>
+              FullscreenProductReviewScreen(cardType: CardType.productQuestion),
         );
       case FullscreenQuestionScreen.routeName:
         return MaterialPageRoute(

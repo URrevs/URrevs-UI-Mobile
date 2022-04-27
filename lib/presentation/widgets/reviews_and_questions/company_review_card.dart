@@ -63,6 +63,8 @@ class CompanyReviewCard extends StatelessWidget {
   /// Number of shares to the review
   final int shareCount;
 
+  final bool fullscreen;
+
   const CompanyReviewCard({
     Key? key,
     required this.postedDate,
@@ -78,10 +80,12 @@ class CompanyReviewCard extends StatelessWidget {
     required this.commentCount,
     required this.shareCount,
     required this.liked,
+    required this.fullscreen,
   }) : super(key: key);
 
   /// An instance of [CompanyReviewCard] filled with dummy data.
-  static CompanyReviewCard get dummyInstance => CompanyReviewCard(
+  static CompanyReviewCard dummyInstance({bool fullscreen = false}) =>
+      CompanyReviewCard(
         postedDate: DateTime.now(),
         usedSinceDate: DateTime.now().subtract(Duration(days: 200)),
         views: 100,
@@ -95,6 +99,7 @@ class CompanyReviewCard extends StatelessWidget {
         commentCount: 5,
         shareCount: 20,
         liked: Random().nextBool(),
+        fullscreen: fullscreen,
       );
 
   /// Callback invoked when like (or upvote) buttons are pressed.
@@ -168,6 +173,7 @@ class CompanyReviewCard extends StatelessWidget {
                   showExpandCircle: false,
                   hideSeeMoreIfNoNeedForExpansion: true,
                   cardType: CardType.companyReview,
+                  fullscreen: fullscreen,
                 ),
                 8.verticalSpace,
                 CardFooter(

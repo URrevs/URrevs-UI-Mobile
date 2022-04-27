@@ -74,6 +74,8 @@ class ProductReviewCard extends StatelessWidget {
   /// Number of shares to the review
   final int shareCount;
 
+  final bool fullscreen;
+
   const ProductReviewCard({
     Key? key,
     required this.postedDate,
@@ -89,10 +91,12 @@ class ProductReviewCard extends StatelessWidget {
     required this.commentCount,
     required this.shareCount,
     required this.liked,
+    required this.fullscreen,
   }) : super(key: key);
 
   /// An instance of [ProductReviewCard] filled with dummy data.
-  static ProductReviewCard get dummyInstance => ProductReviewCard(
+  static ProductReviewCard dummyInstance({bool fullscreen = false}) =>
+      ProductReviewCard(
         postedDate: faker.date.dateTime(minYear: 2000, maxYear: 2022),
         usedSinceDate: faker.date.dateTime(minYear: 2000, maxYear: 2021),
         views: DummyDataManager.randomInt,
@@ -106,6 +110,7 @@ class ProductReviewCard extends StatelessWidget {
         commentCount: DummyDataManager.randomInt,
         shareCount: DummyDataManager.randomInt,
         liked: Random().nextBool(),
+        fullscreen: fullscreen,
       );
 
   /// Callback invoked when like (or upvote) buttons are pressed.
@@ -189,6 +194,7 @@ class ProductReviewCard extends StatelessWidget {
                   showExpandCircle: true,
                   hideSeeMoreIfNoNeedForExpansion: false,
                   cardType: CardType.productReview,
+                    fullscreen: fullscreen
                 ),
                 8.verticalSpace,
                 CardFooter(

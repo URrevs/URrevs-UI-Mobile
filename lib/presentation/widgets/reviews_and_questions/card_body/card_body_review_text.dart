@@ -19,6 +19,7 @@ class CardBodyReviewText extends StatelessWidget {
     required this.setExpandedState,
     required this.noNeedForExpansion,
     required this.hideSeeMoreIfNoNeedForExpansion,
+    required this.fullscreen,
   }) : super(key: key);
 
   /// The text which the user written in the pros section when submitting the
@@ -56,6 +57,8 @@ class CardBodyReviewText extends StatelessWidget {
   /// A function that is invoked to set the expanded state of the parent.
   final void Function(bool) setExpandedState;
 
+  final bool fullscreen;
+
   /// Cut the pros text according to the expanded state and [maxLetters] of
   /// the review card.
   ///
@@ -65,6 +68,7 @@ class CardBodyReviewText extends StatelessWidget {
   /// We would return the pros text as it is if its length is less than
   /// [maxLetters]
   String cutPros(String pros) {
+    if (fullscreen) return pros;
     if (pros.length >= maxLetters) {
       String substr = pros.substring(0, maxLetters);
       return substr + "...";
@@ -82,6 +86,7 @@ class CardBodyReviewText extends StatelessWidget {
   /// * Return a substring of cons text if its length is greater than
   /// remainingLetters value.
   String cutCons(String cons) {
+    if (fullscreen) return cons;
     int remainingLetters = maxLetters - prosText.length;
     if (remainingLetters <= 0) {
       return "";
@@ -110,7 +115,7 @@ class CardBodyReviewText extends StatelessWidget {
           cutPros(prosText),
           style: TextStyleManager.s16w400.copyWith(color: ColorManager.black),
         ),
-        if (showCons)
+        if (fullscreen || showCons)
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
