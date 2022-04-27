@@ -13,6 +13,7 @@ class CardBodyRatingBlock extends StatelessWidget {
     required this.expanded,
     required this.scores,
     required this.ratingCriteria,
+    required this.fullscreen,
   })  : assert(scores.length == ratingCriteria.length),
         super(key: key);
 
@@ -26,12 +27,14 @@ class CardBodyRatingBlock extends StatelessWidget {
   /// in the [CardBodyRatingBlock].
   final List<int> scores;
 
+  final bool fullscreen;
+
   @override
   Widget build(BuildContext context) {
     /// Number of star rows shown in review card.
     /// If review card is expanded, all 7 star rows are shown.
     /// If review card is not expanded, only 1 star row is shown.
-    int shownStarRows = expanded ? scores.length : 1;
+    int shownStarRows = (expanded || fullscreen) ? scores.length : 1;
     return Column(
       children: [
         for (int i = 0; i < shownStarRows; i++) ...[

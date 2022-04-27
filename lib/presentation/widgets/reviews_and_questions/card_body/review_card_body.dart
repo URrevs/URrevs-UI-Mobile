@@ -102,8 +102,9 @@ class _ReviewCardBodyState extends State<ReviewCardBody> {
               expanded: _expanded,
               scores: widget.scores,
               ratingCriteria: widget.ratingCriteria,
+              fullscreen: widget.fullscreen,
             ),
-            if (widget.showExpandCircle) ...[
+            if (widget.showExpandCircle && !widget.fullscreen) ...[
               10.verticalSpace,
               CardBodyExpandCircle(expanded: _expanded),
             ],

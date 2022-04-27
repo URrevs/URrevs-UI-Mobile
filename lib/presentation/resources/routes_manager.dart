@@ -94,8 +94,10 @@ class RouteGenerator {
           builder: (_) => ComparisonScreen(),
         );
       case FullscreenPostScreen.routeName:
+        // TODO: remove default screen arguments value
         FullscreenPostScreenArgs screenArgs =
-            routeSettings.arguments as FullscreenPostScreenArgs;
+            routeSettings.arguments as FullscreenPostScreenArgs? ??
+                FullscreenPostScreenArgs(cardType: CardType.productReview);
         return MaterialPageRoute(
           builder: (_) => FullscreenPostScreen(screenArgs),
         );
