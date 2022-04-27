@@ -4,8 +4,12 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:urrevs_ui_mobile/presentation/presentation_models/posting_review_model.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/company_review_card.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/product_review_card.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/scaffold_with_hiding_fab.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
@@ -19,19 +23,38 @@ class PostedReviewsScreen extends StatefulWidget {
 }
 
 class _PostedReviewsScreenState extends State<PostedReviewsScreen> {
+  ReviewsFilter filter = ReviewsFilter.phones;
+
+  Widget get post => filter == ReviewsFilter.phones
+      ? ProductReviewCard.dummyInstance()
+      : CompanyReviewCard.dummyInstance();
+
+  void _setFilter(ReviewsFilter filter) => setState(() => this.filter = filter);
+
   @override
   Widget build(BuildContext context) {
     return ScaffoldWithHidingFab(
-      appBar: AppBar(),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {},
         label: Text(LocaleKeys.addReview.tr()),
         icon: Icon(FontAwesomeIcons.plus, size: AppSize.s16),
       ),
-      body: ListView(
-        children: [
-          Center(
-            child: Text('posted reviews'),
+      body: CustomScrollView(
+        slivers: [
+          AppBars.appBarWithFilters(setFilter: _setFilter),
+          SliverPadding(
+            padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+            sliver: SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) => Column(
+                  children: [
+                    post,
+                    10.verticalSpace,
+                  ],
+                ),
+                childCount: 10,
+              ),
+            ),
           )
         ],
       ),

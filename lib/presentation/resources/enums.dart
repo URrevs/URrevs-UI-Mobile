@@ -7,3 +7,5 @@ enum CardType {
   answer,
   reply
 }
+
+enum ReviewsFilter { phones, companies }

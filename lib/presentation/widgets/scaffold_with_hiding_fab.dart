@@ -4,12 +4,12 @@ import 'package:flutter/rendering.dart';
 class ScaffoldWithHidingFab extends StatefulWidget {
   const ScaffoldWithHidingFab({
     Key? key,
-    required this.appBar,
+    this.appBar,
     required this.body,
     required this.floatingActionButton,
   }) : super(key: key);
 
-  final AppBar appBar;
+  final AppBar? appBar;
   final Widget body;
   final FloatingActionButton? floatingActionButton;
 
