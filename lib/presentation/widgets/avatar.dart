@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/user_profile/other_user_profile_screen.dart';
 
 /// Build the leading part of the header.
 /// Contains the profile photo of the user.
@@ -18,12 +19,17 @@ class Avatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CircleAvatar(
-      radius: radius,
-      backgroundColor: ColorManager.transparent,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(radius),
-        child: Image.network(imageUrl),
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).pushNamed(OtherUserProfileScreen.routeName);
+      },
+      child: CircleAvatar(
+        radius: radius,
+        backgroundColor: ColorManager.transparent,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(radius),
+          child: Image.network(imageUrl),
+        ),
       ),
     );
   }
