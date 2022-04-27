@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
-import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_question_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_post_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body_question_text.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/see_more_button.dart';
 
@@ -12,12 +13,14 @@ class QuestionCardBody extends StatefulWidget {
     Key? key,
     required this.questionText,
     required this.fullscreen,
+    required this.cardType,
   }) : super(key: key);
 
   /// Question text viewed by the card.
   final String questionText;
 
   final bool fullscreen;
+  final CardType cardType;
 
   @override
   State<QuestionCardBody> createState() => _QuestionCardBodyState();
@@ -77,8 +80,9 @@ class _QuestionCardBodyState extends State<QuestionCardBody> {
                 hideSeeMoreIfNoNeedForExpansion: true,
                 usedInInteraction: false,
                 onPressingFullscreen: () {
-                  Navigator.of(context)
-                      .pushNamed(FullscreenQuestionScreen.routeName);
+                  Navigator.of(context).pushNamed(
+                      FullscreenPostScreen.routeName,
+                      arguments: widget.cardType);
                 },
               )
           ],

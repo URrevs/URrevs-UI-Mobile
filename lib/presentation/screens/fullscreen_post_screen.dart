@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
@@ -9,27 +10,34 @@ import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/comp
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/product_review_card.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/question_card.dart';
 
-class FullscreenProductReviewScreen extends StatefulWidget {
-  const FullscreenProductReviewScreen({
-    Key? key,
+class FullscreenPostScreenArgs {
+  final CardType cardType;
+  final bool focusOnTextField;
+  FullscreenPostScreenArgs({
     required this.cardType,
+    this.focusOnTextField = false,
+  });
+}
+
+class FullscreenPostScreen extends StatefulWidget {
+  const FullscreenPostScreen(
+    this.screenArgs, {
+    Key? key,
   }) : super(key: key);
 
-  final CardType cardType;
+  final FullscreenPostScreenArgs screenArgs;
 
   static const String routeName = 'FullscreenProductReviewScreen';
 
   @override
-  State<FullscreenProductReviewScreen> createState() =>
-      _FullscreenProductReviewScreenState();
+  State<FullscreenPostScreen> createState() => _FullscreenPostScreenState();
 }
 
-class _FullscreenProductReviewScreenState
-    extends State<FullscreenProductReviewScreen> {
+class _FullscreenPostScreenState extends State<FullscreenPostScreen> {
   FocusNode focusNode = FocusNode();
 
   Widget get expandedCard {
-    switch (widget.cardType) {
+    switch (widget.screenArgs.cardType) {
       case CardType.productReview:
         return ProductReviewCard.dummyInstance().copyWith(
           fullscreen: true,
@@ -50,7 +58,7 @@ class _FullscreenProductReviewScreenState
   }
 
   Widget get interactionsList {
-    switch (widget.cardType) {
+    switch (widget.screenArgs.cardType) {
       case CardType.productReview:
       case CardType.companyReview:
         return CommentsList.dummyInstance;
@@ -59,6 +67,14 @@ class _FullscreenProductReviewScreenState
         return AnswersList.dummyInstance;
       default:
         return CommentsList.dummyInstance;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.screenArgs.focusOnTextField) {
+      focusNode.requestFocus();
     }
   }
 

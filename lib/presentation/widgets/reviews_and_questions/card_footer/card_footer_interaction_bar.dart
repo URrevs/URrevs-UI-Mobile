@@ -5,7 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
-import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_product_review_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_post_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_footer/card_footer_interaction_item.dart';
 
 /// Part of a card footer. Contains statistics about users interaction with the
@@ -69,8 +69,8 @@ class CardFooterInteractionBar extends StatelessWidget {
               if (fullscreen) return;
               print(cardType);
               Navigator.of(context).pushNamed(
-                FullscreenProductReviewScreen.routeName,
-                arguments: cardType,
+                FullscreenPostScreen.routeName,
+                arguments: FullscreenPostScreenArgs(cardType: cardType),
               );
             },
             child: Icon(

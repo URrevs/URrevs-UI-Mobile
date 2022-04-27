@@ -201,6 +201,7 @@ class QuestionCard extends StatelessWidget {
                 QuestionCardBody(
                   questionText: questionText,
                   fullscreen: fullscreen,
+                  cardType: cardType,
                 ),
                 8.verticalSpace,
                 CardFooter(

@@ -11,9 +11,7 @@ import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_scre
 import 'package:urrevs_ui_mobile/presentation/screens/company_profile/company_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/comparison_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/development_screen.dart';
-import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_company_review_screen.dart';
-import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_product_review_screen.dart';
-import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_question_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_post_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/product_profile/product_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/search_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/other_user_profile_screen.dart';
@@ -95,20 +93,11 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (_) => ComparisonScreen(),
         );
-      case FullscreenCompanyReviewScreen.routeName:
+      case FullscreenPostScreen.routeName:
+        FullscreenPostScreenArgs screenArgs =
+            routeSettings.arguments as FullscreenPostScreenArgs;
         return MaterialPageRoute(
-          builder: (_) => FullscreenCompanyReviewScreen(),
-        );
-      case FullscreenProductReviewScreen.routeName:
-        // TODO: pass CardType to FullscreenProductReviewScreen
-        CardType cardType = routeSettings.arguments as CardType;
-        return MaterialPageRoute(
-          builder: (_) =>
-              FullscreenProductReviewScreen(cardType: cardType),
-        );
-      case FullscreenQuestionScreen.routeName:
-        return MaterialPageRoute(
-          builder: (_) => FullscreenQuestionScreen(),
+          builder: (_) => FullscreenPostScreen(screenArgs),
         );
       case SearchScreen.routeName:
         return MaterialPageRoute(

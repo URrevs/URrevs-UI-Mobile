@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
-import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_product_review_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_post_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/question_card_body.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/company_review_card.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/product_review_card.dart';
@@ -19,16 +19,22 @@ class _HomeSubscreenState extends State<HomeSubscreen> {
         ProductReviewCard.dummyInstance().copyWith(
           onPressingComment: () {
             Navigator.of(context).pushNamed(
-              FullscreenProductReviewScreen.routeName,
-              arguments: CardType.productReview,
+              FullscreenPostScreen.routeName,
+              arguments: FullscreenPostScreenArgs(
+                cardType: CardType.productReview,
+                focusOnTextField: true,
+              ),
             );
           },
         ),
         CompanyReviewCard.dummyInstance().copyWith(
           onPressingComment: () {
             Navigator.of(context).pushNamed(
-              FullscreenProductReviewScreen.routeName,
-              arguments: CardType.companyReview,
+              FullscreenPostScreen.routeName,
+              arguments: FullscreenPostScreenArgs(
+                cardType: CardType.companyReview,
+                focusOnTextField: true,
+              ),
             );
           },
         ),
@@ -36,8 +42,11 @@ class _HomeSubscreenState extends State<HomeSubscreen> {
           cardType: CardType.productQuestion,
           onPressingAnswer: () {
             Navigator.of(context).pushNamed(
-              FullscreenProductReviewScreen.routeName,
-              arguments: CardType.productQuestion,
+              FullscreenPostScreen.routeName,
+              arguments: FullscreenPostScreenArgs(
+                cardType: CardType.productQuestion,
+                focusOnTextField: true,
+              ),
             );
           },
         ),
@@ -45,8 +54,11 @@ class _HomeSubscreenState extends State<HomeSubscreen> {
           cardType: CardType.companyQuestion,
           onPressingAnswer: () {
             Navigator.of(context).pushNamed(
-              FullscreenProductReviewScreen.routeName,
-              arguments: CardType.companyQuestion,
+              FullscreenPostScreen.routeName,
+              arguments: FullscreenPostScreenArgs(
+                cardType: CardType.companyQuestion,
+                focusOnTextField: true,
+              ),
             );
           },
         ),
