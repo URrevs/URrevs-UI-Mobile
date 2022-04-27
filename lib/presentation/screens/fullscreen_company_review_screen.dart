@@ -16,8 +16,10 @@ class _FullscreenCompanyReviewScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Center(
-        child: Text('company review fullscreen'),
+      body: SafeArea(
+        child: Center(
+          child: Text('company review fullscreen'),
+        ),
       ),
     );
   }

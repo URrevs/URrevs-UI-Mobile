@@ -14,7 +14,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Container(),
+      body: SafeArea(child: Container()),
     );
   }
 }

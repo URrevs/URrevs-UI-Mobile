@@ -60,25 +60,27 @@ class _FullscreenProductReviewScreenState
     return Scaffold(
       appBar: AppBars.appBarWithActions(context: context),
       resizeToAvoidBottomInset: true,
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView(
-              padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
-              children: [
-                expandedCard,
-                20.verticalSpace,
-                interactionsList,
-              ],
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView(
+                padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
+                children: [
+                  expandedCard,
+                  20.verticalSpace,
+                  interactionsList,
+                ],
+              ),
             ),
-          ),
-          Container(
-            color: ColorManager.white,
-            child: TextField(
-              focusNode: focusNode,
-            ),
-          )
-        ],
+            Container(
+              color: ColorManager.white,
+              child: TextField(
+                focusNode: focusNode,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

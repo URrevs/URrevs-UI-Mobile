@@ -15,7 +15,7 @@ class _TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Container(),
+      body: SafeArea(child: Container()),
     );
   }
 }

@@ -14,8 +14,10 @@ class _OtherUserProfileScreenState extends State<OtherUserProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('other user profile')),
-      body: Center(
-        child: Text('other user profile'),
+      body: SafeArea(
+        child: Center(
+          child: Text('other user profile'),
+        ),
       ),
     );
   }

@@ -120,11 +120,13 @@ class RouteGenerator {
 
   static Route<dynamic> unDefinedRoute(String? routeName) {
     return MaterialPageRoute(
-        builder: (_) => Scaffold(
-              appBar: AppBar(
-                title: Text('Route not found'),
+        builder: (_) => SafeArea(
+              child: Scaffold(
+                appBar: AppBar(
+                  title: Text('Route not found'),
+                ),
+                body: Center(child: Text('$routeName is not found')),
               ),
-              body: Center(child: Text('$routeName is not found')),
             ));
   }
 }

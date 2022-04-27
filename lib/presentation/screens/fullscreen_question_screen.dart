@@ -15,8 +15,10 @@ class _FullscreenQuestionScreenState extends State<FullscreenQuestionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Center(
-        child: Text('question fullscreen'),
+      body: SafeArea(
+        child: Center(
+          child: Text('question fullscreen'),
+        ),
       ),
     );
   }

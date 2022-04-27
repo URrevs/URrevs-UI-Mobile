@@ -53,7 +53,7 @@ class _BottomNavigationBarContainerScreenState
           context: context,
           showTabBar: showTabBar,
         ),
-        body: currentPage,
+        body: SafeArea(child: currentPage),
         bottomNavigationBar: BottomNavBar(
           currentIndex: _currentIndex,
           onTap: _setCurrentIndex,

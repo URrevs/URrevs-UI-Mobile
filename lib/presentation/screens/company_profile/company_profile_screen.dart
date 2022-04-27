@@ -46,12 +46,14 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen>
       appBar: AppBars.appBarOfCompnayProfile(
           context: context, controller: _tabController, text: 'Nokia'),
       floatingActionButton: floatingActionButton,
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          CompanyProfileReviewsSubscreen(),
-          CompanyProfileQASubscreen(),
-        ],
+      body: SafeArea(
+        child: TabBarView(
+          controller: _tabController,
+          children: [
+            CompanyProfileReviewsSubscreen(),
+            CompanyProfileQASubscreen(),
+          ],
+        ),
       ),
     );
   }
