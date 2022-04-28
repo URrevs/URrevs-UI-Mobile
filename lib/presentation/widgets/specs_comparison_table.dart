@@ -6,6 +6,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_button_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/utils/no_glowing_scroll_behavior.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/specs_table.dart';
 
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
@@ -230,28 +231,31 @@ class SpecsComparisonTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 0.75.sh,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        children: [
-          SizedBox(
-            width: 1.2.sw,
-            child: Card(
-              elevation: AppElevations.ev3,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16.r),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(16.r),
-                child: ListView(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  children: [
-                    _buildTable(context),
-                  ],
+      child: ScrollConfiguration(
+        behavior: NoGlowingScrollBehaviour(),
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: [
+            SizedBox(
+              width: 1.2.sw,
+              child: Card(
+                elevation: AppElevations.ev3,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16.r),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16.r),
+                  child: ListView(
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    children: [
+                      _buildTable(context),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
