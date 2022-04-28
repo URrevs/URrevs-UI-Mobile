@@ -57,14 +57,7 @@ List<Item> items = [
 class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
   bool isSelected = false;
   int selectedIndex = -1;
-  final List<String> _ratingCriteria = const [
-    LocaleKeys.userInterface,
-    LocaleKeys.manufacturingQuality,
-    LocaleKeys.priceQuality,
-    LocaleKeys.camera,
-    LocaleKeys.callsQuality,
-    LocaleKeys.battery,
-  ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -107,48 +100,46 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
       body: ListView(
         padding: EdgeInsets.all(20),
         children: [
-          // AuthButton(
-          //     text: LocaleKeys.googleAuth.tr(),
-          //     imagePath: SvgAssets.googleLogo,
-          //     color: ColorManager.grey,
-          //     onPressed: () {}),
-          // SizedBox(height: 20),
-          // AuthButton(
-          //     text: LocaleKeys.facebookAuth.tr(),
-          //     imagePath: SvgAssets.facebookLogo,
-          //     color: ColorManager.blue,
-          //     onPressed: () {}),
-          // SizedBox(height: 20),
-          // CompanyHorizontalListTile(companyItems: companyItems),
-          // RatingOverviewCard(
-          //   productName: 'Nokia 7 Plus',
-          //   ratingCriteria: _ratingCriteria,
-          //   scores: DummyDataManager.productOverviewScores,
-          //   generalProductRating:
-          //       DummyDataManager.randomCircularIndicatorDouble,
-          //   generalCompanyRating:
-          //       DummyDataManager.randomCircularIndicatorDouble,
-          //   viewsCounter: DummyDataManager.randomInt,
-          //   isProduct: true,
-          // ),
-          // SizedBox(height: 20),
-          // RatingOverviewCard(
-          //   productName: 'Nokia',
-          //   ratingCriteria: _ratingCriteria,
-          //   scores: DummyDataManager.productOverviewScores,
-          //   generalProductRating:
-          //       DummyDataManager.randomCircularIndicatorDouble,
-          //   generalCompanyRating:
-          //       DummyDataManager.randomCircularIndicatorDouble,
-          //   viewsCounter: DummyDataManager.randomInt,
-          //   isProduct: false,
-          // ),
-          // SizedBox(height: 20),
-          // UpdatedListTile(
-          //   title: 'قائمة المنتجات المضافة حديثاً',
-          //   items: items,
-          // ),
-          // SizedBox(height: 20),
+          AuthButton(
+              text: LocaleKeys.googleAuth.tr(),
+              imagePath: SvgAssets.googleLogo,
+              color: ColorManager.grey,
+              onPressed: () {}),
+          SizedBox(height: 20),
+          AuthButton(
+              text: LocaleKeys.facebookAuth.tr(),
+              imagePath: SvgAssets.facebookLogo,
+              color: ColorManager.blue,
+              onPressed: () {}),
+          SizedBox(height: 20),
+          CompanyHorizontalListTile(companyItems: companyItems),
+          RatingOverviewCard(
+            productName: 'Nokia 7 Plus',
+            scores: DummyDataManager.productOverviewScores,
+            generalProductRating:
+                DummyDataManager.randomCircularIndicatorDouble,
+            generalCompanyRating:
+                DummyDataManager.randomCircularIndicatorDouble,
+            viewsCounter: DummyDataManager.randomInt,
+            isProduct: true,
+          ),
+          SizedBox(height: 20),
+          RatingOverviewCard(
+            productName: 'Nokia',
+            scores: DummyDataManager.productOverviewScores,
+            generalProductRating:
+                DummyDataManager.randomCircularIndicatorDouble,
+            generalCompanyRating:
+                DummyDataManager.randomCircularIndicatorDouble,
+            viewsCounter: DummyDataManager.randomInt,
+            isProduct: false,
+          ),
+          SizedBox(height: 20),
+          UpdatedListTile(
+            title: 'قائمة المنتجات المضافة حديثاً',
+            items: items,
+          ),
+          SizedBox(height: 20),
           UpdatedListTile(title: 'قائمة الشركات المضافة حديثاً', items: items),
           ProductReviewCard.dummyInstance(),
           CompanyReviewCard.dummyInstance(),
