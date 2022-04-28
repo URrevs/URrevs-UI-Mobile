@@ -17,7 +17,6 @@ class RatingOverviewCard extends StatelessWidget {
     required this.productName,
     this.generalProductRating,
     required this.generalCompanyRating,
-    this.ratingCriteria,
     this.scores,
     required this.viewsCounter,
     required this.isProduct,
@@ -29,9 +28,6 @@ class RatingOverviewCard extends StatelessWidget {
 
   /// The name of the product.
   final String productName;
-
-  /// The rating criteria.
-  final List<String>? ratingCriteria;
 
   /// The general scores of the product.
   final List<int>? scores;
@@ -47,6 +43,16 @@ class RatingOverviewCard extends StatelessWidget {
 
   /// Flag to determine if the card is in the product profile screen.
   final bool isProduct;
+
+  /// The rating criteria.
+  final List<String> _ratingCriteria = const [
+    LocaleKeys.userInterface,
+    LocaleKeys.manufacturingQuality,
+    LocaleKeys.priceQuality,
+    LocaleKeys.camera,
+    LocaleKeys.callsQuality,
+    LocaleKeys.battery,
+  ];
   @override
   Widget build(BuildContext context) {
     NumberFormat numberFormat =
@@ -118,23 +124,26 @@ class RatingOverviewCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(16.r),
                       ),
                     ),
-                    child: TextButton(
-                        onPressed: () {},
-                        child: Row(
-                          children: [
-                            Icon(
-                              IconsManager.addToOwnedProducts,
-                              size: AppSize.s28,
-                              color: ColorManager.black,
-                            ),
-                            SizedBox(width: 5.w),
-                            Text(
-                              LocaleKeys.setAsOwnedPhone.tr(),
-                              style: TextStyleManager.s14w400
-                                  .copyWith(color: ColorManager.black),
-                            ),
-                          ],
-                        )),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(16.r),
+                      child: TextButton(
+                          onPressed: () {},
+                          child: Row(
+                            children: [
+                              Icon(
+                                IconsManager.addToOwnedProducts,
+                                size: AppSize.s28,
+                                color: ColorManager.black,
+                              ),
+                              SizedBox(width: 5.w),
+                              Text(
+                                LocaleKeys.setAsOwnedPhone.tr(),
+                                style: TextStyleManager.s14w400
+                                    .copyWith(color: ColorManager.black),
+                              ),
+                            ],
+                          )),
+                    ),
                   ),
                 )
               : Container(),
@@ -165,7 +174,7 @@ class RatingOverviewCard extends StatelessWidget {
                   child: CardBodyRatingBlock(
                     expanded: true,
                     fullscreen: true,
-                    ratingCriteria: ratingCriteria!,
+                    ratingCriteria: _ratingCriteria,
                     scores: scores!,
                   ),
                 )

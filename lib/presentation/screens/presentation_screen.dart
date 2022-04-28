@@ -57,15 +57,7 @@ List<Item> items = [
 class _PresentationScreenState extends ConsumerState<PresentationScreen> {
   bool isSelected = false;
   int selectedIndex = -1;
-  final List<String> _ratingCriteria = const [
-    LocaleKeys.userInterface,
-    LocaleKeys.manufacturingQuality,
-    LocaleKeys.priceQuality,
-    LocaleKeys.camera,
-    LocaleKeys.callsQuality,
-    LocaleKeys.battery,
-  ];
-
+  
   @override
   Widget build(BuildContext context) {
     NumberFormat numberFormat =
@@ -122,7 +114,6 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
           // CompanyHorizontalListTile(companyItems: companyItems),
           RatingOverviewCard(
             productName: 'Nokia 7 Plus',
-            ratingCriteria: _ratingCriteria,
             scores: DummyDataManager.productOverviewScores,
             generalProductRating:
                 DummyDataManager.randomCircularIndicatorDouble,
@@ -134,7 +125,6 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
           SizedBox(height: 20),
           RatingOverviewCard(
             productName: 'Nokia',
-            ratingCriteria: _ratingCriteria,
             scores: DummyDataManager.productOverviewScores,
             generalProductRating:
                 DummyDataManager.randomCircularIndicatorDouble,

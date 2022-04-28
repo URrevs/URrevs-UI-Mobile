@@ -57,14 +57,7 @@ List<Item> items = [
 class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
   bool isSelected = false;
   int selectedIndex = -1;
-  final List<String> _ratingCriteria = const [
-    LocaleKeys.userInterface,
-    LocaleKeys.manufacturingQuality,
-    LocaleKeys.priceQuality,
-    LocaleKeys.camera,
-    LocaleKeys.callsQuality,
-    LocaleKeys.battery,
-  ];
+
 
   @override
   Widget build(BuildContext context) {
