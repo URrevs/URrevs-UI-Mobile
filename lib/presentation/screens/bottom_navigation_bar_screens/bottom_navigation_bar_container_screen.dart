@@ -42,6 +42,14 @@ class _BottomNavigationBarContainerScreenState
     }
   }
 
+  AppBar? get appBar {
+    if (_currentIndex == 0) return null;
+    return AppBars.appBarWithURrevsLogo(
+      context: context,
+      showTabBar: showTabBar,
+    );
+  }
+
   void _setCurrentIndex(int i) => setState(() => _currentIndex = i);
 
   @override
@@ -49,10 +57,7 @@ class _BottomNavigationBarContainerScreenState
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: AppBars.appBarWithURrevsLogo(
-          context: context,
-          showTabBar: showTabBar,
-        ),
+        appBar: appBar,
         body: SafeArea(child: currentPage),
         bottomNavigationBar: BottomNavBar(
           currentIndex: _currentIndex,

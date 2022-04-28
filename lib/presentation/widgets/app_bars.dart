@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/search_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/user_profile_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/tiles/company_horizontal_list_tile.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 class AppBars {
@@ -114,6 +115,36 @@ class AppBars {
               onPressed: () => setFilter(ReviewsFilter.companies),
               child: Text('الشركات'),
             ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  static appBarWithCompaniesList() {
+    return SliverAppBar(
+      title: SizedBox(
+        height: 30.h,
+        width: 95.w,
+        child: Placeholder(),
+      ),
+      actions: [
+        ElevatedButton(onPressed: () {}, child: Text('PROFILE')),
+        ElevatedButton(onPressed: () {}, child: Text('SEARCH')),
+      ],
+      pinned: true,
+      forceElevated: true,
+      snap: true,
+      floating: true,
+      toolbarHeight: 45.h,
+      collapsedHeight: 45.h,
+      expandedHeight: 45.h + 95.h + 10.h,
+      flexibleSpace: Padding(
+        padding: EdgeInsets.only(top: 45.h),
+        child: ListView(
+          physics: NeverScrollableScrollPhysics(),
+          children: [
+            CompanyHorizontalListTile(companyItems: companyItems),
           ],
         ),
       ),

@@ -52,6 +52,6 @@ class _PostingReviewSubscreenState extends State<PostingReviewSubscreen> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(controller: productNameController);
+    return Container();
   }
 }
