@@ -47,13 +47,16 @@ class _UpdatedListTileState extends State<UpdatedListTile> {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(AppRadius.updatedListTile),
           child: ExpansionTile(
-              title: Row(
-                children: [
-                  Text(widget.title, style: TextStyleManager.s20w500),
-                  SizedBox(width: 10),
-                  Text('(${widget.items.length})',
-                      style: TextStyleManager.s20w500),
-                ],
+              title: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Row(
+                  children: [
+                    Text(widget.title, style: TextStyleManager.s20w500),
+                    SizedBox(width: 10),
+                    Text('(${widget.items.length})',
+                        style: TextStyleManager.s20w500),
+                  ],
+                ),
               ),
               collapsedTextColor: ColorManager.black,
               collapsedIconColor: ColorManager.black,

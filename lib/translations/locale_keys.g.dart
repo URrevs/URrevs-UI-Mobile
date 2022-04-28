@@ -95,5 +95,7 @@ abstract class  LocaleKeys {
   static const short_thousands = 'short_thousands';
   static const short_millions = 'short_millions';
   static const short_billions = 'short_billions';
+  static const setAsOwnedPhone = 'setAsOwnedPhone';
+  static const generalCompanyRating = 'generalCompanyRating';
 
 }

@@ -32,7 +32,7 @@ class TextStyleManager {
         fontSize: FontSizeManager.s14,
         fontWeight: FontWeightManager.w800,
       );
-      
+
   static TextStyle get s15w400 => TextStyle(
         fontSize: FontSizeManager.s15,
         fontWeight: FontWeightManager.w400,
@@ -112,5 +112,10 @@ class TextStyleManager {
   static TextStyle get s22w700 => TextStyle(
         fontSize: FontSizeManager.s22,
         fontWeight: FontWeightManager.w700,
+      );
+
+  static TextStyle get s24w500 => TextStyle(
+        fontSize: FontSizeManager.s24,
+        fontWeight: FontWeightManager.w500,
       );
 }

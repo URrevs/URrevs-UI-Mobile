@@ -14,6 +14,7 @@ class FontSizeManager {
   static double get s18 => 1.1 * 18.sp;
   static double get s20 => 1.1 * 20.sp;
   static double get s22 => 1.1 * 22.sp;
+  static double get s24 => 1.1 * 24.sp;
 }
 
 class FontWeightManager {

@@ -25,4 +25,5 @@ class IconsManager {
   static IconData get more => Icons.more_vert;
   static IconData get smartPhone => Icons.smartphone_rounded;
   static IconData get company => Icons.business_rounded;
+  static IconData get addToOwnedProducts => Icons.playlist_add;
 }

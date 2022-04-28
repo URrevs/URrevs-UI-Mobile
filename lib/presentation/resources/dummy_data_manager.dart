@@ -9,6 +9,7 @@ import 'package:urrevs_ui_mobile/presentation/widgets/interactions/reply.dart';
 class DummyDataManager {
   static bool get randomBool => Random().nextBool();
   static int get randomInt => Random().nextInt(100000000);
+  static double get randomCircularIndicatorDouble => Random().nextDouble() * 5;
   static String get randomText => StringsManager.lorem;
   static String get sentenceOrMore =>
       faker.lorem.sentences(Random().nextInt(3) + 1).join(' ');
@@ -31,6 +32,9 @@ class DummyDataManager {
 
   static List<int> get scores =>
       List.generate(7, (_) => Random().nextInt(5) + 1);
+
+  static List<int> get productOverviewScores =>
+      List.generate(6, (_) => Random().nextInt(5) + 1);
 
   static int get likeCount => DummyDataManager.randomInt;
 

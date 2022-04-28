@@ -92,5 +92,7 @@
   "askedQuestions": "الأسئلة المطروحة",
   "short_thousands": "ألف",
   "short_millions": "مليون",
-  "short_billions": "مليار"
+  "short_billions": "مليار",
+  "setAsOwnedPhone": "تعيين كمنتج ممتلك",
+  "generalCompanyRating": "التقييم العام للشركة"
 }
