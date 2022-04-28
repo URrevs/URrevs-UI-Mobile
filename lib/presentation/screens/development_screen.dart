@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/assets_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
@@ -19,6 +20,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/bottom_navigation_bar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/buttons/auth_button.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/buttons/grad_button.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/cards/rating_overview_card.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/circular_rating_indicator.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answer_tree.dart';
@@ -57,7 +59,6 @@ List<Item> items = [
 class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
   bool isSelected = false;
   int selectedIndex = -1;
-
 
   @override
   Widget build(BuildContext context) {
@@ -105,6 +106,16 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
               imagePath: SvgAssets.googleLogo,
               color: ColorManager.grey,
               onPressed: () {}),
+          SizedBox(height: 20),
+          GradButton(
+            text: 'مشاركة رابط الدعوة',
+            icon: Icon(
+              IconsManager.share,
+              size: 23.sp,
+            ),
+            width: 325.w,
+            onPressed: () {},
+          ),
           SizedBox(height: 20),
           AuthButton(
               text: LocaleKeys.facebookAuth.tr(),
