@@ -95,7 +95,17 @@ class CodegenLoader extends AssetLoader{
   "compareWithAnotherProduct": "قارن مع منتج آخر",
   "companyReview": "مراجعة شركة",
   "productReview": "مراجعة منتج",
-  "askedQuestion": "سؤال مطروح"
+  "askedQuestion": "سؤال مطروح",
+  "collectedStars": "النجوم المجمعة",
+  "myReviews": "مراجعاتي",
+  "myQuestions": "أسئلتي",
+  "ownedProducts": "المنتجات الممتلكة",
+  "yourInvitationCode": "كود الدعوة الخاص بك",
+  "inviteYourFriendsToWriteTheirReviews": "ادعُ أصدقاءك لكتابة مراجعاتهم",
+  "questionsOnMyProducts": "الأسئلة المطروحة على منتجاتي",
+  "helpOthersAndGetPoints": "ساعد غيرك واحصل على نقاط المساعدة",
+  "reviews": "المراجعات",
+  "askedQuestions": "الأسئلة المطروحة"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -178,7 +188,17 @@ static const Map<String,dynamic> en = {
   "compareWithAnotherProduct": "Compare with another product",
   "companyReview": "Company Review",
   "productReview": "Prodcut Review",
-  "askedQuestion": "Asked Question"
+  "askedQuestion": "Asked Question",
+  "askedQuestions": "Asked Questions",
+  "collectedStars": "Collected stars",
+  "helpOthersAndGetPoints": "Help others and get points",
+  "inviteYourFriendsToWriteTheirReviews": "Invite your frients to write their reviews",
+  "myQuestions": "My questions",
+  "myReviews": "My reviews",
+  "ownedProducts": "Owned products",
+  "questionsOnMyProducts": "Questions on my products",
+  "reviews": "reviews",
+  "yourInvitationCode": "Your invitation code"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

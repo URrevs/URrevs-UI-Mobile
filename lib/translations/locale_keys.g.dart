@@ -82,5 +82,15 @@ abstract class  LocaleKeys {
   static const companyReview = 'companyReview';
   static const productReview = 'productReview';
   static const askedQuestion = 'askedQuestion';
+  static const collectedStars = 'collectedStars';
+  static const myReviews = 'myReviews';
+  static const myQuestions = 'myQuestions';
+  static const ownedProducts = 'ownedProducts';
+  static const yourInvitationCode = 'yourInvitationCode';
+  static const inviteYourFriendsToWriteTheirReviews = 'inviteYourFriendsToWriteTheirReviews';
+  static const questionsOnMyProducts = 'questionsOnMyProducts';
+  static const helpOthersAndGetPoints = 'helpOthersAndGetPoints';
+  static const reviews = 'reviews';
+  static const askedQuestions = 'askedQuestions';
 
 }

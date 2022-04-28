@@ -79,5 +79,15 @@
   "compareWithAnotherProduct": "قارن مع منتج آخر",
   "companyReview": "مراجعة شركة",
   "productReview": "مراجعة منتج",
-  "askedQuestion": "سؤال مطروح"
+  "askedQuestion": "سؤال مطروح",
+  "collectedStars": "النجوم المجمعة",
+  "myReviews": "مراجعاتي",
+  "myQuestions": "أسئلتي",
+  "ownedProducts": "المنتجات الممتلكة",
+  "yourInvitationCode": "كود الدعوة الخاص بك",
+  "inviteYourFriendsToWriteTheirReviews": "ادعُ أصدقاءك لكتابة مراجعاتهم",
+  "questionsOnMyProducts": "الأسئلة المطروحة على منتجاتي",
+  "helpOthersAndGetPoints": "ساعد غيرك واحصل على نقاط المساعدة",
+  "reviews": "المراجعات",
+  "askedQuestions": "الأسئلة المطروحة"
 }
