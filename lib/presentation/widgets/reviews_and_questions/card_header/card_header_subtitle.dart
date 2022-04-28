@@ -79,7 +79,10 @@ class CardHeaderSubtitle extends StatelessWidget {
           ],
           if (views != null) ...[
             _buildDot(),
-            Icon(IconsManager.views),
+            Padding(
+              padding: EdgeInsets.only(bottom: 5.h),
+              child: Icon(IconsManager.views),
+            ),
             3.horizontalSpace,
             Flexible(
               flex: 20,

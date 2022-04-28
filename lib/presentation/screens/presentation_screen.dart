@@ -50,8 +50,8 @@ class PresentationScreen extends ConsumerStatefulWidget {
 }
 
 List<Item> items = [
-  Item(itemName: 'Xiaomi Redmi Note 6', type: ItemDescription.Smartphone),
-  Item(itemName: 'Xiaomi', type: ItemDescription.Company),
+  Item(itemName: 'Xiaomi Redmi Note 6', type: ItemDescription.smartphone),
+  Item(itemName: 'Xiaomi', type: ItemDescription.company),
 ];
 
 class _PresentationScreenState extends ConsumerState<PresentationScreen> {

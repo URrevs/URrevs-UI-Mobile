@@ -28,9 +28,9 @@ class ItemTile extends StatelessWidget {
   /// Function that chooses the icon of the item, eihter it's smartphone or company.
   IconData chooseSuitableItemIcon(ItemDescription itemDescription) {
     switch (itemDescription) {
-      case ItemDescription.Smartphone:
+      case ItemDescription.smartphone:
         return IconsManager.smartPhone;
-      case ItemDescription.Company:
+      case ItemDescription.company:
         return IconsManager.company;
       default:
         return IconsManager.smartPhone;
@@ -41,9 +41,9 @@ class ItemTile extends StatelessWidget {
   /// A function for translating items description as for localization.
   String getItemDescription(ItemDescription type) {
     switch (type) {
-      case ItemDescription.Smartphone:
+      case ItemDescription.smartphone:
         return LocaleKeys.smartphone.tr();
-      case ItemDescription.Company:
+      case ItemDescription.company:
         return LocaleKeys.company.tr();
     }
   }

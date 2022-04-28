@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/app_elevations.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
@@ -7,7 +8,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/item_tile.dart';
 
 ///Enum that defines the type of the tile's item.
-enum ItemDescription { Smartphone, Company }
+enum ItemDescription { smartphone, company }
 
 ///A class that represents a tile that contains an item.
 class Item {
@@ -38,7 +39,7 @@ class _UpdatedListTileState extends State<UpdatedListTile> {
     return ScrollConfiguration(
       behavior: const ScrollBehavior().copyWith(overscroll: false),
       child: Card(
-        elevation: 3,
+        elevation: AppElevations.ev3,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(
             AppRadius.updatedListTile,

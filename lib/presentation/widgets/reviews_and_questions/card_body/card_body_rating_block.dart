@@ -42,7 +42,7 @@ class CardBodyRatingBlock extends StatelessWidget {
             ratingCriteria: ratingCriteria[i].tr(),
             score: scores[i],
           ),
-          9.verticalSpace,
+          4.verticalSpace,
         ]
       ],
     );

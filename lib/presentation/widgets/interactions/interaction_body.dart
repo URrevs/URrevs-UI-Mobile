@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:urrevs_ui_mobile/app/extensions.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/app_elevations.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
@@ -81,7 +82,7 @@ class _InteractionBodyState extends State<InteractionBody> {
       clipBehavior: Clip.none,
       children: [
         Card(
-          elevation: 1,
+          elevation: AppElevations.ev1,
           margin: EdgeInsets.all(0),
           shape: RoundedRectangleBorder(
             borderRadius:

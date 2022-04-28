@@ -36,23 +36,26 @@ class CardBodyReviewBlockStarBar extends StatelessWidget {
               ? TextStyleManager.s14w500
               : TextStyleManager.s16w500,
         ),
-        RatingBar.builder(
-          itemSize: 18.sp,
-          ignoreGestures: true,
-          initialRating: score.toDouble(),
-          minRating: 1,
-          direction: Axis.horizontal,
-          allowHalfRating: false,
-          itemCount: 5,
-          itemPadding: EdgeInsets.symmetric(horizontal: 3.sp),
-          itemBuilder: (context, _) => SvgPicture.asset(
-            SvgAssets.star,
-            color: ColorManager.blue,
+        Padding(
+          padding: EdgeInsets.only(bottom: 5.h),
+          child: RatingBar.builder(
+            itemSize: 18.sp,
+            ignoreGestures: true,
+            initialRating: score.toDouble(),
+            minRating: 1,
+            direction: Axis.horizontal,
+            allowHalfRating: false,
+            itemCount: 5,
+            itemPadding: EdgeInsets.symmetric(horizontal: 3.sp),
+            itemBuilder: (context, _) => SvgPicture.asset(
+              SvgAssets.star,
+              color: ColorManager.blue,
+            ),
+            unratedColor: ColorManager.grey,
+            onRatingUpdate: (rating) {
+              print(rating);
+            },
           ),
-          unratedColor: ColorManager.grey,
-          onRatingUpdate: (rating) {
-            print(rating);
-          },
         )
       ],
     );

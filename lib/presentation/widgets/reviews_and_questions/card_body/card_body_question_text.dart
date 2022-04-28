@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/font_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/see_more_button.dart';
@@ -70,6 +71,7 @@ class CardBodyQuestionText extends StatelessWidget {
       cutQuestionText(questionText),
       style: TextStyleManager.s16w400.copyWith(
         color: ColorManager.black,
+        height: FontHeightManager.post,
       ),
     );
   }

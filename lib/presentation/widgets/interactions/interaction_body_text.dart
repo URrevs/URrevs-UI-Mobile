@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/font_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_button_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
@@ -72,6 +73,7 @@ class InteractionBodyText extends StatelessWidget {
             text: cutText(interactionText),
             style: TextStyleManager.s15w400.copyWith(
               color: ColorManager.commentBlack,
+              height: FontHeightManager.post,
             ),
           ),
           WidgetSpan(

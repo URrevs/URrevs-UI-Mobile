@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:urrevs_ui_mobile/app/extensions.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/app_elevations.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
@@ -173,7 +174,7 @@ class QuestionCard extends StatelessWidget {
     return Stack(
       children: [
         Card(
-          elevation: 3,
+          elevation: AppElevations.ev3,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
               AppRadius.interactionBodyRadius,

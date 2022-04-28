@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/app_elevations.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
@@ -22,7 +23,7 @@ class InteractionLikeCounter extends StatelessWidget {
     NumberFormat numberFormat =
         NumberFormat.compact(locale: context.locale.languageCode);
     return Card(
-      elevation: 1,
+      elevation: AppElevations.ev1,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(50.r),
       ),

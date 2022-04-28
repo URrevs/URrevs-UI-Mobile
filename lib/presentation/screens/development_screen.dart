@@ -50,8 +50,8 @@ class DevelopmentScreen extends ConsumerStatefulWidget {
 }
 
 List<Item> items = [
-  Item(itemName: 'Xiaomi Redmi Note 6', type: ItemDescription.Smartphone),
-  Item(itemName: 'Xiaomi', type: ItemDescription.Company),
+  Item(itemName: 'Xiaomi Redmi Note 6', type: ItemDescription.smartphone),
+  Item(itemName: 'Xiaomi', type: ItemDescription.company),
 ];
 
 class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
@@ -107,48 +107,48 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
       body: ListView(
         padding: EdgeInsets.all(20),
         children: [
-          AuthButton(
-              text: LocaleKeys.googleAuth.tr(),
-              imagePath: SvgAssets.googleLogo,
-              color: ColorManager.grey,
-              onPressed: () {}),
-          SizedBox(height: 20),
-          AuthButton(
-              text: LocaleKeys.facebookAuth.tr(),
-              imagePath: SvgAssets.facebookLogo,
-              color: ColorManager.blue,
-              onPressed: () {}),
-          SizedBox(height: 20),
+          // AuthButton(
+          //     text: LocaleKeys.googleAuth.tr(),
+          //     imagePath: SvgAssets.googleLogo,
+          //     color: ColorManager.grey,
+          //     onPressed: () {}),
+          // SizedBox(height: 20),
+          // AuthButton(
+          //     text: LocaleKeys.facebookAuth.tr(),
+          //     imagePath: SvgAssets.facebookLogo,
+          //     color: ColorManager.blue,
+          //     onPressed: () {}),
+          // SizedBox(height: 20),
           // CompanyHorizontalListTile(companyItems: companyItems),
-          RatingOverviewCard(
-            productName: 'Nokia 7 Plus',
-            ratingCriteria: _ratingCriteria,
-            scores: DummyDataManager.productOverviewScores,
-            generalProductRating:
-                DummyDataManager.randomCircularIndicatorDouble,
-            generalCompanyRating:
-                DummyDataManager.randomCircularIndicatorDouble,
-            viewsCounter: DummyDataManager.randomInt,
-            isProduct: true,
-          ),
-          SizedBox(height: 20),
-          RatingOverviewCard(
-            productName: 'Nokia',
-            ratingCriteria: _ratingCriteria,
-            scores: DummyDataManager.productOverviewScores,
-            generalProductRating:
-                DummyDataManager.randomCircularIndicatorDouble,
-            generalCompanyRating:
-                DummyDataManager.randomCircularIndicatorDouble,
-            viewsCounter: DummyDataManager.randomInt,
-            isProduct: false,
-          ),
-          SizedBox(height: 20),
-          UpdatedListTile(
-            title: 'قائمة المنتجات المضافة حديثاً',
-            items: items,
-          ),
-          SizedBox(height: 20),
+          // RatingOverviewCard(
+          //   productName: 'Nokia 7 Plus',
+          //   ratingCriteria: _ratingCriteria,
+          //   scores: DummyDataManager.productOverviewScores,
+          //   generalProductRating:
+          //       DummyDataManager.randomCircularIndicatorDouble,
+          //   generalCompanyRating:
+          //       DummyDataManager.randomCircularIndicatorDouble,
+          //   viewsCounter: DummyDataManager.randomInt,
+          //   isProduct: true,
+          // ),
+          // SizedBox(height: 20),
+          // RatingOverviewCard(
+          //   productName: 'Nokia',
+          //   ratingCriteria: _ratingCriteria,
+          //   scores: DummyDataManager.productOverviewScores,
+          //   generalProductRating:
+          //       DummyDataManager.randomCircularIndicatorDouble,
+          //   generalCompanyRating:
+          //       DummyDataManager.randomCircularIndicatorDouble,
+          //   viewsCounter: DummyDataManager.randomInt,
+          //   isProduct: false,
+          // ),
+          // SizedBox(height: 20),
+          // UpdatedListTile(
+          //   title: 'قائمة المنتجات المضافة حديثاً',
+          //   items: items,
+          // ),
+          // SizedBox(height: 20),
           UpdatedListTile(title: 'قائمة الشركات المضافة حديثاً', items: items),
           ProductReviewCard.dummyInstance(),
           CompanyReviewCard.dummyInstance(),

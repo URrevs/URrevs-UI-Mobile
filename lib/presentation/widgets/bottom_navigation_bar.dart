@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/app_elevations.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
@@ -39,7 +40,7 @@ class BottomNavBar extends StatelessWidget {
           onTap: onTap,
           type: BottomNavigationBarType.fixed,
           backgroundColor: ColorManager.white,
-          elevation: 30,
+          elevation: AppElevations.ev30,
           iconSize: 30.sp,
           selectedItemColor: ColorManager.blue,
           selectedLabelStyle: TextStyleManager.s14w700,

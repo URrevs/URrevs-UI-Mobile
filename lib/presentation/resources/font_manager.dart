@@ -5,6 +5,10 @@ class FontConstants {
   static const String tajawal = "Tajawal";
 }
 
+class FontHeightManager {
+  static double get post => 1.33;
+}
+
 class FontSizeManager {
   static double get s12 => 1.1 * 12.sp;
   static double get s13 => 1.1 * 13.sp;
