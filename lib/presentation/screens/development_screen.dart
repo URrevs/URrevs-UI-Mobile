@@ -19,7 +19,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/bottom_navigation_bar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/buttons/auth_button.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/cards/product_rate_overview_card.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/cards/rating_overview_card.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/circular_rating_indicator.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answer_tree.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answers_list.dart';
@@ -112,21 +112,36 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
               imagePath: SvgAssets.googleLogo,
               color: ColorManager.grey,
               onPressed: () {}),
-              SizedBox(height: 20),
+          SizedBox(height: 20),
           AuthButton(
               text: LocaleKeys.facebookAuth.tr(),
               imagePath: SvgAssets.facebookLogo,
               color: ColorManager.blue,
               onPressed: () {}),
-              SizedBox(height: 20),
+          SizedBox(height: 20),
           // CompanyHorizontalListTile(companyItems: companyItems),
-          ProductRateOverviewCard(
+          RatingOverviewCard(
             productName: 'Nokia 7 Plus',
             ratingCriteria: _ratingCriteria,
             scores: DummyDataManager.productOverviewScores,
-            generalProductRating: DummyDataManager.randomCircularIndicatorDouble,
-            generalCompanyRating: DummyDataManager.randomCircularIndicatorDouble,
+            generalProductRating:
+                DummyDataManager.randomCircularIndicatorDouble,
+            generalCompanyRating:
+                DummyDataManager.randomCircularIndicatorDouble,
             viewsCounter: DummyDataManager.randomInt,
+            isProduct: true,
+          ),
+          SizedBox(height: 20),
+          RatingOverviewCard(
+            productName: 'Nokia',
+            ratingCriteria: _ratingCriteria,
+            scores: DummyDataManager.productOverviewScores,
+            generalProductRating:
+                DummyDataManager.randomCircularIndicatorDouble,
+            generalCompanyRating:
+                DummyDataManager.randomCircularIndicatorDouble,
+            viewsCounter: DummyDataManager.randomInt,
+            isProduct: false,
           ),
           SizedBox(height: 20),
           UpdatedListTile(
@@ -151,4 +166,3 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
     );
   }
 }
-
