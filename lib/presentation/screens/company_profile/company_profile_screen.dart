@@ -5,6 +5,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/company_profile/subscreens/company_profile_q_a_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/company_profile/subscreens/company_profile_reviews_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/scaffold_with_hiding_fab.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 class CompanyProfileScreen extends StatefulWidget {
@@ -20,18 +21,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
-  FloatingActionButton? get floatingActionButton {
-    switch (_tabController.index) {
-      case 1:
-        return FloatingActionButton.extended(
-          onPressed: () {},
-          label: Text(LocaleKeys.addQuestion.tr()),
-          icon: Icon(FontAwesomeIcons.plus, size: AppSize.s16),
-        );
-      default:
-        return null;
-    }
-  }
+  bool get hideFab => _tabController.index == 0;
 
   @override
   void initState() {
@@ -42,10 +32,13 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ScaffoldWithHidingFab(
       appBar: AppBars.appBarOfCompnayProfile(
           context: context, controller: _tabController, text: 'Nokia'),
-      floatingActionButton: floatingActionButton,
+      fabLabel: LocaleKeys.addQuestion.tr(),
+      fabIcon: Icon(FontAwesomeIcons.plus, size: AppSize.s16),
+      onPressingFab: () {},
+      hideFab: hideFab,
       body: SafeArea(
         child: TabBarView(
           controller: _tabController,

@@ -21,11 +21,9 @@ class _OwnedProductsScreenState extends State<OwnedProductsScreen> {
   Widget build(BuildContext context) {
     return ScaffoldWithHidingFab(
       appBar: AppBar(),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
-        label: Text(LocaleKeys.addOwnedProduct.tr()),
-        icon: Icon(FontAwesomeIcons.plus, size: AppSize.s16),
-      ),
+      onPressingFab: () {},
+      fabLabel: LocaleKeys.addOwnedProduct.tr(),
+      fabIcon: Icon(FontAwesomeIcons.plus, size: AppSize.s16),
       body: ListView.builder(
         itemBuilder: (context, index) => MenyItem(
           title: 'Nokia 7 plus',

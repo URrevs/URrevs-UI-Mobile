@@ -34,11 +34,9 @@ class _PostedQuestionsScreenState extends State<PostedQuestionsScreen> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWithHidingFab(
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
-        label: Text(LocaleKeys.addQuestion.tr()),
-        icon: Icon(FontAwesomeIcons.plus, size: AppSize.s16),
-      ),
+      onPressingFab: () {},
+      fabLabel: LocaleKeys.addQuestion.tr(),
+      fabIcon: Icon(FontAwesomeIcons.plus, size: AppSize.s16),
       body: CustomScrollView(
         slivers: [
           AppBars.appBarWithFilters(setFilter: _setFilter),

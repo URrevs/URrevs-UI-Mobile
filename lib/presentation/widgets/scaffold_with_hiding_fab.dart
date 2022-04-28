@@ -6,21 +6,41 @@ class ScaffoldWithHidingFab extends StatefulWidget {
     Key? key,
     this.appBar,
     required this.body,
-    required this.floatingActionButton,
+    required this.fabIcon,
+    required this.fabLabel,
+    required this.onPressingFab,
+    this.hideFab = false,
   }) : super(key: key);
 
   final AppBar? appBar;
   final Widget body;
-  final FloatingActionButton? floatingActionButton;
+  final Widget fabIcon;
+  final String fabLabel;
+  final VoidCallback onPressingFab;
+  final bool hideFab;
 
   @override
   State<ScaffoldWithHidingFab> createState() => _ScaffoldWithHidingFabState();
 }
 
 class _ScaffoldWithHidingFabState extends State<ScaffoldWithHidingFab> {
-  bool _showFab = true;
+  bool _expandedFab = true;
 
-  Widget? get fab => _showFab ? widget.floatingActionButton : null;
+  Widget? get fab {
+    if (widget.hideFab) return null;
+    if (_expandedFab) {
+      return FloatingActionButton.extended(
+        onPressed: widget.onPressingFab,
+        label: Text(widget.fabLabel),
+        icon: widget.fabIcon,
+      );
+    } else {
+      return FloatingActionButton(
+        onPressed: widget.onPressingFab,
+        child: widget.fabIcon,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +49,12 @@ class _ScaffoldWithHidingFabState extends State<ScaffoldWithHidingFab> {
       body: SafeArea(
         child: NotificationListener<UserScrollNotification>(
           onNotification: (notification) {
-            if (widget.floatingActionButton == null) return true;
+            if (widget.hideFab) return true;
             if (notification.metrics.axis == Axis.horizontal) return true;
             if (notification.direction == ScrollDirection.forward) {
-              if (!_showFab) setState(() => _showFab = true);
+              if (!_expandedFab) setState(() => _expandedFab = true);
             } else if (notification.direction == ScrollDirection.reverse) {
-              if (_showFab) setState(() => _showFab = false);
+              if (_expandedFab) setState(() => _expandedFab = false);
             }
             return true;
           },

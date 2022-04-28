@@ -25,26 +25,36 @@ class _ProductProfileScreenState extends State<ProductProfileScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
-  FloatingActionButton get floatingActionButton {
+  String get fabLabel {
     switch (_tabController.index) {
       case 1:
-        return FloatingActionButton.extended(
-          onPressed: () {},
-          label: Text(LocaleKeys.compareWithAnotherProduct.tr()),
-          icon: Icon(Icons.compare, size: AppSize.s22),
-        );
+        return LocaleKeys.compareWithAnotherProduct.tr();
       case 2:
-        return FloatingActionButton.extended(
-          onPressed: () {},
-          label: Text(LocaleKeys.addQuestion.tr()),
-          icon: Icon(FontAwesomeIcons.plus, size: AppSize.s16),
-        );
+        return LocaleKeys.addQuestion.tr();
       default:
-        return FloatingActionButton.extended(
-          onPressed: () {},
-          label: Text(LocaleKeys.addReview.tr()),
-          icon: Icon(FontAwesomeIcons.plus, size: AppSize.s16),
-        );
+        return LocaleKeys.addReview.tr();
+    }
+  }
+
+  Widget get fabIcon {
+    switch (_tabController.index) {
+      case 1:
+        return Icon(Icons.compare, size: AppSize.s22);
+      case 2:
+        return Icon(FontAwesomeIcons.plus, size: AppSize.s16);
+      default:
+        return Icon(FontAwesomeIcons.plus, size: AppSize.s16);
+    }
+  }
+
+  VoidCallback get onPressingFab {
+    switch (_tabController.index) {
+      case 1:
+        return () {};
+      case 2:
+        return () {};
+      default:
+        return () {};
     }
   }
 
@@ -63,7 +73,9 @@ class _ProductProfileScreenState extends State<ProductProfileScreen>
         controller: _tabController,
         text: 'Nokia 7 plus',
       ),
-      floatingActionButton: floatingActionButton,
+      fabLabel: fabLabel,
+      fabIcon: fabIcon,
+      onPressingFab: onPressingFab,
       body: TabBarView(
         controller: _tabController,
         children: [

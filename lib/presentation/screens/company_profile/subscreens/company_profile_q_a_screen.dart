@@ -11,6 +11,13 @@ class CompanyProfileQASubscreen extends StatefulWidget {
 class _CompanyProfileQASubscreenState extends State<CompanyProfileQASubscreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return ListView(
+      children: [
+        SizedBox(
+          height: 1000,
+          child: Center(child: Text('company profile q a')),
+        )
+      ],
+    );
   }
 }

@@ -34,11 +34,9 @@ class _PostedReviewsScreenState extends State<PostedReviewsScreen> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWithHidingFab(
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
-        label: Text(LocaleKeys.addReview.tr()),
-        icon: Icon(FontAwesomeIcons.plus, size: AppSize.s16),
-      ),
+      onPressingFab: () {},
+      fabLabel: LocaleKeys.addReview.tr(),
+      fabIcon: Icon(FontAwesomeIcons.plus, size: AppSize.s16),
       body: CustomScrollView(
         slivers: [
           AppBars.appBarWithFilters(setFilter: _setFilter),

@@ -33,7 +33,7 @@ class MyApp extends ConsumerWidget {
       splitScreenMode: false,
       builder: (_) => MaterialApp(
         title: LocaleKeys.urrevs.tr(),
-        initialRoute: FullscreenPostScreen.routeName,
+        initialRoute: CompanyProfileScreen.routeName,
         // initialRoute: DevelopmentScreen.routeName,
         onGenerateRoute: RouteGenerator.getRoute,
         debugShowCheckedModeBanner: false,
