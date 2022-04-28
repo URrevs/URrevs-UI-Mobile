@@ -101,65 +101,57 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
       body: ListView(
         padding: EdgeInsets.all(20),
         children: [
-          AuthButton(
-              text: LocaleKeys.googleAuth.tr(),
-              imagePath: SvgAssets.googleLogo,
-              color: ColorManager.grey,
-              onPressed: () {}),
-          SizedBox(height: 20),
-          GradButton(
-            text: 'مشاركة رابط الدعوة',
-            icon: Icon(
-              IconsManager.share,
-              size: 23.sp,
-            ),
-            width: 325.w,
-            onPressed: () {},
-          ),
-          SizedBox(height: 20),
-          AuthButton(
-              text: LocaleKeys.facebookAuth.tr(),
-              imagePath: SvgAssets.facebookLogo,
-              color: ColorManager.blue,
-              onPressed: () {}),
-          SizedBox(height: 20),
-          CompanyHorizontalListTile(companyItems: companyItems),
-          RatingOverviewCard(
-            productName: 'Nokia 7 Plus',
-            scores: DummyDataManager.productOverviewScores,
-            generalProductRating:
-                DummyDataManager.randomCircularIndicatorDouble,
-            generalCompanyRating:
-                DummyDataManager.randomCircularIndicatorDouble,
-            viewsCounter: DummyDataManager.randomInt,
-            isProduct: true,
-          ),
-          SizedBox(height: 20),
-          RatingOverviewCard(
-            productName: 'Nokia',
-            scores: DummyDataManager.productOverviewScores,
-            generalProductRating:
-                DummyDataManager.randomCircularIndicatorDouble,
-            generalCompanyRating:
-                DummyDataManager.randomCircularIndicatorDouble,
-            viewsCounter: DummyDataManager.randomInt,
-            isProduct: false,
-          ),
-          SizedBox(height: 20),
-          UpdatedListTile(
-            title: 'قائمة المنتجات المضافة حديثاً',
-            items: items,
-          ),
-          SizedBox(height: 20),
-          UpdatedListTile(title: 'قائمة الشركات المضافة حديثاً', items: items),
-          ProductReviewCard.dummyInstance(),
-          CompanyReviewCard.dummyInstance(),
-          QuestionCard.dummyInstance(context),
-          CommentTree.dummyInstance,
-          AnswerTree.dummyInstance,
+          // AuthButton(
+          //     text: LocaleKeys.googleAuth.tr(),
+          //     imagePath: SvgAssets.googleLogo,
+          //     color: ColorManager.grey,
+          //     onPressed: () {}),
+          // SizedBox(height: 20),
+          // AuthButton(
+          //     text: LocaleKeys.facebookAuth.tr(),
+          //     imagePath: SvgAssets.facebookLogo,
+          //     color: ColorManager.blue,
+          //     onPressed: () {}),
+          // SizedBox(height: 20),
+          // CompanyHorizontalListTile(companyItems: companyItems),
+          // RatingOverviewCard(
+          //   productName: 'Nokia 7 Plus',
+          //   ratingCriteria: _ratingCriteria,
+          //   scores: DummyDataManager.productOverviewScores,
+          //   generalProductRating:
+          //       DummyDataManager.randomCircularIndicatorDouble,
+          //   generalCompanyRating:
+          //       DummyDataManager.randomCircularIndicatorDouble,
+          //   viewsCounter: DummyDataManager.randomInt,
+          //   isProduct: true,
+          // ),
+          // SizedBox(height: 20),
+          // RatingOverviewCard(
+          //   productName: 'Nokia',
+          //   ratingCriteria: _ratingCriteria,
+          //   scores: DummyDataManager.productOverviewScores,
+          //   generalProductRating:
+          //       DummyDataManager.randomCircularIndicatorDouble,
+          //   generalCompanyRating:
+          //       DummyDataManager.randomCircularIndicatorDouble,
+          //   viewsCounter: DummyDataManager.randomInt,
+          //   isProduct: false,
+          // ),
+          // SizedBox(height: 20),
+          // UpdatedListTile(
+          //   title: 'قائمة المنتجات المضافة حديثاً',
+          //   items: items,
+          // ),
+          // SizedBox(height: 20),
+          // UpdatedListTile(title: 'قائمة الشركات المضافة حديثاً', items: items),
+          // ProductReviewCard.dummyInstance(),
+          // CompanyReviewCard.dummyInstance(),
+          // QuestionCard.dummyInstance(context),
+          // CommentTree.dummyInstance,
+          // AnswerTree.dummyInstance,
           // CommentsList.dummyInstance,
           // AnswersList.dummyInstance,
-          SpecsTable.dummyInstance,
+          // SpecsTable.dummyInstance,
           SpecsComparisonTable.dummyInstance,
           // SvgPicture.asset(SvgAssets.upvote, color: Colors.red),
         ],

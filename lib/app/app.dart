@@ -35,7 +35,7 @@ class MyApp extends ConsumerWidget {
       builder: (_) => MaterialApp(
         title: LocaleKeys.urrevs.tr(),
         //initialRoute: BottomNavigationBarContainerScreen.routeName,
-         initialRoute: PresentationScreen.routeName,
+        initialRoute: PresentationScreen.routeName,
         onGenerateRoute: RouteGenerator.getRoute,
         debugShowCheckedModeBanner: false,
         themeMode: ref.watch(themeModeProvider),
