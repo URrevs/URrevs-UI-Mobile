@@ -12,6 +12,7 @@ import 'package:urrevs_ui_mobile/presentation/screens/company_profile/company_pr
 import 'package:urrevs_ui_mobile/presentation/screens/comparison_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/development_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_post_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/presentation_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/product_profile/product_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/search_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/owned_products_screen.dart';
@@ -28,6 +29,8 @@ class RouteGenerator {
     switch (routeSettings.name) {
       case DevelopmentScreen.routeName:
         return MaterialPageRoute(builder: (_) => DevelopmentScreen());
+      case PresentationScreen.routeName:
+        return MaterialPageRoute(builder: (_) => PresentationScreen());
       case BottomNavigationBarContainerScreen.routeName:
         return MaterialPageRoute(
           builder: (_) => BottomNavigationBarContainerScreen(),
