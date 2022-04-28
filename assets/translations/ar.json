@@ -94,5 +94,7 @@
   "short_millions": "مليون",
   "short_billions": "مليار",
   "setAsOwnedPhone": "تعيين كمنتج ممتلك",
-  "generalCompanyRating": "التقييم العام للشركة"
+  "generalCompanyRating": "التقييم العام للشركة",
+  "writeAComment": "اكتب تعليق",
+  "writeAnAnswer": "اكتب إجابة"
 }

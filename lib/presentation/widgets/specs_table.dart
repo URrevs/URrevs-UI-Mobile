@@ -252,8 +252,6 @@ class SpecsTable extends StatelessWidget {
       left: 16.w,
     );
 
-    print('rebuilt');
-
     return Card(
       elevation: AppElevations.ev3,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -10,6 +11,7 @@ import 'package:urrevs_ui_mobile/presentation/widgets/interactions/comments_list
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/company_review_card.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/product_review_card.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/question_card.dart';
+import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 class FullscreenPostScreenArgs {
   final CardType cardType;
@@ -36,6 +38,16 @@ class FullscreenPostScreen extends StatefulWidget {
 
 class _FullscreenPostScreenState extends State<FullscreenPostScreen> {
   FocusNode focusNode = FocusNode();
+
+  String get hintText {
+    switch (widget.screenArgs.cardType) {
+      case CardType.productQuestion:
+      case CardType.companyQuestion:
+        return LocaleKeys.writeAnAnswer.tr();
+      default:
+        return LocaleKeys.writeAComment.tr();
+    }
+  }
 
   Widget get expandedCard {
     switch (widget.screenArgs.cardType) {
@@ -116,6 +128,7 @@ class _FullscreenPostScreenState extends State<FullscreenPostScreen> {
                   focusNode: focusNode,
                   style: TextStyleManager.s16w300,
                   decoration: InputDecoration(
+                    hintText: hintText,
                     filled: true,
                     fillColor: ColorManager.textFieldGrey,
                     focusColor: Colors.red,
