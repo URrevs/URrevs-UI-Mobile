@@ -20,7 +20,11 @@ class RatingOverviewCard extends StatelessWidget {
     this.scores,
     required this.viewsCounter,
     required this.isProduct,
-  }) : super(key: key);
+  })  : assert(
+          !(isProduct && generalProductRating != null),
+          'if the card represents a product, a general product rating should be provided',
+        ),
+        super(key: key);
 
   /// The name of the product.
   final String productName;
