@@ -112,7 +112,8 @@ class CodegenLoader extends AssetLoader{
   "setAsOwnedPhone": "تعيين كمنتج ممتلك",
   "generalCompanyRating": "التقييم العام للشركة",
   "writeAComment": "اكتب تعليق",
-  "writeAnAnswer": "اكتب إجابة"
+  "writeAnAnswer": "اكتب إجابة",
+  "shareInvitationLink": "مشاركة رابط الدعوة"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -212,7 +213,8 @@ static const Map<String,dynamic> en = {
   "setAsOwnedPhone": "Set as owned product",
   "generalCompanyRating": "General Company Rating",
   "writeAComment": "Write a comment",
-  "writeAnAnswer": "Write an answer"
+  "writeAnAnswer": "Write an answer",
+  "shareInvitationLink": "Share invitation link"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

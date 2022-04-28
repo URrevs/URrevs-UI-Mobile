@@ -113,7 +113,7 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
               onPressed: () {}),
           SizedBox(height: 20),
           GradButton(
-            text: 'مشاركة رابط الدعوة',
+            text: LocaleKeys.shareInvitationLink.tr(),
             icon: Icon(
               IconsManager.share,
               size: 23.sp,
