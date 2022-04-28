@@ -92,5 +92,8 @@ abstract class  LocaleKeys {
   static const helpOthersAndGetPoints = 'helpOthersAndGetPoints';
   static const reviews = 'reviews';
   static const askedQuestions = 'askedQuestions';
+  static const short_thousands = 'short_thousands';
+  static const short_millions = 'short_millions';
+  static const short_billions = 'short_billions';
 
 }

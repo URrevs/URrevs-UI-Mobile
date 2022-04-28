@@ -89,5 +89,8 @@
   "ownedProducts": "Owned products",
   "questionsOnMyProducts": "Questions on my products",
   "reviews": "reviews",
-  "yourInvitationCode": "Your invitation code"
+  "yourInvitationCode": "Your invitation code",
+  "short_thousands": "K",
+  "short_millions": "M",
+  "short_billions": "B"
 }

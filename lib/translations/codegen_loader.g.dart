@@ -105,7 +105,10 @@ class CodegenLoader extends AssetLoader{
   "questionsOnMyProducts": "الأسئلة المطروحة على منتجاتي",
   "helpOthersAndGetPoints": "ساعد غيرك واحصل على نقاط المساعدة",
   "reviews": "المراجعات",
-  "askedQuestions": "الأسئلة المطروحة"
+  "askedQuestions": "الأسئلة المطروحة",
+  "short_thousands": "ألف",
+  "short_millions": "مليون",
+  "short_billions": "مليار"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -198,7 +201,10 @@ static const Map<String,dynamic> en = {
   "ownedProducts": "Owned products",
   "questionsOnMyProducts": "Questions on my products",
   "reviews": "reviews",
-  "yourInvitationCode": "Your invitation code"
+  "yourInvitationCode": "Your invitation code",
+  "short_thousands": "K",
+  "short_millions": "M",
+  "short_billions": "B"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

@@ -89,5 +89,8 @@
   "questionsOnMyProducts": "الأسئلة المطروحة على منتجاتي",
   "helpOthersAndGetPoints": "ساعد غيرك واحصل على نقاط المساعدة",
   "reviews": "المراجعات",
-  "askedQuestions": "الأسئلة المطروحة"
+  "askedQuestions": "الأسئلة المطروحة",
+  "short_thousands": "ألف",
+  "short_millions": "مليون",
+  "short_billions": "مليار"
 }
