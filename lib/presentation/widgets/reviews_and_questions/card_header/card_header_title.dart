@@ -9,7 +9,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/company_profile/company_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/product_profile/product_profile_screen.dart';
-import 'package:urrevs_ui_mobile/presentation/screens/user_profile/other_user_profile_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/user_profile/user_profile_screen.dart';
 
 /// Build the line containing the author's name and the product name.
 class CardHeaderTitle extends StatelessWidget {
@@ -46,7 +46,10 @@ class CardHeaderTitle extends StatelessWidget {
         Flexible(
           child: GestureDetector(
             onTap: () {
-              Navigator.of(context).pushNamed(OtherUserProfileScreen.routeName);
+              Navigator.of(context).pushNamed(
+                UserProfileScreen.routeName,
+                arguments: UserProfileScreenArgs(otherUser: true),
+              );
             },
             child: Text(
               authorName,

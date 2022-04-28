@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:urrevs_ui_mobile/presentation/resources/assets_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
@@ -15,8 +16,17 @@ import 'package:urrevs_ui_mobile/presentation/widgets/tiles/item_tile.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/updated_list_tile.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
+class UserProfileScreenArgs {
+  bool otherUser;
+  UserProfileScreenArgs({
+    this.otherUser = false,
+  });
+}
+
 class UserProfileScreen extends StatefulWidget {
-  const UserProfileScreen({Key? key}) : super(key: key);
+  const UserProfileScreen(this.screenArgs, {Key? key}) : super(key: key);
+
+  final UserProfileScreenArgs screenArgs;
 
   static const String routeName = 'UserProfileScreen';
 
@@ -55,7 +65,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     );
   }
 
-  List<Widget> get menuItemsList => [
+  List<Widget> get myProfileListItems => [
         MenyItem(
           title: LocaleKeys.myReviews.tr(),
           iconData: Icons.rate_review_outlined,
@@ -95,6 +105,30 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
         ),
       ];
 
+  List<Widget> get otherUserProfileListItems => [
+        MenyItem(
+          title: LocaleKeys.reviews.tr(),
+          iconData: Icons.rate_review_outlined,
+          onTap: () {
+            Navigator.of(context).pushNamed(PostedReviewsScreen.routeName);
+          },
+        ),
+        MenyItem(
+          title: LocaleKeys.ownedProducts.tr(),
+          iconData: Icons.question_answer_outlined,
+          onTap: () {
+            Navigator.of(context).pushNamed(OwnedProductsScreen.routeName);
+          },
+        ),
+        MenyItem(
+          title: LocaleKeys.askedQuestions.tr(),
+          iconData: Icons.devices_other_outlined,
+          onTap: () {
+            Navigator.of(context).pushNamed(PostedQuestionsScreen.routeName);
+          },
+        ),
+      ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -117,7 +151,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 8.verticalSpace,
                 _buildCollectedStars(),
                 22.verticalSpace,
-                ...menuItemsList
+                if (!widget.screenArgs.otherUser) ...myProfileListItems,
+                if (widget.screenArgs.otherUser) ...otherUserProfileListItems,
               ],
             )
           ],
