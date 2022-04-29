@@ -19,6 +19,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/bottom_navigation_bar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/buttons/auth_button.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/buttons/grad_button.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/cards/rating_overview_card.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/circular_rating_indicator.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answer_tree.dart';
@@ -57,7 +58,7 @@ List<Item> items = [
 class _PresentationScreenState extends ConsumerState<PresentationScreen> {
   bool isSelected = false;
   int selectedIndex = -1;
-  
+
   @override
   Widget build(BuildContext context) {
     NumberFormat numberFormat =
@@ -110,6 +111,16 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
               imagePath: SvgAssets.facebookLogo,
               color: ColorManager.blue,
               onPressed: () {}),
+          SizedBox(height: 20),
+          GradButton(
+            text: LocaleKeys.shareInvitationLink.tr(),
+            icon: Icon(
+              IconsManager.share,
+              size: 23.sp,
+            ),
+            width: 325.w,
+            onPressed: () {},
+          ),
           SizedBox(height: 20),
           // CompanyHorizontalListTile(companyItems: companyItems),
           RatingOverviewCard(

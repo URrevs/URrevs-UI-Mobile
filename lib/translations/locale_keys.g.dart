@@ -99,5 +99,6 @@ abstract class  LocaleKeys {
   static const generalCompanyRating = 'generalCompanyRating';
   static const writeAComment = 'writeAComment';
   static const writeAnAnswer = 'writeAnAnswer';
+  static const shareInvitationLink = 'shareInvitationLink';
 
 }
