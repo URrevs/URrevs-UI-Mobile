@@ -7,9 +7,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gradient_widgets/gradient_widgets.dart';
+import 'package:urrevs_ui_mobile/app/extensions.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/assets_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/font_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
@@ -20,6 +23,7 @@ import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/bottom_navigation_bar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/buttons/auth_button.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/buttons/grad_button.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/cards/competition_banner.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/cards/rating_overview_card.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/circular_rating_indicator.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answer_tree.dart';
@@ -100,6 +104,16 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
       body: ListView(
         padding: EdgeInsets.all(20),
         children: [
+          RatingOverviewCard(
+            productName: 'Nokia 7 Plus',
+            scores: DummyDataManager.productOverviewScores,
+            generalProductRating:
+                DummyDataManager.randomCircularIndicatorDouble,
+            generalCompanyRating:
+                DummyDataManager.randomCircularIndicatorDouble,
+            viewsCounter: DummyDataManager.randomInt,
+            isProduct: true,
+          ),
           AuthButton(
               text: LocaleKeys.googleAuth.tr(),
               imagePath: SvgAssets.googleLogo,
@@ -112,27 +126,30 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
               color: ColorManager.blue,
               onPressed: () {}),
           SizedBox(height: 20),
+          CompetitionBanner(
+            numberOfRemainingdays: 12,
+            prizeName: 'Xiaomi Mi Band 5',
+          ),
+          SizedBox(
+            height: 20,
+          ),
           GradButton(
-            text: LocaleKeys.shareInvitationLink.tr(),
+            text: Text(
+              LocaleKeys.shareInvitationLink.tr(),
+              style: TextStyleManager.s18w700,
+            ),
             icon: Icon(
               IconsManager.share,
               size: 23.sp,
             ),
             width: 325.w,
+            reverseIcon: false,
             onPressed: () {},
           ),
           SizedBox(height: 20),
-          // CompanyHorizontalListTile(companyItems: companyItems),
-          RatingOverviewCard(
-            productName: 'Nokia 7 Plus',
-            scores: DummyDataManager.productOverviewScores,
-            generalProductRating:
-                DummyDataManager.randomCircularIndicatorDouble,
-            generalCompanyRating:
-                DummyDataManager.randomCircularIndicatorDouble,
-            viewsCounter: DummyDataManager.randomInt,
-            isProduct: true,
-          ),
+          CompanyHorizontalListTile(companyItems: companyItems),
+          SizedBox(height: 20),
+
           SizedBox(height: 20),
           RatingOverviewCard(
             productName: 'Nokia',

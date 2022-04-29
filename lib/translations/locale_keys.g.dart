@@ -100,5 +100,14 @@ abstract class  LocaleKeys {
   static const writeAComment = 'writeAComment';
   static const writeAnAnswer = 'writeAnAnswer';
   static const shareInvitationLink = 'shareInvitationLink';
+  static const updateProducts = 'updateProducts';
+  static const addCompetition = 'addCompetition';
+  static const compare = 'compare';
+  static const postReview = 'postReview';
+  static const postQuestion = 'postQuestion';
+  static const howToWin = 'howToWin';
+  static const inviteFriends = 'inviteFriends';
+  static const remainigDays = 'remainigDays';
+  static const thePrizeIs = 'thePrizeIs';
 
 }
