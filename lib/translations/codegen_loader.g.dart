@@ -120,7 +120,9 @@ class CodegenLoader extends AssetLoader{
   "postReview": "انشر المراجعة",
   "postQuestion": "انشر السؤال",
   "howToWin": "كيف تربح",
-  "inviteFriends": "ادعُ أصدقائك"
+  "inviteFriends": "ادعُ أصدقائك",
+  "remainigDays": "يوم وتنتهي المسابقة",
+  "thePrizeIs": "الجائزة هي"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -228,7 +230,9 @@ static const Map<String,dynamic> en = {
   "postReview": "Post review",
   "postQuestion": "Post question",
   "howToWin": "How to win",
-  "inviteFriends": "Invite friends"
+  "inviteFriends": "Invite friends",
+  "remainigDays": "days and the competition ends",
+  "thePrizeIs": "the prize is"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

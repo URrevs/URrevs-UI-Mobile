@@ -107,5 +107,7 @@ abstract class  LocaleKeys {
   static const postQuestion = 'postQuestion';
   static const howToWin = 'howToWin';
   static const inviteFriends = 'inviteFriends';
+  static const remainigDays = 'remainigDays';
+  static const thePrizeIs = 'thePrizeIs';
 
 }
