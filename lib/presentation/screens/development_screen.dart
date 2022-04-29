@@ -1,12 +1,17 @@
+import 'dart:io';
 import 'dart:math';
 
+import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:faker/faker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/assets_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
@@ -58,6 +63,55 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
   bool isSelected = false;
   int selectedIndex = -1;
 
+  void signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    await FirebaseAuth.instance.signInWithCredential(credential);
+
+    String idToken = await FirebaseAuth.instance.currentUser!.getIdToken();
+    await Dio().get(
+      'https://urrevs-api-dev-mobile.herokuapp.com/users/authenticate',
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer $idToken',
+        },
+      ),
+    );
+  }
+
+  void signInWithFacebook() async {
+    // Trigger the sign-in flow
+    final LoginResult loginResult = await FacebookAuth.instance.login();
+
+    // Create a credential from the access token
+    final OAuthCredential facebookAuthCredential =
+        FacebookAuthProvider.credential(loginResult.accessToken!.token);
+
+    // Once signed in, return the UserCredential
+    await FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+
+    String idToken = await FirebaseAuth.instance.currentUser!.getIdToken();
+    await Dio().get(
+      'https://urrevs-api-dev-mobile.herokuapp.com/users/authenticate',
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer $idToken',
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,6 +140,10 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
                 .setThemeMode(ThemeMode.light),
             child: Text('☀'),
           ),
+          ElevatedButton(
+            onPressed: () => print(FirebaseAuth.instance.currentUser),
+            child: Text('hhh'),
+          ),
           // ElevatedButton(
           //   onPressed: () {
           //     print("scale width: ${ScreenUtil().scaleWidth}");
@@ -100,17 +158,19 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
       body: ListView(
         padding: EdgeInsets.all(20),
         children: [
-          // AuthButton(
-          //     text: LocaleKeys.googleAuth.tr(),
-          //     imagePath: SvgAssets.googleLogo,
-          //     color: ColorManager.grey,
-          //     onPressed: () {}),
-          // SizedBox(height: 20),
-          // AuthButton(
-          //     text: LocaleKeys.facebookAuth.tr(),
-          //     imagePath: SvgAssets.facebookLogo,
-          //     color: ColorManager.blue,
-          //     onPressed: () {}),
+          AuthButton(
+            text: LocaleKeys.googleAuth.tr(),
+            imagePath: SvgAssets.googleLogo,
+            color: ColorManager.grey,
+            onPressed: signInWithGoogle,
+          ),
+          SizedBox(height: 20),
+          AuthButton(
+            text: LocaleKeys.facebookAuth.tr(),
+            imagePath: SvgAssets.facebookLogo,
+            color: ColorManager.blue,
+            onPressed: signInWithFacebook,
+          ),
           // SizedBox(height: 20),
           // CompanyHorizontalListTile(companyItems: companyItems),
           // RatingOverviewCard(
@@ -151,7 +211,7 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
           // CommentsList.dummyInstance,
           // AnswersList.dummyInstance,
           // SpecsTable.dummyInstance,
-          SpecsComparisonTable.dummyInstance,
+          // SpecsComparisonTable.dummyInstance,
           // SvgPicture.asset(SvgAssets.upvote, color: Colors.red),
         ],
       ),

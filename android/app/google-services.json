@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "1037779383625",
+    "firebase_url": "https://urrev-da6af.firebaseio.com",
+    "project_id": "urrev-da6af",
+    "storage_bucket": "urrev-da6af.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1037779383625:android:a15d44b30cd1f73bdd1698",
+        "android_client_info": {
+          "package_name": "com.example.urevs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1037779383625-f60e4mqrq96aa59rvsbvo2fe71j9c4vl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.urevs",
+            "certificate_hash": "68f6967aec7ab1ce52f34adbe4c5e79de92906ad"
+          }
+        },
+        {
+          "client_id": "1037779383625-len1tqm0tmv9o0vn7perec0mnkhcpdfo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.urevs",
+            "certificate_hash": "66c674034917f9a3d8aa7a085df572dd8ac5e8e7"
+          }
+        },
+        {
+          "client_id": "1037779383625-i46rhqhdrtl8hkbn15qhgr77nn9jbv17.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbxIi7JY0gnSZfz-Y-ydZvougIIVT2Kac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1037779383625-i46rhqhdrtl8hkbn15qhgr77nn9jbv17.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1037779383625-os7mahque55895al98cr6t0lnrtq0q7t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.urevs"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1037779383625:android:5162f7d0a85f7a88dd1698",
+        "android_client_info": {
+          "package_name": "com.example.urrevs_ui_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1037779383625-i46rhqhdrtl8hkbn15qhgr77nn9jbv17.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbxIi7JY0gnSZfz-Y-ydZvougIIVT2Kac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1037779383625-i46rhqhdrtl8hkbn15qhgr77nn9jbv17.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1037779383625-os7mahque55895al98cr6t0lnrtq0q7t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.urevs"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
