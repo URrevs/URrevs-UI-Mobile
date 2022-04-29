@@ -122,7 +122,8 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
             onPressed: () {},
           ),
           SizedBox(height: 20),
-          // CompanyHorizontalListTile(companyItems: companyItems),
+          CompanyHorizontalListTile(companyItems: companyItems),
+          SizedBox(height: 20),
           RatingOverviewCard(
             productName: 'Nokia 7 Plus',
             scores: DummyDataManager.productOverviewScores,
