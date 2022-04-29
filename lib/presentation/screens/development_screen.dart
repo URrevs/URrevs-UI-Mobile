@@ -11,8 +11,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
+import 'package:urrevs_ui_mobile/domain/repository.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/assets_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
@@ -83,6 +85,11 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
     await FirebaseAuth.instance.signInWithCredential(credential);
 
     String idToken = await FirebaseAuth.instance.currentUser!.getIdToken();
+
+    debugPrint('firebase idToken: $idToken');
+    debugPrint('google idToken: ${googleAuth?.idToken}');
+    debugPrint('google access token: ${googleAuth?.accessToken}');
+
     await Dio().get(
       'https://urrevs-api-dev-mobile.herokuapp.com/users/authenticate',
       options: Options(
@@ -164,7 +171,9 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
             text: LocaleKeys.googleAuth.tr(),
             imagePath: SvgAssets.googleLogo,
             color: ColorManager.grey,
-            onPressed: signInWithGoogle,
+            onPressed: () {
+              GetIt.I<Repository>().authenticateWithGoogle();
+            },
           ),
           SizedBox(height: 20),
           AuthButton(
