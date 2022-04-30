@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -94,6 +95,7 @@ class _AuthenticationScreenState extends ConsumerState<AuthenticationScreen> {
         TextButton(
           onPressed: () {
             GoogleSignIn().signOut();
+            FacebookAuth.instance.logOut();
             FirebaseAuth.instance.signOut();
           },
           child: Text('LOGOUT'),

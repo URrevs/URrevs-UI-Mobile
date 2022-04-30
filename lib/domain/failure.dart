@@ -141,3 +141,7 @@ extension FirebaseAuthExceptionFailure on FirebaseAuthException {
 extension AuthenticationCancelledFailure on AuthenticationCancelled {
   Failure get failure => CancelFailure();
 }
+
+// extension NoCurrentUserExceptionExtention on NoCurrentUserException {
+//   Failure get failure => Failure('There is no current logged in user');
+// }

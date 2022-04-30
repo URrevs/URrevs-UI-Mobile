@@ -12,4 +12,7 @@ abstract class RemoteDataSource {
   Future<AuthenticationResponse> authenticate(
     @Header('authorization') String authorizationHeader,
   );
+
+  @GET('/users/profile')
+  Future<GetMyProfileResponse> getMyProfile();
 }

@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -11,6 +13,8 @@ import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_scre
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/owned_products_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/posted_questions_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/posted_reviews_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/get_my_user_profile_state.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/item_tile.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/updated_list_tile.dart';
@@ -23,7 +27,7 @@ class UserProfileScreenArgs {
   });
 }
 
-class UserProfileScreen extends StatefulWidget {
+class UserProfileScreen extends ConsumerStatefulWidget {
   const UserProfileScreen(this.screenArgs, {Key? key}) : super(key: key);
 
   final UserProfileScreenArgs screenArgs;
@@ -31,38 +35,47 @@ class UserProfileScreen extends StatefulWidget {
   static const String routeName = 'UserProfileScreen';
 
   @override
-  State<UserProfileScreen> createState() => _UserProfileScreenState();
+  ConsumerState<UserProfileScreen> createState() => _UserProfileScreenState();
 }
 
-class _UserProfileScreenState extends State<UserProfileScreen> {
-  Row _buildCollectedStars() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          'النجوم المجمعة',
-          style: TextStyleManager.s20w400.copyWith(
-            color: ColorManager.grey,
+class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
+  Widget _buildCollectedStars() {
+    final state = ref.watch(getMyProfileProvider);
+    if (state is GetMyProfileLoadedState) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            LocaleKeys.collectedStars.tr(),
+            style: TextStyleManager.s20w400.copyWith(
+              color: ColorManager.grey,
+            ),
           ),
-        ),
-        12.horizontalSpace,
-        Padding(
-          padding: EdgeInsets.only(bottom: 6.h),
-          child: SvgPicture.asset(
-            SvgAssets.star,
-            color: ColorManager.blue,
-            height: 24.sp,
+          12.horizontalSpace,
+          Padding(
+            padding: EdgeInsets.only(bottom: 6.h),
+            child: SvgPicture.asset(
+              SvgAssets.star,
+              color: ColorManager.blue,
+              height: 24.sp,
+            ),
           ),
-        ),
-        6.horizontalSpace,
-        Text(
-          '40',
-          style: TextStyleManager.s20w400.copyWith(
-            color: ColorManager.grey,
+          6.horizontalSpace,
+          Text(
+            '40',
+            style: TextStyleManager.s20w400.copyWith(
+              color: ColorManager.grey,
+            ),
           ),
-        ),
-      ],
-    );
+        ],
+      );
+    } else if (state is GetMyProfileLoadingState) {
+      return Center(child: CircularProgressIndicator());
+    } else if (state is GetMyProfileErrorState) {
+      return Text(state.failure.message);
+    } else {
+      return SizedBox();
+    }
   }
 
   List<Widget> get myProfileListItems => [
@@ -129,6 +142,29 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
         ),
       ];
 
+  String get imageUrl {
+    if (widget.screenArgs.otherUser) return StringsManager.picsum200x200;
+    firebase_auth.User? user = firebase_auth.FirebaseAuth.instance.currentUser;
+    if (user == null) throw UnsupportedError('user should have logged in');
+    return user.photoURL!;
+  }
+
+  String get userName {
+    if (widget.screenArgs.otherUser) return 'Other user';
+    firebase_auth.User? user = firebase_auth.FirebaseAuth.instance.currentUser;
+    if (user == null) throw UnsupportedError('user should have logged in');
+    return user.displayName!;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(
+      Duration.zero,
+      ref.read(getMyProfileProvider.notifier).getMyProfile,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -140,12 +176,12 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               children: [
                 15.verticalSpace,
                 Avatar(
-                  imageUrl: StringsManager.picsum200x200,
+                  imageUrl: imageUrl,
                   radius: 45.r,
                 ),
                 10.verticalSpace,
                 Text(
-                  'Ziad Mostafa',
+                  userName,
                   style: TextStyleManager.s22w700,
                 ),
                 8.verticalSpace,

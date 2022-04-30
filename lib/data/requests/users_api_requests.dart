@@ -1,1 +1,3 @@
 class AuthenticationRequest {}
+
+class GetMyProfileRequest {}

@@ -21,3 +21,18 @@ Map<String, dynamic> _$AuthenticationResponseToJson(
       'status': instance.status,
       'token': instance.token,
     };
+
+GetMyProfileResponse _$GetMyProfileResponseFromJson(
+        Map<String, dynamic> json) =>
+    GetMyProfileResponse(
+      success: json['success'] as bool,
+      userSubResponse:
+          UserSubResponse.fromJson(json['user'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$GetMyProfileResponseToJson(
+        GetMyProfileResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'user': instance.userSubResponse,
+    };

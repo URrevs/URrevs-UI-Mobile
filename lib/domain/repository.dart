@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -42,7 +43,7 @@ class Repository {
       AuthenticationResponse response =
           await _remoteDataSource.authenticate(authorizationHeader);
       GetIt.I<Dio>().options.headers[HttpHeaders.authorizationHeader] =
-          'Bearer ${response.token}';
+          'bearer ${response.token}';
 
       print(response);
 
@@ -64,6 +65,7 @@ class Repository {
       bool hasConnection = await InternetConnectionChecker().hasConnection;
       if (!hasConnection) throw NoInternetConnection();
 
+      await FacebookAuth.instance.logOut();
       final LoginResult loginResult = await FacebookAuth.instance.login();
       if (loginResult.accessToken == null) throw AuthenticationCancelled();
       final OAuthCredential facebookAuthCredential =
@@ -76,7 +78,7 @@ class Repository {
       AuthenticationResponse response =
           await _remoteDataSource.authenticate(authorizationHeader);
       GetIt.I<Dio>().options.headers[HttpHeaders.authorizationHeader] =
-          'Bearer ${response.token}';
+          'bearer ${response.token}';
 
       print(response);
 
@@ -88,6 +90,25 @@ class Repository {
     } on DioError catch (e) {
       return Left(e.failure);
     } on FirebaseAuthException catch (e) {
+      return Left(e.failure);
+    }
+  }
+
+  // Either<Failure, String> getUserImageUrl() {
+  //   try {
+  //     User? user = FirebaseAuth.instance.currentUser;
+  //     if (user == null) throw NoCurrentUserException();
+  //     return Right(user.photoURL!);
+  //   } on NoCurrentUserException catch (e) {
+  //     return Left(e.failure);
+  //   }
+  // }
+
+  Future<Either<Failure, GetMyProfileResponse>> getMyProfile() async {
+    try {
+      final response = await _remoteDataSource.getMyProfile();
+      return Right(response);
+    } on DioError catch (e) {
       return Left(e.failure);
     }
   }

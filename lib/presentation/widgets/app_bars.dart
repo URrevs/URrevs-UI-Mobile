@@ -1,7 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:urrevs_ui_mobile/app/exceptions.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/search_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/user_profile_screen.dart';
@@ -9,20 +11,26 @@ import 'package:urrevs_ui_mobile/presentation/widgets/tiles/company_horizontal_l
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 class AppBars {
-  static List<Widget> actions(BuildContext context) => <Widget>[
-        ElevatedButton(
-          onPressed: () {
-            Navigator.of(context).pushNamed(UserProfileScreen.routeName);
-          },
-          child: Text('profile'),
-        ),
-        ElevatedButton(
-          onPressed: () {
-            Navigator.of(context).pushNamed(SearchScreen.routeName);
-          },
-          child: Text('search'),
-        ),
-      ];
+  static List<Widget> actions(BuildContext context) {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      throw UnsupportedError('user should be logged in to see these actions');
+    }
+    return <Widget>[
+      ElevatedButton(
+        onPressed: () {
+          Navigator.of(context).pushNamed(UserProfileScreen.routeName);
+        },
+        child: Image.network(user.photoURL!, height: 50.h),
+      ),
+      ElevatedButton(
+        onPressed: () {
+          Navigator.of(context).pushNamed(SearchScreen.routeName);
+        },
+        child: Text('search'),
+      ),
+    ];
+  }
 
   static AppBar appBarWithURrevsLogo({
     required BuildContext context,
