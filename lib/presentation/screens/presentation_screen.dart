@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 import 'package:urrevs_ui_mobile/app/extensions.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/assets_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
@@ -39,6 +40,7 @@ import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/prod
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/question_card.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/specs_comparison_table.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/specs_table.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/stars_counter.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/company_horizontal_list_tile.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/company_logo_tile.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/updated_list_tile.dart';
@@ -104,6 +106,9 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
       body: ListView(
         padding: EdgeInsets.all(20),
         children: [
+          SizedBox(height: 20),
+          StarsCounter(percentage: 0.5),
+          SizedBox(height: 20),
           RatingOverviewCard(
             productName: 'Nokia 7 Plus',
             scores: DummyDataManager.productOverviewScores,
@@ -184,3 +189,4 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
     );
   }
 }
+
