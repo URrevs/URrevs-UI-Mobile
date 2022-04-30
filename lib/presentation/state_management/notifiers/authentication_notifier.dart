@@ -17,7 +17,21 @@ class AuthenticationNotifier extends StateNotifier<AuthenticationState> {
         }
         state = AuthenticationErrorState(failure: failure);
       },
-      (r) => state = AuthenticationLoadedState(),
+      (_) => state = AuthenticationLoadedState(),
+    );
+  }
+
+  void authenticateWithFacebook() async {
+    state = AuthenticationLoadingState();
+    final response = await GetIt.I<Repository>().authenticateWithFacebook();
+    response.fold(
+      (failure) {
+        if (failure.mode == FailureMode.cancel) {
+          return state = AuthenticationInitialState();
+        }
+        state = AuthenticationErrorState(failure: failure);
+      },
+      (_) => state = AuthenticationLoadedState(),
     );
   }
 }

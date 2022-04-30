@@ -64,6 +64,11 @@ class ColorManager {
         dark: Color(0xffE3E3E3),
       ).pickColor();
 
+  static Color get dialogCloseIconBackground => ColorPair(
+        light: Color(0xffe8e8e8),
+        dark: Color(0xffe8e8e8),
+      ).pickColor();
+
   static Color get black => ColorPair(
         light: Color(0xff050505),
         dark: Color(0xff050505),

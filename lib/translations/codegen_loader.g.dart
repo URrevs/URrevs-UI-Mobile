@@ -132,7 +132,10 @@ class CodegenLoader extends AssetLoader{
   "userDisabled": "تم تعطيل هذا المستخدم",
   "userNotFound": "هذا البريد الإلكتروني غير موجود",
   "wrongPassword": "كلمة مرور خاطئة",
-  "unknownFirebaseError": "خطأ غير معروف في Firebase"
+  "unknownFirebaseError": "خطأ غير معروف في Firebase",
+  "toggleLanguageButtonText": "English",
+  "somethingWentWrong": "حدث خطأ ما",
+  "ok": "حسناً"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -252,7 +255,10 @@ static const Map<String,dynamic> en = {
   "wrongPassword": "Wrong password",
   "invalidVerificationCode": "Verification code is not valid",
   "invalidVerificationId": "The verification id is not valid",
-  "unknownFirebaseError": "Unknwon Firebase error"
+  "unknownFirebaseError": "Unknwon Firebase error",
+  "toggleLanguageButtonText": "العربية",
+  "somethingWentWrong": "Something went wrong",
+  "ok": "Ok"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

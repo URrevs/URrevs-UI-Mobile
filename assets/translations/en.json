@@ -116,5 +116,8 @@
   "wrongPassword": "Wrong password",
   "invalidVerificationCode": "Verification code is not valid",
   "invalidVerificationId": "The verification id is not valid",
-  "unknownFirebaseError": "Unknwon Firebase error"
+  "unknownFirebaseError": "Unknwon Firebase error",
+  "toggleLanguageButtonText": "العربية",
+  "somethingWentWrong": "Something went wrong",
+  "ok": "Ok"
 }

@@ -4,15 +4,22 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:loader_overlay/loader_overlay.dart';
+import 'package:urrevs_ui_mobile/app/extensions.dart';
 import 'package:urrevs_ui_mobile/data/dio_factory.dart';
+import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/assets_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/flags_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/font_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/authentication_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/authentication_state.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/buttons/auth_button.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/prompts/error_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/urrevs_logo.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
@@ -28,12 +35,16 @@ class AuthenticationScreen extends ConsumerStatefulWidget {
 
 class _AuthenticationScreenState extends ConsumerState<AuthenticationScreen> {
   Align _buildLanguageButton() {
+    Locale targetLocale =
+        context.isArabic ? LanguageType.en.locale : LanguageType.ar.locale;
+    Alignment alignment =
+        context.isArabic ? Alignment.topLeft : Alignment.topRight;
     return Align(
-      alignment: Alignment.topLeft,
+      alignment: alignment,
       child: Padding(
         padding: EdgeInsets.all(12.sp),
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () => context.setLocale(targetLocale),
           style: ElevatedButton.styleFrom(
             shadowColor: ColorManager.blue,
             shape: RoundedRectangleBorder(
@@ -47,30 +58,15 @@ class _AuthenticationScreenState extends ConsumerState<AuthenticationScreen> {
               fontFamily: FontConstants.tajawal,
             ),
           ),
-          child: Text('English'),
+          child: Text(LocaleKeys.toggleLanguageButtonText.tr()),
         ),
       ),
     );
   }
 
   Widget _buildAuthenticationButtons() {
-    final state = ref.watch(authenticationProvider);
-    if (state is AuthenticationLoadingState) {
-      return SizedBox(
-        height: 100.h,
-        child: Center(child: CircularProgressIndicator()),
-      );
-    } else if (state is AuthenticationErrorState) {
-      print(state.failure);
-    }
     return Column(
       children: [
-        ElevatedButton(
-          onPressed: () {
-            FirebaseAuth.instance.signOut();
-          },
-          child: Text("SIGN OUT"),
-        ),
         AuthButton(
           text: LocaleKeys.googleAuth.tr(),
           imagePath: SvgAssets.googleLogo,
@@ -83,26 +79,75 @@ class _AuthenticationScreenState extends ConsumerState<AuthenticationScreen> {
           text: LocaleKeys.facebookAuth.tr(),
           imagePath: SvgAssets.facebookLogo,
           color: ColorManager.blue,
-          onPressed: () {},
+          onPressed: ref
+              .read(authenticationProvider.notifier)
+              .authenticateWithFacebook,
         ),
       ],
     );
   }
 
+  List<Widget>? get persistentFooterButtons {
+    if (FlagsManager.development) {
+      return [
+        TextButton(
+          onPressed: () {
+            GoogleSignIn().signOut();
+            FirebaseAuth.instance.signOut();
+          },
+          child: Text('LOGOUT'),
+        ),
+        TextButton(
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (context) => ErrorDialog(
+                failure: Failure('حدث خطأ ما.'),
+              ),
+            );
+          },
+          child: Text('SHOW DIALOG'),
+        ),
+      ];
+    } else {
+      return null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    ref.listen<AuthenticationState>(authenticationProvider, (previous, next) {
+      if (next is AuthenticationLoadingState) {
+        context.loaderOverlay.show();
+      } else {
+        if (context.loaderOverlay.visible) {
+          context.loaderOverlay.hide();
+        }
+      }
+    });
+    ref.listen<AuthenticationState>(authenticationProvider, (previous, next) {
+      if (next is AuthenticationErrorState) {
+        showDialog(
+          context: context,
+          builder: (context) => ErrorDialog(failure: next.failure),
+        );
+      }
+    });
     return Scaffold(
       backgroundColor: ColorManager.white,
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            _buildLanguageButton(),
-            80.verticalSpace,
-            URrevsLogo(),
-            80.verticalSpace,
-            _buildAuthenticationButtons(),
-          ],
+      persistentFooterButtons: persistentFooterButtons,
+      body: LoaderOverlay(
+        child: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              _buildLanguageButton(),
+              80.verticalSpace,
+              URrevsLogo(),
+              80.verticalSpace,
+              _buildAuthenticationButtons(),
+            ],
+          ),
         ),
       ),
     );

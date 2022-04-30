@@ -119,5 +119,8 @@ abstract class  LocaleKeys {
   static const userNotFound = 'userNotFound';
   static const wrongPassword = 'wrongPassword';
   static const unknownFirebaseError = 'unknownFirebaseError';
+  static const toggleLanguageButtonText = 'toggleLanguageButtonText';
+  static const somethingWentWrong = 'somethingWentWrong';
+  static const ok = 'ok';
 
 }
