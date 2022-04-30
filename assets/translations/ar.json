@@ -106,5 +106,15 @@
   "howToWin": "كيف تربح",
   "inviteFriends": "ادعُ أصدقائك",
   "remainigDays": "يوم وتنتهي المسابقة",
-  "thePrizeIs": "الجائزة هي"
+  "thePrizeIs": "الجائزة هي",
+  "thereIsNoInternetConnection": "لا يوجد اتصال بالانترنت",
+  "accountExistsWithDifferentCredential": "هذا الحساب موجود بالفعل ببيانات اعتماد مختلفة",
+  "invalidCredential": "بيانات الاعتماد غير صالحة: بيانات الاعتماد غير صحيحة أو منتهية الصلاحية",
+  "invalidVerificationCode": "رمز التحقق غير صالح",
+  "invalidVerificationId": "معرف التحقق غير صالح",
+  "operationNotAllowed": "العملية غير مسموح بها",
+  "userDisabled": "تم تعطيل هذا المستخدم",
+  "userNotFound": "هذا البريد الإلكتروني غير موجود",
+  "wrongPassword": "كلمة مرور خاطئة",
+  "unknownFirebaseError": "خطأ غير معروف في Firebase"
 }

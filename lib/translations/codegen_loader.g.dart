@@ -122,7 +122,17 @@ class CodegenLoader extends AssetLoader{
   "howToWin": "كيف تربح",
   "inviteFriends": "ادعُ أصدقائك",
   "remainigDays": "يوم وتنتهي المسابقة",
-  "thePrizeIs": "الجائزة هي"
+  "thePrizeIs": "الجائزة هي",
+  "thereIsNoInternetConnection": "لا يوجد اتصال بالانترنت",
+  "accountExistsWithDifferentCredential": "هذا الحساب موجود بالفعل ببيانات اعتماد مختلفة",
+  "invalidCredential": "بيانات الاعتماد غير صالحة: بيانات الاعتماد غير صحيحة أو منتهية الصلاحية",
+  "invalidVerificationCode": "رمز التحقق غير صالح",
+  "invalidVerificationId": "معرف التحقق غير صالح",
+  "operationNotAllowed": "العملية غير مسموح بها",
+  "userDisabled": "تم تعطيل هذا المستخدم",
+  "userNotFound": "هذا البريد الإلكتروني غير موجود",
+  "wrongPassword": "كلمة مرور خاطئة",
+  "unknownFirebaseError": "خطأ غير معروف في Firebase"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -232,7 +242,17 @@ static const Map<String,dynamic> en = {
   "howToWin": "How to win",
   "inviteFriends": "Invite friends",
   "remainigDays": "days and the competition ends",
-  "thePrizeIs": "the prize is"
+  "thePrizeIs": "the prize is",
+  "thereIsNoInternetConnection": "There is no internet connection",
+  "accountExistsWithDifferentCredential": "This account already exists with different credentials",
+  "invalidCredential": "Invalid Credentials: credentials are malformed or expired",
+  "operationNotAllowed": "Operation is not allowed",
+  "userDisabled": "This user has been disabled",
+  "userNotFound": "This email does not exist",
+  "wrongPassword": "Wrong password",
+  "invalidVerificationCode": "Verification code is not valid",
+  "invalidVerificationId": "The verification id is not valid",
+  "unknownFirebaseError": "Unknwon Firebase error"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

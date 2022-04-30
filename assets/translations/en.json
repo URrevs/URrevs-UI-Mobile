@@ -106,5 +106,15 @@
   "howToWin": "How to win",
   "inviteFriends": "Invite friends",
   "remainigDays": "days and the competition ends",
-  "thePrizeIs": "the prize is"
+  "thePrizeIs": "the prize is",
+  "thereIsNoInternetConnection": "There is no internet connection",
+  "accountExistsWithDifferentCredential": "This account already exists with different credentials",
+  "invalidCredential": "Invalid Credentials: credentials are malformed or expired",
+  "operationNotAllowed": "Operation is not allowed",
+  "userDisabled": "This user has been disabled",
+  "userNotFound": "This email does not exist",
+  "wrongPassword": "Wrong password",
+  "invalidVerificationCode": "Verification code is not valid",
+  "invalidVerificationId": "The verification id is not valid",
+  "unknownFirebaseError": "Unknwon Firebase error"
 }

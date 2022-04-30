@@ -1,4 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:urrevs_ui_mobile/app/exceptions.dart';
+import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 class ServerErrorMessages {
   static const String tooManyRequests = 'too many requests';
@@ -35,13 +39,29 @@ class ServerErrorMessages {
       ServerErrorMessages._errorMessagesMap[serverErrorMessage] as String;
 }
 
-class Failure {
-  String message;
+enum FailureMode {
+  /// The normal failure mode. This modes indicates that an error has occurred
+  /// and an error message should be shown to the user.
+  error,
 
-  Failure(this.message);
+  /// Indicates that a process has been cancelled by the user. Used in the
+  /// authentication process, when user cancels the sign in flow.
+  cancel,
 }
 
-extension GetFailure on DioError {
+class Failure {
+  String message;
+  FailureMode mode;
+
+  Failure(this.message, {this.mode = FailureMode.error});
+
+  @override
+  String toString() {
+    return 'Failure: $message\nFailure mode: ${mode.name}';
+  }
+}
+
+extension DioErrorFailure on DioError {
   Failure get failure {
     switch (type) {
       case DioErrorType.connectTimeout:
@@ -74,4 +94,39 @@ extension GetFailure on DioError {
         }
     }
   }
+}
+
+extension NoInternetConnectionExceptionFailure on NoInternetConnection {
+  Failure get failure => Failure(LocaleKeys.thereIsNoInternetConnection.tr());
+}
+
+extension FirebaseAuthExceptionFailure on FirebaseAuthException {
+  String get friendlyErrorMessage {
+    switch (code) {
+      case 'account-exists-with-different-credential':
+        return LocaleKeys.accountExistsWithDifferentCredential.tr();
+      case 'invalid-credential':
+        return LocaleKeys.invalidCredential.tr();
+      case 'operation-not-allowed':
+        return LocaleKeys.operationNotAllowed.tr();
+      case 'user-disabled':
+        return LocaleKeys.userDisabled.tr();
+      case 'user-not-found':
+        return LocaleKeys.userNotFound.tr();
+      case 'wrong-password':
+        return LocaleKeys.wrongPassword.tr();
+      case 'invalid-verification-code':
+        return LocaleKeys.invalidVerificationCode.tr();
+      case 'invalid-verification-id':
+        return LocaleKeys.invalidVerificationId.tr();
+      default:
+        return LocaleKeys.unknownFirebaseError.tr();
+    }
+  }
+
+  Failure get failure => Failure(friendlyErrorMessage);
+}
+
+extension AuthenticationCancelledFailure on AuthenticationCancelled {
+  Failure get failure => Failure('', mode: FailureMode.cancel);
 }

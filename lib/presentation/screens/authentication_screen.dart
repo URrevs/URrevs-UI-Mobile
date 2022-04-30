@@ -1,7 +1,10 @@
+import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:urrevs_ui_mobile/data/dio_factory.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/assets_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/font_manager.dart';
@@ -58,10 +61,16 @@ class _AuthenticationScreenState extends ConsumerState<AuthenticationScreen> {
         child: Center(child: CircularProgressIndicator()),
       );
     } else if (state is AuthenticationErrorState) {
-      return Text('Error');
+      print(state.failure);
     }
     return Column(
       children: [
+        ElevatedButton(
+          onPressed: () {
+            FirebaseAuth.instance.signOut();
+          },
+          child: Text("SIGN OUT"),
+        ),
         AuthButton(
           text: LocaleKeys.googleAuth.tr(),
           imagePath: SvgAssets.googleLogo,

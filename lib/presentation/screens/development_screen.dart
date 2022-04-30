@@ -69,7 +69,7 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
 
   void signInWithGoogle() async {
     // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
     // Obtain the auth details from the request
     final GoogleSignInAuthentication? googleAuth =
@@ -98,6 +98,8 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
         },
       ),
     );
+
+    print('request succeeded');
   }
 
   void signInWithFacebook() async {
@@ -171,9 +173,7 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
             text: LocaleKeys.googleAuth.tr(),
             imagePath: SvgAssets.googleLogo,
             color: ColorManager.grey,
-            onPressed: () {
-              GetIt.I<Repository>().authenticateWithGoogle();
-            },
+            onPressed: signInWithGoogle,
           ),
           SizedBox(height: 20),
           AuthButton(

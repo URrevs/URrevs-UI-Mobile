@@ -5,6 +5,8 @@ import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:urrevs_ui_mobile/app/exceptions.dart';
 import 'package:urrevs_ui_mobile/data/remote_data_source/remote_data_source.dart';
 import 'package:urrevs_ui_mobile/data/responses/users_api_response.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
@@ -17,9 +19,15 @@ class Repository {
 
   Future<Either<Failure, void>> authenticateWithGoogle() async {
     try {
+      // check connection before connecting to google
+      bool hasConnection = await InternetConnectionChecker().hasConnection;
+      if (!hasConnection) throw NoInternetConnection();
+
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      if (googleUser == null) throw AuthenticationCancelled();
+
       final GoogleSignInAuthentication? googleAuth =
-          await googleUser?.authentication;
+          await googleUser.authentication;
 
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth?.accessToken,
@@ -38,7 +46,13 @@ class Repository {
       print(response);
 
       return Right(null);
+    } on AuthenticationCancelled catch (e) {
+      return Left(e.failure);
+    } on NoInternetConnection catch (e) {
+      return Left(e.failure);
     } on DioError catch (e) {
+      return Left(e.failure);
+    } on FirebaseAuthException catch (e) {
       return Left(e.failure);
     }
   }

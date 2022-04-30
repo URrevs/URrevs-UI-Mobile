@@ -109,5 +109,15 @@ abstract class  LocaleKeys {
   static const inviteFriends = 'inviteFriends';
   static const remainigDays = 'remainigDays';
   static const thePrizeIs = 'thePrizeIs';
+  static const thereIsNoInternetConnection = 'thereIsNoInternetConnection';
+  static const accountExistsWithDifferentCredential = 'accountExistsWithDifferentCredential';
+  static const invalidCredential = 'invalidCredential';
+  static const invalidVerificationCode = 'invalidVerificationCode';
+  static const invalidVerificationId = 'invalidVerificationId';
+  static const operationNotAllowed = 'operationNotAllowed';
+  static const userDisabled = 'userDisabled';
+  static const userNotFound = 'userNotFound';
+  static const wrongPassword = 'wrongPassword';
+  static const unknownFirebaseError = 'unknownFirebaseError';
 
 }
