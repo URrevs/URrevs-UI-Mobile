@@ -43,6 +43,7 @@ import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/prod
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/question_card.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/specs_comparison_table.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/specs_table.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/stars_counter.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/company_horizontal_list_tile.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/company_logo_tile.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/updated_list_tile.dart';
@@ -169,6 +170,7 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
       body: ListView(
         padding: EdgeInsets.all(20),
         children: [
+          StarsCounter(percentage: 0.56),
           AuthButton(
             text: LocaleKeys.googleAuth.tr(),
             imagePath: SvgAssets.googleLogo,

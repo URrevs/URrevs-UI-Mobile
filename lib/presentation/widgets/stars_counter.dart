@@ -6,18 +6,15 @@ import 'package:urrevs_ui_mobile/app/extensions.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 
-class StarsCounter extends StatefulWidget {
+class StarsCounter extends StatelessWidget {
   const StarsCounter({
     required this.percentage,
     Key? key,
   }) : super(key: key);
+
+  /// Percentage value between 0.0 and 1.0
   final double percentage;
-
-  @override
-  State<StarsCounter> createState() => _StarsCounterState();
-}
-
-class _StarsCounterState extends State<StarsCounter> {
+  
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -34,7 +31,7 @@ class _StarsCounterState extends State<StarsCounter> {
             barRadius: Radius.circular(30.r),
             width: 330.w,
             lineHeight: 14.0,
-            percent: 0.5,
+            percent: percentage,
             backgroundColor: ColorManager.white,
             progressColor: ColorManager.blue,
           ),
