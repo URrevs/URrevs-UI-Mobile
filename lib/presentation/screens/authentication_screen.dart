@@ -1,25 +1,29 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/assets_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/font_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/authentication_state.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/buttons/auth_button.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/urrevs_logo.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
-class AuthenticationScreen extends StatefulWidget {
+class AuthenticationScreen extends ConsumerStatefulWidget {
   const AuthenticationScreen({Key? key}) : super(key: key);
 
   static const String routeName = 'AuthenticationScreen';
 
   @override
-  State<AuthenticationScreen> createState() => _AuthenticationScreenState();
+  ConsumerState<AuthenticationScreen> createState() =>
+      _AuthenticationScreenState();
 }
 
-class _AuthenticationScreenState extends State<AuthenticationScreen> {
+class _AuthenticationScreenState extends ConsumerState<AuthenticationScreen> {
   Align _buildLanguageButton() {
     return Align(
       alignment: Alignment.topLeft,
@@ -46,6 +50,36 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
     );
   }
 
+  Widget _buildAuthenticationButtons() {
+    final state = ref.watch(authenticationProvider);
+    if (state is AuthenticationLoadingState) {
+      return SizedBox(
+        height: 100.h,
+        child: Center(child: CircularProgressIndicator()),
+      );
+    } else if (state is AuthenticationErrorState) {
+      return Text('Error');
+    }
+    return Column(
+      children: [
+        AuthButton(
+          text: LocaleKeys.googleAuth.tr(),
+          imagePath: SvgAssets.googleLogo,
+          color: ColorManager.grey,
+          onPressed:
+              ref.read(authenticationProvider.notifier).authenticateWithGoogle,
+        ),
+        35.verticalSpace,
+        AuthButton(
+          text: LocaleKeys.facebookAuth.tr(),
+          imagePath: SvgAssets.facebookLogo,
+          color: ColorManager.blue,
+          onPressed: () {},
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,19 +92,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
             80.verticalSpace,
             URrevsLogo(),
             80.verticalSpace,
-            AuthButton(
-              text: LocaleKeys.googleAuth.tr(),
-              imagePath: SvgAssets.googleLogo,
-              color: ColorManager.grey,
-              onPressed: () {},
-            ),
-            35.verticalSpace,
-            AuthButton(
-              text: LocaleKeys.facebookAuth.tr(),
-              imagePath: SvgAssets.facebookLogo,
-              color: ColorManager.blue,
-              onPressed: () {},
-            ),
+            _buildAuthenticationButtons(),
           ],
         ),
       ),
