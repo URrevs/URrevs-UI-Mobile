@@ -15,6 +15,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/flags_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/font_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/bottom_navigation_bar_container_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/authentication_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/authentication_state.dart';
@@ -130,6 +131,14 @@ class _AuthenticationScreenState extends ConsumerState<AuthenticationScreen> {
         showDialog(
           context: context,
           builder: (context) => ErrorDialog(failure: next.failure),
+        );
+      }
+    });
+    ref.listen<AuthenticationState>(authenticationProvider, (previous, next) {
+      if (next is AuthenticationLoadedState) {
+        Navigator.of(context).pushNamedAndRemoveUntil(
+          BottomNavigationBarContainerScreen.routeName,
+          (route) => false,
         );
       }
     });
