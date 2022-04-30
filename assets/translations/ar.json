@@ -119,5 +119,16 @@
   "unknownFirebaseError": "خطأ غير معروف في Firebase",
   "toggleLanguageButtonText": "English",
   "somethingWentWrong": "حدث خطأ ما",
-  "ok": "حسناً"
+  "ok": "حسناً",
+  "invalidToken": "الرمز الخاص بك غير صالح",
+  "processFailed": "حدث خطأ بعملية الخادم",
+  "tokenExpired": "انتهت صلاحية الرمز الخاص بك",
+  "tokenRevoked": "تم إبطال رمزك المميز",
+  "tooManyRequests": "لقد أرسلت الكثير من الطلبات",
+  "youDoNotExistInTheSystem": "أنت غير موجود في النظام",
+  "connectionTimedOut": "الاتصال بالخادك أخذ وقتاً طويلاً",
+  "receivingDataTimedout": "استلام البيانات من الخادم أخذ وقتاً طويلاً",
+  "sendingDataTimedout": "إرسال البيانات إلى الخادم أخذ وقتاً طويلاً",
+  "requestWasCancelled": "تم إلغاء الطلب",
+  "unknownNetworkError": "حدث خطأ غير معروف في الشبكة"
 }

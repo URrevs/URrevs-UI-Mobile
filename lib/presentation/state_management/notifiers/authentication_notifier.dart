@@ -12,7 +12,7 @@ class AuthenticationNotifier extends StateNotifier<AuthenticationState> {
     final response = await GetIt.I<Repository>().authenticateWithGoogle();
     response.fold(
       (failure) {
-        if (failure.mode == FailureMode.cancel) {
+        if (failure is CancelFailure) {
           return state = AuthenticationInitialState();
         }
         state = AuthenticationErrorState(failure: failure);
@@ -26,7 +26,7 @@ class AuthenticationNotifier extends StateNotifier<AuthenticationState> {
     final response = await GetIt.I<Repository>().authenticateWithFacebook();
     response.fold(
       (failure) {
-        if (failure.mode == FailureMode.cancel) {
+        if (failure is CancelFailure) {
           return state = AuthenticationInitialState();
         }
         state = AuthenticationErrorState(failure: failure);

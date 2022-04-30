@@ -122,5 +122,16 @@ abstract class  LocaleKeys {
   static const toggleLanguageButtonText = 'toggleLanguageButtonText';
   static const somethingWentWrong = 'somethingWentWrong';
   static const ok = 'ok';
+  static const invalidToken = 'invalidToken';
+  static const processFailed = 'processFailed';
+  static const tokenExpired = 'tokenExpired';
+  static const tokenRevoked = 'tokenRevoked';
+  static const tooManyRequests = 'tooManyRequests';
+  static const youDoNotExistInTheSystem = 'youDoNotExistInTheSystem';
+  static const connectionTimedOut = 'connectionTimedOut';
+  static const receivingDataTimedout = 'receivingDataTimedout';
+  static const sendingDataTimedout = 'sendingDataTimedout';
+  static const requestWasCancelled = 'requestWasCancelled';
+  static const unknownNetworkError = 'unknownNetworkError';
 
 }

@@ -135,7 +135,18 @@ class CodegenLoader extends AssetLoader{
   "unknownFirebaseError": "خطأ غير معروف في Firebase",
   "toggleLanguageButtonText": "English",
   "somethingWentWrong": "حدث خطأ ما",
-  "ok": "حسناً"
+  "ok": "حسناً",
+  "invalidToken": "الرمز الخاص بك غير صالح",
+  "processFailed": "حدث خطأ بعملية الخادم",
+  "tokenExpired": "انتهت صلاحية الرمز الخاص بك",
+  "tokenRevoked": "تم إبطال رمزك المميز",
+  "tooManyRequests": "لقد أرسلت الكثير من الطلبات",
+  "youDoNotExistInTheSystem": "أنت غير موجود في النظام",
+  "connectionTimedOut": "الاتصال بالخادك أخذ وقتاً طويلاً",
+  "receivingDataTimedout": "استلام البيانات من الخادم أخذ وقتاً طويلاً",
+  "sendingDataTimedout": "إرسال البيانات إلى الخادم أخذ وقتاً طويلاً",
+  "requestWasCancelled": "تم إلغاء الطلب",
+  "unknownNetworkError": "حدث خطأ غير معروف في الشبكة"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -258,7 +269,18 @@ static const Map<String,dynamic> en = {
   "unknownFirebaseError": "Unknwon Firebase error",
   "toggleLanguageButtonText": "العربية",
   "somethingWentWrong": "Something went wrong",
-  "ok": "Ok"
+  "ok": "Ok",
+  "tooManyRequests": "You have sent too many requests",
+  "youDoNotExistInTheSystem": "You do not exist in the system",
+  "tokenExpired": "Your token has expired",
+  "tokenRevoked": "Your token has been revoked",
+  "invalidToken": "Your token is invalid",
+  "processFailed": "Server process failed",
+  "connectionTimedOut": "Connection timed out",
+  "receivingDataTimedout": "Receiving data timed out",
+  "sendingDataTimedout": "Sending data timed out",
+  "requestWasCancelled": "Request was cancelled",
+  "unknownNetworkError": "Unknown network error"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

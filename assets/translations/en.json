@@ -119,5 +119,16 @@
   "unknownFirebaseError": "Unknwon Firebase error",
   "toggleLanguageButtonText": "العربية",
   "somethingWentWrong": "Something went wrong",
-  "ok": "Ok"
+  "ok": "Ok",
+  "tooManyRequests": "You have sent too many requests",
+  "youDoNotExistInTheSystem": "You do not exist in the system",
+  "tokenExpired": "Your token has expired",
+  "tokenRevoked": "Your token has been revoked",
+  "invalidToken": "Your token is invalid",
+  "processFailed": "Server process failed",
+  "connectionTimedOut": "Connection timed out",
+  "receivingDataTimedout": "Receiving data timed out",
+  "sendingDataTimedout": "Sending data timed out",
+  "requestWasCancelled": "Request was cancelled",
+  "unknownNetworkError": "Unknown network error"
 }

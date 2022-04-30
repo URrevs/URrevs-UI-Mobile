@@ -13,18 +13,18 @@ class ServerErrorMessages {
   static const String invalidToken = 'invalid token';
   static const String processFailed = 'process failed';
 
-  static const Map<String, String> _errorMessagesMap = {
-    ServerErrorMessages.tooManyRequests: 'You have sent too many requests',
-    ServerErrorMessages.youDoNotExistInTheSystem:
-        'You do not exist in the system',
-    ServerErrorMessages.tokenExpired: 'Your token has expired',
-    ServerErrorMessages.tokenRevoked: 'Your token has been revoked',
-    ServerErrorMessages.invalidToken: 'Your token is invalid',
-    ServerErrorMessages.processFailed: 'Server process failed',
-  };
+  static Map<String, String> get errorMessagesMap => {
+        ServerErrorMessages.tooManyRequests: LocaleKeys.tooManyRequests.tr(),
+        ServerErrorMessages.youDoNotExistInTheSystem:
+            LocaleKeys.youDoNotExistInTheSystem.tr(),
+        ServerErrorMessages.tokenExpired: LocaleKeys.tokenExpired.tr(),
+        ServerErrorMessages.tokenRevoked: LocaleKeys.tokenRevoked.tr(),
+        ServerErrorMessages.invalidToken: LocaleKeys.invalidToken.tr(),
+        ServerErrorMessages.processFailed: LocaleKeys.processFailed.tr(),
+      };
 
   static List<String> get _serverErrorMessages =>
-      _errorMessagesMap.keys.toList();
+      errorMessagesMap.keys.toList();
 
   /// Check whether a message has a corresponding friendly error message or not.
   static bool isAServerErrorMessage(String message) =>
@@ -36,7 +36,7 @@ class ServerErrorMessages {
   /// the received [serverErrorMessage] must be from the static error message
   /// strings in [ServerErrorMessages] class.
   static String getAppErrorMessage(String serverErrorMessage) =>
-      ServerErrorMessages._errorMessagesMap[serverErrorMessage] as String;
+      ServerErrorMessages.errorMessagesMap[serverErrorMessage] as String;
 }
 
 enum FailureMode {
@@ -51,13 +51,24 @@ enum FailureMode {
 
 class Failure {
   String message;
-  FailureMode mode;
 
-  Failure(this.message, {this.mode = FailureMode.error});
+  Failure(this.message);
 
   @override
   String toString() {
-    return 'Failure: $message\nFailure mode: ${mode.name}';
+    return 'Failure: $message';
+  }
+}
+
+/// A special type of [Failure] indicating that a process has been cancelled
+/// by the user.
+/// Used in the authentication process, when user cancels the sign in flow.
+class CancelFailure extends Failure {
+  CancelFailure() : super('');
+
+  @override
+  String toString() {
+    return 'CancelFailure';
   }
 }
 
@@ -65,15 +76,15 @@ extension DioErrorFailure on DioError {
   Failure get failure {
     switch (type) {
       case DioErrorType.connectTimeout:
-        return Failure('connection timed out');
+        return Failure(LocaleKeys.connectionTimedOut.tr());
       case DioErrorType.sendTimeout:
-        return Failure('sending data timed out');
+        return Failure(LocaleKeys.sendingDataTimedout.tr());
       case DioErrorType.receiveTimeout:
-        return Failure('receiving data timed out');
+        return Failure(LocaleKeys.receivingDataTimedout.tr());
       case DioErrorType.cancel:
-        return Failure('request was cancelled');
+        return Failure(LocaleKeys.requestWasCancelled.tr());
       case DioErrorType.other:
-        return Failure('unknown error');
+        return Failure(LocaleKeys.unknownNetworkError.tr());
       case DioErrorType.response:
         String? errorMessage = response?.data['status'];
         if (errorMessage != null &&
@@ -128,5 +139,5 @@ extension FirebaseAuthExceptionFailure on FirebaseAuthException {
 }
 
 extension AuthenticationCancelledFailure on AuthenticationCancelled {
-  Failure get failure => Failure('', mode: FailureMode.cancel);
+  Failure get failure => CancelFailure();
 }
