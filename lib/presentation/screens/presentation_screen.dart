@@ -107,6 +107,32 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
         padding: EdgeInsets.all(20),
         children: [
           SizedBox(height: 20),
+          Card(
+              elevation: 3,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppRadius.updatedListTile),
+              ),
+              child: Row(
+                children: [
+                  Padding(
+                      padding: EdgeInsets.only(
+                          left: 18.w, right: 7.w, top: 12.5.h, bottom: 12.5.h),
+                      child: CircleAvatar(
+                        backgroundColor: ColorManager.backgroundGrey,
+                        radius: 17.2.r,
+                        child: FittedBox(
+                            child: Padding(
+                          padding: EdgeInsets.only(top: 4.h),
+                          child: Text(
+                            '30',
+                            style: TextStyleManager.s18w700
+                                .copyWith(color: ColorManager.black),
+                          ),
+                        )),
+                      )),
+                ],
+              )),
+          SizedBox(height: 20),
           StarsCounter(percentage: 0.5),
           SizedBox(height: 20),
           RatingOverviewCard(
@@ -189,4 +215,3 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
     );
   }
 }
-
