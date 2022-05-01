@@ -7,6 +7,7 @@ import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_scre
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/leaderboard_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/menu_screen/menu_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/posting_screen/posting_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/user_profile/user_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_my_user_profile_state.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
@@ -73,6 +74,18 @@ class _BottomNavigationBarContainerScreenState
       child: Scaffold(
         appBar: appBar,
         body: SafeArea(child: currentPage),
+        persistentFooterButtons: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed(
+                UserProfileScreen.routeName,
+                arguments:
+                    UserProfileScreenArgs(userId: '626c50e6a10cee15a9225805'),
+              );
+            },
+            child: Text('ANOTHER USER PROFILE'),
+          )
+        ],
         bottomNavigationBar: BottomNavBar(
           currentIndex: _currentIndex,
           onTap: _setCurrentIndex,

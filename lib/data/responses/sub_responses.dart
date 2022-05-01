@@ -27,3 +27,26 @@ class UserSubResponse {
       _$UserSubResponseFromJson(json);
   Map<String, dynamic> toJson() => _$UserSubResponseToJson(this);
 }
+
+@JsonSerializable()
+class AnotherUserSubResponse {
+  @JsonKey(name: '_id')
+  String id;
+  String name;
+  String picture;
+  int points;
+
+  AnotherUserSubResponse({
+    required this.id,
+    required this.name,
+    required this.picture,
+    required this.points,
+  });
+
+  User get userModel =>
+      User(id: id, name: name, picture: picture, points: points);
+
+  factory AnotherUserSubResponse.fromJson(Map<String, Object?> json) =>
+      _$AnotherUserSubResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$AnotherUserSubResponseToJson(this);
+}

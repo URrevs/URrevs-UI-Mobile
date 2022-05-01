@@ -23,3 +23,21 @@ Map<String, dynamic> _$UserSubResponseToJson(UserSubResponse instance) =>
       'points': instance.points,
       'refCode': instance.refCode,
     };
+
+AnotherUserSubResponse _$AnotherUserSubResponseFromJson(
+        Map<String, dynamic> json) =>
+    AnotherUserSubResponse(
+      id: json['_id'] as String,
+      name: json['name'] as String,
+      picture: json['picture'] as String,
+      points: json['points'] as int,
+    );
+
+Map<String, dynamic> _$AnotherUserSubResponseToJson(
+        AnotherUserSubResponse instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'name': instance.name,
+      'picture': instance.picture,
+      'points': instance.points,
+    };

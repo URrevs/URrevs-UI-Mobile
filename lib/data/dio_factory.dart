@@ -21,17 +21,6 @@ Dio get getDio {
     headers: headers,
   );
 
-  // check internet connection on each request
-  dio.interceptors.add(
-    InterceptorsWrapper(
-      onRequest: (options, handler) async {
-        bool hasConnection = await InternetConnectionChecker().hasConnection;
-        if (!hasConnection) throw NoInternetConnection();
-        handler.next(options);
-      },
-    ),
-  );
-
   // if (kDebugMode) {
   //   dio.interceptors.add(
   //     PrettyDioLogger(

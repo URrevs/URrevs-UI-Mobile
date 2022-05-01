@@ -36,3 +36,18 @@ Map<String, dynamic> _$GetMyProfileResponseToJson(
       'success': instance.success,
       'user': instance.userSubResponse,
     };
+
+GetTheProfileOfAnotherUserResponse _$GetTheProfileOfAnotherUserResponseFromJson(
+        Map<String, dynamic> json) =>
+    GetTheProfileOfAnotherUserResponse(
+      success: json['success'] as bool,
+      anotherUserSubResponse:
+          AnotherUserSubResponse.fromJson(json['user'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$GetTheProfileOfAnotherUserResponseToJson(
+        GetTheProfileOfAnotherUserResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'user': instance.anotherUserSubResponse,
+    };

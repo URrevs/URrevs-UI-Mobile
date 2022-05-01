@@ -23,7 +23,7 @@ class GetMyProfileLoadedState extends GetMyProfileState {
     required this.refCode,
   });
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [user];
 }
 
 class GetMyProfileErrorState extends GetMyProfileState {
@@ -33,5 +33,5 @@ class GetMyProfileErrorState extends GetMyProfileState {
   });
 
   @override
-  List<Object?> get props => [failure];
+  List<Object?> get props => [failure.message];
 }

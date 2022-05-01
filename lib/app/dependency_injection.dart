@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:urrevs_ui_mobile/app/app_preferences.dart';
+import 'package:urrevs_ui_mobile/data/dio_factory.dart';
 import 'package:urrevs_ui_mobile/data/remote_data_source/remote_data_source.dart';
 import 'package:urrevs_ui_mobile/domain/repository.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/flags_manager.dart';
@@ -12,7 +13,7 @@ Future<void> initAppModule() async {
     () => AppPreferences(sharedPreferences),
   );
   GetIt.I.registerLazySingleton<Dio>(
-    () => Dio(),
+    () => getDio,
   );
   GetIt.I.registerLazySingleton<RemoteDataSource>(
     () => RemoteDataSource(

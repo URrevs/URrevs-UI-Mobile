@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,7 +6,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:urrevs_ui_mobile/presentation/resources/assets_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
-import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/menu_screen/subscreens/questions_about_my_products_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/owned_products_screen.dart';
@@ -15,16 +13,19 @@ import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/po
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/posted_reviews_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_my_user_profile_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/get_the_profile_of_another_user_state.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/tiles/item_tile.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/tiles/updated_list_tile.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/prompts/error_dialog.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
+/// [userId] is the id of an unauthenticated user whose profile is to be shown.
+/// This field would be null if we would view the profile of the currently
+/// authenticated user.
 class UserProfileScreenArgs {
-  bool otherUser;
+  String? userId;
   UserProfileScreenArgs({
-    this.otherUser = false,
+    this.userId,
   });
 }
 
@@ -40,44 +41,7 @@ class UserProfileScreen extends ConsumerStatefulWidget {
 }
 
 class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
-  Widget _buildCollectedStars({required int stars}) {
-    final state = ref.watch(getMyProfileProvider);
-    if (state is GetMyProfileLoadedState) {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            LocaleKeys.collectedStars.tr(),
-            style: TextStyleManager.s20w400.copyWith(
-              color: ColorManager.grey,
-            ),
-          ),
-          12.horizontalSpace,
-          Padding(
-            padding: EdgeInsets.only(bottom: 6.h),
-            child: SvgPicture.asset(
-              SvgAssets.star,
-              color: ColorManager.blue,
-              height: 24.sp,
-            ),
-          ),
-          6.horizontalSpace,
-          Text(
-            stars.toString(),
-            style: TextStyleManager.s20w400.copyWith(
-              color: ColorManager.grey,
-            ),
-          ),
-        ],
-      );
-    } else if (state is GetMyProfileLoadingState) {
-      return Center(child: CircularProgressIndicator());
-    } else if (state is GetMyProfileErrorState) {
-      return Text(state.failure.message);
-    } else {
-      return SizedBox();
-    }
-  }
+  bool get otherUser => widget.screenArgs.userId != null;
 
   List<Widget> myProfileListItems({required String refCode}) {
     return [
@@ -151,46 +115,97 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
         ),
       ];
 
-  String get imageUrl {
-    if (widget.screenArgs.otherUser) return StringsManager.picsum200x200;
-    firebase_auth.User? user = firebase_auth.FirebaseAuth.instance.currentUser;
-    if (user == null) throw UnsupportedError('user should have logged in');
-    return user.photoURL!;
+  Row _buildCollectedStars(int stars) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          LocaleKeys.collectedStars.tr(),
+          style: TextStyleManager.s20w400.copyWith(
+            color: ColorManager.grey,
+          ),
+        ),
+        12.horizontalSpace,
+        Padding(
+          padding: EdgeInsets.only(bottom: 6.h),
+          child: SvgPicture.asset(
+            SvgAssets.star,
+            color: ColorManager.blue,
+            height: 24.sp,
+          ),
+        ),
+        6.horizontalSpace,
+        Text(
+          stars.toString(),
+          style: TextStyleManager.s20w400.copyWith(
+            color: ColorManager.grey,
+          ),
+        ),
+      ],
+    );
   }
 
-  String get userName {
-    if (widget.screenArgs.otherUser) return 'Other user';
-    firebase_auth.User? user = firebase_auth.FirebaseAuth.instance.currentUser;
-    if (user == null) throw UnsupportedError('user should have logged in');
-    return user.displayName!;
+  ListView _buildProfile({
+    required String imageUrl,
+    required String username,
+    required int stars,
+    required String? refCode,
+  }) {
+    return ListView(
+      children: [
+        15.verticalSpace,
+        Avatar(
+          imageUrl: imageUrl,
+          radius: 45.r,
+        ),
+        10.verticalSpace,
+        Text(
+          username,
+          style: TextStyleManager.s22w700,
+          textAlign: TextAlign.center,
+        ),
+        8.verticalSpace,
+        _buildCollectedStars(stars),
+        22.verticalSpace,
+        if (!otherUser) ...myProfileListItems(refCode: refCode!),
+        if (otherUser) ...otherUserProfileListItems
+      ],
+    );
   }
 
-  Widget _buildBody() {
+  StatelessWidget _buildMyProfile() {
     final state = ref.watch(getMyProfileProvider);
     if (state is GetMyProfileLoadedState) {
-      return ListView(
-        children: [
-          15.verticalSpace,
-          Avatar(
-            imageUrl: state.user.picture,
-            radius: 45.r,
-          ),
-          10.verticalSpace,
-          Text(
-            state.user.name,
-            style: TextStyleManager.s22w700,
-            textAlign: TextAlign.center,
-          ),
-          8.verticalSpace,
-          _buildCollectedStars(stars: state.user.points),
-          22.verticalSpace,
-          if (!widget.screenArgs.otherUser)
-            ...myProfileListItems(refCode: state.refCode),
-          if (widget.screenArgs.otherUser) ...otherUserProfileListItems
-        ],
+      return _buildProfile(
+        imageUrl: state.user.picture,
+        username: state.user.name,
+        stars: state.user.points,
+        refCode: state.refCode,
       );
     } else {
       return CircularLoading();
+    }
+  }
+
+  StatelessWidget _buildAnotherUserProfile() {
+    final state = ref.watch(getTheProfileOfAnotherUserProvider);
+    if (state is GetTheProfileOfAnotherUserLoadedState) {
+      return _buildProfile(
+        imageUrl: state.user.picture,
+        username: state.user.name,
+        stars: state.user.points,
+        refCode: null,
+      );
+    } else {
+      return CircularLoading();
+    }
+  }
+
+  Widget _buildBody() {
+    if (!otherUser) {
+      return _buildMyProfile();
+    } else {
+      return _buildAnotherUserProfile();
     }
   }
 
@@ -199,12 +214,38 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
     super.initState();
     Future.delayed(
       Duration.zero,
-      ref.read(getMyProfileProvider.notifier).getMyProfile,
+      () {
+        if (!otherUser) {
+          ref.read(getMyProfileProvider.notifier).getMyProfile();
+        } else {
+          print('request sent');
+          ref
+              .read(getTheProfileOfAnotherUserProvider.notifier)
+              .getTheProfileOfAnotherUser(widget.screenArgs.userId!);
+        }
+      },
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    ref.listen<GetMyProfileState>(getMyProfileProvider, (previous, next) {
+      if (next is GetMyProfileErrorState) {
+        showDialog(
+          context: context,
+          builder: (context) => ErrorDialog(failure: next.failure),
+        );
+      }
+    });
+    ref.listen<GetTheProfileOfAnotherUserState>(
+        getTheProfileOfAnotherUserProvider, (previous, next) {
+      if (next is GetTheProfileOfAnotherUserErrorState) {
+        showDialog(
+          context: context,
+          builder: (context) => ErrorDialog(failure: next.failure),
+        );
+      }
+    });
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(

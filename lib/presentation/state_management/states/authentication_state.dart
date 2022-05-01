@@ -25,5 +25,5 @@ class AuthenticationErrorState extends AuthenticationState {
   });
 
   @override
-  List<Object?> get props => [failure];
+  List<Object?> get props => [failure.message];
 }

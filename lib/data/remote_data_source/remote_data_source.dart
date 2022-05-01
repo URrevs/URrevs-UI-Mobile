@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
+import 'package:urrevs_ui_mobile/data/requests/users_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/responses/users_api_response.dart';
 
 part 'remote_data_source.g.dart';
@@ -15,4 +16,9 @@ abstract class RemoteDataSource {
 
   @GET('/users/profile')
   Future<GetMyProfileResponse> getMyProfile();
+
+  @GET('/users/{userId}/profile')
+  Future<GetTheProfileOfAnotherUserResponse> getTheProfileOfAnotherUser(
+    @Path() String userId,
+  );
 }

@@ -23,7 +23,7 @@ class Avatar extends StatelessWidget {
       onTap: () {
         Navigator.of(context).pushNamed(
           UserProfileScreen.routeName,
-          arguments: UserProfileScreenArgs(otherUser: true),
+          arguments: UserProfileScreenArgs(userId: 'put real id'),
         );
       },
       child: CircleAvatar(

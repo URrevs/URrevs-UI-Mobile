@@ -37,3 +37,19 @@ class GetMyProfileResponse extends BaseResponse {
       _$GetMyProfileResponseFromJson(json);
   Map<String, dynamic> toJson() => _$GetMyProfileResponseToJson(this);
 }
+
+@JsonSerializable()
+class GetTheProfileOfAnotherUserResponse extends BaseResponse {
+  @JsonKey(name: 'user')
+  AnotherUserSubResponse anotherUserSubResponse;
+  GetTheProfileOfAnotherUserResponse({
+    required bool success,
+    required this.anotherUserSubResponse,
+  }) : super(success: success);
+
+  factory GetTheProfileOfAnotherUserResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$GetTheProfileOfAnotherUserResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$GetTheProfileOfAnotherUserResponseToJson(this);
+}

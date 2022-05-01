@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
@@ -12,12 +12,18 @@ import 'package:urrevs_ui_mobile/app/exceptions.dart';
 import 'package:urrevs_ui_mobile/data/remote_data_source/remote_data_source.dart';
 import 'package:urrevs_ui_mobile/data/responses/users_api_response.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
+import 'package:urrevs_ui_mobile/domain/models/user.dart';
 
 class Repository {
   final RemoteDataSource _remoteDataSource;
   Repository({
     required RemoteDataSource remoteDataSource,
   }) : _remoteDataSource = remoteDataSource;
+
+  Future<void> _checkConnection() async {
+    bool hasConnection = await InternetConnectionChecker().hasConnection;
+    if (!hasConnection) throw NoInternetConnection();
+  }
 
   Future<Either<Failure, void>> authenticateWithGoogle() async {
     try {
@@ -106,9 +112,26 @@ class Repository {
 
   Future<Either<Failure, GetMyProfileResponse>> getMyProfile() async {
     try {
+      await _checkConnection();
       final response = await _remoteDataSource.getMyProfile();
       return Right(response);
     } on DioError catch (e) {
+      return Left(e.failure);
+    } on NoInternetConnection catch (e) {
+      return Left(e.failure);
+    }
+  }
+
+  Future<Either<Failure, User>> getTheProfileOfAnotherUser(
+      String userId) async {
+    try {
+      await _checkConnection();
+      final response =
+          await _remoteDataSource.getTheProfileOfAnotherUser(userId);
+      return Right(response.anotherUserSubResponse.userModel);
+    } on DioError catch (e) {
+      return Left(e.failure);
+    } on NoInternetConnection catch (e) {
       return Left(e.failure);
     }
   }
