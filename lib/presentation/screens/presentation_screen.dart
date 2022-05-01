@@ -43,6 +43,7 @@ import 'package:urrevs_ui_mobile/presentation/widgets/specs_table.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/stars_counter.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/company_horizontal_list_tile.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/company_logo_tile.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/tiles/leaderboard_entry_tile.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/updated_list_tile.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -107,31 +108,12 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
         padding: EdgeInsets.all(20),
         children: [
           SizedBox(height: 20),
-          Card(
-              elevation: 3,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(AppRadius.updatedListTile),
-              ),
-              child: Row(
-                children: [
-                  Padding(
-                      padding: EdgeInsets.only(
-                          left: 18.w, right: 7.w, top: 12.5.h, bottom: 12.5.h),
-                      child: CircleAvatar(
-                        backgroundColor: ColorManager.backgroundGrey,
-                        radius: 17.2.r,
-                        child: FittedBox(
-                            child: Padding(
-                          padding: EdgeInsets.only(top: 4.h),
-                          child: Text(
-                            '30',
-                            style: TextStyleManager.s18w700
-                                .copyWith(color: ColorManager.black),
-                          ),
-                        )),
-                      )),
-                ],
-              )),
+          LeaderboardEntryTile(
+            name: 'Ziad Mostafa',
+            imageUrl: 'https://picsum.photos/seed/picsum/200/200',
+            rank: 544,
+            starsCounter: 40002344,
+          ),
           SizedBox(height: 20),
           StarsCounter(percentage: 0.5),
           SizedBox(height: 20),
@@ -215,3 +197,4 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
     );
   }
 }
+
