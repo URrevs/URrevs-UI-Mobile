@@ -16,6 +16,7 @@ import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/po
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_my_user_profile_state.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/item_tile.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/updated_list_tile.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
@@ -39,7 +40,7 @@ class UserProfileScreen extends ConsumerStatefulWidget {
 }
 
 class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
-  Widget _buildCollectedStars() {
+  Widget _buildCollectedStars({required int stars}) {
     final state = ref.watch(getMyProfileProvider);
     if (state is GetMyProfileLoadedState) {
       return Row(
@@ -62,7 +63,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
           ),
           6.horizontalSpace,
           Text(
-            '40',
+            stars.toString(),
             style: TextStyleManager.s20w400.copyWith(
               color: ColorManager.grey,
             ),
@@ -78,45 +79,53 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
     }
   }
 
-  List<Widget> get myProfileListItems => [
-        MenyItem(
-          title: LocaleKeys.myReviews.tr(),
-          iconData: Icons.rate_review_outlined,
-          onTap: () {
-            Navigator.of(context).pushNamed(PostedReviewsScreen.routeName);
-          },
-        ),
-        MenyItem(
-          title: LocaleKeys.myQuestions.tr(),
-          iconData: Icons.question_answer_outlined,
-          onTap: () {
-            Navigator.of(context).pushNamed(PostedQuestionsScreen.routeName);
-          },
-        ),
-        MenyItem(
-          title: LocaleKeys.ownedProducts.tr(),
-          iconData: Icons.devices_other_outlined,
-          onTap: () {
-            Navigator.of(context).pushNamed(OwnedProductsScreen.routeName);
-          },
-        ),
-        MenyItem(
-          title: LocaleKeys.yourInvitationCode.tr(),
-          subtitle: LocaleKeys.inviteYourFriendsToWriteTheirReviews.tr(),
-          iconData: Icons.groups_outlined,
-          // TODO: copy invitation code into user's clipboard
-          onTap: () {},
-        ),
-        MenyItem(
-          title: LocaleKeys.questionsOnMyProducts.tr(),
-          subtitle: LocaleKeys.helpOthersAndGetPoints.tr(),
-          iconData: Icons.question_mark_outlined,
-          onTap: () {
-            Navigator.of(context)
-                .pushNamed(QuestionsAboutMyProductsScreen.routeName);
-          },
-        ),
-      ];
+  List<Widget> myProfileListItems({required String refCode}) {
+    return [
+      MenyItem(
+        title: LocaleKeys.myReviews.tr(),
+        iconData: Icons.rate_review_outlined,
+        onTap: () {
+          Navigator.of(context).pushNamed(PostedReviewsScreen.routeName);
+        },
+      ),
+      MenyItem(
+        title: LocaleKeys.myQuestions.tr(),
+        iconData: Icons.question_answer_outlined,
+        onTap: () {
+          Navigator.of(context).pushNamed(PostedQuestionsScreen.routeName);
+        },
+      ),
+      MenyItem(
+        title: LocaleKeys.ownedProducts.tr(),
+        iconData: Icons.devices_other_outlined,
+        onTap: () {
+          Navigator.of(context).pushNamed(OwnedProductsScreen.routeName);
+        },
+      ),
+      MenyItem(
+        title: LocaleKeys.yourInvitationCode.tr(),
+        subtitle: LocaleKeys.inviteYourFriendsToWriteTheirReviews.tr(),
+        iconData: Icons.groups_outlined,
+        onTap: () {
+          showDialog(
+            context: context,
+            builder: (context) => Dialog(
+              child: Text(refCode),
+            ),
+          );
+        },
+      ),
+      MenyItem(
+        title: LocaleKeys.questionsOnMyProducts.tr(),
+        subtitle: LocaleKeys.helpOthersAndGetPoints.tr(),
+        iconData: Icons.question_mark_outlined,
+        onTap: () {
+          Navigator.of(context)
+              .pushNamed(QuestionsAboutMyProductsScreen.routeName);
+        },
+      ),
+    ];
+  }
 
   List<Widget> get otherUserProfileListItems => [
         MenyItem(
@@ -156,6 +165,35 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
     return user.displayName!;
   }
 
+  Widget _buildBody() {
+    final state = ref.watch(getMyProfileProvider);
+    if (state is GetMyProfileLoadedState) {
+      return ListView(
+        children: [
+          15.verticalSpace,
+          Avatar(
+            imageUrl: state.user.picture,
+            radius: 45.r,
+          ),
+          10.verticalSpace,
+          Text(
+            state.user.name,
+            style: TextStyleManager.s22w700,
+            textAlign: TextAlign.center,
+          ),
+          8.verticalSpace,
+          _buildCollectedStars(stars: state.user.points),
+          22.verticalSpace,
+          if (!widget.screenArgs.otherUser)
+            ...myProfileListItems(refCode: state.refCode),
+          if (widget.screenArgs.otherUser) ...otherUserProfileListItems
+        ],
+      );
+    } else {
+      return CircularLoading();
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -170,29 +208,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
-        child: ListView(
-          children: [
-            Column(
-              children: [
-                15.verticalSpace,
-                Avatar(
-                  imageUrl: imageUrl,
-                  radius: 45.r,
-                ),
-                10.verticalSpace,
-                Text(
-                  userName,
-                  style: TextStyleManager.s22w700,
-                ),
-                8.verticalSpace,
-                _buildCollectedStars(),
-                22.verticalSpace,
-                if (!widget.screenArgs.otherUser) ...myProfileListItems,
-                if (widget.screenArgs.otherUser) ...otherUserProfileListItems,
-              ],
-            )
-          ],
-        ),
+        child: _buildBody(),
       ),
     );
   }
