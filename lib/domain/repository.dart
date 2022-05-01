@@ -12,6 +12,7 @@ import 'package:urrevs_ui_mobile/app/exceptions.dart';
 import 'package:urrevs_ui_mobile/data/remote_data_source/remote_data_source.dart';
 import 'package:urrevs_ui_mobile/data/responses/users_api_response.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
+import 'package:urrevs_ui_mobile/domain/models/phone.dart';
 import 'package:urrevs_ui_mobile/domain/models/user.dart';
 
 class Repository {
@@ -129,6 +130,18 @@ class Repository {
       final response =
           await _remoteDataSource.getTheProfileOfAnotherUser(userId);
       return Right(response.anotherUserSubResponse.userModel);
+    } on DioError catch (e) {
+      return Left(e.failure);
+    } on NoInternetConnection catch (e) {
+      return Left(e.failure);
+    }
+  }
+
+  Future<Either<Failure, List<Phone>>> getMyOwnedPhones(int round) async {
+    try {
+      await _checkConnection();
+      final response = await _remoteDataSource.getMyOwnedPhones(round);
+      return Right(response.phonesModels);
     } on DioError catch (e) {
       return Left(e.failure);
     } on NoInternetConnection catch (e) {

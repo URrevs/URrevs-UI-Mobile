@@ -21,4 +21,9 @@ abstract class RemoteDataSource {
   Future<GetTheProfileOfAnotherUserResponse> getTheProfileOfAnotherUser(
     @Path() String userId,
   );
+
+  @GET('/users/phones')
+  Future<GetMyOwnedPhonesResponse> getMyOwnedPhones(
+    @Query('round') int round,
+  );
 }

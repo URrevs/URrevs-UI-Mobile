@@ -51,3 +51,19 @@ Map<String, dynamic> _$GetTheProfileOfAnotherUserResponseToJson(
       'success': instance.success,
       'user': instance.anotherUserSubResponse,
     };
+
+GetMyOwnedPhonesResponse _$GetMyOwnedPhonesResponseFromJson(
+        Map<String, dynamic> json) =>
+    GetMyOwnedPhonesResponse(
+      success: json['success'] as bool,
+      phonesSubResponses: (json['phones'] as List<dynamic>)
+          .map((e) => PhoneSubResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$GetMyOwnedPhonesResponseToJson(
+        GetMyOwnedPhonesResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'phones': instance.phonesSubResponses,
+    };

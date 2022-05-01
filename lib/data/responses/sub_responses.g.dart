@@ -41,3 +41,17 @@ Map<String, dynamic> _$AnotherUserSubResponseToJson(
       'picture': instance.picture,
       'points': instance.points,
     };
+
+PhoneSubResponse _$PhoneSubResponseFromJson(Map<String, dynamic> json) =>
+    PhoneSubResponse(
+      id: json['_id'] as String,
+      type: json['type'] as String,
+      name: json['name'] as String,
+    );
+
+Map<String, dynamic> _$PhoneSubResponseToJson(PhoneSubResponse instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'type': instance.type,
+      'name': instance.name,
+    };
