@@ -1,26 +1,30 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/all_products_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/home_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/leaderboard_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/menu_screen/menu_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/posting_screen/posting_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/get_my_user_profile_state.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/bottom_navigation_bar.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
-class BottomNavigationBarContainerScreen extends StatefulWidget {
+class BottomNavigationBarContainerScreen extends ConsumerStatefulWidget {
   const BottomNavigationBarContainerScreen({Key? key}) : super(key: key);
 
   static const String routeName = 'BottomNavigationBarContainerScreen';
 
   @override
-  State<BottomNavigationBarContainerScreen> createState() =>
+  ConsumerState<BottomNavigationBarContainerScreen> createState() =>
       _BottomNavigationBarContainerScreenState();
 }
 
 class _BottomNavigationBarContainerScreenState
-    extends State<BottomNavigationBarContainerScreen> {
+    extends ConsumerState<BottomNavigationBarContainerScreen> {
   int _currentIndex = 2;
 
   bool get showTabBar => _currentIndex == 1;
@@ -47,10 +51,20 @@ class _BottomNavigationBarContainerScreenState
     return AppBars.appBarWithURrevsLogo(
       context: context,
       showTabBar: showTabBar,
+      imageUrl: ref.watch(userImageUrlProvider),
     );
   }
 
   void _setCurrentIndex(int i) => setState(() => _currentIndex = i);
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(
+      Duration.zero,
+      ref.read(getMyProfileProvider.notifier).getMyProfile,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

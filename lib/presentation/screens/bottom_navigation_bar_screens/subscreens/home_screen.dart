@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_post_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/question_card_body.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/company_review_card.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/product_review_card.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/question_card.dart';
 
-class HomeSubscreen extends StatefulWidget {
+class HomeSubscreen extends ConsumerStatefulWidget {
   const HomeSubscreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeSubscreen> createState() => _HomeSubscreenState();
+  ConsumerState<HomeSubscreen> createState() => _HomeSubscreenState();
 }
 
-class _HomeSubscreenState extends State<HomeSubscreen> {
+class _HomeSubscreenState extends ConsumerState<HomeSubscreen> {
   Widget get listItem => (<Widget>[
         ProductReviewCard.dummyInstance().copyWith(
           onPressingComment: () {

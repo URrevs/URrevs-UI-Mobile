@@ -11,17 +11,16 @@ import 'package:urrevs_ui_mobile/presentation/widgets/tiles/company_horizontal_l
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 class AppBars {
-  static List<Widget> actions(BuildContext context) {
-    User? user = FirebaseAuth.instance.currentUser;
-    if (user == null) {
-      throw UnsupportedError('user should be logged in to see these actions');
-    }
+  static List<Widget> actions({
+    required BuildContext context,
+    required String imageUrl,
+  }) {
     return <Widget>[
       ElevatedButton(
         onPressed: () {
           Navigator.of(context).pushNamed(UserProfileScreen.routeName);
         },
-        child: Image.network(user.photoURL!, height: 50.h),
+        child: Image.network(imageUrl, height: 50.h),
       ),
       ElevatedButton(
         onPressed: () {
@@ -35,9 +34,10 @@ class AppBars {
   static AppBar appBarWithURrevsLogo({
     required BuildContext context,
     required bool showTabBar,
+    required String imageUrl,
   }) {
     return AppBar(
-      actions: AppBars.actions(context),
+      actions: AppBars.actions(context: context, imageUrl: imageUrl),
       bottom: showTabBar
           ? TabBar(
               tabs: [
@@ -49,9 +49,12 @@ class AppBars {
     );
   }
 
-  static AppBar appBarWithActions({required BuildContext context}) {
+  static AppBar appBarWithActions({
+    required BuildContext context,
+    required String imageUrl,
+  }) {
     return AppBar(
-      actions: AppBars.actions(context),
+      actions: AppBars.actions(context: context, imageUrl: imageUrl),
     );
   }
 
@@ -66,9 +69,15 @@ class AppBars {
     required BuildContext context,
     required TabController controller,
     required String text,
+    required String imageUrl,
   }) {
     return AppBar(
-      title: Row(children: AppBars.actions(context)),
+      title: Row(
+        children: AppBars.actions(
+          context: context,
+          imageUrl: imageUrl,
+        ),
+      ),
       actions: [Text(text)],
       bottom: TabBar(
         controller: controller,
@@ -85,9 +94,15 @@ class AppBars {
     required BuildContext context,
     required TabController controller,
     required String text,
+    required String imageUrl,
   }) {
     return AppBar(
-      title: Row(children: AppBars.actions(context)),
+      title: Row(
+        children: AppBars.actions(
+          context: context,
+          imageUrl: imageUrl,
+        ),
+      ),
       actions: [Text(text)],
       bottom: TabBar(
         controller: controller,

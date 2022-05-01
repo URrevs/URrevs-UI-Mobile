@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -8,20 +9,22 @@ import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/product_profile/subscreens/product_profile_q_a_subscreen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/product_profile/subscreens/product_profile_reviews_subscreen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/product_profile/subscreens/product_profile_specs_subscreen.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/scaffold_with_hiding_fab.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
-class ProductProfileScreen extends StatefulWidget {
+class ProductProfileScreen extends ConsumerStatefulWidget {
   const ProductProfileScreen({Key? key}) : super(key: key);
 
   static const String routeName = 'ProductProfileScreen';
 
   @override
-  State<ProductProfileScreen> createState() => _ProductProfileScreenState();
+  ConsumerState<ProductProfileScreen> createState() =>
+      _ProductProfileScreenState();
 }
 
-class _ProductProfileScreenState extends State<ProductProfileScreen>
+class _ProductProfileScreenState extends ConsumerState<ProductProfileScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
@@ -72,6 +75,7 @@ class _ProductProfileScreenState extends State<ProductProfileScreen>
         context: context,
         controller: _tabController,
         text: 'Nokia 7 plus',
+        imageUrl: ref.watch(userImageUrlProvider),
       ),
       fabLabel: fabLabel,
       fabIcon: fabIcon,

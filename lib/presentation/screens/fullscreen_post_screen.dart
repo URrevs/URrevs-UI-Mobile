@@ -1,10 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answers_list.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/comments_list.dart';
@@ -22,7 +24,7 @@ class FullscreenPostScreenArgs {
   });
 }
 
-class FullscreenPostScreen extends StatefulWidget {
+class FullscreenPostScreen extends ConsumerStatefulWidget {
   const FullscreenPostScreen(
     this.screenArgs, {
     Key? key,
@@ -33,10 +35,11 @@ class FullscreenPostScreen extends StatefulWidget {
   static const String routeName = 'FullscreenProductReviewScreen';
 
   @override
-  State<FullscreenPostScreen> createState() => _FullscreenPostScreenState();
+  ConsumerState<FullscreenPostScreen> createState() =>
+      _FullscreenPostScreenState();
 }
 
-class _FullscreenPostScreenState extends State<FullscreenPostScreen> {
+class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
   FocusNode focusNode = FocusNode();
 
   String get hintText {
@@ -94,7 +97,10 @@ class _FullscreenPostScreenState extends State<FullscreenPostScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBars.appBarWithActions(context: context),
+      appBar: AppBars.appBarWithActions(
+        context: context,
+        imageUrl: ref.watch(userImageUrlProvider),
+      ),
       resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Column(

@@ -1,6 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get_it/get_it.dart';
+import 'package:urrevs_ui_mobile/domain/repository.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/authentication_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/get_my_profile_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/theme_mode_notifier.dart';
@@ -17,3 +20,12 @@ final authenticationProvider =
 final getMyProfileProvider =
     StateNotifierProvider<GetMyProfileNotifier, GetMyProfileState>(
         (ref) => GetMyProfileNotifier());
+
+final userImageUrlProvider = Provider<String>((ref) {
+  final state = ref.watch(getMyProfileProvider);
+  if (state is GetMyProfileLoadedState) {
+    return state.user.picture;
+  } else {
+    return StringsManager.imagePlaceHolder;
+  }
+});
