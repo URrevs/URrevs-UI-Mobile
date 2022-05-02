@@ -99,7 +99,7 @@
   "writeAnAnswer": "Write an answer",
   "shareInvitationLink": "Share invitation link",
   "updateProducts": "Update products",
-  "addCompetition": "Add competition",
+  "addCompetition": "Add contest",
   "compare": "Compare",
   "postReview": "Post review",
   "postQuestion": "Post question",
@@ -131,5 +131,14 @@
   "sendingDataTimedout": "Sending data timed out",
   "requestWasCancelled": "Request was cancelled",
   "unknownNetworkError": "Unknown network error",
+  "addingCompetition": "Adding contest",
+  "enterCompetitionFinishingDate": "Enter contest end date: ",
+  "competitionEndDate": "Contest end date",
+  "enterNumberOfWinners": "Enter the number of winners:",
+  "winnersNumber": "Number of winners",
+  "enterPrizeName": "Enter prize name:",
+  "prizeName": "Name of prize",
+  "enterPrizeImageLink": "Enter prize image's URL:",
+  "prizeImageLink": "Prize image's URL",
   "youHaveGotPointsForLoggingInThroughTheMobileApp": "Congrats! You have got points for logging in through the mobile app"
 }

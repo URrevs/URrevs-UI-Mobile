@@ -7,6 +7,7 @@ class AssetsPaths {
 class ImageAssets {
   static const String splashLogo = "${AssetsPaths.images}/splash_logo.png";
   static const String fullLogo = "${AssetsPaths.images}/full_logo.png";
+  static const String errorImage = "${AssetsPaths.images}/error.jpeg";
 }
 
 class SvgAssets {

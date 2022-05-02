@@ -147,6 +147,15 @@ class CodegenLoader extends AssetLoader{
   "sendingDataTimedout": "إرسال البيانات إلى الخادم أخذ وقتاً طويلاً",
   "requestWasCancelled": "تم إلغاء الطلب",
   "unknownNetworkError": "حدث خطأ غير معروف في الشبكة",
+  "addingCompetition": "اضافة مسابقة",
+  "enterCompetitionFinishingDate": "ادخل تاريخ انتهاء المسابقة:",
+  "competitionEndDate": "تاريخ انتهاء المسابقة",
+  "enterNumberOfWinners": "ادخل عدد الفائزين:",
+  "winnersNumber": "عدد الفائزين",
+  "enterPrizeName": "ادخل اسم الجائزة:",
+  "prizeName": "اسم الجائزة",
+  "enterPrizeImageLink": "ادخل رابط صورة للجائزة:",
+  "prizeImageLink": "رابط صورة الجائزة",
   "youHaveGotPointsForLoggingInThroughTheMobileApp": "مبروك! لقد حصلت علي نقاط لتسجيل دخولك من خلال تطبيق الهاتف"
 };
 static const Map<String,dynamic> en = {
@@ -250,7 +259,7 @@ static const Map<String,dynamic> en = {
   "writeAnAnswer": "Write an answer",
   "shareInvitationLink": "Share invitation link",
   "updateProducts": "Update products",
-  "addCompetition": "Add competition",
+  "addCompetition": "Add contest",
   "compare": "Compare",
   "postReview": "Post review",
   "postQuestion": "Post question",
@@ -282,6 +291,15 @@ static const Map<String,dynamic> en = {
   "sendingDataTimedout": "Sending data timed out",
   "requestWasCancelled": "Request was cancelled",
   "unknownNetworkError": "Unknown network error",
+  "addingCompetition": "Adding contest",
+  "enterCompetitionFinishingDate": "Enter contest end date: ",
+  "competitionEndDate": "Contest end date",
+  "enterNumberOfWinners": "Enter the number of winners:",
+  "winnersNumber": "Number of winners",
+  "enterPrizeName": "Enter prize name:",
+  "prizeName": "Name of prize",
+  "enterPrizeImageLink": "Enter prize image's URL:",
+  "prizeImageLink": "Prize image's URL",
   "youHaveGotPointsForLoggingInThroughTheMobileApp": "Congrats! You have got points for logging in through the mobile app"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};

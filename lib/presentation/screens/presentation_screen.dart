@@ -27,11 +27,14 @@ import 'package:urrevs_ui_mobile/presentation/widgets/buttons/grad_button.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/cards/competition_banner.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/cards/rating_overview_card.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/circular_rating_indicator.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/fields/datepicker_field.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/fields/txt_field.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answer_tree.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answers_list.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/comment_tree.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/comments_list.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/reply.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/prompts/adding_competition_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body_rating_block.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/see_more_button.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/review_card_body.dart';
@@ -65,11 +68,18 @@ List<Item> items = [
 class _PresentationScreenState extends ConsumerState<PresentationScreen> {
   bool isSelected = false;
   int selectedIndex = -1;
-
+  TextEditingController dateCtl = TextEditingController();
+  TextEditingController textCtl = TextEditingController();
+  TextEditingController winnerNumCtl = TextEditingController();
+  TextEditingController prizeNameCtl = TextEditingController();
+  TextEditingController imgUrlCtl = TextEditingController();
   @override
   Widget build(BuildContext context) {
     NumberFormat numberFormat =
         NumberFormat.compact(locale: context.locale.languageCode);
+    String competitionDate = 'أدخل تاريخ انتهاء المسابقة';
+    String hintText = 'عدد الفائزين';
+
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -107,6 +117,18 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
       body: ListView(
         padding: EdgeInsets.all(20),
         children: [
+          SizedBox(height: 20),
+          AddingCompetitionPrompt(
+              dateController: dateCtl,
+              numberOfWinnersController: winnerNumCtl,
+              prizeNameController: prizeNameCtl,
+              imgUrlController: imgUrlCtl),
+
+          //TxtField(textCtl: textCtl, hintText: hintText),
+          SizedBox(
+            height: 20,
+          ),
+          //DatePickerField(dateCtl: dateCtl, hintText: competitionDate),
           SizedBox(height: 20),
           LeaderboardEntryTile(
             name: 'Ziad Mostafa',
@@ -197,4 +219,5 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
     );
   }
 }
+
 
