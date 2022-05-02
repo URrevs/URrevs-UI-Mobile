@@ -133,5 +133,14 @@ abstract class  LocaleKeys {
   static const sendingDataTimedout = 'sendingDataTimedout';
   static const requestWasCancelled = 'requestWasCancelled';
   static const unknownNetworkError = 'unknownNetworkError';
+  static const addingCompetition = 'addingCompetition';
+  static const enterCompetitionFinishingDate = 'enterCompetitionFinishingDate';
+  static const competitionEndDate = 'competitionEndDate';
+  static const enterNumberOfWinners = 'enterNumberOfWinners';
+  static const winnersNumber = 'winnersNumber';
+  static const enterPrizeName = 'enterPrizeName';
+  static const prizeName = 'prizeName';
+  static const enterPrizeImageLink = 'enterPrizeImageLink';
+  static const prizeImageLink = 'prizeImageLink';
 
 }

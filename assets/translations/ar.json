@@ -130,5 +130,14 @@
   "receivingDataTimedout": "استلام البيانات من الخادم أخذ وقتاً طويلاً",
   "sendingDataTimedout": "إرسال البيانات إلى الخادم أخذ وقتاً طويلاً",
   "requestWasCancelled": "تم إلغاء الطلب",
-  "unknownNetworkError": "حدث خطأ غير معروف في الشبكة"
+  "unknownNetworkError": "حدث خطأ غير معروف في الشبكة",
+  "addingCompetition": "اضافة مسابقة",
+  "enterCompetitionFinishingDate": "ادخل تاريخ انتهاء المسابقة:",
+  "competitionEndDate": "تاريخ انتهاء المسابقة",
+  "enterNumberOfWinners": "ادخل عدد الفائزين:",
+  "winnersNumber": "عدد الفائزين",
+  "enterPrizeName": "ادخل اسم الجائزة:",
+  "prizeName": "اسم الجائزة",
+  "enterPrizeImageLink": "ادخل رابط صورة للجائزة:",
+  "prizeImageLink": "رابط صورة الجائزة"
 }
