@@ -130,5 +130,6 @@
   "receivingDataTimedout": "استلام البيانات من الخادم أخذ وقتاً طويلاً",
   "sendingDataTimedout": "إرسال البيانات إلى الخادم أخذ وقتاً طويلاً",
   "requestWasCancelled": "تم إلغاء الطلب",
-  "unknownNetworkError": "حدث خطأ غير معروف في الشبكة"
+  "unknownNetworkError": "حدث خطأ غير معروف في الشبكة",
+  "youHaveGotPointsForLoggingInThroughTheMobileApp": "مبروك! لقد حصلت علي نقاط لتسجيل دخولك من خلال تطبيق الهاتف"
 }

@@ -10,6 +10,7 @@ import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_scre
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/user_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_my_user_profile_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/give_points_to_user_state.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/bottom_navigation_bar.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
@@ -63,29 +64,31 @@ class _BottomNavigationBarContainerScreenState
     super.initState();
     Future.delayed(
       Duration.zero,
-      ref.read(getMyProfileProvider.notifier).getMyProfile,
+      () {
+        ref.read(getMyProfileProvider.notifier).getMyProfile();
+        ref.read(givePointsToUserProvider.notifier).givePointsToUser();
+      },
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    ref.listen(givePointsToUserProvider, (previous, next) {
+      if (next is GivePointsToUserLoadedState) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              LocaleKeys.youHaveGotPointsForLoggingInThroughTheMobileApp.tr(),
+            ),
+          ),
+        );
+      }
+    });
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         appBar: appBar,
         body: SafeArea(child: currentPage),
-        persistentFooterButtons: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed(
-                UserProfileScreen.routeName,
-                arguments:
-                    UserProfileScreenArgs(userId: '626b29227fe7587a42e3e9f6'),
-              );
-            },
-            child: Text('ANOTHER USER PROFILE'),
-          )
-        ],
         bottomNavigationBar: BottomNavBar(
           currentIndex: _currentIndex,
           onTap: _setCurrentIndex,

@@ -223,7 +223,6 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
         if (!otherUser) {
           ref.read(getMyProfileProvider.notifier).getMyProfile();
         } else {
-          print('request sent');
           ref
               .read(getTheProfileOfAnotherUserProvider.notifier)
               .getTheProfileOfAnotherUser(widget.screenArgs.userId!);

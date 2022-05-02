@@ -100,7 +100,6 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
       ),
     );
 
-    print('request succeeded');
   }
 
   void signInWithFacebook() async {

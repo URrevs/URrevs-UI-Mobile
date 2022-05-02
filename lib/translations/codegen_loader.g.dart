@@ -146,7 +146,8 @@ class CodegenLoader extends AssetLoader{
   "receivingDataTimedout": "استلام البيانات من الخادم أخذ وقتاً طويلاً",
   "sendingDataTimedout": "إرسال البيانات إلى الخادم أخذ وقتاً طويلاً",
   "requestWasCancelled": "تم إلغاء الطلب",
-  "unknownNetworkError": "حدث خطأ غير معروف في الشبكة"
+  "unknownNetworkError": "حدث خطأ غير معروف في الشبكة",
+  "youHaveGotPointsForLoggingInThroughTheMobileApp": "مبروك! لقد حصلت علي نقاط لتسجيل دخولك من خلال تطبيق الهاتف"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -280,7 +281,8 @@ static const Map<String,dynamic> en = {
   "receivingDataTimedout": "Receiving data timed out",
   "sendingDataTimedout": "Sending data timed out",
   "requestWasCancelled": "Request was cancelled",
-  "unknownNetworkError": "Unknown network error"
+  "unknownNetworkError": "Unknown network error",
+  "youHaveGotPointsForLoggingInThroughTheMobileApp": "Congrats! You have got points for logging in through the mobile app"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

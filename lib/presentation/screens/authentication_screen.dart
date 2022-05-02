@@ -111,6 +111,19 @@ class _AuthenticationScreenState extends ConsumerState<AuthenticationScreen> {
           },
           child: Text('SHOW DIALOG'),
         ),
+        TextButton(
+          onPressed: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  LocaleKeys.youHaveGotPointsForLoggingInThroughTheMobileApp
+                      .tr(),
+                ),
+              ),
+            );
+          },
+          child: Text('SHOW SNACKBAR'),
+        ),
       ];
     } else {
       return null;

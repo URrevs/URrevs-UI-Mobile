@@ -52,7 +52,6 @@ class Repository {
       GetIt.I<Dio>().options.headers[HttpHeaders.authorizationHeader] =
           'bearer ${response.token}';
 
-      print(response);
 
       return Right(null);
     } on AuthenticationCancelled catch (e) {
@@ -87,7 +86,6 @@ class Repository {
       GetIt.I<Dio>().options.headers[HttpHeaders.authorizationHeader] =
           'bearer ${response.token}';
 
-      print(response);
 
       return Right(null);
     } on AuthenticationCancelled catch (e) {
@@ -97,6 +95,18 @@ class Repository {
     } on DioError catch (e) {
       return Left(e.failure);
     } on FirebaseAuthException catch (e) {
+      return Left(e.failure);
+    }
+  }
+
+  Future<Either<Failure, void>> givePointsToUser() async {
+    try {
+      String idToken = await FirebaseAuth.instance.currentUser!.getIdToken();
+      await _remoteDataSource.givePointsToUser('bearer $idToken');
+      return Right(null);
+    } on DioError catch (e) {
+      return Left(e.failure);
+    } on NoInternetConnection catch (e) {
       return Left(e.failure);
     }
   }
@@ -130,7 +140,6 @@ class Repository {
       await _checkConnection();
       final response =
           await _remoteDataSource.getTheProfileOfAnotherUser(userId);
-      print(response);
       return Right(response.anotherUserSubResponse.userModel);
     } on DioError catch (e) {
       return Left(e.failure);

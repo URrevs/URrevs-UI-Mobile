@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/font_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 
 class ThemeManager {
@@ -55,6 +56,18 @@ class ThemeManager {
             ),
             // minimumSize: Size(80.w, 30.h),
             // maximumSize: Size(100.w, 40.h),
+          ),
+        ),
+        snackBarTheme: SnackBarThemeData(
+          actionTextColor: ColorManager.blue,
+          backgroundColor: ColorManager.snackBarGrey,
+          contentTextStyle: TextStyleManager.s16w500.copyWith(
+            color: ColorManager.black,
+            fontFamily: FontConstants.tajawal,
+          ),
+          elevation: 3,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppRadius.snackBar),
           ),
         ),
         textTheme: TextTheme(

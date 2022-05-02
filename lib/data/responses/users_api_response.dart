@@ -90,3 +90,16 @@ class GetTheOwnedPhonesOfAnotherUserResponse extends BaseResponse {
   Map<String, dynamic> toJson() =>
       _$GetTheOwnedPhonesOfAnotherUserResponseToJson(this);
 }
+
+@JsonSerializable()
+class GivePointsToUserResponse extends BaseResponse {
+  String status;
+  GivePointsToUserResponse({
+    required bool success,
+    required this.status,
+  }) : super(success: success);
+
+  factory GivePointsToUserResponse.fromJson(Map<String, Object?> json) =>
+      _$GivePointsToUserResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$GivePointsToUserResponseToJson(this);
+}

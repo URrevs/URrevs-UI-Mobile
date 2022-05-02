@@ -84,3 +84,17 @@ Map<String, dynamic> _$GetTheOwnedPhonesOfAnotherUserResponseToJson(
       'success': instance.success,
       'phones': instance.phonesSubResponses,
     };
+
+GivePointsToUserResponse _$GivePointsToUserResponseFromJson(
+        Map<String, dynamic> json) =>
+    GivePointsToUserResponse(
+      success: json['success'] as bool,
+      status: json['status'] as String,
+    );
+
+Map<String, dynamic> _$GivePointsToUserResponseToJson(
+        GivePointsToUserResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'status': instance.status,
+    };

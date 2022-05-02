@@ -1,5 +1,7 @@
 class AuthenticationRequest {}
 
+class GivePointsToUserRequest {}
+
 class GetMyProfileRequest {}
 
 class GetTheProfileOfAnotherUserRequest {}

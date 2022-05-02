@@ -130,5 +130,6 @@
   "receivingDataTimedout": "Receiving data timed out",
   "sendingDataTimedout": "Sending data timed out",
   "requestWasCancelled": "Request was cancelled",
-  "unknownNetworkError": "Unknown network error"
+  "unknownNetworkError": "Unknown network error",
+  "youHaveGotPointsForLoggingInThroughTheMobileApp": "Congrats! You have got points for logging in through the mobile app"
 }

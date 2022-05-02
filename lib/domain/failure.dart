@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:urrevs_ui_mobile/app/exceptions.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
@@ -84,6 +85,7 @@ extension DioErrorFailure on DioError {
       case DioErrorType.cancel:
         return Failure(LocaleKeys.requestWasCancelled.tr());
       case DioErrorType.other:
+        debugPrint(toString());
         return Failure(LocaleKeys.unknownNetworkError.tr());
       case DioErrorType.response:
         String? errorMessage = response?.data['status'];

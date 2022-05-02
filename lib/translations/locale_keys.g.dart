@@ -133,5 +133,6 @@ abstract class  LocaleKeys {
   static const sendingDataTimedout = 'sendingDataTimedout';
   static const requestWasCancelled = 'requestWasCancelled';
   static const unknownNetworkError = 'unknownNetworkError';
+  static const youHaveGotPointsForLoggingInThroughTheMobileApp = 'youHaveGotPointsForLoggingInThroughTheMobileApp';
 
 }
