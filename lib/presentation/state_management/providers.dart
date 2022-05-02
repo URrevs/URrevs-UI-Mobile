@@ -29,14 +29,16 @@ final getTheProfileOfAnotherUserProvider = StateNotifierProvider<
         GetTheProfileOfAnotherUserNotifier, GetTheProfileOfAnotherUserState>(
     (ref) => GetTheProfileOfAnotherUserNotifier());
 
-final getOwnedPhonesProvider =
-    StateNotifierProvider<GetMyOwnedPhonesNotifier, GetMyOwnedPhonesState>(
-        (ref) => GetMyOwnedPhonesNotifier());
+// must be auto dispose as it has additional internal state besides the original
+// state
+final getOwnedPhonesProvider = StateNotifierProvider.autoDispose<
+    GetMyOwnedPhonesNotifier,
+    GetMyOwnedPhonesState>((ref) => GetMyOwnedPhonesNotifier());
 
 final userImageUrlProvider = Provider<String>((ref) {
   final state = ref.watch(getMyProfileProvider);
   if (state is GetMyProfileLoadedState) {
-    return state.user.picture;
+    return state.user.picture!;
   } else {
     return StringsManager.imagePlaceHolder;
   }

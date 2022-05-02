@@ -10,7 +10,7 @@ UserSubResponse _$UserSubResponseFromJson(Map<String, dynamic> json) =>
     UserSubResponse(
       id: json['_id'] as String,
       name: json['name'] as String,
-      picture: json['picture'] as String,
+      picture: json['picture'] as String?,
       points: json['points'] as int,
       refCode: json['refCode'] as String,
     );
@@ -29,7 +29,7 @@ AnotherUserSubResponse _$AnotherUserSubResponseFromJson(
     AnotherUserSubResponse(
       id: json['_id'] as String,
       name: json['name'] as String,
-      picture: json['picture'] as String,
+      picture: json['picture'] as String?,
       points: json['points'] as int,
     );
 

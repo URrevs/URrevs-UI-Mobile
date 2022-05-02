@@ -48,7 +48,8 @@ class CardHeaderTitle extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pushNamed(
                 UserProfileScreen.routeName,
-                arguments: UserProfileScreenArgs(userId: 'put real id'),
+                arguments:
+                    UserProfileScreenArgs(userId: '626b29227fe7587a42e3e9f6'),
               );
             },
             child: Text(

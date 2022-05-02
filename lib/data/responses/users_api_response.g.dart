@@ -67,3 +67,20 @@ Map<String, dynamic> _$GetMyOwnedPhonesResponseToJson(
       'success': instance.success,
       'phones': instance.phonesSubResponses,
     };
+
+GetTheOwnedPhonesOfAnotherUserResponse
+    _$GetTheOwnedPhonesOfAnotherUserResponseFromJson(
+            Map<String, dynamic> json) =>
+        GetTheOwnedPhonesOfAnotherUserResponse(
+          success: json['success'] as bool,
+          phonesSubResponses: (json['phones'] as List<dynamic>)
+              .map((e) => PhoneSubResponse.fromJson(e as Map<String, dynamic>))
+              .toList(),
+        );
+
+Map<String, dynamic> _$GetTheOwnedPhonesOfAnotherUserResponseToJson(
+        GetTheOwnedPhonesOfAnotherUserResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'phones': instance.phonesSubResponses,
+    };

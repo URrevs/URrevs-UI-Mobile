@@ -3,12 +3,12 @@ import 'package:equatable/equatable.dart';
 class User extends Equatable {
   final String id;
   final String name;
-  final String picture;
+  final String? picture;
   final int points;
   const User({
     required this.id,
     required this.name,
-    required this.picture,
+    this.picture,
     required this.points,
   });
 

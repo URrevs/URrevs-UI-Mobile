@@ -80,7 +80,7 @@ class _BottomNavigationBarContainerScreenState
               Navigator.of(context).pushNamed(
                 UserProfileScreen.routeName,
                 arguments:
-                    UserProfileScreenArgs(userId: '626c50e6a10cee15a9225805'),
+                    UserProfileScreenArgs(userId: '626b29227fe7587a42e3e9f6'),
               );
             },
             child: Text('ANOTHER USER PROFILE'),

@@ -4,18 +4,29 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+
 import 'package:urrevs_ui_mobile/domain/models/phone.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/user_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_my_owned_phones_state.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/error_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/scaffold_with_hiding_fab.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
+class OwnedProductsScreenArgs {
+  String? userId;
+  OwnedProductsScreenArgs({
+    this.userId,
+  });
+}
+
 class OwnedProductsScreen extends ConsumerStatefulWidget {
-  const OwnedProductsScreen({Key? key}) : super(key: key);
+  const OwnedProductsScreen(this.screenArgs, {Key? key}) : super(key: key);
+
+  final OwnedProductsScreenArgs screenArgs;
 
   static const String routeName = 'OwnedProductsScreen';
 
@@ -34,7 +45,16 @@ class _OwnedProductsScreenState extends ConsumerState<OwnedProductsScreen> {
     _pagingController.addPageRequestListener((_) {
       Future.delayed(
         Duration.zero,
-        ref.read(getOwnedPhonesProvider.notifier).getMyOwnedPhones,
+        () {
+          String? userId = widget.screenArgs.userId;
+          if (userId == null) {
+            ref.read(getOwnedPhonesProvider.notifier).getMyOwnedPhones();
+          } else {
+            ref
+                .read(getOwnedPhonesProvider.notifier)
+                .getTheOwnedPhonesOfAnotherUser(userId);
+          }
+        },
       );
     });
   }
@@ -78,6 +98,8 @@ class _OwnedProductsScreenState extends ConsumerState<OwnedProductsScreen> {
           newPageErrorIndicatorBuilder: (context) => SizedBox(),
           noItemsFoundIndicatorBuilder: null,
           noMoreItemsIndicatorBuilder: null,
+          firstPageProgressIndicatorBuilder: (context) => CircularLoading(),
+          newPageProgressIndicatorBuilder: (context) => CircularLoading(),
         ),
       ),
     );

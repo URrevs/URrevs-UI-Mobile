@@ -115,6 +115,7 @@ class Repository {
     try {
       await _checkConnection();
       final response = await _remoteDataSource.getMyProfile();
+
       return Right(response);
     } on DioError catch (e) {
       return Left(e.failure);
@@ -129,6 +130,7 @@ class Repository {
       await _checkConnection();
       final response =
           await _remoteDataSource.getTheProfileOfAnotherUser(userId);
+      print(response);
       return Right(response.anotherUserSubResponse.userModel);
     } on DioError catch (e) {
       return Left(e.failure);
@@ -141,6 +143,20 @@ class Repository {
     try {
       await _checkConnection();
       final response = await _remoteDataSource.getMyOwnedPhones(round);
+      return Right(response.phonesModels);
+    } on DioError catch (e) {
+      return Left(e.failure);
+    } on NoInternetConnection catch (e) {
+      return Left(e.failure);
+    }
+  }
+
+  Future<Either<Failure, List<Phone>>> getTheOwnedPhonesOfAnotherUser(
+      String userId, int round) async {
+    try {
+      await _checkConnection();
+      final response =
+          await _remoteDataSource.getTheOwnedPhonesOfAnotherUser(userId, round);
       return Right(response.phonesModels);
     } on DioError catch (e) {
       return Left(e.failure);

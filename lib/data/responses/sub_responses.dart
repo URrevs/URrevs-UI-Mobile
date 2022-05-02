@@ -10,14 +10,14 @@ class UserSubResponse {
   @JsonKey(name: '_id')
   String id;
   String name;
-  String picture;
+  String? picture;
   int points;
   String refCode;
 
   UserSubResponse({
     required this.id,
     required this.name,
-    required this.picture,
+    this.picture,
     required this.points,
     required this.refCode,
   });
@@ -35,7 +35,7 @@ class AnotherUserSubResponse {
   @JsonKey(name: '_id')
   String id;
   String name;
-  String picture;
+  String? picture;
   int points;
 
   AnotherUserSubResponse({

@@ -50,8 +50,11 @@ class RouteGenerator {
           builder: (_) => PostedQuestionsScreen(),
         );
       case OwnedProductsScreen.routeName:
+        final screenArgs =
+            routeSettings.arguments as OwnedProductsScreenArgs? ??
+                OwnedProductsScreenArgs();
         return MaterialPageRoute(
-          builder: (_) => OwnedProductsScreen(),
+          builder: (_) => OwnedProductsScreen(screenArgs),
         );
       case AboutUsScreen.routeName:
         return MaterialPageRoute(

@@ -71,3 +71,22 @@ class GetMyOwnedPhonesResponse extends BaseResponse {
       _$GetMyOwnedPhonesResponseFromJson(json);
   Map<String, dynamic> toJson() => _$GetMyOwnedPhonesResponseToJson(this);
 }
+
+@JsonSerializable()
+class GetTheOwnedPhonesOfAnotherUserResponse extends BaseResponse {
+  @JsonKey(name: 'phones')
+  List<PhoneSubResponse> phonesSubResponses;
+  GetTheOwnedPhonesOfAnotherUserResponse({
+    required bool success,
+    required this.phonesSubResponses,
+  }) : super(success: success);
+
+  List<Phone> get phonesModels =>
+      phonesSubResponses.map((p) => p.phoneModel).toList();
+
+  factory GetTheOwnedPhonesOfAnotherUserResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$GetTheOwnedPhonesOfAnotherUserResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$GetTheOwnedPhonesOfAnotherUserResponseToJson(this);
+}
