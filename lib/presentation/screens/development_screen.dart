@@ -169,56 +169,15 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
       body: ListView(
         padding: EdgeInsets.all(20),
         children: [
-          ElevatedButton(
-            onPressed: updateFirebasePhoto,
-            child: Text('CHANGE PHOTO'),
+          Avatar(
+            imageUrl: StringsManager.imagePlaceHolder,
+            radius: 40,
           ),
-          // StarsCounter(percentage: 0.56),
-          // AuthButton(
-          //   text: LocaleKeys.googleAuth.tr(),
-          //   imagePath: SvgAssets.googleLogo,
-          //   color: ColorManager.grey,
-          //   onPressed: signInWithGoogle,
+          // ElevatedButton(
+          //   onPressed: updateFirebasePhoto,
+          //   child: Text('CHANGE PHOTO'),
           // ),
-          // SizedBox(height: 20),
-          // AuthButton(
-          //   text: LocaleKeys.facebookAuth.tr(),
-          //   imagePath: SvgAssets.facebookLogo,
-          //   color: ColorManager.blue,
-          //   onPressed: signInWithFacebook,
-          // ),
-          // SizedBox(height: 20),
-          // CompanyHorizontalListTile(companyItems: companyItems),
-          // RatingOverviewCard(
-          //   productName: 'Nokia 7 Plus',
-          //   ratingCriteria: _ratingCriteria,
-          //   scores: DummyDataManager.productOverviewScores,
-          //   generalProductRating:
-          //       DummyDataManager.randomCircularIndicatorDouble,
-          //   generalCompanyRating:
-          //       DummyDataManager.randomCircularIndicatorDouble,
-          //   viewsCounter: DummyDataManager.randomInt,
-          //   isProduct: true,
-          // ),
-          // SizedBox(height: 20),
-          // RatingOverviewCard(
-          //   productName: 'Nokia',
-          //   ratingCriteria: _ratingCriteria,
-          //   scores: DummyDataManager.productOverviewScores,
-          //   generalProductRating:
-          //       DummyDataManager.randomCircularIndicatorDouble,
-          //   generalCompanyRating:
-          //       DummyDataManager.randomCircularIndicatorDouble,
-          //   viewsCounter: DummyDataManager.randomInt,
-          //   isProduct: false,
-          // ),
-          // SizedBox(height: 20),
-          // UpdatedListTile(
-          //   title: 'قائمة المنتجات المضافة حديثاً',
-          //   items: items,
-          // ),
-          // SizedBox(height: 20),
-          UpdatedListTile(title: 'قائمة الشركات المضافة حديثاً', items: items),
+          // UpdatedListTile(title: 'قائمة الشركات المضافة حديثاً', items: items),
           // ProductReviewCard.dummyInstance(),
           // CompanyReviewCard.dummyInstance(),
           // QuestionCard.dummyInstance(context),

@@ -1,8 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/authentication_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/all_products_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/home_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/leaderboard_screen.dart';
@@ -117,6 +121,21 @@ class _BottomNavigationBarContainerScreenState
       length: 2,
       child: Scaffold(
         appBar: appBar,
+        persistentFooterButtons: [
+          TextButton(
+            onPressed: () {
+              GoogleSignIn().signOut();
+              FacebookAuth.instance.logOut();
+              FirebaseAuth.instance.signOut();
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                AuthenticationScreen.routeName,
+                (route) => false,
+              );
+            },
+            child: Text('LOG OUT'),
+          ),
+        ],
         body: SafeArea(child: currentPage),
         bottomNavigationBar: BottomNavBar(
           currentIndex: _currentIndex,
