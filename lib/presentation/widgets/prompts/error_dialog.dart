@@ -39,7 +39,7 @@ class ErrorDialog extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: ColorManager.dialogCloseIconBackground,
+                      color: ColorManager.dialogCloseIconBackgroundGrey,
                       boxShadow: [
                         BoxShadow(
                           color: ColorManager.black.withOpacity(0.2),

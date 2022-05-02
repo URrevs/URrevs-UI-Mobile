@@ -155,7 +155,8 @@ class CodegenLoader extends AssetLoader{
   "enterPrizeName": "ادخل اسم الجائزة:",
   "prizeName": "اسم الجائزة",
   "enterPrizeImageLink": "ادخل رابط صورة للجائزة:",
-  "prizeImageLink": "رابط صورة الجائزة"
+  "prizeImageLink": "رابط صورة الجائزة",
+  "youHaveGotPointsForLoggingInThroughTheMobileApp": "مبروك! لقد حصلت علي نقاط لتسجيل دخولك من خلال تطبيق الهاتف"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -298,7 +299,8 @@ static const Map<String,dynamic> en = {
   "enterPrizeName": "Enter prize name:",
   "prizeName": "Name of prize",
   "enterPrizeImageLink": "Enter prize image's URL:",
-  "prizeImageLink": "Prize image's URL"
+  "prizeImageLink": "Prize image's URL",
+  "youHaveGotPointsForLoggingInThroughTheMobileApp": "Congrats! You have got points for logging in through the mobile app"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

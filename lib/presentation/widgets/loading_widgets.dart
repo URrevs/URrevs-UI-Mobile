@@ -8,7 +8,7 @@ class CircularLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: CircularProgressIndicator(),
+      child: Text('LOADING...'),
     );
   }
 }

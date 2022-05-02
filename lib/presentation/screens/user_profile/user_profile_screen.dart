@@ -103,7 +103,12 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
           title: LocaleKeys.ownedProducts.tr(),
           iconData: Icons.question_answer_outlined,
           onTap: () {
-            Navigator.of(context).pushNamed(OwnedProductsScreen.routeName);
+            Navigator.of(context).pushNamed(
+              OwnedProductsScreen.routeName,
+              arguments: OwnedProductsScreenArgs(
+                userId: '626b29227fe7587a42e3e9f6', // Loai AL_Jolani
+              ),
+            );
           },
         ),
         MenyItem(
@@ -146,7 +151,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
   }
 
   ListView _buildProfile({
-    required String imageUrl,
+    required String? imageUrl,
     required String username,
     required int stars,
     required String? refCode,
@@ -218,7 +223,6 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
         if (!otherUser) {
           ref.read(getMyProfileProvider.notifier).getMyProfile();
         } else {
-          print('request sent');
           ref
               .read(getTheProfileOfAnotherUserProvider.notifier)
               .getTheProfileOfAnotherUser(widget.screenArgs.userId!);

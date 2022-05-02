@@ -51,3 +51,50 @@ Map<String, dynamic> _$GetTheProfileOfAnotherUserResponseToJson(
       'success': instance.success,
       'user': instance.anotherUserSubResponse,
     };
+
+GetMyOwnedPhonesResponse _$GetMyOwnedPhonesResponseFromJson(
+        Map<String, dynamic> json) =>
+    GetMyOwnedPhonesResponse(
+      success: json['success'] as bool,
+      phonesSubResponses: (json['phones'] as List<dynamic>)
+          .map((e) => PhoneSubResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$GetMyOwnedPhonesResponseToJson(
+        GetMyOwnedPhonesResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'phones': instance.phonesSubResponses,
+    };
+
+GetTheOwnedPhonesOfAnotherUserResponse
+    _$GetTheOwnedPhonesOfAnotherUserResponseFromJson(
+            Map<String, dynamic> json) =>
+        GetTheOwnedPhonesOfAnotherUserResponse(
+          success: json['success'] as bool,
+          phonesSubResponses: (json['phones'] as List<dynamic>)
+              .map((e) => PhoneSubResponse.fromJson(e as Map<String, dynamic>))
+              .toList(),
+        );
+
+Map<String, dynamic> _$GetTheOwnedPhonesOfAnotherUserResponseToJson(
+        GetTheOwnedPhonesOfAnotherUserResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'phones': instance.phonesSubResponses,
+    };
+
+GivePointsToUserResponse _$GivePointsToUserResponseFromJson(
+        Map<String, dynamic> json) =>
+    GivePointsToUserResponse(
+      success: json['success'] as bool,
+      status: json['status'] as String,
+    );
+
+Map<String, dynamic> _$GivePointsToUserResponseToJson(
+        GivePointsToUserResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'status': instance.status,
+    };

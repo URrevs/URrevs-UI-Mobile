@@ -14,11 +14,27 @@ abstract class RemoteDataSource {
     @Header('authorization') String authorizationHeader,
   );
 
+  @PUT('/users/login/mobile')
+  Future<GivePointsToUserResponse> givePointsToUser(
+    @Header('authorization') String authorizationHeader,
+  );
+
   @GET('/users/profile')
   Future<GetMyProfileResponse> getMyProfile();
 
   @GET('/users/{userId}/profile')
   Future<GetTheProfileOfAnotherUserResponse> getTheProfileOfAnotherUser(
     @Path() String userId,
+  );
+
+  @GET('/users/phones')
+  Future<GetMyOwnedPhonesResponse> getMyOwnedPhones(
+    @Query('round') int round,
+  );
+
+  @GET('/users/{userId}/phones')
+  Future<GetMyOwnedPhonesResponse> getTheOwnedPhonesOfAnotherUser(
+    @Path() String userId,
+    @Query('round') int round,
   );
 }

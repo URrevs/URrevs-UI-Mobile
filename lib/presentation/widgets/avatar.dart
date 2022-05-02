@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/user_profile_screen.dart';
 
 /// Build the leading part of the header.
@@ -12,7 +13,7 @@ class Avatar extends StatelessWidget {
   }) : super(key: key);
 
   /// Profile image url of the current logged in user.
-  final String imageUrl;
+  final String? imageUrl;
 
   /// Radius of the displayed [CircleAvatar].
   final double radius;
@@ -23,7 +24,7 @@ class Avatar extends StatelessWidget {
       onTap: () {
         Navigator.of(context).pushNamed(
           UserProfileScreen.routeName,
-          arguments: UserProfileScreenArgs(userId: 'put real id'),
+          arguments: UserProfileScreenArgs(userId: '626b29227fe7587a42e3e9f6'),
         );
       },
       child: CircleAvatar(
@@ -31,7 +32,9 @@ class Avatar extends StatelessWidget {
         backgroundColor: ColorManager.transparent,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(radius),
-          child: Image.network(imageUrl),
+          child: imageUrl != null
+              ? Image.network(imageUrl!)
+              : Image.network(StringsManager.imagePlaceHolder),
         ),
       ),
     );

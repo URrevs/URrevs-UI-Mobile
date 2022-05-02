@@ -67,7 +67,6 @@ class CardFooterInteractionBar extends StatelessWidget {
           icon: GestureDetector(
             onTap: () {
               if (fullscreen) return;
-              print(cardType);
               Navigator.of(context).pushNamed(
                 FullscreenPostScreen.routeName,
                 arguments: FullscreenPostScreenArgs(cardType: cardType),

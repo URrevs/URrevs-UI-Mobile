@@ -1,15 +1,15 @@
 import 'package:equatable/equatable.dart';
 
-class User extends Equatable {
+class Phone extends Equatable {
   final String id;
   final String name;
-  final String? picture;
-  final int points;
-  const User({
+  final String? companyId;
+  final String? companyName;
+  const Phone({
     required this.id,
     required this.name,
-    this.picture,
-    required this.points,
+    this.companyId,
+    this.companyName,
   });
 
   @override

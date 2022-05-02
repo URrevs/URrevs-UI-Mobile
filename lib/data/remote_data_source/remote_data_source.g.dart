@@ -35,6 +35,23 @@ class _RemoteDataSource implements RemoteDataSource {
   }
 
   @override
+  Future<GivePointsToUserResponse> givePointsToUser(authorizationHeader) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'authorization': authorizationHeader};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GivePointsToUserResponse>(
+            Options(method: 'PUT', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/users/login/mobile',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GivePointsToUserResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<GetMyProfileResponse> getMyProfile() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -64,6 +81,39 @@ class _RemoteDataSource implements RemoteDataSource {
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = GetTheProfileOfAnotherUserResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<GetMyOwnedPhonesResponse> getMyOwnedPhones(round) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'round': round};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GetMyOwnedPhonesResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/users/phones',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GetMyOwnedPhonesResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<GetMyOwnedPhonesResponse> getTheOwnedPhonesOfAnotherUser(
+      userId, round) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'round': round};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GetMyOwnedPhonesResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/users/${userId}/phones',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GetMyOwnedPhonesResponse.fromJson(_result.data!);
     return value;
   }
 

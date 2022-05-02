@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'package:urrevs_ui_mobile/data/responses/base_response.dart';
 import 'package:urrevs_ui_mobile/data/responses/sub_responses.dart';
+import 'package:urrevs_ui_mobile/domain/models/phone.dart';
 
 part 'users_api_response.g.dart';
 
@@ -52,4 +53,53 @@ class GetTheProfileOfAnotherUserResponse extends BaseResponse {
       _$GetTheProfileOfAnotherUserResponseFromJson(json);
   Map<String, dynamic> toJson() =>
       _$GetTheProfileOfAnotherUserResponseToJson(this);
+}
+
+@JsonSerializable()
+class GetMyOwnedPhonesResponse extends BaseResponse {
+  @JsonKey(name: 'phones')
+  List<PhoneSubResponse> phonesSubResponses;
+  GetMyOwnedPhonesResponse({
+    required bool success,
+    required this.phonesSubResponses,
+  }) : super(success: success);
+
+  List<Phone> get phonesModels =>
+      phonesSubResponses.map((p) => p.phoneModel).toList();
+
+  factory GetMyOwnedPhonesResponse.fromJson(Map<String, Object?> json) =>
+      _$GetMyOwnedPhonesResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$GetMyOwnedPhonesResponseToJson(this);
+}
+
+@JsonSerializable()
+class GetTheOwnedPhonesOfAnotherUserResponse extends BaseResponse {
+  @JsonKey(name: 'phones')
+  List<PhoneSubResponse> phonesSubResponses;
+  GetTheOwnedPhonesOfAnotherUserResponse({
+    required bool success,
+    required this.phonesSubResponses,
+  }) : super(success: success);
+
+  List<Phone> get phonesModels =>
+      phonesSubResponses.map((p) => p.phoneModel).toList();
+
+  factory GetTheOwnedPhonesOfAnotherUserResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$GetTheOwnedPhonesOfAnotherUserResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$GetTheOwnedPhonesOfAnotherUserResponseToJson(this);
+}
+
+@JsonSerializable()
+class GivePointsToUserResponse extends BaseResponse {
+  String status;
+  GivePointsToUserResponse({
+    required bool success,
+    required this.status,
+  }) : super(success: success);
+
+  factory GivePointsToUserResponse.fromJson(Map<String, Object?> json) =>
+      _$GivePointsToUserResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$GivePointsToUserResponseToJson(this);
 }

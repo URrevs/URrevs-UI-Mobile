@@ -52,9 +52,7 @@ class CardBodyReviewBlockStarBar extends StatelessWidget {
               color: ColorManager.blue,
             ),
             unratedColor: ColorManager.grey,
-            onRatingUpdate: (rating) {
-              print(rating);
-            },
+            onRatingUpdate: (rating) {},
           ),
         )
       ],

@@ -12,6 +12,7 @@ import 'package:urrevs_ui_mobile/app/exceptions.dart';
 import 'package:urrevs_ui_mobile/data/remote_data_source/remote_data_source.dart';
 import 'package:urrevs_ui_mobile/data/responses/users_api_response.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
+import 'package:urrevs_ui_mobile/domain/models/phone.dart';
 import 'package:urrevs_ui_mobile/domain/models/user.dart';
 
 class Repository {
@@ -51,7 +52,6 @@ class Repository {
       GetIt.I<Dio>().options.headers[HttpHeaders.authorizationHeader] =
           'bearer ${response.token}';
 
-      print(response);
 
       return Right(null);
     } on AuthenticationCancelled catch (e) {
@@ -86,7 +86,6 @@ class Repository {
       GetIt.I<Dio>().options.headers[HttpHeaders.authorizationHeader] =
           'bearer ${response.token}';
 
-      print(response);
 
       return Right(null);
     } on AuthenticationCancelled catch (e) {
@@ -96,6 +95,18 @@ class Repository {
     } on DioError catch (e) {
       return Left(e.failure);
     } on FirebaseAuthException catch (e) {
+      return Left(e.failure);
+    }
+  }
+
+  Future<Either<Failure, void>> givePointsToUser() async {
+    try {
+      String idToken = await FirebaseAuth.instance.currentUser!.getIdToken();
+      await _remoteDataSource.givePointsToUser('bearer $idToken');
+      return Right(null);
+    } on DioError catch (e) {
+      return Left(e.failure);
+    } on NoInternetConnection catch (e) {
       return Left(e.failure);
     }
   }
@@ -114,6 +125,7 @@ class Repository {
     try {
       await _checkConnection();
       final response = await _remoteDataSource.getMyProfile();
+
       return Right(response);
     } on DioError catch (e) {
       return Left(e.failure);
@@ -129,6 +141,32 @@ class Repository {
       final response =
           await _remoteDataSource.getTheProfileOfAnotherUser(userId);
       return Right(response.anotherUserSubResponse.userModel);
+    } on DioError catch (e) {
+      return Left(e.failure);
+    } on NoInternetConnection catch (e) {
+      return Left(e.failure);
+    }
+  }
+
+  Future<Either<Failure, List<Phone>>> getMyOwnedPhones(int round) async {
+    try {
+      await _checkConnection();
+      final response = await _remoteDataSource.getMyOwnedPhones(round);
+      return Right(response.phonesModels);
+    } on DioError catch (e) {
+      return Left(e.failure);
+    } on NoInternetConnection catch (e) {
+      return Left(e.failure);
+    }
+  }
+
+  Future<Either<Failure, List<Phone>>> getTheOwnedPhonesOfAnotherUser(
+      String userId, int round) async {
+    try {
+      await _checkConnection();
+      final response =
+          await _remoteDataSource.getTheOwnedPhonesOfAnotherUser(userId, round);
+      return Right(response.phonesModels);
     } on DioError catch (e) {
       return Left(e.failure);
     } on NoInternetConnection catch (e) {
