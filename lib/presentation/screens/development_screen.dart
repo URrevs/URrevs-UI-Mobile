@@ -68,7 +68,17 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
   bool isSelected = false;
   int selectedIndex = -1;
 
-  void signInWithGoogle() async {
+  void updateFirebasePhoto() async {
+    await signInWithGoogle();
+    FirebaseAuth.instance.currentUser!.updatePhotoURL(
+        'https://media.istockphoto.com/photos/hacker-dark-face-using-laptop-picture-id1133604495?k=20&m=1133604495&s=612x612&w=0&h=QX5zvMG1qvfiz10hE5bSUXMj4eRMRTZF4qg3EIr-ffo=');
+    print('current firebase photo:');
+    print(FirebaseAuth.instance.currentUser!.photoURL);
+    print('current google photo:');
+    print(FirebaseAuth.instance.currentUser!.providerData.first.photoURL);
+  }
+
+  Future<void> signInWithGoogle() async {
     // Trigger the authentication flow
     GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
@@ -90,16 +100,6 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
     debugPrint('firebase idToken: $idToken');
     debugPrint('google idToken: ${googleAuth?.idToken}');
     debugPrint('google access token: ${googleAuth?.accessToken}');
-
-    await Dio().get(
-      'https://urrevs-api-dev-mobile.herokuapp.com/users/authenticate',
-      options: Options(
-        headers: {
-          'Authorization': 'Bearer $idToken',
-        },
-      ),
-    );
-
   }
 
   void signInWithFacebook() async {
@@ -169,6 +169,10 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
       body: ListView(
         padding: EdgeInsets.all(20),
         children: [
+          ElevatedButton(
+            onPressed: updateFirebasePhoto,
+            child: Text('CHANGE PHOTO'),
+          ),
           // StarsCounter(percentage: 0.56),
           // AuthButton(
           //   text: LocaleKeys.googleAuth.tr(),

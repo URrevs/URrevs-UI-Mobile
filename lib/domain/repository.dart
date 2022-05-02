@@ -4,7 +4,6 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -26,89 +25,79 @@ class Repository {
     if (!hasConnection) throw NoInternetConnection();
   }
 
-  Future<Either<Failure, void>> authenticateWithGoogle() async {
+  Future<Either<Failure, T>> _tryAndCatch<T>(
+      Future<T> Function() callBack) async {
     try {
-      // check connection before connecting to google
-      bool hasConnection = await InternetConnectionChecker().hasConnection;
-      if (!hasConnection) throw NoInternetConnection();
+      await _checkConnection();
+      T data = await callBack();
+      return Right(data);
+    } on AuthenticationCancelled catch (e) {
+      return Left(e.failure);
+    } on NoInternetConnection catch (e) {
+      return Left(e.failure);
+    } on DioError catch (e) {
+      return Left(e.failure);
+    } on FirebaseAuthException catch (e) {
+      return Left(e.failure);
+    }
+  }
 
+  Future<Either<Failure, void>> authenticateWithGoogle() async {
+    return _tryAndCatch(() async {
+      // login to google auth provider
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
       if (googleUser == null) throw AuthenticationCancelled();
 
+      // login to firebase auth provider
       final GoogleSignInAuthentication? googleAuth =
           await googleUser.authentication;
-
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth?.accessToken,
         idToken: googleAuth?.idToken,
       );
-
       await FirebaseAuth.instance.signInWithCredential(credential);
-      String idToken = await FirebaseAuth.instance.currentUser!.getIdToken();
 
+      // login to out backend
+      String idToken = await FirebaseAuth.instance.currentUser!.getIdToken();
       String authorizationHeader = 'Bearer $idToken';
       AuthenticationResponse response =
           await _remoteDataSource.authenticate(authorizationHeader);
+
+      // save the token
       GetIt.I<Dio>().options.headers[HttpHeaders.authorizationHeader] =
           'bearer ${response.token}';
-
-
-      return Right(null);
-    } on AuthenticationCancelled catch (e) {
-      return Left(e.failure);
-    } on NoInternetConnection catch (e) {
-      return Left(e.failure);
-    } on DioError catch (e) {
-      return Left(e.failure);
-    } on FirebaseAuthException catch (e) {
-      return Left(e.failure);
-    }
+    });
   }
 
   Future<Either<Failure, void>> authenticateWithFacebook() async {
-    try {
-      // check connection before connecting to google
-      bool hasConnection = await InternetConnectionChecker().hasConnection;
-      if (!hasConnection) throw NoInternetConnection();
-
+    return _tryAndCatch(() async {
+      // login to facebook auth provider
       await FacebookAuth.instance.logOut();
       final LoginResult loginResult = await FacebookAuth.instance.login();
       if (loginResult.accessToken == null) throw AuthenticationCancelled();
+
+      // login to firebase auth provider
       final OAuthCredential facebookAuthCredential =
           FacebookAuthProvider.credential(loginResult.accessToken!.token);
-
       await FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
-      String idToken = await FirebaseAuth.instance.currentUser!.getIdToken();
 
+      // login to our backend
+      String idToken = await FirebaseAuth.instance.currentUser!.getIdToken();
       String authorizationHeader = 'Bearer $idToken';
       AuthenticationResponse response =
           await _remoteDataSource.authenticate(authorizationHeader);
+
+      // saving token
       GetIt.I<Dio>().options.headers[HttpHeaders.authorizationHeader] =
           'bearer ${response.token}';
-
-
-      return Right(null);
-    } on AuthenticationCancelled catch (e) {
-      return Left(e.failure);
-    } on NoInternetConnection catch (e) {
-      return Left(e.failure);
-    } on DioError catch (e) {
-      return Left(e.failure);
-    } on FirebaseAuthException catch (e) {
-      return Left(e.failure);
-    }
+    });
   }
 
   Future<Either<Failure, void>> givePointsToUser() async {
-    try {
+    return _tryAndCatch(() async {
       String idToken = await FirebaseAuth.instance.currentUser!.getIdToken();
       await _remoteDataSource.givePointsToUser('bearer $idToken');
-      return Right(null);
-    } on DioError catch (e) {
-      return Left(e.failure);
-    } on NoInternetConnection catch (e) {
-      return Left(e.failure);
-    }
+    });
   }
 
   // Either<Failure, String> getUserImageUrl() {
@@ -122,55 +111,34 @@ class Repository {
   // }
 
   Future<Either<Failure, GetMyProfileResponse>> getMyProfile() async {
-    try {
-      await _checkConnection();
+    return _tryAndCatch(() async {
       final response = await _remoteDataSource.getMyProfile();
-
-      return Right(response);
-    } on DioError catch (e) {
-      return Left(e.failure);
-    } on NoInternetConnection catch (e) {
-      return Left(e.failure);
-    }
+      return response;
+    });
   }
 
   Future<Either<Failure, User>> getTheProfileOfAnotherUser(
       String userId) async {
-    try {
-      await _checkConnection();
+    return _tryAndCatch(() async {
       final response =
           await _remoteDataSource.getTheProfileOfAnotherUser(userId);
-      return Right(response.anotherUserSubResponse.userModel);
-    } on DioError catch (e) {
-      return Left(e.failure);
-    } on NoInternetConnection catch (e) {
-      return Left(e.failure);
-    }
+      return response.anotherUserSubResponse.userModel;
+    });
   }
 
   Future<Either<Failure, List<Phone>>> getMyOwnedPhones(int round) async {
-    try {
-      await _checkConnection();
+    return _tryAndCatch(() async {
       final response = await _remoteDataSource.getMyOwnedPhones(round);
-      return Right(response.phonesModels);
-    } on DioError catch (e) {
-      return Left(e.failure);
-    } on NoInternetConnection catch (e) {
-      return Left(e.failure);
-    }
+      return response.phonesModels;
+    });
   }
 
   Future<Either<Failure, List<Phone>>> getTheOwnedPhonesOfAnotherUser(
       String userId, int round) async {
-    try {
-      await _checkConnection();
+    return _tryAndCatch(() async {
       final response =
           await _remoteDataSource.getTheOwnedPhonesOfAnotherUser(userId, round);
-      return Right(response.phonesModels);
-    } on DioError catch (e) {
-      return Left(e.failure);
-    } on NoInternetConnection catch (e) {
-      return Left(e.failure);
-    }
+      return response.phonesModels;
+    });
   }
 }
