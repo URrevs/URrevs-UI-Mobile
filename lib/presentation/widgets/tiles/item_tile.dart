@@ -10,43 +10,27 @@ import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 /// A widget that displays the name and category of a product, on tapping it routes you to the item profile.
 class ItemTile extends StatelessWidget {
   const ItemTile({
-    required this.itemName,
-    required this.type,
+    required this.title,
+    this.subtitle,
+    required this.iconData,
     required this.onTap,
+    this.showDivider = false,
     Key? key,
   }) : super(key: key);
 
   /// The name of the item.
-  final String itemName;
+  final String title;
 
   /// The type of the item.
-  final ItemDescription type;
+  final String? subtitle;
+
+  /// [IconData] to be shown in the leading of the list tile.
+  final IconData iconData;
 
   /// The function that is called when the item is tapped.
   final VoidCallback onTap;
 
-  /// Function that chooses the icon of the item, eihter it's smartphone or company.
-  IconData chooseSuitableItemIcon(ItemDescription itemDescription) {
-    switch (itemDescription) {
-      case ItemDescription.smartphone:
-        return IconsManager.smartPhone;
-      case ItemDescription.company:
-        return IconsManager.company;
-      default:
-        return IconsManager.smartPhone;
-    }
-    ;
-  }
-
-  /// A function for translating items description as for localization.
-  String getItemDescription(ItemDescription type) {
-    switch (type) {
-      case ItemDescription.smartphone:
-        return LocaleKeys.smartphone.tr();
-      case ItemDescription.company:
-        return LocaleKeys.company.tr();
-    }
-  }
+  final bool showDivider;
 
   @override
   Widget build(BuildContext context) {
@@ -54,27 +38,32 @@ class ItemTile extends StatelessWidget {
       children: [
         ListTile(
           title: Text(
-            itemName,
+            title,
             style: TextStyleManager.s20w700,
           ),
           onTap: onTap,
           textColor: ColorManager.black,
           iconColor: ColorManager.buttonGrey,
-          subtitle: Text(getItemDescription(type),
-              style: TextStyleManager.s18w400.copyWith(
-                color: ColorManager.grey,
-              )),
+          subtitle: subtitle != null
+              ? Text(
+                  subtitle!,
+                  style: TextStyleManager.s18w400.copyWith(
+                    color: ColorManager.grey,
+                  ),
+                )
+              : null,
           leading: Icon(
-            chooseSuitableItemIcon(type),
+            iconData,
             size: 40.sp,
           ),
         ),
-        Divider(
-          indent: 20.w,
-          endIndent: 20.w,
-          color: ColorManager.dividerGrey,
-          thickness: 1.h,
-        )
+        if (showDivider)
+          Divider(
+            indent: 20.w,
+            endIndent: 20.w,
+            color: ColorManager.dividerGrey,
+            thickness: 1.h,
+          )
       ],
     );
   }

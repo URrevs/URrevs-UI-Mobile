@@ -34,8 +34,8 @@ class MyApp extends ConsumerWidget {
       splitScreenMode: false,
       builder: (_) => MaterialApp(
         title: LocaleKeys.urrevs.tr(),
-        initialRoute: AuthenticationScreen.routeName,
-        // initialRoute: BottomNavigationBarContainerScreen.routeName,
+        // initialRoute: AuthenticationScreen.routeName,
+        initialRoute: OwnedProductsScreen.routeName,
         // initialRoute: DevelopmentScreen.routeName,
         onGenerateRoute: RouteGenerator.getRoute,
         debugShowCheckedModeBanner: false,

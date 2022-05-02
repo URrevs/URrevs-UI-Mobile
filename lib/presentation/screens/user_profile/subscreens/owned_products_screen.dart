@@ -15,6 +15,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/get_my_own
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/error_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/scaffold_with_hiding_fab.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/tiles/item_tile.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 class OwnedProductsScreenArgs {
@@ -94,10 +95,11 @@ class _OwnedProductsScreenState extends ConsumerState<OwnedProductsScreen> {
         padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 10.h),
         builderDelegate: PagedChildBuilderDelegate<Phone>(
           itemBuilder: (context, phone, index) {
-            return MenyItem(
+            return ItemTile(
               title: phone.name,
               subtitle: LocaleKeys.smartphone.tr(),
               iconData: IconsManager.smartPhone,
+              showDivider: true,
               onTap: () {},
             );
           },

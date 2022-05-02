@@ -169,20 +169,20 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
       body: ListView(
         padding: EdgeInsets.all(20),
         children: [
-          StarsCounter(percentage: 0.56),
-          AuthButton(
-            text: LocaleKeys.googleAuth.tr(),
-            imagePath: SvgAssets.googleLogo,
-            color: ColorManager.grey,
-            onPressed: signInWithGoogle,
-          ),
-          SizedBox(height: 20),
-          AuthButton(
-            text: LocaleKeys.facebookAuth.tr(),
-            imagePath: SvgAssets.facebookLogo,
-            color: ColorManager.blue,
-            onPressed: signInWithFacebook,
-          ),
+          // StarsCounter(percentage: 0.56),
+          // AuthButton(
+          //   text: LocaleKeys.googleAuth.tr(),
+          //   imagePath: SvgAssets.googleLogo,
+          //   color: ColorManager.grey,
+          //   onPressed: signInWithGoogle,
+          // ),
+          // SizedBox(height: 20),
+          // AuthButton(
+          //   text: LocaleKeys.facebookAuth.tr(),
+          //   imagePath: SvgAssets.facebookLogo,
+          //   color: ColorManager.blue,
+          //   onPressed: signInWithFacebook,
+          // ),
           // SizedBox(height: 20),
           // CompanyHorizontalListTile(companyItems: companyItems),
           // RatingOverviewCard(
@@ -214,7 +214,7 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
           //   items: items,
           // ),
           // SizedBox(height: 20),
-          // UpdatedListTile(title: 'قائمة الشركات المضافة حديثاً', items: items),
+          UpdatedListTile(title: 'قائمة الشركات المضافة حديثاً', items: items),
           // ProductReviewCard.dummyInstance(),
           // CompanyReviewCard.dummyInstance(),
           // QuestionCard.dummyInstance(context),

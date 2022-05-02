@@ -17,6 +17,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/get_the_pr
 import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/error_dialog.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/tiles/item_tile.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 /// [userId] is the id of an unauthenticated user whose profile is to be shown.
@@ -45,28 +46,28 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
 
   List<Widget> myProfileListItems({required String refCode}) {
     return [
-      MenyItem(
+      ItemTile(
         title: LocaleKeys.myReviews.tr(),
         iconData: Icons.rate_review_outlined,
         onTap: () {
           Navigator.of(context).pushNamed(PostedReviewsScreen.routeName);
         },
       ),
-      MenyItem(
+      ItemTile(
         title: LocaleKeys.myQuestions.tr(),
         iconData: Icons.question_answer_outlined,
         onTap: () {
           Navigator.of(context).pushNamed(PostedQuestionsScreen.routeName);
         },
       ),
-      MenyItem(
+      ItemTile(
         title: LocaleKeys.ownedProducts.tr(),
         iconData: Icons.devices_other_outlined,
         onTap: () {
           Navigator.of(context).pushNamed(OwnedProductsScreen.routeName);
         },
       ),
-      MenyItem(
+      ItemTile(
         title: LocaleKeys.yourInvitationCode.tr(),
         subtitle: LocaleKeys.inviteYourFriendsToWriteTheirReviews.tr(),
         iconData: Icons.groups_outlined,
@@ -79,7 +80,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
           );
         },
       ),
-      MenyItem(
+      ItemTile(
         title: LocaleKeys.questionsOnMyProducts.tr(),
         subtitle: LocaleKeys.helpOthersAndGetPoints.tr(),
         iconData: Icons.question_mark_outlined,
@@ -92,14 +93,14 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
   }
 
   List<Widget> get otherUserProfileListItems => [
-        MenyItem(
+        ItemTile(
           title: LocaleKeys.reviews.tr(),
           iconData: Icons.rate_review_outlined,
           onTap: () {
             Navigator.of(context).pushNamed(PostedReviewsScreen.routeName);
           },
         ),
-        MenyItem(
+        ItemTile(
           title: LocaleKeys.ownedProducts.tr(),
           iconData: Icons.question_answer_outlined,
           onTap: () {
@@ -111,7 +112,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
             );
           },
         ),
-        MenyItem(
+        ItemTile(
           title: LocaleKeys.askedQuestions.tr(),
           iconData: Icons.devices_other_outlined,
           onTap: () {
@@ -259,39 +260,3 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
   }
 }
 
-class MenyItem extends StatelessWidget {
-  const MenyItem({
-    Key? key,
-    required this.title,
-    required this.iconData,
-    required this.onTap,
-    this.subtitle,
-  }) : super(key: key);
-
-  final String title;
-  final String? subtitle;
-  final IconData iconData;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(title, style: TextStyleManager.s20w700),
-      onTap: onTap,
-      subtitle: subtitle != null
-          ? Text(
-              subtitle!,
-              style: TextStyleManager.s16w400.copyWith(
-                color: ColorManager.grey,
-              ),
-            )
-          : null,
-      textColor: ColorManager.black,
-      iconColor: ColorManager.buttonGrey,
-      leading: Icon(
-        iconData,
-        size: 40.sp,
-      ),
-    );
-  }
-}
