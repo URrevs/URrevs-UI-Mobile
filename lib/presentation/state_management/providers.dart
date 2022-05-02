@@ -41,6 +41,10 @@ final getOwnedPhonesProvider = StateNotifierProvider.autoDispose<
     GetMyOwnedPhonesNotifier,
     GetMyOwnedPhonesState>((ref) => GetMyOwnedPhonesNotifier());
 
+final userImageFetchedFlagProvider = StateProvider<bool>((ref) {
+  return false;
+});
+
 final userImageUrlProvider = Provider<String>((ref) {
   final state = ref.watch(getMyProfileProvider);
   if (state is GetMyProfileLoadedState) {

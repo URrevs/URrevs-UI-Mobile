@@ -8,6 +8,7 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/bottom_navigation_bar_container_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/user_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_my_owned_phones_state.dart';
@@ -78,7 +79,14 @@ class _OwnedProductsScreenState extends ConsumerState<OwnedProductsScreen> {
     });
     return ScaffoldWithHidingFab(
       appBar: AppBar(),
-      onPressingFab: () {},
+      onPressingFab: () {
+        Navigator.of(context).pushNamed(
+          BottomNavigationBarContainerScreen.routeName,
+          arguments: BottomNavigationBarContainerScreenArgs(
+            screenIndex: BottomNavBarIndeces.postingSubscreen,
+          ),
+        );
+      },
       fabLabel: LocaleKeys.addOwnedProduct.tr(),
       fabIcon: Icon(FontAwesomeIcons.plus, size: AppSize.s16),
       body: PagedListView(

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/all_products_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/home_screen.dart';
@@ -15,8 +16,26 @@ import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/bottom_navigation_bar.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
+class BottomNavBarIndeces {
+  static const int allProductsSubscreen = 0;
+  static const int postingSubscreen = 1;
+  static const int homeSubscreen = 2;
+  static const int leaderboardSubscreen = 3;
+  static const int menuSubscreen = 4;
+}
+
+class BottomNavigationBarContainerScreenArgs {
+  int screenIndex;
+  BottomNavigationBarContainerScreenArgs({
+    required this.screenIndex,
+  });
+}
+
 class BottomNavigationBarContainerScreen extends ConsumerStatefulWidget {
-  const BottomNavigationBarContainerScreen({Key? key}) : super(key: key);
+  const BottomNavigationBarContainerScreen(this.screenArgs, {Key? key})
+      : super(key: key);
+
+  final BottomNavigationBarContainerScreenArgs screenArgs;
 
   static const String routeName = 'BottomNavigationBarContainerScreen';
 
@@ -27,21 +46,21 @@ class BottomNavigationBarContainerScreen extends ConsumerStatefulWidget {
 
 class _BottomNavigationBarContainerScreenState
     extends ConsumerState<BottomNavigationBarContainerScreen> {
-  int _currentIndex = 2;
+  late int _currentIndex = widget.screenArgs.screenIndex;
 
   bool get showTabBar => _currentIndex == 1;
 
   Widget get currentPage {
     switch (_currentIndex) {
-      case 0:
+      case BottomNavBarIndeces.allProductsSubscreen:
         return AllProductsSubscreen();
-      case 1:
+      case BottomNavBarIndeces.postingSubscreen:
         return PostingSubscreen();
-      case 2:
+      case BottomNavBarIndeces.homeSubscreen:
         return HomeSubscreen();
-      case 3:
+      case BottomNavBarIndeces.leaderboardSubscreen:
         return LeaderboardSubscreen();
-      case 4:
+      case BottomNavBarIndeces.menuSubscreen:
         return MenuSubscreen();
       default:
         return HomeSubscreen();
@@ -49,7 +68,7 @@ class _BottomNavigationBarContainerScreenState
   }
 
   AppBar? get appBar {
-    if (_currentIndex == 0) return null;
+    if (_currentIndex == BottomNavBarIndeces.allProductsSubscreen) return null;
     return AppBars.appBarWithURrevsLogo(
       context: context,
       showTabBar: showTabBar,
@@ -65,7 +84,11 @@ class _BottomNavigationBarContainerScreenState
     Future.delayed(
       Duration.zero,
       () {
-        ref.read(getMyProfileProvider.notifier).getMyProfile();
+        bool userImageFetched = ref.watch(userImageFetchedFlagProvider);
+        if (!userImageFetched) {
+          ref.read(getMyProfileProvider.notifier).getMyProfile();
+          ref.read(userImageFetchedFlagProvider.notifier).state = true;
+        }
         ref.read(givePointsToUserProvider.notifier).givePointsToUser();
       },
     );

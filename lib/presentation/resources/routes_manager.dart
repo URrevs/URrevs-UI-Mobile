@@ -32,8 +32,12 @@ class RouteGenerator {
       case PresentationScreen.routeName:
         return MaterialPageRoute(builder: (_) => PresentationScreen());
       case BottomNavigationBarContainerScreen.routeName:
+        final screenArgs = routeSettings.arguments
+                as BottomNavigationBarContainerScreenArgs? ??
+            BottomNavigationBarContainerScreenArgs(
+                screenIndex: BottomNavBarIndeces.homeSubscreen);
         return MaterialPageRoute(
-          builder: (_) => BottomNavigationBarContainerScreen(),
+          builder: (_) => BottomNavigationBarContainerScreen(screenArgs),
         );
       case UserProfileScreen.routeName:
         final screenArgs = routeSettings.arguments as UserProfileScreenArgs? ??
