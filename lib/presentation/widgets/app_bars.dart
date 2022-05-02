@@ -7,20 +7,22 @@ import 'package:urrevs_ui_mobile/app/exceptions.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/search_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/user_profile_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/company_horizontal_list_tile.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 class AppBars {
   static List<Widget> actions({
     required BuildContext context,
-    required String imageUrl,
+    required String? imageUrl,
   }) {
     return <Widget>[
-      ElevatedButton(
-        onPressed: () {
+      Avatar(
+        imageUrl: imageUrl,
+        radius: 40.r,
+        onTap: () {
           Navigator.of(context).pushNamed(UserProfileScreen.routeName);
         },
-        child: Image.network(imageUrl, height: 50.h),
       ),
       ElevatedButton(
         onPressed: () {
@@ -34,7 +36,7 @@ class AppBars {
   static AppBar appBarWithURrevsLogo({
     required BuildContext context,
     required bool showTabBar,
-    required String imageUrl,
+    required String? imageUrl,
   }) {
     return AppBar(
       actions: AppBars.actions(context: context, imageUrl: imageUrl),

@@ -7,6 +7,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart'
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_button_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/user_profile/user_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/reply.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/interaction_body.dart';
@@ -145,8 +146,16 @@ class _AnswerTreeState extends State<AnswerTree> {
           12.horizontalSpace,
         ],
         Avatar(
-            imageUrl: widget.imageUrl,
-            radius: AppRadius.commentTreeAvatarRadius),
+          imageUrl: widget.imageUrl,
+          radius: AppRadius.commentTreeAvatarRadius,
+          onTap: () {
+            Navigator.of(context).pushNamed(
+              UserProfileScreen.routeName,
+              arguments:
+                  UserProfileScreenArgs(userId: '626b29227fe7587a42e3e9f6'),
+            );
+          },
+        ),
         6.horizontalSpace,
         Expanded(
           child: LayoutBuilder(builder: (context, BoxConstraints constraints) {

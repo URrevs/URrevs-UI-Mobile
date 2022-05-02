@@ -10,6 +10,7 @@ import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_scre
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/posting_screen/posting_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/user_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/get_current_user_image_url_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_my_user_profile_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/give_points_to_user_state.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
@@ -69,10 +70,17 @@ class _BottomNavigationBarContainerScreenState
 
   AppBar? get appBar {
     if (_currentIndex == BottomNavBarIndeces.allProductsSubscreen) return null;
+    String? imageUrl;
+    final state = ref.watch(getCurrentUserImageUrlProvider);
+    if (state is GetCuttentUserImageUrlLoadedState) {
+      imageUrl = state.imageUrl;
+    } else {
+      imageUrl = StringsManager.imagePlaceHolder;
+    }
     return AppBars.appBarWithURrevsLogo(
       context: context,
       showTabBar: showTabBar,
-      imageUrl: ref.watch(userImageUrlProvider),
+      imageUrl: imageUrl,
     );
   }
 
@@ -84,11 +92,9 @@ class _BottomNavigationBarContainerScreenState
     Future.delayed(
       Duration.zero,
       () {
-        bool userImageFetched = ref.watch(userImageFetchedFlagProvider);
-        if (!userImageFetched) {
-          ref.read(getMyProfileProvider.notifier).getMyProfile();
-          ref.read(userImageFetchedFlagProvider.notifier).state = true;
-        }
+        ref
+            .read(getCurrentUserImageUrlProvider.notifier)
+            .getCurrentUserImageUrl();
         ref.read(givePointsToUserProvider.notifier).givePointsToUser();
       },
     );
@@ -96,7 +102,7 @@ class _BottomNavigationBarContainerScreenState
 
   @override
   Widget build(BuildContext context) {
-    ref.listen(givePointsToUserProvider, (previous, next) {
+    ref.listen(getCurrentUserImageUrlProvider, (previous, next) {
       if (next is GivePointsToUserLoadedState) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/user_profile/user_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/interaction_body.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/interaction_footer.dart';
@@ -39,7 +40,16 @@ class Reply extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Avatar(imageUrl: imageUrl, radius: AppRadius.replyAvatarRadius),
+        Avatar(
+            imageUrl: imageUrl,
+            radius: AppRadius.replyAvatarRadius,
+            onTap: () {
+              Navigator.of(context).pushNamed(
+                UserProfileScreen.routeName,
+                arguments:
+                    UserProfileScreenArgs(userId: '626b29227fe7587a42e3e9f6'),
+              );
+            }),
         5.horizontalSpace,
         Expanded(
           child: LayoutBuilder(builder: (context, BoxConstraints constraints) {

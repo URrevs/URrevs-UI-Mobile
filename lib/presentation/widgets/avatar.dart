@@ -10,6 +10,7 @@ class Avatar extends StatelessWidget {
     Key? key,
     required this.imageUrl,
     required this.radius,
+    this.onTap,
   }) : super(key: key);
 
   /// Profile image url of the current logged in user.
@@ -18,15 +19,12 @@ class Avatar extends StatelessWidget {
   /// Radius of the displayed [CircleAvatar].
   final double radius;
 
+  final VoidCallback? onTap;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.of(context).pushNamed(
-          UserProfileScreen.routeName,
-          arguments: UserProfileScreenArgs(userId: '626b29227fe7587a42e3e9f6'),
-        );
-      },
+      onTap: onTap,
       child: CircleAvatar(
         radius: radius,
         backgroundColor: ColorManager.transparent,
