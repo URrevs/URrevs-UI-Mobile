@@ -69,6 +69,11 @@ class ColorManager {
         dark: Color(0xffe8e8e8),
       ).pickColor();
 
+  static Color get appBarIconBackground => ColorPair(
+        light: Color(0xffE5E5E7),
+        dark: Color(0xffE5E5E7),
+      ).pickColor();
+
   static Color get snackBarGrey => ColorPair(
         light: Color(0xffc4c4c4),
         dark: Color(0xffc4c4c4),

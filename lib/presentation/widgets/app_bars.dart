@@ -4,7 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/app/exceptions.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/assets_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/search_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/user_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
@@ -17,54 +22,103 @@ class AppBars {
     required String? imageUrl,
   }) {
     return <Widget>[
-      Avatar(
-        imageUrl: imageUrl,
-        radius: 40.r,
+      InkWell(
         onTap: () {
-          Navigator.of(context).pushNamed(UserProfileScreen.routeName);
-        },
-      ),
-      ElevatedButton(
-        onPressed: () {
           Navigator.of(context).pushNamed(SearchScreen.routeName);
         },
-        child: Text('search'),
+        child: CircleAvatar(
+          radius: 18.r,
+          backgroundColor: ColorManager.appBarIconBackground,
+          child: Icon(
+            IconsManager.search,
+            color: ColorManager.black,
+            size: 30.sp,
+          ),
+        ),
       ),
+      Padding(
+        padding: EdgeInsets.symmetric(horizontal: 15.h, vertical: 5.w),
+        child: Avatar(
+          imageUrl: imageUrl,
+          radius: 18.r,
+          onTap: () {
+            Navigator.of(context).pushNamed(UserProfileScreen.routeName);
+          },
+        ),
+      ),
+      // ElevatedButton(
+      //   onPressed: () => context.setLocale(LanguageType.ar.locale),
+      //   child: Text('ar'),
+      // ),
+      // ElevatedButton(
+      //   onPressed: () => context.setLocale(LanguageType.en.locale),
+      //   child: Text('en'),
+      // ),
     ];
   }
 
-  static AppBar appBarWithURrevsLogo({
+  static PreferredSize appBarWithURrevsLogo({
     required BuildContext context,
     required bool showTabBar,
     required String? imageUrl,
   }) {
-    return AppBar(
-      actions: AppBars.actions(context: context, imageUrl: imageUrl),
-      bottom: showTabBar
-          ? TabBar(
-              tabs: [
-                Tab(text: LocaleKeys.tabBarReview.tr()),
-                Tab(text: LocaleKeys.tabBarQuestion.tr()),
-              ],
-            )
-          : null,
+    return PreferredSize(
+      preferredSize: Size.fromHeight(
+        45.h,
+      ),
+      child: AppBar(
+        leading: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10.w),
+          child: Image.asset(
+            ImageAssets.appBarLogo,
+            // width: 94,
+            // height: 30,
+            filterQuality: FilterQuality.high,
+          ),
+        ),
+        leadingWidth: 105.w,
+        backgroundColor: ColorManager.white,
+        actions: AppBars.actions(context: context, imageUrl: imageUrl),
+        bottom: showTabBar
+            ? TabBar(
+                tabs: [
+                  Tab(text: LocaleKeys.tabBarReview.tr()),
+                  Tab(text: LocaleKeys.tabBarQuestion.tr()),
+                ],
+              )
+            : null,
+      ),
     );
   }
 
-  static AppBar appBarWithActions({
+  static PreferredSize appBarWithActions({
     required BuildContext context,
     required String imageUrl,
   }) {
-    return AppBar(
-      actions: AppBars.actions(context: context, imageUrl: imageUrl),
+    return PreferredSize(
+      preferredSize: Size.fromHeight(
+        45.h,
+      ),
+      child: AppBar(
+        // leading: Icon(Icons.arrow_back_rounded, size: 30.sp,),
+        backgroundColor: ColorManager.white,
+        actions: AppBars.actions(context: context, imageUrl: imageUrl),
+        iconTheme: IconThemeData(
+          color: ColorManager.black,
+        ),
+      ),
     );
   }
 
-  static AppBar appBarWithTitle({
+  static PreferredSize appBarWithTitle({
     required BuildContext context,
     required String title,
   }) {
-    return AppBar(title: Text(title));
+    return PreferredSize(
+        preferredSize: Size.fromHeight(
+          45.h,
+        ),
+        child: AppBar(title: Text(title, style: TextStyleManager.s20w700,)));
   }
 
   static AppBar appBarOfProductProfile({

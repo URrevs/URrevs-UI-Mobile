@@ -20,6 +20,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/bottom_navigation_bar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/buttons/auth_button.dart';
@@ -81,39 +82,40 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
     String hintText = 'عدد الفائزين';
 
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          ElevatedButton(
-            onPressed: () => context.setLocale(LanguageType.ar.locale),
-            child: Text('ar'),
-          ),
-          ElevatedButton(
-            onPressed: () => context.setLocale(LanguageType.en.locale),
-            child: Text('en'),
-          ),
-          ElevatedButton(
-            onPressed: () => ref
-                .read(themeModeProvider.notifier)
-                .setThemeMode(ThemeMode.dark),
-            child: Text('🌙'),
-          ),
-          ElevatedButton(
-            onPressed: () => ref
-                .read(themeModeProvider.notifier)
-                .setThemeMode(ThemeMode.light),
-            child: Text('☀'),
-          ),
-          // ElevatedButton(
-          //   onPressed: () {
-          //     print("scale width: ${ScreenUtil().scaleWidth}");
-          //     print("scale height: ${ScreenUtil().scaleHeight}");
-          //     print("screen width: ${ScreenUtil().screenWidth}");
-          //     print("ui size: ${ScreenUtil().uiSize}");
-          //   },
-          //   child: Text('screen util'),
-          // ),
-        ],
-      ),
+      appBar: AppBars.appBarWithActions(context: context, imageUrl: StringsManager.picsum200x200),
+      // appBar: AppBar(
+      //   actions: [
+      //     ElevatedButton(
+      //       onPressed: () => context.setLocale(LanguageType.ar.locale),
+      //       child: Text('ar'),
+      //     ),
+      //     ElevatedButton(
+      //       onPressed: () => context.setLocale(LanguageType.en.locale),
+      //       child: Text('en'),
+      //     ),
+      //     ElevatedButton(
+      //       onPressed: () => ref
+      //           .read(themeModeProvider.notifier)
+      //           .setThemeMode(ThemeMode.dark),
+      //       child: Text('🌙'),
+      //     ),
+      //     ElevatedButton(
+      //       onPressed: () => ref
+      //           .read(themeModeProvider.notifier)
+      //           .setThemeMode(ThemeMode.light),
+      //       child: Text('☀'),
+      //     ),
+      //     // ElevatedButton(
+      //     //   onPressed: () {
+      //     //     print("scale width: ${ScreenUtil().scaleWidth}");
+      //     //     print("scale height: ${ScreenUtil().scaleHeight}");
+      //     //     print("screen width: ${ScreenUtil().screenWidth}");
+      //     //     print("ui size: ${ScreenUtil().uiSize}");
+      //     //   },
+      //     //   child: Text('screen util'),
+      //     // ),
+      //   ],
+      // ),
       body: ListView(
         padding: EdgeInsets.all(20),
         children: [
