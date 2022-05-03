@@ -28,7 +28,7 @@ class ItemTile extends StatelessWidget {
   final IconData iconData;
 
   /// The function that is called when the item is tapped.
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   final bool showDivider;
 

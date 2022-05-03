@@ -24,6 +24,18 @@ class ServerErrorMessages {
         ServerErrorMessages.processFailed: LocaleKeys.processFailed.tr(),
       };
 
+  static List<String> get _retryActionFailures => [
+        tooManyRequests,
+        processFailed,
+      ];
+
+  static List<String> get _authenticateFailures => [
+        youDoNotExistInTheSystem,
+        tokenExpired,
+        invalidToken,
+        tokenRevoked,
+      ];
+
   static List<String> get _serverErrorMessages =>
       errorMessagesMap.keys.toList();
 
@@ -38,16 +50,17 @@ class ServerErrorMessages {
   /// strings in [ServerErrorMessages] class.
   static String getAppErrorMessage(String serverErrorMessage) =>
       ServerErrorMessages.errorMessagesMap[serverErrorMessage] as String;
-}
 
-enum FailureMode {
-  /// The normal failure mode. This modes indicates that an error has occurred
-  /// and an error message should be shown to the user.
-  error,
-
-  /// Indicates that a process has been cancelled by the user. Used in the
-  /// authentication process, when user cancels the sign in flow.
-  cancel,
+  static Failure getFailure(String errorMessage) {
+    String friendlyErrorMessage = errorMessagesMap[errorMessage] as String;
+    if (_retryActionFailures.contains(errorMessage)) {
+      return RetryFailure(friendlyErrorMessage);
+    } else if (_authenticateFailures.contains(errorMessage)) {
+      return AuthenticateFailure(friendlyErrorMessage);
+    } else {
+      return Failure(friendlyErrorMessage);
+    }
+  }
 }
 
 class Failure {
@@ -73,25 +86,68 @@ class CancelFailure extends Failure {
   }
 }
 
+/// A failure that is used in screens in order to show snackbar with failure
+/// message and to show error widgets to retry the failed request.
+class RetryFailure extends Failure {
+  RetryFailure(String message) : super(message);
+
+  @override
+  String toString() {
+    return 'RetryFailure: $message';
+  }
+}
+
+/// A failure that is used in screens in order to show snackbar with failure
+/// message and to navigate the user to authentication screen.
+class AuthenticateFailure extends Failure {
+  AuthenticateFailure(String message) : super(message);
+
+  @override
+  String toString() {
+    return 'AuthenticateFailure: $message';
+  }
+}
+
+/*
+failures requiring retry actions:
+  connection timed out
+  unknown network error
+  too many requests
+  process failed
+  no internet connection
+
+failures requiring authenticate action:
+  you do not exist in the system
+  token expired
+  invalid token
+
+failures requiring no action:
+  account exists with different credentials
+  invalid credential
+  operation not allowed
+  user disabled
+  user not found 
+*/
+
 extension DioErrorFailure on DioError {
   Failure get failure {
     switch (type) {
       case DioErrorType.connectTimeout:
-        return Failure(LocaleKeys.connectionTimedOut.tr());
+        return RetryFailure(LocaleKeys.connectionTimedOut.tr());
       case DioErrorType.sendTimeout:
-        return Failure(LocaleKeys.sendingDataTimedout.tr());
+        return RetryFailure(LocaleKeys.sendingDataTimedout.tr());
       case DioErrorType.receiveTimeout:
-        return Failure(LocaleKeys.receivingDataTimedout.tr());
+        return RetryFailure(LocaleKeys.receivingDataTimedout.tr());
       case DioErrorType.cancel:
         return Failure(LocaleKeys.requestWasCancelled.tr());
       case DioErrorType.other:
         debugPrint(toString());
-        return Failure(LocaleKeys.unknownNetworkError.tr());
+        return RetryFailure(LocaleKeys.unknownNetworkError.tr());
       case DioErrorType.response:
         String? errorMessage = response?.data['status'];
         if (errorMessage != null &&
             ServerErrorMessages.isAServerErrorMessage(errorMessage)) {
-          return Failure(ServerErrorMessages.getAppErrorMessage(errorMessage));
+          return ServerErrorMessages.getFailure(errorMessage);
         }
         switch (response?.statusCode) {
           case 400:

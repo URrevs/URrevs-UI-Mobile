@@ -126,7 +126,7 @@
   "tokenRevoked": "تم إبطال رمزك المميز",
   "tooManyRequests": "لقد أرسلت الكثير من الطلبات",
   "youDoNotExistInTheSystem": "أنت غير موجود في النظام",
-  "connectionTimedOut": "الاتصال بالخادك أخذ وقتاً طويلاً",
+  "connectionTimedOut": "الاتصال بالخادم أخذ وقتاً طويلاً",
   "receivingDataTimedout": "استلام البيانات من الخادم أخذ وقتاً طويلاً",
   "sendingDataTimedout": "إرسال البيانات إلى الخادم أخذ وقتاً طويلاً",
   "requestWasCancelled": "تم إلغاء الطلب",

@@ -59,13 +59,14 @@ class ThemeManager {
           ),
         ),
         snackBarTheme: SnackBarThemeData(
+          elevation: 3,
           actionTextColor: ColorManager.blue,
           backgroundColor: ColorManager.snackBarGrey,
+          behavior: SnackBarBehavior.floating,
           contentTextStyle: TextStyleManager.s16w500.copyWith(
             color: ColorManager.black,
             fontFamily: FontConstants.tajawal,
           ),
-          elevation: 3,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppRadius.snackBar),
           ),

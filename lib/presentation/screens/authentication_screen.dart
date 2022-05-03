@@ -140,16 +140,13 @@ class _AuthenticationScreenState extends ConsumerState<AuthenticationScreen> {
           context.loaderOverlay.hide();
         }
       }
-    });
-    ref.listen<AuthenticationState>(authenticationProvider, (previous, next) {
       if (next is AuthenticationErrorState) {
-        showDialog(
-          context: context,
-          builder: (context) => ErrorDialog(failure: next.failure),
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(next.failure.message),
+          ),
         );
       }
-    });
-    ref.listen<AuthenticationState>(authenticationProvider, (previous, next) {
       if (next is AuthenticationLoadedState) {
         Navigator.of(context).pushNamedAndRemoveUntil(
           BottomNavigationBarContainerScreen.routeName,
