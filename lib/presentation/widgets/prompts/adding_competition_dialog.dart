@@ -46,7 +46,7 @@ class _AddingCompetitionPromptState extends State<AddingCompetitionPrompt> {
   /// Function to build the prize image, when the a vaild URL is entered.
   Widget prizeImageBuilder() {
     String imgUrl = widget.imgUrlController.text;
-    print(Uri.parse(imgUrl).isAbsolute);
+    // print(Uri.parse(imgUrl).isAbsolute);
     setState(() {
       imgUrl = widget.imgUrlController.text;
     });

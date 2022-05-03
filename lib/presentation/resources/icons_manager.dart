@@ -29,4 +29,5 @@ class IconsManager {
   static IconData get inviteFriends => Icons.groups_outlined;
   static IconData get howTowin => Icons.help;
   static IconData get star => Icons.star_rate_rounded;
+  static IconData get search => Icons.search_rounded;
 }

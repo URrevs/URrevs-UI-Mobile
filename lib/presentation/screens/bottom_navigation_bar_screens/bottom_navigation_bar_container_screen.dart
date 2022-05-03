@@ -72,7 +72,7 @@ class _BottomNavigationBarContainerScreenState
     }
   }
 
-  AppBar? get appBar {
+  PreferredSize? get appBar {
     if (_currentIndex == BottomNavBarIndeces.allProductsSubscreen) return null;
     String? imageUrl;
     final state = ref.watch(getCurrentUserImageUrlProvider);
