@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 class FullscreenErrorWidget extends StatelessWidget {
   const FullscreenErrorWidget({
+    this.retryLastRequest = true,
     required this.onRetry,
     Key? key,
   }) : super(key: key);
 
+  final bool retryLastRequest;
   final VoidCallback onRetry;
 
   @override
@@ -15,11 +17,12 @@ class FullscreenErrorWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Partial error widget'),
-          ElevatedButton(
-            onPressed: onRetry,
-            child: Text('Retry'),
-          ),
+          Text('Fullscreen error widget'),
+          if (retryLastRequest)
+            ElevatedButton(
+              onPressed: onRetry,
+              child: Text('Retry'),
+            ),
         ],
       ),
     );

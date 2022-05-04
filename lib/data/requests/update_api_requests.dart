@@ -1,0 +1,3 @@
+class UpdateTargetsFromSource {}
+
+class GetInfoAboutTheLatestUpdateRequest {}

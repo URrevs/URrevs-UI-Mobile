@@ -1,6 +1,6 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
-abstract class  LocaleKeys {
+abstract class LocaleKeys {
   static const urrevs = 'urrevs';
   static const generalProductRating = 'generalProductRating';
   static const userInterface = 'userInterface';
@@ -87,7 +87,8 @@ abstract class  LocaleKeys {
   static const myQuestions = 'myQuestions';
   static const ownedProducts = 'ownedProducts';
   static const yourInvitationCode = 'yourInvitationCode';
-  static const inviteYourFriendsToWriteTheirReviews = 'inviteYourFriendsToWriteTheirReviews';
+  static const inviteYourFriendsToWriteTheirReviews =
+      'inviteYourFriendsToWriteTheirReviews';
   static const questionsOnMyProducts = 'questionsOnMyProducts';
   static const helpOthersAndGetPoints = 'helpOthersAndGetPoints';
   static const reviews = 'reviews';
@@ -110,7 +111,8 @@ abstract class  LocaleKeys {
   static const remainigDays = 'remainigDays';
   static const thePrizeIs = 'thePrizeIs';
   static const thereIsNoInternetConnection = 'thereIsNoInternetConnection';
-  static const accountExistsWithDifferentCredential = 'accountExistsWithDifferentCredential';
+  static const accountExistsWithDifferentCredential =
+      'accountExistsWithDifferentCredential';
   static const invalidCredential = 'invalidCredential';
   static const invalidVerificationCode = 'invalidVerificationCode';
   static const invalidVerificationId = 'invalidVerificationId';
@@ -142,10 +144,27 @@ abstract class  LocaleKeys {
   static const prizeName = 'prizeName';
   static const enterPrizeImageLink = 'enterPrizeImageLink';
   static const prizeImageLink = 'prizeImageLink';
-  static const youHaveGotPointsForLoggingInThroughTheMobileApp = 'youHaveGotPointsForLoggingInThroughTheMobileApp';
+  static const youHaveGotPointsForLoggingInThroughTheMobileApp =
+      'youHaveGotPointsForLoggingInThroughTheMobileApp';
+  static const updating = 'updating';
+  static const automatically = 'automatically';
+  static const manually = 'manually';
+  static const updateHasNotBeenCompleted = 'updateHasNotBeenCompleted';
+  static const successfullyCompleted = 'successfullyCompleted';
+  static const listOfNewlyAddedProducts = 'listOfNewlyAddedProducts';
+  static const lastUpdateWasDone = 'lastUpdateWasDone';
+  static const inPreposition = 'inPreposition';
+  static const listOfNewlyAddedCompanies = 'listOfNewlyAddedCompanies';
+  static const noUpdateOperationsYet = 'noUpdateOperationsYet';
+  static const youAreNotAdmin = 'youAreNotAdmin';
+  static const thereIsARunningUpdateOperationRightNow =
+      'thereIsARunningUpdateOperationRightNow';
   static const myProfile = 'myProfile';
   static const phones = 'phones';
   static const companies = 'companies';
+<<<<<<< HEAD
   static const competitionPrize = 'competitionPrize';
 
+=======
+>>>>>>> dedb87746f4da448fb6603fb427edea0bbc5efbd
 }

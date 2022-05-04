@@ -9,6 +9,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:urrevs_ui_mobile/app/exceptions.dart';
 import 'package:urrevs_ui_mobile/data/remote_data_source/remote_data_source.dart';
+import 'package:urrevs_ui_mobile/data/responses/update_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/users_api_response.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone.dart';
@@ -100,16 +101,6 @@ class Repository {
     });
   }
 
-  // Either<Failure, String> getUserImageUrl() {
-  //   try {
-  //     User? user = FirebaseAuth.instance.currentUser;
-  //     if (user == null) throw NoCurrentUserException();
-  //     return Right(user.photoURL!);
-  //   } on NoCurrentUserException catch (e) {
-  //     return Left(e.failure);
-  //   }
-  // }
-
   Future<Either<Failure, GetMyProfileResponse>> getMyProfile() async {
     return _tryAndCatch(() async {
       final response = await _remoteDataSource.getMyProfile();
@@ -139,6 +130,20 @@ class Repository {
       final response =
           await _remoteDataSource.getTheOwnedPhonesOfAnotherUser(userId, round);
       return response.phonesModels;
+    });
+  }
+
+  Future<Either<Failure, void>> updateTargetsFromSource() async {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.updateTargetsFromSource();
+    });
+  }
+
+  Future<Either<Failure, GetInfoAboutLatestUpdateResponse>>
+      getInfoAboutLatestUpdate() async {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.getInfoAboutLatestUpdate();
+      return response;
     });
   }
 }

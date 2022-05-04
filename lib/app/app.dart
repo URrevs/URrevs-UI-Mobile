@@ -10,6 +10,7 @@ import 'package:urrevs_ui_mobile/app/extensions.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/authentication_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/bottom_navigation_bar_container_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/menu_screen/subscreens/admin_panel/subscreens.dart/update_products_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/company_profile/company_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/development_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_post_screen.dart';
@@ -44,7 +45,7 @@ class _MyAppState extends ConsumerState<MyApp> {
       splitScreenMode: false,
       builder: (_) => MaterialApp(
         title: LocaleKeys.urrevs.tr(),
-        initialRoute: AuthenticationScreen.routeName,
+        initialRoute: UpdateProductsScreen.routeName,
         // initialRoute: OwnedProductsScreen.routeName,
         // initialRoute: DevelopmentScreen.routeName,
         navigatorObservers: [routeObserver],
