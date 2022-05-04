@@ -10,11 +10,18 @@ import 'package:urrevs_ui_mobile/presentation/widgets/alert_dialog_title.dart';
 class CustomAlertDialog extends StatelessWidget {
   const CustomAlertDialog({
     required this.title,
+    required this.hasTitle,
     required this.content,
     Key? key,
   }) : super(key: key);
 
+  /// The title of the dialog.
   final String title;
+
+  /// Flag to show the title and exit icon on the dialog.
+  final bool hasTitle;
+
+  /// The content of the dialog.
   final Widget content;
   @override
   Widget build(BuildContext context) {
@@ -22,7 +29,7 @@ class CustomAlertDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppRadius.interactionBodyRadius),
       ),
-      title: AlertDialogTitle(
+      title: hasTitle?AlertDialogTitle(
         titleText: Text(
           title,
           style: TextStyleManager.s16w700.copyWith(
@@ -30,7 +37,7 @@ class CustomAlertDialog extends StatelessWidget {
             fontFamily: FontConstants.tajawal,
           ),
         ),
-      ),
+      ):null,
       insetPadding: EdgeInsets.all(10.sp),
       content: content,
     );

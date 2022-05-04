@@ -80,7 +80,7 @@
   "companyReview": "مراجعة شركة",
   "productReview": "مراجعة منتج",
   "askedQuestion": "سؤال مطروح",
-  "collectedStars": "النجوم المجمعة",
+  "collectedStars": "النقاط المجمعة",
   "myReviews": "مراجعاتي",
   "myQuestions": "أسئلتي",
   "ownedProducts": "المنتجات الممتلكة",
@@ -155,11 +155,7 @@
   "thereIsARunningUpdateOperationRightNow": "هناك عملية تحديث قيد التشغيل الآن",
   "myProfile": "حسابي",
   "phones": "الهواتف",
-<<<<<<< HEAD
   "companies": "الشركات",
-  "competitionPrize": "جائزة المسابقة:"
+  "competitionPrize": "جائزة المسابقة:",
+  "reviewEncouragement": "كلما كانت مراجعتك مميزة ومليئة بالتفاصيل سوف تحصل علي نقاط مساعدة أكثر."
 }
-=======
-  "companies": "الشركات"
-}
->>>>>>> dedb87746f4da448fb6603fb427edea0bbc5efbd

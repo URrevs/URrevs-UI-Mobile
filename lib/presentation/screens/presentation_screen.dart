@@ -39,6 +39,7 @@ import 'package:urrevs_ui_mobile/presentation/widgets/interactions/reply.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/adding_competition_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/custom_alert_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/prize_photo_dialog.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/prompts/review_encouragement_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body_rating_block.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/see_more_button.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/review_card_body.dart';
@@ -123,9 +124,12 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
         padding: EdgeInsets.all(20),
         children: [
           SizedBox(height: 20),
+          ReviewEncouragementDialog(),
+          SizedBox(height: 20),
           PrizePhotoDialog(
             prizeName: 'Xiaomi Mi Band 5',
-            imageUrl: 'https://shop.btcegyptgold.com/media/catalog/product/cache/54154f8e5f8cfdda3a2d411d19afaba5/1/k/1kg_995.5.jpg',
+            imageUrl:
+                'https://shop.btcegyptgold.com/media/catalog/product/cache/54154f8e5f8cfdda3a2d411d19afaba5/1/k/1kg_995.5.jpg',
           ),
           SizedBox(height: 20),
           AddingCompetitionPrompt(

@@ -26,6 +26,7 @@ class PrizePhotoDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomAlertDialog(
       title: LocaleKeys.competitionPrize.tr(),
+      hasTitle: true,
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
