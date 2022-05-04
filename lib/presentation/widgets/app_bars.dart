@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/app/exceptions.dart';
+import 'package:urrevs_ui_mobile/app/extensions.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/assets_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
@@ -20,6 +21,7 @@ class AppBars {
   static List<Widget> actions({
     required BuildContext context,
     required String? imageUrl,
+    required bool isReversed,
   }) {
     return <Widget>[
       InkWell(
@@ -37,7 +39,13 @@ class AppBars {
         ),
       ),
       Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15.h, vertical: 5.w),
+        padding: isReversed
+            ? EdgeInsets.only(
+                top: 5.h,
+                bottom: 5.h,
+                right: !context.isArabic ? 15.w : 0,
+                left: !context.isArabic ? 0 : 15.w)
+            : EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.h),
         child: Avatar(
           imageUrl: imageUrl,
           radius: 18.r,
@@ -67,18 +75,20 @@ class AppBars {
         45.h,
       ),
       child: AppBar(
+        elevation: 3,
         leading: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.w),
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
           child: Image.asset(
             ImageAssets.appBarLogo,
-            // width: 94,
-            // height: 30,
+            //  width: 94,
+            //  height: 30,
             filterQuality: FilterQuality.high,
           ),
         ),
-        leadingWidth: 105.w,
+        leadingWidth: 125.w,
         backgroundColor: ColorManager.white,
-        actions: AppBars.actions(context: context, imageUrl: imageUrl),
+        actions: AppBars.actions(
+            context: context, imageUrl: imageUrl, isReversed: false),
         bottom: showTabBar
             ? TabBar(
                 tabs: [
@@ -100,9 +110,10 @@ class AppBars {
         45.h,
       ),
       child: AppBar(
-        // leading: Icon(Icons.arrow_back_rounded, size: 30.sp,),
+        elevation: 3,
         backgroundColor: ColorManager.white,
-        actions: AppBars.actions(context: context, imageUrl: imageUrl),
+        actions: AppBars.actions(
+            context: context, imageUrl: imageUrl, isReversed: false),
         iconTheme: IconThemeData(
           color: ColorManager.black,
         ),
@@ -115,65 +126,171 @@ class AppBars {
     required String title,
   }) {
     return PreferredSize(
-        preferredSize: Size.fromHeight(
-          45.h,
+      preferredSize: Size.fromHeight(
+        45.h,
+      ),
+      child: AppBar(
+        elevation: 3,
+        title: Text(
+          title,
+          style: TextStyleManager.s20w700.copyWith(color: ColorManager.black),
         ),
-        child: AppBar(title: Text(title, style: TextStyleManager.s20w700,)));
+        backgroundColor: ColorManager.white,
+        iconTheme: IconThemeData(
+          color: ColorManager.black,
+        ),
+      ),
+    );
   }
 
-  static AppBar appBarOfProductProfile({
+  static PreferredSize appBarOfUserProfile({
+    required BuildContext context,
+    required String title,
+  }) {
+    return PreferredSize(
+      preferredSize: Size.fromHeight(
+        45.h,
+      ),
+      child: AppBar(
+        elevation: 3,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(
+              title,
+              style:
+                  TextStyleManager.s20w700.copyWith(color: ColorManager.black),
+            ),
+          ],
+        ),
+        backgroundColor: ColorManager.white,
+        iconTheme: IconThemeData(
+          color: ColorManager.black,
+        ),
+      ),
+    );
+  }
+
+  static PreferredSize appBarOfProductProfile({
     required BuildContext context,
     required TabController controller,
     required String text,
     required String imageUrl,
   }) {
-    return AppBar(
-      title: Row(
-        children: AppBars.actions(
-          context: context,
-          imageUrl: imageUrl,
-        ),
+    return PreferredSize(
+      preferredSize: Size.fromHeight(
+        82.h,
       ),
-      actions: [Text(text)],
-      bottom: TabBar(
-        controller: controller,
-        tabs: [
-          Tab(text: LocaleKeys.tabBarReviews.tr()),
-          Tab(text: LocaleKeys.tabBarSpecs.tr()),
-          Tab(text: LocaleKeys.tabBarQuestionsAndAnswers.tr()),
+      child: AppBar(
+        elevation: 3,
+        titleSpacing: 0,
+        backgroundColor: ColorManager.white,
+        iconTheme: IconThemeData(
+          color: ColorManager.black,
+        ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: AppBars.actions(
+            context: context,
+            imageUrl: imageUrl,
+            isReversed: true,
+          ).reversed.toList(),
+        ),
+        actions: [
+          Padding(
+            padding: EdgeInsets.only(
+                top: 15.h,
+                right: !context.isArabic ? 15.w : 0,
+                left: !context.isArabic ? 0 : 15.w),
+            child: Text(
+              text,
+              style:
+                  TextStyleManager.s20w700.copyWith(color: ColorManager.black),
+            ),
+          )
         ],
+        bottom: TabBar(
+          controller: controller,
+          tabs: [
+            Tab(text: LocaleKeys.tabBarReviews.tr()),
+            Tab(text: LocaleKeys.tabBarSpecs.tr()),
+            Tab(text: LocaleKeys.tabBarQuestionsAndAnswers.tr()),
+          ],
+        ),
       ),
     );
   }
 
-  static AppBar appBarOfCompnayProfile({
+  static PreferredSize appBarOfCompnayProfile({
     required BuildContext context,
     required TabController controller,
     required String text,
     required String imageUrl,
   }) {
-    return AppBar(
-      title: Row(
-        children: AppBars.actions(
-          context: context,
-          imageUrl: imageUrl,
-        ),
+    return PreferredSize(
+      preferredSize: Size.fromHeight(
+        82.h,
       ),
-      actions: [Text(text)],
-      bottom: TabBar(
-        controller: controller,
-        tabs: [
-          Tab(text: LocaleKeys.tabBarReviews.tr()),
-          Tab(text: LocaleKeys.tabBarQuestionsAndAnswers.tr()),
+      child: AppBar(
+        elevation: 3,
+        titleSpacing: 0,
+        backgroundColor: ColorManager.white,
+        iconTheme: IconThemeData(
+          color: ColorManager.black,
+        ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: AppBars.actions(
+            context: context,
+            imageUrl: imageUrl,
+            isReversed: true,
+          ).reversed.toList(),
+        ),
+        actions: [
+          Padding(
+            padding: EdgeInsets.only(
+                top: 15.h,
+                right: !context.isArabic ? 15.w : 0,
+                left: !context.isArabic ? 0 : 15.w),
+            child: Text(
+              text,
+              style:
+                  TextStyleManager.s20w700.copyWith(color: ColorManager.black),
+            ),
+          )
         ],
+        bottom: TabBar(
+          controller: controller,
+          tabs: [
+            Tab(text: LocaleKeys.tabBarReviews.tr()),
+            Tab(text: LocaleKeys.tabBarQuestionsAndAnswers.tr()),
+          ],
+        ),
       ),
     );
   }
 
-  static SliverAppBar appBarWithFilters({
-    required ValueChanged<ReviewsFilter> setFilter,
-  }) {
+  static SliverAppBar appBarWithFilters(
+      {required ValueChanged<ReviewsFilter> setFilter,
+      required bool isMobileFilterPressed,
+      required String title}) {
     return SliverAppBar(
+      title: Text(
+        title,
+        style: TextStyleManager.s20w700.copyWith(color: ColorManager.black),
+      ),
+      titleSpacing: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(10.r),
+          bottomRight: Radius.circular(10.r),
+        ),
+      ),
+      backgroundColor: ColorManager.white,
+      iconTheme: IconThemeData(
+        color: ColorManager.black,
+      ),
+      elevation: 3,
       pinned: true,
       forceElevated: true,
       snap: true,
@@ -186,13 +303,53 @@ class AppBars {
         padding: EdgeInsets.only(top: 45.h),
         child: Row(
           children: [
-            ElevatedButton(
-              onPressed: () => setFilter(ReviewsFilter.phones),
-              child: Text('الهواتف'),
+            SizedBox(
+              width: 17.w,
             ),
-            ElevatedButton(
-              onPressed: () => setFilter(ReviewsFilter.companies),
-              child: Text('الشركات'),
+            TextButton(
+              style: ButtonStyle(
+                  backgroundColor: isMobileFilterPressed
+                      ? MaterialStateProperty.all<Color>(
+                          ColorManager.buttonGrey)
+                      : MaterialStateProperty.all<Color>(ColorManager.white),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(26.r),
+                          side: BorderSide(color: ColorManager.buttonGrey)))),
+              onPressed: () {
+                setFilter(
+                  ReviewsFilter.phones,
+                );
+              },
+              child: Text(LocaleKeys.phones.tr(),
+                  style: TextStyleManager.s14w700.copyWith(
+                      color: isMobileFilterPressed
+                          ? ColorManager.white
+                          : ColorManager.buttonGrey)),
+            ),
+            SizedBox(
+              width: 17.w,
+            ),
+            TextButton(
+              style: ButtonStyle(
+                  backgroundColor: !isMobileFilterPressed
+                      ? MaterialStateProperty.all<Color>(
+                          ColorManager.buttonGrey)
+                      : MaterialStateProperty.all<Color>(ColorManager.white),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(26.r),
+                          side: BorderSide(color: ColorManager.buttonGrey)))),
+              onPressed: () {
+                setFilter(
+                  ReviewsFilter.companies,
+                );
+              },
+              child: Text(LocaleKeys.companies.tr(),
+                  style: TextStyleManager.s14w700.copyWith(
+                      color: !isMobileFilterPressed
+                          ? ColorManager.white
+                          : ColorManager.buttonGrey)),
             ),
           ],
         ),
@@ -202,6 +359,7 @@ class AppBars {
 
   static appBarWithCompaniesList() {
     return SliverAppBar(
+      elevation: 3,
       title: SizedBox(
         height: 30.h,
         width: 95.w,

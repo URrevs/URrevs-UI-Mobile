@@ -152,5 +152,8 @@
   "listOfNewlyAddedCompanies": "List of newly added companies",
   "noUpdateOperationsYet": "No update operations yet",
   "youAreNotAdmin": "You are not an admin",
-  "thereIsARunningUpdateOperationRightNow": "There is a running update operation right now"
+  "thereIsARunningUpdateOperationRightNow": "There is a running update operation right now",
+  "myProfile": "My profile",
+  "phones": "Smartphones",
+  "companies": "Companies"
 }

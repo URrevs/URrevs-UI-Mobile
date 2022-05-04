@@ -12,7 +12,7 @@ class ScaffoldWithHidingFab extends StatefulWidget {
     this.hideFab = false,
   }) : super(key: key);
 
-  final AppBar? appBar;
+  final PreferredSize? appBar;
   final Widget body;
   final Widget fabIcon;
   final String fabLabel;

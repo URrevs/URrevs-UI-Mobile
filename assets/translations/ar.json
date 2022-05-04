@@ -152,5 +152,8 @@
   "listOfNewlyAddedCompanies": "قائمة الشركات المضافة حديثاً",
   "noUpdateOperationsYet": "لا توجد عمليات تحديث بعد",
   "youAreNotAdmin": "أنت لست مشرف للتطبيق",
-  "thereIsARunningUpdateOperationRightNow": "هناك عملية تحديث قيد التشغيل الآن"
+  "thereIsARunningUpdateOperationRightNow": "هناك عملية تحديث قيد التشغيل الآن",
+  "myProfile": "حسابي",
+  "phones": "الهواتف",
+  "companies": "الشركات"
 }
