@@ -140,5 +140,8 @@
   "prizeName": "اسم الجائزة",
   "enterPrizeImageLink": "ادخل رابط صورة للجائزة:",
   "prizeImageLink": "رابط صورة الجائزة",
-  "youHaveGotPointsForLoggingInThroughTheMobileApp": "مبروك! لقد حصلت علي نقاط لتسجيل دخولك من خلال تطبيق الهاتف"
+  "youHaveGotPointsForLoggingInThroughTheMobileApp": "مبروك! لقد حصلت علي نقاط لتسجيل دخولك من خلال تطبيق الهاتف",
+  "myProfile": "حسابي",
+  "phones": "الهواتف",
+  "companies": "الشركات"
 }

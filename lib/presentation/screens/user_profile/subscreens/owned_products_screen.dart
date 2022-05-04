@@ -79,7 +79,10 @@ class _OwnedProductsScreenState extends ConsumerState<OwnedProductsScreen> {
       }
     });
     return ScaffoldWithHidingFab(
-      appBar: AppBar(),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(45.h),
+        child: AppBar(),
+      ),
       onPressingFab: () {
         Navigator.of(context).pushNamed(
           BottomNavigationBarContainerScreen.routeName,

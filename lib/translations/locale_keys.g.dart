@@ -143,5 +143,8 @@ abstract class  LocaleKeys {
   static const enterPrizeImageLink = 'enterPrizeImageLink';
   static const prizeImageLink = 'prizeImageLink';
   static const youHaveGotPointsForLoggingInThroughTheMobileApp = 'youHaveGotPointsForLoggingInThroughTheMobileApp';
+  static const myProfile = 'myProfile';
+  static const phones = 'phones';
+  static const companies = 'companies';
 
 }

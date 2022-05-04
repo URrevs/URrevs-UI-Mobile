@@ -140,5 +140,8 @@
   "prizeName": "Name of prize",
   "enterPrizeImageLink": "Enter prize image's URL:",
   "prizeImageLink": "Prize image's URL",
-  "youHaveGotPointsForLoggingInThroughTheMobileApp": "Congrats! You have got points for logging in through the mobile app"
+  "youHaveGotPointsForLoggingInThroughTheMobileApp": "Congrats! You have got points for logging in through the mobile app",
+  "myProfile": "My profile",
+  "phones": "Smartphones",
+  "companies": "Companies"
 }

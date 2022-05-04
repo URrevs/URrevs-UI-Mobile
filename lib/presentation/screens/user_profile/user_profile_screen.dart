@@ -14,6 +14,7 @@ import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/po
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_my_user_profile_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_the_profile_of_another_user_state.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/error_dialog.dart';
@@ -215,6 +216,20 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
     }
   }
 
+  PreferredSize _buildAppBar(){
+    final state = ref.watch(getTheProfileOfAnotherUserProvider);
+    /// AppBar for other user profile.
+    if(otherUser && state is GetTheProfileOfAnotherUserLoadedState){
+      return AppBars.appBarOfUserProfile(context: context,
+        title: state.user.name,
+      );
+    }
+    /// AppBar for my profile.
+    else{
+      return AppBars.appBarWithTitle(context: context, title: LocaleKeys.myProfile.tr());
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -252,7 +267,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
       }
     });
     return Scaffold(
-      appBar: AppBar(),
+      appBar: _buildAppBar(),
       body: SafeArea(
         child: _buildBody(),
       ),

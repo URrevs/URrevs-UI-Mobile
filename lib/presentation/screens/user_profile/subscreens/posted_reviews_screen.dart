@@ -24,12 +24,21 @@ class PostedReviewsScreen extends StatefulWidget {
 
 class _PostedReviewsScreenState extends State<PostedReviewsScreen> {
   ReviewsFilter filter = ReviewsFilter.phones;
+  bool isMobileFilterPressed = true;
 
   Widget get post => filter == ReviewsFilter.phones
       ? ProductReviewCard.dummyInstance()
       : CompanyReviewCard.dummyInstance();
 
-  void _setFilter(ReviewsFilter filter) => setState(() => this.filter = filter);
+  void _setFilter(ReviewsFilter filter) => setState(() {
+        if (isMobileFilterPressed && filter == ReviewsFilter.phones) {
+        } else if (!isMobileFilterPressed &&
+            filter == ReviewsFilter.companies) {
+        } else {
+          isMobileFilterPressed = !isMobileFilterPressed;
+          this.filter = filter;
+        }
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +48,10 @@ class _PostedReviewsScreenState extends State<PostedReviewsScreen> {
       fabIcon: Icon(FontAwesomeIcons.plus, size: AppSize.s16),
       body: CustomScrollView(
         slivers: [
-          AppBars.appBarWithFilters(setFilter: _setFilter),
+          AppBars.appBarWithFilters(
+              title: LocaleKeys.reviews.tr(),
+              setFilter: _setFilter,
+              isMobileFilterPressed: isMobileFilterPressed),
           SliverPadding(
             padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
             sliver: SliverList(
