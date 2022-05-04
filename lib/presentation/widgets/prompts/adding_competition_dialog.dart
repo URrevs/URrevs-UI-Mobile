@@ -9,6 +9,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/font_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/alert_dialog_title.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/buttons/grad_button.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/fields/datepicker_field.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/fields/txt_field.dart';
@@ -55,13 +56,12 @@ class _AddingCompetitionPromptState extends State<AddingCompetitionPrompt> {
     return Uri.parse(imgUrl).isAbsolute
         ? Center(
             child: SizedBox(
-              width: 120.w,
-              height: 120.h,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15.r),
                 child: Image.network(
                   imgUrl,
                   fit: BoxFit.cover,
+                  filterQuality: FilterQuality.high,
                   errorBuilder: (context, exception, stackTrace) {
                     return Image.asset(
                       ImageAssets.errorImage,
@@ -166,57 +166,3 @@ class _AddingCompetitionPromptState extends State<AddingCompetitionPrompt> {
   }
 }
 
-/// Alert dialog title with exiting button
-class AlertDialogTitle extends StatelessWidget {
-  const AlertDialogTitle({
-    required this.titleText,
-    Key? key,
-  }) : super(key: key);
-  /// The text to display in the title.
-  final Text titleText;
-  
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      clipBehavior: Clip.none,
-      children: [
-        Padding(
-          padding: EdgeInsets.only( top: 15.h),
-          child: titleText,
-        ),
-        Positioned(
-          top: 0,
-          left: context.isArabic ? 0 : null,
-          right: context.isArabic ? null : 0,
-          child: Padding(
-            padding: EdgeInsets.all(10.sp),
-            child: GestureDetector(
-              onTap: Navigator.of(context).pop,
-              child: Container(
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: ColorManager.dialogCloseIconBackgroundGrey,
-                    boxShadow: [
-                      BoxShadow(
-                        color: ColorManager.black.withOpacity(0.2),
-                        blurRadius: 1.sp,
-                        spreadRadius: 1.sp,
-                        offset: Offset(0, 2),
-                      )
-                    ]),
-                child: Padding(
-                  padding: EdgeInsets.all(2.sp),
-                  child: Icon(
-                    FontAwesomeIcons.xmark,
-                    size: 24.sp,
-                    color: ColorManager.black,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}

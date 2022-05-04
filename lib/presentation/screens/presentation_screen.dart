@@ -20,6 +20,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/alert_dialog_title.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/bottom_navigation_bar.dart';
@@ -36,6 +37,9 @@ import 'package:urrevs_ui_mobile/presentation/widgets/interactions/comment_tree.
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/comments_list.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/reply.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/adding_competition_dialog.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/prompts/custom_alert_dialog.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/prompts/prize_photo_dialog.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/prompts/review_encouragement_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body_rating_block.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/see_more_button.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/review_card_body.dart';
@@ -82,43 +86,51 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
     String hintText = 'عدد الفائزين';
 
     return Scaffold(
-      appBar: AppBars.appBarWithActions(context: context, imageUrl: StringsManager.picsum200x200),
-      // appBar: AppBar(
-      //   actions: [
-      //     ElevatedButton(
-      //       onPressed: () => context.setLocale(LanguageType.ar.locale),
-      //       child: Text('ar'),
-      //     ),
-      //     ElevatedButton(
-      //       onPressed: () => context.setLocale(LanguageType.en.locale),
-      //       child: Text('en'),
-      //     ),
-      //     ElevatedButton(
-      //       onPressed: () => ref
-      //           .read(themeModeProvider.notifier)
-      //           .setThemeMode(ThemeMode.dark),
-      //       child: Text('🌙'),
-      //     ),
-      //     ElevatedButton(
-      //       onPressed: () => ref
-      //           .read(themeModeProvider.notifier)
-      //           .setThemeMode(ThemeMode.light),
-      //       child: Text('☀'),
-      //     ),
-      //     // ElevatedButton(
-      //     //   onPressed: () {
-      //     //     print("scale width: ${ScreenUtil().scaleWidth}");
-      //     //     print("scale height: ${ScreenUtil().scaleHeight}");
-      //     //     print("screen width: ${ScreenUtil().screenWidth}");
-      //     //     print("ui size: ${ScreenUtil().uiSize}");
-      //     //   },
-      //     //   child: Text('screen util'),
-      //     // ),
-      //   ],
-      // ),
+      //appBar: AppBars.appBarWithActions(context: context, imageUrl: StringsManager.picsum200x200),
+      appBar: AppBar(
+        actions: [
+          ElevatedButton(
+            onPressed: () => context.setLocale(LanguageType.ar.locale),
+            child: Text('ar'),
+          ),
+          ElevatedButton(
+            onPressed: () => context.setLocale(LanguageType.en.locale),
+            child: Text('en'),
+          ),
+          ElevatedButton(
+            onPressed: () => ref
+                .read(themeModeProvider.notifier)
+                .setThemeMode(ThemeMode.dark),
+            child: Text('🌙'),
+          ),
+          ElevatedButton(
+            onPressed: () => ref
+                .read(themeModeProvider.notifier)
+                .setThemeMode(ThemeMode.light),
+            child: Text('☀'),
+          ),
+          // ElevatedButton(
+          //   onPressed: () {
+          //     print("scale width: ${ScreenUtil().scaleWidth}");
+          //     print("scale height: ${ScreenUtil().scaleHeight}");
+          //     print("screen width: ${ScreenUtil().screenWidth}");
+          //     print("ui size: ${ScreenUtil().uiSize}");
+          //   },
+          //   child: Text('screen util'),
+          // ),
+        ],
+      ),
       body: ListView(
         padding: EdgeInsets.all(20),
         children: [
+          SizedBox(height: 20),
+          ReviewEncouragementDialog(),
+          SizedBox(height: 20),
+          PrizePhotoDialog(
+            prizeName: 'Xiaomi Mi Band 5',
+            imageUrl:
+                'https://shop.btcegyptgold.com/media/catalog/product/cache/54154f8e5f8cfdda3a2d411d19afaba5/1/k/1kg_995.5.jpg',
+          ),
           SizedBox(height: 20),
           AddingCompetitionPrompt(
               dateController: dateCtl,
@@ -221,5 +233,4 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
     );
   }
 }
-
 

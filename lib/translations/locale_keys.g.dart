@@ -162,5 +162,7 @@ abstract class  LocaleKeys {
   static const lastUpdatedIn = 'lastUpdatedIn';
   static const addACompetition = 'addACompetition';
   static const theLastCompetitionTookPlaceIn = 'theLastCompetitionTookPlaceIn';
+  static const competitionPrize = 'competitionPrize';
+  static const reviewEncouragement = 'reviewEncouragement';
 
 }

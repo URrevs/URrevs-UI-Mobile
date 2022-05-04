@@ -80,7 +80,7 @@
   "companyReview": "مراجعة شركة",
   "productReview": "مراجعة منتج",
   "askedQuestion": "سؤال مطروح",
-  "collectedStars": "النجوم المجمعة",
+  "collectedStars": "النقاط المجمعة",
   "myReviews": "مراجعاتي",
   "myQuestions": "أسئلتي",
   "ownedProducts": "المنتجات الممتلكة",
@@ -159,5 +159,7 @@
   "updateProductList": "تحديث قائمة المنتجات",
   "lastUpdatedIn": "آخر تحديث تم في",
   "addACompetition": "إضافة مسابقة",
-  "theLastCompetitionTookPlaceIn": "آخر مسابقة تمت في"
+  "theLastCompetitionTookPlaceIn": "آخر مسابقة تمت في",
+  "competitionPrize": "جائزة المسابقة:",
+  "reviewEncouragement": "كلما كانت مراجعتك مميزة ومليئة بالتفاصيل سوف تحصل علي نقاط مساعدة أكثر."
 }
