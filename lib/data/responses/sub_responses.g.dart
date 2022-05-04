@@ -55,3 +55,17 @@ Map<String, dynamic> _$PhoneSubResponseToJson(PhoneSubResponse instance) =>
       'type': instance.type,
       'name': instance.name,
     };
+
+CompanySubResponse _$CompanySubResponseFromJson(Map<String, dynamic> json) =>
+    CompanySubResponse(
+      id: json['_id'] as String,
+      type: json['type'] as String,
+      name: json['name'] as String,
+    );
+
+Map<String, dynamic> _$CompanySubResponseToJson(CompanySubResponse instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'type': instance.type,
+      'name': instance.name,
+    };

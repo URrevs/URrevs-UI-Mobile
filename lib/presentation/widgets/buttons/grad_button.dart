@@ -13,6 +13,7 @@ class GradButton extends StatelessWidget {
     required this.width,
     required this.reverseIcon,
     required this.onPressed,
+    this.isEnabled = true,
     Key? key,
   }) : super(key: key);
 
@@ -20,7 +21,7 @@ class GradButton extends StatelessWidget {
   final Text text;
 
   /// The icon to display in the button.
-  final Icon icon;
+  final Widget icon;
 
   /// The width of the button.
   final double width;
@@ -28,11 +29,14 @@ class GradButton extends StatelessWidget {
   /// The callback to execute when the button is tapped.
   final VoidCallback onPressed;
 
+  final bool isEnabled;
+
   /// Flag to reverse the icon, used in RTL buttons.
   final bool reverseIcon;
   @override
   Widget build(BuildContext context) {
     return GradientButton(
+      isEnabled: isEnabled,
       callback: onPressed,
       increaseWidthBy: width,
       shadowColor: ColorManager.black.withOpacity(0.5).withOpacity(0.5),
@@ -44,10 +48,12 @@ class GradButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            context.isArabic && reverseIcon? Transform(
-                alignment: Alignment.center,
-                transform: Matrix4.rotationY(math.pi),
-                child: icon) : icon,
+            context.isArabic && reverseIcon
+                ? Transform(
+                    alignment: Alignment.center,
+                    transform: Matrix4.rotationY(math.pi),
+                    child: icon)
+                : icon,
             SizedBox(width: 5),
             Padding(
               padding: EdgeInsets.only(top: 6.h),

@@ -142,7 +142,7 @@ class CodegenLoader extends AssetLoader{
   "tokenRevoked": "تم إبطال رمزك المميز",
   "tooManyRequests": "لقد أرسلت الكثير من الطلبات",
   "youDoNotExistInTheSystem": "أنت غير موجود في النظام",
-  "connectionTimedOut": "الاتصال بالخادك أخذ وقتاً طويلاً",
+  "connectionTimedOut": "الاتصال بالخادم أخذ وقتاً طويلاً",
   "receivingDataTimedout": "استلام البيانات من الخادم أخذ وقتاً طويلاً",
   "sendingDataTimedout": "إرسال البيانات إلى الخادم أخذ وقتاً طويلاً",
   "requestWasCancelled": "تم إلغاء الطلب",
@@ -156,7 +156,19 @@ class CodegenLoader extends AssetLoader{
   "prizeName": "اسم الجائزة",
   "enterPrizeImageLink": "ادخل رابط صورة للجائزة:",
   "prizeImageLink": "رابط صورة الجائزة",
-  "youHaveGotPointsForLoggingInThroughTheMobileApp": "مبروك! لقد حصلت علي نقاط لتسجيل دخولك من خلال تطبيق الهاتف"
+  "youHaveGotPointsForLoggingInThroughTheMobileApp": "مبروك! لقد حصلت علي نقاط لتسجيل دخولك من خلال تطبيق الهاتف",
+  "updating": "جاري التحديث",
+  "automatically": "أوتوماتيكياً",
+  "manually": "يدوياً",
+  "updateHasNotBeenCompleted": "لم يكتمل التحديث",
+  "successfullyCompleted": "اكتمل بنجاح",
+  "listOfNewlyAddedProducts": "قائمة المنتجات المضافة حديثاً",
+  "lastUpdateWasDone": "آخر تحديث تم",
+  "inPreposition": "في",
+  "listOfNewlyAddedCompanies": "قائمة الشركات المضافة حديثاً",
+  "noUpdateOperationsYet": "لا توجد عمليات تحديث بعد",
+  "youAreNotAdmin": "أنت لست مشرف للتطبيق",
+  "thereIsARunningUpdateOperationRightNow": "هناك عملية تحديث قيد التشغيل الآن"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -300,7 +312,19 @@ static const Map<String,dynamic> en = {
   "prizeName": "Name of prize",
   "enterPrizeImageLink": "Enter prize image's URL:",
   "prizeImageLink": "Prize image's URL",
-  "youHaveGotPointsForLoggingInThroughTheMobileApp": "Congrats! You have got points for logging in through the mobile app"
+  "youHaveGotPointsForLoggingInThroughTheMobileApp": "Congrats! You have got points for logging in through the mobile app",
+  "updating": "Updating",
+  "automatically": "automatically",
+  "manually": "manually",
+  "updateHasNotBeenCompleted": "Update has not been completed",
+  "successfullyCompleted": "Successfully completed",
+  "listOfNewlyAddedProducts": "List of newly added products",
+  "lastUpdateWasDone": "Last update done",
+  "inPreposition": "in",
+  "listOfNewlyAddedCompanies": "List of newly added companies",
+  "noUpdateOperationsYet": "No update operations yet",
+  "youAreNotAdmin": "You are not an admin",
+  "thereIsARunningUpdateOperationRightNow": "There is a running update operation right now"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

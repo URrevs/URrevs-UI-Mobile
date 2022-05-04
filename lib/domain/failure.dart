@@ -13,6 +13,10 @@ class ServerErrorMessages {
   static const String tokenRevoked = 'token revoked';
   static const String invalidToken = 'invalid token';
   static const String processFailed = 'process failed';
+  static const String noUpdateOperationsYet = 'no update operations yet';
+  static const String youAreNotAnAdmin = 'you are not admin';
+  static const String thereIsARunningUpdateOperationRightNow =
+      'there is a running update operation right now';
 
   static Map<String, String> get errorMessagesMap => {
         ServerErrorMessages.tooManyRequests: LocaleKeys.tooManyRequests.tr(),
@@ -22,6 +26,11 @@ class ServerErrorMessages {
         ServerErrorMessages.tokenRevoked: LocaleKeys.tokenRevoked.tr(),
         ServerErrorMessages.invalidToken: LocaleKeys.invalidToken.tr(),
         ServerErrorMessages.processFailed: LocaleKeys.processFailed.tr(),
+        ServerErrorMessages.noUpdateOperationsYet:
+            LocaleKeys.noUpdateOperationsYet.tr(),
+        ServerErrorMessages.youAreNotAnAdmin: LocaleKeys.youAreNotAdmin.tr(),
+        ServerErrorMessages.thereIsARunningUpdateOperationRightNow:
+            LocaleKeys.thereIsARunningUpdateOperationRightNow.tr(),
       };
 
   static List<String> get _retryActionFailures => [

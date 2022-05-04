@@ -143,5 +143,17 @@ abstract class  LocaleKeys {
   static const enterPrizeImageLink = 'enterPrizeImageLink';
   static const prizeImageLink = 'prizeImageLink';
   static const youHaveGotPointsForLoggingInThroughTheMobileApp = 'youHaveGotPointsForLoggingInThroughTheMobileApp';
+  static const updating = 'updating';
+  static const automatically = 'automatically';
+  static const manually = 'manually';
+  static const updateHasNotBeenCompleted = 'updateHasNotBeenCompleted';
+  static const successfullyCompleted = 'successfullyCompleted';
+  static const listOfNewlyAddedProducts = 'listOfNewlyAddedProducts';
+  static const lastUpdateWasDone = 'lastUpdateWasDone';
+  static const inPreposition = 'inPreposition';
+  static const listOfNewlyAddedCompanies = 'listOfNewlyAddedCompanies';
+  static const noUpdateOperationsYet = 'noUpdateOperationsYet';
+  static const youAreNotAdmin = 'youAreNotAdmin';
+  static const thereIsARunningUpdateOperationRightNow = 'thereIsARunningUpdateOperationRightNow';
 
 }

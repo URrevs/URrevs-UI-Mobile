@@ -140,5 +140,17 @@
   "prizeName": "اسم الجائزة",
   "enterPrizeImageLink": "ادخل رابط صورة للجائزة:",
   "prizeImageLink": "رابط صورة الجائزة",
-  "youHaveGotPointsForLoggingInThroughTheMobileApp": "مبروك! لقد حصلت علي نقاط لتسجيل دخولك من خلال تطبيق الهاتف"
+  "youHaveGotPointsForLoggingInThroughTheMobileApp": "مبروك! لقد حصلت علي نقاط لتسجيل دخولك من خلال تطبيق الهاتف",
+  "updating": "جاري التحديث",
+  "automatically": "أوتوماتيكياً",
+  "manually": "يدوياً",
+  "updateHasNotBeenCompleted": "لم يكتمل التحديث",
+  "successfullyCompleted": "اكتمل بنجاح",
+  "listOfNewlyAddedProducts": "قائمة المنتجات المضافة حديثاً",
+  "lastUpdateWasDone": "آخر تحديث تم",
+  "inPreposition": "في",
+  "listOfNewlyAddedCompanies": "قائمة الشركات المضافة حديثاً",
+  "noUpdateOperationsYet": "لا توجد عمليات تحديث بعد",
+  "youAreNotAdmin": "أنت لست مشرف للتطبيق",
+  "thereIsARunningUpdateOperationRightNow": "هناك عملية تحديث قيد التشغيل الآن"
 }
