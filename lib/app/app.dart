@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:urrevs_ui_mobile/app/extensions.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
@@ -23,11 +26,18 @@ import 'package:urrevs_ui_mobile/presentation/resources/theme_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/timeago.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
-class MyApp extends ConsumerWidget {
+final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
+
+class MyApp extends ConsumerStatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ref) {
+  ConsumerState<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends ConsumerState<MyApp> {
+  @override
+  Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: Size(411, 731),
       minTextAdapt: true,
@@ -37,15 +47,17 @@ class MyApp extends ConsumerWidget {
         initialRoute: AuthenticationScreen.routeName,
         // initialRoute: OwnedProductsScreen.routeName,
         // initialRoute: DevelopmentScreen.routeName,
+        navigatorObservers: [routeObserver],
         onGenerateRoute: RouteGenerator.getRoute,
         debugShowCheckedModeBanner: false,
         themeMode: ref.watch(themeModeProvider),
         theme: ThemeManager.light,
         darkTheme: ThemeManager.dark,
         builder: (context, widget) {
-          ScreenUtil.setContext(context);
           timeago.setLocaleMessages(LanguageType.en.name, MyCustomEnMessages());
           timeago.setLocaleMessages(LanguageType.ar.name, MyCustomArMessages());
+
+          ScreenUtil.setContext(context);
           return MediaQuery(
             //Setting font does not change with system font size
             data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),

@@ -30,9 +30,16 @@ class Avatar extends StatelessWidget {
         backgroundColor: ColorManager.transparent,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(radius),
-          child: imageUrl != null
-              ? Image.network(imageUrl!)
-              : Image.network(StringsManager.imagePlaceHolder),
+          child: SizedBox(
+            height: radius * 2,
+            width: radius * 2,
+            child: imageUrl != null
+                ? Image.network(imageUrl!, fit: BoxFit.cover)
+                : Image.network(
+                    StringsManager.imagePlaceHolder,
+                    fit: BoxFit.cover,
+                  ),
+          ),
         ),
       ),
     );
