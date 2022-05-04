@@ -150,6 +150,23 @@ class _RemoteDataSource implements RemoteDataSource {
   }
 
   @override
+  Future<AddNewRecentSearchResponse> addNewRecentSearch(request) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<AddNewRecentSearchResponse>(
+            Options(method: 'PUT', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/search/myrecent',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = AddNewRecentSearchResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<GetMyRecentSearchesResponse> getMyRecentSearches() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -162,6 +179,40 @@ class _RemoteDataSource implements RemoteDataSource {
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = GetMyRecentSearchesResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<DeleteRecentSearchResponse> deleteRecentSearch(request) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DeleteRecentSearchResponse>(
+            Options(method: 'DELETE', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/search/recent',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = DeleteRecentSearchResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<SearchProductsAndCompaiesResponse> searchProductsAndCompanies(
+      searchWord) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'q': searchWord};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<SearchProductsAndCompaiesResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/search/all',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = SearchProductsAndCompaiesResponse.fromJson(_result.data!);
     return value;
   }
 

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:urrevs_ui_mobile/data/requests/search_api_requests.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/domain/models/search_result.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
@@ -10,8 +11,10 @@ import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart'
 import 'package:urrevs_ui_mobile/presentation/screens/company_profile/company_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/product_profile/product_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
-import 'package:urrevs_ui_mobile/presentation/state_management/states/get_my_recent_searches.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/delete_recent_search_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/get_my_recent_searches.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/empty_list_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/fullscreen_error_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/recent_searches_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/item_tile.dart';
@@ -33,12 +36,28 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     ref.read(getMyRecentSearchesProvider.notifier).getMyRecentSearches();
   }
 
-  void _navigateToTargetProfile(SearchResult searchResult) {
+  void _navigateToTargetProfile({
+    required SearchResult searchResult,
+    bool addNewRecentSearch = false,
+  }) {
+    if (addNewRecentSearch) {
+      AddNewRecentSearchRequest request = AddNewRecentSearchRequest(
+        productId: searchResult.id,
+        type: searchResult.type,
+      );
+      ref.read(addNewRecentSearchProvider.notifier).addNewRecentSearch(request);
+    }
     if (searchResult.type == SearchType.phone) {
       Navigator.of(context).pushNamed(ProductProfileScreen.routeName);
     } else {
       Navigator.of(context).pushNamed(CompanyProfileScreen.routeName);
     }
+  }
+
+  void _deleteRecentSearch(SearchResult recentSearch) {
+    DeleteRecentSearchRequest request =
+        DeleteRecentSearchRequest(id: recentSearch.id);
+    ref.read(deleteRecentSearchProvider.notifier).deleteRecentSearch(request);
   }
 
   @override
@@ -49,6 +68,10 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ref.addErrorListener(
+      provider: deleteRecentSearchProvider,
+      context: context,
+    );
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
@@ -136,6 +159,9 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
       );
     }
     final loadedState = state as GetMyRecentSearchesLoadedState;
+    if (loadedState.searchResults.isEmpty) {
+      return EmptyListWidget();
+    }
     return Column(
       children: [
         for (var recentSearch in loadedState.searchResults)
@@ -144,17 +170,38 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
             subtitle: recentSearch.typeText,
             iconData: recentSearch.typeIconData,
             showDivider: true,
-            onTap: () => _navigateToTargetProfile(recentSearch),
-            trailing: IconButton(
-              onPressed: () {},
-              icon: Icon(
-                FontAwesomeIcons.xmark,
-                size: 18.sp,
-                color: ColorManager.black,
-              ),
-            ),
+            onTap: () => _navigateToTargetProfile(searchResult: recentSearch),
+            trailing: _buildDeleteRecentSearchButton(recentSearch),
           ),
       ],
+    );
+  }
+
+  Widget _buildDeleteRecentSearchButton(SearchResult recentSearch) {
+    final state = ref.watch(deleteRecentSearchProvider);
+    if (state is DeleteRecentSearchLoadingState &&
+        state.searchResultId == recentSearch.id) {
+      return Padding(
+        padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
+        child: SizedBox(
+          height: 18.h,
+          width: 18.w,
+          child: CircularProgressIndicator(
+            color: ColorManager.black,
+            strokeWidth: 3,
+          ),
+        ),
+      );
+    }
+    return SizedBox(
+      child: IconButton(
+        onPressed: () => _deleteRecentSearch(recentSearch),
+        icon: Icon(
+          FontAwesomeIcons.xmark,
+          size: 18.sp,
+          color: ColorManager.black,
+        ),
+      ),
     );
   }
 }

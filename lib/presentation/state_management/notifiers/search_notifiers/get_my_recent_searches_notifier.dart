@@ -1,7 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:urrevs_ui_mobile/domain/repository.dart';
-import 'package:urrevs_ui_mobile/presentation/state_management/states/get_my_recent_searches.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/get_my_recent_searches.dart';
+import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 
 class GetMyRecentSearchesNotifier
     extends StateNotifier<GetMyRecentSearchesState> {
@@ -16,5 +17,17 @@ class GetMyRecentSearchesNotifier
         state = GetMyRecentSearchesLoadedState(searchResults: searchResults);
       },
     );
+  }
+
+  void removeRecentSearchFromState(String id) {
+    final currentState = state;
+    if (currentState is GetMyRecentSearchesLoadedState) {
+      state = GetMyRecentSearchesLoadedState(
+        searchResults: [
+          for (var recentSearch in currentState.searchResults)
+            if (recentSearch.id != id) recentSearch,
+        ],
+      );
+    }
   }
 }

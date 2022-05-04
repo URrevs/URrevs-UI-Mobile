@@ -163,5 +163,6 @@
   "competitionPrize": "Contest's prize:",
   "reviewEncouragement": "The more unique and detailed your review, the more points you will get.",
   "previousSearchResults": "Previous search results",
-  "searchForAProductOrACompany": "Search for a product or company"
+  "searchForAProductOrACompany": "Search for a product or company",
+  "badRequest": "Bad request"
 }

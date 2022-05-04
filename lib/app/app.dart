@@ -47,7 +47,7 @@ class _MyAppState extends ConsumerState<MyApp> {
       splitScreenMode: false,
       builder: (_) => MaterialApp(
         title: LocaleKeys.urrevs.tr(),
-        initialRoute: AuthenticationScreen.routeName,
+        initialRoute: SearchScreen.routeName,
         // initialRoute: OwnedProductsScreen.routeName,
         // initialRoute: DevelopmentScreen.routeName,
         navigatorObservers: [routeObserver],
