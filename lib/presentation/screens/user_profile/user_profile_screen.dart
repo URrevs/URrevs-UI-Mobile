@@ -18,7 +18,6 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/get_my_use
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_the_profile_of_another_user_state.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/partial_error_widget.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/profile_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/error_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/item_tile.dart';
@@ -47,6 +46,27 @@ class UserProfileScreen extends ConsumerStatefulWidget {
 
 class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
   bool get otherUser => widget.screenArgs.userId != null;
+
+  Widget _buildRefCodeTile() {
+    final state = ref.watch(getMyProfileProvider);
+    VoidCallback? onTap;
+    if (state is GetMyProfileLoadedState) {
+      onTap = () {
+        showDialog(
+          context: context,
+          builder: (context) => Dialog(
+            child: Text(state.refCode),
+          ),
+        );
+      };
+    }
+    return ItemTile(
+      title: LocaleKeys.yourInvitationCode.tr(),
+      subtitle: LocaleKeys.inviteYourFriendsToWriteTheirReviews.tr(),
+      iconData: Icons.groups_outlined,
+      onTap: onTap,
+    );
+  }
 
   List<Widget> myProfileListItems() {
     return [
@@ -82,27 +102,6 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
         },
       ),
     ];
-  }
-
-  Widget _buildRefCodeTile() {
-    final state = ref.watch(getMyProfileProvider);
-    VoidCallback? onTap;
-    if (state is GetMyProfileLoadedState) {
-      onTap = () {
-        showDialog(
-          context: context,
-          builder: (context) => Dialog(
-            child: Text(state.refCode),
-          ),
-        );
-      };
-    }
-    return ItemTile(
-      title: LocaleKeys.yourInvitationCode.tr(),
-      subtitle: LocaleKeys.inviteYourFriendsToWriteTheirReviews.tr(),
-      iconData: Icons.groups_outlined,
-      onTap: onTap,
-    );
   }
 
   List<Widget> get otherUserProfileListItems => [
@@ -164,23 +163,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
     );
   }
 
-  ListView _buildProfile({
-    required String? imageUrl,
-    required String username,
-    required int stars,
-    required String? refCode,
-  }) {
-    return ListView(
-      children: [
-        _buildProfileData(),
-        22.verticalSpace,
-        if (!otherUser) ...myProfileListItems(),
-        if (otherUser) ...otherUserProfileListItems
-      ],
-    );
-  }
-
-  Widget _buildProfileData() {
+  Widget _buildMyProfileData() {
     final state = ref.watch(getMyProfileProvider);
     if (state is GetMyProfileInitialState ||
         state is GetMyProfileLoadingState) {
@@ -191,21 +174,63 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
       );
     }
     final loadedState = state as GetMyProfileLoadedState;
+    return _buildProfileData(
+      picture: loadedState.user.picture,
+      name: loadedState.user.name,
+      points: loadedState.user.points,
+    );
+  }
+
+  Widget _buildOtherUserProfileData() {
+    final state = ref.watch(getTheProfileOfAnotherUserProvider);
+    if (state is GetTheProfileOfAnotherUserInitialState ||
+        state is GetTheProfileOfAnotherUserLoadingState) {
+      return ProfileLoading();
+    } else if (state is GetTheProfileOfAnotherUserErrorState) {
+      return PartialErrorWidget(
+        onRetry: ref.read(getMyProfileProvider.notifier).getMyProfile,
+      );
+    }
+    final loadedState = state as GetTheProfileOfAnotherUserLoadedState;
+    return _buildProfileData(
+      picture: loadedState.user.picture,
+      name: loadedState.user.name,
+      points: loadedState.user.points,
+    );
+  }
+
+  ListView _buildProfile() {
+    return ListView(
+      children: [
+        if (!otherUser) _buildMyProfileData(),
+        if (otherUser) _buildOtherUserProfileData(),
+        22.verticalSpace,
+        if (!otherUser) ...myProfileListItems(),
+        if (otherUser) ...otherUserProfileListItems
+      ],
+    );
+  }
+
+  Column _buildProfileData({
+    String? picture,
+    required String name,
+    required int points,
+  }) {
     return Column(
       children: [
         15.verticalSpace,
         Avatar(
-          imageUrl: loadedState.user.picture,
+          imageUrl: picture,
           radius: 45.r,
         ),
         10.verticalSpace,
         Text(
-          loadedState.user.name,
+          name,
           style: TextStyleManager.s22w700,
           textAlign: TextAlign.center,
         ),
         8.verticalSpace,
-        _buildCollectedStars(loadedState.user.points),
+        _buildCollectedStars(points),
       ],
     );
   }
@@ -224,26 +249,24 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
         }
       }
     });
-    return _buildProfile(
-      imageUrl: '',
-      username: '',
-      stars: 0,
-      refCode: '',
-    );
+    return _buildProfile();
   }
 
-  StatelessWidget _buildAnotherUserProfile() {
-    final state = ref.watch(getTheProfileOfAnotherUserProvider);
-    if (state is GetTheProfileOfAnotherUserLoadedState) {
-      return _buildProfile(
-        imageUrl: state.user.picture,
-        username: state.user.name,
-        stars: state.user.points,
-        refCode: null,
-      );
-    } else {
-      return CircularLoading();
-    }
+  Widget _buildAnotherUserProfile() {
+    ref.listen(getTheProfileOfAnotherUserProvider, (previous, next) {
+      if (next is GetTheProfileOfAnotherUserErrorState) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(next.failure.message)),
+        );
+        if (next.failure is AuthenticateFailure) {
+          Navigator.of(context).pushNamedAndRemoveUntil(
+            AuthenticationScreen.routeName,
+            (route) => false,
+          );
+        }
+      }
+    });
+    return _buildProfile();
   }
 
   Widget _buildBody() {
@@ -273,15 +296,6 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ref.listen<GetTheProfileOfAnotherUserState>(
-        getTheProfileOfAnotherUserProvider, (previous, next) {
-      if (next is GetTheProfileOfAnotherUserErrorState) {
-        showDialog(
-          context: context,
-          builder: (context) => ErrorDialog(failure: next.failure),
-        );
-      }
-    });
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
