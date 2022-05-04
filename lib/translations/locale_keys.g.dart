@@ -146,5 +146,6 @@ abstract class  LocaleKeys {
   static const myProfile = 'myProfile';
   static const phones = 'phones';
   static const companies = 'companies';
+  static const competitionPrize = 'competitionPrize';
 
 }

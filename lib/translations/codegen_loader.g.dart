@@ -142,7 +142,7 @@ class CodegenLoader extends AssetLoader{
   "tokenRevoked": "تم إبطال رمزك المميز",
   "tooManyRequests": "لقد أرسلت الكثير من الطلبات",
   "youDoNotExistInTheSystem": "أنت غير موجود في النظام",
-  "connectionTimedOut": "الاتصال بالخادك أخذ وقتاً طويلاً",
+  "connectionTimedOut": "الاتصال بالخادم أخذ وقتاً طويلاً",
   "receivingDataTimedout": "استلام البيانات من الخادم أخذ وقتاً طويلاً",
   "sendingDataTimedout": "إرسال البيانات إلى الخادم أخذ وقتاً طويلاً",
   "requestWasCancelled": "تم إلغاء الطلب",
@@ -159,7 +159,8 @@ class CodegenLoader extends AssetLoader{
   "youHaveGotPointsForLoggingInThroughTheMobileApp": "مبروك! لقد حصلت علي نقاط لتسجيل دخولك من خلال تطبيق الهاتف",
   "myProfile": "حسابي",
   "phones": "الهواتف",
-  "companies": "الشركات"
+  "companies": "الشركات",
+  "competitionPrize": "جائزة المسابقة:"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -306,7 +307,8 @@ static const Map<String,dynamic> en = {
   "youHaveGotPointsForLoggingInThroughTheMobileApp": "Congrats! You have got points for logging in through the mobile app",
   "myProfile": "My profile",
   "phones": "Smartphones",
-  "companies": "Companies"
+  "companies": "Companies",
+  "competitionPrize": "Contest's prize:"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }
