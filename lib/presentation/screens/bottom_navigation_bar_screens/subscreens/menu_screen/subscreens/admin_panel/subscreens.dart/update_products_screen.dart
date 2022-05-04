@@ -53,6 +53,7 @@ class _UpdateProductsScreenState extends ConsumerState<UpdateProductsScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(next.failure.message),
+            margin: EdgeInsets.symmetric(vertical: 90.h, horizontal: 15),
           ),
         );
         if (next.failure is AuthenticateFailure) {
@@ -63,10 +64,13 @@ class _UpdateProductsScreenState extends ConsumerState<UpdateProductsScreen> {
         }
       }
     });
-    return Scaffold(
-      appBar: AppBar(),
-      body: SafeArea(
-        child: _buildBody(),
+    return RefreshIndicator(
+      onRefresh: () async => _getInfoAboutLatestUpdate(),
+      child: Scaffold(
+        appBar: AppBar(),
+        body: SafeArea(
+          child: _buildBody(),
+        ),
       ),
     );
   }

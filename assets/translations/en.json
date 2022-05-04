@@ -155,5 +155,9 @@
   "thereIsARunningUpdateOperationRightNow": "There is a running update operation right now",
   "myProfile": "My profile",
   "phones": "Smartphones",
-  "companies": "Companies"
+  "companies": "Companies",
+  "updateProductList": "Update product list",
+  "lastUpdatedIn": "Last updated in",
+  "addACompetition": "Add a compeition",
+  "theLastCompetitionTookPlaceIn": "The last competition took place in"
 }

@@ -155,5 +155,9 @@
   "thereIsARunningUpdateOperationRightNow": "هناك عملية تحديث قيد التشغيل الآن",
   "myProfile": "حسابي",
   "phones": "الهواتف",
-  "companies": "الشركات"
+  "companies": "الشركات",
+  "updateProductList": "تحديث قائمة المنتجات",
+  "lastUpdatedIn": "آخر تحديث تم في",
+  "addACompetition": "إضافة مسابقة",
+  "theLastCompetitionTookPlaceIn": "آخر مسابقة تمت في"
 }
