@@ -26,6 +26,8 @@ import 'package:urrevs_ui_mobile/presentation/resources/theme_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/timeago.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
+final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
+
 class MyApp extends ConsumerStatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -45,6 +47,7 @@ class _MyAppState extends ConsumerState<MyApp> {
         initialRoute: AuthenticationScreen.routeName,
         // initialRoute: OwnedProductsScreen.routeName,
         // initialRoute: DevelopmentScreen.routeName,
+        navigatorObservers: [routeObserver],
         onGenerateRoute: RouteGenerator.getRoute,
         debugShowCheckedModeBanner: false,
         themeMode: ref.watch(themeModeProvider),
@@ -53,7 +56,7 @@ class _MyAppState extends ConsumerState<MyApp> {
         builder: (context, widget) {
           timeago.setLocaleMessages(LanguageType.en.name, MyCustomEnMessages());
           timeago.setLocaleMessages(LanguageType.ar.name, MyCustomArMessages());
-          
+
           ScreenUtil.setContext(context);
           return MediaQuery(
             //Setting font does not change with system font size
