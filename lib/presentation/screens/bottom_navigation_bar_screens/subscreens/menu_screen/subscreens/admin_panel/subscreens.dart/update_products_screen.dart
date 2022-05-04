@@ -13,7 +13,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/get_info_a
 import 'package:urrevs_ui_mobile/presentation/state_management/states/update_targets_from_source_state.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/buttons/grad_button.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/fullscreen_error_widget.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/admin_update_products_tile_loading.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/update_products_expansion_card_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/updated_list_tile.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
@@ -98,7 +98,7 @@ class _UpdateProductsScreenState extends ConsumerState<UpdateProductsScreen> {
       );
     } else if (state is GetInfoAboutLatestUpdateInitialState ||
         state is GetInfoAboutLatestUpdateLoadingState) {
-      return AdminUpdateProductsTileLoading();
+      return UpdateProductsExpansionCardLoading();
     } else {
       final loadedState = state as GetInfoAboutLatestUpdateLoadedState;
       final String updateCompletedDate =
