@@ -13,6 +13,7 @@ import 'package:urrevs_ui_mobile/data/responses/update_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/users_api_response.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone.dart';
+import 'package:urrevs_ui_mobile/domain/models/search_result.dart';
 import 'package:urrevs_ui_mobile/domain/models/user.dart';
 
 class Repository {
@@ -144,6 +145,13 @@ class Repository {
     return _tryAndCatch(() async {
       final response = await _remoteDataSource.getInfoAboutLatestUpdate();
       return response;
+    });
+  }
+
+  Future<Either<Failure, List<SearchResult>>> getMyRecentSearches() async {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.getMyRecentSearches();
+      return response.searchResults;
     });
   }
 }

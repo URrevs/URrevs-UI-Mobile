@@ -69,3 +69,24 @@ Map<String, dynamic> _$CompanySubResponseToJson(CompanySubResponse instance) =>
       'type': instance.type,
       'name': instance.name,
     };
+
+RecentSearchSubResponse _$RecentSearchSubResponseFromJson(
+        Map<String, dynamic> json) =>
+    RecentSearchSubResponse(
+      id: json['_id'] as String,
+      type: $enumDecode(_$SearchTypeEnumMap, json['type']),
+      name: json['name'] as String,
+    );
+
+Map<String, dynamic> _$RecentSearchSubResponseToJson(
+        RecentSearchSubResponse instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'name': instance.name,
+      'type': _$SearchTypeEnumMap[instance.type],
+    };
+
+const _$SearchTypeEnumMap = {
+  SearchType.phone: 'phone',
+  SearchType.company: 'company',
+};

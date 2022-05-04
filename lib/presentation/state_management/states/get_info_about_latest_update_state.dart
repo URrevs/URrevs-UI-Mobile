@@ -11,19 +11,22 @@ abstract class GetInfoAboutLatestUpdateState extends Equatable
     implements RequestState {}
 
 class GetInfoAboutLatestUpdateInitialState
-    extends GetInfoAboutLatestUpdateState {
+    extends GetInfoAboutLatestUpdateState
+    implements InitialState {
   @override
   List<Object?> get props => [];
 }
 
 class GetInfoAboutLatestUpdateLoadingState
-    extends GetInfoAboutLatestUpdateState {
+    extends GetInfoAboutLatestUpdateState
+    implements LoadingState {
   @override
   List<Object?> get props => [];
 }
 
 class GetInfoAboutLatestUpdateLoadedState
-    extends GetInfoAboutLatestUpdateState {
+    extends GetInfoAboutLatestUpdateState
+    implements LoadedState {
   final List<Phone> phones;
   final List<Company> companies;
   final DateTime date;

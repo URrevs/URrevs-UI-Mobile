@@ -161,5 +161,7 @@
   "addACompetition": "Add a compeition",
   "theLastCompetitionTookPlaceIn": "The last competition took place in",
   "competitionPrize": "Contest's prize:",
-  "reviewEncouragement": "The more unique and detailed your review, the more points you will get."
+  "reviewEncouragement": "The more unique and detailed your review, the more points you will get.",
+  "previousSearchResults": "Previous search results",
+  "searchForAProductOrACompany": "Search for a product or company"
 }

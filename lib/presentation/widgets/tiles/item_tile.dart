@@ -15,6 +15,7 @@ class ItemTile extends StatelessWidget {
     required this.iconData,
     required this.onTap,
     this.showDivider = false,
+    this.trailing,
     Key? key,
   }) : super(key: key);
 
@@ -31,6 +32,8 @@ class ItemTile extends StatelessWidget {
   final VoidCallback? onTap;
 
   final bool showDivider;
+
+  final Widget? trailing;
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +59,7 @@ class ItemTile extends StatelessWidget {
             iconData,
             size: 40.sp,
           ),
+          trailing: trailing,
         ),
         if (showDivider)
           Divider(
