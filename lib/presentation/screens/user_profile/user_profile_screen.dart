@@ -278,17 +278,25 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
     }
   }
 
-  PreferredSize _buildAppBar(){
+  PreferredSize _buildAppBar() {
     final state = ref.watch(getTheProfileOfAnotherUserProvider);
+
+    print(otherUser);
+
     /// AppBar for other user profile.
-    if(otherUser && state is GetTheProfileOfAnotherUserLoadedState){
-      return AppBars.appBarOfUserProfile(context: context,
-        title: state.user.name,
+    if (otherUser) {
+      String name =
+          state is GetTheProfileOfAnotherUserLoadedState ? state.user.name : '';
+      return AppBars.appBarOfUserProfile(
+        context: context,
+        title: name,
       );
     }
+
     /// AppBar for my profile.
-    else{
-      return AppBars.appBarWithTitle(context: context, title: LocaleKeys.myProfile.tr());
+    else {
+      return AppBars.appBarWithTitle(
+          context: context, title: LocaleKeys.myProfile.tr());
     }
   }
 

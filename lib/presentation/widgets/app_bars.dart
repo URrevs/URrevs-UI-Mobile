@@ -381,7 +381,7 @@ class AppBars {
         child: ListView(
           physics: NeverScrollableScrollPhysics(),
           children: [
-            CompanyHorizontalListTile(companyItems: companyItems),
+            // CompanyHorizontalListTile(companyItems: companyItems),
           ],
         ),
       ),

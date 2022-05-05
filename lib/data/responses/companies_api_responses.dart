@@ -9,6 +9,7 @@ part 'companies_api_responses.g.dart';
 
 @JsonSerializable()
 class GetAllCompaniesResponse extends BaseResponse {
+  @JsonKey(name: 'companies')
   List<CompanyWithLogoSubResponse> companiesSubResponses;
   GetAllCompaniesResponse({
     required bool success,

@@ -121,13 +121,13 @@ class CompanyWithLogoSubResponse {
   String id;
   String type;
   String name;
-  String logo;
+  String? logo;
 
   CompanyWithLogoSubResponse({
     required this.id,
     required this.type,
     required this.name,
-    required this.logo,
+    this.logo,
   });
 
   Company get companyModel => Company(id: id, name: name, logo: logo);
@@ -135,4 +135,33 @@ class CompanyWithLogoSubResponse {
   factory CompanyWithLogoSubResponse.fromJson(Map<String, Object?> json) =>
       _$CompanyWithLogoSubResponseFromJson(json);
   Map<String, dynamic> toJson() => _$CompanyWithLogoSubResponseToJson(this);
+}
+
+@JsonSerializable()
+class PhoneWithCompanyIdAndNameSubResponse {
+  @JsonKey(name: '_id')
+  String id;
+  String name;
+  String companyId;
+  String companyName;
+
+  PhoneWithCompanyIdAndNameSubResponse({
+    required this.id,
+    required this.name,
+    required this.companyId,
+    required this.companyName,
+  });
+
+  Phone get phoneModel => Phone(
+        id: id,
+        name: name,
+        companyId: companyId,
+        companyName: companyName,
+      );
+
+  factory PhoneWithCompanyIdAndNameSubResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$PhoneWithCompanyIdAndNameSubResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$PhoneWithCompanyIdAndNameSubResponseToJson(this);
 }

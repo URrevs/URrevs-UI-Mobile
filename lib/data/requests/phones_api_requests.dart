@@ -1,0 +1,3 @@
+class GetAllPhonesRequest {}
+
+class GetPhonesFromCertainCompanyRequest {}

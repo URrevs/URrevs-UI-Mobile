@@ -4,6 +4,7 @@ import 'package:urrevs_ui_mobile/data/requests/companies_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/search_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/users_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/responses/companies_api_responses.dart';
+import 'package:urrevs_ui_mobile/data/responses/phones_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/search_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/update_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/users_api_response.dart';
@@ -78,6 +79,17 @@ abstract class RemoteDataSource {
   /// 17
   @GET('/companies/all')
   Future<GetAllCompaniesResponse> getAllCompanies(
+    @Query('round') int round,
+  );
+
+  @GET('/phones/all')
+  Future<GetAllPhonesResponse> getAllPhones(
+    @Query('round') int round,
+  );
+
+  @GET('/phones/by/{companyId}')
+  Future<GetPhonesFromCertainCompanyResponse> getPhonesFromCertainCompany(
+    @Path() String companyId,
     @Query('round') int round,
   );
 }

@@ -10,7 +10,7 @@ GetAllCompaniesResponse _$GetAllCompaniesResponseFromJson(
         Map<String, dynamic> json) =>
     GetAllCompaniesResponse(
       success: json['success'] as bool,
-      companiesSubResponses: (json['companiesSubResponses'] as List<dynamic>)
+      companiesSubResponses: (json['companies'] as List<dynamic>)
           .map((e) =>
               CompanyWithLogoSubResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -20,5 +20,5 @@ Map<String, dynamic> _$GetAllCompaniesResponseToJson(
         GetAllCompaniesResponse instance) =>
     <String, dynamic>{
       'success': instance.success,
-      'companiesSubResponses': instance.companiesSubResponses,
+      'companies': instance.companiesSubResponses,
     };
