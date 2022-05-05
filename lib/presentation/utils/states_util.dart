@@ -14,6 +14,11 @@ abstract class ErrorState {
   Failure get failure;
 }
 
+abstract class InfiniteScrollingState<T> {
+  List<T> get infiniteScrollingItems;
+  bool get roundsEnded;
+}
+
 void showSnackBarWithoutActionAtError({
   required RequestState state,
   required BuildContext context,

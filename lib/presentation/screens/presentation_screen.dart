@@ -218,7 +218,6 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
             onPressed: () {},
           ),
           SizedBox(height: 20),
-          CompanyHorizontalListTile(companyItems: companyItems),
           SizedBox(height: 20),
 
           SizedBox(height: 20),

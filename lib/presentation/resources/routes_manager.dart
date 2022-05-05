@@ -36,7 +36,7 @@ class RouteGenerator {
         final screenArgs = routeSettings.arguments
                 as BottomNavigationBarContainerScreenArgs? ??
             BottomNavigationBarContainerScreenArgs(
-                screenIndex: BottomNavBarIndeces.homeSubscreen);
+                screenIndex: BottomNavBarIndeces.allProductsSubscreen);
         return MaterialPageRoute(
           builder: (_) => BottomNavigationBarContainerScreen(screenArgs),
         );

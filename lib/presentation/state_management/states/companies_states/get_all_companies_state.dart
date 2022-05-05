@@ -19,12 +19,23 @@ class GetAllCompaniesLoadingState extends GetAllCompaniesState
 }
 
 class GetAllCompaniesLoadedState extends GetAllCompaniesState
-    implements LoadedState {
-  final List<Company> companies;
+    implements LoadedState, InfiniteScrollingState<Company> {
+  @override
+  final List<Company> infiniteScrollingItems;
+  @override
+  final bool roundsEnded;
 
-  GetAllCompaniesLoadedState({required this.companies});
+  GetAllCompaniesLoadedState({
+    required this.infiniteScrollingItems,
+    required this.roundsEnded,
+  });
   @override
   List<Object?> get props => [];
+
+  @override
+  String toString() {
+    return 'GetAllCompaniesLoadedState(infiniteScrollingItems: $infiniteScrollingItems, roundsEnded: $roundsEnded)';
+  }
 }
 
 class GetAllCompaniesErrorState extends GetAllCompaniesState

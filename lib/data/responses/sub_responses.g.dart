@@ -97,7 +97,7 @@ CompanyWithLogoSubResponse _$CompanyWithLogoSubResponseFromJson(
       id: json['_id'] as String,
       type: json['type'] as String,
       name: json['name'] as String,
-      logo: json['logo'] as String,
+      logo: json['logo'] as String?,
     );
 
 Map<String, dynamic> _$CompanyWithLogoSubResponseToJson(
@@ -107,4 +107,22 @@ Map<String, dynamic> _$CompanyWithLogoSubResponseToJson(
       'type': instance.type,
       'name': instance.name,
       'logo': instance.logo,
+    };
+
+PhoneWithCompanyIdAndNameSubResponse
+    _$PhoneWithCompanyIdAndNameSubResponseFromJson(Map<String, dynamic> json) =>
+        PhoneWithCompanyIdAndNameSubResponse(
+          id: json['_id'] as String,
+          name: json['name'] as String,
+          companyId: json['companyId'] as String,
+          companyName: json['companyName'] as String,
+        );
+
+Map<String, dynamic> _$PhoneWithCompanyIdAndNameSubResponseToJson(
+        PhoneWithCompanyIdAndNameSubResponse instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'name': instance.name,
+      'companyId': instance.companyId,
+      'companyName': instance.companyName,
     };

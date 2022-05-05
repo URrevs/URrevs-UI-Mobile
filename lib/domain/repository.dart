@@ -187,4 +187,20 @@ class Repository {
       return response.companeisModels;
     });
   }
+
+  Future<Either<Failure, List<Phone>>> getAllPhones(int round) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.getAllPhones(round);
+      return response.phonesModels;
+    });
+  }
+
+  Future<Either<Failure, List<Phone>>> getPhonesFromCertainCompany(
+      String companyId, int round) {
+    return _tryAndCatch(() async {
+      final response =
+          await _remoteDataSource.getPhonesFromCertainCompany(companyId, round);
+      return response.phonesModels;
+    });
+  }
 }
