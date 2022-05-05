@@ -156,7 +156,6 @@
   "myProfile": "حسابي",
   "phones": "الهواتف",
   "companies": "الشركات",
-  "updateProductList": "تحديث قائمة المنتجات",
   "lastUpdatedIn": "آخر تحديث تم في",
   "addACompetition": "إضافة مسابقة",
   "theLastCompetitionTookPlaceIn": "آخر مسابقة تمت في",
@@ -165,5 +164,7 @@
   "previousSearchResults": "نتائج البحث السابقة",
   "searchForAProductOrACompany": "ابحث عن منتج أو شركة",
   "badRequest": "الطلب غير صالح",
-  "search": "البحث"
+  "search": "البحث",
+  "updateProductsList": "تحديث قائمة المنتجات",
+  "adminPanel": "لوحة المشرف"
 }

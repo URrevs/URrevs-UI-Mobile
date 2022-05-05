@@ -6,11 +6,13 @@ import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/domain/models/company.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/authentication_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_info_about_latest_update_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/update_targets_from_source_state.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/buttons/grad_button.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/fullscreen_error_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/update_products_expansion_card_loading.dart';
@@ -67,7 +69,10 @@ class _UpdateProductsScreenState extends ConsumerState<UpdateProductsScreen> {
     return RefreshIndicator(
       onRefresh: () async => _getInfoAboutLatestUpdate(),
       child: Scaffold(
-        appBar: AppBar(),
+        appBar: AppBars.appBarWithTitle(
+          context: context,
+          title: LocaleKeys.updateProductsList.tr(),
+        ),
         body: SafeArea(
           child: _buildBody(),
         ),

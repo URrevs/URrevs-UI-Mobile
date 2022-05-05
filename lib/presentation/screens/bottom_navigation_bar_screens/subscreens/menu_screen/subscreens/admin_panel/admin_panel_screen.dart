@@ -10,6 +10,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/get_info_a
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_the_profile_of_another_user_state.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/no_glowing_scroll_behavior.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/fullscreen_error_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/admin_panel_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/item_tile.dart';
@@ -49,7 +50,10 @@ class _AdminPanelScreenState extends ConsumerState<AdminPanelScreen> {
         _getInfoAboutLatestUpdate();
       },
       child: Scaffold(
-        appBar: AppBar(),
+        appBar: AppBars.appBarWithTitle(
+          context: context,
+          title: LocaleKeys.adminPanel.tr(),
+        ),
         body: SafeArea(
           child: ScrollConfiguration(
             behavior: NoGlowingScrollBehaviour(),
@@ -78,7 +82,7 @@ class _AdminPanelScreenState extends ConsumerState<AdminPanelScreen> {
       return ListView(
         children: [
           ItemTile(
-            title: LocaleKeys.updateProductList.tr(),
+            title: LocaleKeys.updateProductsList.tr(),
             subtitle: LocaleKeys.lastUpdatedIn.tr() + ' ' + updateCompletedDate,
             iconData: Icons.emoji_events,
             onTap: () {

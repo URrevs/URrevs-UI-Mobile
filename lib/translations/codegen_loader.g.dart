@@ -172,7 +172,6 @@ class CodegenLoader extends AssetLoader{
   "myProfile": "حسابي",
   "phones": "الهواتف",
   "companies": "الشركات",
-  "updateProductList": "تحديث قائمة المنتجات",
   "lastUpdatedIn": "آخر تحديث تم في",
   "addACompetition": "إضافة مسابقة",
   "theLastCompetitionTookPlaceIn": "آخر مسابقة تمت في",
@@ -181,7 +180,9 @@ class CodegenLoader extends AssetLoader{
   "previousSearchResults": "نتائج البحث السابقة",
   "searchForAProductOrACompany": "ابحث عن منتج أو شركة",
   "badRequest": "الطلب غير صالح",
-  "search": "البحث"
+  "search": "البحث",
+  "updateProductsList": "تحديث قائمة المنتجات",
+  "adminPanel": "لوحة المشرف"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -341,7 +342,6 @@ static const Map<String,dynamic> en = {
   "myProfile": "My profile",
   "phones": "Smartphones",
   "companies": "Companies",
-  "updateProductList": "Update product list",
   "lastUpdatedIn": "Last updated in",
   "addACompetition": "Add a compeition",
   "theLastCompetitionTookPlaceIn": "The last competition took place in",
@@ -350,7 +350,9 @@ static const Map<String,dynamic> en = {
   "previousSearchResults": "Previous search results",
   "searchForAProductOrACompany": "Search for a product or company",
   "badRequest": "Bad request",
-  "search": "Search"
+  "search": "Search",
+  "updateProductsList": "Update products list",
+  "adminPanel": "Admin panel"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

@@ -156,7 +156,6 @@
   "myProfile": "My profile",
   "phones": "Smartphones",
   "companies": "Companies",
-  "updateProductList": "Update product list",
   "lastUpdatedIn": "Last updated in",
   "addACompetition": "Add a compeition",
   "theLastCompetitionTookPlaceIn": "The last competition took place in",
@@ -165,5 +164,7 @@
   "previousSearchResults": "Previous search results",
   "searchForAProductOrACompany": "Search for a product or company",
   "badRequest": "Bad request",
-  "search": "Search"
+  "search": "Search",
+  "updateProductsList": "Update products list",
+  "adminPanel": "Admin panel"
 }

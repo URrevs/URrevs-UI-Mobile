@@ -158,7 +158,6 @@ abstract class  LocaleKeys {
   static const myProfile = 'myProfile';
   static const phones = 'phones';
   static const companies = 'companies';
-  static const updateProductList = 'updateProductList';
   static const lastUpdatedIn = 'lastUpdatedIn';
   static const addACompetition = 'addACompetition';
   static const theLastCompetitionTookPlaceIn = 'theLastCompetitionTookPlaceIn';
@@ -168,5 +167,7 @@ abstract class  LocaleKeys {
   static const searchForAProductOrACompany = 'searchForAProductOrACompany';
   static const badRequest = 'badRequest';
   static const search = 'search';
+  static const updateProductsList = 'updateProductsList';
+  static const adminPanel = 'adminPanel';
 
 }
