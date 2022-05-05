@@ -38,6 +38,7 @@ import 'package:urrevs_ui_mobile/presentation/widgets/interactions/comment_tree.
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/comments_list.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/reply.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/adding_competition_dialog.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/prompts/compare_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/custom_alert_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/disclaimer_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/how_to_win_dialog.dart';
@@ -46,6 +47,7 @@ import 'package:urrevs_ui_mobile/presentation/widgets/prompts/marked_as_accepted
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/prize_photo_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/referral_code_help_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/review_encouragement_dialog.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/prompts/sign_out_confirmation_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body_rating_block.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/see_more_button.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/review_card_body.dart';
@@ -86,6 +88,7 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
   TextEditingController prizeNameCtl = TextEditingController();
   TextEditingController imgUrlCtl = TextEditingController();
   TextEditingController invitationPromptCtl = TextEditingController();
+  TextEditingController searchCtl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -94,6 +97,12 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
     String competitionDate = 'أدخل تاريخ انتهاء المسابقة';
     String hintText = 'عدد الفائزين';
     //invitationPromptCtl.text = 'UR1029';
+    bool logOutFromAlldevices = false;
+    final InputBorder inputBorder = OutlineInputBorder(
+      borderRadius: BorderRadius.circular(40.r),
+      borderSide: BorderSide(width: 0.5, color: ColorManager.strokeGrey),
+    );
+    FocusNode focusNode = FocusNode();
     return Scaffold(
       //appBar: AppBars.appBarWithActions(context: context, imageUrl: StringsManager.picsum200x200),
       appBar: AppBar(
@@ -132,6 +141,16 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
       body: ListView(
         padding: EdgeInsets.all(20),
         children: [
+          SizedBox(
+            height: 20,
+          ),
+          CompareDialoge(
+              searchCtl: searchCtl,
+              productName1: 'Nokia 7 Plus',),
+          SizedBox(
+            height: 20,
+          ),
+          SignOutConfirmationDialog(),
           SizedBox(height: 20),
           InvitationCodeDialog(
             invitationPromptCtl: invitationPromptCtl,
@@ -254,3 +273,4 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
     );
   }
 }
+

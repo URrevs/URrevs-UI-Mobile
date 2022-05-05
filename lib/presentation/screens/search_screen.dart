@@ -161,9 +161,12 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
         ],
       ),
       child: TextField(
+        cursorColor: ColorManager.black,
         controller: _controller,
         focusNode: focusNode,
-        style: TextStyleManager.s16w300,
+        style: TextStyleManager.s18w500.copyWith(
+          color: ColorManager.black,
+        ),
         decoration: InputDecoration(
           hintText: LocaleKeys.searchForAProductOrACompany.tr(),
           filled: true,
