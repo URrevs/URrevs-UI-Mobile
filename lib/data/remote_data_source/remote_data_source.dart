@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
+import 'package:urrevs_ui_mobile/data/requests/companies_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/search_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/users_api_requests.dart';
+import 'package:urrevs_ui_mobile/data/responses/companies_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/search_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/update_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/users_api_response.dart';
@@ -71,5 +73,11 @@ abstract class RemoteDataSource {
   @GET('/search/all')
   Future<SearchProductsAndCompaiesResponse> searchProductsAndCompanies(
     @Query('q') String searchWord,
+  );
+
+  /// 17
+  @GET('/companies/all')
+  Future<GetAllCompaniesResponse> getAllCompanies(
+    @Query('round') int round,
   );
 }

@@ -90,3 +90,21 @@ const _$SearchTypeEnumMap = {
   SearchType.phone: 'phone',
   SearchType.company: 'company',
 };
+
+CompanyWithLogoSubResponse _$CompanyWithLogoSubResponseFromJson(
+        Map<String, dynamic> json) =>
+    CompanyWithLogoSubResponse(
+      id: json['_id'] as String,
+      type: json['type'] as String,
+      name: json['name'] as String,
+      logo: json['logo'] as String,
+    );
+
+Map<String, dynamic> _$CompanyWithLogoSubResponseToJson(
+        CompanyWithLogoSubResponse instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'type': instance.type,
+      'name': instance.name,
+      'logo': instance.logo,
+    };
