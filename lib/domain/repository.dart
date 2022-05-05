@@ -14,6 +14,7 @@ import 'package:urrevs_ui_mobile/data/responses/search_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/update_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/users_api_response.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
+import 'package:urrevs_ui_mobile/domain/models/company.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone.dart';
 import 'package:urrevs_ui_mobile/domain/models/search_result.dart';
 import 'package:urrevs_ui_mobile/domain/models/user.dart';
@@ -177,6 +178,13 @@ class Repository {
       final response =
           await _remoteDataSource.searchProductsAndCompanies(searchWord);
       return response;
+    });
+  }
+
+  Future<Either<Failure, List<Company>>> getAllCompanies(int round) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.getAllCompanies(round);
+      return response.companeisModels;
     });
   }
 }

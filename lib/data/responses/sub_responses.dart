@@ -1,8 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
+
 import 'package:urrevs_ui_mobile/domain/models/company.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone.dart';
 import 'package:urrevs_ui_mobile/domain/models/search_result.dart';
-
 import 'package:urrevs_ui_mobile/domain/models/user.dart';
 
 part 'sub_responses.g.dart';
@@ -113,4 +113,26 @@ class RecentSearchSubResponse {
   factory RecentSearchSubResponse.fromJson(Map<String, Object?> json) =>
       _$RecentSearchSubResponseFromJson(json);
   Map<String, dynamic> toJson() => _$RecentSearchSubResponseToJson(this);
+}
+
+@JsonSerializable()
+class CompanyWithLogoSubResponse {
+  @JsonKey(name: '_id')
+  String id;
+  String type;
+  String name;
+  String logo;
+
+  CompanyWithLogoSubResponse({
+    required this.id,
+    required this.type,
+    required this.name,
+    required this.logo,
+  });
+
+  Company get companyModel => Company(id: id, name: name, logo: logo);
+
+  factory CompanyWithLogoSubResponse.fromJson(Map<String, Object?> json) =>
+      _$CompanyWithLogoSubResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$CompanyWithLogoSubResponseToJson(this);
 }
