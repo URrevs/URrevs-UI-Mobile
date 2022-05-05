@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:faker/faker.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,7 +39,11 @@ import 'package:urrevs_ui_mobile/presentation/widgets/interactions/comments_list
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/reply.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/adding_competition_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/custom_alert_dialog.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/prompts/disclaimer_dialog.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/prompts/how_to_win_dialog.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/prompts/marked_as_accepted_explanation_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/prize_photo_dialog.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/prompts/referral_code_help_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/review_encouragement_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body_rating_block.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/see_more_button.dart';
@@ -78,6 +83,8 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
   TextEditingController winnerNumCtl = TextEditingController();
   TextEditingController prizeNameCtl = TextEditingController();
   TextEditingController imgUrlCtl = TextEditingController();
+
+  
   @override
   Widget build(BuildContext context) {
     NumberFormat numberFormat =
@@ -123,6 +130,14 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
       body: ListView(
         padding: EdgeInsets.all(20),
         children: [
+          SizedBox(height: 20),
+          HowToWinDialog(),
+          SizedBox(height: 20),
+          MarkedAsAcceptedExplanationDialog(),
+          SizedBox(height: 20),
+          ReferralCodeHelpDialog(),
+          SizedBox(height: 20),
+          DisclaimerDialog(),
           SizedBox(height: 20),
           ReviewEncouragementDialog(),
           SizedBox(height: 20),
