@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
+import 'package:urrevs_ui_mobile/domain/models/search_result.dart';
 import 'package:urrevs_ui_mobile/domain/repository.dart';
-import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/get_my_recent_searches.dart';
-import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/get_my_recent_searches_state.dart';
 
 class GetMyRecentSearchesNotifier
     extends StateNotifier<GetMyRecentSearchesState> {
@@ -28,6 +28,18 @@ class GetMyRecentSearchesNotifier
             if (recentSearch.id != id) recentSearch,
         ],
       );
+    }
+  }
+
+  void addRecentSeatchToState(SearchResult searchResult) {
+    final currentState = state;
+    if (currentState is GetMyRecentSearchesLoadedState) {
+      List<SearchResult> newResults = [
+        searchResult,
+        ...currentState.searchResults,
+      ];
+      if (newResults.length > 5) newResults.length = 5;
+      state = GetMyRecentSearchesLoadedState(searchResults: newResults);
     }
   }
 }

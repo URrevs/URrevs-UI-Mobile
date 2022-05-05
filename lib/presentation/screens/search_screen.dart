@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,15 +10,19 @@ import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/domain/models/search_result.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/company_profile/company_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/product_profile/product_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/delete_recent_search_state.dart';
-import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/get_my_recent_searches.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/get_my_recent_searches_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/search_products_and_companies_state.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/empty_list_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/fullscreen_error_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/recent_searches_loading.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/suggested_searches_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/item_tile.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
@@ -31,6 +37,8 @@ class SearchScreen extends ConsumerStatefulWidget {
 
 class _SearchScreenState extends ConsumerState<SearchScreen> {
   FocusNode focusNode = FocusNode();
+  final TextEditingController _controller = TextEditingController();
+  Timer? _timer;
 
   void _getMyRecentSearches() {
     ref.read(getMyRecentSearchesProvider.notifier).getMyRecentSearches();
@@ -42,10 +50,13 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
   }) {
     if (addNewRecentSearch) {
       AddNewRecentSearchRequest request = AddNewRecentSearchRequest(
-        productId: searchResult.id,
+        id: searchResult.id,
         type: searchResult.type,
       );
       ref.read(addNewRecentSearchProvider.notifier).addNewRecentSearch(request);
+      ref
+          .read(getMyRecentSearchesProvider.notifier)
+          .addRecentSeatchToState(searchResult);
     }
     if (searchResult.type == SearchType.phone) {
       Navigator.of(context).pushNamed(ProductProfileScreen.routeName);
@@ -60,10 +71,36 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     ref.read(deleteRecentSearchProvider.notifier).deleteRecentSearch(request);
   }
 
+  void _searchProductsAndCompanies() {
+    ref
+        .read(searchProductsAndCompaiesProvider.notifier)
+        .searchProductsAndCompanies(_controller.text);
+  }
+
+  void _handleTextFieldChange() {
+    _timer?.cancel();
+    if (_controller.text.isNotEmpty) {
+      _timer = Timer(AppDuration.typingThrottling, () {
+        _searchProductsAndCompanies();
+      });
+    } else {
+      ref
+          .read(searchProductsAndCompaiesProvider.notifier)
+          .returnToInitialState();
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, _getMyRecentSearches);
+    // _controller.addListener(() {});
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
   }
 
   @override
@@ -73,7 +110,10 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
       context: context,
     );
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBars.appBarWithTitle(
+        context: context,
+        title: LocaleKeys.search.tr(),
+      ),
       body: SafeArea(
         child: ListView(
           padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
@@ -94,14 +134,8 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
               ],
             ),
             16.verticalSpace,
-            Text(
-              LocaleKeys.previousSearchResults.tr(),
-              style: TextStyleManager.s16w500.copyWith(
-                color: ColorManager.grey,
-              ),
-            ),
-            23.verticalSpace,
-            _buildRecentSearches()
+            _buildRecentSearches(),
+            _buildSuggestedSearches(),
           ],
         ),
       ),
@@ -127,6 +161,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
         ],
       ),
       child: TextField(
+        controller: _controller,
         focusNode: focusNode,
         style: TextStyleManager.s16w300,
         decoration: InputDecoration(
@@ -139,6 +174,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
           enabledBorder: inputBorder,
           focusedBorder: inputBorder,
         ),
+        onChanged: (_) => _handleTextFieldChange(),
       ),
     );
   }
@@ -148,22 +184,34 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
         (previous, next) {
       showSnackBarWithoutActionAtError(state: next, context: context);
     });
-    final state = ref.watch(getMyRecentSearchesProvider);
-    if (state is GetMyRecentSearchesInitialState ||
-        state is GetMyRecentSearchesLoadingState) {
+    final suggestedSearchesState = ref.watch(searchProductsAndCompaiesProvider);
+    if (suggestedSearchesState is! SearchProductsAndCompaiesInitialState) {
+      return SizedBox();
+    }
+    final recentSearchesState = ref.watch(getMyRecentSearchesProvider);
+    if (recentSearchesState is GetMyRecentSearchesInitialState ||
+        recentSearchesState is GetMyRecentSearchesLoadingState) {
       return RecentSearchesLoading();
-    } else if (state is GetMyRecentSearchesErrorState) {
+    } else if (recentSearchesState is GetMyRecentSearchesErrorState) {
       return FullscreenErrorWidget(
         onRetry: _getMyRecentSearches,
-        retryLastRequest: state.failure is RetryFailure,
+        retryLastRequest: recentSearchesState.failure is RetryFailure,
       );
     }
-    final loadedState = state as GetMyRecentSearchesLoadedState;
+    final loadedState = recentSearchesState as GetMyRecentSearchesLoadedState;
     if (loadedState.searchResults.isEmpty) {
       return EmptyListWidget();
     }
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Text(
+          LocaleKeys.previousSearchResults.tr(),
+          style: TextStyleManager.s16w500.copyWith(
+            color: ColorManager.grey,
+          ),
+        ),
+        23.verticalSpace,
         for (var recentSearch in loadedState.searchResults)
           ItemTile(
             title: recentSearch.name,
@@ -202,6 +250,42 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
           color: ColorManager.black,
         ),
       ),
+    );
+  }
+
+  Widget _buildSuggestedSearches() {
+    ref.addErrorListener(
+      provider: searchProductsAndCompaiesProvider,
+      context: context,
+    );
+    final state = ref.watch(searchProductsAndCompaiesProvider);
+    if (state is InitialState) {
+      return SizedBox();
+    } else if (state is LoadingState) {
+      return SuggestedSearchesLoading();
+    } else if (state is SearchProductsAndCompaiesErrorState) {
+      return FullscreenErrorWidget(
+        onRetry: _searchProductsAndCompanies,
+        retryLastRequest: state.failure is RetryFailure,
+      );
+    }
+    state as SearchProductsAndCompaiesLoadedState;
+    return ListView(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      children: [
+        for (var searchResult in state.searchResults)
+          ItemTile(
+            title: searchResult.name,
+            subtitle: searchResult.typeText,
+            showDivider: true,
+            iconData: searchResult.typeIconData,
+            onTap: () => _navigateToTargetProfile(
+              searchResult: searchResult,
+              addNewRecentSearch: true,
+            ),
+          ),
+      ],
     );
   }
 }

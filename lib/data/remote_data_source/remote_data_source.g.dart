@@ -159,7 +159,7 @@ class _RemoteDataSource implements RemoteDataSource {
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<AddNewRecentSearchResponse>(
             Options(method: 'PUT', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/search/myrecent',
+                .compose(_dio.options, '/search/recent',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = AddNewRecentSearchResponse.fromJson(_result.data!);

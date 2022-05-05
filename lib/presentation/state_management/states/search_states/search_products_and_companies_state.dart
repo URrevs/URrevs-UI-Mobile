@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/domain/models/company.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone.dart';
+import 'package:urrevs_ui_mobile/domain/models/search_result.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 
 abstract class SearchProductsAndCompaiesState extends Equatable
@@ -22,12 +23,10 @@ class SearchProductsAndCompaiesLoadingState
 
 class SearchProductsAndCompaiesLoadedState
     extends SearchProductsAndCompaiesState implements LoadedState {
-  final List<Phone> phones;
-  final List<Company> companies;
+  final List<SearchResult> searchResults;
 
   SearchProductsAndCompaiesLoadedState({
-    required this.phones,
-    required this.companies,
+    required this.searchResults,
   });
   @override
   List<Object?> get props => [];

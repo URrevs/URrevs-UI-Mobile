@@ -14,6 +14,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/search_
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/search_notifiers/get_my_recent_searches_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/get_the_profile_of_another_user.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/give_points_to_user_notifier.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/search_notifiers/search_products_and_companies_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/theme_mode_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/update_targets_from_source_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/authentication_state.dart';
@@ -22,10 +23,11 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/get_info_a
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_my_owned_phones_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/add_new_recent_search_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/delete_recent_search_state.dart';
-import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/get_my_recent_searches.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/get_my_recent_searches_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_my_user_profile_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_the_profile_of_another_user_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/give_points_to_user_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/search_products_and_companies_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/update_targets_from_source_state.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 
@@ -70,13 +72,18 @@ final getMyRecentSearchesProvider = StateNotifierProvider.autoDispose<
     GetMyRecentSearchesNotifier,
     GetMyRecentSearchesState>((ref) => GetMyRecentSearchesNotifier());
 
-final addNewRecentSearchProvider = StateNotifierProvider.autoDispose<
+final addNewRecentSearchProvider =
+    StateNotifierProvider<
     AddNewRecentSearchNotifier,
     AddNewRecentSearchState>((ref) => AddNewRecentSearchNotifier());
 
 final deleteRecentSearchProvider = StateNotifierProvider.autoDispose<
     DeleteRecentSearchNotifier,
     DeleteRecentSearchState>((ref) => DeleteRecentSearchNotifier(ref));
+
+final searchProductsAndCompaiesProvider = StateNotifierProvider.autoDispose<
+        SearchProductsAndCompaiesNotifier, SearchProductsAndCompaiesState>(
+    (ref) => SearchProductsAndCompaiesNotifier());
 
 final userImageFetchedFlagProvider = StateProvider<bool>((ref) {
   return false;

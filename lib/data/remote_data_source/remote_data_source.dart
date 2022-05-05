@@ -54,7 +54,7 @@ abstract class RemoteDataSource {
   // SEARCH API
 
   /// 10
-  @PUT('/search/myrecent')
+  @PUT('/search/recent')
   Future<AddNewRecentSearchResponse> addNewRecentSearch(
     @Body() AddNewRecentSearchRequest request,
   );

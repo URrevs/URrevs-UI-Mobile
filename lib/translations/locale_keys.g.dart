@@ -167,5 +167,6 @@ abstract class  LocaleKeys {
   static const previousSearchResults = 'previousSearchResults';
   static const searchForAProductOrACompany = 'searchForAProductOrACompany';
   static const badRequest = 'badRequest';
+  static const search = 'search';
 
 }

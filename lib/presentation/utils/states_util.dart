@@ -20,7 +20,7 @@ void showSnackBarWithoutActionAtError({
 }) {
   dynamic currentState = state;
   if (currentState is ErrorState) {
-    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(currentState.failure.message)),
     );

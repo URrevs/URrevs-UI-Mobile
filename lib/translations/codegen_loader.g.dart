@@ -180,7 +180,8 @@ class CodegenLoader extends AssetLoader{
   "reviewEncouragement": "كلما كانت مراجعتك مميزة ومليئة بالتفاصيل سوف تحصل علي نقاط مساعدة أكثر.",
   "previousSearchResults": "نتائج البحث السابقة",
   "searchForAProductOrACompany": "ابحث عن منتج أو شركة",
-  "badRequest": "الطلب غير صالح"
+  "badRequest": "الطلب غير صالح",
+  "search": "البحث"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -348,7 +349,8 @@ static const Map<String,dynamic> en = {
   "reviewEncouragement": "The more unique and detailed your review, the more points you will get.",
   "previousSearchResults": "Previous search results",
   "searchForAProductOrACompany": "Search for a product or company",
-  "badRequest": "Bad request"
+  "badRequest": "Bad request",
+  "search": "Search"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

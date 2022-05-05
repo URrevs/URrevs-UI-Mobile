@@ -68,6 +68,20 @@ class SearchProductsAndCompaiesResponse extends BaseResponse {
   List<Company> get companiesModels =>
       companiesSubResponses.map((c) => c.companyModel).toList();
 
+  List<SearchResult> get searchResults {
+    List<SearchResult> phonesSearches = phonesModels
+        .map(
+            (p) => SearchResult(id: p.id, name: p.name, type: SearchType.phone))
+        .toList();
+    List<SearchResult> companiesSearches = companiesModels
+        .map((c) =>
+            SearchResult(id: c.id, name: c.name, type: SearchType.company))
+        .toList();
+    List<SearchResult> searchResults = [...phonesSearches, ...companiesSearches]
+      ..sort((a, b) => a.name.compareTo(b.name));
+    return searchResults;
+  }
+
   factory SearchProductsAndCompaiesResponse.fromJson(
           Map<String, Object?> json) =>
       _$SearchProductsAndCompaiesResponseFromJson(json);

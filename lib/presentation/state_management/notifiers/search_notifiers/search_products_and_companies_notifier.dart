@@ -17,10 +17,12 @@ class SearchProductsAndCompaiesNotifier
           state = SearchProductsAndCompaiesErrorState(failure: failure),
       (response) {
         state = SearchProductsAndCompaiesLoadedState(
-          phones: response.phonesModels,
-          companies: response.companiesModels,
+          searchResults: response.searchResults,
         );
       },
     );
   }
+
+  void returnToInitialState() =>
+      state = SearchProductsAndCompaiesInitialState();
 }

@@ -6,10 +6,11 @@ part 'search_api_requests.g.dart';
 
 @JsonSerializable()
 class AddNewRecentSearchRequest {
-  String productId;
+  @JsonKey(name: '_id')
+  String id;
   SearchType type;
   AddNewRecentSearchRequest({
-    required this.productId,
+    required this.id,
     required this.type,
   });
 
@@ -22,6 +23,7 @@ class GetMyRecentSearchesRequest {}
 
 @JsonSerializable()
 class DeleteRecentSearchRequest {
+  @JsonKey(name: '_id')
   String id;
   DeleteRecentSearchRequest({
     required this.id,

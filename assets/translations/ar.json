@@ -164,5 +164,6 @@
   "reviewEncouragement": "كلما كانت مراجعتك مميزة ومليئة بالتفاصيل سوف تحصل علي نقاط مساعدة أكثر.",
   "previousSearchResults": "نتائج البحث السابقة",
   "searchForAProductOrACompany": "ابحث عن منتج أو شركة",
-  "badRequest": "الطلب غير صالح"
+  "badRequest": "الطلب غير صالح",
+  "search": "البحث"
 }
