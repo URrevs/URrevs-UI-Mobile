@@ -19,6 +19,7 @@ class ThemeManager {
       );
 
   static ThemeData get light => ThemeData(
+        unselectedWidgetColor: ColorManager.black,
         scaffoldBackgroundColor: ColorManager.backgroundGrey,
         fontFamily: FontConstants.tajawal,
         dialogTheme: DialogTheme(

@@ -177,5 +177,9 @@ abstract class  LocaleKeys {
   static const updateProductsList = 'updateProductsList';
   static const adminPanel = 'adminPanel';
   static const invitationCodePrompt = 'invitationCodePrompt';
+  static const sureToLogOut = 'sureToLogOut';
+  static const logOut = 'logOut';
+  static const cancel = 'cancel';
+  static const logOutFromAllDevices = 'logOutFromAllDevices';
 
 }

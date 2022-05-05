@@ -174,5 +174,9 @@
   "search": "Search",
   "updateProductsList": "Update products list",
   "adminPanel": "Admin panel",
-  "invitationCodePrompt": "When your friend posts reviews on their products.\nYou and your friend will get help points."
+  "invitationCodePrompt": "When your friend posts reviews on their products.\nYou and your friend will get help points.",
+  "sureToLogOut": "Are you sure you want\nto log out?",
+  "logOut": "Log out",
+  "cancel": "Cancel",
+  "logOutFromAllDevices": "Log out of all devices registered with this account"
 }

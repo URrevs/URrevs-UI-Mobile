@@ -190,7 +190,11 @@ class CodegenLoader extends AssetLoader{
   "search": "البحث",
   "updateProductsList": "تحديث قائمة المنتجات",
   "adminPanel": "لوحة المشرف",
-  "invitationCodePrompt": "عند قيام صديقك بنشر مراجعات علي منتجاته.\nسوف تحصل انت وصديقك علي نقاط المساعدة."
+  "invitationCodePrompt": "عند قيام صديقك بنشر مراجعات علي منتجاته.\nسوف تحصل انت وصديقك علي نقاط المساعدة.",
+  "sureToLogOut": "هل أنت متأكد من رغبتك بتسجيل الخروج؟",
+  "logOut": "تسجيل الخروج",
+  "cancel": "الغاء",
+  "logOutFromAllDevices": "تسجيل الخروج من جميع الاجهزة المسجلة بهذا الحساب"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -368,7 +372,11 @@ static const Map<String,dynamic> en = {
   "search": "Search",
   "updateProductsList": "Update products list",
   "adminPanel": "Admin panel",
-  "invitationCodePrompt": "When your friend posts reviews on their products.\nYou and your friend will get help points."
+  "invitationCodePrompt": "When your friend posts reviews on their products.\nYou and your friend will get help points.",
+  "sureToLogOut": "Are you sure you want\nto log out?",
+  "logOut": "Log out",
+  "cancel": "Cancel",
+  "logOutFromAllDevices": "Log out of all devices registered with this account"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

@@ -39,6 +39,11 @@ class ColorManager {
         dark: Color(0xff65676B),
       ).pickColor();
 
+  static Color get red => ColorPair(
+        light: Color(0xffE41D1D),
+        dark: Color(0xffE41D1D),
+      ).pickColor();
+
   static Color get dividerGrey => ColorPair(
         light: Color(0xffCED0D4),
         dark: Color(0xffCED0D4),
@@ -60,8 +65,8 @@ class ColorManager {
       ).pickColor();
 
   static Color get textFieldGrey => ColorPair(
-        light: Color(0xffE3E3E3),
-        dark: Color(0xffE3E3E3),
+        light: Color(0xffF0F2F5),
+        dark: Color(0xffF0F2F5),
       ).pickColor();
 
   static Color get dialogCloseIconBackgroundGrey => ColorPair(

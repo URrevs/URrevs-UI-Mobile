@@ -12,6 +12,7 @@ class CustomAlertDialog extends StatelessWidget {
     required this.title,
     required this.hasTitle,
     required this.content,
+    this.actions,
     Key? key,
   }) : super(key: key);
 
@@ -23,6 +24,8 @@ class CustomAlertDialog extends StatelessWidget {
 
   /// The content of the dialog.
   final Widget content;
+
+  final List<Widget>? actions;
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -40,6 +43,7 @@ class CustomAlertDialog extends StatelessWidget {
       ):null,
       insetPadding: EdgeInsets.all(10.sp),
       content: content,
+      actions: actions,
     );
   }
 }

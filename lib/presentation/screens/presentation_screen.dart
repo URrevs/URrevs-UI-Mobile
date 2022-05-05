@@ -46,6 +46,7 @@ import 'package:urrevs_ui_mobile/presentation/widgets/prompts/marked_as_accepted
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/prize_photo_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/referral_code_help_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/review_encouragement_dialog.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/prompts/sign_out_confirmation_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body_rating_block.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/see_more_button.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/review_card_body.dart';
@@ -94,6 +95,7 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
     String competitionDate = 'أدخل تاريخ انتهاء المسابقة';
     String hintText = 'عدد الفائزين';
     //invitationPromptCtl.text = 'UR1029';
+    bool logOutFromAlldevices = false;
     return Scaffold(
       //appBar: AppBars.appBarWithActions(context: context, imageUrl: StringsManager.picsum200x200),
       appBar: AppBar(
@@ -132,6 +134,10 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
       body: ListView(
         padding: EdgeInsets.all(20),
         children: [
+          SizedBox(
+            height: 20,
+          ),
+          SignOutConfirmationDialog(),
           SizedBox(height: 20),
           InvitationCodeDialog(
             invitationPromptCtl: invitationPromptCtl,
@@ -255,3 +261,4 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
     );
   }
 }
+
