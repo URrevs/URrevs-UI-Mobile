@@ -176,5 +176,6 @@ abstract class  LocaleKeys {
   static const search = 'search';
   static const updateProductsList = 'updateProductsList';
   static const adminPanel = 'adminPanel';
+  static const invitationCodePrompt = 'invitationCodePrompt';
 
 }

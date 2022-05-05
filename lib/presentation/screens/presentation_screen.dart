@@ -41,6 +41,7 @@ import 'package:urrevs_ui_mobile/presentation/widgets/prompts/adding_competition
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/custom_alert_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/disclaimer_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/how_to_win_dialog.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/prompts/invitation_code_and_link_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/marked_as_accepted_explanation_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/prize_photo_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/referral_code_help_dialog.dart';
@@ -60,6 +61,7 @@ import 'package:urrevs_ui_mobile/presentation/widgets/tiles/leaderboard_entry_ti
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/updated_list_tile.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:flutter/services.dart';
 
 class PresentationScreen extends ConsumerStatefulWidget {
   const PresentationScreen({Key? key}) : super(key: key);
@@ -83,15 +85,15 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
   TextEditingController winnerNumCtl = TextEditingController();
   TextEditingController prizeNameCtl = TextEditingController();
   TextEditingController imgUrlCtl = TextEditingController();
+  TextEditingController invitationPromptCtl = TextEditingController();
 
-  
   @override
   Widget build(BuildContext context) {
     NumberFormat numberFormat =
         NumberFormat.compact(locale: context.locale.languageCode);
     String competitionDate = 'أدخل تاريخ انتهاء المسابقة';
     String hintText = 'عدد الفائزين';
-
+    //invitationPromptCtl.text = 'UR1029';
     return Scaffold(
       //appBar: AppBars.appBarWithActions(context: context, imageUrl: StringsManager.picsum200x200),
       appBar: AppBar(
@@ -130,6 +132,11 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
       body: ListView(
         padding: EdgeInsets.all(20),
         children: [
+          SizedBox(height: 20),
+          InvitationCodeDialog(
+            invitationPromptCtl: invitationPromptCtl,
+            invitationCode: 'UR1029',
+          ),
           SizedBox(height: 20),
           HowToWinDialog(),
           SizedBox(height: 20),
@@ -248,4 +255,3 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
     );
   }
 }
-

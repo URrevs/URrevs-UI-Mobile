@@ -30,4 +30,5 @@ class IconsManager {
   static IconData get howTowin => Icons.help;
   static IconData get star => Icons.star_rate_rounded;
   static IconData get search => Icons.search_rounded;
+  static IconData get copy => Icons.content_copy;
 }

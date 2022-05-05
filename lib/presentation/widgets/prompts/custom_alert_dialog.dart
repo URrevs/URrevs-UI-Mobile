@@ -29,7 +29,7 @@ class CustomAlertDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppRadius.interactionBodyRadius),
       ),
-      title: hasTitle?AlertDialogTitle(
+      title: hasTitle ? AlertDialogTitle(
         titleText: Text(
           title,
           style: TextStyleManager.s16w700.copyWith(
