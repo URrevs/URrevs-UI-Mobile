@@ -80,7 +80,7 @@ class CompetitionBanner extends StatelessWidget {
                                 fontFamily: FontConstants.tajawal,
                               ),
                             ),
-                            onTap: () {},
+                            onTap: () {print('tapped');},
                           ),
                         ),
                       ],

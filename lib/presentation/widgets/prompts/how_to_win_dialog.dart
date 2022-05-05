@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/font_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
@@ -14,14 +15,15 @@ class HowToWinDialog extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  Future launchGooglePlay(String url) async {
-  url = 'https://flutter.dev';
-   print('object');
-  // if (await canLaunch(url)) {
-  //   await launch(url);
-  // } else {
-  //   throw 'Could not launch $url';
-  // }
+  Future launchGooglePlay() async {
+    /// this is the url of the app in the google play store
+  String url = 'https://flutter.dev';
+  final Uri _url = Uri.parse(url);
+  if (await canLaunchUrl(_url)) {
+    await launchUrl(_url);
+  } else {
+    throw 'Could not launch $url';
+  }
 }
 
   @override
@@ -57,12 +59,13 @@ class HowToWinDialog extends StatelessWidget {
                   style: TextStyleManager.s16w700.copyWith(
                     color: ColorManager.black,
                     fontFamily: FontConstants.tajawal,
-                    decoration: TextDecoration.underline,
                   ),
                  recognizer: TapGestureRecognizer()
                    ..onTap = () =>
-                       launchGooglePlay('https://play.google.com/store/apps/details?id=com.urrevs.urrevs'),
+                       launchGooglePlay(),
                  ),
+                 TextSpan(text: ' '),
+                 TextSpan(text: '\n\n'),
                 TextSpan(text: LocaleKeys.howToWinPrompt2.tr()),
               ],
             ),
