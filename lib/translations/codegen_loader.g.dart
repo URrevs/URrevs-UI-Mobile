@@ -184,7 +184,13 @@ class CodegenLoader extends AssetLoader{
   "howToWinPrompt": "تستطيع تجميع نقاط المساعدة عن طريق الاتي:\n1. قم بارسال رابط الدعوة الخاص بك لاصدقائك، وعندما يقوموا بنشر مراجعات خاصة بهم سوف تحصل انت وأصدقائك علي نقاط المساعدة.\n2. عند قيامك باضافة مراجعة علي منتجاتك، كلما كانت مراجعتك مميزة ومليئة بالتفاصيل سوف تحصل علي نقاط مساعدة أكثر.\n3. عند قيامك بالرد علي اسئلة المستتخدمين المطروحة علي منتجاتك الممتلكة، في حالة قبول صاحب السؤال ردك كاجابة مفيدة له.\nعند حصولك علي اعجاب علي مراجعاتك أو أسئلتك المطروحة.\n4. عند حصولك علي تصويت علي اجاباتك عن الاسئلة المطروحة علي منتجاتك الممتلكة.\n5. عند قيامك بتسجيل دخولك عن طريق ",
   "howToWinPromptTitle": "يمكنك الربح عن طريق تجميع اكبر عدد من نقاط المساعدة خلال مدة المسابقة.",
   "ourMobileApp": "تطبيقنا المحمول.\n\n",
-  "howToWinPrompt2": "بعد انتهاء مدة المسابقة سوف يحصل اصحاب المراكز الاولي علي جوائز."
+  "howToWinPrompt2": "بعد انتهاء مدة المسابقة سوف يحصل اصحاب المراكز الاولي علي جوائز.",
+  "previousSearchResults": "نتائج البحث السابقة",
+  "searchForAProductOrACompany": "ابحث عن منتج أو شركة",
+  "badRequest": "الطلب غير صالح",
+  "search": "البحث",
+  "updateProductsList": "تحديث قائمة المنتجات",
+  "adminPanel": "لوحة المشرف"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -356,7 +362,13 @@ static const Map<String,dynamic> en = {
   "howToWinPrompt": "You can collect help points by:\n1. Send your invite link to your friends, and when they post reviews of thei products, you and your friends will get helping points.\n2. When you add a review to your products, the more unique and detailed your review will be, the more points you will get.\n3. When you respond to users' questions about your owned products, after the question owner accepts your response as a useful answer to him.\n4. When you get admiration for your reviews or questions asked.\n5. When you get a vote on your answers to the questions asked about your owned products.\n6. When you log in with our ",
   "howToWinPromptTitle": "You can win by accumulating the largest number of helping points during the competition.",
   "ourMobileApp": "our Mobile App.\n\n",
-  "howToWinPrompt2": "After the competition ends, the first place winners will receive prizes."
+  "howToWinPrompt2": "After the competition ends, the first place winners will receive prizes.",
+  "previousSearchResults": "Previous search results",
+  "searchForAProductOrACompany": "Search for a product or company",
+  "badRequest": "Bad request",
+  "search": "Search",
+  "updateProductsList": "Update products list",
+  "adminPanel": "Admin panel"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

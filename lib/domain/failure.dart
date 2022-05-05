@@ -17,6 +17,7 @@ class ServerErrorMessages {
   static const String youAreNotAnAdmin = 'you are not admin';
   static const String thereIsARunningUpdateOperationRightNow =
       'there is a running update operation right now';
+  static const String badRequest = 'bad request';
 
   static Map<String, String> get errorMessagesMap => {
         ServerErrorMessages.tooManyRequests: LocaleKeys.tooManyRequests.tr(),
@@ -31,6 +32,7 @@ class ServerErrorMessages {
         ServerErrorMessages.youAreNotAnAdmin: LocaleKeys.youAreNotAdmin.tr(),
         ServerErrorMessages.thereIsARunningUpdateOperationRightNow:
             LocaleKeys.thereIsARunningUpdateOperationRightNow.tr(),
+        ServerErrorMessages.badRequest: LocaleKeys.badRequest.tr(),
       };
 
   static List<String> get _retryActionFailures => [

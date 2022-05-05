@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
+import 'package:urrevs_ui_mobile/data/requests/search_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/users_api_requests.dart';
+import 'package:urrevs_ui_mobile/data/responses/search_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/update_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/users_api_response.dart';
 
@@ -48,4 +50,26 @@ abstract class RemoteDataSource {
 
   @GET('/targets/update/latest')
   Future<GetInfoAboutLatestUpdateResponse> getInfoAboutLatestUpdate();
+
+  // SEARCH API
+
+  /// 10
+  @PUT('/search/recent')
+  Future<AddNewRecentSearchResponse> addNewRecentSearch(
+    @Body() AddNewRecentSearchRequest request,
+  );
+
+  /// 11
+  @GET('/search/recent')
+  Future<GetMyRecentSearchesResponse> getMyRecentSearches();
+
+  @DELETE('/search/recent')
+  Future<DeleteRecentSearchResponse> deleteRecentSearch(
+    @Body() DeleteRecentSearchRequest request,
+  );
+
+  @GET('/search/all')
+  Future<SearchProductsAndCompaiesResponse> searchProductsAndCompanies(
+    @Query('q') String searchWord,
+  );
 }

@@ -156,7 +156,6 @@
   "myProfile": "My profile",
   "phones": "Smartphones",
   "companies": "Companies",
-  "updateProductList": "Update product list",
   "lastUpdatedIn": "Last updated in",
   "addACompetition": "Add a compeition",
   "theLastCompetitionTookPlaceIn": "The last competition took place in",
@@ -168,5 +167,11 @@
   "howToWinPrompt": "You can collect help points by:\n1. Send your invite link to your friends, and when they post reviews of thei products, you and your friends will get helping points.\n2. When you add a review to your products, the more unique and detailed your review will be, the more points you will get.\n3. When you respond to users' questions about your owned products, after the question owner accepts your response as a useful answer to him.\n4. When you get admiration for your reviews or questions asked.\n5. When you get a vote on your answers to the questions asked about your owned products.\n6. When you log in with our ",
   "howToWinPromptTitle": "You can win by accumulating the largest number of helping points during the competition.",
   "ourMobileApp": "our Mobile App.\n\n",
-  "howToWinPrompt2": "After the competition ends, the first place winners will receive prizes."
+  "howToWinPrompt2": "After the competition ends, the first place winners will receive prizes.",
+  "previousSearchResults": "Previous search results",
+  "searchForAProductOrACompany": "Search for a product or company",
+  "badRequest": "Bad request",
+  "search": "Search",
+  "updateProductsList": "Update products list",
+  "adminPanel": "Admin panel"
 }

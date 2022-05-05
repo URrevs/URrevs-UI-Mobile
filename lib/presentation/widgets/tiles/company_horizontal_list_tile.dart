@@ -72,55 +72,47 @@ class _CompanyHorizontalListTileState extends State<CompanyHorizontalListTile> {
   int _selectedIndex = -1;
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: AppElevations.ev3,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(
-          10,
-        ),
+    return ClipRRect(
+      borderRadius: BorderRadius.only(
+        bottomLeft: Radius.circular(10.r),
+        bottomRight: Radius.circular(10.r),
       ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(10.r),
-          bottomRight: Radius.circular(10.r),
-        ),
-        child: Container(
-          color: ColorManager.white,
-          height: 95.h,
-          child: ScrollConfiguration(
-            behavior: const ScrollBehavior().copyWith(overscroll: false),
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: companyItems.length,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {
-                      setState(() {
-                        if (_selectedIndex == index) {
-                          _selectedIndex = -1;
-                        } else {
-                          _selectedIndex = index;
-                        }
-                      });
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: _selectedIndex == index
-                            ? ColorManager.blue.withOpacity(0.8)
-                            : ColorManager.white,
-                        borderRadius:
-                            BorderRadius.all(Radius.elliptical(10.r, 10.r)),
-                      ),
-                      padding: EdgeInsets.symmetric(horizontal: 8),
-                      child: CompanyLogoTile(
-                        companyName: companyItems[index].name,
-                        imageUrl: companyItems[index].imageUrl,
-                        isSelected: _selectedIndex == index ? true : false,
-                      ),
+      child: Container(
+        color: ColorManager.white,
+        height: 95.h,
+        child: ScrollConfiguration(
+          behavior: const ScrollBehavior().copyWith(overscroll: false),
+          child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: companyItems.length,
+              itemBuilder: (context, index) {
+                return InkWell(
+                  onTap: () {
+                    setState(() {
+                      if (_selectedIndex == index) {
+                        _selectedIndex = -1;
+                      } else {
+                        _selectedIndex = index;
+                      }
+                    });
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: _selectedIndex == index
+                          ? ColorManager.blue.withOpacity(0.8)
+                          : ColorManager.white,
+                      borderRadius:
+                          BorderRadius.all(Radius.elliptical(10.r, 10.r)),
                     ),
-                  );
-                }),
-          ),
+                    padding: EdgeInsets.symmetric(horizontal: 8),
+                    child: CompanyLogoTile(
+                      companyName: companyItems[index].name,
+                      imageUrl: companyItems[index].imageUrl,
+                      isSelected: _selectedIndex == index ? true : false,
+                    ),
+                  ),
+                );
+              }),
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:urrevs_ui_mobile/domain/models/search_result.dart';
 
 class Phone extends Equatable {
   final String id;
@@ -14,4 +15,10 @@ class Phone extends Equatable {
 
   @override
   List<Object?> get props => [id];
+
+  SearchResult get toSearchResult => SearchResult(
+        id: id,
+        name: name,
+        type: SearchType.phone,
+      );
 }

@@ -9,10 +9,13 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:urrevs_ui_mobile/app/exceptions.dart';
 import 'package:urrevs_ui_mobile/data/remote_data_source/remote_data_source.dart';
+import 'package:urrevs_ui_mobile/data/requests/search_api_requests.dart';
+import 'package:urrevs_ui_mobile/data/responses/search_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/update_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/users_api_response.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone.dart';
+import 'package:urrevs_ui_mobile/domain/models/search_result.dart';
 import 'package:urrevs_ui_mobile/domain/models/user.dart';
 
 class Repository {
@@ -143,6 +146,36 @@ class Repository {
       getInfoAboutLatestUpdate() async {
     return _tryAndCatch(() async {
       final response = await _remoteDataSource.getInfoAboutLatestUpdate();
+      return response;
+    });
+  }
+
+  Future<Either<Failure, List<SearchResult>>> getMyRecentSearches() async {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.getMyRecentSearches();
+      return response.searchResults;
+    });
+  }
+
+  Future<Either<Failure, void>> addNewRecentSearch(
+      AddNewRecentSearchRequest request) async {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.addNewRecentSearch(request);
+    });
+  }
+
+  Future<Either<Failure, void>> deleteRecentSearch(
+      DeleteRecentSearchRequest request) async {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.deleteRecentSearch(request);
+    });
+  }
+
+  Future<Either<Failure, SearchProductsAndCompaiesResponse>>
+      searchProductsAndCompanies(String searchWord) async {
+    return _tryAndCatch(() async {
+      final response =
+          await _remoteDataSource.searchProductsAndCompanies(searchWord);
       return response;
     });
   }

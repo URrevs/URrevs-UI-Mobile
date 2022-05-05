@@ -55,4 +55,5 @@ class AppNumericValues {
 
 class AppDuration {
   static const Duration d300 = Duration(milliseconds: 300);
+  static Duration get typingThrottling => Duration(milliseconds: 1000);
 }
