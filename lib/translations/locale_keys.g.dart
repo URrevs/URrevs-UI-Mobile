@@ -181,5 +181,7 @@ abstract class  LocaleKeys {
   static const logOut = 'logOut';
   static const cancel = 'cancel';
   static const logOutFromAllDevices = 'logOutFromAllDevices';
+  static const withWord = 'withWord';
+  static const writeProductName = 'writeProductName';
 
 }

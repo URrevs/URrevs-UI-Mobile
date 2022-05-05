@@ -178,5 +178,7 @@
   "sureToLogOut": "هل أنت متأكد من رغبتك بتسجيل الخروج؟",
   "logOut": "تسجيل الخروج",
   "cancel": "الغاء",
-  "logOutFromAllDevices": "تسجيل الخروج من جميع الاجهزة المسجلة بهذا الحساب"
+  "logOutFromAllDevices": "تسجيل الخروج من جميع الاجهزة المسجلة بهذا الحساب",
+  "withWord": "مع",
+  "writeProductName": "اكتب اسم المنتج"
 }

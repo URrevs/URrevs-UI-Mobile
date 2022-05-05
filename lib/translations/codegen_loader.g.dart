@@ -194,7 +194,9 @@ class CodegenLoader extends AssetLoader{
   "sureToLogOut": "هل أنت متأكد من رغبتك بتسجيل الخروج؟",
   "logOut": "تسجيل الخروج",
   "cancel": "الغاء",
-  "logOutFromAllDevices": "تسجيل الخروج من جميع الاجهزة المسجلة بهذا الحساب"
+  "logOutFromAllDevices": "تسجيل الخروج من جميع الاجهزة المسجلة بهذا الحساب",
+  "withWord": "مع",
+  "writeProductName": "اكتب اسم المنتج"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -376,7 +378,9 @@ static const Map<String,dynamic> en = {
   "sureToLogOut": "Are you sure you want\nto log out?",
   "logOut": "Log out",
   "cancel": "Cancel",
-  "logOutFromAllDevices": "Log out of all devices registered with this account"
+  "logOutFromAllDevices": "Log out of all devices registered with this account",
+  "withWord": "with",
+  "writeProductName": "Enter product's name"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

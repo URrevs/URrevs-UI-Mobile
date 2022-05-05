@@ -178,5 +178,7 @@
   "sureToLogOut": "Are you sure you want\nto log out?",
   "logOut": "Log out",
   "cancel": "Cancel",
-  "logOutFromAllDevices": "Log out of all devices registered with this account"
+  "logOutFromAllDevices": "Log out of all devices registered with this account",
+  "withWord": "with",
+  "writeProductName": "Enter product's name"
 }

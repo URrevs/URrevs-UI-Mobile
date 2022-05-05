@@ -38,6 +38,7 @@ import 'package:urrevs_ui_mobile/presentation/widgets/interactions/comment_tree.
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/comments_list.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/reply.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/adding_competition_dialog.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/prompts/compare_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/custom_alert_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/disclaimer_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/how_to_win_dialog.dart';
@@ -87,6 +88,7 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
   TextEditingController prizeNameCtl = TextEditingController();
   TextEditingController imgUrlCtl = TextEditingController();
   TextEditingController invitationPromptCtl = TextEditingController();
+  TextEditingController searchCtl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -96,6 +98,11 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
     String hintText = 'عدد الفائزين';
     //invitationPromptCtl.text = 'UR1029';
     bool logOutFromAlldevices = false;
+    final InputBorder inputBorder = OutlineInputBorder(
+      borderRadius: BorderRadius.circular(40.r),
+      borderSide: BorderSide(width: 0.5, color: ColorManager.strokeGrey),
+    );
+    FocusNode focusNode = FocusNode();
     return Scaffold(
       //appBar: AppBars.appBarWithActions(context: context, imageUrl: StringsManager.picsum200x200),
       appBar: AppBar(
@@ -134,6 +141,12 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
       body: ListView(
         padding: EdgeInsets.all(20),
         children: [
+          SizedBox(
+            height: 20,
+          ),
+          CompareDialoge(
+              searchCtl: searchCtl,
+              productName1: 'Nokia 7 Plus',),
           SizedBox(
             height: 20,
           ),
