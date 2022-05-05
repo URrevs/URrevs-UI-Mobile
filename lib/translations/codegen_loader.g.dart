@@ -196,7 +196,9 @@ class CodegenLoader extends AssetLoader{
   "cancel": "الغاء",
   "logOutFromAllDevices": "تسجيل الخروج من جميع الاجهزة المسجلة بهذا الحساب",
   "withWord": "مع",
-  "writeProductName": "اكتب اسم المنتج"
+  "writeProductName": "اكتب اسم المنتج",
+  "specifications": "المواصفات",
+  "similarPhones": "الهواتف المماثلة"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -380,7 +382,9 @@ static const Map<String,dynamic> en = {
   "cancel": "Cancel",
   "logOutFromAllDevices": "Log out of all devices registered with this account",
   "withWord": "with",
-  "writeProductName": "Enter product's name"
+  "writeProductName": "Enter product's name",
+  "specifications": "Specifications",
+  "similarPhones": "Similar phones"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

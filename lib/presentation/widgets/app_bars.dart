@@ -199,7 +199,7 @@ class AppBars {
         actions: [
           Padding(
             padding: EdgeInsets.only(
-                top: 15.h,
+                top: 10.h,
                 right: !context.isArabic ? 15.w : 0,
                 left: !context.isArabic ? 0 : 15.w),
             child: Text(
@@ -249,7 +249,7 @@ class AppBars {
         actions: [
           Padding(
             padding: EdgeInsets.only(
-                top: 15.h,
+                top: 10.h,
                 right: !context.isArabic ? 15.w : 0,
                 left: !context.isArabic ? 0 : 15.w),
             child: Text(

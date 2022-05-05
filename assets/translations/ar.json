@@ -180,5 +180,7 @@
   "cancel": "الغاء",
   "logOutFromAllDevices": "تسجيل الخروج من جميع الاجهزة المسجلة بهذا الحساب",
   "withWord": "مع",
-  "writeProductName": "اكتب اسم المنتج"
+  "writeProductName": "اكتب اسم المنتج",
+  "specifications": "المواصفات",
+  "similarPhones": "الهواتف المماثلة"
 }

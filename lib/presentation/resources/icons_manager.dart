@@ -32,4 +32,5 @@ class IconsManager {
   static IconData get search => Icons.search_rounded;
   static IconData get copy => Icons.content_copy;
   static IconData get compare => Icons.compare_rounded;
+  static IconData get help => Icons.help;
 }
