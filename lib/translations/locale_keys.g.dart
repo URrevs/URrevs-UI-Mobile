@@ -163,6 +163,13 @@ abstract class  LocaleKeys {
   static const theLastCompetitionTookPlaceIn = 'theLastCompetitionTookPlaceIn';
   static const competitionPrize = 'competitionPrize';
   static const reviewEncouragement = 'reviewEncouragement';
+  static const disclaimer = 'disclaimer';
+  static const markedAsAcceptedPrompt = 'markedAsAcceptedPrompt';
+  static const referralCodeHelpPrompt = 'referralCodeHelpPrompt';
+  static const howToWinPrompt = 'howToWinPrompt';
+  static const howToWinPromptTitle = 'howToWinPromptTitle';
+  static const ourMobileApp = 'ourMobileApp';
+  static const howToWinPrompt2 = 'howToWinPrompt2';
   static const previousSearchResults = 'previousSearchResults';
   static const searchForAProductOrACompany = 'searchForAProductOrACompany';
   static const badRequest = 'badRequest';
