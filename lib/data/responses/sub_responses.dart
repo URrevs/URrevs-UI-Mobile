@@ -179,7 +179,7 @@ class SpecsSubResponse {
   double? priceEgp;
   double? priceEur;
   double? priceUsd;
-  DateTime releaseDate;
+  String? releaseDate;
   String? dimensions;
   String? network;
   String? screenProtection;

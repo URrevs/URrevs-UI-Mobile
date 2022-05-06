@@ -11,7 +11,7 @@ class Specs {
   double? priceEgp;
   double? priceEur;
   double? priceUsd;
-  DateTime releaseDate;
+  String? releaseDate;
   String? dimensions;
   String? network;
   String? screenProtection;
@@ -71,13 +71,19 @@ class Specs {
 
   Map<String, String> toMap({required String languageCode}) {
     // TODO: show prices with usd and euros in their locales
-    String? strPrice = priceEgp?.toStringAsFixed(2);
+
+    String? strPrice;
+    double? price = priceEgp;
+    if (price != null) {
+      price = (price / 10).round() * 10; // round to tens
+    }
+    strPrice = price?.toStringAsFixed(0);
     if (strPrice != null) strPrice += " " + LocaleKeys.egyptianPound.tr();
-    String strReleaseDate = DateFormat.yMMMM(languageCode).format(releaseDate);
+    // String strReleaseDate = DateFormat.yMMMM(languageCode).format(releaseDate);
     return {
       LocaleKeys.price: strPrice ?? '-',
       LocaleKeys.manufacturingCompany: companyName,
-      LocaleKeys.releaseDate: strReleaseDate,
+      LocaleKeys.releaseDate: releaseDate ?? '-',
       LocaleKeys.productDimensions: dimensions ?? '-',
       LocaleKeys.networkType: network ?? '-',
       LocaleKeys.screenProtection: screenProtection ?? '-',
