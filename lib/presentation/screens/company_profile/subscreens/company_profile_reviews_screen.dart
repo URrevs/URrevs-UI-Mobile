@@ -1,7 +1,5 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
-import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_post_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/cards/rating_overview_card.dart';
@@ -34,7 +32,6 @@ class _CompanyProfileReviewsSubscreenState
 
   @override
   Widget build(BuildContext context) {
-    context.setLocale(LanguageType.ar.locale);
     return ListView.builder(
       itemBuilder: (context, index) {
         if (index == 0) {

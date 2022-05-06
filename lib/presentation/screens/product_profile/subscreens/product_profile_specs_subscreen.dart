@@ -170,14 +170,17 @@ class _ProductProfileSpecsSubscreenState
                                 child: SizedBox(
                                   width: 100.w,
                                   height: 60.h,
-                                  child: Flexible(
-                                    child: Text(
-                                      suggestedItems[index].name,
-                                      style: TextStyleManager.s16w500,
-                                      textAlign: TextAlign.center,
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 3,
-                                    ),
+                                  child: Flex(
+                                    direction: Axis.vertical,
+                                    children: [Flexible(
+                                      child: Text(
+                                        suggestedItems[index].name,
+                                        style: TextStyleManager.s16w500,
+                                        textAlign: TextAlign.center,
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 3,
+                                      ),
+                                    )],
                                   ),
                                 ),
                               ),
