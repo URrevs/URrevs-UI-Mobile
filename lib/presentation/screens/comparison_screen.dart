@@ -45,10 +45,20 @@ class _ComparisonScreenState extends ConsumerState<ComparisonScreen> {
         );
   }
 
+  void _indicateUserComparedBetweenTwoPhones() {
+    ref
+        .read(indicateUserComparedBetweenTwoPhonesProvider.notifier)
+        .indicateUserComparedBetweenTwoPhones(
+          widget.screenArgs.firstPhoneId,
+          widget.screenArgs.secondPhoneId,
+        );
+  }
+
   @override
   void initState() {
     super.initState();
     _getTwoPhonesSpecs();
+    _indicateUserComparedBetweenTwoPhones();
   }
 
   @override
