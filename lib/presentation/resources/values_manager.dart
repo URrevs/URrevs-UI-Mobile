@@ -9,6 +9,10 @@ class VerticalSpacesBetween {
   static Widget get interactionsListAndMoreCommentsButton => 9.verticalSpace;
 }
 
+class AppEdgeInsets{
+  /// The edge insets for the app screen.
+  static EdgeInsets get screenPadding => EdgeInsets.only(left: 8.w, right: 8.w, top: 12.h, bottom: 70.h);
+}
 class AppWidth {
   static double get w1 => 1.w;
   static double get w2 => 2.w;
