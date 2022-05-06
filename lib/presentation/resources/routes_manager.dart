@@ -36,7 +36,7 @@ class RouteGenerator {
         final screenArgs = routeSettings.arguments
                 as BottomNavigationBarContainerScreenArgs? ??
             BottomNavigationBarContainerScreenArgs(
-                screenIndex: BottomNavBarIndeces.allProductsSubscreen);
+                screenIndex: BottomNavBarIndeces.homeSubscreen);
         return MaterialPageRoute(
           builder: (_) => BottomNavigationBarContainerScreen(screenArgs),
         );
@@ -90,8 +90,11 @@ class RouteGenerator {
           builder: (_) => TermsAndConditionsScreen(),
         );
       case CompanyProfileScreen.routeName:
+        final screenArgs =
+            routeSettings.arguments as CompanyProfileScreenArgs? ??
+                CompanyProfileScreenArgs.defaultArgs;
         return MaterialPageRoute(
-          builder: (_) => CompanyProfileScreen(),
+          builder: (_) => CompanyProfileScreen(screenArgs),
         );
       case ProductProfileScreen.routeName:
         return MaterialPageRoute(
@@ -102,8 +105,11 @@ class RouteGenerator {
           builder: (_) => AuthenticationScreen(),
         );
       case ComparisonScreen.routeName:
+        ComparisonScreenArgs screenArgs =
+            routeSettings.arguments as ComparisonScreenArgs? ??
+                ComparisonScreenArgs.defaultArgs;
         return MaterialPageRoute(
-          builder: (_) => ComparisonScreen(),
+          builder: (_) => ComparisonScreen(screenArgs),
         );
       case FullscreenPostScreen.routeName:
         // TODO: remove default screen arguments value

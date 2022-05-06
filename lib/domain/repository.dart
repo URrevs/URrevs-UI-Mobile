@@ -10,6 +10,7 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:urrevs_ui_mobile/app/exceptions.dart';
 import 'package:urrevs_ui_mobile/data/remote_data_source/remote_data_source.dart';
 import 'package:urrevs_ui_mobile/data/requests/search_api_requests.dart';
+import 'package:urrevs_ui_mobile/data/responses/phones_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/search_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/update_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/users_api_response.dart';
@@ -17,6 +18,7 @@ import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/domain/models/company.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone.dart';
 import 'package:urrevs_ui_mobile/domain/models/search_result.dart';
+import 'package:urrevs_ui_mobile/domain/models/specs.dart';
 import 'package:urrevs_ui_mobile/domain/models/user.dart';
 
 class Repository {
@@ -201,6 +203,26 @@ class Repository {
       final response =
           await _remoteDataSource.getPhonesFromCertainCompany(companyId, round);
       return response.phonesModels;
+    });
+  }
+
+  Future<Either<Failure, Specs>> getPhoneSpecs(String phoneId) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.getPhoneSpecs(phoneId);
+      return response.specsSubResponse.specsModel;
+    });
+  }
+
+  Future<Either<Failure, List<Specs>>> getTwoPhonesSpecs(
+    String firstPhoneId,
+    String secondPhoneId,
+  ) {
+    return _tryAndCatch(() async {
+      final List<GetPhoneSpecsResponse> responses = await Future.wait([
+        _remoteDataSource.getPhoneSpecs(firstPhoneId),
+        _remoteDataSource.getPhoneSpecs(secondPhoneId),
+      ]);
+      return responses.map((r) => r.specsSubResponse.specsModel).toList();
     });
   }
 }

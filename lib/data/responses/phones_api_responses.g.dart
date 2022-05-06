@@ -38,3 +38,18 @@ Map<String, dynamic> _$GetPhonesFromCertainCompanyResponseToJson(
       'success': instance.success,
       'phones': instance.phonesSubResponses,
     };
+
+GetPhoneSpecsResponse _$GetPhoneSpecsResponseFromJson(
+        Map<String, dynamic> json) =>
+    GetPhoneSpecsResponse(
+      success: json['success'] as bool,
+      specsSubResponse:
+          SpecsSubResponse.fromJson(json['specs'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$GetPhoneSpecsResponseToJson(
+        GetPhoneSpecsResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'specs': instance.specsSubResponse,
+    };

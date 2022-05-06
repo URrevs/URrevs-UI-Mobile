@@ -43,3 +43,17 @@ class GetPhonesFromCertainCompanyResponse extends BaseResponse {
   Map<String, dynamic> toJson() =>
       _$GetPhonesFromCertainCompanyResponseToJson(this);
 }
+
+@JsonSerializable()
+class GetPhoneSpecsResponse extends BaseResponse {
+  @JsonKey(name: 'specs')
+  SpecsSubResponse specsSubResponse;
+  GetPhoneSpecsResponse({
+    required bool success,
+    required this.specsSubResponse,
+  }) : super(success: success);
+
+  factory GetPhoneSpecsResponse.fromJson(Map<String, Object?> json) =>
+      _$GetPhoneSpecsResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$GetPhoneSpecsResponseToJson(this);
+}

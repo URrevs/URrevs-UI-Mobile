@@ -1,23 +1,23 @@
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:urrevs_ui_mobile/domain/models/specs.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/app_elevations.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
-import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_button_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/company_profile/company_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/no_glowing_scroll_behavior.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/specs_table.dart';
 
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
-class SpecsComparisonTable extends StatelessWidget {
+class SpecsComparisonTable extends StatefulWidget {
   final String firstProductName;
   final String secondProductName;
   final String firstProductImageUrl;
   final String secondProductImageIrl;
-  final SpecsDummyData firstProductSpecs;
-  final SpecsDummyData secondProductSpecs;
+  final Specs firstProductSpecs;
+  final Specs secondProductSpecs;
 
   const SpecsComparisonTable({
     Key? key,
@@ -29,15 +29,11 @@ class SpecsComparisonTable extends StatelessWidget {
     required this.secondProductSpecs,
   }) : super(key: key);
 
-  static SpecsComparisonTable get dummyInstance => SpecsComparisonTable(
-        firstProductName: 'Oppo Reno 6',
-        secondProductName: 'Nokia plus',
-        firstProductImageUrl: StringsManager.picsum200x200,
-        secondProductImageIrl: StringsManager.picsum200x200,
-        firstProductSpecs: SpecsDummyData.dummyData,
-        secondProductSpecs: SpecsDummyData.dummyData,
-      );
+  @override
+  State<SpecsComparisonTable> createState() => _SpecsComparisonTableState();
+}
 
+class _SpecsComparisonTableState extends State<SpecsComparisonTable> {
   /// Returns a [TableRow] that contains both the specification name and value
   /// of that specification for both phones.
   TableRow _specsTableRow({
@@ -49,8 +45,8 @@ class SpecsComparisonTable extends StatelessWidget {
       children: <Widget>[
         _pointOfComparisonCell(specName.tr(), TextStyleManager.s16w500),
         if (specName == LocaleKeys.manufacturingCompany) ...[
-          _companyName(firstSpecValue),
-          _companyName(secondSpecValue),
+          _companyName(firstSpecValue, widget.firstProductSpecs.companyId),
+          _companyName(secondSpecValue, widget.secondProductSpecs.companyId),
         ],
         if (specName != LocaleKeys.manufacturingCompany) ...[
           _specValue(
@@ -90,12 +86,12 @@ class SpecsComparisonTable extends StatelessWidget {
           TextStyleManager.s20w500,
         ),
         _specValue(
-          firstProductName,
+          widget.firstProductName,
           TextDirection.ltr,
           TextStyleManager.s20w500,
         ),
         _specValue(
-          secondProductName,
+          widget.secondProductName,
           TextDirection.ltr,
           TextStyleManager.s20w500,
         ),
@@ -112,10 +108,10 @@ class SpecsComparisonTable extends StatelessWidget {
           TextStyleManager.s16w500,
         ),
         _organizedTableCell(
-          child: _organizedProductImage(imageUrl: firstProductImageUrl),
+          child: _organizedProductImage(imageUrl: widget.firstProductImageUrl),
         ),
         _organizedTableCell(
-          child: _organizedProductImage(imageUrl: secondProductImageIrl),
+          child: _organizedProductImage(imageUrl: widget.secondProductImageIrl),
         ),
       ],
     );
@@ -167,10 +163,10 @@ class SpecsComparisonTable extends StatelessWidget {
 
   /// Returns a [TableCell] that contains a [TextButton] navigating to the
   /// company profile screen.
-  TableCell _companyName(String specValue) {
+  TableCell _companyName(String specValue, String companyId) {
     return _organizedTableCell(
       child: TextButton(
-        onPressed: _navigateToCompanyScreen,
+        onPressed: () => _navigateToCompanyScreen(companyId),
         style: TextButtonStyleManager.specsCompanyName,
         child: Text(
           specValue,
@@ -185,7 +181,10 @@ class SpecsComparisonTable extends StatelessWidget {
   }
 
   /// Navigates to company profile screen.
-  void _navigateToCompanyScreen() {}
+  void _navigateToCompanyScreen(String companyId) {
+    Navigator.of(context).pushNamed(CompanyProfileScreen.routeName,
+        arguments: CompanyProfileScreenArgs(companyId: companyId));
+  }
 
   TableCell _pointOfComparisonCell(String text, TextStyle textStyle) {
     return _organizedTableCell(
@@ -200,12 +199,18 @@ class SpecsComparisonTable extends StatelessWidget {
   /// Returns the table containing all the spcifications on the 2 products.
   Table _buildTable(BuildContext context) {
     final String languageCode = context.locale.languageCode;
-    final List<String> specNames =
-        firstProductSpecs.toMap(languageCode: languageCode).keys.toList();
-    final List<String> firstProductSpecsValues =
-        firstProductSpecs.toMap(languageCode: languageCode).values.toList();
-    final List<String> secondProductSpecsValues =
-        secondProductSpecs.toMap(languageCode: languageCode).values.toList();
+    final List<String> specNames = widget.firstProductSpecs
+        .toMap(languageCode: languageCode)
+        .keys
+        .toList();
+    final List<String> firstProductSpecsValues = widget.firstProductSpecs
+        .toMap(languageCode: languageCode)
+        .values
+        .toList();
+    final List<String> secondProductSpecsValues = widget.secondProductSpecs
+        .toMap(languageCode: languageCode)
+        .values
+        .toList();
     final borderSide = BorderSide(width: 1, color: ColorManager.dividerGrey);
 
     return Table(
@@ -230,7 +235,7 @@ class SpecsComparisonTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 0.75.sh,
+      height: 1.sh - MediaQuery.of(context).padding.top,
       child: ScrollConfiguration(
         behavior: NoGlowingScrollBehaviour(),
         child: ListView(

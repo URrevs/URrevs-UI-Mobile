@@ -185,5 +185,6 @@ abstract class  LocaleKeys {
   static const writeProductName = 'writeProductName';
   static const specifications = 'specifications';
   static const similarPhones = 'similarPhones';
+  static const comparison = 'comparison';
 
 }

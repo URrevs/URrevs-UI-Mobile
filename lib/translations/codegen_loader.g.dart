@@ -198,7 +198,8 @@ class CodegenLoader extends AssetLoader{
   "withWord": "مع",
   "writeProductName": "اكتب اسم المنتج",
   "specifications": "المواصفات",
-  "similarPhones": "الهواتف المماثلة"
+  "similarPhones": "الهواتف المماثلة",
+  "comparison": "المقارنة"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -384,7 +385,8 @@ static const Map<String,dynamic> en = {
   "withWord": "with",
   "writeProductName": "Enter product's name",
   "specifications": "Specifications",
-  "similarPhones": "Similar phones"
+  "similarPhones": "Similar phones",
+  "comparison": "Comparison"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

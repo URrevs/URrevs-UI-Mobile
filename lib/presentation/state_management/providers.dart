@@ -14,6 +14,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/get_inf
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/get_my_owned_phones_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/get_my_profile_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/phones_notifier/get_all_phones_notifier.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/phones_notifier/get_two_phones_specs_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/search_notifiers/add_new_recent_search_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/search_notifiers/delete_recent_search_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/search_notifiers/get_my_recent_searches_notifier.dart';
@@ -29,6 +30,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/get_info_a
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_my_owned_phones_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_all_phones_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_phones_from_certain_company_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_two_phones_specs_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/add_new_recent_search_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/delete_recent_search_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/get_my_recent_searches_state.dart';
@@ -107,6 +109,10 @@ final getAllPhonesProvider =
 final getPhonesFromCertainCompanyProvider = StateNotifierProvider.autoDispose<
         GetPhonesFromCertainCompanyNotifier, GetPhonesFromCertainCompanyState>(
     (ref) => GetPhonesFromCertainCompanyNotifier());
+
+final getTwoPhonesSpecsProvider = StateNotifierProvider.autoDispose<
+    GetTwoPhonesSpecsNotifier,
+    GetTwoPhonesSpecsState>((ref) => GetTwoPhonesSpecsNotifier());
 
 final userImageFetchedFlagProvider = StateProvider<bool>((ref) {
   return false;

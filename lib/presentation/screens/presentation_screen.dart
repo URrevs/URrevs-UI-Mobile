@@ -264,8 +264,6 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
           AnswerTree.dummyInstance,
           // CommentsList.dummyInstance,
           // AnswersList.dummyInstance,
-          SpecsTable.dummyInstance,
-          SpecsComparisonTable.dummyInstance,
           // SvgPicture.asset(SvgAssets.upvote, color: Colors.red),
         ],
       ),

@@ -124,7 +124,7 @@ class _ProductProfileSpecsSubscreenState
             )
           ],
         ),
-        SpecsTable.dummyInstance,
+        // SpecsTable.dummyInstance,
         SizedBox(height: 12.h),
         Text(
           LocaleKeys.similarPhones.tr() + ':',

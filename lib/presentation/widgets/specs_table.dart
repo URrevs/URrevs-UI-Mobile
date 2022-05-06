@@ -3,10 +3,12 @@
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:urrevs_ui_mobile/domain/models/specs.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/app_elevations.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_button_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/company_profile/company_profile_screen.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 class SpecsDummyData {
@@ -146,14 +148,16 @@ class SpecsDummyData {
       );
 }
 
-class SpecsTable extends StatelessWidget {
-  final SpecsDummyData specs;
+class SpecsTable extends StatefulWidget {
+  final Specs specs;
 
   const SpecsTable({Key? key, required this.specs}) : super(key: key);
 
-  static SpecsTable get dummyInstance =>
-      SpecsTable(specs: SpecsDummyData.dummyData);
+  @override
+  State<SpecsTable> createState() => _SpecsTableState();
+}
 
+class _SpecsTableState extends State<SpecsTable> {
   /// Returns a [TableRow] that contains both the specification name and value
   /// of the phone.
   TableRow _tableRow({required String specName, required String specValue}) {
@@ -221,7 +225,10 @@ class SpecsTable extends StatelessWidget {
   }
 
   /// Navigates to company profile screen.
-  void _navigateToCompanyScreen() {}
+  void _navigateToCompanyScreen() {
+    Navigator.of(context).pushNamed(CompanyProfileScreen.routeName,
+        arguments: CompanyProfileScreenArgs(companyId: widget.specs.companyId));
+  }
 
   /// Returns a [TableCell] that contains the name of the specification of the
   /// phone.
@@ -242,9 +249,9 @@ class SpecsTable extends StatelessWidget {
   Widget build(BuildContext context) {
     final String languageCode = context.locale.languageCode;
     final List<String> specNames =
-        specs.toMap(languageCode: languageCode).keys.toList();
+        widget.specs.toMap(languageCode: languageCode).keys.toList();
     final List<String> specValues =
-        specs.toMap(languageCode: languageCode).values.toList();
+        widget.specs.toMap(languageCode: languageCode).values.toList();
     final cardPadding = EdgeInsets.only(
       bottom: 15.h,
       top: 7.h,

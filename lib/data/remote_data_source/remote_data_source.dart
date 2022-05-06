@@ -92,4 +92,9 @@ abstract class RemoteDataSource {
     @Path() String companyId,
     @Query('round') int round,
   );
+
+  @GET('/phones/{phoneId}/specs')
+  Future<GetPhoneSpecsResponse> getPhoneSpecs(
+    @Path() String phoneId,
+  );
 }

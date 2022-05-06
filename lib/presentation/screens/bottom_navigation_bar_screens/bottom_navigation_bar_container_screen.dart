@@ -12,6 +12,7 @@ import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_scre
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/leaderboard_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/menu_screen/menu_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/posting_screen/posting_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/comparison_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/user_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_current_user_image_url_state.dart';
@@ -134,6 +135,12 @@ class _BottomNavigationBarContainerScreenState
               );
             },
             child: Text('LOG OUT'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed(ComparisonScreen.routeName);
+            },
+            child: Text('COMPARISON'),
           ),
         ],
         body: SafeArea(child: currentPage),
