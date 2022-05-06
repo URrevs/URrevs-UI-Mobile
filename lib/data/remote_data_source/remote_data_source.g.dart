@@ -281,6 +281,58 @@ class _RemoteDataSource implements RemoteDataSource {
     return value;
   }
 
+  @override
+  Future<GetPhoneStatisticalInfoResponse> getPhoneStatisticalInfo(
+      phoneId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GetPhoneStatisticalInfoResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/phones/${phoneId}/stats',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GetPhoneStatisticalInfoResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<IndicateUserComparedBetweenTwoPhonesResponse>
+      indicateUserComparedBetweenTwoPhones(phoneId1, phoneId2) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<IndicateUserComparedBetweenTwoPhonesResponse>(
+            Options(method: 'PUT', headers: _headers, extra: _extra)
+                .compose(
+                    _dio.options, '/phones/${phoneId1}/compare/${phoneId2}',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value =
+        IndicateUserComparedBetweenTwoPhonesResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<GetSimilarPhonesResponse> getSimilarPhones(phoneId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GetSimilarPhonesResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/phones/${phoneId}/similar',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GetSimilarPhonesResponse.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

@@ -57,3 +57,50 @@ class GetPhoneSpecsResponse extends BaseResponse {
       _$GetPhoneSpecsResponseFromJson(json);
   Map<String, dynamic> toJson() => _$GetPhoneSpecsResponseToJson(this);
 }
+
+@JsonSerializable()
+class GetPhoneStatisticalInfoResponse extends BaseResponse {
+  @JsonKey(name: 'stats')
+  InfoSubResponse infoSubResponse;
+  GetPhoneStatisticalInfoResponse({
+    required bool success,
+    required this.infoSubResponse,
+  }) : super(success: success);
+
+  factory GetPhoneStatisticalInfoResponse.fromJson(Map<String, Object?> json) =>
+      _$GetPhoneStatisticalInfoResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$GetPhoneStatisticalInfoResponseToJson(this);
+}
+
+@JsonSerializable()
+class IndicateUserComparedBetweenTwoPhonesResponse extends BaseResponse {
+  String status;
+  IndicateUserComparedBetweenTwoPhonesResponse({
+    required bool success,
+    required this.status,
+  }) : super(success: success);
+
+  factory IndicateUserComparedBetweenTwoPhonesResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$IndicateUserComparedBetweenTwoPhonesResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$IndicateUserComparedBetweenTwoPhonesResponseToJson(this);
+}
+
+@JsonSerializable()
+class GetSimilarPhonesResponse extends BaseResponse {
+  @JsonKey(name: 'phones')
+  List<PhoneWithPictureSubResponse> phonesSubResponses;
+  GetSimilarPhonesResponse({
+    required bool success,
+    required this.phonesSubResponses,
+  }) : super(success: success);
+
+  List<Phone> get phonesModels =>
+      phonesSubResponses.map((p) => p.phoneModel).toList();
+
+  factory GetSimilarPhonesResponse.fromJson(Map<String, Object?> json) =>
+      _$GetSimilarPhonesResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$GetSimilarPhonesResponseToJson(this);
+}

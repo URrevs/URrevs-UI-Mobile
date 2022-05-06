@@ -54,3 +54,50 @@ Map<String, dynamic> _$GetPhoneSpecsResponseToJson(
       'success': instance.success,
       'specs': instance.specsSubResponse,
     };
+
+GetPhoneStatisticalInfoResponse _$GetPhoneStatisticalInfoResponseFromJson(
+        Map<String, dynamic> json) =>
+    GetPhoneStatisticalInfoResponse(
+      success: json['success'] as bool,
+      infoSubResponse:
+          InfoSubResponse.fromJson(json['stats'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$GetPhoneStatisticalInfoResponseToJson(
+        GetPhoneStatisticalInfoResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'stats': instance.infoSubResponse,
+    };
+
+IndicateUserComparedBetweenTwoPhonesResponse
+    _$IndicateUserComparedBetweenTwoPhonesResponseFromJson(
+            Map<String, dynamic> json) =>
+        IndicateUserComparedBetweenTwoPhonesResponse(
+          success: json['success'] as bool,
+          status: json['status'] as String,
+        );
+
+Map<String, dynamic> _$IndicateUserComparedBetweenTwoPhonesResponseToJson(
+        IndicateUserComparedBetweenTwoPhonesResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'status': instance.status,
+    };
+
+GetSimilarPhonesResponse _$GetSimilarPhonesResponseFromJson(
+        Map<String, dynamic> json) =>
+    GetSimilarPhonesResponse(
+      success: json['success'] as bool,
+      phonesSubResponses: (json['phones'] as List<dynamic>)
+          .map((e) =>
+              PhoneWithPictureSubResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$GetSimilarPhonesResponseToJson(
+        GetSimilarPhonesResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'phones': instance.phonesSubResponses,
+    };

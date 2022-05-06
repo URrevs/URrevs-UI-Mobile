@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+
 import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/domain/models/company.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone.dart';
@@ -39,27 +40,6 @@ class _AllProductsSubscreenState extends ConsumerState<AllProductsSubscreen> {
 
   void _getPhones() {
     ref.read(getAllPhonesProvider.notifier).getPhones(_companyId);
-  }
-
-  SliverAppBar _buildCompanyList() {
-    return SliverAppBar(
-      elevation: 3,
-      forceElevated: true,
-      snap: true,
-      floating: true,
-      toolbarHeight: 95.h,
-      collapsedHeight: 95.h,
-      expandedHeight: 95.h,
-      backgroundColor: ColorManager.transparent,
-      flexibleSpace: CompanyHorizontalListTile(
-        controller: _companiesController,
-        selectedCompanyId: _companyId,
-        setCompanyId: (id) {
-          setState(() => _companyId = id);
-          _phonesController.refresh();
-        },
-      ),
-    );
   }
 
   @override
@@ -111,7 +91,31 @@ class _AllProductsSubscreenState extends ConsumerState<AllProductsSubscreen> {
     return ScrollConfiguration(
       behavior: const ScrollBehavior().copyWith(overscroll: false),
       child: CustomScrollView(
-        slivers: [_buildCompanyList(), _buildPhonesList()],
+        slivers: [
+          _buildCompanyList(),
+          _buildPhonesList(),
+        ],
+      ),
+    );
+  }
+
+  SliverAppBar _buildCompanyList() {
+    return SliverAppBar(
+      elevation: 3,
+      forceElevated: true,
+      snap: true,
+      floating: true,
+      toolbarHeight: 95.h,
+      collapsedHeight: 95.h,
+      expandedHeight: 95.h,
+      backgroundColor: ColorManager.transparent,
+      flexibleSpace: CompanyHorizontalListTile(
+        controller: _companiesController,
+        selectedCompanyId: _companyId,
+        setCompanyId: (id) {
+          setState(() => _companyId = id);
+          _phonesController.refresh();
+        },
       ),
     );
   }

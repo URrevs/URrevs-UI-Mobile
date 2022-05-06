@@ -16,6 +16,7 @@ import 'package:urrevs_ui_mobile/data/responses/update_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/users_api_response.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/domain/models/company.dart';
+import 'package:urrevs_ui_mobile/domain/models/info.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone.dart';
 import 'package:urrevs_ui_mobile/domain/models/search_result.dart';
 import 'package:urrevs_ui_mobile/domain/models/specs.dart';
@@ -223,6 +224,28 @@ class Repository {
         _remoteDataSource.getPhoneSpecs(secondPhoneId),
       ]);
       return responses.map((r) => r.specsSubResponse.specsModel).toList();
+    });
+  }
+
+  Future<Either<Failure, Info>> getPhoneStatisticalInfo(String phoneId) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.getPhoneStatisticalInfo(phoneId);
+      return response.infoSubResponse.infoModel;
+    });
+  }
+
+  Future<Either<Failure, void>> indicateUserComparedBetweenTwoPhones(
+      String phoneId1, phoneId2) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.indicateUserComparedBetweenTwoPhones(
+          phoneId1, phoneId2);
+    });
+  }
+
+  Future<Either<Failure, List<Phone>>> getSimilarPhones(String phoneId) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.getSimilarPhones(phoneId);
+      return response.phonesModels;
     });
   }
 }

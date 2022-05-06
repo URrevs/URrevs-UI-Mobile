@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/assets_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 
 class CustomNetworkImage extends StatelessWidget {
@@ -8,14 +9,14 @@ class CustomNetworkImage extends StatelessWidget {
     required this.imageUrl,
     Key? key,
   }) : super(key: key);
-  final String imageUrl;
+  final String? imageUrl;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       child: ClipRRect(
         borderRadius: BorderRadius.circular(AppRadius.postCardRadius),
         child: Image.network(
-          imageUrl,
+          imageUrl ?? StringsManager.phoneImagePlaceHolder,
           fit: BoxFit.cover,
           filterQuality: FilterQuality.high,
           errorBuilder: (context, exception, stackTrace) {

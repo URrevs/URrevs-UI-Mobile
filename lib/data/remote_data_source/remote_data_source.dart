@@ -97,4 +97,22 @@ abstract class RemoteDataSource {
   Future<GetPhoneSpecsResponse> getPhoneSpecs(
     @Path() String phoneId,
   );
+
+  /// 22
+  @GET('/phones/{phoneId}/stats')
+  Future<GetPhoneStatisticalInfoResponse> getPhoneStatisticalInfo(
+    @Path() String phoneId,
+  );
+
+  @PUT('/phones/{phoneId1}/compare/{phoneId2}')
+  Future<IndicateUserComparedBetweenTwoPhonesResponse>
+      indicateUserComparedBetweenTwoPhones(
+    @Path() String phoneId1,
+    @Path() String phoneId2,
+  );
+
+  @GET('/phones/{phoneId}/similar')
+  Future<GetSimilarPhonesResponse> getSimilarPhones(
+    @Path() String phoneId,
+  );
 }

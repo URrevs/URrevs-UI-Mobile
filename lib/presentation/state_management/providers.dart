@@ -29,8 +29,12 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/get_curren
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_info_about_latest_update_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_my_owned_phones_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_all_phones_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_phone_specs_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_phone_statistical_info_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_phones_from_certain_company_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_similar_phones_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_two_phones_specs_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/indicate_user_compared_between_two_phones_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/add_new_recent_search_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/delete_recent_search_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/get_my_recent_searches_state.dart';
@@ -40,9 +44,14 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/give_point
 import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/search_products_and_companies_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/update_targets_from_source_state.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/fullscreen_error_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/partial_error_widget.dart';
 
+import 'notifiers/phones_notifier/get_phone_specs_notifier.dart';
 import 'notifiers/phones_notifier/get_phones_from_certain_company_notifier.dart';
+import 'notifiers/phones_notifier/get_similar_phones_notifier.dart';
+import 'notifiers/phones_notifier/indicate_user_compared_between_two_phones_notifier.dart';
+import 'notifiers/search_notifiers/get_phone_statistical_info_notifier.dart';
 
 final themeModeProvider = StateNotifierProvider<ThemeModeNotifier, ThemeMode>(
     (ref) => ThemeModeNotifier());
@@ -113,6 +122,24 @@ final getPhonesFromCertainCompanyProvider = StateNotifierProvider.autoDispose<
 final getTwoPhonesSpecsProvider = StateNotifierProvider.autoDispose<
     GetTwoPhonesSpecsNotifier,
     GetTwoPhonesSpecsState>((ref) => GetTwoPhonesSpecsNotifier());
+
+final getPhoneSpecsProvider = StateNotifierProvider.autoDispose<
+    GetPhoneSpecsNotifier,
+    GetPhoneSpecsState>((ref) => GetPhoneSpecsNotifier());
+
+final getPhoneStatisticalInfoProvider = StateNotifierProvider.autoDispose<
+    GetPhoneStatisticalInfoNotifier,
+    GetPhoneStatisticalInfoState>((ref) => GetPhoneStatisticalInfoNotifier());
+
+final indicateUserComparedBetweenTwoPhonesProvider =
+    StateNotifierProvider.autoDispose<
+            IndicateUserComparedBetweenTwoPhonesNotifier,
+            IndicateUserComparedBetweenTwoPhonesState>(
+        (ref) => IndicateUserComparedBetweenTwoPhonesNotifier());
+
+final getSimilarPhonesProvider = StateNotifierProvider.autoDispose<
+    GetSimilarPhonesNotifier,
+    GetSimilarPhonesState>((ref) => GetSimilarPhonesNotifier());
 
 final userImageFetchedFlagProvider = StateProvider<bool>((ref) {
   return false;
@@ -197,4 +224,7 @@ extension WidgetRefListeners on WidgetRef {
       return SizedBox();
     }
   }
+
+  
 }
+

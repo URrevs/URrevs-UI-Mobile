@@ -97,8 +97,11 @@ class RouteGenerator {
           builder: (_) => CompanyProfileScreen(screenArgs),
         );
       case ProductProfileScreen.routeName:
+        final screenArgs =
+            routeSettings.arguments as ProductProfileScreenArgs? ??
+                ProductProfileScreenArgs.defaultArgs;
         return MaterialPageRoute(
-          builder: (_) => ProductProfileScreen(),
+          builder: (_) => ProductProfileScreen(screenArgs),
         );
       case AuthenticationScreen.routeName:
         return MaterialPageRoute(

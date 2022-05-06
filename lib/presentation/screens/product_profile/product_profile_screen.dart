@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'package:urrevs_ui_mobile/presentation/resources/assets_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/product_profile/subscreens/product_profile_q_a_subscreen.dart';
@@ -14,8 +15,21 @@ import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/scaffold_with_hiding_fab.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
+class ProductProfileScreenArgs {
+  String phoneId;
+  ProductProfileScreenArgs({
+    required this.phoneId,
+  });
+
+  static ProductProfileScreenArgs get defaultArgs {
+    return ProductProfileScreenArgs(phoneId: '6256a75b5f87fa90093a4bd6');
+  }
+}
+
 class ProductProfileScreen extends ConsumerStatefulWidget {
-  const ProductProfileScreen({Key? key}) : super(key: key);
+  const ProductProfileScreen(this.screenArgs, {Key? key}) : super(key: key);
+
+  final ProductProfileScreenArgs screenArgs;
 
   static const String routeName = 'ProductProfileScreen';
 
@@ -84,7 +98,7 @@ class _ProductProfileScreenState extends ConsumerState<ProductProfileScreen>
         controller: _tabController,
         children: [
           ProductProfileReviewsSubscreen(),
-          ProductProfileSpecsSubscreen(),
+          ProductProfileSpecsSubscreen(phoneId: widget.screenArgs.phoneId),
           ProductProfileQASubscreen(),
         ],
       ),

@@ -59,9 +59,15 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
           .addRecentSeatchToState(searchResult);
     }
     if (searchResult.type == SearchType.phone) {
-      Navigator.of(context).pushNamed(ProductProfileScreen.routeName);
+      Navigator.of(context).pushNamed(
+        ProductProfileScreen.routeName,
+        arguments: ProductProfileScreenArgs(phoneId: searchResult.id),
+      );
     } else {
-      Navigator.of(context).pushNamed(CompanyProfileScreen.routeName);
+      Navigator.of(context).pushNamed(
+        CompanyProfileScreen.routeName,
+        arguments: CompanyProfileScreenArgs(companyId: searchResult.id),
+      );
     }
   }
 

@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'package:urrevs_ui_mobile/domain/models/company.dart';
+import 'package:urrevs_ui_mobile/domain/models/info.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone.dart';
 import 'package:urrevs_ui_mobile/domain/models/search_result.dart';
 import 'package:urrevs_ui_mobile/domain/models/specs.dart';
@@ -274,4 +275,67 @@ class SpecsSubResponse {
   factory SpecsSubResponse.fromJson(Map<String, Object?> json) =>
       _$SpecsSubResponseFromJson(json);
   Map<String, dynamic> toJson() => _$SpecsSubResponseToJson(this);
+}
+
+@JsonSerializable()
+class InfoSubResponse {
+  int views;
+  num generalRating;
+  num companyRating;
+  num uiRating;
+  num manufacturingQuality;
+  num valueForMoney;
+  num camera;
+  num callQuality;
+  num battery;
+
+  InfoSubResponse({
+    required this.views,
+    required this.generalRating,
+    required this.companyRating,
+    required this.uiRating,
+    required this.manufacturingQuality,
+    required this.valueForMoney,
+    required this.camera,
+    required this.callQuality,
+    required this.battery,
+  });
+
+  Info get infoModel => Info(
+        views: views,
+        generalRating: generalRating,
+        companyRating: companyRating,
+        uiRating: uiRating,
+        manufacturingQuality: manufacturingQuality,
+        valueForMoney: valueForMoney,
+        camera: camera,
+        callQuality: callQuality,
+        battery: battery,
+      );
+
+  factory InfoSubResponse.fromJson(Map<String, Object?> json) =>
+      _$InfoSubResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$InfoSubResponseToJson(this);
+}
+
+@JsonSerializable()
+class PhoneWithPictureSubResponse {
+  @JsonKey(name: '_id')
+  String id;
+  String type;
+  String name;
+  String picture;
+
+  PhoneWithPictureSubResponse({
+    required this.id,
+    required this.type,
+    required this.name,
+    required this.picture,
+  });
+
+  Phone get phoneModel => Phone(id: id, name: name, picture: picture);
+
+  factory PhoneWithPictureSubResponse.fromJson(Map<String, Object?> json) =>
+      _$PhoneWithPictureSubResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$PhoneWithPictureSubResponseToJson(this);
 }
