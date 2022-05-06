@@ -103,6 +103,7 @@ final getAllPhonesProvider =
     StateNotifierProvider.autoDispose<GetAllPhonesNotifier, GetAllPhonesState>(
         (ref) => GetAllPhonesNotifier());
 
+@Deprecated('Use [getAllPhonesProvider] instead')
 final getPhonesFromCertainCompanyProvider = StateNotifierProvider.autoDispose<
         GetPhonesFromCertainCompanyNotifier, GetPhonesFromCertainCompanyState>(
     (ref) => GetPhonesFromCertainCompanyNotifier());
@@ -175,14 +176,14 @@ extension WidgetRefListeners on WidgetRef {
   Widget partialErrorWidget({
     required ProviderListenable provider,
     required VoidCallback onRetry,
-    required PagingController controller,
+    required PagingController? controller,
   }) {
     final state = watch(provider);
     if (state is ErrorState) {
       return PartialErrorWidget(
         onRetry: () {
           onRetry();
-          controller.retryLastFailedRequest();
+          controller?.retryLastFailedRequest();
         },
         retryLastRequest: state.failure is RetryFailure,
       );

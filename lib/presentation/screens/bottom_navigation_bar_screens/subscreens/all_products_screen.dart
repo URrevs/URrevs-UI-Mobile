@@ -141,18 +141,12 @@ class _AllProductsSubscreenState extends ConsumerState<AllProductsSubscreen> {
         },
         firstPageErrorIndicatorBuilder: (context) => SizedBox(),
         newPageErrorIndicatorBuilder: (context) {
-          final state = ref.watch(getAllPhonesProvider);
-          if (state is GetAllPhonesErrorState) {
-            return PartialErrorWidget(
-              onRetry: () {
-                ref.read(getAllPhonesProvider.notifier).getPhones(_companyId);
-                _phonesController.retryLastFailedRequest();
-              },
-              retryLastRequest: state.failure is RetryFailure,
-            );
-          } else {
-            return SizedBox();
-          }
+          return ref.partialErrorWidget(
+            controller: _phonesController,
+            provider: getAllPhonesProvider,
+            onRetry: () =>
+                ref.read(getAllPhonesProvider.notifier).getPhones(_companyId),
+          );
         },
         firstPageProgressIndicatorBuilder: (context) =>
             AllProductsListLoading(),
