@@ -5,6 +5,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/buttons/grad_button.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/fields/search_text_field.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/custom_alert_dialog.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
@@ -29,12 +30,7 @@ class CompareDialoge extends StatefulWidget {
 class _CompareDialogeState extends State<CompareDialoge> {
   @override
   Widget build(BuildContext context) {
-    final InputBorder inputBorder = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(40.r),
-      borderSide: BorderSide(width: 0.5, color: ColorManager.strokeGrey),
-    );
-    FocusNode focusNode = FocusNode();
-
+    
     return CustomAlertDialog(
       title: '',
       hasTitle: true,
@@ -52,47 +48,7 @@ class _CompareDialogeState extends State<CompareDialoge> {
           SizedBox(
             height: 10.h,
           ),
-          Container(
-            height: 46.h,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(40.r),
-              boxShadow: [
-                BoxShadow(
-                  color: ColorManager.black.withOpacity(0.1),
-                  blurRadius: 1,
-                  spreadRadius: 1,
-                  offset: Offset(0, 2),
-                )
-              ],
-            ),
-            child: TextField(
-              cursorColor: ColorManager.black,
-              controller: widget.searchCtl,
-              focusNode: focusNode,
-              style: TextStyleManager.s18w500.copyWith(
-                color: ColorManager.black,
-              ),
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.symmetric(
-                 horizontal: 20.w
-                ),
-                suffixIcon: Icon(
-                  IconsManager.search,
-                  size: 29.sp,
-                ),
-                suffixIconColor: ColorManager.black,
-                hintText: LocaleKeys.writeProductName.tr(),
-                filled: true,
-                fillColor: ColorManager.textFieldGrey,
-                focusColor: Colors.red,
-                errorBorder: inputBorder,
-                disabledBorder: inputBorder,
-                enabledBorder: inputBorder,
-                focusedBorder: inputBorder,
-              ),
-              onChanged: (_) => print(_),
-            ),
-          ),
+          SearchTextField(searchCtl: widget.searchCtl, fillColor: ColorManager.backgroundGrey,),
           SizedBox(
             height: 70.h,
           ),
@@ -113,3 +69,4 @@ class _CompareDialogeState extends State<CompareDialoge> {
     );
   }
 }
+

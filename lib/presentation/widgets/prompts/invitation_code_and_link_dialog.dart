@@ -61,7 +61,7 @@ class InvitationCodeDialog extends StatelessWidget {
                                   color: ColorManager.backgroundGrey),
                               borderRadius: BorderRadius.circular(5.r)),
                           filled: true,
-                          fillColor: ColorManager.textFieldGrey,
+                          fillColor: ColorManager.dialogCloseIconBackgroundGrey,
                         ),
                       ),
                     ),

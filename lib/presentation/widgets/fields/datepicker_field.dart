@@ -38,12 +38,12 @@ class DatePickerField extends StatelessWidget {
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 5.w),
         border: OutlineInputBorder(
-            borderSide: BorderSide(color: ColorManager.backgroundGrey),
+            borderSide: BorderSide(width: 0.8, color: ColorManager.backgroundGrey),
             borderRadius: BorderRadius.circular(5.r)),
         hintText: hintText,
         hintStyle: TextStyleManager.s16w300.copyWith(color: ColorManager.black),
         filled: true,
-        fillColor: ColorManager.textFieldGrey,
+        fillColor: ColorManager.backgroundGrey,
         suffixIcon: Icon(
           IconsManager.expand,
           size: 32.sp,

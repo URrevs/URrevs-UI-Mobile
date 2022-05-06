@@ -116,6 +116,7 @@ class _AddingCompetitionPromptState extends State<AddingCompetitionPrompt> {
             textController: widget.numberOfWinnersController,
             hintText: LocaleKeys.winnersNumber.tr(),
             keyboardType: TextInputType.number,
+            fillColor: ColorManager.backgroundGrey,
           ),
           SizedBox(height: 14.h),
           Text(
@@ -130,6 +131,7 @@ class _AddingCompetitionPromptState extends State<AddingCompetitionPrompt> {
             textController: widget.prizeNameController,
             hintText: LocaleKeys.prizeName.tr(),
             keyboardType: TextInputType.text,
+            fillColor: ColorManager.backgroundGrey
           ),
           SizedBox(height: 14.h),
           Text(
@@ -144,6 +146,7 @@ class _AddingCompetitionPromptState extends State<AddingCompetitionPrompt> {
             textController: widget.imgUrlController,
             hintText: LocaleKeys.prizeImageLink.tr(),
             keyboardType: TextInputType.url,
+            fillColor: ColorManager.backgroundGrey
           ),
           SizedBox(height: 14.h),
           prizeImageBuilder(),

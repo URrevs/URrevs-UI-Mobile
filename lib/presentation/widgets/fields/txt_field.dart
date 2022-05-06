@@ -9,12 +9,14 @@ class TxtField extends StatelessWidget {
     Key? key,
     required this.textController,
     required this.hintText,
-    required this.keyboardType
+    required this.keyboardType,
+    required this.fillColor,
   }) : super(key: key);
 
   final TextEditingController textController;
   final String hintText;
   final TextInputType keyboardType;
+  final Color fillColor;
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +32,13 @@ class TxtField extends StatelessWidget {
         contentPadding:
             EdgeInsets.symmetric(vertical: 20.h, horizontal: 5.w),
         border: OutlineInputBorder(
-            borderSide: BorderSide(color: ColorManager.backgroundGrey),
+            borderSide: BorderSide(width: 0.8, color: ColorManager.backgroundGrey),
             borderRadius: BorderRadius.circular(5.r)),
         hintText: hintText,
         hintStyle:
             TextStyleManager.s16w300.copyWith(color: ColorManager.black),
         filled: true,
-        fillColor: ColorManager.textFieldGrey,
+        fillColor: fillColor,
       ),
     );
   }

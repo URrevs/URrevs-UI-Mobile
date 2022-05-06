@@ -1,5 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:urrevs_ui_mobile/presentation/presentation_models/posting_review_model.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/fields/search_text_field.dart';
+import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 class PostingReviewSubscreen extends StatefulWidget {
   const PostingReviewSubscreen({Key? key}) : super(key: key);
@@ -52,6 +58,16 @@ class _PostingReviewSubscreenState extends State<PostingReviewSubscreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return ListView(
+      padding: AppEdgeInsets.screenPadding,
+      addAutomaticKeepAlives: false,
+      cacheExtent: 100,
+      children: [
+        Text(LocaleKeys.chooseProduct.tr() + ':',
+            style: TextStyleManager.s18w700),
+            SearchTextField(searchCtl: productNameController, fillColor: ColorManager.textFieldGrey,),
+
+      ]
+    );
   }
 }
