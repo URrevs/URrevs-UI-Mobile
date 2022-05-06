@@ -11,7 +11,8 @@ GetAllPhonesResponse _$GetAllPhonesResponseFromJson(
     GetAllPhonesResponse(
       success: json['success'] as bool,
       phonesSubResponses: (json['phones'] as List<dynamic>)
-          .map((e) => PhoneSubResponse.fromJson(e as Map<String, dynamic>))
+          .map((e) => PhoneWithCompanyLogogSubResponse.fromJson(
+              e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -27,7 +28,7 @@ GetPhonesFromCertainCompanyResponse
         GetPhonesFromCertainCompanyResponse(
           success: json['success'] as bool,
           phonesSubResponses: (json['phones'] as List<dynamic>)
-              .map((e) => PhoneWithCompanyIdAndNameSubResponse.fromJson(
+              .map((e) => PhoneWithCompanyLogogSubResponse.fromJson(
                   e as Map<String, dynamic>))
               .toList(),
         );

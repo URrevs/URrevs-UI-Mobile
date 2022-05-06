@@ -10,7 +10,7 @@ part 'phones_api_responses.g.dart';
 @JsonSerializable()
 class GetAllPhonesResponse extends BaseResponse {
   @JsonKey(name: 'phones')
-  List<PhoneSubResponse> phonesSubResponses;
+  List<PhoneWithCompanyLogogSubResponse> phonesSubResponses;
   GetAllPhonesResponse({
     required bool success,
     required this.phonesSubResponses,
@@ -28,7 +28,7 @@ class GetAllPhonesResponse extends BaseResponse {
 @JsonSerializable()
 class GetPhonesFromCertainCompanyResponse extends BaseResponse {
   @JsonKey(name: 'phones')
-  List<PhoneWithCompanyIdAndNameSubResponse> phonesSubResponses;
+  List<PhoneWithCompanyLogogSubResponse> phonesSubResponses;
   GetPhonesFromCertainCompanyResponse({
     required bool success,
     required this.phonesSubResponses,

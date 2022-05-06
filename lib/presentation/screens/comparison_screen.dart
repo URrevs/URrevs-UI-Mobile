@@ -65,6 +65,7 @@ class _ComparisonScreenState extends ConsumerState<ComparisonScreen> {
   }
 
   Widget _buildBody() {
+    ref.addErrorListener(provider: getTwoPhonesSpecsProvider, context: context);
     final state = ref.watch(getTwoPhonesSpecsProvider);
     if (state is InitialState || state is LoadingState) {
       return ComparisonTableLoading();
@@ -75,13 +76,16 @@ class _ComparisonScreenState extends ConsumerState<ComparisonScreen> {
       );
     }
     state as GetTwoPhonesSpecsLoadedState;
-    return SpecsComparisonTable(
-      firstProductName: state.firstPhoneSpecs.name,
-      secondProductName: state.secondPhoneSpecs.name,
-      firstProductImageUrl: state.firstPhoneSpecs.picture,
-      secondProductImageIrl: state.secondPhoneSpecs.picture,
-      firstProductSpecs: state.firstPhoneSpecs,
-      secondProductSpecs: state.firstPhoneSpecs,
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 8),
+      child: SpecsComparisonTable(
+        firstProductName: state.firstPhoneSpecs.name,
+        secondProductName: state.secondPhoneSpecs.name,
+        firstProductImageUrl: state.firstPhoneSpecs.picture,
+        secondProductImageIrl: state.secondPhoneSpecs.picture,
+        firstProductSpecs: state.firstPhoneSpecs,
+        secondProductSpecs: state.firstPhoneSpecs,
+      ),
     );
   }
 }

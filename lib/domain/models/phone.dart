@@ -1,16 +1,15 @@
 import 'package:equatable/equatable.dart';
+
 import 'package:urrevs_ui_mobile/domain/models/search_result.dart';
 
 class Phone extends Equatable {
   final String id;
   final String name;
-  final String? companyId;
-  final String? companyName;
+  final String? companyLogo;
   const Phone({
     required this.id,
     required this.name,
-    this.companyId,
-    this.companyName,
+    this.companyLogo,
   });
 
   @override

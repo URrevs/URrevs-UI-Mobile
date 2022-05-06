@@ -130,7 +130,7 @@ class _AllProductsSubscreenState extends ConsumerState<AllProductsSubscreen> {
           return ItemTile(
             title: phone.name,
             subtitle: LocaleKeys.smartphone.tr(),
-            iconData: Icons.smartphone,
+            imageUrl: phone.companyLogo,
             onTap: () {
               Navigator.of(context).pushNamed(
                 ProductProfileScreen.routeName,

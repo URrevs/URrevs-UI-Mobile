@@ -139,32 +139,27 @@ class CompanyWithLogoSubResponse {
 }
 
 @JsonSerializable()
-class PhoneWithCompanyIdAndNameSubResponse {
+class PhoneWithCompanyLogogSubResponse {
   @JsonKey(name: '_id')
   String id;
+  String type;
   String name;
-  String companyId;
-  String companyName;
+  String? companyLogo;
 
-  PhoneWithCompanyIdAndNameSubResponse({
+  PhoneWithCompanyLogogSubResponse({
     required this.id,
+    required this.type,
     required this.name,
-    required this.companyId,
-    required this.companyName,
+    required this.companyLogo,
   });
 
-  Phone get phoneModel => Phone(
-        id: id,
-        name: name,
-        companyId: companyId,
-        companyName: companyName,
-      );
+  Phone get phoneModel => Phone(id: id, name: name, companyLogo: companyLogo);
 
-  factory PhoneWithCompanyIdAndNameSubResponse.fromJson(
+  factory PhoneWithCompanyLogogSubResponse.fromJson(
           Map<String, Object?> json) =>
-      _$PhoneWithCompanyIdAndNameSubResponseFromJson(json);
+      _$PhoneWithCompanyLogogSubResponseFromJson(json);
   Map<String, dynamic> toJson() =>
-      _$PhoneWithCompanyIdAndNameSubResponseToJson(this);
+      _$PhoneWithCompanyLogogSubResponseToJson(this);
 }
 
 @JsonSerializable()

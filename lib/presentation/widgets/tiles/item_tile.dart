@@ -20,8 +20,7 @@ class ItemTile extends StatelessWidget {
     this.showDivider = false,
     this.trailing,
     Key? key,
-  })  : assert(iconData != null || imageUrl != null),
-        assert(iconData == null || imageUrl == null),
+  })  : assert(iconData == null || imageUrl == null),
         super(key: key);
 
   /// The name of the item.

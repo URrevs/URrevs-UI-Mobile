@@ -109,22 +109,22 @@ Map<String, dynamic> _$CompanyWithLogoSubResponseToJson(
       'logo': instance.logo,
     };
 
-PhoneWithCompanyIdAndNameSubResponse
-    _$PhoneWithCompanyIdAndNameSubResponseFromJson(Map<String, dynamic> json) =>
-        PhoneWithCompanyIdAndNameSubResponse(
-          id: json['_id'] as String,
-          name: json['name'] as String,
-          companyId: json['companyId'] as String,
-          companyName: json['companyName'] as String,
-        );
+PhoneWithCompanyLogogSubResponse _$PhoneWithCompanyLogogSubResponseFromJson(
+        Map<String, dynamic> json) =>
+    PhoneWithCompanyLogogSubResponse(
+      id: json['_id'] as String,
+      type: json['type'] as String,
+      name: json['name'] as String,
+      companyLogo: json['companyLogo'] as String?,
+    );
 
-Map<String, dynamic> _$PhoneWithCompanyIdAndNameSubResponseToJson(
-        PhoneWithCompanyIdAndNameSubResponse instance) =>
+Map<String, dynamic> _$PhoneWithCompanyLogogSubResponseToJson(
+        PhoneWithCompanyLogogSubResponse instance) =>
     <String, dynamic>{
       '_id': instance.id,
+      'type': instance.type,
       'name': instance.name,
-      'companyId': instance.companyId,
-      'companyName': instance.companyName,
+      'companyLogo': instance.companyLogo,
     };
 
 SpecsSubResponse _$SpecsSubResponseFromJson(Map<String, dynamic> json) =>
