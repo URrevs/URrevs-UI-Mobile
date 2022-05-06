@@ -5,7 +5,7 @@ import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/domain/models/company.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone.dart';
 import 'package:urrevs_ui_mobile/domain/repository.dart';
-import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_all_phones_states.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_all_phones_state.dart';
 
 class GetAllPhonesNotifier extends StateNotifier<GetAllPhonesState> {
   GetAllPhonesNotifier() : super(GetAllPhonesInitialState());
@@ -19,7 +19,7 @@ class GetAllPhonesNotifier extends StateNotifier<GetAllPhonesState> {
     final currentState = state;
     // get previously loaded phones
     if (currentState is GetAllPhonesLoadedState) {
-      currentPhones = currentState.phones;
+      currentPhones = [...currentState.infiniteScrollingItems];
     }
     // clear previous phones list if company id is different
     if (companyId != _previousCompanyId) {
@@ -41,7 +41,7 @@ class GetAllPhonesNotifier extends StateNotifier<GetAllPhonesState> {
         bool roundsEnded = phones.isEmpty;
         List<Phone> newPhones = [...currentPhones, ...phones];
         state = GetAllPhonesLoadedState(
-          phones: newPhones,
+          infiniteScrollingItems: newPhones,
           roundsEnded: roundsEnded,
         );
         _round++;

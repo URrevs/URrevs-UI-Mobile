@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/domain/models/company.dart';
 import 'package:urrevs_ui_mobile/domain/repository.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
@@ -26,7 +27,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/companies_
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_current_user_image_url_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_info_about_latest_update_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_my_owned_phones_state.dart';
-import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_all_phones_states.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_all_phones_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_phones_from_certain_company_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/add_new_recent_search_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/delete_recent_search_state.dart';
@@ -37,6 +38,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/give_point
 import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/search_products_and_companies_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/update_targets_from_source_state.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/partial_error_widget.dart';
 
 import 'notifiers/phones_notifier/get_phones_from_certain_company_notifier.dart';
 
@@ -167,5 +169,25 @@ extension WidgetRefListeners on WidgetRef {
         controller.itemList = items;
       }
     });
+  }
+
+  /// Return partial error widget put into infinite scrolling lists.
+  Widget partialErrorWidget({
+    required ProviderListenable provider,
+    required VoidCallback onRetry,
+    required PagingController controller,
+  }) {
+    final state = watch(provider);
+    if (state is ErrorState) {
+      return PartialErrorWidget(
+        onRetry: () {
+          onRetry();
+          controller.retryLastFailedRequest();
+        },
+        retryLastRequest: state.failure is RetryFailure,
+      );
+    } else {
+      return SizedBox();
+    }
   }
 }

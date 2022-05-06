@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/updated_list_tile.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
@@ -12,12 +14,15 @@ class ItemTile extends StatelessWidget {
   const ItemTile({
     required this.title,
     this.subtitle,
-    required this.iconData,
+    this.iconData,
+    this.imageUrl,
     required this.onTap,
     this.showDivider = false,
     this.trailing,
     Key? key,
-  }) : super(key: key);
+  })  : assert(iconData != null || imageUrl != null),
+        assert(iconData == null || imageUrl == null),
+        super(key: key);
 
   /// The name of the item.
   final String title;
@@ -26,7 +31,9 @@ class ItemTile extends StatelessWidget {
   final String? subtitle;
 
   /// [IconData] to be shown in the leading of the list tile.
-  final IconData iconData;
+  final IconData? iconData;
+
+  final String? imageUrl;
 
   /// The function that is called when the item is tapped.
   final VoidCallback? onTap;
@@ -55,10 +62,9 @@ class ItemTile extends StatelessWidget {
                   ),
                 )
               : null,
-          leading: Icon(
-            iconData,
-            size: 40.sp,
-          ),
+          leading: iconData != null
+              ? Icon(iconData, size: 40.sp)
+              : Avatar(imageUrl: imageUrl, radius: AppRadius.companyLogo),
           trailing: trailing,
         ),
         if (showDivider)

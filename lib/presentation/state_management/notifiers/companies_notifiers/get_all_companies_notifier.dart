@@ -33,7 +33,6 @@ class GetAllCompaniesNotifier extends StateNotifier<GetAllCompaniesState> {
         );
         // increment rounds
         _round++;
-        print(state);
       },
     );
   }

@@ -18,15 +18,23 @@ class GetAllPhonesLoadingState extends GetAllPhonesState
   List<Object?> get props => [];
 }
 
-class GetAllPhonesLoadedState extends GetAllPhonesState implements LoadedState {
-  final List<Phone> phones;
+class GetAllPhonesLoadedState extends GetAllPhonesState
+    implements LoadedState, InfiniteScrollingState<Phone> {
+  @override
+  final List<Phone> infiniteScrollingItems;
+  @override
   final bool roundsEnded;
   GetAllPhonesLoadedState({
-    required this.phones,
+    required this.infiniteScrollingItems,
     required this.roundsEnded,
   });
   @override
   List<Object?> get props => [];
+
+  @override
+  String toString() {
+    return 'GetAllPhonesLoadedState(infiniteScrollingItems: $infiniteScrollingItems, roundsEnded: $roundsEnded)';
+  }
 }
 
 class GetAllPhonesErrorState extends GetAllPhonesState implements ErrorState {
