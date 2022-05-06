@@ -126,7 +126,7 @@ class _SpecsComparisonTableState extends State<SpecsComparisonTable> {
         borderRadius: BorderRadius.circular(15),
         child: Image.network(
           imageUrl,
-          fit: BoxFit.cover,
+          fit: BoxFit.contain,
         ),
       ),
     );
