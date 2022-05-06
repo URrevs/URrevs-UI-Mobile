@@ -123,7 +123,7 @@ class _ProductProfileSpecsSubscreenState
     ]);
     if (widget != null) return widget;
     return ListView(
-      padding: EdgeInsets.only(left: 8.w, right: 8.w, top: 12.h, bottom: 70.h),
+      padding: AppEdgeInsets.screenPadding,
       addAutomaticKeepAlives: false,
       cacheExtent: 100,
       children: [

@@ -151,7 +151,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
   Widget _buildTextField() {
     final InputBorder inputBorder = OutlineInputBorder(
       borderRadius: BorderRadius.circular(40.r),
-      borderSide: BorderSide(width: 0.5, color: ColorManager.strokeGrey),
+      borderSide: BorderSide(width: 0.8, color: ColorManager.strokeGrey),
     );
     return Container(
       height: 46.h,
@@ -177,11 +177,16 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
           hintText: LocaleKeys.searchForAProductOrACompany.tr(),
           filled: true,
           fillColor: ColorManager.textFieldGrey,
+          hintStyle: TextStyleManager.s16w300.copyWith(
+                  color: ColorManager.black,
+                ),
           focusColor: Colors.red,
           errorBorder: inputBorder,
           disabledBorder: inputBorder,
           enabledBorder: inputBorder,
-          focusedBorder: inputBorder,
+          focusedBorder: inputBorder.copyWith(
+            borderSide: BorderSide(color: ColorManager.blue),
+          ),
         ),
         onChanged: (_) => _handleTextFieldChange(),
       ),

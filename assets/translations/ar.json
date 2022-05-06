@@ -183,5 +183,16 @@
   "writeProductName": "اكتب اسم المنتج",
   "specifications": "المواصفات",
   "similarPhones": "الهواتف المماثلة",
-  "comparison": "المقارنة"
+  "comparison": "المقارنة",
+  "chooseProduct": "اختر المنتج",
+  "howLongHaveYouOwnedThisProduct": "منذ متي وانت تمتلك هذا المنتج؟",
+  "rateOverallExpericence": "قيم تجربتك العامة مع المنتج",
+  "purchaseDate": "تاريخ الشراء",
+  "whatDoYouLikeAboutThisProduct": "ما الذي أعجبك بشأن هذا المنتج؟",
+  "whatDoYouHateAboutThisProduct": "ما الذي تكرهه بشأن هذا المنتج؟",
+  "howDoYouRateTheManufacturer": "كيف تقيم الشركة المصنعة؟",
+  "WhatDoYouLikeAbout": "ماذا يعجبك بشأن",
+  "whatDoYouHateAbout": "ما الذي تكرهه بشأن",
+  "invitationCode": "كود الدعوة",
+  "enterInvitationCode": "قم بادخال كود الدعوة"
 }

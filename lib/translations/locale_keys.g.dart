@@ -186,5 +186,16 @@ abstract class  LocaleKeys {
   static const specifications = 'specifications';
   static const similarPhones = 'similarPhones';
   static const comparison = 'comparison';
+  static const chooseProduct = 'chooseProduct';
+  static const howLongHaveYouOwnedThisProduct = 'howLongHaveYouOwnedThisProduct';
+  static const rateOverallExpericence = 'rateOverallExpericence';
+  static const purchaseDate = 'purchaseDate';
+  static const whatDoYouLikeAboutThisProduct = 'whatDoYouLikeAboutThisProduct';
+  static const whatDoYouHateAboutThisProduct = 'whatDoYouHateAboutThisProduct';
+  static const howDoYouRateTheManufacturer = 'howDoYouRateTheManufacturer';
+  static const WhatDoYouLikeAbout = 'WhatDoYouLikeAbout';
+  static const whatDoYouHateAbout = 'whatDoYouHateAbout';
+  static const invitationCode = 'invitationCode';
+  static const enterInvitationCode = 'enterInvitationCode';
 
 }
