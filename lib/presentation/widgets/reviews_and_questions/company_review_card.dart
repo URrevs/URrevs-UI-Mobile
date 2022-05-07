@@ -25,7 +25,7 @@ class CompanyReviewCard extends StatelessWidget {
   final String authorName;
 
   /// Profile image url of the current logged in user.
-  final String imageUrl;
+  final String? imageUrl;
 
   /// Name of product on which the review was posted.
   final String companyName;
@@ -33,8 +33,6 @@ class CompanyReviewCard extends StatelessWidget {
   /// The date where the review was posted.
   final DateTime postedDate;
 
-  /// The date from which the user started using the product.
-  final DateTime usedSinceDate;
 
   /// How many times this review was viewed.
   final int views;
@@ -72,7 +70,6 @@ class CompanyReviewCard extends StatelessWidget {
   const CompanyReviewCard({
     Key? key,
     required this.postedDate,
-    required this.usedSinceDate,
     required this.views,
     required this.authorName,
     required this.imageUrl,
@@ -92,7 +89,6 @@ class CompanyReviewCard extends StatelessWidget {
   static CompanyReviewCard dummyInstance({bool fullscreen = false}) =>
       CompanyReviewCard(
         postedDate: DateTime.now(),
-        usedSinceDate: DateTime.now().subtract(Duration(days: 200)),
         views: 100,
         authorName: faker.person.name(),
         imageUrl: StringsManager.picsum200x200,
@@ -127,7 +123,6 @@ class CompanyReviewCard extends StatelessWidget {
   }) {
     return CompanyReviewCard(
       postedDate: postedDate ?? this.postedDate,
-      usedSinceDate: usedSinceDate ?? this.usedSinceDate,
       views: views ?? this.views,
       authorName: authorName ?? this.authorName,
       imageUrl: imageUrl ?? this.imageUrl,

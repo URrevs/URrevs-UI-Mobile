@@ -122,4 +122,9 @@ abstract class RemoteDataSource {
   Future<GetPhoneReviewResponse> getPhoneReview(
     @Path() String phoneId,
   );
+
+  @GET('/reviews/company/{reviewId}')
+  Future<GetCompanyReviewResponse> getCompanyReview(
+    @Path() String reviewId,
+  );
 }

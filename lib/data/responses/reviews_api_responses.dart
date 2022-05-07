@@ -8,13 +8,27 @@ part 'reviews_api_responses.g.dart';
 @JsonSerializable()
 class GetPhoneReviewResponse extends BaseResponse {
   @JsonKey(name: 'review')
-  ReviewSubResponse reviewSubResponses;
+  PhoneReviewSubResponse phoneReviewSubRespone;
   GetPhoneReviewResponse({
     required bool success,
-    required this.reviewSubResponses,
+    required this.phoneReviewSubRespone,
   }) : super(success: success);
 
   factory GetPhoneReviewResponse.fromJson(Map<String, Object?> json) =>
       _$GetPhoneReviewResponseFromJson(json);
   Map<String, dynamic> toJson() => _$GetPhoneReviewResponseToJson(this);
+}
+
+@JsonSerializable()
+class GetCompanyReviewResponse extends BaseResponse {
+  @JsonKey(name: 'review')
+  CompanyReviewSubResponse companyReviewSubResponses;
+  GetCompanyReviewResponse({
+    required bool success,
+    required this.companyReviewSubResponses,
+  }) : super(success: success);
+
+  factory GetCompanyReviewResponse.fromJson(Map<String, Object?> json) =>
+      _$GetCompanyReviewResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$GetCompanyReviewResponseToJson(this);
 }

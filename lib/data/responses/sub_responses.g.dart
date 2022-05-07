@@ -243,17 +243,18 @@ Map<String, dynamic> _$PhoneWithPictureSubResponseToJson(
       'picture': instance.picture,
     };
 
-ReviewSubResponse _$ReviewSubResponseFromJson(Map<String, dynamic> json) =>
-    ReviewSubResponse(
+PhoneReviewSubResponse _$PhoneReviewSubResponseFromJson(
+        Map<String, dynamic> json) =>
+    PhoneReviewSubResponse(
       id: json['_id'] as String,
       type: json['type'] as String,
       targetId: json['targetId'] as String,
       targetName: json['targetName'] as String,
       userId: json['userId'] as String,
       userName: json['userName'] as String,
-      photo: json['photo'] as String,
-      createdAt:
-          ReviewSubResponse._dateTimeFromTimestamp(json['createdAt'] as int),
+      photo: json['photo'] as String?,
+      createdAt: PhoneReviewSubResponse._dateTimeFromTimestamp(
+          json['createdAt'] as int),
       views: json['views'] as int,
       likes: json['likes'] as int,
       commentsCount: json['commentsCount'] as int,
@@ -271,7 +272,8 @@ ReviewSubResponse _$ReviewSubResponseFromJson(Map<String, dynamic> json) =>
       liked: json['liked'] as bool,
     );
 
-Map<String, dynamic> _$ReviewSubResponseToJson(ReviewSubResponse instance) =>
+Map<String, dynamic> _$PhoneReviewSubResponseToJson(
+        PhoneReviewSubResponse instance) =>
     <String, dynamic>{
       '_id': instance.id,
       'type': instance.type,
@@ -293,6 +295,51 @@ Map<String, dynamic> _$ReviewSubResponseToJson(ReviewSubResponse instance) =>
       'camera': instance.camera,
       'callQuality': instance.callQuality,
       'battery': instance.battery,
+      'pros': instance.pros,
+      'cons': instance.cons,
+      'liked': instance.liked,
+    };
+
+CompanyReviewSubResponse _$CompanyReviewSubResponseFromJson(
+        Map<String, dynamic> json) =>
+    CompanyReviewSubResponse(
+      id: json['_id'] as String,
+      type: json['type'] as String,
+      targetId: json['targetId'] as String,
+      targetName: json['targetName'] as String,
+      userId: json['userId'] as String,
+      userName: json['userName'] as String,
+      photo: json['picture'] as String?,
+      createdAt: CompanyReviewSubResponse._dateTimeFromTimestamp(
+          json['createdAt'] as int),
+      corresPhoneRev: json['corresPhoneRev'] as String,
+      views: json['views'] as int,
+      likes: json['likes'] as int,
+      commentsCount: json['commentsCount'] as int,
+      shares: json['shares'] as int,
+      generalRating: (json['generalRating'] as num).toDouble(),
+      pros: json['pros'] as String,
+      cons: json['cons'] as String,
+      liked: json['liked'] as bool,
+    );
+
+Map<String, dynamic> _$CompanyReviewSubResponseToJson(
+        CompanyReviewSubResponse instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'type': instance.type,
+      'targetId': instance.targetId,
+      'targetName': instance.targetName,
+      'userId': instance.userId,
+      'userName': instance.userName,
+      'picture': instance.photo,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'corresPhoneRev': instance.corresPhoneRev,
+      'views': instance.views,
+      'likes': instance.likes,
+      'commentsCount': instance.commentsCount,
+      'shares': instance.shares,
+      'generalRating': instance.generalRating,
       'pros': instance.pros,
       'cons': instance.cons,
       'liked': instance.liked,

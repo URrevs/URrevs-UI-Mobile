@@ -23,7 +23,7 @@ import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 /// A card showing a review for a product.
 class ProductReviewCard extends StatelessWidget {
   /// Profile image url of the current logged in user.
-  final String imageUrl;
+  final String? imageUrl;
 
   /// Name of review author.
   final String authorName;

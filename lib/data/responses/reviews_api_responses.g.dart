@@ -10,13 +10,28 @@ GetPhoneReviewResponse _$GetPhoneReviewResponseFromJson(
         Map<String, dynamic> json) =>
     GetPhoneReviewResponse(
       success: json['success'] as bool,
-      reviewSubResponses:
-          ReviewSubResponse.fromJson(json['review'] as Map<String, dynamic>),
+      phoneReviewSubRespone: PhoneReviewSubResponse.fromJson(
+          json['review'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$GetPhoneReviewResponseToJson(
         GetPhoneReviewResponse instance) =>
     <String, dynamic>{
       'success': instance.success,
-      'review': instance.reviewSubResponses,
+      'review': instance.phoneReviewSubRespone,
+    };
+
+GetCompanyReviewResponse _$GetCompanyReviewResponseFromJson(
+        Map<String, dynamic> json) =>
+    GetCompanyReviewResponse(
+      success: json['success'] as bool,
+      companyReviewSubResponses: CompanyReviewSubResponse.fromJson(
+          json['review'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$GetCompanyReviewResponseToJson(
+        GetCompanyReviewResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'review': instance.companyReviewSubResponses,
     };

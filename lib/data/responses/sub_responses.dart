@@ -1,9 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'package:urrevs_ui_mobile/domain/models/company.dart';
+import 'package:urrevs_ui_mobile/domain/models/company_review.dart';
 import 'package:urrevs_ui_mobile/domain/models/info.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone.dart';
-import 'package:urrevs_ui_mobile/domain/models/review.dart';
+import 'package:urrevs_ui_mobile/domain/models/phone_review.dart';
 import 'package:urrevs_ui_mobile/domain/models/search_result.dart';
 import 'package:urrevs_ui_mobile/domain/models/specs.dart';
 import 'package:urrevs_ui_mobile/domain/models/user.dart';
@@ -342,7 +343,7 @@ class PhoneWithPictureSubResponse {
 }
 
 @JsonSerializable()
-class ReviewSubResponse {
+class PhoneReviewSubResponse {
   @JsonKey(name: '_id')
   String id;
   String type;
@@ -350,7 +351,7 @@ class ReviewSubResponse {
   String targetName;
   String userId;
   String userName;
-  String photo;
+  String? photo;
   @JsonKey(fromJson: _dateTimeFromTimestamp)
   DateTime createdAt;
   int views;
@@ -369,7 +370,7 @@ class ReviewSubResponse {
   String cons;
   bool liked;
 
-  ReviewSubResponse({
+  PhoneReviewSubResponse({
     required this.id,
     required this.type,
     required this.targetId,
@@ -395,7 +396,7 @@ class ReviewSubResponse {
     required this.liked,
   });
 
-  PhoneReview get reviewModel => PhoneReview(
+  PhoneReview get phoneReviewModel => PhoneReview(
         id: id,
         type: type,
         targetId: targetId,
@@ -424,7 +425,78 @@ class ReviewSubResponse {
   static DateTime _dateTimeFromTimestamp(int timestamp) =>
       DateTime.fromMillisecondsSinceEpoch(timestamp);
 
-  factory ReviewSubResponse.fromJson(Map<String, Object?> json) =>
-      _$ReviewSubResponseFromJson(json);
-  Map<String, dynamic> toJson() => _$ReviewSubResponseToJson(this);
+  factory PhoneReviewSubResponse.fromJson(Map<String, Object?> json) =>
+      _$PhoneReviewSubResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$PhoneReviewSubResponseToJson(this);
+}
+
+@JsonSerializable()
+class CompanyReviewSubResponse {
+  @JsonKey(name: '_id')
+  String id;
+  String type;
+  String targetId;
+  String targetName;
+  String userId;
+  String userName;
+  @JsonKey(name: 'picture')
+  String? photo;
+  @JsonKey(fromJson: _dateTimeFromTimestamp)
+  DateTime createdAt;
+  String corresPhoneRev;
+  int views;
+  int likes;
+  int commentsCount;
+  int shares;
+  double generalRating;
+  String pros;
+  String cons;
+  bool liked;
+
+  CompanyReviewSubResponse({
+    required this.id,
+    required this.type,
+    required this.targetId,
+    required this.targetName,
+    required this.userId,
+    required this.userName,
+    required this.photo,
+    required this.createdAt,
+    required this.corresPhoneRev,
+    required this.views,
+    required this.likes,
+    required this.commentsCount,
+    required this.shares,
+    required this.generalRating,
+    required this.pros,
+    required this.cons,
+    required this.liked,
+  });
+
+  CompanyReview get companyReviewModel => CompanyReview(
+        id: id,
+        type: type,
+        targetId: targetId,
+        targetName: targetName,
+        userId: userId,
+        userName: userName,
+        photo: photo,
+        createdAt: createdAt,
+        corresPhoneRev: corresPhoneRev,
+        views: views,
+        likes: likes,
+        commentsCount: commentsCount,
+        shares: shares,
+        generalRating: generalRating,
+        pros: pros,
+        cons: cons,
+        liked: liked,
+      );
+
+  static DateTime _dateTimeFromTimestamp(int timestamp) =>
+      DateTime.fromMillisecondsSinceEpoch(timestamp);
+
+  factory CompanyReviewSubResponse.fromJson(Map<String, Object?> json) =>
+      _$CompanyReviewSubResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$CompanyReviewSubResponseToJson(this);
 }

@@ -9,7 +9,7 @@ class PhoneReview extends Equatable {
   final String targetName;
   final String userId;
   final String userName;
-  final String photo;
+  final String? photo;
   final DateTime createdAt;
   final int views;
   final int likes;

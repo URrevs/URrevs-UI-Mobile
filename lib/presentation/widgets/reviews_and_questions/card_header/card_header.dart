@@ -22,7 +22,7 @@ class CardHeader extends StatelessWidget {
   }) : super(key: key);
 
   /// Profile image url of the current logged in user.
-  final String imageUrl;
+  final String? imageUrl;
 
   /// Name of review author.
   final String authorName;

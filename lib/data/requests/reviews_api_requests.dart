@@ -1,1 +1,3 @@
 class GetPhoneReviewRequest {}
+
+class GetCompanyReviewRequest {}

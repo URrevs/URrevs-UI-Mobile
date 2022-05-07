@@ -2,17 +2,20 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:urrevs_ui_mobile/domain/models/review.dart';
+import 'package:urrevs_ui_mobile/domain/models/company_review.dart';
+import 'package:urrevs_ui_mobile/domain/models/phone_review.dart';
 
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_company_review_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_phone_review_state.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answers_list.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/comments_list.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/company_review_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/phone_review_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/company_review_card.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/product_review_card.dart';
@@ -31,7 +34,7 @@ class FullscreenPostScreenArgs {
 
   static FullscreenPostScreenArgs get defaultArgs {
     return FullscreenPostScreenArgs(
-      cardType: CardType.productReview,
+      cardType: CardType.companyReview,
       reviewId: '',
     );
   }
@@ -56,11 +59,28 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
   FocusNode focusNode = FocusNode();
 
   void _getPost() {
-    if (widget.screenArgs.cardType == CardType.productReview) {
-      ref
-          .read(getPhoneReviewProvider.notifier)
-          .getPhoneReview(widget.screenArgs.reviewId);
+    switch (widget.screenArgs.cardType) {
+      case CardType.productReview:
+        return _getProductReview();
+      case CardType.companyReview:
+        return _getCompanyReview();
+      // case CardType.productQuestion:
+      // case CardType.companyQuestion:
+      default:
+        return;
     }
+  }
+
+  void _getProductReview() {
+    ref
+        .read(getPhoneReviewProvider.notifier)
+        .getPhoneReview(widget.screenArgs.reviewId);
+  }
+
+  void _getCompanyReview() {
+    ref
+        .read(getCompanyReviewProvider.notifier)
+        .getCompanyReview(widget.screenArgs.reviewId);
   }
 
   String get hintText {
@@ -119,6 +139,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
   @override
   Widget build(BuildContext context) {
     ref.addErrorListener(provider: getPhoneReviewProvider, context: context);
+    ref.addErrorListener(provider: getCompanyReviewProvider, context: context);
     return Scaffold(
       appBar: AppBars.appBarWithActions(
         context: context,
@@ -132,9 +153,13 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
   }
 
   Widget _buildBody() {
-    final state = ref.watch(getPhoneReviewProvider);
+    final phoneReviewState = ref.watch(getPhoneReviewProvider);
+    final companyReviewState = ref.watch(getCompanyReviewProvider);
     Widget? widget = fullScreenErrorWidgetOrNull(
-      [StateAndRetry(state: state, onRetry: _getPost)],
+      [
+        StateAndRetry(state: phoneReviewState, onRetry: _getPost),
+        StateAndRetry(state: companyReviewState, onRetry: _getPost),
+      ],
     );
     if (widget != null) return widget;
     return Column(
@@ -155,6 +180,19 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
   }
 
   Widget _buildPost() {
+    switch (widget.screenArgs.cardType) {
+      case CardType.productReview:
+        return _buildPhoneReview();
+      case CardType.companyReview:
+        return _buildCompanyReview();
+      // case CardType.productQuestion:
+      // case CardType.companyQuestion:
+      default:
+        return SizedBox();
+    }
+  }
+
+  Widget _buildPhoneReview() {
     final state = ref.watch(getPhoneReviewProvider);
     Widget? widget = loadingOrErrorWidgetOrNull(
       state: state,
@@ -176,6 +214,32 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
       commentCount: phoneReview.commentsCount,
       shareCount: phoneReview.shares,
       liked: phoneReview.liked,
+      fullscreen: true,
+      onPressingComment: () => focusNode.requestFocus(),
+    );
+  }
+
+  Widget _buildCompanyReview() {
+    final state = ref.watch(getCompanyReviewProvider);
+    Widget? widget = loadingOrErrorWidgetOrNull(
+      state: state,
+      loadingWidget: CompanyReviewLoading(),
+    );
+    if (widget != null) return widget;
+    CompanyReview companyReview = (state as GetCompanyReviewLoadedState).review;
+    return CompanyReviewCard(
+      postedDate: companyReview.createdAt,
+      views: companyReview.views,
+      authorName: companyReview.userName,
+      imageUrl: companyReview.photo,
+      companyName: companyReview.targetName,
+      generalRating: companyReview.generalRating.toInt(),
+      prosText: companyReview.pros,
+      consText: companyReview.cons,
+      likeCount: companyReview.likes,
+      commentCount: companyReview.commentsCount,
+      shareCount: companyReview.shares,
+      liked: companyReview.liked,
       fullscreen: true,
       onPressingComment: () => focusNode.requestFocus(),
     );
