@@ -4,52 +4,88 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
+import 'package:month_picker_dialog/month_picker_dialog.dart';
 
 class DatePickerField extends StatelessWidget {
   const DatePickerField({
     Key? key,
     required this.dateController,
     required this.hintText,
+    required this.fillColor,
+    required this.isMonthDatePicker,
+    this.errorMsg = '',
+    this.hasErrorMsg = false,
   }) : super(key: key);
 
   final TextEditingController dateController;
   final String hintText;
+  final Color fillColor;
+  final bool isMonthDatePicker;
+  final String errorMsg;
+  final bool hasErrorMsg;
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    final InputBorder inputBorder = OutlineInputBorder(
+            borderSide:
+                BorderSide(width: 0.8, color: ColorManager.backgroundGrey),
+            borderRadius: BorderRadius.circular(5.r));
+    return TextFormField(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       textAlignVertical: TextAlignVertical.center,
       readOnly: true,
       controller: dateController,
       onTap: () {
         FocusScope.of(context).requestFocus(FocusNode());
+        if (!isMonthDatePicker) {
         showDatePicker(
                 context: context,
                 initialDate: DateTime.now(),
                 firstDate: DateTime.now(),
                 lastDate: DateTime(2222))
             .then((date) {
-          dateController.text = DateFormat("EEE, d / M /y").format(date!);
+          dateController.text = DateFormat("EEE, d / M /y", Localizations.localeOf(context).toString()).format(date!);
         });
+        } else {
+        showMonthPicker(
+                context: context,
+                firstDate: DateTime(2007, 1),
+                lastDate: DateTime(DateTime.now().year, DateTime.now().month),
+                initialDate:
+                    DateTime(DateTime.now().year, DateTime.now().month),
+                locale: Localizations.localeOf(context))
+            .then((date) {
+          dateController.text =
+              DateFormat("yMMMM", Localizations.localeOf(context).toString())
+                  .format(date!);
+        });
+        }
       },
       style: TextStyleManager.s20w500.copyWith(
         color: ColorManager.black,
       ),
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 5.w),
-        border: OutlineInputBorder(
-            borderSide: BorderSide(width: 0.8, color: ColorManager.backgroundGrey),
-            borderRadius: BorderRadius.circular(5.r)),
+        contentPadding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 10.w),
+        border:inputBorder,
+        errorBorder:hasErrorMsg? inputBorder.copyWith(borderSide: BorderSide(color: ColorManager.red)):inputBorder,
         hintText: hintText,
         hintStyle: TextStyleManager.s16w300.copyWith(color: ColorManager.black),
+        errorStyle: TextStyleManager.s13w400.copyWith(color: ColorManager.red),
         filled: true,
-        fillColor: ColorManager.backgroundGrey,
+        fillColor: fillColor,
         suffixIcon: Icon(
           IconsManager.expand,
           size: 32.sp,
         ),
         suffixIconColor: ColorManager.black,
       ),
+      validator: hasErrorMsg? (value) {
+        if (value == null || value.isEmpty) {
+          return errorMsg;
+        } else {
+          return null;
+        }
+      }: null,
     );
   }
 }

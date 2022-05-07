@@ -211,7 +211,17 @@ class CodegenLoader extends AssetLoader{
   "whatDoYouHateAbout": "ما الذي تكرهه بشأن",
   "invitationCode": "كود الدعوة",
   "enterInvitationCode": "قم بادخال كود الدعوة",
-  "internalServerError": "حدث خطأ في الخادم"
+  "internalServerError": "حدث خطأ في الخادم",
+  "enterNumberOfWinnersErrorMsg": "يجب ادخال عدد الفائزين.",
+  "AddPrizeNameErrorMsg": "يجب ادخال اسم الجائزة.",
+  "prizeImageUrlErrorMsg": "يجب ادخال رابط صورة الجائزة.",
+  "likedAboutProductErrorMsg": "يجب ادخال بعض مميزات هذا المنتج.",
+  "hateAboutProductErrorMsg": "يجب ادخال بعض عيوب هذا المنتج.",
+  "likedAboutManufacturerErrorMsg": "يجب ادخال بعض مميزات الشركة المصنعة.",
+  "hatedAboutManufacturerErrorMsg": "يجب ادخال بعض عيوب الشركة المصنعة.",
+  "purchaseDateErrorMsg": "يجب ادخال تاريخ شراء هذا المنتج.",
+  "competitionEndDateErrorMsg": "يجب ادخال تاريخ انتهاء المسابقة.",
+  "productNameErrorMsg": "يجب ادخال اسم المنتج."
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -410,7 +420,17 @@ static const Map<String,dynamic> en = {
   "whatDoYouHateAbout": "What do you hate about",
   "invitationCode": "Invitation code",
   "enterInvitationCode": "Enter invitation code",
-  "internalServerError": "Internal server error"
+  "internalServerError": "Internal server error",
+  "enterNumberOfWinnersErrorMsg": "The number of winners must be entered.",
+  "AddPrizeNameErrorMsg": "The prize name must be entered.",
+  "prizeImageUrlErrorMsg": "The prize image link must be entered.",
+  "likedAboutProductErrorMsg": "Some pros of this product must be entered.",
+  "hateAboutProductErrorMsg": "Some cons in this product must be entered.",
+  "likedAboutManufacturerErrorMsg": "Some pros must be entered.",
+  "hatedAboutManufacturerErrorMsg": "Some cons must be entered.",
+  "purchaseDateErrorMsg": "Product purchase date must be entered.",
+  "competitionEndDateErrorMsg": "Contest's end date must be entered.",
+  "productNameErrorMsg": "Product's name must be entered."
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }
