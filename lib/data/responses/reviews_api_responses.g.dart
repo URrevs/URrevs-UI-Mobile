@@ -35,3 +35,72 @@ Map<String, dynamic> _$GetCompanyReviewResponseToJson(
       'success': instance.success,
       'review': instance.companyReviewSubResponses,
     };
+
+GetMyPhoneReviewsResponse _$GetMyPhoneReviewsResponseFromJson(
+        Map<String, dynamic> json) =>
+    GetMyPhoneReviewsResponse(
+      success: json['success'] as bool,
+      phoneReviewsSubResponses: (json['reviews'] as List<dynamic>)
+          .map(
+              (e) => PhoneReviewSubResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$GetMyPhoneReviewsResponseToJson(
+        GetMyPhoneReviewsResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'reviews': instance.phoneReviewsSubResponses,
+    };
+
+GetPhoneReviewsOfAnotherUserResponse
+    _$GetPhoneReviewsOfAnotherUserResponseFromJson(Map<String, dynamic> json) =>
+        GetPhoneReviewsOfAnotherUserResponse(
+          success: json['success'] as bool,
+          phoneReviewsSubResponses: (json['reviews'] as List<dynamic>)
+              .map((e) =>
+                  PhoneReviewSubResponse.fromJson(e as Map<String, dynamic>))
+              .toList(),
+        );
+
+Map<String, dynamic> _$GetPhoneReviewsOfAnotherUserResponseToJson(
+        GetPhoneReviewsOfAnotherUserResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'reviews': instance.phoneReviewsSubResponses,
+    };
+
+GetMyCompanyReviewsResponse _$GetMyCompanyReviewsResponseFromJson(
+        Map<String, dynamic> json) =>
+    GetMyCompanyReviewsResponse(
+      success: json['success'] as bool,
+      companyReviewsSubResponses: (json['reviews'] as List<dynamic>)
+          .map((e) =>
+              CompanyReviewSubResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$GetMyCompanyReviewsResponseToJson(
+        GetMyCompanyReviewsResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'reviews': instance.companyReviewsSubResponses,
+    };
+
+GetCompanyReviewsOfAnotherUserResponse
+    _$GetCompanyReviewsOfAnotherUserResponseFromJson(
+            Map<String, dynamic> json) =>
+        GetCompanyReviewsOfAnotherUserResponse(
+          success: json['success'] as bool,
+          companyReviewsSubResponses: (json['reviews'] as List<dynamic>)
+              .map((e) =>
+                  CompanyReviewSubResponse.fromJson(e as Map<String, dynamic>))
+              .toList(),
+        );
+
+Map<String, dynamic> _$GetCompanyReviewsOfAnotherUserResponseToJson(
+        GetCompanyReviewsOfAnotherUserResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'reviews': instance.companyReviewsSubResponses,
+    };

@@ -25,17 +25,17 @@ import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 class FullscreenPostScreenArgs {
   final CardType cardType;
   final bool focusOnTextField;
-  final String reviewId;
+  final String postId;
   FullscreenPostScreenArgs({
     required this.cardType,
-    required this.reviewId,
+    required this.postId,
     this.focusOnTextField = false,
   });
 
   static FullscreenPostScreenArgs get defaultArgs {
     return FullscreenPostScreenArgs(
       cardType: CardType.companyReview,
-      reviewId: '',
+      postId: '',
     );
   }
 }
@@ -74,13 +74,13 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
   void _getProductReview() {
     ref
         .read(getPhoneReviewProvider.notifier)
-        .getPhoneReview(widget.screenArgs.reviewId);
+        .getPhoneReview(widget.screenArgs.postId);
   }
 
   void _getCompanyReview() {
     ref
         .read(getCompanyReviewProvider.notifier)
-        .getCompanyReview(widget.screenArgs.reviewId);
+        .getCompanyReview(widget.screenArgs.postId);
   }
 
   String get hintText {

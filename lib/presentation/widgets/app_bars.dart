@@ -124,13 +124,14 @@ class AppBars {
   static PreferredSize appBarWithTitle({
     required BuildContext context,
     required String title,
+    double elevation = 3,
   }) {
     return PreferredSize(
       preferredSize: Size.fromHeight(
         45.h,
       ),
       child: AppBar(
-        elevation: 3,
+        elevation: elevation,
         title: Text(
           title,
           style: TextStyleManager.s20w700.copyWith(color: ColorManager.black),
@@ -275,10 +276,6 @@ class AppBars {
       required bool isMobileFilterPressed,
       required String title}) {
     return SliverAppBar(
-      title: Text(
-        title,
-        style: TextStyleManager.s20w700.copyWith(color: ColorManager.black),
-      ),
       titleSpacing: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -295,64 +292,64 @@ class AppBars {
       forceElevated: true,
       snap: true,
       floating: true,
-      stretch: true,
       toolbarHeight: 45.h,
       collapsedHeight: 45.h,
-      expandedHeight: 90.h,
-      flexibleSpace: Padding(
-        padding: EdgeInsets.only(top: 45.h),
-        child: Row(
-          children: [
-            SizedBox(
-              width: 17.w,
+      expandedHeight: 45.h,
+      flexibleSpace: Row(
+        children: [
+          SizedBox(width: 17.w),
+          TextButton(
+            style: ButtonStyle(
+              backgroundColor: isMobileFilterPressed
+                  ? MaterialStateProperty.all<Color>(ColorManager.buttonGrey)
+                  : MaterialStateProperty.all<Color>(ColorManager.white),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(26.r),
+                  side: BorderSide(color: ColorManager.buttonGrey),
+                ),
+              ),
             ),
-            TextButton(
-              style: ButtonStyle(
-                  backgroundColor: isMobileFilterPressed
-                      ? MaterialStateProperty.all<Color>(
-                          ColorManager.buttonGrey)
-                      : MaterialStateProperty.all<Color>(ColorManager.white),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(26.r),
-                          side: BorderSide(color: ColorManager.buttonGrey)))),
-              onPressed: () {
-                setFilter(
-                  ReviewsFilter.phones,
-                );
-              },
-              child: Text(LocaleKeys.phones.tr(),
-                  style: TextStyleManager.s14w700.copyWith(
-                      color: isMobileFilterPressed
-                          ? ColorManager.white
-                          : ColorManager.buttonGrey)),
+            onPressed: () {
+              setFilter(
+                ReviewsFilter.phones,
+              );
+            },
+            child: Text(
+              LocaleKeys.phones.tr(),
+              style: TextStyleManager.s14w700.copyWith(
+                color: isMobileFilterPressed
+                    ? ColorManager.white
+                    : ColorManager.buttonGrey,
+              ),
             ),
-            SizedBox(
-              width: 17.w,
+          ),
+          SizedBox(width: 17.w),
+          TextButton(
+            style: ButtonStyle(
+              backgroundColor: !isMobileFilterPressed
+                  ? MaterialStateProperty.all<Color>(ColorManager.buttonGrey)
+                  : MaterialStateProperty.all<Color>(ColorManager.white),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(26.r),
+                  side: BorderSide(color: ColorManager.buttonGrey),
+                ),
+              ),
             ),
-            TextButton(
-              style: ButtonStyle(
-                  backgroundColor: !isMobileFilterPressed
-                      ? MaterialStateProperty.all<Color>(
-                          ColorManager.buttonGrey)
-                      : MaterialStateProperty.all<Color>(ColorManager.white),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(26.r),
-                          side: BorderSide(color: ColorManager.buttonGrey)))),
-              onPressed: () {
-                setFilter(
-                  ReviewsFilter.companies,
-                );
-              },
-              child: Text(LocaleKeys.companies.tr(),
-                  style: TextStyleManager.s14w700.copyWith(
-                      color: !isMobileFilterPressed
-                          ? ColorManager.white
-                          : ColorManager.buttonGrey)),
+            onPressed: () {
+              setFilter(ReviewsFilter.companies);
+            },
+            child: Text(
+              LocaleKeys.companies.tr(),
+              style: TextStyleManager.s14w700.copyWith(
+                color: !isMobileFilterPressed
+                    ? ColorManager.white
+                    : ColorManager.buttonGrey,
+              ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

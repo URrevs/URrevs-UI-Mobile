@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:urrevs_ui_mobile/app/extensions.dart';
+import 'package:urrevs_ui_mobile/domain/models/phone_review.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/app_elevations.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
@@ -99,25 +100,44 @@ class ProductReviewCard extends StatelessWidget {
     required this.onPressingComment,
   }) : super(key: key);
 
+  ProductReviewCard.fromPhoneReview({
+    required PhoneReview phoneReview,
+    required this.fullscreen,
+    required this.onPressingComment,
+    Key? key,
+  })  : postedDate = phoneReview.createdAt,
+        usedSinceDate = phoneReview.ownedAt,
+        views = phoneReview.views,
+        authorName = phoneReview.userName,
+        imageUrl = phoneReview.photo,
+        productName = phoneReview.targetName,
+        scores = phoneReview.scores,
+        prosText = phoneReview.pros,
+        consText = phoneReview.cons,
+        likeCount = phoneReview.likes,
+        commentCount = phoneReview.commentsCount,
+        shareCount = phoneReview.shares,
+        liked = phoneReview.liked,
+        super(key: key);
+
   /// An instance of [ProductReviewCard] filled with dummy data.
   static ProductReviewCard dummyInstance({bool fullscreen = false}) =>
       ProductReviewCard(
-        postedDate: faker.date.dateTime(minYear: 2000, maxYear: 2022),
-        usedSinceDate: faker.date.dateTime(minYear: 2000, maxYear: 2021),
-        views: DummyDataManager.randomInt,
-        authorName: faker.person.name(),
-        imageUrl: StringsManager.picsum200x200,
-        productName: 'Oppo Reno 5',
-        scores: List.generate(7, (_) => Random().nextInt(5) + 1),
-        prosText: StringsManager.longestReviewPros,
-        consText: StringsManager.longestReviewCons,
-        likeCount: DummyDataManager.randomInt,
-        commentCount: DummyDataManager.randomInt,
-        shareCount: DummyDataManager.randomInt,
-        liked: Random().nextBool(),
-        fullscreen: fullscreen,
-          onPressingComment: () {}
-      );
+          postedDate: faker.date.dateTime(minYear: 2000, maxYear: 2022),
+          usedSinceDate: faker.date.dateTime(minYear: 2000, maxYear: 2021),
+          views: DummyDataManager.randomInt,
+          authorName: faker.person.name(),
+          imageUrl: StringsManager.picsum200x200,
+          productName: 'Oppo Reno 5',
+          scores: List.generate(7, (_) => Random().nextInt(5) + 1),
+          prosText: StringsManager.longestReviewPros,
+          consText: StringsManager.longestReviewCons,
+          likeCount: DummyDataManager.randomInt,
+          commentCount: DummyDataManager.randomInt,
+          shareCount: DummyDataManager.randomInt,
+          liked: Random().nextBool(),
+          fullscreen: fullscreen,
+          onPressingComment: () {});
 
   ProductReviewCard copyWith({
     String? imageUrl,

@@ -88,15 +88,20 @@ Widget? loadingOrErrorWidgetOrNull({
 ///
 /// If no provider is emitting an [ErrorState] at the current moment, null is
 /// returned.
-Widget? fullScreenErrorWidgetOrNull(List<StateAndRetry> list) {
+Widget? fullScreenErrorWidgetOrNull(List<StateAndRetry> list,
+    {bool retryOtherFailedRequests = true}) {
   for (var stateAndRetry in list) {
     if (stateAndRetry.state is ErrorState) {
       return FullscreenErrorWidget(
         onRetry: () {
-          for (var sar in list) {
-            if (sar.state is ErrorState) {
-              sar.onRetry();
+          if (retryOtherFailedRequests) {
+            for (var sar in list) {
+              if (sar.state is ErrorState) {
+                sar.onRetry();
+              }
             }
+          } else {
+            stateAndRetry.onRetry();
           }
         },
         retryLastRequest:

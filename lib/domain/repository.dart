@@ -264,4 +264,36 @@ class Repository {
       return response.companyReviewSubResponses.companyReviewModel;
     });
   }
+
+  Future<Either<Failure, List<PhoneReview>>> getMyPhoneReviews(int round) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.getMyPhoneReviews(round);
+      return response.phoneReviewsModels;
+    });
+  }
+
+  Future<Either<Failure, List<PhoneReview>>> getPhoneReviewsOfAnotherUser(
+      String userId, int round) {
+    return _tryAndCatch(() async {
+      final response =
+          await _remoteDataSource.getPhoneReviewsOfAnotherUser(userId, round);
+      return response.phoneReviewsModels;
+    });
+  }
+
+  Future<Either<Failure, List<CompanyReview>>> getMyCompanyReviews(int round) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.getMyCompanyReviews(round);
+      return response.companyReviewsModels;
+    });
+  }
+
+  Future<Either<Failure, List<CompanyReview>>> getCompanyReviewsOfAnotherUser(
+      String userId, int round) {
+    return _tryAndCatch(() async {
+      final response =
+          await _remoteDataSource.getCompanyReviewsOfAnotherUser(userId, round);
+      return response.companyReviewsModels;
+    });
+  }
 }
