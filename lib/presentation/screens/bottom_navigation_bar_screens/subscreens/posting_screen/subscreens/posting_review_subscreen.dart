@@ -79,7 +79,7 @@ class _PostingReviewSubscreenState extends State<PostingReviewSubscreen> {
   bool star7 = false;
   bool star8 = false;
   final _formKey = GlobalKey<FormState>();
-
+  bool productSelected = false;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -255,56 +255,65 @@ class _PostingReviewSubscreenState extends State<PostingReviewSubscreen> {
               hasErrorMsg: true,
             ),
             SizedBox(height: 40.h),
-            // rate the manufacturer
-            Text(LocaleKeys.howDoYouRateTheManufacturer.tr(),
-                style: TextStyleManager.s18w500),
-            Center(
-              child: CustomRatingBar(
-                onRatingUpdate: (rating) {
-                  FocusScope.of(context).unfocus();
-                  if (!star8) {
-                    setState(() {
-                      //starsPoints++;
-                    });
-                  }
-                  if (rating != 0) {
-                    star8 = true;
-                    postingReviewModel.companyRating = rating.toInt();
-                  }
-                },
-              ),
-            ),
-            SizedBox(height: 20.h),
-            // what do you like about the manufacturer
-            Text(
-                LocaleKeys.WhatDoYouLikeAbout.tr() +
-                    ' ' +
-                    postingReviewModel.companyName,
-                style: TextStyleManager.s18w500),
-            TxtField(
-              textController: likedAboutCompanyController,
-              hintText: LocaleKeys.pros.tr(),
-              keyboardType: TextInputType.text,
-              fillColor: ColorManager.textFieldGrey,
-              errorMsg: LocaleKeys.likedAboutManufacturerErrorMsg.tr(),
-              hasErrorMsg: true,
-            ),
-            SizedBox(height: 20.h),
-            // what do you hate about the manufacturer
-            Text(
-                LocaleKeys.whatDoYouHateAbout.tr() +
-                    ' ' +
-                    postingReviewModel.companyName,
-                style: TextStyleManager.s18w500),
-            TxtField(
-              textController: hatedAboutCompanyController,
-              hintText: LocaleKeys.cons.tr(),
-              keyboardType: TextInputType.text,
-              fillColor: ColorManager.textFieldGrey,
-              errorMsg: LocaleKeys.hatedAboutManufacturerErrorMsg.tr(),
-              hasErrorMsg: true,
-            ),
-            SizedBox(height: 20.h),
+            productSelected
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // rate the manufacturer
+                      Text(LocaleKeys.howDoYouRateTheManufacturer.tr(),
+                          style: TextStyleManager.s18w500),
+                      Center(
+                        child: CustomRatingBar(
+                          onRatingUpdate: (rating) {
+                            FocusScope.of(context).unfocus();
+                            if (!star8) {
+                              setState(() {
+                                //starsPoints++;
+                              });
+                            }
+                            if (rating != 0) {
+                              star8 = true;
+                              postingReviewModel.companyRating = rating.toInt();
+                            }
+                          },
+                        ),
+                      ),
+                      SizedBox(height: 20.h),
+                      // what do you like about the manufacturer
+                      Text(
+                          LocaleKeys.WhatDoYouLikeAbout.tr() +
+                              ' ' +
+                              postingReviewModel.companyName,
+                          style: TextStyleManager.s18w500),
+                      TxtField(
+                        textController: likedAboutCompanyController,
+                        hintText: LocaleKeys.pros.tr(),
+                        keyboardType: TextInputType.text,
+                        fillColor: ColorManager.textFieldGrey,
+                        errorMsg:
+                            LocaleKeys.likedAboutManufacturerErrorMsg.tr(),
+                        hasErrorMsg: true,
+                      ),
+                      SizedBox(height: 20.h),
+                      // what do you hate about the manufacturer
+                      Text(
+                          LocaleKeys.whatDoYouHateAbout.tr() +
+                              ' ' +
+                              postingReviewModel.companyName,
+                          style: TextStyleManager.s18w500),
+                      TxtField(
+                        textController: hatedAboutCompanyController,
+                        hintText: LocaleKeys.cons.tr(),
+                        keyboardType: TextInputType.text,
+                        fillColor: ColorManager.textFieldGrey,
+                        errorMsg:
+                            LocaleKeys.hatedAboutManufacturerErrorMsg.tr(),
+                        hasErrorMsg: true,
+                      ),
+                      SizedBox(height: 20.h),
+                    ],
+                  )
+                : SizedBox(),
             Row(
               children: [
                 Text(LocaleKeys.enterInvitationCode.tr() + ':',
@@ -436,13 +445,13 @@ class CustomRatingBar extends StatelessWidget {
           size: 30.sp,
         ),
         half: Icon(
-          IconsManager.star,
-          color: ColorManager.grey,
+          IconsManager.starOutlined,
+          color: ColorManager.black,
           size: 30.sp,
         ),
         empty: Icon(
-          IconsManager.star,
-          color: ColorManager.grey,
+          IconsManager.starOutlined,
+          color: ColorManager.black,
           size: 30.sp,
         ),
       ),
