@@ -47,8 +47,11 @@ class RouteGenerator {
           builder: (_) => UserProfileScreen(screenArgs),
         );
       case PostedReviewsScreen.routeName:
+        final screenArgs =
+            routeSettings.arguments as PostedReviewsScreenArgs? ??
+                PostedReviewsScreenArgs.defaultArgs;
         return MaterialPageRoute(
-          builder: (_) => PostedReviewsScreen(),
+          builder: (_) => PostedReviewsScreen(screenArgs),
         );
       case PostedQuestionsScreen.routeName:
         return MaterialPageRoute(

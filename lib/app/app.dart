@@ -49,7 +49,7 @@ class _MyAppState extends ConsumerState<MyApp> {
       builder: (_) => MaterialApp(
         title: LocaleKeys.urrevs.tr(),
         // initialRoute: AuthenticationScreen.routeName,
-        initialRoute: FullscreenPostScreen.routeName,
+        initialRoute: PostedReviewsScreen.routeName,
         // initialRoute: DevelopmentScreen.routeName,
         navigatorObservers: [routeObserver],
         onGenerateRoute: RouteGenerator.getRoute,

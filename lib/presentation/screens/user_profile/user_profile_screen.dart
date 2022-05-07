@@ -110,7 +110,12 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
           title: LocaleKeys.reviews.tr(),
           iconData: Icons.rate_review_outlined,
           onTap: () {
-            Navigator.of(context).pushNamed(PostedReviewsScreen.routeName);
+            Navigator.of(context).pushNamed(
+              PostedReviewsScreen.routeName,
+              arguments: PostedReviewsScreenArgs(
+                userId: widget.screenArgs.userId,
+              ),
+            );
           },
         ),
         ItemTile(

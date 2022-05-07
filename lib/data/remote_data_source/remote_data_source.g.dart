@@ -365,6 +365,73 @@ class _RemoteDataSource implements RemoteDataSource {
     return value;
   }
 
+  @override
+  Future<GetMyPhoneReviewsResponse> getMyPhoneReviews(round) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'round': round};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GetMyPhoneReviewsResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/reviews/phone/by/me',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GetMyPhoneReviewsResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<GetPhoneReviewsOfAnotherUserResponse> getPhoneReviewsOfAnotherUser(
+      userId, round) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'round': round};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GetPhoneReviewsOfAnotherUserResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/reviews/phone/by/${userId}',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GetPhoneReviewsOfAnotherUserResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<GetMyCompanyReviewsResponse> getMyCompanyReviews(round) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'round': round};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GetMyCompanyReviewsResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/reviews/company/by/me',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GetMyCompanyReviewsResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<GetCompanyReviewsOfAnotherUserResponse> getCompanyReviewsOfAnotherUser(
+      userId, round) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'round': round};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GetCompanyReviewsOfAnotherUserResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/reviews/company/by/${userId}',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value =
+        GetCompanyReviewsOfAnotherUserResponse.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

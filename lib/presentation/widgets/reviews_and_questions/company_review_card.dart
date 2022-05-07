@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:urrevs_ui_mobile/app/extensions.dart';
+import 'package:urrevs_ui_mobile/domain/models/company_review.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/app_elevations.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
@@ -32,7 +33,6 @@ class CompanyReviewCard extends StatelessWidget {
 
   /// The date where the review was posted.
   final DateTime postedDate;
-
 
   /// How many times this review was viewed.
   final int views;
@@ -84,6 +84,25 @@ class CompanyReviewCard extends StatelessWidget {
     required this.fullscreen,
     required this.onPressingComment,
   }) : super(key: key);
+
+  CompanyReviewCard.fromCompanyReview({
+    required CompanyReview companyReview,
+    required this.fullscreen,
+    required this.onPressingComment,
+    Key? key,
+  })  : postedDate = companyReview.createdAt,
+        views = companyReview.views,
+        authorName = companyReview.userName,
+        imageUrl = companyReview.photo,
+        companyName = companyReview.targetName,
+        generalRating = companyReview.generalRating.toInt(),
+        prosText = companyReview.pros,
+        consText = companyReview.cons,
+        likeCount = companyReview.likes,
+        commentCount = companyReview.commentsCount,
+        shareCount = companyReview.shares,
+        liked = companyReview.liked,
+        super(key: key);
 
   /// An instance of [CompanyReviewCard] filled with dummy data.
   static CompanyReviewCard dummyInstance({bool fullscreen = false}) =>

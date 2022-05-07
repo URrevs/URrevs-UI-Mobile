@@ -127,4 +127,26 @@ abstract class RemoteDataSource {
   Future<GetCompanyReviewResponse> getCompanyReview(
     @Path() String reviewId,
   );
+
+  @GET('/reviews/phone/by/me')
+  Future<GetMyPhoneReviewsResponse> getMyPhoneReviews(
+    @Query('round') int round,
+  );
+
+  @GET('/reviews/phone/by/{userId}')
+  Future<GetPhoneReviewsOfAnotherUserResponse> getPhoneReviewsOfAnotherUser(
+    @Path() String userId,
+    @Query('round') int round,
+  );
+
+  @GET('/reviews/company/by/me')
+  Future<GetMyCompanyReviewsResponse> getMyCompanyReviews(
+    @Query('round') int round,
+  );
+
+  @GET('/reviews/company/by/{userId}')
+  Future<GetCompanyReviewsOfAnotherUserResponse> getCompanyReviewsOfAnotherUser(
+    @Path() String userId,
+    @Query('round') int round,
+  );
 }

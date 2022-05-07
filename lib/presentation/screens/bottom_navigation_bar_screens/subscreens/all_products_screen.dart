@@ -138,7 +138,7 @@ class _AllProductsSubscreenState extends ConsumerState<AllProductsSubscreen> {
             onTap: () {
               Navigator.of(context).pushNamed(
                 ProductProfileScreen.routeName,
-                // TODO: pass screen arguments
+                arguments: ProductProfileScreenArgs(phoneId: phone.id),
               );
             },
           );
