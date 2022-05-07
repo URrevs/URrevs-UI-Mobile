@@ -1,8 +1,10 @@
 class PostingReviewModel {
   String productName;
+  String companyName;
   DateTime usedSince;
   int generalRating;
   int manufacturingQuality;
+  int userInterface;
   int priceQuality;
   int camera;
   int callsQuality;
@@ -15,9 +17,11 @@ class PostingReviewModel {
   String invitationCode;
   PostingReviewModel({
     required this.productName,
+    required this.companyName,
     required this.usedSince,
     required this.generalRating,
     required this.manufacturingQuality,
+    required this.userInterface,
     required this.priceQuality,
     required this.camera,
     required this.callsQuality,

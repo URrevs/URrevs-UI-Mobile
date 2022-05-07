@@ -28,45 +28,60 @@ class CompareDialoge extends StatefulWidget {
 }
 
 class _CompareDialogeState extends State<CompareDialoge> {
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    
     return CustomAlertDialog(
       title: '',
       hasTitle: true,
-      content: Column(
-        children: [
-          Text(
-            LocaleKeys.compare.tr() +
-                ' ' +
-                widget.productName1 +
-                ' ' +
-                LocaleKeys.withWord.tr(),
-            style: TextStyleManager.s18w500,
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(
-            height: 10.h,
-          ),
-          SearchTextField(searchCtl: widget.searchCtl, fillColor: ColorManager.backgroundGrey,),
-          SizedBox(
-            height: 70.h,
-          ),
-          GradButton(
-              text: Text(
-                LocaleKeys.compare.tr(),
-                style: TextStyleManager.s18w700,
-              ),
-              icon: Icon(
-                IconsManager.compare,
-                size: 28.sp,
-              ),
-              width: 310.w,
-              reverseIcon: false,
-              onPressed: () {})
-        ],
+      content: Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            Text(
+              LocaleKeys.compare.tr() +
+                  ' ' +
+                  widget.productName1 +
+                  ' ' +
+                  LocaleKeys.withWord.tr(),
+              style: TextStyleManager.s18w500,
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(
+              height: 10.h,
+            ),
+            SearchTextField(
+              searchCtl: widget.searchCtl,
+              fillColor: ColorManager.backgroundGrey,
+              hasErrorMsg: true,
+              errorMsg: LocaleKeys.productNameErrorMsg.tr(),
+            ),
+            SizedBox(
+              height: 70.h,
+            ),
+            GradButton(
+                text: Text(
+                  LocaleKeys.compare.tr(),
+                  style: TextStyleManager.s18w700,
+                ),
+                icon: Icon(
+                  IconsManager.compare,
+                  size: 28.sp,
+                ),
+                width: 310.w,
+                reverseIcon: false,
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    // If the form is valid, display a snackbar. In the real world,
+                    // you'd often call a server or save the information in a database.
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Processing Data')),
+                    );
+                  }
+                })
+          ],
+        ),
       ),
     );
   }
 }
-

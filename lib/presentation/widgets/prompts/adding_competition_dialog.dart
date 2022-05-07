@@ -45,7 +45,6 @@ class AddingCompetitionPrompt extends StatefulWidget {
 }
 
 class _AddingCompetitionPromptState extends State<AddingCompetitionPrompt> {
-  
   /// Function to build the prize image, when the a vaild URL is entered.
   Widget prizeImageBuilder() {
     String imgUrl = widget.imgUrlController.text;
@@ -75,6 +74,8 @@ class _AddingCompetitionPromptState extends State<AddingCompetitionPrompt> {
         : SizedBox();
   }
 
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -82,90 +83,112 @@ class _AddingCompetitionPromptState extends State<AddingCompetitionPrompt> {
         borderRadius: BorderRadius.circular(AppRadius.interactionBodyRadius),
       ),
       scrollable: true,
-      title: AlertDialogTitle(titleText: Text(LocaleKeys.addingCompetition.tr()),),
+      title: AlertDialogTitle(
+        titleText: Text(LocaleKeys.addingCompetition.tr()),
+      ),
       titleTextStyle: TextStyleManager.s16w700.copyWith(
         color: ColorManager.black,
         fontFamily: FontConstants.tajawal,
       ),
       insetPadding: EdgeInsets.all(10.sp),
-      content: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            LocaleKeys.enterCompetitionFinishingDate.tr(),
-            textAlign: TextAlign.start,
-            style: TextStyleManager.s18w500.copyWith(
-              color: ColorManager.black,
-            ),
-          ),
-          SizedBox(height: 5.h, width: 320.w),
-          DatePickerField(
-            dateController: widget.dateController,
-            hintText: LocaleKeys.competitionEndDate.tr(),
-          ),
-          SizedBox(height: 14.h),
-          Text(
-            LocaleKeys.enterNumberOfWinners.tr(),
-            textAlign: TextAlign.start,
-            style: TextStyleManager.s18w500.copyWith(
-              color: ColorManager.black,
-            ),
-          ),
-          SizedBox(height: 5.h),
-          TxtField(
-            textController: widget.numberOfWinnersController,
-            hintText: LocaleKeys.winnersNumber.tr(),
-            keyboardType: TextInputType.number,
-            fillColor: ColorManager.backgroundGrey,
-          ),
-          SizedBox(height: 14.h),
-          Text(
-            LocaleKeys.enterPrizeName.tr(),
-            textAlign: TextAlign.start,
-            style: TextStyleManager.s18w500.copyWith(
-              color: ColorManager.black,
-            ),
-          ),
-          SizedBox(height: 5.h),
-          TxtField(
-            textController: widget.prizeNameController,
-            hintText: LocaleKeys.prizeName.tr(),
-            keyboardType: TextInputType.text,
-            fillColor: ColorManager.backgroundGrey
-          ),
-          SizedBox(height: 14.h),
-          Text(
-            LocaleKeys.enterPrizeImageLink.tr(),
-            textAlign: TextAlign.start,
-            style: TextStyleManager.s18w500.copyWith(
-              color: ColorManager.black,
-            ),
-          ),
-          SizedBox(height: 5.h),
-          TxtField(
-            textController: widget.imgUrlController,
-            hintText: LocaleKeys.prizeImageLink.tr(),
-            keyboardType: TextInputType.url,
-            fillColor: ColorManager.backgroundGrey
-          ),
-          SizedBox(height: 14.h),
-          prizeImageBuilder(),
-          SizedBox(height: 14.h),
-          GradButton(
-              text: Text(
-                LocaleKeys.addCompetition.tr(),
-                style: TextStyleManager.s18w700,
+      content: Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              LocaleKeys.enterCompetitionFinishingDate.tr(),
+              textAlign: TextAlign.start,
+              style: TextStyleManager.s18w500.copyWith(
+                color: ColorManager.black,
               ),
-              icon: Icon(
-                IconsManager.add,
-                size: 28.sp,
+            ),
+            SizedBox(height: 5.h, width: 320.w),
+            DatePickerField(
+              dateController: widget.dateController,
+              hintText: LocaleKeys.competitionEndDate.tr(),
+              fillColor: ColorManager.backgroundGrey,
+              isMonthDatePicker: false,
+              hasErrorMsg: true,
+              errorMsg: LocaleKeys.competitionEndDateErrorMsg.tr(),
+            ),
+            SizedBox(height: 14.h),
+            Text(
+              LocaleKeys.enterNumberOfWinners.tr(),
+              textAlign: TextAlign.start,
+              style: TextStyleManager.s18w500.copyWith(
+                color: ColorManager.black,
               ),
-              width: 250.w,
-              reverseIcon: false,
-              onPressed: () {}),
-        ],
+            ),
+            SizedBox(height: 5.h),
+            TxtField(
+              textController: widget.numberOfWinnersController,
+              hintText: LocaleKeys.winnersNumber.tr(),
+              keyboardType: TextInputType.number,
+              fillColor: ColorManager.backgroundGrey,
+              errorMsg: LocaleKeys.enterNumberOfWinnersErrorMsg.tr(),
+              hasErrorMsg: true,
+            ),
+            SizedBox(height: 14.h),
+            Text(
+              LocaleKeys.enterPrizeName.tr(),
+              textAlign: TextAlign.start,
+              style: TextStyleManager.s18w500.copyWith(
+                color: ColorManager.black,
+              ),
+            ),
+            SizedBox(height: 5.h),
+            TxtField(
+              textController: widget.prizeNameController,
+              hintText: LocaleKeys.prizeName.tr(),
+              keyboardType: TextInputType.text,
+              fillColor: ColorManager.backgroundGrey,
+              errorMsg: LocaleKeys.AddPrizeNameErrorMsg.tr(),
+              hasErrorMsg: true,
+            ),
+            SizedBox(height: 14.h),
+            Text(
+              LocaleKeys.enterPrizeImageLink.tr(),
+              textAlign: TextAlign.start,
+              style: TextStyleManager.s18w500.copyWith(
+                color: ColorManager.black,
+              ),
+            ),
+            SizedBox(height: 5.h),
+            TxtField(
+              textController: widget.imgUrlController,
+              hintText: LocaleKeys.prizeImageLink.tr(),
+              keyboardType: TextInputType.url,
+              fillColor: ColorManager.backgroundGrey,
+              errorMsg: LocaleKeys.prizeImageUrlErrorMsg.tr(),
+              hasErrorMsg: true,
+            ),
+            SizedBox(height: 14.h),
+            prizeImageBuilder(),
+            SizedBox(height: 14.h),
+            GradButton(
+                text: Text(
+                  LocaleKeys.addCompetition.tr(),
+                  style: TextStyleManager.s18w700,
+                ),
+                icon: Icon(
+                  IconsManager.add,
+                  size: 28.sp,
+                ),
+                width: 250.w,
+                reverseIcon: false,
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    // If the form is valid, display a snackbar. In the real world,
+                    // you'd often call a server or save the information in a database.
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Processing Data')),
+                    );
+                  }
+                }),
+          ],
+        ),
       ),
     );
   }
 }
-

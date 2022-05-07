@@ -12,10 +12,15 @@ class SearchTextField extends StatelessWidget {
     Key? key,
     required this.searchCtl,
     required this.fillColor,
+    this.errorMsg = '',
+    this.hasErrorMsg = false,
   }) : super(key: key);
 
   final TextEditingController searchCtl;
   final Color fillColor;
+  final bool hasErrorMsg;
+  final String errorMsg;
+  
   @override
   Widget build(BuildContext context) {
     final InputBorder inputBorder = OutlineInputBorder(
@@ -23,49 +28,45 @@ class SearchTextField extends StatelessWidget {
       borderSide: BorderSide(width: 0.8, color: ColorManager.strokeGrey),
     );
     FocusNode focusNode = FocusNode();
-    return Container(
-      height: 46.h,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(40.r),
-        boxShadow: [
-          BoxShadow(
-            color: ColorManager.black.withOpacity(0.1),
-            blurRadius: 1,
-            spreadRadius: 1,
-            offset: Offset(0, 2),
-          )
-        ],
+    
+    return TextFormField(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      cursorColor: ColorManager.black,
+      controller: searchCtl,
+      focusNode: focusNode,
+      style: TextStyleManager.s18w500.copyWith(
+        color: ColorManager.black,
       ),
-      child: TextField(
-        cursorColor: ColorManager.black,
-        controller: searchCtl,
-        focusNode: focusNode,
-        style: TextStyleManager.s18w500.copyWith(
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(
+         horizontal: 20.w
+        ),
+        suffixIcon: Icon(
+          IconsManager.search,
+          size: 29.sp,
+        ),
+        suffixIconColor: ColorManager.black,
+        hintText: LocaleKeys.writeProductName.tr(),
+        hintStyle: TextStyleManager.s16w300.copyWith(
           color: ColorManager.black,
         ),
-        decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(
-           horizontal: 20.w
-          ),
-          suffixIcon: Icon(
-            IconsManager.search,
-            size: 29.sp,
-          ),
-          suffixIconColor: ColorManager.black,
-          hintText: LocaleKeys.writeProductName.tr(),
-          hintStyle: TextStyleManager.s16w300.copyWith(
-            color: ColorManager.black,
-          ),
-          filled: true,
-          fillColor: fillColor,
-          focusColor: Colors.red,
-          errorBorder: inputBorder,
-          disabledBorder: inputBorder,
-          enabledBorder: inputBorder,
-          focusedBorder: inputBorder.copyWith(borderSide: BorderSide(color: ColorManager.blue)),
-        ),
-        onChanged: (_) => print(_),
+        filled: true,
+        fillColor: fillColor,
+        focusColor: Colors.red,
+        errorStyle: TextStyleManager.s13w400.copyWith(color: ColorManager.red),
+        errorBorder:hasErrorMsg? inputBorder.copyWith(borderSide: BorderSide(color: ColorManager.red)):inputBorder,
+        disabledBorder: inputBorder,
+        border: inputBorder,
+        focusedBorder: inputBorder.copyWith(borderSide: BorderSide(color: ColorManager.blue)),
       ),
+      onChanged: (_) => print(_),
+      validator: hasErrorMsg? (value) {
+      if (value == null || value.isEmpty) {
+        return errorMsg;
+      } else {
+        return null;
+      }
+    }: null,
     );
   }
 }

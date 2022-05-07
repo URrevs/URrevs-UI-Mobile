@@ -198,5 +198,15 @@ abstract class  LocaleKeys {
   static const invitationCode = 'invitationCode';
   static const enterInvitationCode = 'enterInvitationCode';
   static const internalServerError = 'internalServerError';
+  static const enterNumberOfWinnersErrorMsg = 'enterNumberOfWinnersErrorMsg';
+  static const AddPrizeNameErrorMsg = 'AddPrizeNameErrorMsg';
+  static const prizeImageUrlErrorMsg = 'prizeImageUrlErrorMsg';
+  static const likedAboutProductErrorMsg = 'likedAboutProductErrorMsg';
+  static const hateAboutProductErrorMsg = 'hateAboutProductErrorMsg';
+  static const likedAboutManufacturerErrorMsg = 'likedAboutManufacturerErrorMsg';
+  static const hatedAboutManufacturerErrorMsg = 'hatedAboutManufacturerErrorMsg';
+  static const purchaseDateErrorMsg = 'purchaseDateErrorMsg';
+  static const competitionEndDateErrorMsg = 'competitionEndDateErrorMsg';
+  static const productNameErrorMsg = 'productNameErrorMsg';
 
 }
