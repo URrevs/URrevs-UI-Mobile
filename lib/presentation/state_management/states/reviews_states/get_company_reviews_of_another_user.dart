@@ -1,49 +1,49 @@
-import 'package:equatable/equatable.dart';
+// import 'package:equatable/equatable.dart';
 
-import 'package:urrevs_ui_mobile/domain/failure.dart';
-import 'package:urrevs_ui_mobile/domain/models/company_review.dart';
-import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
+// import 'package:urrevs_ui_mobile/domain/failure.dart';
+// import 'package:urrevs_ui_mobile/domain/models/company_review.dart';
+// import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 
-abstract class GetCompanyReviewsOfAnotherUserState extends Equatable
-    implements RequestState {}
+// abstract class GetCompanyReviewsOfAnotherUserState extends Equatable
+//     implements RequestState {}
 
-class GetCompanyReviewsOfAnotherUserInitialState
-    extends GetCompanyReviewsOfAnotherUserState implements InitialState {
-  @override
-  List<Object?> get props => [];
-}
+// class GetCompanyReviewsOfAnotherUserInitialState
+//     extends GetCompanyReviewsOfAnotherUserState implements InitialState {
+//   @override
+//   List<Object?> get props => [];
+// }
 
-class GetCompanyReviewsOfAnotherUserLoadingState
-    extends GetCompanyReviewsOfAnotherUserState implements LoadingState {
-  @override
-  List<Object?> get props => [];
-}
+// class GetCompanyReviewsOfAnotherUserLoadingState
+//     extends GetCompanyReviewsOfAnotherUserState implements LoadingState {
+//   @override
+//   List<Object?> get props => [];
+// }
 
-class GetCompanyReviewsOfAnotherUserLoadedState
-    extends GetCompanyReviewsOfAnotherUserState
-    implements LoadedState, InfiniteScrollingState<CompanyReview> {
-  @override
-  final List<CompanyReview> infiniteScrollingItems;
-  @override
-  final bool roundsEnded;
+// class GetCompanyReviewsOfAnotherUserLoadedState
+//     extends GetCompanyReviewsOfAnotherUserState
+//     implements LoadedState, InfiniteScrollingState<CompanyReview> {
+//   @override
+//   final List<CompanyReview> infiniteScrollingItems;
+//   @override
+//   final bool roundsEnded;
 
-  GetCompanyReviewsOfAnotherUserLoadedState({
-    required this.infiniteScrollingItems,
-    required this.roundsEnded,
-  });
+//   GetCompanyReviewsOfAnotherUserLoadedState({
+//     required this.infiniteScrollingItems,
+//     required this.roundsEnded,
+//   });
 
-  @override
-  List<Object?> get props => [];
-}
+//   @override
+//   List<Object?> get props => [];
+// }
 
-class GetCompanyReviewsOfAnotherUserErrorState
-    extends GetCompanyReviewsOfAnotherUserState implements ErrorState {
-  @override
-  final Failure failure;
-  GetCompanyReviewsOfAnotherUserErrorState({
-    required this.failure,
-  });
+// class GetCompanyReviewsOfAnotherUserErrorState
+//     extends GetCompanyReviewsOfAnotherUserState implements ErrorState {
+//   @override
+//   final Failure failure;
+//   GetCompanyReviewsOfAnotherUserErrorState({
+//     required this.failure,
+//   });
 
-  @override
-  List<Object?> get props => [failure.message];
-}
+//   @override
+//   List<Object?> get props => [failure.message];
+// }

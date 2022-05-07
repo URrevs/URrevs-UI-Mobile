@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/authentication_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/partial_error_widget.dart';
@@ -16,6 +17,11 @@ abstract class LoadedState {}
 
 abstract class ErrorState {
   Failure get failure;
+}
+
+abstract class GeneralErrorWidget {
+  set setOnRetry(VoidCallback func);
+  set setRetryLastRequest(bool value);
 }
 
 abstract class InfiniteScrollingState<T> {
@@ -81,6 +87,18 @@ Widget? loadingOrErrorWidgetOrNull({
   }
 }
 
+// Widget? erroWidgetOrNull({
+//   required RequestState state,
+//   required GeneralErrorWidget errorWidget,
+//   required VoidCallback onRetry,
+// }) {
+//   assert(errorWidget is Widget);
+//   if (state is! ErrorState) return null;
+//   errorWidget.retryLastRequest = (state as ErrorState).failure is RetryFailure;
+//   errorWidget.onRetry = onRetry;
+//   return errorWidget as Widget;
+// }
+
 /// A method which takes a list of providers and list of callback functions.
 /// For each provider, if it emitted an [ErrorState], a
 /// [FullscreenErrorWidget] is returned with the corresponding callback to be
@@ -91,6 +109,9 @@ Widget? loadingOrErrorWidgetOrNull({
 Widget? fullScreenErrorWidgetOrNull(List<StateAndRetry> list,
     {bool retryOtherFailedRequests = true}) {
   for (var stateAndRetry in list) {
+    if (stateAndRetry.controller?.itemList != null) {
+      return null;
+    }
     if (stateAndRetry.state is ErrorState) {
       return FullscreenErrorWidget(
         onRetry: () {
@@ -120,8 +141,10 @@ Widget? fullScreenErrorWidgetOrNull(List<StateAndRetry> list,
 class StateAndRetry {
   RequestState state;
   VoidCallback onRetry;
+  PagingController? controller;
   StateAndRetry({
     required this.state,
     required this.onRetry,
+    this.controller,
   });
 }

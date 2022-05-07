@@ -1,10 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/domain/models/company_review.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone_review.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
@@ -13,11 +13,12 @@ import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_post_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/no_glowing_scroll_behavior.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/empty_list_widget.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/fullscreen_error_widget.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/vertical_list_error_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/review_card_list_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/company_review_card.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/product_review_card.dart';
@@ -50,10 +51,16 @@ class PostedReviewsScreen extends ConsumerStatefulWidget {
 
 class _PostedReviewsScreenState extends ConsumerState<PostedReviewsScreen> {
   ReviewsFilter _filter = ReviewsFilter.phones;
-  late PagingController<int, PhoneReview> _myPhoneReviewsController;
-  late PagingController<int, CompanyReview> _myCompanyReviewsController;
-  late PagingController<int, PhoneReview> _otherUserPhoneReviewsController;
-  late PagingController<int, CompanyReview> _otherUserCompanyReviewsController;
+  late PagingController<int, PhoneReview> _phoneReviewsController;
+  late PagingController<int, CompanyReview> _companyReviewsController;
+
+  late final String? _userId = widget.screenArgs.userId;
+
+  late final GetUserPhoneReviewsProviderParams _phoneProviderParams =
+      GetUserPhoneReviewsProviderParams(userId: _userId);
+
+  late final GetUserCompanyReviewsProviderParams _companyProviderParams =
+      GetUserCompanyReviewsProviderParams(userId: _userId);
 
   bool get isMine => widget.screenArgs.userId == null;
 
@@ -61,63 +68,37 @@ class _PostedReviewsScreenState extends ConsumerState<PostedReviewsScreen> {
       isMine ? LocaleKeys.myReviews.tr() : LocaleKeys.tabBarReview.tr();
 
   void setFilter(ReviewsFilter filter) {
-    ref.refresh(getMyPhoneReviewsProvider);
-    ref.refresh(getMyCompanyReviewsProvider);
-    ref.refresh(getPhoneReviewsOfAnotherUserProvider);
-    ref.refresh(getCompanyReviewsOfAnotherUserProvider);
-    _myPhoneReviewsController.refresh();
-    _myCompanyReviewsController.refresh();
-    _otherUserPhoneReviewsController.refresh();
-    _otherUserCompanyReviewsController.refresh();
+    ref.refresh(getUserPhoneReviewsProvider(_phoneProviderParams));
+    ref.refresh(getUserCompanyReviewsProvider(_companyProviderParams));
+    _phoneReviewsController.refresh();
+    _companyReviewsController.refresh();
     setState(() => _filter = filter);
   }
 
-  void _getMyPhoneReviews() {
-    _myPhoneReviewsController.retryLastFailedRequest();
-    ref.read(getMyPhoneReviewsProvider.notifier).getMyPhoneReviews();
+  void _getPhoneReviews() {
+    _phoneReviewsController.retryLastFailedRequest();
+    ref
+        .read(getUserPhoneReviewsProvider(_phoneProviderParams).notifier)
+        .getUserPhoneReviews();
   }
 
-  void _getMyCompanyReviews() {
-    _myCompanyReviewsController.retryLastFailedRequest();
-    ref.read(getMyCompanyReviewsProvider.notifier).getMyCompanyReviews();
-  }
-
-  void _getPhoneReviewsOfAnotherUser() {
-    if (!isMine) {
-      _otherUserPhoneReviewsController.retryLastFailedRequest();
-      ref
-          .read(getPhoneReviewsOfAnotherUserProvider.notifier)
-          .getPhoneReviewsOfAnotherUser(widget.screenArgs.userId!);
-    }
-  }
-
-  void _getCompanyReviewsOfAnotherUser() {
-    if (!isMine) {
-      _otherUserCompanyReviewsController.retryLastFailedRequest();
-      ref
-          .read(getCompanyReviewsOfAnotherUserProvider.notifier)
-          .getCompanyReviewsOfAnotherUser(widget.screenArgs.userId!);
-    }
+  void _getCompanyReviews() {
+    _companyReviewsController.retryLastFailedRequest();
+    ref
+        .read(getUserCompanyReviewsProvider(_companyProviderParams).notifier)
+        .getUserCompanyReviews();
   }
 
   @override
   void initState() {
     super.initState();
-    _myPhoneReviewsController = PagingController(firstPageKey: 0)
+    _phoneReviewsController = PagingController(firstPageKey: 0)
       ..addPageRequestListener((_) {
-        Future.delayed(Duration.zero, _getMyPhoneReviews);
+        Future.delayed(Duration.zero, _getPhoneReviews);
       });
-    _myCompanyReviewsController = PagingController(firstPageKey: 0)
+    _companyReviewsController = PagingController(firstPageKey: 0)
       ..addPageRequestListener((_) {
-        Future.delayed(Duration.zero, _getMyCompanyReviews);
-      });
-    _otherUserPhoneReviewsController = PagingController(firstPageKey: 0)
-      ..addPageRequestListener((_) {
-        Future.delayed(Duration.zero, _getPhoneReviewsOfAnotherUser);
-      });
-    _otherUserCompanyReviewsController = PagingController(firstPageKey: 0)
-      ..addPageRequestListener((_) {
-        Future.delayed(Duration.zero, _getCompanyReviewsOfAnotherUser);
+        Future.delayed(Duration.zero, _getCompanyReviews);
       });
   }
 
@@ -137,27 +118,27 @@ class _PostedReviewsScreenState extends ConsumerState<PostedReviewsScreen> {
   }
 
   Widget _buildBody() {
-    final myPhoneReviewsState = ref.watch(getMyPhoneReviewsProvider);
-    final myCompanyReviewsState = ref.watch(getMyCompanyReviewsProvider);
-    Widget? widget = fullScreenErrorWidgetOrNull(
+    final phoneReviewsState =
+        ref.watch(getUserPhoneReviewsProvider(_phoneProviderParams));
+    final companyReviewsState =
+        ref.watch(getUserCompanyReviewsProvider(_companyProviderParams));
+
+    Widget? errWidget = fullScreenErrorWidgetOrNull(
       [
-        StateAndRetry(state: myPhoneReviewsState, onRetry: _getMyPhoneReviews),
         StateAndRetry(
-          state: myCompanyReviewsState,
-          onRetry: _getMyCompanyReviews,
+          state: phoneReviewsState,
+          onRetry: _getPhoneReviews,
+          controller: _phoneReviewsController,
         ),
         StateAndRetry(
-          state: ref.watch(getPhoneReviewsOfAnotherUserProvider),
-          onRetry: _getPhoneReviewsOfAnotherUser,
-        ),
-        StateAndRetry(
-          state: ref.watch(getCompanyReviewsOfAnotherUserProvider),
-          onRetry: _getCompanyReviewsOfAnotherUser,
+          state: companyReviewsState,
+          onRetry: _getCompanyReviews,
+          controller: _companyReviewsController,
         ),
       ],
       retryOtherFailedRequests: false,
     );
-    if (widget != null) return widget;
+    if (errWidget != null) return errWidget;
     return CustomScrollView(
       slivers: [
         _buildFilterBar(),
@@ -167,31 +148,27 @@ class _PostedReviewsScreenState extends ConsumerState<PostedReviewsScreen> {
   }
 
   Widget _chooseBetweenLists() {
-    if (widget.screenArgs.userId == null) {
-      if (_filter == ReviewsFilter.phones) {
-        return _buildPhoneReviewsList();
-      } else {
-        return _buildMyCompanyReviewsList();
-      }
+    if (_filter == ReviewsFilter.phones) {
+      return _buildPhoneReviewsList();
     } else {
-      if (_filter == ReviewsFilter.phones) {
-        return _buildOtherUserPhoneReviewsList();
-      } else {
-        return _buildOtherUserCompanyReviewsList();
-      }
+      return _buildMyCompanyReviewsList();
     }
   }
 
   Widget _buildPhoneReviewsList() {
-    ref.addErrorListener(provider: getMyPhoneReviewsProvider, context: context);
+    ref.addErrorListener(
+      provider: getUserPhoneReviewsProvider(_phoneProviderParams),
+      context: context,
+      controller: _phoneReviewsController,
+    );
     ref.addInfiniteScrollingListener(
-      getMyPhoneReviewsProvider,
-      _myPhoneReviewsController,
+      getUserPhoneReviewsProvider(_phoneProviderParams),
+      _phoneReviewsController,
     );
     return SliverPadding(
       padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
       sliver: PagedSliverList(
-        pagingController: _myPhoneReviewsController,
+        pagingController: _phoneReviewsController,
         builderDelegate: PagedChildBuilderDelegate<PhoneReview>(
           itemBuilder: (context, phoneReview, index) {
             return ProductReviewCard.fromPhoneReview(
@@ -211,11 +188,16 @@ class _PostedReviewsScreenState extends ConsumerState<PostedReviewsScreen> {
           },
           firstPageErrorIndicatorBuilder: (context) => SizedBox(),
           newPageErrorIndicatorBuilder: (context) {
-            return ref.partialErrorWidget(
-              controller: _myPhoneReviewsController,
-              provider: getAllPhonesProvider,
-              onRetry: _getMyPhoneReviews,
-            );
+            final state =
+                ref.watch(getUserPhoneReviewsProvider(_phoneProviderParams));
+            if (state is ErrorState) {
+              return VerticalListErrorWidget(
+                onRetry: _getPhoneReviews,
+                retryLastRequest: (state as ErrorState).failure is RetryFailure,
+              );
+            } else {
+              return SizedBox();
+            }
           },
           firstPageProgressIndicatorBuilder: (context) =>
               ReviewCardsListLoading(),
@@ -229,109 +211,18 @@ class _PostedReviewsScreenState extends ConsumerState<PostedReviewsScreen> {
 
   Widget _buildMyCompanyReviewsList() {
     ref.addErrorListener(
-        provider: getMyCompanyReviewsProvider, context: context);
-    ref.addInfiniteScrollingListener(
-      getMyCompanyReviewsProvider,
-      _myCompanyReviewsController,
-    );
-    return SliverPadding(
-      padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-      sliver: PagedSliverList<int, CompanyReview>(
-        pagingController: _myCompanyReviewsController,
-        builderDelegate: PagedChildBuilderDelegate<CompanyReview>(
-          itemBuilder: (context, companyReview, index) {
-            return CompanyReviewCard.fromCompanyReview(
-              companyReview: companyReview,
-              fullscreen: true,
-              onPressingComment: () {
-                Navigator.of(context).pushNamed(
-                  FullscreenPostScreen.routeName,
-                  arguments: FullscreenPostScreenArgs(
-                    cardType: CardType.productReview,
-                    postId: companyReview.id,
-                    focusOnTextField: true,
-                  ),
-                );
-              },
-            );
-          },
-          firstPageErrorIndicatorBuilder: (context) => SizedBox(),
-          newPageErrorIndicatorBuilder: (context) {
-            return ref.partialErrorWidget(
-              controller: _myCompanyReviewsController,
-              provider: getMyCompanyReviewsProvider,
-              onRetry: _getMyCompanyReviews,
-            );
-          },
-          firstPageProgressIndicatorBuilder: (context) =>
-              ReviewCardsListLoading(),
-          newPageProgressIndicatorBuilder: (context) =>
-              ReviewCardsListLoading(),
-          noItemsFoundIndicatorBuilder: (context) => EmptyListWidget(),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildOtherUserPhoneReviewsList() {
-    ref.addErrorListener(
-      provider: getPhoneReviewsOfAnotherUserProvider,
+      provider: getUserCompanyReviewsProvider(_companyProviderParams),
       context: context,
+      controller: _companyReviewsController,
     );
     ref.addInfiniteScrollingListener(
-      getPhoneReviewsOfAnotherUserProvider,
-      _otherUserPhoneReviewsController,
-    );
-    return SliverPadding(
-      padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-      sliver: PagedSliverList(
-        pagingController: _otherUserPhoneReviewsController,
-        builderDelegate: PagedChildBuilderDelegate<PhoneReview>(
-          itemBuilder: (context, phoneReview, index) {
-            return ProductReviewCard.fromPhoneReview(
-              phoneReview: phoneReview,
-              fullscreen: true,
-              onPressingComment: () {
-                Navigator.of(context).pushNamed(
-                  FullscreenPostScreen.routeName,
-                  arguments: FullscreenPostScreenArgs(
-                    cardType: CardType.productReview,
-                    postId: phoneReview.id,
-                    focusOnTextField: true,
-                  ),
-                );
-              },
-            );
-          },
-          firstPageErrorIndicatorBuilder: (context) => SizedBox(),
-          newPageErrorIndicatorBuilder: (context) {
-            return ref.partialErrorWidget(
-              controller: _otherUserPhoneReviewsController,
-              provider: getPhoneReviewsOfAnotherUserProvider,
-              onRetry: _getPhoneReviewsOfAnotherUser,
-            );
-          },
-          firstPageProgressIndicatorBuilder: (context) =>
-              ReviewCardsListLoading(),
-          newPageProgressIndicatorBuilder: (context) =>
-              ReviewCardsListLoading(),
-          noItemsFoundIndicatorBuilder: (context) => EmptyListWidget(),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildOtherUserCompanyReviewsList() {
-    ref.addErrorListener(
-        provider: getCompanyReviewsOfAnotherUserProvider, context: context);
-    ref.addInfiniteScrollingListener(
-      getCompanyReviewsOfAnotherUserProvider,
-      _otherUserCompanyReviewsController,
+      getUserCompanyReviewsProvider(_companyProviderParams),
+      _companyReviewsController,
     );
     return SliverPadding(
       padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
       sliver: PagedSliverList<int, CompanyReview>(
-        pagingController: _otherUserCompanyReviewsController,
+        pagingController: _companyReviewsController,
         builderDelegate: PagedChildBuilderDelegate<CompanyReview>(
           itemBuilder: (context, companyReview, index) {
             return CompanyReviewCard.fromCompanyReview(
@@ -351,11 +242,16 @@ class _PostedReviewsScreenState extends ConsumerState<PostedReviewsScreen> {
           },
           firstPageErrorIndicatorBuilder: (context) => SizedBox(),
           newPageErrorIndicatorBuilder: (context) {
-            return ref.partialErrorWidget(
-              controller: _otherUserCompanyReviewsController,
-              provider: getCompanyReviewsOfAnotherUserProvider,
-              onRetry: _getCompanyReviewsOfAnotherUser,
-            );
+            final state = ref
+                .watch(getUserCompanyReviewsProvider(_companyProviderParams));
+            if (state is ErrorState) {
+              return VerticalListErrorWidget(
+                onRetry: _getCompanyReviews,
+                retryLastRequest: (state as ErrorState).failure is RetryFailure,
+              );
+            } else {
+              return SizedBox();
+            }
           },
           firstPageProgressIndicatorBuilder: (context) =>
               ReviewCardsListLoading(),

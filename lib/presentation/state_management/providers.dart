@@ -23,6 +23,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/give_po
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/search_notifiers/search_products_and_companies_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/theme_mode_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/update_targets_from_source_notifier.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/authentication_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/companies_states/get_all_companies_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_current_user_image_url_state.dart';
@@ -41,6 +42,8 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_st
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_my_phone_reviews_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_phone_review_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_phone_reviews_of_another_user_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_user_company_reviews_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_user_phone_reviews_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/add_new_recent_search_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/delete_recent_search_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/get_my_recent_searches_state.dart';
@@ -63,6 +66,8 @@ import 'notifiers/reviews_notifiers/get_my_companies_reviews_notifier.dart';
 import 'notifiers/reviews_notifiers/get_my_phone_reviews_notifier.dart';
 import 'notifiers/reviews_notifiers/get_phone_review_notifier.dart';
 import 'notifiers/reviews_notifiers/get_phone_reviews_of_another_user_notifier.dart';
+import 'notifiers/reviews_notifiers/get_user_company_reviews_notifier.dart';
+import 'notifiers/reviews_notifiers/get_user_phone_reviews_notifier.dart';
 import 'notifiers/search_notifiers/get_phone_statistical_info_notifier.dart';
 
 final themeModeProvider = StateNotifierProvider<ThemeModeNotifier, ThemeMode>(
@@ -161,23 +166,37 @@ final getCompanyReviewProvider = StateNotifierProvider.autoDispose<
     GetCompanyReviewNotifier,
     GetCompanyReviewState>((ref) => GetCompanyReviewNotifier());
 
-final getMyPhoneReviewsProvider = StateNotifierProvider.autoDispose<
-    GetMyPhoneReviewsNotifier,
-    GetMyPhoneReviewsState>((ref) => GetMyPhoneReviewsNotifier());
+// final getMyPhoneReviewsProvider = StateNotifierProvider.autoDispose<
+//     GetMyPhoneReviewsNotifier,
+//     GetMyPhoneReviewsState>((ref) => GetMyPhoneReviewsNotifier());
 
-final getPhoneReviewsOfAnotherUserProvider = StateNotifierProvider.autoDispose<
-        GetPhoneReviewsOfAnotherUserNotifier,
-        GetPhoneReviewsOfAnotherUserState>(
-    (ref) => GetPhoneReviewsOfAnotherUserNotifier());
+// final getPhoneReviewsOfAnotherUserProvider = StateNotifierProvider.autoDispose
+//     .family<
+//             GetPhoneReviewsOfAnotherUserNotifier,
+//             GetPhoneReviewsOfAnotherUserState,
+//             GetUserPhoneReviewsProviderParams>(
+//         (ref, params) => GetPhoneReviewsOfAnotherUserNotifier());
 
-final getMyCompanyReviewsProvider = StateNotifierProvider.autoDispose<
-    GetMyCompanyReviewsNotifier,
-    GetMyCompanyReviewsState>((ref) => GetMyCompanyReviewsNotifier());
+// final getMyCompanyReviewsProvider = StateNotifierProvider.autoDispose<
+//     GetMyCompanyReviewsNotifier,
+//     GetMyCompanyReviewsState>((ref) => GetMyCompanyReviewsNotifier());
 
-final getCompanyReviewsOfAnotherUserProvider =
-    StateNotifierProvider.autoDispose<GetCompanyReviewsOfAnotherUserNotifier,
-            GetCompanyReviewsOfAnotherUserState>(
-        (ref) => GetCompanyReviewsOfAnotherUserNotifier());
+// final getCompanyReviewsOfAnotherUserProvider =
+//     StateNotifierProvider.autoDispose<GetCompanyReviewsOfAnotherUserNotifier,
+//             GetCompanyReviewsOfAnotherUserState>(
+//         (ref) => GetCompanyReviewsOfAnotherUserNotifier());
+
+final getUserPhoneReviewsProvider = StateNotifierProvider.autoDispose.family<
+        GetUserPhoneReviewsNotifier,
+        GetUserPhoneReviewsState,
+        GetUserPhoneReviewsProviderParams>(
+    (ref, params) => GetUserPhoneReviewsNotifier(userId: params.userId));
+
+final getUserCompanyReviewsProvider = StateNotifierProvider.autoDispose.family<
+        GetUserCompanyReviewsNotifier,
+        GetUserCompanyReviewsState,
+        GetUserCompanyReviewsProviderParams>(
+    (ref, params) => GetUserCompanyReviewsNotifier(userId: params.userId));
 
 final userImageFetchedFlagProvider = StateProvider<bool>((ref) {
   return false;
