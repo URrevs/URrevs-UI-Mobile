@@ -69,7 +69,10 @@ class CardFooterInteractionBar extends StatelessWidget {
               if (fullscreen) return;
               Navigator.of(context).pushNamed(
                 FullscreenPostScreen.routeName,
-                arguments: FullscreenPostScreenArgs(cardType: cardType),
+                arguments: FullscreenPostScreenArgs(
+                  cardType: cardType,
+                  reviewId: '',
+                ),
               );
             },
             child: Icon(

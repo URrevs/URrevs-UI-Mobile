@@ -224,7 +224,10 @@ class QuestionCard extends StatelessWidget {
                     child: answer!.copyWith(onTappingAnswerInCard: () {
                       Navigator.of(context).pushNamed(
                         FullscreenPostScreen.routeName,
-                        arguments: FullscreenPostScreenArgs(cardType: cardType),
+                        arguments: FullscreenPostScreenArgs(
+                          cardType: cardType,
+                          reviewId: '',
+                        ),
                       );
                     }),
                   ),

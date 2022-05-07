@@ -197,5 +197,6 @@ abstract class  LocaleKeys {
   static const whatDoYouHateAbout = 'whatDoYouHateAbout';
   static const invitationCode = 'invitationCode';
   static const enterInvitationCode = 'enterInvitationCode';
+  static const internalServerError = 'internalServerError';
 
 }

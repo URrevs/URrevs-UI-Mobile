@@ -242,3 +242,58 @@ Map<String, dynamic> _$PhoneWithPictureSubResponseToJson(
       'name': instance.name,
       'picture': instance.picture,
     };
+
+ReviewSubResponse _$ReviewSubResponseFromJson(Map<String, dynamic> json) =>
+    ReviewSubResponse(
+      id: json['_id'] as String,
+      type: json['type'] as String,
+      targetId: json['targetId'] as String,
+      targetName: json['targetName'] as String,
+      userId: json['userId'] as String,
+      userName: json['userName'] as String,
+      photo: json['photo'] as String,
+      createdAt:
+          ReviewSubResponse._dateTimeFromTimestamp(json['createdAt'] as int),
+      views: json['views'] as int,
+      likes: json['likes'] as int,
+      commentsCount: json['commentsCount'] as int,
+      shares: json['shares'] as int,
+      ownedAt: DateTime.parse(json['ownedAt'] as String),
+      generalRating: (json['generalRating'] as num).toDouble(),
+      uiRating: json['uiRating'] as int,
+      manufacturingQuality: json['manufacturingQuality'] as int,
+      valueForMoney: json['valueForMoney'] as int,
+      camera: json['camera'] as int,
+      callQuality: json['callQuality'] as int,
+      battery: json['battery'] as int,
+      pros: json['pros'] as String,
+      cons: json['cons'] as String,
+      liked: json['liked'] as bool,
+    );
+
+Map<String, dynamic> _$ReviewSubResponseToJson(ReviewSubResponse instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'type': instance.type,
+      'targetId': instance.targetId,
+      'targetName': instance.targetName,
+      'userId': instance.userId,
+      'userName': instance.userName,
+      'photo': instance.photo,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'views': instance.views,
+      'likes': instance.likes,
+      'commentsCount': instance.commentsCount,
+      'shares': instance.shares,
+      'ownedAt': instance.ownedAt.toIso8601String(),
+      'generalRating': instance.generalRating,
+      'uiRating': instance.uiRating,
+      'manufacturingQuality': instance.manufacturingQuality,
+      'valueForMoney': instance.valueForMoney,
+      'camera': instance.camera,
+      'callQuality': instance.callQuality,
+      'battery': instance.battery,
+      'pros': instance.pros,
+      'cons': instance.cons,
+      'liked': instance.liked,
+    };

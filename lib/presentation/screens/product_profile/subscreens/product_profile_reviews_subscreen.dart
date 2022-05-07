@@ -22,6 +22,7 @@ class _ProductProfileReviewsSubscreenState
               FullscreenPostScreen.routeName,
               arguments: FullscreenPostScreenArgs(
                 cardType: CardType.productReview,
+                reviewId: '',
                 focusOnTextField: true,
               ),
             );

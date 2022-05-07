@@ -18,6 +18,7 @@ import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/domain/models/company.dart';
 import 'package:urrevs_ui_mobile/domain/models/info.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone.dart';
+import 'package:urrevs_ui_mobile/domain/models/review.dart';
 import 'package:urrevs_ui_mobile/domain/models/search_result.dart';
 import 'package:urrevs_ui_mobile/domain/models/specs.dart';
 import 'package:urrevs_ui_mobile/domain/models/user.dart';
@@ -246,6 +247,13 @@ class Repository {
     return _tryAndCatch(() async {
       final response = await _remoteDataSource.getSimilarPhones(phoneId);
       return response.phonesModels;
+    });
+  }
+
+  Future<Either<Failure, PhoneReview>> getPhoneReview(String reviewId) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.getPhoneReview(reviewId);
+      return response.reviewSubResponses.reviewModel;
     });
   }
 }

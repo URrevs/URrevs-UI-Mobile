@@ -194,5 +194,6 @@
   "WhatDoYouLikeAbout": "ماذا يعجبك بشأن",
   "whatDoYouHateAbout": "ما الذي تكرهه بشأن",
   "invitationCode": "كود الدعوة",
-  "enterInvitationCode": "قم بادخال كود الدعوة"
+  "enterInvitationCode": "قم بادخال كود الدعوة",
+  "internalServerError": "حدث خطأ في الخادم"
 }

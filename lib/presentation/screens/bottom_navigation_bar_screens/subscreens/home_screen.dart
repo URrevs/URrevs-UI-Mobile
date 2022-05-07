@@ -24,6 +24,7 @@ class _HomeSubscreenState extends ConsumerState<HomeSubscreen> {
               FullscreenPostScreen.routeName,
               arguments: FullscreenPostScreenArgs(
                 cardType: CardType.productReview,
+                reviewId: '',
                 focusOnTextField: true,
               ),
             );
@@ -35,6 +36,7 @@ class _HomeSubscreenState extends ConsumerState<HomeSubscreen> {
               FullscreenPostScreen.routeName,
               arguments: FullscreenPostScreenArgs(
                 cardType: CardType.companyReview,
+                reviewId: '',
                 focusOnTextField: true,
               ),
             );
@@ -47,6 +49,7 @@ class _HomeSubscreenState extends ConsumerState<HomeSubscreen> {
               FullscreenPostScreen.routeName,
               arguments: FullscreenPostScreenArgs(
                 cardType: CardType.productQuestion,
+                reviewId: '',
                 focusOnTextField: true,
               ),
             );
@@ -59,6 +62,7 @@ class _HomeSubscreenState extends ConsumerState<HomeSubscreen> {
               FullscreenPostScreen.routeName,
               arguments: FullscreenPostScreenArgs(
                 cardType: CardType.companyQuestion,
+                reviewId: '',
                 focusOnTextField: true,
               ),
             );

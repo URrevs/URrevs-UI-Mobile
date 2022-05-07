@@ -18,6 +18,7 @@ class ServerErrorMessages {
   static const String thereIsARunningUpdateOperationRightNow =
       'there is a running update operation right now';
   static const String badRequest = 'bad request';
+  static const String internalServerError = 'internal server error';
 
   static Map<String, String> get errorMessagesMap => {
         ServerErrorMessages.tooManyRequests: LocaleKeys.tooManyRequests.tr(),
@@ -33,11 +34,15 @@ class ServerErrorMessages {
         ServerErrorMessages.thereIsARunningUpdateOperationRightNow:
             LocaleKeys.thereIsARunningUpdateOperationRightNow.tr(),
         ServerErrorMessages.badRequest: LocaleKeys.badRequest.tr(),
+        ServerErrorMessages.internalServerError:
+            LocaleKeys.internalServerError.tr(),
       };
 
   static List<String> get _retryActionFailures => [
         tooManyRequests,
         processFailed,
+        internalServerError,
+        badRequest,
       ];
 
   static List<String> get _authenticateFailures => [

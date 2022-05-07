@@ -210,7 +210,8 @@ class CodegenLoader extends AssetLoader{
   "WhatDoYouLikeAbout": "ماذا يعجبك بشأن",
   "whatDoYouHateAbout": "ما الذي تكرهه بشأن",
   "invitationCode": "كود الدعوة",
-  "enterInvitationCode": "قم بادخال كود الدعوة"
+  "enterInvitationCode": "قم بادخال كود الدعوة",
+  "internalServerError": "حدث خطأ في الخادم"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -408,7 +409,8 @@ static const Map<String,dynamic> en = {
   "WhatDoYouLikeAbout": "What do you like about",
   "whatDoYouHateAbout": "What do you hate about",
   "invitationCode": "Invitation code",
-  "enterInvitationCode": "Enter invitation code"
+  "enterInvitationCode": "Enter invitation code",
+  "internalServerError": "Internal server error"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

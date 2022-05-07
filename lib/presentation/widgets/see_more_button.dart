@@ -88,7 +88,10 @@ class SeeMoreButton extends StatelessWidget {
     }
     Navigator.of(context).pushNamed(
       FullscreenPostScreen.routeName,
-      arguments: FullscreenPostScreenArgs(cardType: cardType),
+      arguments: FullscreenPostScreenArgs(
+        cardType: cardType,
+        reviewId: '',
+      ),
     );
   }
 

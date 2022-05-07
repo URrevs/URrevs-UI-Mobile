@@ -194,5 +194,6 @@
   "WhatDoYouLikeAbout": "What do you like about",
   "whatDoYouHateAbout": "What do you hate about",
   "invitationCode": "Invitation code",
-  "enterInvitationCode": "Enter invitation code"
+  "enterInvitationCode": "Enter invitation code",
+  "internalServerError": "Internal server error"
 }

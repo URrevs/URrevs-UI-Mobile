@@ -22,6 +22,7 @@ class _CompanyProfileReviewsSubscreenState
               FullscreenPostScreen.routeName,
               arguments: FullscreenPostScreenArgs(
                 cardType: CardType.companyReview,
+                reviewId: '',
                 focusOnTextField: true,
               ),
             );

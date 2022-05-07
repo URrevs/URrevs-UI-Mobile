@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:urrevs_ui_mobile/domain/models/company.dart';
 import 'package:urrevs_ui_mobile/domain/models/info.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone.dart';
+import 'package:urrevs_ui_mobile/domain/models/review.dart';
 import 'package:urrevs_ui_mobile/domain/models/search_result.dart';
 import 'package:urrevs_ui_mobile/domain/models/specs.dart';
 import 'package:urrevs_ui_mobile/domain/models/user.dart';
@@ -338,4 +339,92 @@ class PhoneWithPictureSubResponse {
   factory PhoneWithPictureSubResponse.fromJson(Map<String, Object?> json) =>
       _$PhoneWithPictureSubResponseFromJson(json);
   Map<String, dynamic> toJson() => _$PhoneWithPictureSubResponseToJson(this);
+}
+
+@JsonSerializable()
+class ReviewSubResponse {
+  @JsonKey(name: '_id')
+  String id;
+  String type;
+  String targetId;
+  String targetName;
+  String userId;
+  String userName;
+  String photo;
+  @JsonKey(fromJson: _dateTimeFromTimestamp)
+  DateTime createdAt;
+  int views;
+  int likes;
+  int commentsCount;
+  int shares;
+  DateTime ownedAt;
+  double generalRating;
+  int uiRating;
+  int manufacturingQuality;
+  int valueForMoney;
+  int camera;
+  int callQuality;
+  int battery;
+  String pros;
+  String cons;
+  bool liked;
+
+  ReviewSubResponse({
+    required this.id,
+    required this.type,
+    required this.targetId,
+    required this.targetName,
+    required this.userId,
+    required this.userName,
+    required this.photo,
+    required this.createdAt,
+    required this.views,
+    required this.likes,
+    required this.commentsCount,
+    required this.shares,
+    required this.ownedAt,
+    required this.generalRating,
+    required this.uiRating,
+    required this.manufacturingQuality,
+    required this.valueForMoney,
+    required this.camera,
+    required this.callQuality,
+    required this.battery,
+    required this.pros,
+    required this.cons,
+    required this.liked,
+  });
+
+  PhoneReview get reviewModel => PhoneReview(
+        id: id,
+        type: type,
+        targetId: targetId,
+        targetName: targetName,
+        userId: userId,
+        userName: userName,
+        photo: photo,
+        createdAt: createdAt,
+        views: views,
+        likes: likes,
+        commentsCount: commentsCount,
+        shares: shares,
+        ownedAt: ownedAt,
+        generalRating: generalRating,
+        uiRating: uiRating,
+        manufacturingQuality: manufacturingQuality,
+        valueForMoney: valueForMoney,
+        camera: camera,
+        callQuality: callQuality,
+        battery: battery,
+        pros: pros,
+        cons: cons,
+        liked: liked,
+      );
+
+  static DateTime _dateTimeFromTimestamp(int timestamp) =>
+      DateTime.fromMillisecondsSinceEpoch(timestamp);
+
+  factory ReviewSubResponse.fromJson(Map<String, Object?> json) =>
+      _$ReviewSubResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$ReviewSubResponseToJson(this);
 }
