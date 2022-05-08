@@ -226,7 +226,8 @@ class CodegenLoader extends AssetLoader{
   "settings": "الاعدادات",
   "aboutUs": "عنا",
   "termsOfUse": "شروط الاستخدام",
-  "privacyPolicy": "سياسة الخصوصية"
+  "privacyPolicy": "سياسة الخصوصية",
+  "postedQuestions": "الأسئلة المطروحة"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -440,7 +441,8 @@ static const Map<String,dynamic> en = {
   "settings": "Settings",
   "aboutUs": "About us",
   "termsOfUse": "Terms of use",
-  "privacyPolicy": "Privacy policy"
+  "privacyPolicy": "Privacy policy",
+  "postedQuestions": "Posted questions"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }
