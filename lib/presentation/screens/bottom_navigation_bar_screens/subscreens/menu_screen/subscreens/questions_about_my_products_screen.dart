@@ -1,4 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
+import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 class QuestionsAboutMyProductsScreen extends StatefulWidget {
   const QuestionsAboutMyProductsScreen({Key? key}) : super(key: key);
@@ -15,7 +18,10 @@ class _QuestionsAboutMyProductsScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBars.appBarWithTitle(
+        context: context,
+        title: LocaleKeys.questionsAboutMyProducts.tr(),
+      ),
       body: SafeArea(child: Container()),
     );
   }

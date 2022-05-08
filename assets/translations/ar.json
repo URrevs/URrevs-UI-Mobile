@@ -205,5 +205,10 @@
   "hatedAboutManufacturerErrorMsg": "يجب ادخال بعض عيوب الشركة المصنعة.",
   "purchaseDateErrorMsg": "يجب ادخال تاريخ شراء هذا المنتج.",
   "competitionEndDateErrorMsg": "يجب ادخال تاريخ انتهاء المسابقة.",
-  "productNameErrorMsg": "يجب ادخال اسم المنتج."
+  "productNameErrorMsg": "يجب ادخال اسم المنتج.",
+  "questionsAboutMyProducts": "الأسئلة المطروحة على منتجاتي",
+  "settings": "الاعدادات",
+  "aboutUs": "عنا",
+  "termsOfUse": "شروط الاستخدام",
+  "privacyPolicy": "سياسة الخصوصية"
 }

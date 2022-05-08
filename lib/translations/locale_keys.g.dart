@@ -208,5 +208,10 @@ abstract class  LocaleKeys {
   static const purchaseDateErrorMsg = 'purchaseDateErrorMsg';
   static const competitionEndDateErrorMsg = 'competitionEndDateErrorMsg';
   static const productNameErrorMsg = 'productNameErrorMsg';
+  static const questionsAboutMyProducts = 'questionsAboutMyProducts';
+  static const settings = 'settings';
+  static const aboutUs = 'aboutUs';
+  static const termsOfUse = 'termsOfUse';
+  static const privacyPolicy = 'privacyPolicy';
 
 }

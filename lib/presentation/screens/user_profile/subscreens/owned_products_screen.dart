@@ -16,6 +16,7 @@ import 'package:urrevs_ui_mobile/presentation/screens/product_profile/product_pr
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/user_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_my_owned_phones_state.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/empty_list_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/fullscreen_error_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets.dart';
@@ -139,9 +140,12 @@ class _OwnedProductsScreenState extends ConsumerState<OwnedProductsScreen>
       },
       child: ScaffoldWithHidingFab(
         appBar: PreferredSize(
-        preferredSize: Size.fromHeight(45.h),
-        child: AppBar(),
-      ),
+          preferredSize: Size.fromHeight(45.h),
+          child: AppBars.appBarWithTitle(
+            context: context,
+            title: LocaleKeys.ownedProducts.tr(),
+          ),
+        ),
         onPressingFab: () {
           Navigator.of(context).pushNamed(
             BottomNavigationBarContainerScreen.routeName,

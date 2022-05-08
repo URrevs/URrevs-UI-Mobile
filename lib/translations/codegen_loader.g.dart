@@ -221,7 +221,12 @@ class CodegenLoader extends AssetLoader{
   "hatedAboutManufacturerErrorMsg": "يجب ادخال بعض عيوب الشركة المصنعة.",
   "purchaseDateErrorMsg": "يجب ادخال تاريخ شراء هذا المنتج.",
   "competitionEndDateErrorMsg": "يجب ادخال تاريخ انتهاء المسابقة.",
-  "productNameErrorMsg": "يجب ادخال اسم المنتج."
+  "productNameErrorMsg": "يجب ادخال اسم المنتج.",
+  "questionsAboutMyProducts": "الأسئلة المطروحة على منتجاتي",
+  "settings": "الاعدادات",
+  "aboutUs": "عنا",
+  "termsOfUse": "شروط الاستخدام",
+  "privacyPolicy": "سياسة الخصوصية"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -430,7 +435,12 @@ static const Map<String,dynamic> en = {
   "hatedAboutManufacturerErrorMsg": "Some cons must be entered.",
   "purchaseDateErrorMsg": "Product purchase date must be entered.",
   "competitionEndDateErrorMsg": "Contest's end date must be entered.",
-  "productNameErrorMsg": "Product's name must be entered."
+  "productNameErrorMsg": "Product's name must be entered.",
+  "questionsAboutMyProducts": "Questions about my products",
+  "settings": "Settings",
+  "aboutUs": "About us",
+  "termsOfUse": "Terms of use",
+  "privacyPolicy": "Privacy policy"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

@@ -286,8 +286,6 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
   PreferredSize _buildAppBar() {
     final state = ref.watch(getTheProfileOfAnotherUserProvider);
 
-    print(otherUser);
-
     /// AppBar for other user profile.
     if (otherUser) {
       String name =
