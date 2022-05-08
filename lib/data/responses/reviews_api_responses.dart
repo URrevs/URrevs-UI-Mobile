@@ -107,3 +107,22 @@ class GetCompanyReviewsOfAnotherUserResponse extends BaseResponse {
   Map<String, dynamic> toJson() =>
       _$GetCompanyReviewsOfAnotherUserResponseToJson(this);
 }
+
+@JsonSerializable()
+class GetReviewsOnCertainPhoneResponse extends BaseResponse {
+  @JsonKey(name: 'reviews')
+  List<PhoneReviewSubResponse> phoneReviewsSubResponses;
+  GetReviewsOnCertainPhoneResponse({
+    required bool success,
+    required this.phoneReviewsSubResponses,
+  }) : super(success: success);
+
+  List<PhoneReview> get phoneReviewsModels =>
+      phoneReviewsSubResponses.map((p) => p.phoneReviewModel).toList();
+
+  factory GetReviewsOnCertainPhoneResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$GetReviewsOnCertainPhoneResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$GetReviewsOnCertainPhoneResponseToJson(this);
+}

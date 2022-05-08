@@ -15,7 +15,9 @@ class GetPhoneStatisticalInfoNotifier
     response.fold(
       (failure) => state = GetPhoneStatisticalInfoErrorState(failure: failure),
       (info) {
-        state = GetPhoneStatisticalInfoLoadedState(info: info);
+        if (mounted) {
+          state = GetPhoneStatisticalInfoLoadedState(info: info);
+        }
       },
     );
   }

@@ -4,6 +4,7 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/authentication_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/partial_error_widget.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/vertical_list_error_widget.dart';
 
 import '../widgets/error_widgets/fullscreen_error_widget.dart';
 
@@ -147,4 +148,40 @@ class StateAndRetry {
     required this.onRetry,
     this.controller,
   });
+}
+
+Widget fullscreenErrorWidget({
+  required RequestState state,
+  required VoidCallback onRetry,
+  required PagingController? controller,
+}) {
+  if (state is ErrorState) {
+    return FullscreenErrorWidget(
+      onRetry: () {
+        onRetry();
+        controller?.retryLastFailedRequest();
+      },
+      retryLastRequest: (state as ErrorState).failure is RetryFailure,
+    );
+  } else {
+    return SizedBox();
+  }
+}
+
+Widget verticalListErrorWidget({
+  required RequestState state,
+  required VoidCallback onRetry,
+  required PagingController? controller,
+}) {
+  if (state is ErrorState) {
+    return VerticalListErrorWidget(
+      onRetry: () {
+        onRetry();
+        controller?.retryLastFailedRequest();
+      },
+      retryLastRequest: (state as ErrorState).failure is RetryFailure,
+    );
+  } else {
+    return SizedBox();
+  }
 }

@@ -9,3 +9,5 @@ class GetPhoneReviewsOfAnotherUserRequest {}
 class GetMyCompanyReviewsRequest {}
 
 class GetCompanyReviewsOfAnotherUserRequest {}
+
+class GetReviewsOnCertainPhoneRequest {}

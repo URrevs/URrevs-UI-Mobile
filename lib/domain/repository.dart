@@ -296,4 +296,13 @@ class Repository {
       return response.companyReviewsModels;
     });
   }
+
+  Future<Either<Failure, List<PhoneReview>>> getReviewsOnCertainPhone(
+      String phoneId, int round) {
+    return _tryAndCatch(() async {
+      final response =
+          await _remoteDataSource.getReviewsOnCertainPhone(phoneId, round);
+      return response.phoneReviewsModels;
+    });
+  }
 }

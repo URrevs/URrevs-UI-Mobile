@@ -78,7 +78,7 @@ class _ProductProfileScreenState extends ConsumerState<ProductProfileScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this, initialIndex: 1);
+    _tabController = TabController(length: 3, vsync: this, initialIndex: 0);
     _tabController.addListener(() => setState(() {}));
   }
 
@@ -97,7 +97,7 @@ class _ProductProfileScreenState extends ConsumerState<ProductProfileScreen>
       body: TabBarView(
         controller: _tabController,
         children: [
-          ProductProfileReviewsSubscreen(),
+          ProductProfileReviewsSubscreen(phoneId: widget.screenArgs.phoneId),
           ProductProfileSpecsSubscreen(phoneId: widget.screenArgs.phoneId),
           ProductProfileQASubscreen(),
         ],

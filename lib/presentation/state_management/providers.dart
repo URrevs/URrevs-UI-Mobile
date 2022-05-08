@@ -42,6 +42,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_st
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_my_phone_reviews_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_phone_review_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_phone_reviews_of_another_user_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_reviews_on_certain_phone_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_user_company_reviews_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_user_phone_reviews_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/add_new_recent_search_state.dart';
@@ -66,6 +67,7 @@ import 'notifiers/reviews_notifiers/get_my_companies_reviews_notifier.dart';
 import 'notifiers/reviews_notifiers/get_my_phone_reviews_notifier.dart';
 import 'notifiers/reviews_notifiers/get_phone_review_notifier.dart';
 import 'notifiers/reviews_notifiers/get_phone_reviews_of_another_user_notifier.dart';
+import 'notifiers/reviews_notifiers/get_reviews_on_certain_phone_notifier.dart';
 import 'notifiers/reviews_notifiers/get_user_company_reviews_notifier.dart';
 import 'notifiers/reviews_notifiers/get_user_phone_reviews_notifier.dart';
 import 'notifiers/search_notifiers/get_phone_statistical_info_notifier.dart';
@@ -198,6 +200,12 @@ final getUserCompanyReviewsProvider = StateNotifierProvider.autoDispose.family<
         GetUserCompanyReviewsProviderParams>(
     (ref, params) => GetUserCompanyReviewsNotifier(userId: params.userId));
 
+final getReviewsOnCertainPhoneProvider = StateNotifierProvider.autoDispose
+    .family<GetReviewsOnCertainPhoneNotifier, GetReviewsOnCertainPhoneState,
+            GetReviewsOnCertainPhoneProviderParams>(
+        (ref, params) =>
+            GetReviewsOnCertainPhoneNotifier(phoneId: params.phoneId));
+
 final userImageFetchedFlagProvider = StateProvider<bool>((ref) {
   return false;
 });
@@ -281,4 +289,6 @@ extension WidgetRefListeners on WidgetRef {
       return SizedBox();
     }
   }
+
+  
 }
