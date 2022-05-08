@@ -187,3 +187,21 @@ Map<String, dynamic> _$GetCommentsAndRepliesForPhoneReviewResponseToJson(
       'success': instance.success,
       'comments': instance.commentsSubResponses,
     };
+
+GetCommentsAndRepliesForCompanyReviewResponse
+    _$GetCommentsAndRepliesForCompanyReviewResponseFromJson(
+            Map<String, dynamic> json) =>
+        GetCommentsAndRepliesForCompanyReviewResponse(
+          success: json['success'] as bool,
+          commentsSubResponses: (json['comments'] as List<dynamic>)
+              .map(
+                  (e) => CommentSubResponse.fromJson(e as Map<String, dynamic>))
+              .toList(),
+        );
+
+Map<String, dynamic> _$GetCommentsAndRepliesForCompanyReviewResponseToJson(
+        GetCommentsAndRepliesForCompanyReviewResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'comments': instance.commentsSubResponses,
+    };

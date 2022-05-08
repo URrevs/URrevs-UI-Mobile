@@ -15,7 +15,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
-import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_comments_and_replies_for_phone_review_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_comments_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_company_review_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_phone_review_state.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
@@ -42,14 +42,14 @@ class FullscreenPostScreenArgs {
   FullscreenPostScreenArgs({
     required this.cardType,
     required this.postId,
-    this.postType = PostType.phoneReview,
+    this.postType = PostType.companyReview,
     this.focusOnTextField = false,
   });
 
   static FullscreenPostScreenArgs get defaultArgs {
     return FullscreenPostScreenArgs(
       cardType: CardType.productQuestion,
-      postType: PostType.phoneReview,
+      postType: PostType.companyReview,
       postId: 'change_it',
     );
   }
@@ -74,9 +74,9 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
   FocusNode focusNode = FocusNode();
 
   late final String _postId = widget.screenArgs.postId;
-  late final GetCommentsAndRepliesForPhoneReviewProviderParams
+  late final GetCommentsProviderParams
       _commentsProviderParams =
-      GetCommentsAndRepliesForPhoneReviewProviderParams(
+      GetCommentsProviderParams(
     postId: _postId,
     postType: widget.screenArgs.postType,
   );
@@ -111,9 +111,9 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
   void _getComments() {
     ref
         .read(
-            getCommentsAndRepliesForPhoneReviewProvider(_commentsProviderParams)
+            getCommentsProvider(_commentsProviderParams)
                 .notifier)
-        .getCommentsAndRepliesForPhoneReview();
+        .getComments();
   }
 
   String get _hintText {
@@ -157,7 +157,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
     final phoneReviewState = ref.watch(getPhoneReviewProvider);
     final companyReviewState = ref.watch(getCompanyReviewProvider);
     final commentsState = ref.watch(
-        getCommentsAndRepliesForPhoneReviewProvider(_commentsProviderParams));
+        getCommentsProvider(_commentsProviderParams));
     Widget? widget = fullScreenErrorWidgetOrNull(
       [
         StateAndRetry(state: phoneReviewState, onRetry: _getPost),
@@ -175,9 +175,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
             children: [
               _buildPost(),
               20.verticalSpace,
-              _buildCommentsList(),
-              _buildCommentsListLoadingOrError(),
-              _buildMoreCommentsButton(),
+              _buildComments(),
             ],
           ),
         ),
@@ -186,9 +184,20 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
     );
   }
 
+  Widget _buildComments() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildCommentsTrees(),
+        _buildCommentsListLoadingOrError(),
+        _buildMoreCommentsButton(),
+      ],
+    );
+  }
+
   Widget _buildMoreCommentsButton() {
     final state = ref.watch(
-        getCommentsAndRepliesForPhoneReviewProvider(_commentsProviderParams));
+        getCommentsProvider(_commentsProviderParams));
     if (state is LoadingState || state is ErrorState) {
       return SizedBox();
     }
@@ -206,16 +215,16 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
     );
   }
 
-  Widget _buildCommentsList() {
+  Widget _buildCommentsTrees() {
     // add new comments to state
     // also show snackbar at first round error
     ref.listen(
-        getCommentsAndRepliesForPhoneReviewProvider(_commentsProviderParams),
+        getCommentsProvider(_commentsProviderParams),
         (previous, next) {
-      if (next is GetCommentsAndRepliesForPhoneReviewLoadedState) {
+      if (next is GetCommentsLoadedState) {
         _comments.clear();
         _comments.addAll(next.infiniteScrollingItems);
-      } else if (next is GetCommentsAndRepliesForPhoneReviewErrorState &&
+      } else if (next is GetCommentsErrorState &&
           _comments.isEmpty) {
         showSnackBarWithoutActionAtError(state: next, context: context);
       }
@@ -228,7 +237,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
   // comments in the state (next round error)
   Widget _buildCommentsListLoadingOrError() {
     final state = ref.watch(
-        getCommentsAndRepliesForPhoneReviewProvider(_commentsProviderParams));
+        getCommentsProvider(_commentsProviderParams));
     if (state is ErrorState && _comments.isNotEmpty) {
       return VerticalListErrorWidget(
         onRetry: _getComments,

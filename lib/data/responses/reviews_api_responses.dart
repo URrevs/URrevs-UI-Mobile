@@ -190,3 +190,22 @@ class GetCommentsAndRepliesForPhoneReviewResponse extends BaseResponse {
   Map<String, dynamic> toJson() =>
       _$GetCommentsAndRepliesForPhoneReviewResponseToJson(this);
 }
+
+@JsonSerializable()
+class GetCommentsAndRepliesForCompanyReviewResponse extends BaseResponse {
+  @JsonKey(name: 'comments')
+  List<CommentSubResponse> commentsSubResponses;
+  GetCommentsAndRepliesForCompanyReviewResponse({
+    required bool success,
+    required this.commentsSubResponses,
+  }) : super(success: success);
+
+  List<Comment> get commentsModels =>
+      commentsSubResponses.map((c) => c.commentModel).toList();
+
+  factory GetCommentsAndRepliesForCompanyReviewResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$GetCommentsAndRepliesForCompanyReviewResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$GetCommentsAndRepliesForCompanyReviewResponseToJson(this);
+}

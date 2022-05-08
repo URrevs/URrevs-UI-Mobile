@@ -49,11 +49,10 @@ class LikePostProviderParams extends Equatable {
   List<Object?> get props => [postId, postType];
 }
 
-class GetCommentsAndRepliesForPhoneReviewProviderParams
-    extends BaseProviderParams {
+class GetCommentsProviderParams extends BaseProviderParams {
   final String postId;
   final PostType postType;
-  GetCommentsAndRepliesForPhoneReviewProviderParams({
+  GetCommentsProviderParams({
     required this.postId,
     required this.postType,
   });

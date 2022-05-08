@@ -33,7 +33,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_sta
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_similar_phones_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_two_phones_specs_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/indicate_user_compared_between_two_phones_state.dart';
-import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_comments_and_replies_for_phone_review_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_comments_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_company_review_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_phone_review_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_reviews_on_certain_phone_state.dart';
@@ -201,12 +201,10 @@ final likePostProvider = StateNotifierProvider.autoDispose
   return LikePostNotifier(postId: params.postId, postType: params.postType);
 });
 
-final getCommentsAndRepliesForPhoneReviewProvider =
+final getCommentsProvider =
     StateNotifierProvider.autoDispose.family<
-            GetCommentsAndRepliesForPhoneReviewNotifier,
-            GetCommentsAndRepliesForPhoneReviewState,
-            GetCommentsAndRepliesForPhoneReviewProviderParams>(
-        (ref, params) => GetCommentsAndRepliesForPhoneReviewNotifier(
+            GetCommentsNotifier, GetCommentsState, GetCommentsProviderParams>(
+        (ref, params) => GetCommentsNotifier(
             postId: params.postId, postType: params.postType));
 
 final userImageFetchedFlagProvider = StateProvider<bool>((ref) {

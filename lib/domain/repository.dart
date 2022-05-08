@@ -339,4 +339,13 @@ class Repository {
       return response.commentsModels;
     });
   }
+
+  Future<Either<Failure, List<Comment>>> getCommentsAndRepliesForCompanyReview(
+      String reviewId, int round) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource
+          .getCommentsAndRepliesForCompanyReview(reviewId, round);
+      return response.commentsModels;
+    });
+  }
 }
