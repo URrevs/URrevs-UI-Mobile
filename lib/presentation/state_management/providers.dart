@@ -17,6 +17,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/search_
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/get_the_profile_of_another_user.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/give_points_to_user_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/search_notifiers/search_products_and_companies_notifier.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/simple_state_notifiers/like_post_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/theme_mode_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/update_targets_from_source_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
@@ -192,6 +193,11 @@ final getReviewsOnCertainPhoneProvider = StateNotifierProvider.autoDispose
             GetReviewsOnCertainPhoneProviderParams>(
         (ref, params) =>
             GetReviewsOnCertainPhoneNotifier(phoneId: params.phoneId));
+
+final likePostProvider = StateNotifierProvider.autoDispose
+    .family<LikePostNotifier, bool, LikePostProviderParams>((ref, params) {
+  return LikePostNotifier(postId: params.postId, postType: params.postType);
+});
 
 final userImageFetchedFlagProvider = StateProvider<bool>((ref) {
   return false;

@@ -21,6 +21,8 @@ class CardFooter extends StatelessWidget {
     required this.onShare,
     required this.cardType,
     required this.fullscreen,
+    required this.postType,
+    required this.postId,
   }) : super(key: key);
 
   /// Is the review liked by the current logged in user or not.
@@ -52,6 +54,10 @@ class CardFooter extends StatelessWidget {
 
   final CardType cardType;
 
+  final PostType postType;
+
+  final String postId;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -76,6 +82,8 @@ class CardFooter extends StatelessWidget {
             onLike: onLike,
             onComment: onComment,
             onShare: onShare,
+            postId: postId,
+            postType: postType,
           ),
         )
       ],

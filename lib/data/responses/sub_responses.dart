@@ -352,7 +352,6 @@ class PhoneReviewSubResponse {
   String userId;
   String userName;
   String? photo;
-  @JsonKey(fromJson: _dateTimeFromTimestamp)
   DateTime createdAt;
   int views;
   int likes;
@@ -422,9 +421,6 @@ class PhoneReviewSubResponse {
         liked: liked,
       );
 
-  static DateTime _dateTimeFromTimestamp(int timestamp) =>
-      DateTime.fromMillisecondsSinceEpoch(timestamp);
-
   factory PhoneReviewSubResponse.fromJson(Map<String, Object?> json) =>
       _$PhoneReviewSubResponseFromJson(json);
   Map<String, dynamic> toJson() => _$PhoneReviewSubResponseToJson(this);
@@ -441,7 +437,6 @@ class CompanyReviewSubResponse {
   String userName;
   @JsonKey(name: 'picture')
   String? photo;
-  @JsonKey(fromJson: _dateTimeFromTimestamp)
   DateTime createdAt;
   String corresPhoneRev;
   int views;
@@ -492,9 +487,6 @@ class CompanyReviewSubResponse {
         cons: cons,
         liked: liked,
       );
-
-  static DateTime _dateTimeFromTimestamp(int timestamp) =>
-      DateTime.fromMillisecondsSinceEpoch(timestamp);
 
   factory CompanyReviewSubResponse.fromJson(Map<String, Object?> json) =>
       _$CompanyReviewSubResponseFromJson(json);

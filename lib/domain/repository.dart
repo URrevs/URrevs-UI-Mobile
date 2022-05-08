@@ -305,4 +305,28 @@ class Repository {
       return response.phoneReviewsModels;
     });
   }
+
+  Future<Either<Failure, void>> likePhoneReview(String reviewId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.likePhoneReview(reviewId);
+    });
+  }
+
+  Future<Either<Failure, void>> unlikePhoneReview(String reviewId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.unlikePhoneReview(reviewId);
+    });
+  }
+
+  Future<Either<Failure, void>> likeCompanyReview(String reviewId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.likeCompanyReview(reviewId);
+    });
+  }
+
+  Future<Either<Failure, void>> unlikeCompanyReview(String reviewId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.unlikeCompanyReview(reviewId);
+    });
+  }
 }

@@ -9,3 +9,7 @@ enum CardType {
 }
 
 enum ReviewsFilter { phones, companies }
+
+enum PostType { phoneReview, companyReview, question }
+
+enum CardHeaderTitleType { phone, company }

@@ -18,7 +18,10 @@ class CardHeader extends StatelessWidget {
     required this.authorName,
     required this.imageUrl,
     required this.targetName,
-      required this.cardType
+    required this.cardType,
+    required this.userId,
+    required this.targetId,
+    required this.type,
   }) : super(key: key);
 
   /// Profile image url of the current logged in user.
@@ -40,6 +43,12 @@ class CardHeader extends StatelessWidget {
   final int? views;
 
   final CardType cardType;
+
+  final String userId;
+
+  final String targetId;
+
+  final CardHeaderTitleType type;
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +76,9 @@ class CardHeader extends StatelessWidget {
                   authorName: authorName,
                   productName: targetName,
                   cardType: cardType,
+                  targetId: targetId,
+                  type: type,
+                  userId: userId,
                 ),
                 CardHeaderSubtitle(
                   postedDate: postedDate,

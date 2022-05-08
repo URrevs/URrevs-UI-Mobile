@@ -120,7 +120,7 @@ abstract class RemoteDataSource {
   /// 26
   @GET('/reviews/phone/{reviewId}')
   Future<GetPhoneReviewResponse> getPhoneReview(
-    @Path() String phoneId,
+    @Path() String reviewId,
   );
 
   @GET('/reviews/company/{reviewId}')
@@ -154,5 +154,25 @@ abstract class RemoteDataSource {
   Future<GetReviewsOnCertainPhoneResponse> getReviewsOnCertainPhone(
     @Path() String phoneId,
     @Query('round') int round,
+  );
+
+  @POST('/reviews/phone/{reviewId}/like')
+  Future<LikePhoneReviewResponse> likePhoneReview(
+    @Path() String reviewId,
+  );
+
+  @POST('/reviews/phone/{reviewId}/unlike')
+  Future<UnlikePhoneReviewResponse> unlikePhoneReview(
+    @Path() String reviewId,
+  );
+
+  @POST('/reviews/company/{reviewId}/like')
+  Future<LikeCompanyReviewResponse> likeCompanyReview(
+    @Path() String reviewId,
+  );
+
+  @POST('/reviews/company/{reviewId}/unlike')
+  Future<UnlikeCompanyReviewResponse> unlikeCompanyReview(
+    @Path() String reviewId,
   );
 }

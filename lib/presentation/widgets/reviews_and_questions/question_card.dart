@@ -19,10 +19,13 @@ import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answer_tree.d
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/question_card_body.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_footer/card_footer.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_header/card_header.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_header/card_header_title.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 /// A card showing a question.
 class QuestionCard extends StatelessWidget {
+  final String questionId;
+
   /// Profile image url of the current logged in user.
   final String imageUrl;
 
@@ -58,8 +61,18 @@ class QuestionCard extends StatelessWidget {
 
   final VoidCallback onPressingAnswer;
 
+  final String userId;
+
+  final String targetId;
+
+  final CardHeaderTitleType cardHeaderTitleType;
+
   const QuestionCard({
     Key? key,
+    required this.questionId,
+    required this.userId,
+    required this.targetId,
+    required this.cardHeaderTitleType,
     required this.imageUrl,
     required this.authorName,
     required this.targetName,
@@ -81,6 +94,10 @@ class QuestionCard extends StatelessWidget {
     bool fullscreen = false,
   }) =>
       QuestionCard(
+        questionId: DummyDataManager.randomInt.toString(),
+        userId: DummyDataManager.randomInt.toString(),
+        targetId: DummyDataManager.randomInt.toString(),
+        cardHeaderTitleType: CardHeaderTitleType.phone,
         postedDate: DummyDataManager.postedDate,
         authorName: DummyDataManager.authorName,
         imageUrl: DummyDataManager.imageUrl,
@@ -99,6 +116,10 @@ class QuestionCard extends StatelessWidget {
       );
 
   QuestionCard copyWith({
+    String? questionId,
+    String? userId,
+    String? targetId,
+    CardHeaderTitleType? cardHeaderTitleType,
     String? imageUrl,
     String? authorName,
     String? targetName,
@@ -115,6 +136,10 @@ class QuestionCard extends StatelessWidget {
     VoidCallback? onPressingAnswer,
   }) {
     return QuestionCard(
+      questionId: questionId ?? this.questionId,
+      userId: userId ?? this.userId,
+      targetId: targetId ?? this.targetId,
+      cardHeaderTitleType: cardHeaderTitleType ?? this.cardHeaderTitleType,
       postedDate: postedDate ?? this.postedDate,
       authorName: authorName ?? this.authorName,
       imageUrl: imageUrl ?? this.imageUrl,
@@ -192,6 +217,9 @@ class QuestionCard extends StatelessWidget {
                   usedSinceDate: null,
                   views: null,
                   cardType: cardType,
+                  userId: userId,
+                  targetId: targetId,
+                  type: cardHeaderTitleType,
                 ),
                 10.verticalSpace,
                 QuestionCardBody(
@@ -211,6 +239,8 @@ class QuestionCard extends StatelessWidget {
                   onShare: _onShare,
                   cardType: cardType,
                   fullscreen: fullscreen,
+                  postType: PostType.question,
+                  postId: questionId,
                 ),
                 if (!fullscreen && answer != null) ...[
                   Divider(

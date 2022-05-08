@@ -18,6 +18,9 @@ class CardHeaderTitle extends StatelessWidget {
     required this.authorName,
     required this.productName,
     required this.cardType,
+    required this.userId,
+    required this.targetId,
+    required this.type,
   }) : super(key: key);
 
   /// Name of review author.
@@ -28,14 +31,26 @@ class CardHeaderTitle extends StatelessWidget {
 
   final CardType cardType;
 
+  final String userId;
+
+  final String targetId;
+
+  final CardHeaderTitleType type;
+
   void _onPressingTarget(BuildContext context) {
-    switch (cardType) {
-      case CardType.companyReview:
-      case CardType.companyQuestion:
-        Navigator.of(context).pushNamed(CompanyProfileScreen.routeName);
+    switch (type) {
+      case CardHeaderTitleType.company:
+        Navigator.of(context).pushNamed(
+          CompanyProfileScreen.routeName,
+          arguments: CompanyProfileScreenArgs(companyId: targetId),
+        );
         break;
-      default:
-        Navigator.of(context).pushNamed(ProductProfileScreen.routeName);
+      case CardHeaderTitleType.phone:
+        Navigator.of(context).pushNamed(
+          ProductProfileScreen.routeName,
+          arguments: ProductProfileScreenArgs(phoneId: targetId),
+        );
+        break;
     }
   }
 
@@ -48,8 +63,7 @@ class CardHeaderTitle extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pushNamed(
                 UserProfileScreen.routeName,
-                arguments:
-                    UserProfileScreenArgs(userId: '626b29227fe7587a42e3e9f6'),
+                arguments: UserProfileScreenArgs(userId: userId),
               );
             },
             child: Text(

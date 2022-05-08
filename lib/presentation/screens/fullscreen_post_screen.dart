@@ -130,6 +130,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
   @override
   void initState() {
     super.initState();
+    print(widget.screenArgs.postId);
     _getPost();
     if (widget.screenArgs.focusOnTextField) {
       focusNode.requestFocus();
@@ -201,6 +202,9 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
     if (widget != null) return widget;
     PhoneReview phoneReview = (state as GetPhoneReviewLoadedState).review;
     return ProductReviewCard(
+      reviewId: phoneReview.id,
+      productId: phoneReview.targetId,
+      userId: phoneReview.userId,
       postedDate: phoneReview.createdAt,
       usedSinceDate: phoneReview.ownedAt,
       views: phoneReview.views,
@@ -228,6 +232,9 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
     if (widget != null) return widget;
     CompanyReview companyReview = (state as GetCompanyReviewLoadedState).review;
     return CompanyReviewCard(
+      reviewId: companyReview.id,
+      userId: companyReview.userId,
+      companyId: companyReview.targetId,
       postedDate: companyReview.createdAt,
       views: companyReview.views,
       authorName: companyReview.userName,

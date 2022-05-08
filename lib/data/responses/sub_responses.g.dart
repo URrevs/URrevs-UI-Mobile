@@ -253,8 +253,7 @@ PhoneReviewSubResponse _$PhoneReviewSubResponseFromJson(
       userId: json['userId'] as String,
       userName: json['userName'] as String,
       photo: json['photo'] as String?,
-      createdAt: PhoneReviewSubResponse._dateTimeFromTimestamp(
-          json['createdAt'] as int),
+      createdAt: DateTime.parse(json['createdAt'] as String),
       views: json['views'] as int,
       likes: json['likes'] as int,
       commentsCount: json['commentsCount'] as int,
@@ -310,8 +309,7 @@ CompanyReviewSubResponse _$CompanyReviewSubResponseFromJson(
       userId: json['userId'] as String,
       userName: json['userName'] as String,
       photo: json['picture'] as String?,
-      createdAt: CompanyReviewSubResponse._dateTimeFromTimestamp(
-          json['createdAt'] as int),
+      createdAt: DateTime.parse(json['createdAt'] as String),
       corresPhoneRev: json['corresPhoneRev'] as String,
       views: json['views'] as int,
       likes: json['likes'] as int,

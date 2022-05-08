@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
+
 abstract class BaseProviderParams extends Equatable {
   final int providerId;
   BaseProviderParams() : providerId = DateTime.now().millisecondsSinceEpoch;
@@ -33,4 +35,16 @@ class GetReviewsOnCertainPhoneProviderParams extends BaseProviderParams {
   GetReviewsOnCertainPhoneProviderParams({
     required this.phoneId,
   });
+}
+
+class LikePostProviderParams extends Equatable {
+  final String postId;
+  final PostType postType;
+  const LikePostProviderParams({
+    required this.postId,
+    required this.postType,
+  });
+
+  @override
+  List<Object?> get props => [postId, postType];
 }

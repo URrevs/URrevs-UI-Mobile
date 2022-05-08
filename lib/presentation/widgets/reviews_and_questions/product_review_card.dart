@@ -81,8 +81,17 @@ class ProductReviewCard extends StatelessWidget {
 
   final VoidCallback onPressingComment;
 
+  final String reviewId;
+
+  final String userId;
+
+  final String productId;
+
   const ProductReviewCard({
     Key? key,
+    required this.reviewId,
+    required this.userId,
+    required this.productId,
     required this.postedDate,
     required this.usedSinceDate,
     required this.views,
@@ -105,7 +114,10 @@ class ProductReviewCard extends StatelessWidget {
     required this.fullscreen,
     required this.onPressingComment,
     Key? key,
-  })  : postedDate = phoneReview.createdAt,
+  })  : reviewId = phoneReview.id,
+        userId = phoneReview.userId,
+        productId = phoneReview.targetId,
+        postedDate = phoneReview.createdAt,
         usedSinceDate = phoneReview.ownedAt,
         views = phoneReview.views,
         authorName = phoneReview.userName,
@@ -123,23 +135,30 @@ class ProductReviewCard extends StatelessWidget {
   /// An instance of [ProductReviewCard] filled with dummy data.
   static ProductReviewCard dummyInstance({bool fullscreen = false}) =>
       ProductReviewCard(
-          postedDate: faker.date.dateTime(minYear: 2000, maxYear: 2022),
-          usedSinceDate: faker.date.dateTime(minYear: 2000, maxYear: 2021),
-          views: DummyDataManager.randomInt,
-          authorName: faker.person.name(),
-          imageUrl: StringsManager.picsum200x200,
-          productName: 'Oppo Reno 5',
-          scores: List.generate(7, (_) => Random().nextInt(5) + 1),
-          prosText: StringsManager.longestReviewPros,
-          consText: StringsManager.longestReviewCons,
-          likeCount: DummyDataManager.randomInt,
-          commentCount: DummyDataManager.randomInt,
-          shareCount: DummyDataManager.randomInt,
-          liked: Random().nextBool(),
-          fullscreen: fullscreen,
-          onPressingComment: () {});
+        reviewId: 'reviewId-${DateTime.now().microsecondsSinceEpoch}',
+        userId: 'userId-${DateTime.now().microsecondsSinceEpoch}',
+        productId: 'productId-${DateTime.now().microsecondsSinceEpoch}',
+        postedDate: faker.date.dateTime(minYear: 2000, maxYear: 2022),
+        usedSinceDate: faker.date.dateTime(minYear: 2000, maxYear: 2021),
+        views: DummyDataManager.randomInt,
+        authorName: faker.person.name(),
+        imageUrl: StringsManager.picsum200x200,
+        productName: 'Oppo Reno 5',
+        scores: List.generate(7, (_) => Random().nextInt(5) + 1),
+        prosText: StringsManager.longestReviewPros,
+        consText: StringsManager.longestReviewCons,
+        likeCount: DummyDataManager.randomInt,
+        commentCount: DummyDataManager.randomInt,
+        shareCount: DummyDataManager.randomInt,
+        liked: Random().nextBool(),
+        fullscreen: fullscreen,
+        onPressingComment: () {},
+      );
 
   ProductReviewCard copyWith({
+    String? reviewId,
+    String? userId,
+    String? productId,
     String? imageUrl,
     String? authorName,
     String? productName,
@@ -157,21 +176,25 @@ class ProductReviewCard extends StatelessWidget {
     VoidCallback? onPressingComment,
   }) {
     return ProductReviewCard(
-        postedDate: postedDate ?? this.postedDate,
-        usedSinceDate: usedSinceDate ?? this.usedSinceDate,
-        views: views ?? this.views,
-        authorName: authorName ?? this.authorName,
-        imageUrl: imageUrl ?? this.imageUrl,
-        productName: productName ?? this.productName,
-        scores: scores ?? this.scores,
-        prosText: prosText ?? this.prosText,
-        consText: consText ?? this.consText,
-        likeCount: likeCount ?? this.likeCount,
-        commentCount: commentCount ?? this.commentCount,
-        shareCount: shareCount ?? this.shareCount,
-        liked: liked ?? this.liked,
-        fullscreen: fullscreen ?? this.fullscreen,
-        onPressingComment: onPressingComment ?? this.onPressingComment);
+      reviewId: reviewId ?? this.reviewId,
+      userId: userId ?? this.userId,
+      productId: productId ?? this.productId,
+      postedDate: postedDate ?? this.postedDate,
+      usedSinceDate: usedSinceDate ?? this.usedSinceDate,
+      views: views ?? this.views,
+      authorName: authorName ?? this.authorName,
+      imageUrl: imageUrl ?? this.imageUrl,
+      productName: productName ?? this.productName,
+      scores: scores ?? this.scores,
+      prosText: prosText ?? this.prosText,
+      consText: consText ?? this.consText,
+      likeCount: likeCount ?? this.likeCount,
+      commentCount: commentCount ?? this.commentCount,
+      shareCount: shareCount ?? this.shareCount,
+      liked: liked ?? this.liked,
+      fullscreen: fullscreen ?? this.fullscreen,
+      onPressingComment: onPressingComment ?? this.onPressingComment,
+    );
   }
 
   /// Callback invoked when like (or upvote) buttons are pressed.
@@ -245,6 +268,9 @@ class ProductReviewCard extends StatelessWidget {
                   usedSinceDate: usedSinceDate,
                   views: views,
                   cardType: CardType.productReview,
+                  userId: userId,
+                  targetId: productId,
+                  type: CardHeaderTitleType.phone,
                 ),
                 10.verticalSpace,
                 ReviewCardBody(
@@ -258,6 +284,8 @@ class ProductReviewCard extends StatelessWidget {
                     fullscreen: fullscreen),
                 8.verticalSpace,
                 CardFooter(
+                  postId: reviewId,
+                  postType: PostType.phoneReview,
                   likeCount: likeCount,
                   commentCount: commentCount,
                   shareCount: shareCount,

@@ -22,6 +22,8 @@ import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 /// A card showing a review for a product.
 class CompanyReviewCard extends StatelessWidget {
+  final String reviewId;
+
   /// Name of review author.
   final String authorName;
 
@@ -67,8 +69,15 @@ class CompanyReviewCard extends StatelessWidget {
 
   final VoidCallback onPressingComment;
 
+  final String userId;
+
+  final String companyId;
+
   const CompanyReviewCard({
     Key? key,
+    required this.reviewId,
+    required this.userId,
+    required this.companyId,
     required this.postedDate,
     required this.views,
     required this.authorName,
@@ -90,7 +99,10 @@ class CompanyReviewCard extends StatelessWidget {
     required this.fullscreen,
     required this.onPressingComment,
     Key? key,
-  })  : postedDate = companyReview.createdAt,
+  })  : reviewId = companyReview.id,
+        userId = companyReview.userId,
+        companyId = companyReview.targetId,
+        postedDate = companyReview.createdAt,
         views = companyReview.views,
         authorName = companyReview.userName,
         imageUrl = companyReview.photo,
@@ -107,6 +119,9 @@ class CompanyReviewCard extends StatelessWidget {
   /// An instance of [CompanyReviewCard] filled with dummy data.
   static CompanyReviewCard dummyInstance({bool fullscreen = false}) =>
       CompanyReviewCard(
+        reviewId: DateTime.now().microsecondsSinceEpoch.toString(),
+        userId: DateTime.now().microsecondsSinceEpoch.toString(),
+        companyId: DateTime.now().microsecondsSinceEpoch.toString(),
         postedDate: DateTime.now(),
         views: 100,
         authorName: faker.person.name(),
@@ -124,6 +139,9 @@ class CompanyReviewCard extends StatelessWidget {
       );
 
   CompanyReviewCard copyWith({
+    String? reviewId,
+    String? userId,
+    String? companyId,
     String? imageUrl,
     String? authorName,
     String? companyName,
@@ -141,6 +159,9 @@ class CompanyReviewCard extends StatelessWidget {
     VoidCallback? onPressingComment,
   }) {
     return CompanyReviewCard(
+      reviewId: reviewId ?? this.reviewId,
+      userId: userId ?? this.userId,
+      companyId: companyId ?? this.companyId,
       postedDate: postedDate ?? this.postedDate,
       views: views ?? this.views,
       authorName: authorName ?? this.authorName,
@@ -229,6 +250,9 @@ class CompanyReviewCard extends StatelessWidget {
                   usedSinceDate: null,
                   views: views,
                   cardType: CardType.companyReview,
+                  userId: userId,
+                  targetId: companyId,
+                  type: CardHeaderTitleType.company,
                 ),
                 10.verticalSpace,
                 ReviewCardBody(
@@ -253,6 +277,8 @@ class CompanyReviewCard extends StatelessWidget {
                   onShare: _onShare,
                   cardType: CardType.companyReview,
                   fullscreen: fullscreen,
+                  postType: PostType.companyReview,
+                  postId: reviewId,
                 ),
               ],
             ),
