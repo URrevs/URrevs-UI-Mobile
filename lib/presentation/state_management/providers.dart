@@ -1,11 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get_it/get_it.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
-import 'package:urrevs_ui_mobile/domain/models/company.dart';
-import 'package:urrevs_ui_mobile/domain/repository.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/authentication_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/companies_notifiers/get_all_companies_notifier.dart';
@@ -37,11 +33,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_sta
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_two_phones_specs_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/indicate_user_compared_between_two_phones_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_company_review_state.dart';
-import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_company_reviews_of_another_user.dart';
-import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_my_companies_reviews_state.dart';
-import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_my_phone_reviews_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_phone_review_state.dart';
-import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_phone_reviews_of_another_user_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_reviews_on_certain_phone_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_user_company_reviews_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_user_phone_reviews_state.dart';
@@ -54,7 +46,6 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/give_point
 import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/search_products_and_companies_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/update_targets_from_source_state.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/fullscreen_error_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/partial_error_widget.dart';
 
 import 'notifiers/phones_notifier/get_phone_specs_notifier.dart';
@@ -62,11 +53,7 @@ import 'notifiers/phones_notifier/get_phones_from_certain_company_notifier.dart'
 import 'notifiers/phones_notifier/get_similar_phones_notifier.dart';
 import 'notifiers/phones_notifier/indicate_user_compared_between_two_phones_notifier.dart';
 import 'notifiers/reviews_notifiers/get_company_review_notifier.dart';
-import 'notifiers/reviews_notifiers/get_company_reviews_of_another_user_notifier.dart';
-import 'notifiers/reviews_notifiers/get_my_companies_reviews_notifier.dart';
-import 'notifiers/reviews_notifiers/get_my_phone_reviews_notifier.dart';
 import 'notifiers/reviews_notifiers/get_phone_review_notifier.dart';
-import 'notifiers/reviews_notifiers/get_phone_reviews_of_another_user_notifier.dart';
 import 'notifiers/reviews_notifiers/get_reviews_on_certain_phone_notifier.dart';
 import 'notifiers/reviews_notifiers/get_user_company_reviews_notifier.dart';
 import 'notifiers/reviews_notifiers/get_user_phone_reviews_notifier.dart';
@@ -289,6 +276,4 @@ extension WidgetRefListeners on WidgetRef {
       return SizedBox();
     }
   }
-
-  
 }
