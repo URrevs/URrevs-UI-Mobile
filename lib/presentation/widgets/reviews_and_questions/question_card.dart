@@ -255,6 +255,7 @@ class QuestionCard extends StatelessWidget {
                       Navigator.of(context).pushNamed(
                         FullscreenPostScreen.routeName,
                         arguments: FullscreenPostScreenArgs(
+                          postType: PostType.question,
                           cardType: cardType,
                           postId: '',
                         ),

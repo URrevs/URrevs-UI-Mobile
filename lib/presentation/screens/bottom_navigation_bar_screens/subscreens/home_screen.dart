@@ -23,6 +23,7 @@ class _HomeSubscreenState extends ConsumerState<HomeSubscreen> {
             Navigator.of(context).pushNamed(
               FullscreenPostScreen.routeName,
               arguments: FullscreenPostScreenArgs(
+                postType: PostType.phoneReview,
                 cardType: CardType.productReview,
                 postId: '',
                 focusOnTextField: true,
@@ -35,6 +36,7 @@ class _HomeSubscreenState extends ConsumerState<HomeSubscreen> {
             Navigator.of(context).pushNamed(
               FullscreenPostScreen.routeName,
               arguments: FullscreenPostScreenArgs(
+                postType: PostType.companyReview,
                 cardType: CardType.companyReview,
                 postId: '',
                 focusOnTextField: true,
@@ -48,6 +50,7 @@ class _HomeSubscreenState extends ConsumerState<HomeSubscreen> {
             Navigator.of(context).pushNamed(
               FullscreenPostScreen.routeName,
               arguments: FullscreenPostScreenArgs(
+                postType: PostType.question,
                 cardType: CardType.productQuestion,
                 postId: '',
                 focusOnTextField: true,
@@ -61,6 +64,7 @@ class _HomeSubscreenState extends ConsumerState<HomeSubscreen> {
             Navigator.of(context).pushNamed(
               FullscreenPostScreen.routeName,
               arguments: FullscreenPostScreenArgs(
+                postType: PostType.question,
                 cardType: CardType.companyQuestion,
                 postId: '',
                 focusOnTextField: true,

@@ -2,19 +2,29 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:urrevs_ui_mobile/app/extensions.dart';
+import 'package:urrevs_ui_mobile/domain/failure.dart';
+import 'package:urrevs_ui_mobile/domain/models/comment.dart';
 import 'package:urrevs_ui_mobile/domain/models/company_review.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone_review.dart';
 
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_comments_and_replies_for_phone_review_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_company_review_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_phone_review_state.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/vertical_list_error_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answers_list.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/interactions/comment_tree.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/comments_list.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/comments_list_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/company_review_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/phone_review_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/company_review_card.dart';
@@ -22,20 +32,25 @@ import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/prod
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/question_card.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
+import '../resources/text_button_style_manager.dart';
+
 class FullscreenPostScreenArgs {
   final CardType cardType;
   final bool focusOnTextField;
   final String postId;
+  final PostType postType;
   FullscreenPostScreenArgs({
     required this.cardType,
     required this.postId,
+    this.postType = PostType.phoneReview,
     this.focusOnTextField = false,
   });
 
   static FullscreenPostScreenArgs get defaultArgs {
     return FullscreenPostScreenArgs(
-      cardType: CardType.companyReview,
-      postId: '',
+      cardType: CardType.productQuestion,
+      postType: PostType.phoneReview,
+      postId: 'change_it',
     );
   }
 }
@@ -58,11 +73,21 @@ class FullscreenPostScreen extends ConsumerStatefulWidget {
 class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
   FocusNode focusNode = FocusNode();
 
+  late final String _postId = widget.screenArgs.postId;
+  late final GetCommentsAndRepliesForPhoneReviewProviderParams
+      _commentsProviderParams =
+      GetCommentsAndRepliesForPhoneReviewProviderParams(
+    postId: _postId,
+    postType: widget.screenArgs.postType,
+  );
+
+  final List<Comment> _comments = [];
+
   void _getPost() {
-    switch (widget.screenArgs.cardType) {
-      case CardType.productReview:
+    switch (widget.screenArgs.postType) {
+      case PostType.phoneReview:
         return _getProductReview();
-      case CardType.companyReview:
+      case PostType.companyReview:
         return _getCompanyReview();
       // case CardType.productQuestion:
       // case CardType.companyQuestion:
@@ -83,7 +108,15 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
         .getCompanyReview(widget.screenArgs.postId);
   }
 
-  String get hintText {
+  void _getComments() {
+    ref
+        .read(
+            getCommentsAndRepliesForPhoneReviewProvider(_commentsProviderParams)
+                .notifier)
+        .getCommentsAndRepliesForPhoneReview();
+  }
+
+  String get _hintText {
     switch (widget.screenArgs.cardType) {
       case CardType.productQuestion:
       case CardType.companyQuestion:
@@ -93,45 +126,12 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
     }
   }
 
-  Widget get expandedCard {
-    switch (widget.screenArgs.cardType) {
-      case CardType.productReview:
-        return ProductReviewCard.dummyInstance().copyWith(
-          fullscreen: true,
-          onPressingComment: focusNode.requestFocus,
-        );
-      case CardType.companyReview:
-        return CompanyReviewCard.dummyInstance().copyWith(
-            fullscreen: true, onPressingComment: focusNode.requestFocus);
-      case CardType.productQuestion:
-      case CardType.companyQuestion:
-        return QuestionCard.dummyInstance(context).copyWith(
-          fullscreen: true,
-          onPressingAnswer: focusNode.requestFocus,
-        );
-      default:
-        return ProductReviewCard.dummyInstance(fullscreen: true);
-    }
-  }
-
-  Widget get interactionsList {
-    switch (widget.screenArgs.cardType) {
-      case CardType.productReview:
-      case CardType.companyReview:
-        return CommentsList.dummyInstance;
-      case CardType.productQuestion:
-      case CardType.companyQuestion:
-        return AnswersList.dummyInstance;
-      default:
-        return CommentsList.dummyInstance;
-    }
-  }
-
   @override
   void initState() {
     super.initState();
     print(widget.screenArgs.postId);
     _getPost();
+    _getComments();
     if (widget.screenArgs.focusOnTextField) {
       focusNode.requestFocus();
     }
@@ -156,10 +156,14 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
   Widget _buildBody() {
     final phoneReviewState = ref.watch(getPhoneReviewProvider);
     final companyReviewState = ref.watch(getCompanyReviewProvider);
+    final commentsState = ref.watch(
+        getCommentsAndRepliesForPhoneReviewProvider(_commentsProviderParams));
     Widget? widget = fullScreenErrorWidgetOrNull(
       [
         StateAndRetry(state: phoneReviewState, onRetry: _getPost),
         StateAndRetry(state: companyReviewState, onRetry: _getPost),
+        if (_comments.isEmpty)
+          StateAndRetry(state: commentsState, onRetry: _getComments),
       ],
     );
     if (widget != null) return widget;
@@ -171,7 +175,9 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
             children: [
               _buildPost(),
               20.verticalSpace,
-              interactionsList,
+              _buildCommentsList(),
+              _buildCommentsListLoadingOrError(),
+              _buildMoreCommentsButton(),
             ],
           ),
         ),
@@ -180,11 +186,66 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
     );
   }
 
+  Widget _buildMoreCommentsButton() {
+    final state = ref.watch(
+        getCommentsAndRepliesForPhoneReviewProvider(_commentsProviderParams));
+    if (state is LoadingState || state is ErrorState) {
+      return SizedBox();
+    }
+    return Container(
+      alignment:
+          context.isArabic ? Alignment.centerRight : Alignment.centerLeft,
+      child: TextButton(
+        onPressed: _getComments,
+        style: TextButtonStyleManager.showMoreAnswers,
+        child: Text(
+          LocaleKeys.moreComments.tr(),
+          style: TextStyleManager.s16w800.copyWith(color: ColorManager.black),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCommentsList() {
+    // add new comments to state
+    // also show snackbar at first round error
+    ref.listen(
+        getCommentsAndRepliesForPhoneReviewProvider(_commentsProviderParams),
+        (previous, next) {
+      if (next is GetCommentsAndRepliesForPhoneReviewLoadedState) {
+        _comments.clear();
+        _comments.addAll(next.infiniteScrollingItems);
+      } else if (next is GetCommentsAndRepliesForPhoneReviewErrorState &&
+          _comments.isEmpty) {
+        showSnackBarWithoutActionAtError(state: next, context: context);
+      }
+    });
+    return CommentsList(comments: _comments);
+  }
+
+  // always return loading widget when in loading state
+  // return vertical error widget at error state accompanied by presence of
+  // comments in the state (next round error)
+  Widget _buildCommentsListLoadingOrError() {
+    final state = ref.watch(
+        getCommentsAndRepliesForPhoneReviewProvider(_commentsProviderParams));
+    if (state is ErrorState && _comments.isNotEmpty) {
+      return VerticalListErrorWidget(
+        onRetry: _getComments,
+        retryLastRequest: (state as ErrorState).failure is RetryFailure,
+      );
+    } else if (state is LoadingState) {
+      return CommentsListLoading();
+    } else {
+      return SizedBox();
+    }
+  }
+
   Widget _buildPost() {
-    switch (widget.screenArgs.cardType) {
-      case CardType.productReview:
+    switch (widget.screenArgs.postType) {
+      case PostType.phoneReview:
         return _buildPhoneReview();
-      case CardType.companyReview:
+      case PostType.companyReview:
         return _buildCompanyReview();
       // case CardType.productQuestion:
       // case CardType.companyQuestion:
@@ -272,7 +333,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
           focusNode: focusNode,
           style: TextStyleManager.s16w300,
           decoration: InputDecoration(
-            hintText: hintText,
+            hintText: _hintText,
             filled: true,
             fillColor: ColorManager.textFieldGrey,
             focusColor: Colors.red,

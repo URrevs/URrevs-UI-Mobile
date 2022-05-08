@@ -175,4 +175,12 @@ abstract class RemoteDataSource {
   Future<UnlikeCompanyReviewResponse> unlikeCompanyReview(
     @Path() String reviewId,
   );
+
+  /// 38
+  @GET('/reviews/phone/{reviewId}/comments')
+  Future<GetCommentsAndRepliesForPhoneReviewResponse>
+      getCommentsAndRepliesForPhoneReview(
+    @Path() String reviewId,
+    @Query('round') int round,
+  );
 }

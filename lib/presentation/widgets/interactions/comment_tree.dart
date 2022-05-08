@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:urrevs_ui_mobile/domain/models/comment.dart';
+import 'package:urrevs_ui_mobile/domain/models/reply.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_button_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
@@ -23,13 +25,23 @@ class CommentTree extends StatefulWidget {
     required this.liked,
   }) : super(key: key);
 
-  final String imageUrl;
+  CommentTree.fromComment(Comment comment, {Key? key})
+      : imageUrl = comment.photo,
+        authorName = comment.userName,
+        commentText = comment.content,
+        likeCount = comment.likes,
+        datePosted = comment.createdAt,
+        replies = comment.replies,
+        liked = comment.liked,
+        super(key: key);
+
+  final String? imageUrl;
   final String authorName;
   final String commentText;
   final int likeCount;
   final DateTime datePosted;
   final bool liked;
-  final List<Reply> replies;
+  final List<ReplyModel> replies;
 
   static CommentTree get dummyInstance => CommentTree(
         key: UniqueKey(),
@@ -39,7 +51,7 @@ class CommentTree extends StatefulWidget {
         likeCount: DummyDataManager.randomInt,
         datePosted: DummyDataManager.postedDate,
         liked: DummyDataManager.randomBool,
-        replies: DummyDataManager.replies,
+        replies: [],
       );
 
   @override
@@ -103,7 +115,14 @@ class _CommentTreeState extends State<CommentTree> {
                 if (_expandReplies) ...[
                   VerticalSpacesBetween.interactionBodyAndReplies,
                   for (int i = 0; i < widget.replies.length; i++) ...[
-                    widget.replies[i],
+                    Reply(
+                      imageUrl: widget.replies[i].photo,
+                      authorName: widget.replies[i].userName,
+                      replyText: widget.replies[i].content,
+                      likeCount: widget.replies[i].likes,
+                      datePosted: widget.replies[i].createdAt,
+                      liked: widget.replies[i].liked,
+                    ),
                     if (i != widget.replies.length - 1)
                       VerticalSpacesBetween.replies,
                   ],

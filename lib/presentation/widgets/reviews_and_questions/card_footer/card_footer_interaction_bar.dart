@@ -19,6 +19,7 @@ class CardFooterInteractionBar extends StatelessWidget {
     required this.useInReviewCard,
     required this.cardType,
     required this.fullscreen,
+    required this.postType,
   }) : super(key: key);
 
   /// Number of likes given to the review.
@@ -37,6 +38,8 @@ class CardFooterInteractionBar extends StatelessWidget {
   final CardType cardType;
 
   final bool fullscreen;
+
+  final PostType postType;
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +73,7 @@ class CardFooterInteractionBar extends StatelessWidget {
               Navigator.of(context).pushNamed(
                 FullscreenPostScreen.routeName,
                 arguments: FullscreenPostScreenArgs(
+                  postType: postType,
                   cardType: cardType,
                   postId: '',
                 ),

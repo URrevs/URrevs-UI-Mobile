@@ -1,10 +1,12 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:urrevs_ui_mobile/domain/models/comment.dart';
 
 import 'package:urrevs_ui_mobile/domain/models/company.dart';
 import 'package:urrevs_ui_mobile/domain/models/company_review.dart';
 import 'package:urrevs_ui_mobile/domain/models/info.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone_review.dart';
+import 'package:urrevs_ui_mobile/domain/models/reply.dart';
 import 'package:urrevs_ui_mobile/domain/models/search_result.dart';
 import 'package:urrevs_ui_mobile/domain/models/specs.dart';
 import 'package:urrevs_ui_mobile/domain/models/user.dart';
@@ -491,4 +493,84 @@ class CompanyReviewSubResponse {
   factory CompanyReviewSubResponse.fromJson(Map<String, Object?> json) =>
       _$CompanyReviewSubResponseFromJson(json);
   Map<String, dynamic> toJson() => _$CompanyReviewSubResponseToJson(this);
+}
+
+@JsonSerializable()
+class ReplySubResponse {
+  @JsonKey(name: '_id')
+  String id;
+  String userId;
+  String userName;
+  @JsonKey(name: 'userPicture')
+  String? photo;
+  DateTime createdAt;
+  String content;
+  int likes;
+  bool liked;
+  ReplySubResponse({
+    required this.id,
+    required this.userId,
+    required this.userName,
+    this.photo,
+    required this.createdAt,
+    required this.content,
+    required this.likes,
+    required this.liked,
+  });
+
+  ReplyModel get replyModel => ReplyModel(
+        id: id,
+        userId: userId,
+        userName: userName,
+        createdAt: createdAt,
+        content: content,
+        likes: likes,
+        liked: liked,
+      );
+
+  factory ReplySubResponse.fromJson(Map<String, Object?> json) =>
+      _$ReplySubResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$ReplySubResponseToJson(this);
+}
+
+@JsonSerializable()
+class CommentSubResponse {
+  @JsonKey(name: '_id')
+  String id;
+  String userId;
+  String userName;
+  @JsonKey(name: 'userPicture')
+  String? photo;
+  DateTime createdAt;
+  String content;
+  int likes;
+  bool liked;
+  @JsonKey(name: 'replies')
+  List<ReplySubResponse> repliesSubResponses;
+  CommentSubResponse({
+    required this.id,
+    required this.userId,
+    required this.userName,
+    this.photo,
+    required this.createdAt,
+    required this.content,
+    required this.likes,
+    required this.liked,
+    required this.repliesSubResponses,
+  });
+
+  Comment get commentModel => Comment(
+        id: id,
+        userId: userId,
+        userName: userName,
+        createdAt: createdAt,
+        content: content,
+        likes: likes,
+        liked: liked,
+        replies: repliesSubResponses.map((r) => r.replyModel).toList(),
+      );
+
+  factory CommentSubResponse.fromJson(Map<String, Object?> json) =>
+      _$CommentSubResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$CommentSubResponseToJson(this);
 }

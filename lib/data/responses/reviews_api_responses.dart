@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'package:urrevs_ui_mobile/data/responses/sub_responses.dart';
+import 'package:urrevs_ui_mobile/domain/models/comment.dart';
 import 'package:urrevs_ui_mobile/domain/models/company_review.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone_review.dart';
 
@@ -169,4 +170,23 @@ class UnlikeCompanyReviewResponse extends BaseResponse {
   factory UnlikeCompanyReviewResponse.fromJson(Map<String, Object?> json) =>
       _$UnlikeCompanyReviewResponseFromJson(json);
   Map<String, dynamic> toJson() => _$UnlikeCompanyReviewResponseToJson(this);
+}
+
+@JsonSerializable()
+class GetCommentsAndRepliesForPhoneReviewResponse extends BaseResponse {
+  @JsonKey(name: 'comments')
+  List<CommentSubResponse> commentsSubResponses;
+  GetCommentsAndRepliesForPhoneReviewResponse({
+    required bool success,
+    required this.commentsSubResponses,
+  }) : super(success: success);
+
+  List<Comment> get commentsModels =>
+      commentsSubResponses.map((c) => c.commentModel).toList();
+
+  factory GetCommentsAndRepliesForPhoneReviewResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$GetCommentsAndRepliesForPhoneReviewResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$GetCommentsAndRepliesForPhoneReviewResponseToJson(this);
 }

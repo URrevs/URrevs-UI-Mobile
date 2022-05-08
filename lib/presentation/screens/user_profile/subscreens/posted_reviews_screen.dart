@@ -178,6 +178,7 @@ class _PostedReviewsScreenState extends ConsumerState<PostedReviewsScreen> {
                 Navigator.of(context).pushNamed(
                   FullscreenPostScreen.routeName,
                   arguments: FullscreenPostScreenArgs(
+                    postType: PostType.phoneReview,
                     cardType: CardType.productReview,
                     postId: phoneReview.id,
                     focusOnTextField: true,
@@ -232,6 +233,7 @@ class _PostedReviewsScreenState extends ConsumerState<PostedReviewsScreen> {
                 Navigator.of(context).pushNamed(
                   FullscreenPostScreen.routeName,
                   arguments: FullscreenPostScreenArgs(
+                    postType: PostType.companyReview,
                     cardType: CardType.productReview,
                     postId: companyReview.id,
                     focusOnTextField: true,

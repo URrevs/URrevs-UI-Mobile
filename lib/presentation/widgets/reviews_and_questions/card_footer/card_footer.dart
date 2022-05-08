@@ -65,6 +65,7 @@ class CardFooter extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: CardFooterInteractionBar(
+            postType: postType,
             likeCount: likeCount,
             commentCount: commentCount,
             shareCount: shareCount,

@@ -15,6 +15,7 @@ import 'package:urrevs_ui_mobile/data/responses/search_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/update_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/users_api_response.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
+import 'package:urrevs_ui_mobile/domain/models/comment.dart';
 import 'package:urrevs_ui_mobile/domain/models/company.dart';
 import 'package:urrevs_ui_mobile/domain/models/company_review.dart';
 import 'package:urrevs_ui_mobile/domain/models/info.dart';
@@ -327,6 +328,15 @@ class Repository {
   Future<Either<Failure, void>> unlikeCompanyReview(String reviewId) {
     return _tryAndCatch(() async {
       await _remoteDataSource.unlikeCompanyReview(reviewId);
+    });
+  }
+
+  Future<Either<Failure, List<Comment>>> getCommentsAndRepliesForPhoneReview(
+      String reviewId, int round) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource
+          .getCommentsAndRepliesForPhoneReview(reviewId, round);
+      return response.commentsModels;
     });
   }
 }

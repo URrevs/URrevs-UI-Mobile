@@ -21,6 +21,7 @@ class _CompanyProfileReviewsSubscreenState
             Navigator.of(context).pushNamed(
               FullscreenPostScreen.routeName,
               arguments: FullscreenPostScreenArgs(
+                postType: PostType.companyReview,
                 cardType: CardType.companyReview,
                 postId: '',
                 focusOnTextField: true,

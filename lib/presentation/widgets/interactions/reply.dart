@@ -8,7 +8,7 @@ import 'package:urrevs_ui_mobile/presentation/widgets/interactions/interaction_b
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/interaction_footer.dart';
 
 class Reply extends StatelessWidget {
-  final String imageUrl;
+  final String? imageUrl;
   final String authorName;
   final String replyText;
   final int likeCount;

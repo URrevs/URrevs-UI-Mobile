@@ -342,3 +342,55 @@ Map<String, dynamic> _$CompanyReviewSubResponseToJson(
       'cons': instance.cons,
       'liked': instance.liked,
     };
+
+ReplySubResponse _$ReplySubResponseFromJson(Map<String, dynamic> json) =>
+    ReplySubResponse(
+      id: json['_id'] as String,
+      userId: json['userId'] as String,
+      userName: json['userName'] as String,
+      photo: json['userPicture'] as String?,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      content: json['content'] as String,
+      likes: json['likes'] as int,
+      liked: json['liked'] as bool,
+    );
+
+Map<String, dynamic> _$ReplySubResponseToJson(ReplySubResponse instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'userId': instance.userId,
+      'userName': instance.userName,
+      'userPicture': instance.photo,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'content': instance.content,
+      'likes': instance.likes,
+      'liked': instance.liked,
+    };
+
+CommentSubResponse _$CommentSubResponseFromJson(Map<String, dynamic> json) =>
+    CommentSubResponse(
+      id: json['_id'] as String,
+      userId: json['userId'] as String,
+      userName: json['userName'] as String,
+      photo: json['userPicture'] as String?,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      content: json['content'] as String,
+      likes: json['likes'] as int,
+      liked: json['liked'] as bool,
+      repliesSubResponses: (json['replies'] as List<dynamic>)
+          .map((e) => ReplySubResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$CommentSubResponseToJson(CommentSubResponse instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'userId': instance.userId,
+      'userName': instance.userName,
+      'userPicture': instance.photo,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'content': instance.content,
+      'likes': instance.likes,
+      'liked': instance.liked,
+      'replies': instance.repliesSubResponses,
+    };
