@@ -194,7 +194,7 @@
   "WhatDoYouLikeAbout": "ماذا يعجبك بشأن",
   "whatDoYouHateAbout": "ما الذي تكرهه بشأن",
   "invitationCode": "كود الدعوة",
-  "enterInvitationCode": "قم بادخال كود الدعوة",
+  "enterInvitationCode": "قم بادخال كود الدعوة (إن وجد)",
   "internalServerError": "حدث خطأ في الخادم",
   "enterNumberOfWinnersErrorMsg": "يجب ادخال عدد الفائزين.",
   "AddPrizeNameErrorMsg": "يجب ادخال اسم الجائزة.",
@@ -212,5 +212,15 @@
   "termsOfUse": "شروط الاستخدام",
   "privacyPolicy": "سياسة الخصوصية",
   "postedQuestions": "الأسئلة المطروحة",
-  "posting": "جاري النشر"
+  "posting": "جاري النشر",
+  "yourQuestionRegarding": "سؤالك بخصوص:",
+  "writeTheNameOfProductOrCompany": "اكتب اسم المنتج او الشركة",
+  "writeYourQuestion": "اكتب سؤالك",
+  "question": "السؤال",
+  "productNameOrCompanyNameErrorMsg": "يجب ادخال اسم المنتج أو الشركة.",
+  "enterYourQuestionErrorMsg": "يجب ادخال سؤالك.",
+  "usersRanking": "ترتيب المستخدمين:",
+  "yourRanking": "ترتيبك:",
+  "howToCollectPoints": "كيف تجمع النقاط",
+  "helpOthersToCollectPoints": "ساعد الاخرين لتجمع اكبر عدد من النقاط"
 }

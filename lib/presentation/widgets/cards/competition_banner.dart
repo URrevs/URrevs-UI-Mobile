@@ -1,4 +1,3 @@
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,8 +5,12 @@ import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/font_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/buttons/grad_button.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/prompts/how_to_win_dialog.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/prompts/invitation_code_and_link_dialog.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/prompts/prize_photo_dialog.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 class CompetitionBanner extends StatelessWidget {
@@ -22,7 +25,7 @@ class CompetitionBanner extends StatelessWidget {
 
   /// name of the prize.
   final String prizeName;
-  
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -55,8 +58,8 @@ class CompetitionBanner extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: RichText(
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 4,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 4,
                     textAlign: TextAlign.center,
                     text: TextSpan(
                       style: TextStyleManager.s22w500.copyWith(
@@ -64,7 +67,10 @@ class CompetitionBanner extends StatelessWidget {
                         fontFamily: FontConstants.tajawal,
                       ),
                       children: [
-                        TextSpan(text: numberOfRemainingdays.toString() +' '+ LocaleKeys.remainigDays.tr()),
+                        TextSpan(
+                            text: numberOfRemainingdays.toString() +
+                                ' ' +
+                                LocaleKeys.remainigDays.tr()),
                         TextSpan(text: '\n'),
                         TextSpan(text: LocaleKeys.thePrizeIs.tr()),
                         TextSpan(text: '\n'),
@@ -80,15 +86,23 @@ class CompetitionBanner extends StatelessWidget {
                                 fontFamily: FontConstants.tajawal,
                               ),
                             ),
-                            onTap: () {print('tapped');},
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return PrizePhotoDialog(
+                                      prizeName: 'Xiaomi Mi Band 5',
+                                      imageUrl: StringsManager.prizeImageLink);
+                                },
+                              );
+                            },
                           ),
                         ),
                       ],
                     )),
               ),
               Padding(
-                padding:
-                    EdgeInsets.symmetric(horizontal: 8.w, vertical: 5.h),
+                padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 5.h),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -104,7 +118,14 @@ class CompetitionBanner extends StatelessWidget {
                       ),
                       reverseIcon: true,
                       width: 25.w,
-                      onPressed: () {},
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return HowToWinDialog();
+                          },
+                        );
+                      },
                     ),
                     GradButton(
                       text: Text(
@@ -118,7 +139,16 @@ class CompetitionBanner extends StatelessWidget {
                       ),
                       width: 50.w,
                       reverseIcon: false,
-                      onPressed: () {},
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return InvitationCodeDialog(
+                                invitationCode: 'UR1029',
+                                );
+                          },
+                        );
+                      },
                     )
                   ],
                 ),

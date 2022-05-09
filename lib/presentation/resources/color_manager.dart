@@ -34,6 +34,11 @@ class ColorManager {
         dark: Color(0xffFF8E52),
       ).pickColor();
 
+  static Color get golden => ColorPair(
+        light: Color(0xffFFBF00),
+        dark: Color(0xffFFBF00),
+      ).pickColor();
+
   static Color get grey => ColorPair(
         light: Color(0xff65676B),
         dark: Color(0xff65676B),

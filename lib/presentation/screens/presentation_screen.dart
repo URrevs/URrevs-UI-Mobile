@@ -145,15 +145,15 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
             height: 20,
           ),
           CompareDialoge(
-              searchCtl: searchCtl,
-              productName1: 'Nokia 7 Plus',),
+            searchCtl: searchCtl,
+            productName1: 'Nokia 7 Plus',
+          ),
           SizedBox(
             height: 20,
           ),
           SignOutConfirmationDialog(),
           SizedBox(height: 20),
           InvitationCodeDialog(
-            invitationPromptCtl: invitationPromptCtl,
             invitationCode: 'UR1029',
           ),
           SizedBox(height: 20),
@@ -187,6 +187,7 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
           SizedBox(height: 20),
           LeaderboardEntryTile(
             name: 'Ziad Mostafa',
+            isWinner: false,
             imageUrl: 'https://picsum.photos/seed/picsum/200/200',
             rank: 544,
             starsCounter: 40002344,
@@ -271,4 +272,3 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
     );
   }
 }
-

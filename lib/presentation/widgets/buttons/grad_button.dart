@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:urrevs_ui_mobile/app/extensions.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
-import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'dart:math' as math;
 
 class GradButton extends StatelessWidget {

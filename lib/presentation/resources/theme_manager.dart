@@ -19,6 +19,7 @@ class ThemeManager {
       );
 
   static ThemeData get light => ThemeData(
+        tabBarTheme: TabBarTheme(labelColor: ColorManager.black),
         unselectedWidgetColor: ColorManager.black,
         scaffoldBackgroundColor: ColorManager.backgroundGrey,
         fontFamily: FontConstants.tajawal,

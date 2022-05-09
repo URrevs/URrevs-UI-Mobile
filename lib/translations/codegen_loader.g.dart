@@ -210,7 +210,7 @@ class CodegenLoader extends AssetLoader{
   "WhatDoYouLikeAbout": "ماذا يعجبك بشأن",
   "whatDoYouHateAbout": "ما الذي تكرهه بشأن",
   "invitationCode": "كود الدعوة",
-  "enterInvitationCode": "قم بادخال كود الدعوة",
+  "enterInvitationCode": "قم بادخال كود الدعوة (إن وجد)",
   "internalServerError": "حدث خطأ في الخادم",
   "enterNumberOfWinnersErrorMsg": "يجب ادخال عدد الفائزين.",
   "AddPrizeNameErrorMsg": "يجب ادخال اسم الجائزة.",
@@ -228,7 +228,17 @@ class CodegenLoader extends AssetLoader{
   "termsOfUse": "شروط الاستخدام",
   "privacyPolicy": "سياسة الخصوصية",
   "postedQuestions": "الأسئلة المطروحة",
-  "posting": "جاري النشر"
+  "posting": "جاري النشر",
+  "yourQuestionRegarding": "سؤالك بخصوص:",
+  "writeTheNameOfProductOrCompany": "اكتب اسم المنتج او الشركة",
+  "writeYourQuestion": "اكتب سؤالك",
+  "question": "السؤال",
+  "productNameOrCompanyNameErrorMsg": "يجب ادخال اسم المنتج أو الشركة.",
+  "enterYourQuestionErrorMsg": "يجب ادخال سؤالك.",
+  "usersRanking": "ترتيب المستخدمين:",
+  "yourRanking": "ترتيبك:",
+  "howToCollectPoints": "كيف تجمع النقاط",
+  "helpOthersToCollectPoints": "ساعد الاخرين لتجمع اكبر عدد من النقاط"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -426,7 +436,7 @@ static const Map<String,dynamic> en = {
   "WhatDoYouLikeAbout": "What do you like about",
   "whatDoYouHateAbout": "What do you hate about",
   "invitationCode": "Invitation code",
-  "enterInvitationCode": "Enter invitation code",
+  "enterInvitationCode": "Enter invitation code (optional)",
   "internalServerError": "Internal server error",
   "enterNumberOfWinnersErrorMsg": "The number of winners must be entered.",
   "AddPrizeNameErrorMsg": "The prize name must be entered.",
@@ -444,7 +454,17 @@ static const Map<String,dynamic> en = {
   "termsOfUse": "Terms of use",
   "privacyPolicy": "Privacy policy",
   "postedQuestions": "Posted questions",
-  "posting": "Posting"
+  "posting": "Posting",
+  "yourQuestionRegarding": "Your question regarding:",
+  "writeTheNameOfProductOrCompany": "Enter name of the product or company",
+  "writeYourQuestion": "Write your question",
+  "question": "Question",
+  "productNameOrCompanyNameErrorMsg": "Product's name or company's name myst be entered.",
+  "enterYourQuestionErrorMsg": "Your question must be entered.",
+  "usersRanking": "Users ranking:",
+  "yourRanking": "Your ranking:",
+  "howToCollectPoints": "How to collect points",
+  "helpOthersToCollectPoints": "Help others to collect as many points as possible"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

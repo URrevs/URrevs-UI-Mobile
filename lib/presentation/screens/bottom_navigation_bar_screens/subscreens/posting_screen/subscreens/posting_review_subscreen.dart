@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/app/extensions.dart';
 import 'package:urrevs_ui_mobile/presentation/presentation_models/posting_review_model.dart';
@@ -15,6 +16,8 @@ import 'package:urrevs_ui_mobile/presentation/widgets/fields/txt_field.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/referral_code_help_dialog.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 import 'dart:math' as math;
+
+final productSelectedProvider = StateProvider.autoDispose<bool>((ref) => false);
 
 class PostingReviewSubscreen extends StatefulWidget {
   const PostingReviewSubscreen({Key? key}) : super(key: key);
@@ -80,8 +83,25 @@ class _PostingReviewSubscreenState extends State<PostingReviewSubscreen> {
   bool star8 = false;
   final _formKey = GlobalKey<FormState>();
   bool productSelected = false;
+  void onProductNameChanged() {
+    if (productNameController.text.isNotEmpty) {
+      if (!productSelected) {
+        setState(() {
+          productSelected = true;
+        });
+      }
+    } else {
+      if (productSelected) {
+        setState(() {
+          productSelected = false;
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    //bool productSelected = ref.watch(productSelectedProvider);
     return SingleChildScrollView(
       padding: AppEdgeInsets.screenPadding.copyWith(bottom: 10.h),
       child: Form(
@@ -95,7 +115,9 @@ class _PostingReviewSubscreenState extends State<PostingReviewSubscreen> {
               searchCtl: productNameController,
               fillColor: ColorManager.textFieldGrey,
               hasErrorMsg: true,
+              hintText: LocaleKeys.writeProductName.tr(),
               errorMsg: LocaleKeys.productNameErrorMsg.tr(),
+              onChange: onProductNameChanged,
             ),
             SizedBox(height: 20.h),
             Text(
@@ -314,6 +336,7 @@ class _PostingReviewSubscreenState extends State<PostingReviewSubscreen> {
                     ],
                   )
                 : SizedBox(),
+
             Row(
               children: [
                 Text(LocaleKeys.enterInvitationCode.tr() + ':',

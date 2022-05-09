@@ -215,5 +215,15 @@ abstract class  LocaleKeys {
   static const privacyPolicy = 'privacyPolicy';
   static const postedQuestions = 'postedQuestions';
   static const posting = 'posting';
+  static const yourQuestionRegarding = 'yourQuestionRegarding';
+  static const writeTheNameOfProductOrCompany = 'writeTheNameOfProductOrCompany';
+  static const writeYourQuestion = 'writeYourQuestion';
+  static const question = 'question';
+  static const productNameOrCompanyNameErrorMsg = 'productNameOrCompanyNameErrorMsg';
+  static const enterYourQuestionErrorMsg = 'enterYourQuestionErrorMsg';
+  static const usersRanking = 'usersRanking';
+  static const yourRanking = 'yourRanking';
+  static const howToCollectPoints = 'howToCollectPoints';
+  static const helpOthersToCollectPoints = 'helpOthersToCollectPoints';
 
 }

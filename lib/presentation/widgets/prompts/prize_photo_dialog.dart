@@ -6,6 +6,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/assets_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/font_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/custom_network_image.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/custom_alert_dialog.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
@@ -39,20 +40,7 @@ class PrizePhotoDialog extends StatelessWidget {
           ),
           SizedBox(height: 10.h, width: 350.w),
           SizedBox(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(15.r),
-              child: Image.network(
-                imageUrl,
-                fit: BoxFit.cover,
-                filterQuality: FilterQuality.high,
-                errorBuilder: (context, exception, stackTrace) {
-                  return Image.asset(
-                    ImageAssets.errorImage,
-                    fit: BoxFit.cover,
-                  );
-                },
-              ),
-            ),
+            child: CustomNetworkImage(imageUrl: imageUrl),
           ),
         ],
       ),
