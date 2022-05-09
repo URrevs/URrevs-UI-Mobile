@@ -15,6 +15,7 @@ import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_scre
 import 'package:urrevs_ui_mobile/presentation/screens/comparison_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/user_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/authentication_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_current_user_image_url_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_my_user_profile_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/give_points_to_user_state.dart';
@@ -74,18 +75,12 @@ class _BottomNavigationBarContainerScreenState
   }
 
   PreferredSize? get appBar {
-    // if (_currentIndex == BottomNavBarIndeces.allProductsSubscreen) return null;
-    String? imageUrl;
-    final state = ref.watch(getCurrentUserImageUrlProvider);
-    if (state is GetCuttentUserImageUrlLoadedState) {
-      imageUrl = state.imageUrl;
-    } else {
-      imageUrl = StringsManager.imagePlaceHolder;
-    }
+    final state =
+        ref.watch(authenticationProvider) as AuthenticationLoadedState;
     return AppBars.appBarWithURrevsLogo(
       context: context,
       showTabBar: showTabBar,
-      imageUrl: imageUrl,
+      imageUrl: state.user.picture,
     );
   }
 
@@ -96,18 +91,13 @@ class _BottomNavigationBarContainerScreenState
     super.initState();
     Future.delayed(
       Duration.zero,
-      () {
-        ref
-            .read(getCurrentUserImageUrlProvider.notifier)
-            .getCurrentUserImageUrl();
-        ref.read(givePointsToUserProvider.notifier).givePointsToUser();
-      },
+      ref.read(givePointsToUserProvider.notifier).givePointsToUser,
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    ref.listen(getCurrentUserImageUrlProvider, (previous, next) {
+    ref.listen(givePointsToUserProvider, (previous, next) {
       if (next is GivePointsToUserLoadedState) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(

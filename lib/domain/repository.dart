@@ -9,6 +9,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:urrevs_ui_mobile/app/exceptions.dart';
 import 'package:urrevs_ui_mobile/data/remote_data_source/remote_data_source.dart';
+import 'package:urrevs_ui_mobile/data/requests/reviews_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/search_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/responses/phones_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/search_api_responses.dart';
@@ -53,7 +54,7 @@ class Repository {
     }
   }
 
-  Future<Either<Failure, void>> authenticateWithGoogle() async {
+  Future<Either<Failure, User>> authenticateWithGoogle() async {
     return _tryAndCatch(() async {
       // login to google auth provider
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -77,10 +78,13 @@ class Repository {
       // save the token
       GetIt.I<Dio>().options.headers[HttpHeaders.authorizationHeader] =
           'bearer ${response.token}';
+
+      final profileRes = await _remoteDataSource.getMyProfile();
+      return profileRes.userSubResponse.userModel;
     });
   }
 
-  Future<Either<Failure, void>> authenticateWithFacebook() async {
+  Future<Either<Failure, User>> authenticateWithFacebook() async {
     return _tryAndCatch(() async {
       // login to facebook auth provider
       await FacebookAuth.instance.logOut();
@@ -101,6 +105,9 @@ class Repository {
       // saving token
       GetIt.I<Dio>().options.headers[HttpHeaders.authorizationHeader] =
           'bearer ${response.token}';
+
+      final profileRes = await _remoteDataSource.getMyProfile();
+      return profileRes.userSubResponse.userModel;
     });
   }
 
@@ -346,6 +353,24 @@ class Repository {
       final response = await _remoteDataSource
           .getCommentsAndRepliesForCompanyReview(reviewId, round);
       return response.commentsModels;
+    });
+  }
+
+  Future<Either<Failure, String>> addCommentToPhoneReview(
+      String reviewId, AddCommentToPhoneReviewRequest request) {
+    return _tryAndCatch(() async {
+      final response =
+          await _remoteDataSource.addCommentToPhoneReview(reviewId, request);
+      return response.commentId;
+    });
+  }
+
+  Future<Either<Failure, String>> addCommentToCompanyReview(
+      String reviewId, AddCommentToCompanyReviewRequest request) {
+    return _tryAndCatch(() async {
+      final response =
+          await _remoteDataSource.addCommentToCompanyReview(reviewId, request);
+      return response.commentId;
     });
   }
 }

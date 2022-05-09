@@ -17,7 +17,7 @@ class AuthenticationNotifier extends StateNotifier<AuthenticationState> {
         }
         state = AuthenticationErrorState(failure: failure);
       },
-      (_) => state = AuthenticationLoadedState(),
+      (user) => state = AuthenticationLoadedState(user: user),
     );
   }
 
@@ -31,7 +31,7 @@ class AuthenticationNotifier extends StateNotifier<AuthenticationState> {
         }
         state = AuthenticationErrorState(failure: failure);
       },
-      (_) => state = AuthenticationLoadedState(),
+      (user) => state = AuthenticationLoadedState(user: user),
     );
   }
 }

@@ -60,3 +60,10 @@ class GetCommentsProviderParams extends BaseProviderParams {
   @override
   List<Object?> get props => [postId, postType];
 }
+
+class AddCommentProviderParams extends BaseProviderParams {
+  AddCommentProviderParams();
+
+  @override
+  List<Object?> get props => [];
+}

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 import 'package:urrevs_ui_mobile/data/requests/companies_api_requests.dart';
+import 'package:urrevs_ui_mobile/data/requests/reviews_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/search_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/users_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/responses/companies_api_responses.dart';
@@ -189,5 +190,17 @@ abstract class RemoteDataSource {
       getCommentsAndRepliesForCompanyReview(
     @Path() String reviewId,
     @Query('round') int round,
+  );
+
+  @POST('/reviews/phone/{reviewId}/comments')
+  Future<AddCommentToPhoneReviewResponse> addCommentToPhoneReview(
+    @Path() String reviewId,
+    @Body() AddCommentToPhoneReviewRequest request,
+  );
+
+  @POST('/reviews/company/{reviewId}/comments')
+  Future<AddCommentToCompanyReviewResponse> addCommentToCompanyReview(
+    @Path() String reviewId,
+    @Body() AddCommentToCompanyReviewRequest request,
   );
 }

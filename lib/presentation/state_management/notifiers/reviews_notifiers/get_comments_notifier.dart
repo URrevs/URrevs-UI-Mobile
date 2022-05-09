@@ -9,8 +9,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import '../../states/reviews_states/get_comments_state.dart';
 
 class GetCommentsNotifier extends StateNotifier<GetCommentsState> {
-  GetCommentsNotifier(
-      {required String postId, required PostType postType})
+  GetCommentsNotifier({required String postId, required PostType postType})
       : _postId = postId,
         _postType = postType,
         super(GetCommentsInitialState());
@@ -42,8 +41,7 @@ class GetCommentsNotifier extends StateNotifier<GetCommentsState> {
     }
     response.fold(
       // deal with failure
-      (failure) => state =
-          GetCommentsErrorState(failure: failure),
+      (failure) => state = GetCommentsErrorState(failure: failure),
       (comments) {
         // add items and rounds ended state to the loaded state
         bool roundsEnded = comments.isEmpty;
@@ -57,5 +55,18 @@ class GetCommentsNotifier extends StateNotifier<GetCommentsState> {
         _round++;
       },
     );
+  }
+
+  void addCommentToState(Comment comment) {
+    final currentState = state;
+    if (currentState is GetCommentsLoadedState) {
+      state = GetCommentsLoadedState(
+        infiniteScrollingItems: [
+          comment,
+          ...currentState.infiniteScrollingItems
+        ],
+        roundsEnded: currentState.roundsEnded,
+      );
+    }
   }
 }

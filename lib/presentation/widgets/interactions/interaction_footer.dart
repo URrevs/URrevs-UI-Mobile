@@ -18,12 +18,14 @@ class InteractionFooter extends StatelessWidget {
     required this.maxWidth,
     required this.liked,
     required this.firstButtonType,
+    this.posting = false,
   }) : super(key: key);
 
   final DateTime datePosted;
   final double maxWidth;
   final bool liked;
   final InteractionFooterFirstButtonText firstButtonType;
+  final bool posting;
 
   String get firstButtonText {
     switch (firstButtonType) {
@@ -38,6 +40,10 @@ class InteractionFooter extends StatelessWidget {
     }
   }
 
+  String footerText(BuildContext context) => posting
+      ? LocaleKeys.posting.tr() + '...'
+      : timeago.format(datePosted, locale: context.locale.languageCode);
+
   @override
   Widget build(BuildContext context) {
     EdgeInsets footerElementsPadding =
@@ -50,24 +56,26 @@ class InteractionFooter extends StatelessWidget {
       textBaseline: TextBaseline.alphabetic,
       children: [
         10.horizontalSpace,
-        TextButton(
-          onPressed: () {},
-          style: TextButtonStyleManager.interactionFooterButton.copyWith(
-            foregroundColor: MaterialStateProperty.all(firstButtonColor),
+        if (!posting) ...[
+          TextButton(
+            onPressed: () {},
+            style: TextButtonStyleManager.interactionFooterButton.copyWith(
+              foregroundColor: MaterialStateProperty.all(firstButtonColor),
+            ),
+            child: Text(firstButtonText, style: TextStyleManager.s13w700),
           ),
-          child: Text(firstButtonText, style: TextStyleManager.s13w700),
-        ),
-        20.horizontalSpace,
-        TextButton(
-          onPressed: () {},
-          style: TextButtonStyleManager.interactionFooterButton,
-          child: Text(LocaleKeys.reply.tr(), style: TextStyleManager.s13w700),
-        ),
-        20.horizontalSpace,
+          20.horizontalSpace,
+          TextButton(
+            onPressed: () {},
+            style: TextButtonStyleManager.interactionFooterButton,
+            child: Text(LocaleKeys.reply.tr(), style: TextStyleManager.s13w700),
+          ),
+          20.horizontalSpace,
+        ],
         Padding(
           padding: footerElementsPadding,
           child: Text(
-            timeago.format(datePosted, locale: context.locale.languageCode),
+            footerText(context),
             style: TextStyleManager.s13w400.copyWith(
               color: ColorManager.grey,
             ),

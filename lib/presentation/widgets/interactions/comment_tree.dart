@@ -16,8 +16,10 @@ import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 class CommentTree extends StatefulWidget {
   const CommentTree({
     Key? key,
+    required this.commentId,
     required this.imageUrl,
     required this.authorName,
+    required this.userId,
     required this.commentText,
     required this.likeCount,
     required this.datePosted,
@@ -28,25 +30,31 @@ class CommentTree extends StatefulWidget {
   CommentTree.fromComment(Comment comment, {Key? key})
       : imageUrl = comment.photo,
         authorName = comment.userName,
+        userId = comment.userId,
         commentText = comment.content,
         likeCount = comment.likes,
         datePosted = comment.createdAt,
         replies = comment.replies,
         liked = comment.liked,
+        commentId = comment.id,
         super(key: key);
 
   final String? imageUrl;
   final String authorName;
+  final String userId;
   final String commentText;
   final int likeCount;
   final DateTime datePosted;
   final bool liked;
   final List<ReplyModel> replies;
+  final String? commentId;
 
   static CommentTree get dummyInstance => CommentTree(
         key: UniqueKey(),
+        commentId: DummyDataManager.randomInt.toString(),
         imageUrl: DummyDataManager.imageUrl,
         authorName: DummyDataManager.authorName,
+        userId: DummyDataManager.randomInt.toString(),
         commentText: DummyDataManager.sentenceOrMore,
         likeCount: DummyDataManager.randomInt,
         datePosted: DummyDataManager.postedDate,
@@ -69,6 +77,7 @@ class _CommentTreeState extends State<CommentTree> {
 
   @override
   Widget build(BuildContext context) {
+    print('widget.replies.isNotEmpty: ${widget.replies.isNotEmpty}');
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,8 +88,7 @@ class _CommentTreeState extends State<CommentTree> {
           onTap: () {
             Navigator.of(context).pushNamed(
               UserProfileScreen.routeName,
-              arguments:
-                  UserProfileScreenArgs(userId: '626b29227fe7587a42e3e9f6'),
+              arguments: UserProfileScreenArgs(userId: widget.userId),
             );
           },
         ),
@@ -102,8 +110,9 @@ class _CommentTreeState extends State<CommentTree> {
                   maxWidth: constraints.maxWidth - 16.w,
                   liked: widget.liked,
                   firstButtonType: InteractionFooterFirstButtonText.like,
+                  posting: widget.commentId == null,
                 ),
-                if (!_expandReplies) ...[
+                if (!_expandReplies && widget.replies.isNotEmpty) ...[
                   VerticalSpacesBetween.interactionBodyAndShowRepliesButton,
                   TextButton(
                     onPressed: _onPressingShowReplies,
