@@ -172,6 +172,7 @@ class _AnswerTreeState extends State<AnswerTree> {
                   onTappingAnswerInCard: widget.onTappingAnswerInCard,
                 ),
                 InteractionFooter(
+                  onPressingReply: () {},
                   datePosted: widget.datePosted,
                   maxWidth: constraints.maxWidth - 16.w,
                   liked: widget.liked,

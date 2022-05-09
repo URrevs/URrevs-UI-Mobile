@@ -187,3 +187,78 @@ Map<String, dynamic> _$GetCommentsAndRepliesForPhoneReviewResponseToJson(
       'success': instance.success,
       'comments': instance.commentsSubResponses,
     };
+
+GetCommentsAndRepliesForCompanyReviewResponse
+    _$GetCommentsAndRepliesForCompanyReviewResponseFromJson(
+            Map<String, dynamic> json) =>
+        GetCommentsAndRepliesForCompanyReviewResponse(
+          success: json['success'] as bool,
+          commentsSubResponses: (json['comments'] as List<dynamic>)
+              .map(
+                  (e) => CommentSubResponse.fromJson(e as Map<String, dynamic>))
+              .toList(),
+        );
+
+Map<String, dynamic> _$GetCommentsAndRepliesForCompanyReviewResponseToJson(
+        GetCommentsAndRepliesForCompanyReviewResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'comments': instance.commentsSubResponses,
+    };
+
+AddCommentToPhoneReviewResponse _$AddCommentToPhoneReviewResponseFromJson(
+        Map<String, dynamic> json) =>
+    AddCommentToPhoneReviewResponse(
+      success: json['success'] as bool,
+      commentId: json['comment'] as String,
+    );
+
+Map<String, dynamic> _$AddCommentToPhoneReviewResponseToJson(
+        AddCommentToPhoneReviewResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'comment': instance.commentId,
+    };
+
+AddCommentToCompanyReviewResponse _$AddCommentToCompanyReviewResponseFromJson(
+        Map<String, dynamic> json) =>
+    AddCommentToCompanyReviewResponse(
+      success: json['success'] as bool,
+      commentId: json['comment'] as String,
+    );
+
+Map<String, dynamic> _$AddCommentToCompanyReviewResponseToJson(
+        AddCommentToCompanyReviewResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'comment': instance.commentId,
+    };
+
+AddReplyToPhoneReviewCommentResponse
+    _$AddReplyToPhoneReviewCommentResponseFromJson(Map<String, dynamic> json) =>
+        AddReplyToPhoneReviewCommentResponse(
+          success: json['success'] as bool,
+          replyId: json['reply'] as String,
+        );
+
+Map<String, dynamic> _$AddReplyToPhoneReviewCommentResponseToJson(
+        AddReplyToPhoneReviewCommentResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'reply': instance.replyId,
+    };
+
+AddReplyToCompanyReviewCommentResponse
+    _$AddReplyToCompanyReviewCommentResponseFromJson(
+            Map<String, dynamic> json) =>
+        AddReplyToCompanyReviewCommentResponse(
+          success: json['success'] as bool,
+          replyId: json['reply'] as String,
+        );
+
+Map<String, dynamic> _$AddReplyToCompanyReviewCommentResponseToJson(
+        AddReplyToCompanyReviewCommentResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'reply': instance.replyId,
+    };

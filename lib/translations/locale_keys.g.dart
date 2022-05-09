@@ -214,5 +214,6 @@ abstract class  LocaleKeys {
   static const termsOfUse = 'termsOfUse';
   static const privacyPolicy = 'privacyPolicy';
   static const postedQuestions = 'postedQuestions';
+  static const posting = 'posting';
 
 }

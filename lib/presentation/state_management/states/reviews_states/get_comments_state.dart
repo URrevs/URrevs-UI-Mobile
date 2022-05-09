@@ -4,30 +4,26 @@ import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/domain/models/comment.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 
-abstract class GetCommentsAndRepliesForPhoneReviewState extends Equatable
-    implements RequestState {}
+abstract class GetCommentsState extends Equatable implements RequestState {}
 
-class GetCommentsAndRepliesForPhoneReviewInitialState
-    extends GetCommentsAndRepliesForPhoneReviewState implements InitialState {
+class GetCommentsInitialState extends GetCommentsState implements InitialState {
   @override
   List<Object?> get props => [];
 }
 
-class GetCommentsAndRepliesForPhoneReviewLoadingState
-    extends GetCommentsAndRepliesForPhoneReviewState implements LoadingState {
+class GetCommentsLoadingState extends GetCommentsState implements LoadingState {
   @override
   List<Object?> get props => [];
 }
 
-class GetCommentsAndRepliesForPhoneReviewLoadedState
-    extends GetCommentsAndRepliesForPhoneReviewState
+class GetCommentsLoadedState extends GetCommentsState
     implements LoadedState, InfiniteScrollingState<Comment> {
   @override
   final List<Comment> infiniteScrollingItems;
   @override
   final bool roundsEnded;
 
-  GetCommentsAndRepliesForPhoneReviewLoadedState({
+  GetCommentsLoadedState({
     required this.infiniteScrollingItems,
     required this.roundsEnded,
   });
@@ -36,11 +32,10 @@ class GetCommentsAndRepliesForPhoneReviewLoadedState
   List<Object?> get props => [];
 }
 
-class GetCommentsAndRepliesForPhoneReviewErrorState
-    extends GetCommentsAndRepliesForPhoneReviewState implements ErrorState {
+class GetCommentsErrorState extends GetCommentsState implements ErrorState {
   @override
   final Failure failure;
-  GetCommentsAndRepliesForPhoneReviewErrorState({
+  GetCommentsErrorState({
     required this.failure,
   });
 

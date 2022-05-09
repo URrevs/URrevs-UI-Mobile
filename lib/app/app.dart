@@ -48,8 +48,8 @@ class _MyAppState extends ConsumerState<MyApp> {
       splitScreenMode: false,
       builder: (_) => MaterialApp(
         title: LocaleKeys.urrevs.tr(),
-        // initialRoute: AuthenticationScreen.routeName,
-        initialRoute: FullscreenPostScreen.routeName,
+        initialRoute: AuthenticationScreen.routeName,
+        // initialRoute: FullscreenPostScreen.routeName,
         // initialRoute: DevelopmentScreen.routeName,
         navigatorObservers: [routeObserver],
         onGenerateRoute: RouteGenerator.getRoute,

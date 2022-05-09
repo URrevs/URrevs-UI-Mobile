@@ -25,7 +25,7 @@ class _HomeSubscreenState extends ConsumerState<HomeSubscreen> {
               arguments: FullscreenPostScreenArgs(
                 postType: PostType.phoneReview,
                 cardType: CardType.productReview,
-                postId: '',
+                postId: 'change_it',
                 focusOnTextField: true,
               ),
             );
@@ -38,7 +38,7 @@ class _HomeSubscreenState extends ConsumerState<HomeSubscreen> {
               arguments: FullscreenPostScreenArgs(
                 postType: PostType.companyReview,
                 cardType: CardType.companyReview,
-                postId: '',
+                postId: 'change_it',
                 focusOnTextField: true,
               ),
             );
@@ -52,7 +52,7 @@ class _HomeSubscreenState extends ConsumerState<HomeSubscreen> {
               arguments: FullscreenPostScreenArgs(
                 postType: PostType.question,
                 cardType: CardType.productQuestion,
-                postId: '',
+                postId: 'change_it',
                 focusOnTextField: true,
               ),
             );
@@ -66,7 +66,7 @@ class _HomeSubscreenState extends ConsumerState<HomeSubscreen> {
               arguments: FullscreenPostScreenArgs(
                 postType: PostType.question,
                 cardType: CardType.companyQuestion,
-                postId: '',
+                postId: 'change_it',
                 focusOnTextField: true,
               ),
             );

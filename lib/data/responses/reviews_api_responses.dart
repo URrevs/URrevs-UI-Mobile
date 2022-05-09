@@ -190,3 +190,85 @@ class GetCommentsAndRepliesForPhoneReviewResponse extends BaseResponse {
   Map<String, dynamic> toJson() =>
       _$GetCommentsAndRepliesForPhoneReviewResponseToJson(this);
 }
+
+@JsonSerializable()
+class GetCommentsAndRepliesForCompanyReviewResponse extends BaseResponse {
+  @JsonKey(name: 'comments')
+  List<CommentSubResponse> commentsSubResponses;
+  GetCommentsAndRepliesForCompanyReviewResponse({
+    required bool success,
+    required this.commentsSubResponses,
+  }) : super(success: success);
+
+  List<Comment> get commentsModels =>
+      commentsSubResponses.map((c) => c.commentModel).toList();
+
+  factory GetCommentsAndRepliesForCompanyReviewResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$GetCommentsAndRepliesForCompanyReviewResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$GetCommentsAndRepliesForCompanyReviewResponseToJson(this);
+}
+
+@JsonSerializable()
+class AddCommentToPhoneReviewResponse extends BaseResponse {
+  @JsonKey(name: 'comment')
+  String commentId;
+  AddCommentToPhoneReviewResponse({
+    required bool success,
+    required this.commentId,
+  }) : super(success: success);
+
+  factory AddCommentToPhoneReviewResponse.fromJson(Map<String, Object?> json) =>
+      _$AddCommentToPhoneReviewResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$AddCommentToPhoneReviewResponseToJson(this);
+}
+
+@JsonSerializable()
+class AddCommentToCompanyReviewResponse extends BaseResponse {
+  @JsonKey(name: 'comment')
+  String commentId;
+  AddCommentToCompanyReviewResponse({
+    required bool success,
+    required this.commentId,
+  }) : super(success: success);
+
+  factory AddCommentToCompanyReviewResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$AddCommentToCompanyReviewResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$AddCommentToCompanyReviewResponseToJson(this);
+}
+
+@JsonSerializable()
+class AddReplyToPhoneReviewCommentResponse extends BaseResponse {
+  @JsonKey(name: 'reply')
+  String replyId;
+  AddReplyToPhoneReviewCommentResponse({
+    required bool success,
+    required this.replyId,
+  }) : super(success: success);
+
+  factory AddReplyToPhoneReviewCommentResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$AddReplyToPhoneReviewCommentResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$AddReplyToPhoneReviewCommentResponseToJson(this);
+}
+
+@JsonSerializable()
+class AddReplyToCompanyReviewCommentResponse extends BaseResponse {
+  @JsonKey(name: 'reply')
+  String replyId;
+  AddReplyToCompanyReviewCommentResponse({
+    required bool success,
+    required this.replyId,
+  }) : super(success: success);
+
+  factory AddReplyToCompanyReviewCommentResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$AddReplyToCompanyReviewCommentResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$AddReplyToCompanyReviewCommentResponseToJson(this);
+}
