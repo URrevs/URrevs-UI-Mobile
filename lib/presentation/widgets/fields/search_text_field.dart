@@ -12,6 +12,7 @@ class SearchTextField extends StatelessWidget {
     Key? key,
     required this.searchCtl,
     required this.fillColor,
+    required this.onChange,
     this.errorMsg = '',
     this.hasErrorMsg = false,
   }) : super(key: key);
@@ -20,7 +21,7 @@ class SearchTextField extends StatelessWidget {
   final Color fillColor;
   final bool hasErrorMsg;
   final String errorMsg;
-  
+  final VoidCallback onChange;
   @override
   Widget build(BuildContext context) {
     final InputBorder inputBorder = OutlineInputBorder(
@@ -59,7 +60,7 @@ class SearchTextField extends StatelessWidget {
         border: inputBorder,
         focusedBorder: inputBorder.copyWith(borderSide: BorderSide(color: ColorManager.blue)),
       ),
-      onChanged: (_) => print(_),
+      onChanged: (_)=>onChange(),
       validator: hasErrorMsg? (value) {
       if (value == null || value.isEmpty) {
         return errorMsg;

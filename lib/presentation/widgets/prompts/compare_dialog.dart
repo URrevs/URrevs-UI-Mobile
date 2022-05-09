@@ -55,6 +55,7 @@ class _CompareDialogeState extends State<CompareDialoge> {
               fillColor: ColorManager.backgroundGrey,
               hasErrorMsg: true,
               errorMsg: LocaleKeys.productNameErrorMsg.tr(),
+              onChange: ()=>{}
             ),
             SizedBox(
               height: 70.h,
