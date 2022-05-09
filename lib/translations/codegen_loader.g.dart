@@ -234,7 +234,8 @@ class CodegenLoader extends AssetLoader{
   "writeYourQuestion": "اكتب سؤالك",
   "question": "السؤال",
   "productNameOrCompanyNameErrorMsg": "يجب ادخال اسم المنتج أو الشركة.",
-  "enterYourQuestionErrorMsg": "يجب ادخال سؤالك."
+  "enterYourQuestionErrorMsg": "يجب ادخال سؤالك.",
+  "askedQuestionsAboutMyproducts": "الأسئلة المطروحة علي منتجاتي"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -456,7 +457,8 @@ static const Map<String,dynamic> en = {
   "writeYourQuestion": "Write your question",
   "question": "Question",
   "productNameOrCompanyNameErrorMsg": "Product's name or company's name myst be entered.",
-  "enterYourQuestionErrorMsg": "Your question must be entered."
+  "enterYourQuestionErrorMsg": "Your question must be entered.",
+  "askedQuestionsAboutMyproducts": "Asked questions about my products"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

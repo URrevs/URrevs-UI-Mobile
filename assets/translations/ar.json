@@ -218,5 +218,6 @@
   "writeYourQuestion": "اكتب سؤالك",
   "question": "السؤال",
   "productNameOrCompanyNameErrorMsg": "يجب ادخال اسم المنتج أو الشركة.",
-  "enterYourQuestionErrorMsg": "يجب ادخال سؤالك."
+  "enterYourQuestionErrorMsg": "يجب ادخال سؤالك.",
+  "askedQuestionsAboutMyproducts": "الأسئلة المطروحة علي منتجاتي"
 }

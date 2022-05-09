@@ -218,5 +218,6 @@
   "writeYourQuestion": "Write your question",
   "question": "Question",
   "productNameOrCompanyNameErrorMsg": "Product's name or company's name myst be entered.",
-  "enterYourQuestionErrorMsg": "Your question must be entered."
+  "enterYourQuestionErrorMsg": "Your question must be entered.",
+  "askedQuestionsAboutMyproducts": "Asked questions about my products"
 }
