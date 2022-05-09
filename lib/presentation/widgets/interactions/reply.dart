@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/user_profile_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/authentication_state.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/interaction_body.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/interaction_footer.dart';
@@ -17,7 +20,7 @@ class Reply extends StatelessWidget {
   final bool liked;
   final VoidCallback onPressingReply;
   final String interactionId;
-  final String replyCommentId;
+  final String replyParentId;
   final PostType parentPostType;
   final String userId;
 
@@ -32,7 +35,7 @@ class Reply extends StatelessWidget {
     required this.onPressingReply,
     required this.interactionId,
     required this.parentPostType,
-    required this.replyCommentId,
+    required this.replyParentId,
     required this.userId,
   }) : super(key: key);
 
@@ -47,7 +50,7 @@ class Reply extends StatelessWidget {
         interactionId: DummyDataManager.randomInt.toString(),
         userId: DummyDataManager.randomInt.toString(),
         parentPostType: PostType.phoneReview,
-        replyCommentId: DummyDataManager.randomInt.toString(),
+        replyParentId: DummyDataManager.randomInt.toString(),
       );
 
   @override
@@ -57,15 +60,15 @@ class Reply extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Avatar(
-            imageUrl: imageUrl,
-            radius: AppRadius.replyAvatarRadius,
-            onTap: () {
-              Navigator.of(context).pushNamed(
-                UserProfileScreen.routeName,
-                arguments:
-                    UserProfileScreenArgs(userId: '626b29227fe7587a42e3e9f6'),
-              );
-            }),
+          imageUrl: imageUrl,
+          radius: AppRadius.replyAvatarRadius,
+          onTap: () {
+            Navigator.of(context).pushNamed(
+              UserProfileScreen.routeName,
+              arguments: UserProfileScreenArgs(userId: userId),
+            );
+          },
+        ),
         5.horizontalSpace,
         Expanded(
           child: LayoutBuilder(builder: (context, BoxConstraints constraints) {
@@ -88,7 +91,7 @@ class Reply extends StatelessWidget {
                   interactionId: interactionId,
                   interactionType: InteractionType.reply,
                   parentPostType: parentPostType,
-                  replyParentId: replyCommentId,
+                  replyParentId: replyParentId,
                   userId: userId,
                 ),
               ],

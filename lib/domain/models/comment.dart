@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:urrevs_ui_mobile/domain/models/reply.dart';
+import 'package:urrevs_ui_mobile/domain/models/reply_model.dart';
 
 class Comment extends Equatable {
   final String id;

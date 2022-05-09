@@ -9,7 +9,7 @@ import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/domain/models/comment.dart';
 import 'package:urrevs_ui_mobile/domain/models/company_review.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone_review.dart';
-import 'package:urrevs_ui_mobile/domain/models/reply.dart';
+import 'package:urrevs_ui_mobile/domain/models/reply_model.dart';
 import 'package:urrevs_ui_mobile/domain/models/user.dart';
 
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';

@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/domain/models/comment.dart';
-import 'package:urrevs_ui_mobile/domain/models/reply.dart';
+import 'package:urrevs_ui_mobile/domain/models/reply_model.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_button_style_manager.dart';
@@ -153,9 +153,9 @@ class _CommentTreeState extends State<CommentTree> {
                       onPressingReply: widget.onPressingReply,
                       interactionId: widget.replies[i].id,
                       parentPostType: widget.parentPostType,
-                      userId: widget.userId,
+                      userId: widget.replies[i].userId,
                       // comment id cannot be null if there is a reply passed to the comment
-                      replyCommentId: widget.commentId!,
+                      replyParentId: widget.commentId!,
                     ),
                     if (i != widget.replies.length - 1)
                       VerticalSpacesBetween.replies,

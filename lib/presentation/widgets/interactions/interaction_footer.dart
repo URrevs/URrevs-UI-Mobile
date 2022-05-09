@@ -104,8 +104,6 @@ class _InteractionFooterState extends ConsumerState<InteractionFooter> {
     final state = ref.watch(authenticationProvider);
     bool isMyInteraction =
         state is AuthenticationLoadedState && state.user.id == widget.userId;
-    print('user: ${widget.userId}');
-    print('isMyInteraction: $isMyInteraction');
 
     EdgeInsets footerElementsPadding =
         EdgeInsets.only(top: 6.h, left: 3.w, right: 3.w);
@@ -117,10 +115,10 @@ class _InteractionFooterState extends ConsumerState<InteractionFooter> {
       children: [
         10.horizontalSpace,
         if (!widget.posting) ...[
-          // if (!isMyInteraction) ...[
-          _buildLikeButton(),
-          20.horizontalSpace,
-          // ],
+          if (!isMyInteraction) ...[
+            _buildLikeButton(),
+            20.horizontalSpace,
+          ],
           TextButton(
             onPressed: widget.onPressingReply,
             style: TextButtonStyleManager.interactionFooterButton,
