@@ -203,4 +203,16 @@ abstract class RemoteDataSource {
     @Path() String reviewId,
     @Body() AddCommentToCompanyReviewRequest request,
   );
+
+  @POST('/reviews/phone/comments/{commentId}/replies')
+  Future<AddReplyToPhoneReviewCommentResponse> addReplyToPhoneReviewComment(
+    @Path() String commentId,
+    @Body() AddReplyToPhoneReviewCommentRequest request,
+  );
+
+  @POST('/reviews/company/comments/{commentId}/replies')
+  Future<AddReplyToCompanyReviewCommentResponse> addReplyToCompanyReviewComment(
+    @Path() String commentId,
+    @Body() AddReplyToCompanyReviewCommentRequest request,
+  );
 }

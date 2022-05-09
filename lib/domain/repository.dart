@@ -373,4 +373,22 @@ class Repository {
       return response.commentId;
     });
   }
+
+  Future<Either<Failure, String>> addReplyToPhoneReviewComment(
+      String commentId, AddReplyToPhoneReviewCommentRequest request) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.addReplyToPhoneReviewComment(
+          commentId, request);
+      return response.replyId;
+    });
+  }
+
+  Future<Either<Failure, String>> addReplyToCompanyReviewComment(
+      String commentId, AddReplyToCompanyReviewCommentRequest request) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.addReplyToCompanyReviewComment(
+          commentId, request);
+      return response.replyId;
+    });
+  }
 }

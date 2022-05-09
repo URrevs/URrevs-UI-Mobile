@@ -233,3 +233,32 @@ Map<String, dynamic> _$AddCommentToCompanyReviewResponseToJson(
       'success': instance.success,
       'comment': instance.commentId,
     };
+
+AddReplyToPhoneReviewCommentResponse
+    _$AddReplyToPhoneReviewCommentResponseFromJson(Map<String, dynamic> json) =>
+        AddReplyToPhoneReviewCommentResponse(
+          success: json['success'] as bool,
+          replyId: json['reply'] as String,
+        );
+
+Map<String, dynamic> _$AddReplyToPhoneReviewCommentResponseToJson(
+        AddReplyToPhoneReviewCommentResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'reply': instance.replyId,
+    };
+
+AddReplyToCompanyReviewCommentResponse
+    _$AddReplyToCompanyReviewCommentResponseFromJson(
+            Map<String, dynamic> json) =>
+        AddReplyToCompanyReviewCommentResponse(
+          success: json['success'] as bool,
+          replyId: json['reply'] as String,
+        );
+
+Map<String, dynamic> _$AddReplyToCompanyReviewCommentResponseToJson(
+        AddReplyToCompanyReviewCommentResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'reply': instance.replyId,
+    };

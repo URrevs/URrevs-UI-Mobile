@@ -67,3 +67,10 @@ class AddCommentProviderParams extends BaseProviderParams {
   @override
   List<Object?> get props => [];
 }
+
+class AddReviewReplyProviderParams extends BaseProviderParams {
+  AddReviewReplyProviderParams();
+
+  @override
+  List<Object?> get props => [];
+}

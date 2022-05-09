@@ -14,6 +14,7 @@ class Reply extends StatelessWidget {
   final int likeCount;
   final DateTime datePosted;
   final bool liked;
+  final VoidCallback onPressingReply;
 
   const Reply({
     Key? key,
@@ -23,6 +24,7 @@ class Reply extends StatelessWidget {
     required this.likeCount,
     required this.datePosted,
     required this.liked,
+    required this.onPressingReply,
   }) : super(key: key);
 
   static Reply get dummyInstance => Reply(
@@ -32,6 +34,7 @@ class Reply extends StatelessWidget {
         likeCount: DummyDataManager.randomInt,
         datePosted: DummyDataManager.postedDate,
         liked: DummyDataManager.randomBool,
+        onPressingReply: () {},
       );
 
   @override
@@ -64,6 +67,7 @@ class Reply extends StatelessWidget {
                   inQuestionCard: false,
                 ),
                 InteractionFooter(
+                  onPressingReply: onPressingReply,
                   datePosted: datePosted,
                   maxWidth: constraints.maxWidth - 16.w,
                   liked: liked,

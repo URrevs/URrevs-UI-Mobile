@@ -41,3 +41,31 @@ class AddCommentToCompanyReviewRequest {
   Map<String, dynamic> toJson() =>
       _$AddCommentToCompanyReviewRequestToJson(this);
 }
+
+@JsonSerializable()
+class AddReplyToPhoneReviewCommentRequest {
+  String content;
+  AddReplyToPhoneReviewCommentRequest({
+    required this.content,
+  });
+
+  factory AddReplyToPhoneReviewCommentRequest.fromJson(
+          Map<String, Object?> json) =>
+      _$AddReplyToPhoneReviewCommentRequestFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$AddReplyToPhoneReviewCommentRequestToJson(this);
+}
+
+@JsonSerializable()
+class AddReplyToCompanyReviewCommentRequest {
+  String content;
+  AddReplyToCompanyReviewCommentRequest({
+    required this.content,
+  });
+
+  factory AddReplyToCompanyReviewCommentRequest.fromJson(
+          Map<String, Object?> json) =>
+      _$AddReplyToCompanyReviewCommentRequestFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$AddReplyToCompanyReviewCommentRequestToJson(this);
+}

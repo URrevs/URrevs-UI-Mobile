@@ -240,3 +240,35 @@ class AddCommentToCompanyReviewResponse extends BaseResponse {
   Map<String, dynamic> toJson() =>
       _$AddCommentToCompanyReviewResponseToJson(this);
 }
+
+@JsonSerializable()
+class AddReplyToPhoneReviewCommentResponse extends BaseResponse {
+  @JsonKey(name: 'reply')
+  String replyId;
+  AddReplyToPhoneReviewCommentResponse({
+    required bool success,
+    required this.replyId,
+  }) : super(success: success);
+
+  factory AddReplyToPhoneReviewCommentResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$AddReplyToPhoneReviewCommentResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$AddReplyToPhoneReviewCommentResponseToJson(this);
+}
+
+@JsonSerializable()
+class AddReplyToCompanyReviewCommentResponse extends BaseResponse {
+  @JsonKey(name: 'reply')
+  String replyId;
+  AddReplyToCompanyReviewCommentResponse({
+    required bool success,
+    required this.replyId,
+  }) : super(success: success);
+
+  factory AddReplyToCompanyReviewCommentResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$AddReplyToCompanyReviewCommentResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$AddReplyToCompanyReviewCommentResponseToJson(this);
+}

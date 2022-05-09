@@ -18,6 +18,7 @@ class InteractionFooter extends StatelessWidget {
     required this.maxWidth,
     required this.liked,
     required this.firstButtonType,
+    required this.onPressingReply,
     this.posting = false,
   }) : super(key: key);
 
@@ -26,6 +27,7 @@ class InteractionFooter extends StatelessWidget {
   final bool liked;
   final InteractionFooterFirstButtonText firstButtonType;
   final bool posting;
+  final VoidCallback onPressingReply;
 
   String get firstButtonText {
     switch (firstButtonType) {
@@ -66,7 +68,7 @@ class InteractionFooter extends StatelessWidget {
           ),
           20.horizontalSpace,
           TextButton(
-            onPressed: () {},
+            onPressed: onPressingReply,
             style: TextButtonStyleManager.interactionFooterButton,
             child: Text(LocaleKeys.reply.tr(), style: TextStyleManager.s13w700),
           ),

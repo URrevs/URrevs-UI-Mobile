@@ -25,10 +25,14 @@ class CommentTree extends StatefulWidget {
     required this.datePosted,
     required this.replies,
     required this.liked,
+    required this.onPressingReply,
   }) : super(key: key);
 
-  CommentTree.fromComment(Comment comment, {Key? key})
-      : imageUrl = comment.photo,
+  CommentTree.fromComment(
+    Comment comment, {
+    Key? key,
+    required this.onPressingReply,
+  })  : imageUrl = comment.photo,
         authorName = comment.userName,
         userId = comment.userId,
         commentText = comment.content,
@@ -48,8 +52,10 @@ class CommentTree extends StatefulWidget {
   final bool liked;
   final List<ReplyModel> replies;
   final String? commentId;
+  final VoidCallback onPressingReply;
 
   static CommentTree get dummyInstance => CommentTree(
+        onPressingReply: () {},
         key: UniqueKey(),
         commentId: DummyDataManager.randomInt.toString(),
         imageUrl: DummyDataManager.imageUrl,
@@ -77,7 +83,6 @@ class _CommentTreeState extends State<CommentTree> {
 
   @override
   Widget build(BuildContext context) {
-    print('widget.replies.isNotEmpty: ${widget.replies.isNotEmpty}');
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,6 +111,10 @@ class _CommentTreeState extends State<CommentTree> {
                   inQuestionCard: false,
                 ),
                 InteractionFooter(
+                  onPressingReply: () {
+                    setState(() => _expandReplies = true);
+                    widget.onPressingReply();
+                  },
                   datePosted: widget.datePosted,
                   maxWidth: constraints.maxWidth - 16.w,
                   liked: widget.liked,
@@ -131,6 +140,7 @@ class _CommentTreeState extends State<CommentTree> {
                       likeCount: widget.replies[i].likes,
                       datePosted: widget.replies[i].createdAt,
                       liked: widget.replies[i].liked,
+                      onPressingReply: widget.onPressingReply,
                     ),
                     if (i != widget.replies.length - 1)
                       VerticalSpacesBetween.replies,

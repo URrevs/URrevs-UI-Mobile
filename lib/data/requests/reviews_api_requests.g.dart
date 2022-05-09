@@ -29,3 +29,28 @@ Map<String, dynamic> _$AddCommentToCompanyReviewRequestToJson(
     <String, dynamic>{
       'content': instance.content,
     };
+
+AddReplyToPhoneReviewCommentRequest
+    _$AddReplyToPhoneReviewCommentRequestFromJson(Map<String, dynamic> json) =>
+        AddReplyToPhoneReviewCommentRequest(
+          content: json['content'] as String,
+        );
+
+Map<String, dynamic> _$AddReplyToPhoneReviewCommentRequestToJson(
+        AddReplyToPhoneReviewCommentRequest instance) =>
+    <String, dynamic>{
+      'content': instance.content,
+    };
+
+AddReplyToCompanyReviewCommentRequest
+    _$AddReplyToCompanyReviewCommentRequestFromJson(
+            Map<String, dynamic> json) =>
+        AddReplyToCompanyReviewCommentRequest(
+          content: json['content'] as String,
+        );
+
+Map<String, dynamic> _$AddReplyToCompanyReviewCommentRequestToJson(
+        AddReplyToCompanyReviewCommentRequest instance) =>
+    <String, dynamic>{
+      'content': instance.content,
+    };

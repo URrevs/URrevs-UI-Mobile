@@ -14,11 +14,16 @@ class CommentsList extends StatelessWidget {
   const CommentsList({
     Key? key,
     required this.comments,
+    required this.onPressingReplyList,
   }) : super(key: key);
 
   final List<Comment> comments;
+  final List<VoidCallback> onPressingReplyList;
 
-  static CommentsList get dummyInstance => CommentsList(comments: []);
+  static CommentsList get dummyInstance => CommentsList(
+        comments: [],
+        onPressingReplyList: [],
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +31,10 @@ class CommentsList extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         for (int i = 0; i < comments.length; i++) ...[
-          CommentTree.fromComment(comments[i]),
+          CommentTree.fromComment(
+            comments[i],
+            onPressingReply: onPressingReplyList[i],
+          ),
           if (i != comments.length - 1) VerticalSpacesBetween.interactionTrees,
         ],
         VerticalSpacesBetween.interactionsListAndMoreCommentsButton,
