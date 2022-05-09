@@ -30,15 +30,18 @@ abstract class InfiniteScrollingState<T> {
   bool get roundsEnded;
 }
 
-void showSnackBarWithoutActionAtError({
-  required RequestState state,
-  required BuildContext context,
-}) {
+void showSnackBarWithoutActionAtError(
+    {required RequestState state,
+    required BuildContext context,
+    EdgeInsets? margin}) {
   dynamic currentState = state;
   if (currentState is ErrorState) {
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(currentState.failure.message)),
+      SnackBar(
+        content: Text(currentState.failure.message),
+        margin: margin,
+      ),
     );
     if (currentState.failure is AuthenticateFailure) {
       Navigator.of(context).pushNamedAndRemoveUntil(

@@ -15,6 +15,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/authentication_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/authentication_state.dart';
@@ -28,6 +29,7 @@ import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/vertical_lis
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answers_list.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/comment_tree.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/comments_list.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/comments_list_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/company_review_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/phone_review_loading.dart';
@@ -147,6 +149,12 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
       ref
           .read(addCommentProvider(_addCommentProviderParams).notifier)
           .addCommentToPhoneReview(widget.screenArgs.postId, request);
+    } else if (widget.screenArgs.postType == PostType.companyReview) {
+      AddCommentToCompanyReviewRequest request =
+          AddCommentToCompanyReviewRequest(content: _controller.text);
+      ref
+          .read(addCommentProvider(_addCommentProviderParams).notifier)
+          .addCommentToCompanyReview(widget.screenArgs.postId, request);
     }
   }
 
@@ -225,7 +233,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
       children: [
         _buildCommentsTrees(),
         _buildCommentsListLoadingOrError(),
-        _buildMoreCommentsButton(),
+        if (_comments.isNotEmpty) _buildMoreCommentsButton(),
       ],
     );
   }
@@ -374,6 +382,11 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
   }
 
   Widget _buildTextFieldSection() {
+    ref.addErrorListener(
+      provider: addCommentProvider(_addCommentProviderParams),
+      context: context,
+      margin: EdgeInsets.fromLTRB(15.h, 5.h, 15.h, 10.h + 60.h),
+    );
     ref.listen(addCommentProvider(_addCommentProviderParams), (previous, next) {
       if (next is AddCommentLoadedState) {
         Comment lastPostedComment = _postedCommentModel(
@@ -413,7 +426,6 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
             hintText: _hintText,
             filled: true,
             fillColor: ColorManager.textFieldGrey,
-            focusColor: Colors.red,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(40.r),
               borderSide: BorderSide.none,
@@ -421,10 +433,10 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
             suffixIcon: IconButton(
               icon: Icon(
                 Icons.send,
-                color: ColorManager.blue,
                 size: 26.sp,
               ),
               onPressed: loading ? null : _addComment,
+              color: ColorManager.blue,
             ),
           ),
         ),

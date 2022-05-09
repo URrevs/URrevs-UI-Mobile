@@ -230,13 +230,18 @@ extension WidgetRefListeners on WidgetRef {
     required ProviderListenable<RequestState> provider,
     required BuildContext context,
     PagingController? controller,
+    EdgeInsets? margin,
   }) {
     listen<RequestState>(provider, (previous, next) {
       // if an error occurred duting next round, do not show snackbars
       bool nextRoundError = controller != null && controller.itemList != null;
       if (nextRoundError) return;
       // show snackbars otherwise
-      showSnackBarWithoutActionAtError(state: next, context: context);
+      showSnackBarWithoutActionAtError(
+        state: next,
+        context: context,
+        margin: margin,
+      );
     });
   }
 

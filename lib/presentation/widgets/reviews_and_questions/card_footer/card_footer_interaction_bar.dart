@@ -75,7 +75,7 @@ class CardFooterInteractionBar extends StatelessWidget {
                 arguments: FullscreenPostScreenArgs(
                   postType: postType,
                   cardType: cardType,
-                  postId: '',
+                  postId: 'change_it',
                 ),
               );
             },
