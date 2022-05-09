@@ -65,6 +65,8 @@ class _LeaderboardSubscreenState extends State<LeaderboardSubscreen> {
                     itemCount: 10,
                     itemBuilder: (context, index) {
                       return LeaderboardEntryData(
+                        // TODO: add data, on tap it should transfer the user to the user profile screen
+                          onTap: () {},
                           rank: index + 1,
                           imageUrl: StringsManager.imagePlaceHolder,
                           name: StringsManager.fakeName,
