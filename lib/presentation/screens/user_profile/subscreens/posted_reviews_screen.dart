@@ -173,7 +173,7 @@ class _PostedReviewsScreenState extends ConsumerState<PostedReviewsScreen> {
           itemBuilder: (context, phoneReview, index) {
             return ProductReviewCard.fromPhoneReview(
               phoneReview: phoneReview,
-              fullscreen: true,
+              fullscreen: false,
               onPressingComment: () {
                 Navigator.of(context).pushNamed(
                   FullscreenPostScreen.routeName,
@@ -228,7 +228,7 @@ class _PostedReviewsScreenState extends ConsumerState<PostedReviewsScreen> {
           itemBuilder: (context, companyReview, index) {
             return CompanyReviewCard.fromCompanyReview(
               companyReview: companyReview,
-              fullscreen: true,
+              fullscreen: false,
               onPressingComment: () {
                 Navigator.of(context).pushNamed(
                   FullscreenPostScreen.routeName,

@@ -229,6 +229,7 @@ class QuestionCard extends StatelessWidget {
                 ),
                 8.verticalSpace,
                 CardFooter(
+                  userId: userId,
                   likeCount: upvoteCount,
                   commentCount: answerCount,
                   shareCount: shareCount,

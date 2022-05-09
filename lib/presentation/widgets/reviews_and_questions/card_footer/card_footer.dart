@@ -23,6 +23,7 @@ class CardFooter extends StatelessWidget {
     required this.fullscreen,
     required this.postType,
     required this.postId,
+    required this.userId,
   }) : super(key: key);
 
   /// Is the review liked by the current logged in user or not.
@@ -57,6 +58,7 @@ class CardFooter extends StatelessWidget {
   final PostType postType;
 
   final String postId;
+  final String userId;
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +67,7 @@ class CardFooter extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: CardFooterInteractionBar(
+            userId: userId,
             postType: postType,
             likeCount: likeCount,
             commentCount: commentCount,
@@ -72,6 +75,7 @@ class CardFooter extends StatelessWidget {
             useInReviewCard: useInReviewCard,
             cardType: cardType,
             fullscreen: fullscreen,
+            postId: postId,
           ),
         ),
         Divider(height: 16.h, thickness: 1.h, color: ColorManager.dividerGrey),

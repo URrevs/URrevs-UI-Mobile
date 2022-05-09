@@ -76,8 +76,9 @@ class _ReviewCardBodyState extends State<ReviewCardBody> {
   /// an expansion. This state is when the sum of pros text length and cons text
   /// length is less than or equal collapsedMaxLetters.
   bool get noNeedForExpansion =>
+      widget.cardType != CardType.productReview &&
       widget.prosText.length + widget.consText.length <=
-      AppNumericValues.collapsedMaxLetters;
+          AppNumericValues.collapsedMaxLetters;
 
   void setExpandedState(bool value) {
     setState(() {

@@ -69,7 +69,7 @@ class _ProductProfileReviewsSubscreenState
         itemBuilder: (context, phoneReview, index) {
           return ProductReviewCard.fromPhoneReview(
             phoneReview: phoneReview,
-            fullscreen: true,
+            fullscreen: false,
             onPressingComment: () {
               Navigator.of(context).pushNamed(
                 FullscreenPostScreen.routeName,

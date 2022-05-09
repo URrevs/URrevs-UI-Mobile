@@ -279,6 +279,7 @@ class CompanyReviewCard extends StatelessWidget {
                   fullscreen: fullscreen,
                   postType: PostType.companyReview,
                   postId: reviewId,
+                  userId: userId,
                 ),
               ],
             ),
