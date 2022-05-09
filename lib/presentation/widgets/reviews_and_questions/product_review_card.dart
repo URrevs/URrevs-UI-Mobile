@@ -135,7 +135,7 @@ class ProductReviewCard extends StatelessWidget {
   /// An instance of [ProductReviewCard] filled with dummy data.
   static ProductReviewCard dummyInstance({bool fullscreen = false}) =>
       ProductReviewCard(
-        reviewId: 'reviewId-${DateTime.now().microsecondsSinceEpoch}',
+        reviewId: 'dummyReviewId-${DateTime.now().microsecondsSinceEpoch}',
         userId: 'userId-${DateTime.now().microsecondsSinceEpoch}',
         productId: 'productId-${DateTime.now().microsecondsSinceEpoch}',
         postedDate: faker.date.dateTime(minYear: 2000, maxYear: 2022),
@@ -270,7 +270,7 @@ class ProductReviewCard extends StatelessWidget {
                   cardType: CardType.productReview,
                   userId: userId,
                   targetId: productId,
-                  type: CardHeaderTitleType.phone,
+                  type: TargetType.phone,
                 ),
                 10.verticalSpace,
                 ReviewCardBody(

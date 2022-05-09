@@ -391,4 +391,56 @@ class Repository {
       return response.replyId;
     });
   }
+
+  Future<Either<Failure, void>> likePhoneReviewComment(String commentId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.likePhoneReviewComment(commentId);
+    });
+  }
+
+  Future<Either<Failure, void>> unlikePhoneReviewComment(String commentId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.unlikePhoneReviewComment(commentId);
+    });
+  }
+
+  Future<Either<Failure, void>> likeCompanyReviewComment(String commentId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.likeCompanyReviewComment(commentId);
+    });
+  }
+
+  Future<Either<Failure, void>> unlikeCompanyReviewComment(String commentId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.unlikeCompanyReviewComment(commentId);
+    });
+  }
+
+  Future<Either<Failure, void>> likePhoneReviewReply(
+      String commentId, String replyId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.likePhoneReviewReply(commentId, replyId);
+    });
+  }
+
+  Future<Either<Failure, void>> unlikePhoneReviewReply(
+      String commentId, String replyId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.unlikePhoneReviewReply(commentId, replyId);
+    });
+  }
+
+  Future<Either<Failure, void>> likeCompanyReviewReply(
+      String commentId, String replyId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.likeCompanyReviewReply(commentId, replyId);
+    });
+  }
+
+  Future<Either<Failure, void>> unlikeCompanyReviewReply(
+      String commentId, String replyId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.unlikeCompanyReviewReply(commentId, replyId);
+    });
+  }
 }

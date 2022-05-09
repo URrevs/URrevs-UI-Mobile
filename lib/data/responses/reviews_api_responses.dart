@@ -272,3 +272,99 @@ class AddReplyToCompanyReviewCommentResponse extends BaseResponse {
   Map<String, dynamic> toJson() =>
       _$AddReplyToCompanyReviewCommentResponseToJson(this);
 }
+
+@JsonSerializable()
+class LikePhoneReviewCommentResponse extends BaseResponse {
+  LikePhoneReviewCommentResponse({
+    required bool success,
+  }) : super(success: success);
+
+  factory LikePhoneReviewCommentResponse.fromJson(Map<String, Object?> json) =>
+      _$LikePhoneReviewCommentResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$LikePhoneReviewCommentResponseToJson(this);
+}
+
+@JsonSerializable()
+class UnlikePhoneReviewCommentResponse extends BaseResponse {
+  UnlikePhoneReviewCommentResponse({
+    required bool success,
+  }) : super(success: success);
+
+  factory UnlikePhoneReviewCommentResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$UnlikePhoneReviewCommentResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$UnlikePhoneReviewCommentResponseToJson(this);
+}
+
+@JsonSerializable()
+class LikeCompanyReviewCommentResponse extends BaseResponse {
+  LikeCompanyReviewCommentResponse({
+    required bool success,
+  }) : super(success: success);
+
+  factory LikeCompanyReviewCommentResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$LikeCompanyReviewCommentResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$LikeCompanyReviewCommentResponseToJson(this);
+}
+
+@JsonSerializable()
+class UnlikeCompanyReviewCommentResponse extends BaseResponse {
+  UnlikeCompanyReviewCommentResponse({
+    required bool success,
+  }) : super(success: success);
+
+  factory UnlikeCompanyReviewCommentResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$UnlikeCompanyReviewCommentResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$UnlikeCompanyReviewCommentResponseToJson(this);
+}
+
+@JsonSerializable()
+class LikePhoneReviewReplyResponse extends BaseResponse {
+  LikePhoneReviewReplyResponse({
+    required bool success,
+  }) : super(success: success);
+
+  factory LikePhoneReviewReplyResponse.fromJson(Map<String, Object?> json) =>
+      _$LikePhoneReviewReplyResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$LikePhoneReviewReplyResponseToJson(this);
+}
+
+@JsonSerializable()
+class UnlikePhoneReviewReplyResponse extends BaseResponse {
+  UnlikePhoneReviewReplyResponse({
+    required bool success,
+  }) : super(success: success);
+
+  factory UnlikePhoneReviewReplyResponse.fromJson(Map<String, Object?> json) =>
+      _$UnlikePhoneReviewReplyResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$UnlikePhoneReviewReplyResponseToJson(this);
+}
+
+@JsonSerializable()
+class LikeCompanyReviewReplyResponse extends BaseResponse {
+  LikeCompanyReviewReplyResponse({
+    required bool success,
+  }) : super(success: success);
+
+  factory LikeCompanyReviewReplyResponse.fromJson(Map<String, Object?> json) =>
+      _$LikeCompanyReviewReplyResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$LikeCompanyReviewReplyResponseToJson(this);
+}
+
+@JsonSerializable()
+class UnlikeCompanyReviewReplyResponse extends BaseResponse {
+  UnlikeCompanyReviewReplyResponse({
+    required bool success,
+  }) : super(success: success);
+
+  factory UnlikeCompanyReviewReplyResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$UnlikeCompanyReviewReplyResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$UnlikeCompanyReviewReplyResponseToJson(this);
+}

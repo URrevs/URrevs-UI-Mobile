@@ -35,18 +35,26 @@ class GetReviewsOnCertainPhoneProviderParams extends BaseProviderParams {
   GetReviewsOnCertainPhoneProviderParams({
     required this.phoneId,
   });
+
+  @override
+  List<Object?> get props => [providerId, phoneId];
 }
 
-class LikePostProviderParams extends Equatable {
-  final String postId;
+class LikeProviderParams extends Equatable {
+  final String socialItemId;
+  final String? replyParentId;
   final PostType postType;
-  const LikePostProviderParams({
-    required this.postId,
+  final InteractionType? interactionType;
+  const LikeProviderParams({
+    required this.socialItemId,
+    required this.replyParentId,
     required this.postType,
+    required this.interactionType,
   });
 
   @override
-  List<Object?> get props => [postId, postType];
+  List<Object?> get props =>
+      [socialItemId, replyParentId, postType, interactionType];
 }
 
 class GetCommentsProviderParams extends BaseProviderParams {
@@ -58,19 +66,13 @@ class GetCommentsProviderParams extends BaseProviderParams {
   });
 
   @override
-  List<Object?> get props => [postId, postType];
+  List<Object?> get props => [postId, postType, providerId];
 }
 
 class AddCommentProviderParams extends BaseProviderParams {
   AddCommentProviderParams();
-
-  @override
-  List<Object?> get props => [];
 }
 
 class AddReviewReplyProviderParams extends BaseProviderParams {
   AddReviewReplyProviderParams();
-
-  @override
-  List<Object?> get props => [];
 }

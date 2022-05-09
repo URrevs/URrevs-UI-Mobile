@@ -65,7 +65,7 @@ class QuestionCard extends StatelessWidget {
 
   final String targetId;
 
-  final CardHeaderTitleType cardHeaderTitleType;
+  final TargetType cardHeaderTitleType;
 
   const QuestionCard({
     Key? key,
@@ -97,7 +97,7 @@ class QuestionCard extends StatelessWidget {
         questionId: DummyDataManager.randomInt.toString(),
         userId: DummyDataManager.randomInt.toString(),
         targetId: DummyDataManager.randomInt.toString(),
-        cardHeaderTitleType: CardHeaderTitleType.phone,
+        cardHeaderTitleType: TargetType.phone,
         postedDate: DummyDataManager.postedDate,
         authorName: DummyDataManager.authorName,
         imageUrl: DummyDataManager.imageUrl,
@@ -119,7 +119,7 @@ class QuestionCard extends StatelessWidget {
     String? questionId,
     String? userId,
     String? targetId,
-    CardHeaderTitleType? cardHeaderTitleType,
+    TargetType? cardHeaderTitleType,
     String? imageUrl,
     String? authorName,
     String? targetName,

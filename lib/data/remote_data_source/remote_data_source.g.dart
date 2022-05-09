@@ -624,6 +624,150 @@ class _RemoteDataSource implements RemoteDataSource {
     return value;
   }
 
+  @override
+  Future<LikePhoneReviewCommentResponse> likePhoneReviewComment(
+      commentId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<LikePhoneReviewCommentResponse>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(
+                    _dio.options, '/reviews/phone/comments/${commentId}/like',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = LikePhoneReviewCommentResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<UnlikePhoneReviewCommentResponse> unlikePhoneReviewComment(
+      commentId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<UnlikePhoneReviewCommentResponse>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(
+                    _dio.options, '/reviews/phone/comments/${commentId}/unlike',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = UnlikePhoneReviewCommentResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<LikeCompanyReviewCommentResponse> likeCompanyReviewComment(
+      commentId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<LikeCompanyReviewCommentResponse>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(
+                    _dio.options, '/reviews/company/comments/${commentId}/like',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = LikeCompanyReviewCommentResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<UnlikeCompanyReviewCommentResponse> unlikeCompanyReviewComment(
+      commentId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<UnlikeCompanyReviewCommentResponse>(Options(
+                method: 'POST', headers: _headers, extra: _extra)
+            .compose(
+                _dio.options, '/reviews/company/comments/${commentId}/unlike',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = UnlikeCompanyReviewCommentResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<LikePhoneReviewReplyResponse> likePhoneReviewReply(
+      commentId, replyId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<LikePhoneReviewReplyResponse>(Options(
+                method: 'POST', headers: _headers, extra: _extra)
+            .compose(_dio.options,
+                '/reviews/phone/comments/${commentId}/replies/${replyId}/like',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = LikePhoneReviewReplyResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<UnlikePhoneReviewReplyResponse> unlikePhoneReviewReply(
+      commentId, replyId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<
+        UnlikePhoneReviewReplyResponse>(Options(
+            method: 'POST', headers: _headers, extra: _extra)
+        .compose(_dio.options,
+            '/reviews/phone/comments/${commentId}/replies/${replyId}/unlike',
+            queryParameters: queryParameters, data: _data)
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = UnlikePhoneReviewReplyResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<LikeCompanyReviewReplyResponse> likeCompanyReviewReply(
+      commentId, replyId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<
+        LikeCompanyReviewReplyResponse>(Options(
+            method: 'POST', headers: _headers, extra: _extra)
+        .compose(_dio.options,
+            '/reviews/company/comments/${commentId}/replies/${replyId}/like',
+            queryParameters: queryParameters, data: _data)
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = LikeCompanyReviewReplyResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<UnlikeCompanyReviewReplyResponse> unlikeCompanyReviewReply(
+      commentId, replyId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<
+        UnlikeCompanyReviewReplyResponse>(Options(
+            method: 'POST', headers: _headers, extra: _extra)
+        .compose(_dio.options,
+            '/reviews/company/comments/${commentId}/replies/${replyId}/unlike',
+            queryParameters: queryParameters, data: _data)
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = UnlikeCompanyReviewReplyResponse.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

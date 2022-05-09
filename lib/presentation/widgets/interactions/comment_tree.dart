@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/domain/models/comment.dart';
 import 'package:urrevs_ui_mobile/domain/models/reply.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_button_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/user_profile_screen.dart';
@@ -26,12 +27,14 @@ class CommentTree extends StatefulWidget {
     required this.replies,
     required this.liked,
     required this.onPressingReply,
+    required this.parentPostType,
   }) : super(key: key);
 
   CommentTree.fromComment(
     Comment comment, {
     Key? key,
     required this.onPressingReply,
+    required this.parentPostType,
   })  : imageUrl = comment.photo,
         authorName = comment.userName,
         userId = comment.userId,
@@ -53,6 +56,7 @@ class CommentTree extends StatefulWidget {
   final List<ReplyModel> replies;
   final String? commentId;
   final VoidCallback onPressingReply;
+  final PostType parentPostType;
 
   static CommentTree get dummyInstance => CommentTree(
         onPressingReply: () {},
@@ -65,6 +69,7 @@ class CommentTree extends StatefulWidget {
         likeCount: DummyDataManager.randomInt,
         datePosted: DummyDataManager.postedDate,
         liked: DummyDataManager.randomBool,
+        parentPostType: PostType.phoneReview,
         replies: [],
       );
 
@@ -120,6 +125,11 @@ class _CommentTreeState extends State<CommentTree> {
                   liked: widget.liked,
                   firstButtonType: InteractionFooterFirstButtonText.like,
                   posting: widget.commentId == null,
+                  interactionId: widget.commentId,
+                  interactionType: InteractionType.comment,
+                  parentPostType: widget.parentPostType,
+                  replyParentId: null,
+                  userId: widget.userId,
                 ),
                 if (!_expandReplies && widget.replies.isNotEmpty) ...[
                   VerticalSpacesBetween.interactionBodyAndShowRepliesButton,
@@ -141,6 +151,11 @@ class _CommentTreeState extends State<CommentTree> {
                       datePosted: widget.replies[i].createdAt,
                       liked: widget.replies[i].liked,
                       onPressingReply: widget.onPressingReply,
+                      interactionId: widget.replies[i].id,
+                      parentPostType: widget.parentPostType,
+                      userId: widget.userId,
+                      // comment id cannot be null if there is a reply passed to the comment
+                      replyCommentId: widget.commentId!,
                     ),
                     if (i != widget.replies.length - 1)
                       VerticalSpacesBetween.replies,

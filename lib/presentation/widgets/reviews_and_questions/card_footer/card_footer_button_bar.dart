@@ -9,6 +9,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/like_state.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_footer/card_footer_button.dart';
 
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
@@ -22,8 +23,8 @@ class CardFooterButtonBar extends ConsumerStatefulWidget {
     required this.onLike,
     required this.onComment,
     required this.onShare,
-    this.postId = 'change_it',
-    this.postType = PostType.phoneReview,
+    required this.postId,
+    required this.postType,
   }) : super(key: key);
 
   /// Is the review liked by the current logged in user or not.
@@ -52,21 +53,30 @@ class CardFooterButtonBar extends ConsumerStatefulWidget {
 }
 
 class _CardFooterButtonBarState extends ConsumerState<CardFooterButtonBar> {
-  late final LikePostProviderParams _providerParams =
-      LikePostProviderParams(postId: widget.postId, postType: widget.postType);
+  late final LikeProviderParams _providerParams = LikeProviderParams(
+    socialItemId: widget.postId,
+    postType: widget.postType,
+    interactionType: null,
+    replyParentId: null,
+  );
 
   @override
   void initState() {
     super.initState();
     SchedulerBinding.instance!.addPostFrameCallback((_) {
       ref
-          .read(likePostProvider(_providerParams).notifier)
+          .read(likeProvider(_providerParams).notifier)
           .setLikedState(widget.liked);
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    ref.addErrorListener(
+      provider: likeProvider(_providerParams),
+      context: context,
+    );
+
     String secondText = widget.useInReviewCard
         ? LocaleKeys.comment.tr()
         : LocaleKeys.answer.tr();
@@ -94,7 +104,8 @@ class _CardFooterButtonBarState extends ConsumerState<CardFooterButtonBar> {
   }
 
   Widget _buildLikeButton() {
-    bool liked = ref.watch(likePostProvider(_providerParams));
+    final state = ref.watch(likeProvider(_providerParams));
+    bool liked = state is LikeLoadedState && state.liked;
 
     String likedText = liked ? LocaleKeys.liked.tr() : LocaleKeys.like.tr();
 
@@ -119,7 +130,7 @@ class _CardFooterButtonBarState extends ConsumerState<CardFooterButtonBar> {
       text: firstText,
       liked: liked,
       onPressed: () {
-        ref.read(likePostProvider(_providerParams).notifier).toggleLikeState();
+        ref.read(likeProvider(_providerParams).notifier).toggleLikeState();
       },
     );
   }

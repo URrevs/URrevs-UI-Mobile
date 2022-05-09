@@ -10,6 +10,12 @@ enum CardType {
 
 enum ReviewsFilter { phones, companies }
 
-enum PostType { phoneReview, companyReview, question }
+enum PostType {
+  phoneReview,
+  companyReview,
+  question
+} //phone question - company question
 
-enum CardHeaderTitleType { phone, company }
+enum TargetType { phone, company }
+
+enum InteractionType { comment, answer, reply }

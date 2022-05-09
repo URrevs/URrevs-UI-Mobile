@@ -35,17 +35,17 @@ class CardHeaderTitle extends StatelessWidget {
 
   final String targetId;
 
-  final CardHeaderTitleType type;
+  final TargetType type;
 
   void _onPressingTarget(BuildContext context) {
     switch (type) {
-      case CardHeaderTitleType.company:
+      case TargetType.company:
         Navigator.of(context).pushNamed(
           CompanyProfileScreen.routeName,
           arguments: CompanyProfileScreenArgs(companyId: targetId),
         );
         break;
-      case CardHeaderTitleType.phone:
+      case TargetType.phone:
         Navigator.of(context).pushNamed(
           ProductProfileScreen.routeName,
           arguments: ProductProfileScreenArgs(phoneId: targetId),

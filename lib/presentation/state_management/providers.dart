@@ -17,7 +17,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/search_
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/get_the_profile_of_another_user.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/give_points_to_user_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/search_notifiers/search_products_and_companies_notifier.dart';
-import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/simple_state_notifiers/like_post_notifier.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/simple_state_notifiers/like_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/theme_mode_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/update_targets_from_source_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
@@ -41,6 +41,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_st
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_reviews_on_certain_phone_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_user_company_reviews_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_user_phone_reviews_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/like_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/add_new_recent_search_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/delete_recent_search_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/get_my_recent_searches_state.dart';
@@ -200,9 +201,14 @@ final getReviewsOnCertainPhoneProvider = StateNotifierProvider.autoDispose
         (ref, params) =>
             GetReviewsOnCertainPhoneNotifier(phoneId: params.phoneId));
 
-final likePostProvider = StateNotifierProvider.autoDispose
-    .family<LikePostNotifier, bool, LikePostProviderParams>((ref, params) {
-  return LikePostNotifier(postId: params.postId, postType: params.postType);
+final likeProvider = StateNotifierProvider.autoDispose
+    .family<LikeNotifier, LikeState, LikeProviderParams>((ref, params) {
+  return LikeNotifier(
+    socialItemId: params.socialItemId,
+    replyParentId: params.replyParentId,
+    postType: params.postType,
+    interactionType: params.interactionType,
+  );
 });
 
 final getCommentsProvider = StateNotifierProvider.autoDispose

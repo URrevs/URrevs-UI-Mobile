@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/user_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
@@ -15,6 +16,10 @@ class Reply extends StatelessWidget {
   final DateTime datePosted;
   final bool liked;
   final VoidCallback onPressingReply;
+  final String interactionId;
+  final String replyCommentId;
+  final PostType parentPostType;
+  final String userId;
 
   const Reply({
     Key? key,
@@ -25,6 +30,10 @@ class Reply extends StatelessWidget {
     required this.datePosted,
     required this.liked,
     required this.onPressingReply,
+    required this.interactionId,
+    required this.parentPostType,
+    required this.replyCommentId,
+    required this.userId,
   }) : super(key: key);
 
   static Reply get dummyInstance => Reply(
@@ -35,6 +44,10 @@ class Reply extends StatelessWidget {
         datePosted: DummyDataManager.postedDate,
         liked: DummyDataManager.randomBool,
         onPressingReply: () {},
+        interactionId: DummyDataManager.randomInt.toString(),
+        userId: DummyDataManager.randomInt.toString(),
+        parentPostType: PostType.phoneReview,
+        replyCommentId: DummyDataManager.randomInt.toString(),
       );
 
   @override
@@ -72,6 +85,11 @@ class Reply extends StatelessWidget {
                   maxWidth: constraints.maxWidth - 16.w,
                   liked: liked,
                   firstButtonType: InteractionFooterFirstButtonText.like,
+                  interactionId: interactionId,
+                  interactionType: InteractionType.reply,
+                  parentPostType: parentPostType,
+                  replyParentId: replyCommentId,
+                  userId: userId,
                 ),
               ],
             );

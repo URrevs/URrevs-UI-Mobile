@@ -4,9 +4,11 @@ import 'package:urrevs_ui_mobile/domain/models/comment.dart';
 
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_button_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/empty_list_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/comment_tree.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
@@ -15,14 +17,17 @@ class CommentsList extends StatelessWidget {
     Key? key,
     required this.comments,
     required this.onPressingReplyList,
+    required this.parentPostType,
   }) : super(key: key);
 
   final List<Comment> comments;
   final List<VoidCallback> onPressingReplyList;
+  final PostType parentPostType;
 
   static CommentsList get dummyInstance => CommentsList(
         comments: [],
         onPressingReplyList: [],
+        parentPostType: PostType.phoneReview,
       );
 
   @override
@@ -34,6 +39,7 @@ class CommentsList extends StatelessWidget {
           CommentTree.fromComment(
             comments[i],
             onPressingReply: onPressingReplyList[i],
+            parentPostType: parentPostType,
           ),
           if (i != comments.length - 1) VerticalSpacesBetween.interactionTrees,
         ],

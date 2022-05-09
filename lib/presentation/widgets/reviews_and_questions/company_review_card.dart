@@ -252,7 +252,7 @@ class CompanyReviewCard extends StatelessWidget {
                   cardType: CardType.companyReview,
                   userId: userId,
                   targetId: companyId,
-                  type: CardHeaderTitleType.company,
+                  type: TargetType.company,
                 ),
                 10.verticalSpace,
                 ReviewCardBody(

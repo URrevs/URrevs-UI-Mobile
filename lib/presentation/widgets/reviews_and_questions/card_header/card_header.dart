@@ -48,7 +48,7 @@ class CardHeader extends StatelessWidget {
 
   final String targetId;
 
-  final CardHeaderTitleType type;
+  final TargetType type;
 
   @override
   Widget build(BuildContext context) {

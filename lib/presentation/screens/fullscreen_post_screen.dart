@@ -27,6 +27,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_st
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_phone_review_state.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/empty_list_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/vertical_list_error_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answers_list.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/comment_tree.dart';
@@ -195,8 +196,10 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
   void initState() {
     super.initState();
     print(widget.screenArgs.postId);
-    _getPost();
-    _getComments();
+    Future.delayed(Duration.zero, () {
+      _getPost();
+      _getComments();
+    });
     if (widget.screenArgs.focusOnTextField) {
       focusNode.requestFocus();
     }
@@ -279,6 +282,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
         replies: [], // not shown
         liked: false, // not shown
         onPressingReply: () {},
+        parentPostType: widget.screenArgs.postType,
       );
     } else {
       return SizedBox();
@@ -315,8 +319,11 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
         showSnackBarWithoutActionAtError(state: next, context: context);
       }
     });
+    final state = ref.watch(getCommentsProvider(_commentsProviderParams));
+    if (state is LoadedState && _comments.isEmpty) return EmptyListWidget();
     return CommentsList(
       comments: _comments,
+      parentPostType: widget.screenArgs.postType,
       onPressingReplyList: List.generate(_comments.length, (i) {
         return () {
           _idOfCommentRepliedTo = _comments[i].id;

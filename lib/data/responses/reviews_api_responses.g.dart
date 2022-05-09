@@ -262,3 +262,99 @@ Map<String, dynamic> _$AddReplyToCompanyReviewCommentResponseToJson(
       'success': instance.success,
       'reply': instance.replyId,
     };
+
+LikePhoneReviewCommentResponse _$LikePhoneReviewCommentResponseFromJson(
+        Map<String, dynamic> json) =>
+    LikePhoneReviewCommentResponse(
+      success: json['success'] as bool,
+    );
+
+Map<String, dynamic> _$LikePhoneReviewCommentResponseToJson(
+        LikePhoneReviewCommentResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+    };
+
+UnlikePhoneReviewCommentResponse _$UnlikePhoneReviewCommentResponseFromJson(
+        Map<String, dynamic> json) =>
+    UnlikePhoneReviewCommentResponse(
+      success: json['success'] as bool,
+    );
+
+Map<String, dynamic> _$UnlikePhoneReviewCommentResponseToJson(
+        UnlikePhoneReviewCommentResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+    };
+
+LikeCompanyReviewCommentResponse _$LikeCompanyReviewCommentResponseFromJson(
+        Map<String, dynamic> json) =>
+    LikeCompanyReviewCommentResponse(
+      success: json['success'] as bool,
+    );
+
+Map<String, dynamic> _$LikeCompanyReviewCommentResponseToJson(
+        LikeCompanyReviewCommentResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+    };
+
+UnlikeCompanyReviewCommentResponse _$UnlikeCompanyReviewCommentResponseFromJson(
+        Map<String, dynamic> json) =>
+    UnlikeCompanyReviewCommentResponse(
+      success: json['success'] as bool,
+    );
+
+Map<String, dynamic> _$UnlikeCompanyReviewCommentResponseToJson(
+        UnlikeCompanyReviewCommentResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+    };
+
+LikePhoneReviewReplyResponse _$LikePhoneReviewReplyResponseFromJson(
+        Map<String, dynamic> json) =>
+    LikePhoneReviewReplyResponse(
+      success: json['success'] as bool,
+    );
+
+Map<String, dynamic> _$LikePhoneReviewReplyResponseToJson(
+        LikePhoneReviewReplyResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+    };
+
+UnlikePhoneReviewReplyResponse _$UnlikePhoneReviewReplyResponseFromJson(
+        Map<String, dynamic> json) =>
+    UnlikePhoneReviewReplyResponse(
+      success: json['success'] as bool,
+    );
+
+Map<String, dynamic> _$UnlikePhoneReviewReplyResponseToJson(
+        UnlikePhoneReviewReplyResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+    };
+
+LikeCompanyReviewReplyResponse _$LikeCompanyReviewReplyResponseFromJson(
+        Map<String, dynamic> json) =>
+    LikeCompanyReviewReplyResponse(
+      success: json['success'] as bool,
+    );
+
+Map<String, dynamic> _$LikeCompanyReviewReplyResponseToJson(
+        LikeCompanyReviewReplyResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+    };
+
+UnlikeCompanyReviewReplyResponse _$UnlikeCompanyReviewReplyResponseFromJson(
+        Map<String, dynamic> json) =>
+    UnlikeCompanyReviewReplyResponse(
+      success: json['success'] as bool,
+    );
+
+Map<String, dynamic> _$UnlikeCompanyReviewReplyResponseToJson(
+        UnlikeCompanyReviewReplyResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+    };

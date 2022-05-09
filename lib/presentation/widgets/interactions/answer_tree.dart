@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_button_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
@@ -17,6 +18,9 @@ import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 class AnswerTree extends StatefulWidget {
   const AnswerTree({
     Key? key,
+    required this.answerId,
+    required this.userId,
+    required this.parentPostType,
     required this.imageUrl,
     required this.authorName,
     required this.usedSinceDate,
@@ -35,6 +39,9 @@ class AnswerTree extends StatefulWidget {
         ),
         super(key: key);
 
+  final String answerId;
+  final String userId;
+  final PostType parentPostType;
   final String imageUrl;
   final String authorName;
   final DateTime usedSinceDate;
@@ -61,6 +68,9 @@ class AnswerTree extends StatefulWidget {
         isQuestionAuthor: DummyDataManager.randomBool,
         inQuestionCard: false,
         replies: DummyDataManager.replies,
+        answerId: DummyDataManager.randomInt.toString(),
+        userId: DummyDataManager.randomInt.toString(),
+        parentPostType: PostType.question,
       );
 
   static AnswerTree get dummyInstanceInQuestionCard => AnswerTree(
@@ -77,6 +87,9 @@ class AnswerTree extends StatefulWidget {
         inQuestionCard: true,
         replies: DummyDataManager.replies,
         onTappingAnswerInCard: () {},
+        answerId: DummyDataManager.randomInt.toString(),
+        userId: DummyDataManager.randomInt.toString(),
+        parentPostType: PostType.question,
       );
 
   AnswerTree copyWith({
@@ -92,6 +105,9 @@ class AnswerTree extends StatefulWidget {
     bool? inQuestionCard,
     List<Reply>? replies,
     VoidCallback? onTappingAnswerInCard,
+    PostType? parentPostType,
+    String? answerId,
+    String? userId,
   }) {
     return AnswerTree(
       imageUrl: imageUrl ?? this.imageUrl,
@@ -107,6 +123,9 @@ class AnswerTree extends StatefulWidget {
       replies: replies ?? this.replies,
       onTappingAnswerInCard:
           onTappingAnswerInCard ?? this.onTappingAnswerInCard,
+      parentPostType: parentPostType ?? this.parentPostType,
+      answerId: answerId ?? this.answerId,
+      userId: userId ?? this.userId,
     );
   }
 
@@ -177,6 +196,11 @@ class _AnswerTreeState extends State<AnswerTree> {
                   maxWidth: constraints.maxWidth - 16.w,
                   liked: widget.liked,
                   firstButtonType: firstButtonType,
+                  interactionId: widget.answerId,
+                  replyParentId: null,
+                  interactionType: InteractionType.answer,
+                  parentPostType: widget.parentPostType,
+                  userId: widget.userId,
                 ),
                 if (!widget.inQuestionCard && !_expandReplies) ...[
                   VerticalSpacesBetween.interactionBodyAndShowRepliesButton,

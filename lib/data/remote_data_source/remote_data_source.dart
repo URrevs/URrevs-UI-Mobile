@@ -215,4 +215,48 @@ abstract class RemoteDataSource {
     @Path() String commentId,
     @Body() AddReplyToCompanyReviewCommentRequest request,
   );
+
+  @POST('/reviews/phone/comments/{commentId}/like')
+  Future<LikePhoneReviewCommentResponse> likePhoneReviewComment(
+    @Path() String commentId,
+  );
+
+  @POST('/reviews/phone/comments/{commentId}/unlike')
+  Future<UnlikePhoneReviewCommentResponse> unlikePhoneReviewComment(
+    @Path() String commentId,
+  );
+
+  @POST('/reviews/company/comments/{commentId}/like')
+  Future<LikeCompanyReviewCommentResponse> likeCompanyReviewComment(
+    @Path() String commentId,
+  );
+
+  @POST('/reviews/company/comments/{commentId}/unlike')
+  Future<UnlikeCompanyReviewCommentResponse> unlikeCompanyReviewComment(
+    @Path() String commentId,
+  );
+
+  @POST('/reviews/phone/comments/{commentId}/replies/{replyId}/like')
+  Future<LikePhoneReviewReplyResponse> likePhoneReviewReply(
+    @Path() String commentId,
+    @Path() String replyId,
+  );
+
+  @POST('/reviews/phone/comments/{commentId}/replies/{replyId}/unlike')
+  Future<UnlikePhoneReviewReplyResponse> unlikePhoneReviewReply(
+    @Path() String commentId,
+    @Path() String replyId,
+  );
+
+  @POST('/reviews/company/comments/{commentId}/replies/{replyId}/like')
+  Future<LikeCompanyReviewReplyResponse> likeCompanyReviewReply(
+    @Path() String commentId,
+    @Path() String replyId,
+  );
+
+  @POST('/reviews/company/comments/{commentId}/replies/{replyId}/unlike')
+  Future<UnlikeCompanyReviewReplyResponse> unlikeCompanyReviewReply(
+    @Path() String commentId,
+    @Path() String replyId,
+  );
 }
