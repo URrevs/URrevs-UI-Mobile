@@ -221,6 +221,9 @@ abstract class  LocaleKeys {
   static const question = 'question';
   static const productNameOrCompanyNameErrorMsg = 'productNameOrCompanyNameErrorMsg';
   static const enterYourQuestionErrorMsg = 'enterYourQuestionErrorMsg';
-  static const askedQuestionsAboutMyproducts = 'askedQuestionsAboutMyproducts';
+  static const usersRanking = 'usersRanking';
+  static const yourRanking = 'yourRanking';
+  static const howToCollectPoints = 'howToCollectPoints';
+  static const helpOthersToCollectPoints = 'helpOthersToCollectPoints';
 
 }

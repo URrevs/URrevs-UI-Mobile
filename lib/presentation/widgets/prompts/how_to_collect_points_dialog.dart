@@ -9,8 +9,8 @@ import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart'
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
-class HowToWinDialog extends StatelessWidget {
-  const HowToWinDialog({
+class HowToCollectPointsDialog extends StatelessWidget {
+  const HowToCollectPointsDialog({
     Key? key,
   }) : super(key: key);
 
@@ -28,13 +28,6 @@ class HowToWinDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(
-        LocaleKeys.howToWinPromptTitle.tr(),
-        style: TextStyleManager.s16w700.copyWith(
-          color: ColorManager.black,
-          fontFamily: FontConstants.tajawal,
-        ),
-      ),
       scrollable: true,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppRadius.interactionBodyRadius),
@@ -61,8 +54,6 @@ class HowToWinDialog extends StatelessWidget {
                     ..onTap = () => launchGooglePlay(),
                 ),
                 TextSpan(text: ' '),
-                TextSpan(text: '\n\n'),
-                TextSpan(text: LocaleKeys.howToWinPrompt2.tr()),
               ],
             ),
           )),

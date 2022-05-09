@@ -219,5 +219,8 @@
   "question": "Question",
   "productNameOrCompanyNameErrorMsg": "Product's name or company's name myst be entered.",
   "enterYourQuestionErrorMsg": "Your question must be entered.",
-  "askedQuestionsAboutMyproducts": "Asked questions about my products"
+  "usersRanking": "Users ranking:",
+  "yourRanking": "Your ranking:",
+  "howToCollectPoints": "How to collect points",
+  "helpOthersToCollectPoints": "Help others to collect as many points as possible"
 }

@@ -219,5 +219,8 @@
   "question": "السؤال",
   "productNameOrCompanyNameErrorMsg": "يجب ادخال اسم المنتج أو الشركة.",
   "enterYourQuestionErrorMsg": "يجب ادخال سؤالك.",
-  "askedQuestionsAboutMyproducts": "الأسئلة المطروحة علي منتجاتي"
+  "usersRanking": "ترتيب المستخدمين:",
+  "yourRanking": "ترتيبك:",
+  "howToCollectPoints": "كيف تجمع النقاط",
+  "helpOthersToCollectPoints": "ساعد الاخرين لتجمع اكبر عدد من النقاط"
 }

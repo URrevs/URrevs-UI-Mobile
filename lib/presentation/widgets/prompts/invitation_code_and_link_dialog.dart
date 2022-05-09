@@ -17,14 +17,13 @@ class InvitationCodeDialog extends StatelessWidget {
   const InvitationCodeDialog({
     Key? key,
     required this.invitationCode,
-    required this.invitationPromptCtl,
   }) : super(key: key);
 
-  /// the controller that holds the invitation code, you should the value of the invitation code through invitationPromptCtl.text = 'your invitation code'.
-  final TextEditingController invitationPromptCtl;
+  /// the controller that holds the invitation code, you should set the value of the invitation code through invitationPromptCtl.text = 'your invitation code'.
   final String invitationCode;
   @override
   Widget build(BuildContext context) {
+    TextEditingController invitationPromptCtl = TextEditingController();
     invitationPromptCtl.text = invitationCode;
     return CustomAlertDialog(
         title: LocaleKeys.yourInvitationCode.tr() + ':',

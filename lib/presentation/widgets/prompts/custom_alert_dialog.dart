@@ -42,7 +42,7 @@ class CustomAlertDialog extends StatelessWidget {
         ),
       ):null,
       insetPadding: EdgeInsets.all(10.sp),
-      content: content,
+      content: SingleChildScrollView(child: content),
       actions: actions,
     );
   }
