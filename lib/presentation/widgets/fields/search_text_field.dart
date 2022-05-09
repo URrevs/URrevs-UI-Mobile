@@ -13,6 +13,7 @@ class SearchTextField extends StatelessWidget {
     required this.searchCtl,
     required this.fillColor,
     required this.onChange,
+    required this.hintText,
     this.errorMsg = '',
     this.hasErrorMsg = false,
   }) : super(key: key);
@@ -21,6 +22,7 @@ class SearchTextField extends StatelessWidget {
   final Color fillColor;
   final bool hasErrorMsg;
   final String errorMsg;
+  final String hintText;
   final VoidCallback onChange;
   @override
   Widget build(BuildContext context) {
@@ -47,7 +49,7 @@ class SearchTextField extends StatelessWidget {
           size: 29.sp,
         ),
         suffixIconColor: ColorManager.black,
-        hintText: LocaleKeys.writeProductName.tr(),
+        hintText: hintText,
         hintStyle: TextStyleManager.s16w300.copyWith(
           color: ColorManager.black,
         ),

@@ -115,6 +115,7 @@ class _PostingReviewSubscreenState extends State<PostingReviewSubscreen> {
               searchCtl: productNameController,
               fillColor: ColorManager.textFieldGrey,
               hasErrorMsg: true,
+              hintText: LocaleKeys.writeProductName.tr(),
               errorMsg: LocaleKeys.productNameErrorMsg.tr(),
               onChange: onProductNameChanged,
             ),
