@@ -299,6 +299,61 @@ Map<String, dynamic> _$PhoneReviewSubResponseToJson(
       'liked': instance.liked,
     };
 
+PhoneReviewForAddPhoneReviewSubResponse
+    _$PhoneReviewForAddPhoneReviewSubResponseFromJson(
+            Map<String, dynamic> json) =>
+        PhoneReviewForAddPhoneReviewSubResponse(
+          id: json['_id'] as String,
+          type: json['type'] as String,
+          phoneId: json['phoneId'] as String,
+          phoneName: json['phoneName'] as String,
+          userId: json['userId'] as String,
+          userName: json['userName'] as String,
+          photo: json['picture'] as String?,
+          createdAt: DateTime.parse(json['createdAt'] as String),
+          ownedAt: DateTime.parse(json['ownedAt'] as String),
+          views: json['views'] as int,
+          likes: json['likes'] as int,
+          commentsCount: json['commentsCount'] as int,
+          shares: json['shares'] as int,
+          generalRating: (json['generalRating'] as num).toDouble(),
+          uiRating: json['uiRating'] as int,
+          manufacturingQuality: json['manufacturingQuality'] as int,
+          valueForMoney: json['valueForMoney'] as int,
+          camera: json['camera'] as int,
+          callQuality: json['callQuality'] as int,
+          battery: json['battery'] as int,
+          pros: json['pros'] as String,
+          cons: json['cons'] as String,
+        );
+
+Map<String, dynamic> _$PhoneReviewForAddPhoneReviewSubResponseToJson(
+        PhoneReviewForAddPhoneReviewSubResponse instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'type': instance.type,
+      'phoneId': instance.phoneId,
+      'phoneName': instance.phoneName,
+      'userId': instance.userId,
+      'userName': instance.userName,
+      'picture': instance.photo,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'ownedAt': instance.ownedAt.toIso8601String(),
+      'views': instance.views,
+      'likes': instance.likes,
+      'commentsCount': instance.commentsCount,
+      'shares': instance.shares,
+      'generalRating': instance.generalRating,
+      'uiRating': instance.uiRating,
+      'manufacturingQuality': instance.manufacturingQuality,
+      'valueForMoney': instance.valueForMoney,
+      'camera': instance.camera,
+      'callQuality': instance.callQuality,
+      'battery': instance.battery,
+      'pros': instance.pros,
+      'cons': instance.cons,
+    };
+
 CompanyReviewSubResponse _$CompanyReviewSubResponseFromJson(
         Map<String, dynamic> json) =>
     CompanyReviewSubResponse(

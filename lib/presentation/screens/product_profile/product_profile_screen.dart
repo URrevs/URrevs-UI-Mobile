@@ -17,12 +17,17 @@ import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 class ProductProfileScreenArgs {
   String phoneId;
+  String phoneName;
   ProductProfileScreenArgs({
     required this.phoneId,
+    required this.phoneName,
   });
 
   static ProductProfileScreenArgs get defaultArgs {
-    return ProductProfileScreenArgs(phoneId: '6256a75b5f87fa90093a4bd6');
+    return ProductProfileScreenArgs(
+      phoneId: '6256a75b5f87fa90093a4bd6',
+      phoneName: 'Nokia 7 plus',
+    );
   }
 }
 
@@ -78,7 +83,7 @@ class _ProductProfileScreenState extends ConsumerState<ProductProfileScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this, initialIndex: 0);
+    _tabController = TabController(length: 3, vsync: this, initialIndex: 1);
     _tabController.addListener(() => setState(() {}));
   }
 
@@ -88,7 +93,7 @@ class _ProductProfileScreenState extends ConsumerState<ProductProfileScreen>
       appBar: AppBars.appBarOfProductProfile(
         context: context,
         controller: _tabController,
-        text: 'Nokia 7 plus',
+        text: widget.screenArgs.phoneName,
         imageUrl: ref.watch(userImageUrlProvider),
       ),
       fabLabel: fabLabel,

@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:urrevs_ui_mobile/domain/models/comment.dart';
 
+import 'package:urrevs_ui_mobile/domain/models/comment.dart';
 import 'package:urrevs_ui_mobile/domain/models/company.dart';
 import 'package:urrevs_ui_mobile/domain/models/company_review.dart';
 import 'package:urrevs_ui_mobile/domain/models/info.dart';
@@ -426,6 +426,91 @@ class PhoneReviewSubResponse {
   factory PhoneReviewSubResponse.fromJson(Map<String, Object?> json) =>
       _$PhoneReviewSubResponseFromJson(json);
   Map<String, dynamic> toJson() => _$PhoneReviewSubResponseToJson(this);
+}
+
+@JsonSerializable()
+class PhoneReviewForAddPhoneReviewSubResponse {
+  @JsonKey(name: '_id')
+  String id;
+  String type;
+  String phoneId;
+  String phoneName;
+  String userId;
+  String userName;
+  @JsonKey(name: 'picture')
+  String? photo;
+  DateTime createdAt;
+  DateTime ownedAt;
+  int views;
+  int likes;
+  int commentsCount;
+  int shares;
+  double generalRating;
+  int uiRating;
+  int manufacturingQuality;
+  int valueForMoney;
+  int camera;
+  int callQuality;
+  int battery;
+  String pros;
+  String cons;
+
+  PhoneReviewForAddPhoneReviewSubResponse({
+    required this.id,
+    required this.type,
+    required this.phoneId,
+    required this.phoneName,
+    required this.userId,
+    required this.userName,
+    required this.photo,
+    required this.createdAt,
+    required this.ownedAt,
+    required this.views,
+    required this.likes,
+    required this.commentsCount,
+    required this.shares,
+    required this.generalRating,
+    required this.uiRating,
+    required this.manufacturingQuality,
+    required this.valueForMoney,
+    required this.camera,
+    required this.callQuality,
+    required this.battery,
+    required this.pros,
+    required this.cons,
+  });
+
+  PhoneReview get phoneReviewModel => PhoneReview(
+        id: id,
+        type: type,
+        targetId: phoneId,
+        targetName: phoneName,
+        userId: userId,
+        userName: userName,
+        photo: photo,
+        createdAt: createdAt,
+        views: views,
+        likes: likes,
+        commentsCount: commentsCount,
+        shares: shares,
+        ownedAt: ownedAt,
+        generalRating: generalRating,
+        uiRating: uiRating,
+        manufacturingQuality: manufacturingQuality,
+        valueForMoney: valueForMoney,
+        camera: camera,
+        callQuality: callQuality,
+        battery: battery,
+        pros: pros,
+        cons: cons,
+        liked: false,
+      );
+
+  factory PhoneReviewForAddPhoneReviewSubResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$PhoneReviewForAddPhoneReviewSubResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$PhoneReviewForAddPhoneReviewSubResponseToJson(this);
 }
 
 @JsonSerializable()

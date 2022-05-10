@@ -4,29 +4,66 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/app/extensions.dart';
+import 'package:urrevs_ui_mobile/data/requests/reviews_api_requests.dart';
+import 'package:urrevs_ui_mobile/domain/models/company.dart';
+import 'package:urrevs_ui_mobile/domain/models/search_result.dart';
 import 'package:urrevs_ui_mobile/presentation/presentation_models/posting_review_model.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/posted_reviews_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_phone_manufacturing_company_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/search_state.dart';
+import 'package:urrevs_ui_mobile/presentation/utils/no_glowing_scroll_behavior.dart';
+import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/buttons/grad_button.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/partial_error_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/fields/datepicker_field.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/fields/search_text_field.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/fields/txt_field.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/company_fields_loading.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/suggested_searches_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/referral_code_help_dialog.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 import 'dart:math' as math;
 
+import '../../../../../../domain/failure.dart';
+import '../../../../../state_management/providers.dart';
+import '../../../../../widgets/empty_list_widget.dart';
+
 final productSelectedProvider = StateProvider.autoDispose<bool>((ref) => false);
 
-class PostingReviewSubscreen extends StatefulWidget {
+class PostingReviewSubscreen extends ConsumerStatefulWidget {
   const PostingReviewSubscreen({Key? key}) : super(key: key);
 
   @override
-  State<PostingReviewSubscreen> createState() => _PostingReviewSubscreenState();
+  ConsumerState<PostingReviewSubscreen> createState() =>
+      _PostingReviewSubscreenState();
 }
 
-class _PostingReviewSubscreenState extends State<PostingReviewSubscreen> {
+class _PostingReviewSubscreenState
+    extends ConsumerState<PostingReviewSubscreen> {
+  final SearchProviderParams _searchProviderParams =
+      SearchProviderParams(searchMode: SearchMode.phones);
+  final GetPhoneManufacturingCompanyProviderParams
+      _manufacturingCompanyProviderParams =
+      GetPhoneManufacturingCompanyProviderParams();
+  final AddPhoneReviewProviderParams _addReviewProviderParams =
+      AddPhoneReviewProviderParams();
+
+  SearchResult? _chosenSearchResult;
+
+  DateTime? _chosenDate;
+
+  void _setChosenDate(DateTime date) {
+    setState(() {
+      _chosenDate = date;
+    });
+  }
+
   PostingReviewModel postingReviewModel = PostingReviewModel(
     productName: '',
     companyName: 'Xiaomi',
@@ -99,6 +136,111 @@ class _PostingReviewSubscreenState extends State<PostingReviewSubscreen> {
     }
   }
 
+  void _search() {
+    ref
+        .read(searchProvider(_searchProviderParams).notifier)
+        .search(productNameController.text);
+  }
+
+  void _chooseSearchResult(SearchResult searchResult) {
+    productNameController.text = searchResult.name;
+    setState(() => _chosenSearchResult = searchResult);
+    ref
+        .read(getPhoneManufacturingCompanyProvider(
+                _manufacturingCompanyProviderParams)
+            .notifier)
+        .getPhoneManufacturingCompany(searchResult.id);
+  }
+
+  void _clearChosenSearchResult() {
+    setState(() {
+      _chosenSearchResult = null;
+    });
+    ref
+        .read(getPhoneManufacturingCompanyProvider(
+                _manufacturingCompanyProviderParams)
+            .notifier)
+        .returnToInitialState();
+  }
+
+  Widget _buildSearchResults() {
+    ref.addErrorListener(
+      provider: searchProvider(_searchProviderParams),
+      context: context,
+    );
+    if (_chosenSearchResult != null) {
+      return SizedBox();
+    }
+    final state = ref.watch(searchProvider(_searchProviderParams));
+    if (state is InitialState) {
+      return SizedBox();
+    } else if (state is LoadingState) {
+      return SuggestedSearchesLoading();
+    } else if (state is SearchErrorState) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: 20.h),
+          PartialErrorWidget(
+            onRetry: _search,
+            retryLastRequest: state.failure is RetryFailure,
+          ),
+        ],
+      );
+    }
+    state as SearchLoadedState;
+    if (state.searchResults.isEmpty) {
+      return EmptyListWidget();
+    }
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: 20.h),
+        Container(
+          decoration: BoxDecoration(
+              // boxShadow: [
+              //   BoxShadow(
+              //     color: ColorManager.grey,
+              //     blurRadius: 0.1,
+              //   ),
+              //   BoxShadow(
+              //     color: ColorManager.backgroundGrey,
+              //     spreadRadius: -1,
+              //     blurRadius: 8.0,
+              //     offset: Offset(10, 0),
+              //   ),
+              //   BoxShadow(
+              //     color: ColorManager.backgroundGrey,
+              //     spreadRadius: -1,
+              //     blurRadius: 8.0,
+              //     offset: Offset(-10, 0),
+              //   ),
+              // ],
+              ),
+          child: ScrollConfiguration(
+            behavior: NoGlowingScrollBehaviour(),
+            child: ListView(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              children: [
+                for (var searchResult in state.searchResults)
+                  ListTile(
+                    title: Text(
+                      searchResult.name,
+                      style: TextStyleManager.s16w400.copyWith(
+                        color: ColorManager.black,
+                      ),
+                    ),
+                    onTap: () => _chooseSearchResult(searchResult),
+                  )
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     //bool productSelected = ref.watch(productSelectedProvider);
@@ -112,13 +254,18 @@ class _PostingReviewSubscreenState extends State<PostingReviewSubscreen> {
             Text(LocaleKeys.chooseProduct.tr() + ':',
                 style: TextStyleManager.s18w500),
             SearchTextField(
-              searchCtl: productNameController,
               fillColor: ColorManager.textFieldGrey,
+              searchCtl: productNameController,
               hasErrorMsg: true,
               hintText: LocaleKeys.writeProductName.tr(),
               errorMsg: LocaleKeys.productNameErrorMsg.tr(),
-              onChange: onProductNameChanged,
+              searchProviderParams: _searchProviderParams,
+              readOnly: _chosenSearchResult != null,
+              onClear: _clearChosenSearchResult,
+              checkChosenSearchResult: true,
+              chosenSearchResult: _chosenSearchResult,
             ),
+            _buildSearchResults(),
             SizedBox(height: 20.h),
             Text(
               LocaleKeys.howLongHaveYouOwnedThisProduct.tr(),
@@ -131,6 +278,7 @@ class _PostingReviewSubscreenState extends State<PostingReviewSubscreen> {
               isMonthDatePicker: true,
               hasErrorMsg: true,
               errorMsg: LocaleKeys.purchaseDateErrorMsg.tr(),
+              setChosenDate: _setChosenDate,
             ),
             SizedBox(height: 20.h),
             Text(LocaleKeys.rateOverallExpericence.tr(),
@@ -277,66 +425,7 @@ class _PostingReviewSubscreenState extends State<PostingReviewSubscreen> {
               hasErrorMsg: true,
             ),
             SizedBox(height: 40.h),
-            productSelected
-                ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // rate the manufacturer
-                      Text(LocaleKeys.howDoYouRateTheManufacturer.tr(),
-                          style: TextStyleManager.s18w500),
-                      Center(
-                        child: CustomRatingBar(
-                          onRatingUpdate: (rating) {
-                            FocusScope.of(context).unfocus();
-                            if (!star8) {
-                              setState(() {
-                                //starsPoints++;
-                              });
-                            }
-                            if (rating != 0) {
-                              star8 = true;
-                              postingReviewModel.companyRating = rating.toInt();
-                            }
-                          },
-                        ),
-                      ),
-                      SizedBox(height: 20.h),
-                      // what do you like about the manufacturer
-                      Text(
-                          LocaleKeys.WhatDoYouLikeAbout.tr() +
-                              ' ' +
-                              postingReviewModel.companyName,
-                          style: TextStyleManager.s18w500),
-                      TxtField(
-                        textController: likedAboutCompanyController,
-                        hintText: LocaleKeys.pros.tr(),
-                        keyboardType: TextInputType.text,
-                        fillColor: ColorManager.textFieldGrey,
-                        errorMsg:
-                            LocaleKeys.likedAboutManufacturerErrorMsg.tr(),
-                        hasErrorMsg: true,
-                      ),
-                      SizedBox(height: 20.h),
-                      // what do you hate about the manufacturer
-                      Text(
-                          LocaleKeys.whatDoYouHateAbout.tr() +
-                              ' ' +
-                              postingReviewModel.companyName,
-                          style: TextStyleManager.s18w500),
-                      TxtField(
-                        textController: hatedAboutCompanyController,
-                        hintText: LocaleKeys.cons.tr(),
-                        keyboardType: TextInputType.text,
-                        fillColor: ColorManager.textFieldGrey,
-                        errorMsg:
-                            LocaleKeys.hatedAboutManufacturerErrorMsg.tr(),
-                        hasErrorMsg: true,
-                      ),
-                      SizedBox(height: 20.h),
-                    ],
-                  )
-                : SizedBox(),
-
+            _buildCompanyFields(),
             Row(
               children: [
                 Text(LocaleKeys.enterInvitationCode.tr() + ':',
@@ -386,26 +475,162 @@ class _PostingReviewSubscreenState extends State<PostingReviewSubscreen> {
               ),
             ),
             SizedBox(height: 20.h),
-            GradButton(
-                text: Text(
-                  LocaleKeys.postReview.tr(),
-                  style: TextStyleManager.s18w700,
-                ),
-                icon: Icon(IconsManager.add, size: 28.sp),
-                width: 360.w,
-                reverseIcon: false,
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    // If the form is valid, display a snackbar. In the real world,
-                    // you'd often call a server or save the information in a database.
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Processing Data')),
-                    );
-                  }
-                }),
+            _buildSubmitButton(),
           ],
         ),
       ),
+    );
+  }
+
+  GradButton _buildSubmitButton() {
+    ref.listen(addPhoneReviewProvider(_addReviewProviderParams),
+        (previous, next) {
+      if (next is LoadedState) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('تم النشر بنجاح'),
+            margin: EdgeInsets.fromLTRB(15.w, 5.h, 15.w, 10.h + 50.h),
+            action: SnackBarAction(
+              label: 'رؤية المنشور',
+              onPressed: () {
+                Navigator.of(context).pushNamed(
+                  PostedReviewsScreen.routeName,
+                  arguments: PostedReviewsScreenArgs(userId: null),
+                );
+              },
+            ),
+          ),
+        );
+      }
+    });
+    final state = ref.watch(addPhoneReviewProvider(_addReviewProviderParams));
+    late Widget icon;
+    if (state is LoadingState) {
+      icon = Padding(
+        padding: EdgeInsets.symmetric(horizontal: 6.w),
+        child: Center(
+          child: SizedBox(
+            height: 16.sp,
+            width: 16.sp,
+            child: CircularProgressIndicator(
+              color: ColorManager.white,
+              strokeWidth: 3,
+            ),
+          ),
+        ),
+      );
+    } else {
+      icon = Icon(IconsManager.add, size: 28.sp);
+    }
+    return GradButton(
+        text: Text(
+          LocaleKeys.postReview.tr(),
+          style: TextStyleManager.s18w700,
+        ),
+        icon: icon,
+        width: 360.w,
+        reverseIcon: false,
+        onPressed: () {
+          if (_formKey.currentState!.validate()) {
+            String? refCode = invitationCodeController.text;
+            if (refCode.isEmpty) refCode = null;
+            final companyState = ref.watch(getPhoneManufacturingCompanyProvider(
+                    _manufacturingCompanyProviderParams))
+                as GetPhoneManufacturingCompanyLoadedState;
+            AddPhoneReviewRequest request = AddPhoneReviewRequest(
+              phoneId: _chosenSearchResult!.id,
+              companyId: companyState.company.id,
+              ownedDate: _chosenDate!,
+              generalRating: postingReviewModel.generalRating,
+              uiRating: postingReviewModel.userInterface,
+              manQuality: postingReviewModel.manufacturingQuality,
+              valFMon: postingReviewModel.priceQuality,
+              camera: postingReviewModel.camera,
+              callQuality: postingReviewModel.callsQuality,
+              battery: postingReviewModel.battery,
+              pros: likedAboutProductController.text,
+              cons: hatedAboutProductController.text,
+              ref: refCode,
+              companyRating: postingReviewModel.companyRating,
+              compPros: likedAboutCompanyController.text,
+              compCons: hatedAboutCompanyController.text,
+            );
+            ref
+                .read(addPhoneReviewProvider(_addReviewProviderParams).notifier)
+                .addPhoneReview(request);
+          }
+        });
+  }
+
+  Widget _buildCompanyFields() {
+    final state = ref.watch(getPhoneManufacturingCompanyProvider(
+        _manufacturingCompanyProviderParams));
+    ref.listen(
+        getPhoneManufacturingCompanyProvider(
+            _manufacturingCompanyProviderParams), (previous, next) {
+      if (next is ErrorState) {
+        showSnackBarWithoutActionAtError(state: state, context: context);
+        setState(() => _chosenSearchResult = null);
+        ref
+            .read(searchProvider(_searchProviderParams).notifier)
+            .returnToInitialState();
+      }
+    });
+    if (state is InitialState || state is ErrorState) {
+      return SizedBox();
+    } else if (state is LoadingState) {
+      return CompanyFieldsLoading();
+    }
+    Company company =
+        (state as GetPhoneManufacturingCompanyLoadedState).company;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // rate the manufacturer
+        Text(LocaleKeys.howDoYouRateTheManufacturer.tr(),
+            style: TextStyleManager.s18w500),
+        Center(
+          child: CustomRatingBar(
+            onRatingUpdate: (rating) {
+              FocusScope.of(context).unfocus();
+              if (!star8) {
+                setState(() {
+                  //starsPoints++;
+                });
+              }
+              if (rating != 0) {
+                star8 = true;
+                postingReviewModel.companyRating = rating.toInt();
+              }
+            },
+          ),
+        ),
+        SizedBox(height: 20.h),
+        // what do you like about the manufacturer
+        Text(LocaleKeys.WhatDoYouLikeAbout.tr() + ' ' + company.name,
+            style: TextStyleManager.s18w500),
+        TxtField(
+          textController: likedAboutCompanyController,
+          hintText: LocaleKeys.pros.tr(),
+          keyboardType: TextInputType.text,
+          fillColor: ColorManager.textFieldGrey,
+          errorMsg: LocaleKeys.likedAboutManufacturerErrorMsg.tr(),
+          hasErrorMsg: true,
+        ),
+        SizedBox(height: 20.h),
+        // what do you hate about the manufacturer
+        Text(LocaleKeys.whatDoYouHateAbout.tr() + ' ' + company.name,
+            style: TextStyleManager.s18w500),
+        TxtField(
+          textController: hatedAboutCompanyController,
+          hintText: LocaleKeys.cons.tr(),
+          keyboardType: TextInputType.text,
+          fillColor: ColorManager.textFieldGrey,
+          errorMsg: LocaleKeys.hatedAboutManufacturerErrorMsg.tr(),
+          hasErrorMsg: true,
+        ),
+        SizedBox(height: 20.h),
+      ],
     );
   }
 }

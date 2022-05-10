@@ -2,6 +2,49 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'reviews_api_requests.g.dart';
 
+@JsonSerializable()
+class AddPhoneReviewRequest {
+  String phoneId;
+  String companyId;
+  DateTime ownedDate;
+  int generalRating;
+  int uiRating;
+  int manQuality;
+  int valFMon;
+  int camera;
+  int callQuality;
+  int battery;
+  String pros;
+  String cons;
+  String? ref;
+  int companyRating;
+  String compPros;
+  String compCons;
+
+  AddPhoneReviewRequest({
+    required this.phoneId,
+    required this.companyId,
+    required this.ownedDate,
+    required this.generalRating,
+    required this.uiRating,
+    required this.manQuality,
+    required this.valFMon,
+    required this.camera,
+    required this.callQuality,
+    required this.battery,
+    required this.pros,
+    required this.cons,
+    required this.ref,
+    required this.companyRating,
+    required this.compPros,
+    required this.compCons,
+  });
+
+  factory AddPhoneReviewRequest.fromJson(Map<String, Object?> json) =>
+      _$AddPhoneReviewRequestFromJson(json);
+  Map<String, dynamic> toJson() => _$AddPhoneReviewRequestToJson(this);
+}
+
 class GetPhoneReviewRequest {}
 
 class GetCompanyReviewRequest {}

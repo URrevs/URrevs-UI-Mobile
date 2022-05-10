@@ -16,15 +16,19 @@ import 'package:urrevs_ui_mobile/presentation/screens/product_profile/product_pr
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/delete_recent_search_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/get_my_recent_searches_state.dart';
-import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/search_products_and_companies_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/search_state.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/empty_list_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/fullscreen_error_widget.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/fields/search_text_field.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/recent_searches_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/suggested_searches_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/item_tile.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
+
+import '../resources/enums.dart';
+import '../state_management/providers_parameters.dart';
 
 class SearchScreen extends ConsumerStatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -38,10 +42,17 @@ class SearchScreen extends ConsumerStatefulWidget {
 class _SearchScreenState extends ConsumerState<SearchScreen> {
   FocusNode focusNode = FocusNode();
   final TextEditingController _controller = TextEditingController();
-  Timer? _timer;
+  final SearchProviderParams _searchProviderParams =
+      SearchProviderParams(searchMode: SearchMode.phones);
 
   void _getMyRecentSearches() {
     ref.read(getMyRecentSearchesProvider.notifier).getMyRecentSearches();
+  }
+
+  void _search() {
+    ref
+        .read(searchProvider(_searchProviderParams).notifier)
+        .search(_controller.text);
   }
 
   void _navigateToTargetProfile({
@@ -61,7 +72,10 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     if (searchResult.type == SearchType.phone) {
       Navigator.of(context).pushNamed(
         ProductProfileScreen.routeName,
-        arguments: ProductProfileScreenArgs(phoneId: searchResult.id),
+        arguments: ProductProfileScreenArgs(
+          phoneId: searchResult.id,
+          phoneName: searchResult.name,
+        ),
       );
     } else {
       Navigator.of(context).pushNamed(
@@ -77,36 +91,10 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     ref.read(deleteRecentSearchProvider.notifier).deleteRecentSearch(request);
   }
 
-  void _searchProductsAndCompanies() {
-    ref
-        .read(searchProductsAndCompaiesProvider.notifier)
-        .searchProductsAndCompanies(_controller.text);
-  }
-
-  void _handleTextFieldChange() {
-    _timer?.cancel();
-    if (_controller.text.isNotEmpty) {
-      _timer = Timer(AppDuration.typingThrottling, () {
-        _searchProductsAndCompanies();
-      });
-    } else {
-      ref
-          .read(searchProductsAndCompaiesProvider.notifier)
-          .returnToInitialState();
-    }
-  }
-
   @override
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, _getMyRecentSearches);
-    // _controller.addListener(() {});
-  }
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
   }
 
   @override
@@ -127,7 +115,15 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
             Row(
               children: [
                 Expanded(
-                  child: _buildTextField(),
+                  child: SearchTextField(
+                    checkChosenSearchResult: false,
+                    key: ValueKey(0),
+                    fillColor: ColorManager.textFieldGrey,
+                    hintText: LocaleKeys.searchForAProductOrACompany.tr(),
+                    searchCtl: _controller,
+                    searchProviderParams: _searchProviderParams,
+                    hasErrorMsg: false,
+                  ),
                 ),
                 IconButton(
                   onPressed: () {},
@@ -148,58 +144,14 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     );
   }
 
-  Widget _buildTextField() {
-    final InputBorder inputBorder = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(40.r),
-      borderSide: BorderSide(width: 0.8, color: ColorManager.strokeGrey),
-    );
-    return Container(
-      height: 46.h,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(40.r),
-        boxShadow: [
-          BoxShadow(
-            color: ColorManager.black.withOpacity(0.1),
-            blurRadius: 1,
-            spreadRadius: 1,
-            offset: Offset(0, 2),
-          )
-        ],
-      ),
-      child: TextField(
-        cursorColor: ColorManager.black,
-        controller: _controller,
-        focusNode: focusNode,
-        style: TextStyleManager.s18w500.copyWith(
-          color: ColorManager.black,
-        ),
-        decoration: InputDecoration(
-          hintText: LocaleKeys.searchForAProductOrACompany.tr(),
-          filled: true,
-          fillColor: ColorManager.textFieldGrey,
-          hintStyle: TextStyleManager.s16w300.copyWith(
-                  color: ColorManager.black,
-                ),
-          focusColor: Colors.red,
-          errorBorder: inputBorder,
-          disabledBorder: inputBorder,
-          enabledBorder: inputBorder,
-          focusedBorder: inputBorder.copyWith(
-            borderSide: BorderSide(color: ColorManager.blue),
-          ),
-        ),
-        onChanged: (_) => _handleTextFieldChange(),
-      ),
-    );
-  }
-
   Widget _buildRecentSearches() {
     ref.listen<GetMyRecentSearchesState>(getMyRecentSearchesProvider,
         (previous, next) {
       showSnackBarWithoutActionAtError(state: next, context: context);
     });
-    final suggestedSearchesState = ref.watch(searchProductsAndCompaiesProvider);
-    if (suggestedSearchesState is! SearchProductsAndCompaiesInitialState) {
+    final suggestedSearchesState =
+        ref.watch(searchProvider(_searchProviderParams));
+    if (suggestedSearchesState is! SearchInitialState) {
       return SizedBox();
     }
     final recentSearchesState = ref.watch(getMyRecentSearchesProvider);
@@ -269,21 +221,24 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
 
   Widget _buildSuggestedSearches() {
     ref.addErrorListener(
-      provider: searchProductsAndCompaiesProvider,
+      provider: searchProvider(_searchProviderParams),
       context: context,
     );
-    final state = ref.watch(searchProductsAndCompaiesProvider);
+    final state = ref.watch(searchProvider(_searchProviderParams));
     if (state is InitialState) {
       return SizedBox();
     } else if (state is LoadingState) {
       return SuggestedSearchesLoading();
-    } else if (state is SearchProductsAndCompaiesErrorState) {
+    } else if (state is SearchErrorState) {
       return FullscreenErrorWidget(
-        onRetry: _searchProductsAndCompanies,
+        onRetry: _search,
         retryLastRequest: state.failure is RetryFailure,
       );
     }
-    state as SearchProductsAndCompaiesLoadedState;
+    state as SearchLoadedState;
+    if (state.searchResults.isEmpty) {
+      return EmptyListWidget();
+    }
     return ListView(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),

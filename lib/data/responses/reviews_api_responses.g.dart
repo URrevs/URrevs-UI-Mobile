@@ -6,6 +6,23 @@ part of 'reviews_api_responses.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+AddPhoneReviewResponse _$AddPhoneReviewResponseFromJson(
+        Map<String, dynamic> json) =>
+    AddPhoneReviewResponse(
+      success: json['success'] as bool,
+      phoneReviewSubRespone: PhoneReviewForAddPhoneReviewSubResponse.fromJson(
+          json['review'] as Map<String, dynamic>),
+      earnedPoints: json['earnedPoints'] as int,
+    );
+
+Map<String, dynamic> _$AddPhoneReviewResponseToJson(
+        AddPhoneReviewResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'review': instance.phoneReviewSubRespone,
+      'earnedPoints': instance.earnedPoints,
+    };
+
 GetPhoneReviewResponse _$GetPhoneReviewResponseFromJson(
         Map<String, dynamic> json) =>
     GetPhoneReviewResponse(

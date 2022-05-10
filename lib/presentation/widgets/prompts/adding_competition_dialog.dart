@@ -105,6 +105,7 @@ class _AddingCompetitionPromptState extends State<AddingCompetitionPrompt> {
             ),
             SizedBox(height: 5.h, width: 320.w),
             DatePickerField(
+              setChosenDate: (_) {},
               dateController: widget.dateController,
               hintText: LocaleKeys.competitionEndDate.tr(),
               fillColor: ColorManager.backgroundGrey,

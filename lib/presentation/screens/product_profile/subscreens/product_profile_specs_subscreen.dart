@@ -216,7 +216,8 @@ class _ProductProfileSpecsSubscreenState
               Navigator.pushNamed(
                 context,
                 ProductProfileScreen.routeName,
-                arguments: ProductProfileScreenArgs(phoneId: phone.id),
+                arguments: ProductProfileScreenArgs(
+                    phoneId: phone.id, phoneName: phone.name),
               );
             },
             child: Column(

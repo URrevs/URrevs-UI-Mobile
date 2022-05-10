@@ -2,15 +2,25 @@ import 'package:equatable/equatable.dart';
 
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 
-abstract class BaseProviderParams extends Equatable {
+/// Subclasses of [NotSyncedProviderParams] do not have to extend [Equatable] as
+/// non of those provider would ever be equal to another one.
+abstract class NotSyncedProviderParams extends Equatable {
   final int providerId;
-  BaseProviderParams() : providerId = DateTime.now().millisecondsSinceEpoch;
+  NotSyncedProviderParams()
+      : providerId = DateTime.now().millisecondsSinceEpoch;
 
   @override
   List<Object?> get props => [providerId];
 }
 
-abstract class UserIdProviderParams extends BaseProviderParams {
+class SearchProviderParams extends NotSyncedProviderParams {
+  final SearchMode searchMode;
+  SearchProviderParams({
+    required this.searchMode,
+  });
+}
+
+abstract class UserIdProviderParams extends NotSyncedProviderParams {
   final String? userId;
   UserIdProviderParams({
     required this.userId,
@@ -30,7 +40,7 @@ class GetUserCompanyReviewsProviderParams extends UserIdProviderParams {
       : super(userId: userId);
 }
 
-class GetReviewsOnCertainPhoneProviderParams extends BaseProviderParams {
+class GetReviewsOnCertainPhoneProviderParams extends NotSyncedProviderParams {
   final String phoneId;
   GetReviewsOnCertainPhoneProviderParams({
     required this.phoneId,
@@ -57,7 +67,7 @@ class LikeProviderParams extends Equatable {
       [socialItemId, replyParentId, postType, interactionType];
 }
 
-class GetCommentsProviderParams extends BaseProviderParams {
+class GetCommentsProviderParams extends NotSyncedProviderParams {
   final String postId;
   final PostType postType;
   GetCommentsProviderParams({
@@ -69,10 +79,19 @@ class GetCommentsProviderParams extends BaseProviderParams {
   List<Object?> get props => [postId, postType, providerId];
 }
 
-class AddCommentProviderParams extends BaseProviderParams {
+class AddCommentProviderParams extends NotSyncedProviderParams {
   AddCommentProviderParams();
 }
 
-class AddReviewReplyProviderParams extends BaseProviderParams {
+class AddReviewReplyProviderParams extends NotSyncedProviderParams {
   AddReviewReplyProviderParams();
+}
+
+class GetPhoneManufacturingCompanyProviderParams
+    extends NotSyncedProviderParams {
+  GetPhoneManufacturingCompanyProviderParams();
+}
+
+class AddPhoneReviewProviderParams extends NotSyncedProviderParams {
+  AddPhoneReviewProviderParams();
 }

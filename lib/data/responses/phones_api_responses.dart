@@ -45,6 +45,22 @@ class GetPhonesFromCertainCompanyResponse extends BaseResponse {
 }
 
 @JsonSerializable()
+class GetPhoneManufacturingCompanyResponse extends BaseResponse {
+  @JsonKey(name: 'company')
+  CompanySubResponse companySubResponse;
+  GetPhoneManufacturingCompanyResponse({
+    required bool success,
+    required this.companySubResponse,
+  }) : super(success: success);
+
+  factory GetPhoneManufacturingCompanyResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$GetPhoneManufacturingCompanyResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$GetPhoneManufacturingCompanyResponseToJson(this);
+}
+
+@JsonSerializable()
 class GetPhoneSpecsResponse extends BaseResponse {
   @JsonKey(name: 'specs')
   SpecsSubResponse specsSubResponse;

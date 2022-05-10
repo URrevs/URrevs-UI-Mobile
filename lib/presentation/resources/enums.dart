@@ -19,3 +19,5 @@ enum PostType {
 enum TargetType { phone, company }
 
 enum InteractionType { comment, answer, reply }
+
+enum SearchMode { productsAndCompanies, phones }

@@ -9,6 +9,9 @@ import 'package:urrevs_ui_mobile/presentation/widgets/fields/search_text_field.d
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/custom_alert_dialog.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
+import '../../resources/enums.dart';
+import '../../state_management/providers_parameters.dart';
+
 /// a prompt that navigates to specs compare screen to compare between 2 products
 
 class CompareDialoge extends StatefulWidget {
@@ -29,6 +32,8 @@ class CompareDialoge extends StatefulWidget {
 
 class _CompareDialogeState extends State<CompareDialoge> {
   final _formKey = GlobalKey<FormState>();
+  final SearchProviderParams _searchProviderParams =
+      SearchProviderParams(searchMode: SearchMode.phones);
   @override
   Widget build(BuildContext context) {
     return CustomAlertDialog(
@@ -51,12 +56,13 @@ class _CompareDialogeState extends State<CompareDialoge> {
               height: 10.h,
             ),
             SearchTextField(
+              checkChosenSearchResult: false,
               searchCtl: widget.searchCtl,
               fillColor: ColorManager.backgroundGrey,
               hasErrorMsg: true,
               errorMsg: LocaleKeys.productNameErrorMsg.tr(),
-              onChange: ()=>{},
               hintText: LocaleKeys.writeProductName.tr(),
+              searchProviderParams: _searchProviderParams,
             ),
             SizedBox(
               height: 70.h,

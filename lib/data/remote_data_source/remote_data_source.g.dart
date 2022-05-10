@@ -217,6 +217,22 @@ class _RemoteDataSource implements RemoteDataSource {
   }
 
   @override
+  Future<SearchPhonesResponse> searchPhones(searchWord) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'q': searchWord};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<SearchPhonesResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/search/products/phones',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = SearchPhonesResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<GetAllCompaniesResponse> getAllCompanies(round) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'round': round};
@@ -262,6 +278,23 @@ class _RemoteDataSource implements RemoteDataSource {
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = GetPhonesFromCertainCompanyResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<GetPhoneManufacturingCompanyResponse> getPhoneManufacturingCompany(
+      phoneId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GetPhoneManufacturingCompanyResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/phones/${phoneId}/company',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GetPhoneManufacturingCompanyResponse.fromJson(_result.data!);
     return value;
   }
 
@@ -330,6 +363,23 @@ class _RemoteDataSource implements RemoteDataSource {
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = GetSimilarPhonesResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<AddPhoneReviewResponse> addPhoneReview(request) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<AddPhoneReviewResponse>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/reviews/phone',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = AddPhoneReviewResponse.fromJson(_result.data!);
     return value;
   }
 

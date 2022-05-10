@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/presentation_models/posting_question_model.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
@@ -10,6 +11,8 @@ import 'package:urrevs_ui_mobile/presentation/widgets/buttons/grad_button.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/fields/search_text_field.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/fields/txt_field.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
+
+import '../../../../../state_management/providers_parameters.dart';
 
 class PostingQuestionSubscreen extends StatefulWidget {
   const PostingQuestionSubscreen({Key? key}) : super(key: key);
@@ -20,6 +23,9 @@ class PostingQuestionSubscreen extends StatefulWidget {
 }
 
 class _PostingQuestionSubscreenState extends State<PostingQuestionSubscreen> {
+  final SearchProviderParams _searchProviderParams =
+      SearchProviderParams(searchMode: SearchMode.phones);
+
   PostingQuestionModel postingQuestionModel =
       PostingQuestionModel(productName: '', question: '');
 
@@ -45,15 +51,18 @@ class _PostingQuestionSubscreenState extends State<PostingQuestionSubscreen> {
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(LocaleKeys.yourQuestionRegarding.tr(),
                 style: TextStyleManager.s18w500),
-             SearchTextField(
-              searchCtl: productNameController,
+            SearchTextField(
+              checkChosenSearchResult: false,
               fillColor: ColorManager.textFieldGrey,
+              searchProviderParams: _searchProviderParams,
+              searchCtl: productNameController,
               hasErrorMsg: true,
               hintText: LocaleKeys.writeTheNameOfProductOrCompany.tr(),
               errorMsg: LocaleKeys.productNameOrCompanyNameErrorMsg.tr(),
-              onChange: () => {},),
-              SizedBox(height: 20.h),
-            Text(LocaleKeys.writeYourQuestion.tr(), style: TextStyleManager.s18w500), 
+            ),
+            SizedBox(height: 20.h),
+            Text(LocaleKeys.writeYourQuestion.tr(),
+                style: TextStyleManager.s18w500),
             TxtField(
               textController: questionController,
               hintText: LocaleKeys.question.tr(),

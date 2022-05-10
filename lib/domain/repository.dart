@@ -185,12 +185,20 @@ class Repository {
     });
   }
 
-  Future<Either<Failure, SearchProductsAndCompaiesResponse>>
+  Future<Either<Failure, List<SearchResult>>>
       searchProductsAndCompanies(String searchWord) async {
     return _tryAndCatch(() async {
       final response =
           await _remoteDataSource.searchProductsAndCompanies(searchWord);
-      return response;
+      return response.searchResults;
+    });
+  }
+
+  Future<Either<Failure, List<SearchResult>>> searchPhones(
+      String searchWord) async {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.searchPhones(searchWord);
+      return response.searchResults;
     });
   }
 
@@ -214,6 +222,15 @@ class Repository {
       final response =
           await _remoteDataSource.getPhonesFromCertainCompany(companyId, round);
       return response.phonesModels;
+    });
+  }
+
+  Future<Either<Failure, Company>> getPhoneManufacturingCompany(
+      String phoneId) {
+    return _tryAndCatch(() async {
+      final response =
+          await _remoteDataSource.getPhoneManufacturingCompany(phoneId);
+      return response.companySubResponse.companyModel;
     });
   }
 
@@ -256,6 +273,14 @@ class Repository {
     return _tryAndCatch(() async {
       final response = await _remoteDataSource.getSimilarPhones(phoneId);
       return response.phonesModels;
+    });
+  }
+
+  Future<Either<Failure, PhoneReview>> addPhoneReview(
+      AddPhoneReviewRequest request) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.addPhoneReview(request);
+      return response.phoneReviewSubRespone.phoneReviewModel;
     });
   }
 

@@ -48,7 +48,10 @@ class CardHeaderTitle extends StatelessWidget {
       case TargetType.phone:
         Navigator.of(context).pushNamed(
           ProductProfileScreen.routeName,
-          arguments: ProductProfileScreenArgs(phoneId: targetId),
+          arguments: ProductProfileScreenArgs(
+            phoneId: targetId,
+            phoneName: productName,
+          ),
         );
         break;
     }
