@@ -228,5 +228,7 @@ abstract class  LocaleKeys {
   static const postedSuccessfully = 'postedSuccessfully';
   static const seePost = 'seePost';
   static const aboutUsContent = 'aboutUsContent';
+  static const contactUs = 'contactUs';
+  static const followUs = 'followUs';
 
 }

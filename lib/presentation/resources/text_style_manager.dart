@@ -104,7 +104,7 @@ class TextStyleManager {
         fontSize: FontSizeManager.s20,
         fontWeight: FontWeightManager.w700,
       );
-
+  
   static TextStyle get s22w500 => TextStyle(
         fontSize: FontSizeManager.s22,
         fontWeight: FontWeightManager.w500,
