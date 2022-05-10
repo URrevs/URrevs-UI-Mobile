@@ -488,10 +488,10 @@ class _PostingReviewSubscreenState
       if (next is LoadedState) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('تم النشر بنجاح'),
+            content: Text(LocaleKeys.postedSuccessfully.tr()),
             margin: EdgeInsets.fromLTRB(15.w, 5.h, 15.w, 10.h + 50.h),
             action: SnackBarAction(
-              label: 'رؤية المنشور',
+              label: LocaleKeys.seePost.tr(),
               onPressed: () {
                 Navigator.of(context).pushNamed(
                   PostedReviewsScreen.routeName,

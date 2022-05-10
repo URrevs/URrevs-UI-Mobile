@@ -225,5 +225,7 @@ abstract class  LocaleKeys {
   static const yourRanking = 'yourRanking';
   static const howToCollectPoints = 'howToCollectPoints';
   static const helpOthersToCollectPoints = 'helpOthersToCollectPoints';
+  static const postedSuccessfully = 'postedSuccessfully';
+  static const seePost = 'seePost';
 
 }

@@ -238,7 +238,9 @@ class CodegenLoader extends AssetLoader{
   "usersRanking": "ترتيب المستخدمين:",
   "yourRanking": "ترتيبك:",
   "howToCollectPoints": "كيف تجمع النقاط",
-  "helpOthersToCollectPoints": "ساعد الاخرين لتجمع اكبر عدد من النقاط"
+  "helpOthersToCollectPoints": "ساعد الاخرين لتجمع اكبر عدد من النقاط",
+  "postedSuccessfully": "تم النشر بنجاح",
+  "seePost": "رؤية المنشور"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -464,7 +466,9 @@ static const Map<String,dynamic> en = {
   "usersRanking": "Users ranking:",
   "yourRanking": "Your ranking:",
   "howToCollectPoints": "How to collect points",
-  "helpOthersToCollectPoints": "Help others to collect as many points as possible"
+  "helpOthersToCollectPoints": "Help others to collect as many points as possible",
+  "postedSuccessfully": "Posted Successfully",
+  "seePost": "See post"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

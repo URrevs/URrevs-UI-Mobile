@@ -222,5 +222,7 @@
   "usersRanking": "Users ranking:",
   "yourRanking": "Your ranking:",
   "howToCollectPoints": "How to collect points",
-  "helpOthersToCollectPoints": "Help others to collect as many points as possible"
+  "helpOthersToCollectPoints": "Help others to collect as many points as possible",
+  "postedSuccessfully": "Posted Successfully",
+  "seePost": "See post"
 }
