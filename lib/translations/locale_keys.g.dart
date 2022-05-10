@@ -227,5 +227,6 @@ abstract class  LocaleKeys {
   static const helpOthersToCollectPoints = 'helpOthersToCollectPoints';
   static const postedSuccessfully = 'postedSuccessfully';
   static const seePost = 'seePost';
+  static const aboutUsContent = 'aboutUsContent';
 
 }

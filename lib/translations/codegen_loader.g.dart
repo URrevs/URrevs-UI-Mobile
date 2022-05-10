@@ -240,7 +240,8 @@ class CodegenLoader extends AssetLoader{
   "howToCollectPoints": "كيف تجمع النقاط",
   "helpOthersToCollectPoints": "ساعد الاخرين لتجمع اكبر عدد من النقاط",
   "postedSuccessfully": "تم النشر بنجاح",
-  "seePost": "رؤية المنشور"
+  "seePost": "رؤية المنشور",
+  "aboutUsContent": "اول منصة متخصصة في الوطن العربي لمراجعات المستخدمين. هدفنا مساعدة الشخص المقبل علي الشراء في اختيار هاتفه من خلال المراجعات التي توفرها المنصة له والتي تشمل تجارب المستخدمين لهواتفهم من مميزات وعيوب وكذلك توفير امكانيات واسعار احدث الهواتف."
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -468,7 +469,8 @@ static const Map<String,dynamic> en = {
   "howToCollectPoints": "How to collect points",
   "helpOthersToCollectPoints": "Help others to collect as many points as possible",
   "postedSuccessfully": "Posted Successfully",
-  "seePost": "See post"
+  "seePost": "See post",
+  "aboutUsContent": "The first specialized platform in the Arab world for user reviews. Our goal is to help the prospective buyers choosing their phones through the reviews provided by the platform to them, which include the experiences of users of their phones, advantages and disadvantages, as well as providing the capabilities and prices of the latest phones."
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }
