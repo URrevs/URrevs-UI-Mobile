@@ -8,3 +8,7 @@ extension IsArabic on BuildContext {
   TextDirection get textDirection =>
       isArabic ? TextDirection.rtl : TextDirection.ltr;
 }
+
+extension IsDarkMode on BuildContext {
+  bool get isDarkMode => MediaQuery.of(this).platformBrightness == Brightness.dark;
+}

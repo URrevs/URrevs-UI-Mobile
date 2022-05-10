@@ -4,11 +4,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/authentication_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/menu_screen/subscreens/about_us_screen.dart';
 
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/menu_screen/subscreens/admin_panel/admin_panel_screen.dart';
@@ -39,6 +41,22 @@ class MenuSubscreen extends ConsumerStatefulWidget {
 }
 
 class _MenuSubscreenState extends ConsumerState<MenuSubscreen> {
+  Widget _buildMyProfile() {
+    ref.listen(getMyProfileProvider, (previous, next) {
+      if (next is GetMyProfileErrorState) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(next.failure.message)),
+        );
+        if (next.failure is AuthenticateFailure) {
+          Navigator.of(context).pushNamedAndRemoveUntil(
+            AuthenticationScreen.routeName,
+            (route) => false,
+          );
+        }
+      }
+    });
+    return _buildMyProfileData();
+  }
   Widget _buildMyProfileData() {
     final state = ref.watch(getMyProfileProvider);
     if (state is GetMyProfileInitialState ||
@@ -264,7 +282,7 @@ class _MenuSubscreenState extends ConsumerState<MenuSubscreen> {
                       IconButton(
                         icon: Icon(
                           FontAwesomeIcons.facebook,
-                          color: Color(0xFF1877F2),
+                          color: Color(0xFF1372E6),
                           size: 40.sp,
                         ),
                         onPressed: () {
@@ -330,7 +348,7 @@ class _MenuSubscreenState extends ConsumerState<MenuSubscreen> {
         body: ListView(
       padding: EdgeInsets.symmetric(vertical: 10.h),
       children: [
-        _buildMyProfileData(),
+        _buildMyProfile(),
         ...myProfileListItems(),
         5.verticalSpace,
         _buildFooter(),

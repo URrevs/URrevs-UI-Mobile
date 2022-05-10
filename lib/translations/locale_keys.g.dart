@@ -230,5 +230,11 @@ abstract class  LocaleKeys {
   static const aboutUsContent = 'aboutUsContent';
   static const contactUs = 'contactUs';
   static const followUs = 'followUs';
+  static const language = 'language';
+  static const theme = 'theme';
+  static const arabic = 'arabic';
+  static const english = 'english';
+  static const lightTheme = 'lightTheme';
+  static const darkTheme = 'darkTheme';
 
 }
