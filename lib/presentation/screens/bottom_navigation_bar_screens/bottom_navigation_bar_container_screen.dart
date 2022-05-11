@@ -112,27 +112,6 @@ class _BottomNavigationBarContainerScreenState
       length: 2,
       child: Scaffold(
         appBar: appBar,
-        persistentFooterButtons: [
-          TextButton(
-            onPressed: () {
-              GoogleSignIn().signOut();
-              FacebookAuth.instance.logOut();
-              FirebaseAuth.instance.signOut();
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                AuthenticationScreen.routeName,
-                (route) => false,
-              );
-            },
-            child: Text('LOG OUT'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed(ComparisonScreen.routeName);
-            },
-            child: Text('COMPARISON'),
-          ),
-        ],
         body: SafeArea(child: currentPage),
         bottomNavigationBar: BottomNavBar(
           currentIndex: _currentIndex,

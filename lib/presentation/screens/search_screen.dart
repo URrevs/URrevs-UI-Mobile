@@ -112,28 +112,14 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
         child: ListView(
           padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
           children: [
-            Row(
-              children: [
-                Expanded(
-                  child: SearchTextField(
-                    checkChosenSearchResult: false,
-                    key: ValueKey(0),
-                    fillColor: ColorManager.textFieldGrey,
-                    hintText: LocaleKeys.searchForAProductOrACompany.tr(),
-                    searchCtl: _controller,
-                    searchProviderParams: _searchProviderParams,
-                    hasErrorMsg: false,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    FontAwesomeIcons.magnifyingGlass,
-                    size: 21.sp,
-                    color: ColorManager.black,
-                  ),
-                ),
-              ],
+            SearchTextField(
+              checkChosenSearchResult: false,
+              key: ValueKey(0),
+              fillColor: ColorManager.textFieldGrey,
+              hintText: LocaleKeys.searchForAProductOrACompany.tr(),
+              searchCtl: _controller,
+              searchProviderParams: _searchProviderParams,
+              hasErrorMsg: false,
             ),
             16.verticalSpace,
             _buildRecentSearches(),

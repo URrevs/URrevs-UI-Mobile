@@ -94,7 +94,7 @@ class _ComparisonScreenState extends ConsumerState<ComparisonScreen> {
         firstProductImageUrl: state.firstPhoneSpecs.picture,
         secondProductImageIrl: state.secondPhoneSpecs.picture,
         firstProductSpecs: state.firstPhoneSpecs,
-        secondProductSpecs: state.firstPhoneSpecs,
+        secondProductSpecs: state.secondPhoneSpecs,
       ),
     );
   }

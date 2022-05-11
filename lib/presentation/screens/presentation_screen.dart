@@ -145,7 +145,8 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
             height: 20,
           ),
           CompareDialoge(
-            searchCtl: searchCtl,
+            // searchCtl: searchCtl,
+            productId1: DummyDataManager.randomInt.toString(),
             productName1: 'Nokia 7 Plus',
           ),
           SizedBox(

@@ -33,6 +33,7 @@ import 'dart:math' as math;
 import '../../../../../../domain/failure.dart';
 import '../../../../../state_management/providers.dart';
 import '../../../../../widgets/empty_list_widget.dart';
+import '../../../../../widgets/loading_widgets/small_search_list_loading.dart';
 
 final productSelectedProvider = StateProvider.autoDispose<bool>((ref) => false);
 
@@ -175,7 +176,7 @@ class _PostingReviewSubscreenState
     if (state is InitialState) {
       return SizedBox();
     } else if (state is LoadingState) {
-      return SuggestedSearchesLoading();
+      return SmallSearchingListLoading();
     } else if (state is SearchErrorState) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,

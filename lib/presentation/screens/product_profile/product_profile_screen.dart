@@ -12,6 +12,7 @@ import 'package:urrevs_ui_mobile/presentation/screens/product_profile/subscreens
 import 'package:urrevs_ui_mobile/presentation/screens/product_profile/subscreens/product_profile_specs_subscreen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/prompts/compare_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/scaffold_with_hiding_fab.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
@@ -72,10 +73,18 @@ class _ProductProfileScreenState extends ConsumerState<ProductProfileScreen>
   VoidCallback get onPressingFab {
     switch (_tabController.index) {
       case 1:
-        return () {};
+        return () {
+          showDialog(
+            context: context,
+            builder: (context) => CompareDialoge(
+              productId1: widget.screenArgs.phoneId,
+              productName1: widget.screenArgs.phoneName,
+            ),
+          );
+        };
       case 2:
         return () {};
-      default:
+      default: // 0
         return () {};
     }
   }
