@@ -89,47 +89,6 @@ class _AuthenticationScreenState extends ConsumerState<AuthenticationScreen> {
     );
   }
 
-  List<Widget>? get persistentFooterButtons {
-    if (FlagsManager.development) {
-      return [
-        TextButton(
-          onPressed: () {
-            GoogleSignIn().signOut();
-            FacebookAuth.instance.logOut();
-            FirebaseAuth.instance.signOut();
-          },
-          child: Text('LOGOUT'),
-        ),
-        TextButton(
-          onPressed: () {
-            showDialog(
-              context: context,
-              builder: (context) => ErrorDialog(
-                failure: Failure('حدث خطأ ما.'),
-              ),
-            );
-          },
-          child: Text('SHOW DIALOG'),
-        ),
-        TextButton(
-          onPressed: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  LocaleKeys.youHaveGotPointsForLoggingInThroughTheMobileApp
-                      .tr(),
-                ),
-              ),
-            );
-          },
-          child: Text('SHOW SNACKBAR'),
-        ),
-      ];
-    } else {
-      return null;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     ref.listen<AuthenticationState>(authenticationProvider, (previous, next) {
@@ -156,7 +115,6 @@ class _AuthenticationScreenState extends ConsumerState<AuthenticationScreen> {
     });
     return Scaffold(
       backgroundColor: ColorManager.white,
-      persistentFooterButtons: persistentFooterButtons,
       body: LoaderOverlay(
         child: SafeArea(
           child: Column(

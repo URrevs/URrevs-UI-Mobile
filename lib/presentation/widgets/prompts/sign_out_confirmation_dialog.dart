@@ -1,11 +1,15 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/authentication_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/custom_alert_dialog.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
-/// prompt that logs user from this device and sends a request to log out from 
+/// prompt that logs user from this device and sends a request to log out from
 /// other devices
 
 class SignOutConfirmationDialog extends StatefulWidget {
@@ -44,20 +48,28 @@ class _SignOutConfirmationDialogState extends State<SignOutConfirmationDialog> {
           child: Text(
             LocaleKeys.cancel.tr(),
             style: TextStyleManager.s16w900.copyWith(
-                color: ColorManager.black,),
+              color: ColorManager.black,
+            ),
           ),
           onPressed: () {
-            
+            Navigator.of(context).pop();
           },
         ),
         TextButton(
           child: Text(
             LocaleKeys.logOut.tr(),
             style: TextStyleManager.s16w900.copyWith(
-                color: ColorManager.red,),
+              color: ColorManager.red,
+            ),
           ),
           onPressed: () {
-         
+            GoogleSignIn().signOut();
+            FacebookAuth.instance.logOut();
+            FirebaseAuth.instance.signOut();
+            Navigator.of(context).pushNamedAndRemoveUntil(
+              AuthenticationScreen.routeName,
+              (route) => false,
+            );
           },
         ),
       ],
