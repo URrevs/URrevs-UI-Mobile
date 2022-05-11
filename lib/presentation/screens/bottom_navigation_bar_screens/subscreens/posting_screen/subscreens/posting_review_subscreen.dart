@@ -484,6 +484,10 @@ class _PostingReviewSubscreenState
   }
 
   GradButton _buildSubmitButton() {
+    ref.addErrorListener(
+      provider: addPhoneReviewProvider(_addReviewProviderParams),
+      context: context,
+    );
     ref.listen(addPhoneReviewProvider(_addReviewProviderParams),
         (previous, next) {
       if (next is LoadedState) {
@@ -534,6 +538,7 @@ class _PostingReviewSubscreenState
         onPressed: () {
           if (_formKey.currentState!.validate()) {
             String? refCode = invitationCodeController.text;
+            print(refCode);
             if (refCode.isEmpty) refCode = null;
             final companyState = ref.watch(getPhoneManufacturingCompanyProvider(
                     _manufacturingCompanyProviderParams))
@@ -551,7 +556,7 @@ class _PostingReviewSubscreenState
               battery: postingReviewModel.battery,
               pros: likedAboutProductController.text,
               cons: hatedAboutProductController.text,
-              ref: refCode,
+              refCode: refCode,
               companyRating: postingReviewModel.companyRating,
               compPros: likedAboutCompanyController.text,
               compCons: hatedAboutCompanyController.text,

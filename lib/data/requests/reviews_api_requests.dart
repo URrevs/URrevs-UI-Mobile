@@ -16,7 +16,7 @@ class AddPhoneReviewRequest {
   int battery;
   String pros;
   String cons;
-  String? ref;
+  String? refCode;
   int companyRating;
   String compPros;
   String compCons;
@@ -34,7 +34,7 @@ class AddPhoneReviewRequest {
     required this.battery,
     required this.pros,
     required this.cons,
-    required this.ref,
+    required this.refCode,
     required this.companyRating,
     required this.compPros,
     required this.compCons,
