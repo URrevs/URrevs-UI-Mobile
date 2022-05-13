@@ -13,7 +13,7 @@ class ReplyModel extends Equatable {
     required this.id,
     required this.userId,
     required this.userName,
-    this.photo,
+    required this.photo,
     required this.createdAt,
     required this.content,
     required this.likes,

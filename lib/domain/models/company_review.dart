@@ -1,7 +1,6 @@
-import 'package:equatable/equatable.dart';
+import 'package:urrevs_ui_mobile/domain/models/post.dart';
 
-class CompanyReview extends Equatable {
-  final String id;
+class CompanyReview extends Post {
   final String type;
   final String targetId;
   final String targetName;
@@ -18,8 +17,8 @@ class CompanyReview extends Equatable {
   final String pros;
   final String cons;
   final bool liked;
-  CompanyReview({
-    required this.id,
+  const CompanyReview({
+    required String id,
     required this.type,
     required this.targetId,
     required this.targetName,
@@ -36,7 +35,7 @@ class CompanyReview extends Equatable {
     required this.pros,
     required this.cons,
     required this.liked,
-  });
+  }) : super(id: id);
 
   @override
   List<Object?> get props => [id];

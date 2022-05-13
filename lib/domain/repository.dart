@@ -22,6 +22,7 @@ import 'package:urrevs_ui_mobile/domain/models/company_review.dart';
 import 'package:urrevs_ui_mobile/domain/models/info.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone_review.dart';
+import 'package:urrevs_ui_mobile/domain/models/quesiton.dart';
 import 'package:urrevs_ui_mobile/domain/models/search_result.dart';
 import 'package:urrevs_ui_mobile/domain/models/specs.dart';
 import 'package:urrevs_ui_mobile/domain/models/user.dart';
@@ -185,8 +186,8 @@ class Repository {
     });
   }
 
-  Future<Either<Failure, List<SearchResult>>>
-      searchProductsAndCompanies(String searchWord) async {
+  Future<Either<Failure, List<SearchResult>>> searchProductsAndCompanies(
+      String searchWord) async {
     return _tryAndCatch(() async {
       final response =
           await _remoteDataSource.searchProductsAndCompanies(searchWord);
@@ -466,6 +467,20 @@ class Repository {
       String commentId, String replyId) {
     return _tryAndCatch(() async {
       await _remoteDataSource.unlikeCompanyReviewReply(commentId, replyId);
+    });
+  }
+
+  Future<Either<Failure, Question>> getPhoneQuestion(String questionId) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.getPhoneQuestion(questionId);
+      return response.questionSubResponse.questionModel;
+    });
+  }
+
+  Future<Either<Failure, Question>> getCompanyQuestion(String questionId) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.getCompanyQuestion(questionId);
+      return response.questionSubResponse.questionModel;
     });
   }
 }

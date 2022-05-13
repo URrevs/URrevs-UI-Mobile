@@ -95,3 +95,12 @@ class GetPhoneManufacturingCompanyProviderParams
 class AddPhoneReviewProviderParams extends NotSyncedProviderParams {
   AddPhoneReviewProviderParams();
 }
+
+class GetPostProviderParams extends NotSyncedProviderParams {
+  final String postId;
+  final PostType postType;
+  GetPostProviderParams({
+    required this.postId,
+    required this.postType,
+  });
+}

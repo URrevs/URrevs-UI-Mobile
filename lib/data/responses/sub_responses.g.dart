@@ -449,3 +449,74 @@ Map<String, dynamic> _$CommentSubResponseToJson(CommentSubResponse instance) =>
       'liked': instance.liked,
       'replies': instance.repliesSubResponses,
     };
+
+QuestionSubResponse _$QuestionSubResponseFromJson(Map<String, dynamic> json) =>
+    QuestionSubResponse(
+      id: json['_id'] as String,
+      type: $enumDecode(_$TargetTypeEnumMap, json['type']),
+      userId: json['userId'] as String,
+      userName: json['userName'] as String,
+      photo: json['photo'] as String?,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      targetName: json['targetName'] as String,
+      targetId: json['targetId'] as String,
+      content: json['content'] as String,
+      upvotes: json['upvotes'] as int,
+      upvoted: json['upvoted'] as bool,
+      ansCount: json['ansCount'] as int,
+      shares: json['shares'] as int,
+      acceptedAns: AnswerSubResponse.fromJson(
+          json['acceptedAns'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$QuestionSubResponseToJson(
+        QuestionSubResponse instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'type': _$TargetTypeEnumMap[instance.type],
+      'userId': instance.userId,
+      'userName': instance.userName,
+      'photo': instance.photo,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'targetName': instance.targetName,
+      'targetId': instance.targetId,
+      'content': instance.content,
+      'upvotes': instance.upvotes,
+      'upvoted': instance.upvoted,
+      'ansCount': instance.ansCount,
+      'shares': instance.shares,
+      'acceptedAns': instance.acceptedAns,
+    };
+
+const _$TargetTypeEnumMap = {
+  TargetType.phone: 'phone',
+  TargetType.company: 'company',
+};
+
+AnswerSubResponse _$AnswerSubResponseFromJson(Map<String, dynamic> json) =>
+    AnswerSubResponse(
+      id: json['_id'] as String,
+      userId: json['userId'] as String,
+      userName: json['userName'] as String,
+      photo: json['photo'] as String?,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      content: json['content'] as String,
+      upvotes: json['upvotes'] as int,
+      upvoted: json['upvoted'] as bool,
+      repliesSubResponses: (json['replies'] as List<dynamic>)
+          .map((e) => ReplySubResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$AnswerSubResponseToJson(AnswerSubResponse instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'userId': instance.userId,
+      'userName': instance.userName,
+      'photo': instance.photo,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'content': instance.content,
+      'upvotes': instance.upvotes,
+      'upvoted': instance.upvoted,
+      'replies': instance.repliesSubResponses,
+    };

@@ -13,7 +13,8 @@ enum ReviewsFilter { phones, companies }
 enum PostType {
   phoneReview,
   companyReview,
-  question
+  phoneQuestion,
+  companyQuestion
 } //phone question - company question
 
 enum TargetType { phone, company }

@@ -33,13 +33,12 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_sta
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_similar_phones_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_two_phones_specs_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/indicate_user_compared_between_two_phones_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/question_states/get_post_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/add_comment_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/add_phone_review_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/add_review_reply_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_comments_state.dart';
-import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_company_review_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_phone_manufacturing_company_state.dart';
-import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_phone_review_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_reviews_on_certain_phone_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_user_company_reviews_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_user_phone_reviews_state.dart';
@@ -59,13 +58,12 @@ import 'notifiers/phones_notifier/get_phone_specs_notifier.dart';
 import 'notifiers/phones_notifier/get_phones_from_certain_company_notifier.dart';
 import 'notifiers/phones_notifier/get_similar_phones_notifier.dart';
 import 'notifiers/phones_notifier/indicate_user_compared_between_two_phones_notifier.dart';
+import 'notifiers/questions_notifiers/get_post_notifier.dart';
 import 'notifiers/reviews_notifiers/add_comment_notifier.dart';
 import 'notifiers/reviews_notifiers/add_phone_review_notifier.dart';
 import 'notifiers/reviews_notifiers/add_review_reply_notifier.dart';
 import 'notifiers/reviews_notifiers/get_comments_notifier.dart';
-import 'notifiers/reviews_notifiers/get_company_review_notifier.dart';
 import 'notifiers/reviews_notifiers/get_phone_manufacturing_company_notifier.dart';
-import 'notifiers/reviews_notifiers/get_phone_review_notifier.dart';
 import 'notifiers/reviews_notifiers/get_reviews_on_certain_phone_notifier.dart';
 import 'notifiers/reviews_notifiers/get_user_company_reviews_notifier.dart';
 import 'notifiers/reviews_notifiers/get_user_phone_reviews_notifier.dart';
@@ -159,14 +157,6 @@ final getSimilarPhonesProvider = StateNotifierProvider.autoDispose<
     GetSimilarPhonesNotifier,
     GetSimilarPhonesState>((ref) => GetSimilarPhonesNotifier());
 
-final getPhoneReviewProvider = StateNotifierProvider.autoDispose<
-    GetPhoneReviewNotifier,
-    GetPhoneReviewState>((ref) => GetPhoneReviewNotifier());
-
-final getCompanyReviewProvider = StateNotifierProvider.autoDispose<
-    GetCompanyReviewNotifier,
-    GetCompanyReviewState>((ref) => GetCompanyReviewNotifier());
-
 // final getMyPhoneReviewsProvider = StateNotifierProvider.autoDispose<
 //     GetMyPhoneReviewsNotifier,
 //     GetMyPhoneReviewsState>((ref) => GetMyPhoneReviewsNotifier());
@@ -240,6 +230,13 @@ final addPhoneReviewProvider = StateNotifierProvider.autoDispose.family<
     AddPhoneReviewNotifier,
     AddPhoneReviewState,
     AddPhoneReviewProviderParams>((ref, params) => AddPhoneReviewNotifier());
+
+final getPostProvider = StateNotifierProvider.autoDispose
+    .family<GetPostNotifier, GetPostState, GetPostProviderParams>(
+        (ref, params) => GetPostNotifier(
+              postId: params.postId,
+              postType: params.postType,
+            ));
 
 final userImageFetchedFlagProvider = StateProvider<bool>((ref) {
   return false;

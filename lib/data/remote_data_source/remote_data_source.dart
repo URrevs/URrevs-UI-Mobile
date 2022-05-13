@@ -6,6 +6,7 @@ import 'package:urrevs_ui_mobile/data/requests/search_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/users_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/responses/companies_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/phones_api_responses.dart';
+import 'package:urrevs_ui_mobile/data/responses/questions_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/reviews_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/search_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/update_api_responses.dart';
@@ -273,5 +274,15 @@ abstract class RemoteDataSource {
   Future<UnlikeCompanyReviewReplyResponse> unlikeCompanyReviewReply(
     @Path() String commentId,
     @Path() String replyId,
+  );
+
+  @GET('/questions/phone/{questionId}')
+  Future<GetPhoneQuestionResponse> getPhoneQuestion(
+    @Path() String questionId,
+  );
+
+  @GET('/questions/company/{questionId}')
+  Future<GetPhoneQuestionResponse> getCompanyQuestion(
+    @Path() String questionId,
   );
 }

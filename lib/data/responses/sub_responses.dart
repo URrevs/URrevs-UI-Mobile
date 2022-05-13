@@ -1,15 +1,18 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import 'package:urrevs_ui_mobile/domain/models/answer.dart';
 import 'package:urrevs_ui_mobile/domain/models/comment.dart';
 import 'package:urrevs_ui_mobile/domain/models/company.dart';
 import 'package:urrevs_ui_mobile/domain/models/company_review.dart';
 import 'package:urrevs_ui_mobile/domain/models/info.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone_review.dart';
+import 'package:urrevs_ui_mobile/domain/models/quesiton.dart';
 import 'package:urrevs_ui_mobile/domain/models/reply_model.dart';
 import 'package:urrevs_ui_mobile/domain/models/search_result.dart';
 import 'package:urrevs_ui_mobile/domain/models/specs.dart';
 import 'package:urrevs_ui_mobile/domain/models/user.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 
 part 'sub_responses.g.dart';
 
@@ -611,6 +614,7 @@ class ReplySubResponse {
         content: content,
         likes: likes,
         liked: liked,
+        photo: photo,
       );
 
   factory ReplySubResponse.fromJson(Map<String, Object?> json) =>
@@ -652,10 +656,109 @@ class CommentSubResponse {
         content: content,
         likes: likes,
         liked: liked,
+        photo: photo,
         replies: repliesSubResponses.map((r) => r.replyModel).toList(),
       );
 
   factory CommentSubResponse.fromJson(Map<String, Object?> json) =>
       _$CommentSubResponseFromJson(json);
   Map<String, dynamic> toJson() => _$CommentSubResponseToJson(this);
+}
+
+@JsonSerializable()
+class QuestionSubResponse {
+  @JsonKey(name: '_id')
+  String id;
+  TargetType type;
+  String userId;
+  String userName;
+  String? photo;
+  DateTime createdAt;
+  String targetName;
+  String targetId;
+  String content;
+  int upvotes;
+  bool upvoted;
+  int ansCount;
+  int shares;
+  AnswerSubResponse acceptedAns;
+  QuestionSubResponse({
+    required this.id,
+    required this.type,
+    required this.userId,
+    required this.userName,
+    required this.photo,
+    required this.createdAt,
+    required this.targetName,
+    required this.targetId,
+    required this.content,
+    required this.upvotes,
+    required this.upvoted,
+    required this.ansCount,
+    required this.shares,
+    required this.acceptedAns,
+  });
+
+  Question get questionModel => Question(
+        id: id,
+        type: type,
+        userId: userId,
+        userName: userName,
+        photo: photo,
+        createdAt: createdAt,
+        content: content,
+        targetName: targetName,
+        targetId: targetId,
+        upvotes: upvotes,
+        upvoted: upvoted,
+        ansCount: ansCount,
+        shares: shares,
+        acceptedAns: acceptedAns.answerModel,
+      );
+
+  factory QuestionSubResponse.fromJson(Map<String, Object?> json) =>
+      _$QuestionSubResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$QuestionSubResponseToJson(this);
+}
+
+@JsonSerializable()
+class AnswerSubResponse {
+  @JsonKey(name: '_id')
+  String id;
+  String userId;
+  String userName;
+  String? photo;
+  DateTime createdAt;
+  String content;
+  int upvotes;
+  bool upvoted;
+  @JsonKey(name: 'replies')
+  List<ReplySubResponse> repliesSubResponses;
+  AnswerSubResponse({
+    required this.id,
+    required this.userId,
+    required this.userName,
+    required this.photo,
+    required this.createdAt,
+    required this.content,
+    required this.upvotes,
+    required this.upvoted,
+    required this.repliesSubResponses,
+  });
+
+  Answer get answerModel => Answer(
+        id: id,
+        userId: userId,
+        userName: userName,
+        createdAt: createdAt,
+        photo: photo,
+        content: content,
+        upvotes: upvotes,
+        upvoted: upvoted,
+        replies: repliesSubResponses.map((r) => r.replyModel).toList(),
+      );
+
+  factory AnswerSubResponse.fromJson(Map<String, Object?> json) =>
+      _$AnswerSubResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$AnswerSubResponseToJson(this);
 }

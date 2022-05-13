@@ -1,9 +1,6 @@
-import 'package:equatable/equatable.dart';
+import 'package:urrevs_ui_mobile/domain/models/post.dart';
 
-import 'package:urrevs_ui_mobile/domain/models/search_result.dart';
-
-class PhoneReview extends Equatable {
-  final String id;
+class PhoneReview extends Post {
   final String type;
   final String targetId;
   final String targetName;
@@ -27,7 +24,7 @@ class PhoneReview extends Equatable {
   final String cons;
   final bool liked;
   const PhoneReview({
-    required this.id,
+    required String id,
     required this.type,
     required this.targetId,
     required this.targetName,
@@ -50,7 +47,7 @@ class PhoneReview extends Equatable {
     required this.pros,
     required this.cons,
     required this.liked,
-  });
+  }) : super(id: id);
 
   List<int> get scores {
     return [

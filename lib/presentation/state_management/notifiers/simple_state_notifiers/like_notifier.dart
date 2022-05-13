@@ -40,7 +40,7 @@ class LikeNotifier extends StateNotifier<LikeState> {
             response = await GetIt.I<Repository>()
                 .likeCompanyReviewComment(_socialItemId);
             break;
-          case PostType.question:
+          case PostType.phoneQuestion:
             // TODO: Handle this case.
             break;
         }
@@ -58,7 +58,7 @@ class LikeNotifier extends StateNotifier<LikeState> {
             response = await GetIt.I<Repository>()
                 .likeCompanyReviewReply(_replyParentId!, _socialItemId);
             break;
-          case PostType.question:
+          case PostType.phoneQuestion:
             // TODO: Handle this case.
             break;
         }
@@ -73,7 +73,7 @@ class LikeNotifier extends StateNotifier<LikeState> {
             response =
                 await GetIt.I<Repository>().likeCompanyReview(_socialItemId);
             break;
-          case PostType.question:
+          case PostType.phoneQuestion:
             // TODO: Handle this case.
             break;
         }
@@ -101,7 +101,7 @@ class LikeNotifier extends StateNotifier<LikeState> {
             response = await GetIt.I<Repository>()
                 .unlikeCompanyReviewComment(_socialItemId);
             break;
-          case PostType.question:
+          case PostType.phoneQuestion:
             // TODO: Handle this case.
             break;
         }
@@ -119,7 +119,7 @@ class LikeNotifier extends StateNotifier<LikeState> {
             response = await GetIt.I<Repository>()
                 .unlikeCompanyReviewReply(_replyParentId!, _socialItemId);
             break;
-          case PostType.question:
+          case PostType.phoneQuestion:
             // TODO: Handle this case.
             break;
         }
@@ -134,7 +134,7 @@ class LikeNotifier extends StateNotifier<LikeState> {
             response =
                 await GetIt.I<Repository>().unlikeCompanyReview(_socialItemId);
             break;
-          case PostType.question:
+          case PostType.phoneQuestion:
             // TODO: Handle this case.
             break;
         }

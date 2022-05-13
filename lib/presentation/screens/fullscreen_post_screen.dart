@@ -9,6 +9,7 @@ import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/domain/models/comment.dart';
 import 'package:urrevs_ui_mobile/domain/models/company_review.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone_review.dart';
+import 'package:urrevs_ui_mobile/domain/models/quesiton.dart';
 import 'package:urrevs_ui_mobile/domain/models/reply_model.dart';
 import 'package:urrevs_ui_mobile/domain/models/user.dart';
 
@@ -20,11 +21,10 @@ import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/authent
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/authentication_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/question_states/get_post_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/add_comment_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/add_review_reply_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_comments_state.dart';
-import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_company_review_state.dart';
-import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_phone_review_state.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/empty_list_widget.dart';
@@ -85,6 +85,12 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
   final TextEditingController _controller = TextEditingController();
 
   late final String _postId = widget.screenArgs.postId;
+  late final TargetType _targetType = TargetType.phone;
+  late final PostType _postType = widget.screenArgs.postType;
+
+  late final GetPostProviderParams _postProviderParams =
+      GetPostProviderParams(postId: _postId, postType: _postType);
+
   late final GetCommentsProviderParams _commentsProviderParams =
       GetCommentsProviderParams(
     postId: _postId,
@@ -118,28 +124,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
   }
 
   void _getPost() {
-    switch (widget.screenArgs.postType) {
-      case PostType.phoneReview:
-        return _getProductReview();
-      case PostType.companyReview:
-        return _getCompanyReview();
-      // case CardType.productQuestion:
-      // case CardType.companyQuestion:
-      default:
-        return;
-    }
-  }
-
-  void _getProductReview() {
-    ref
-        .read(getPhoneReviewProvider.notifier)
-        .getPhoneReview(widget.screenArgs.postId);
-  }
-
-  void _getCompanyReview() {
-    ref
-        .read(getCompanyReviewProvider.notifier)
-        .getCompanyReview(widget.screenArgs.postId);
+    ref.read(getPostProvider(_postProviderParams).notifier).getPost();
   }
 
   void _getComments() {
@@ -198,7 +183,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
     print(widget.screenArgs.postId);
     Future.delayed(Duration.zero, () {
       _getPost();
-      _getComments();
+      // _getComments();
     });
     if (widget.screenArgs.focusOnTextField) {
       focusNode.requestFocus();
@@ -207,8 +192,10 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ref.addErrorListener(provider: getPhoneReviewProvider, context: context);
-    ref.addErrorListener(provider: getCompanyReviewProvider, context: context);
+    ref.addErrorListener(
+      provider: getPostProvider(_postProviderParams),
+      context: context,
+    );
     return Scaffold(
       appBar: AppBars.appBarWithActions(
         context: context,
@@ -222,14 +209,12 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
   }
 
   Widget _buildBody() {
-    final phoneReviewState = ref.watch(getPhoneReviewProvider);
-    final companyReviewState = ref.watch(getCompanyReviewProvider);
+    final postState = ref.watch(getPostProvider(_postProviderParams));
     final commentsState =
         ref.watch(getCommentsProvider(_commentsProviderParams));
     Widget? widget = fullScreenErrorWidgetOrNull(
       [
-        StateAndRetry(state: phoneReviewState, onRetry: _getPost),
-        StateAndRetry(state: companyReviewState, onRetry: _getPost),
+        StateAndRetry(state: postState, onRetry: _getPost),
         if (_comments.isEmpty)
           StateAndRetry(state: commentsState, onRetry: _getComments),
       ],
@@ -243,8 +228,8 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
             children: [
               _buildPost(),
               20.verticalSpace,
-              _buildPostedComment(),
-              _buildComments(),
+              // _buildPostedComment(),
+              // _buildComments(),
             ],
           ),
         ),
@@ -351,43 +336,29 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
   }
 
   Widget _buildPost() {
+    final state = ref.watch(getPostProvider(_postProviderParams));
+    Widget? loadingOrErrorwidget = loadingOrErrorWidgetOrNull(
+      state: state,
+      loadingWidget: PhoneReviewLoading(),
+    );
+    if (loadingOrErrorwidget != null) return loadingOrErrorwidget;
     switch (widget.screenArgs.postType) {
       case PostType.phoneReview:
         return _buildPhoneReview();
       case PostType.companyReview:
         return _buildCompanyReview();
-      // case CardType.productQuestion:
-      // case CardType.companyQuestion:
+      case PostType.phoneQuestion:
+        return _buildQuestion();
       default:
         return SizedBox();
     }
   }
 
   Widget _buildPhoneReview() {
-    final state = ref.watch(getPhoneReviewProvider);
-    Widget? widget = loadingOrErrorWidgetOrNull(
-      state: state,
-      loadingWidget: PhoneReviewLoading(),
-    );
-    if (widget != null) return widget;
-    PhoneReview phoneReview = (state as GetPhoneReviewLoadedState).review;
-    return ProductReviewCard(
-      reviewId: phoneReview.id,
-      productId: phoneReview.targetId,
-      userId: phoneReview.userId,
-      postedDate: phoneReview.createdAt,
-      usedSinceDate: phoneReview.ownedAt,
-      views: phoneReview.views,
-      authorName: phoneReview.userName,
-      imageUrl: phoneReview.photo,
-      productName: phoneReview.targetName,
-      scores: phoneReview.scores,
-      prosText: phoneReview.pros,
-      consText: phoneReview.cons,
-      likeCount: phoneReview.likes,
-      commentCount: phoneReview.commentsCount,
-      shareCount: phoneReview.shares,
-      liked: phoneReview.liked,
+    final state = ref.watch(getPostProvider(_postProviderParams));
+    PhoneReview phoneReview = (state as GetPostLoadedState).post as PhoneReview;
+    return ProductReviewCard.fromPhoneReview(
+      phoneReview: phoneReview,
       fullscreen: true,
       onPressingComment: () {
         focusNode.requestFocus();
@@ -396,30 +367,24 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
     );
   }
 
-  Widget _buildCompanyReview() {
-    final state = ref.watch(getCompanyReviewProvider);
-    Widget? widget = loadingOrErrorWidgetOrNull(
-      state: state,
-      loadingWidget: CompanyReviewLoading(),
+  Widget _buildQuestion() {
+    final state = ref.watch(getPostProvider(_postProviderParams));
+    Question question = (state as GetPostLoadedState).post as Question;
+    return QuestionCard.fromQuestion(
+      question,
+      cardHeaderTitleType: _targetType,
+      cardType: widget.screenArgs.cardType,
+      fullscreen: true,
+      onPressingAnswer: () {},
     );
-    if (widget != null) return widget;
-    CompanyReview companyReview = (state as GetCompanyReviewLoadedState).review;
-    return CompanyReviewCard(
-      reviewId: companyReview.id,
-      userId: companyReview.userId,
-      companyId: companyReview.targetId,
-      postedDate: companyReview.createdAt,
-      views: companyReview.views,
-      authorName: companyReview.userName,
-      imageUrl: companyReview.photo,
-      companyName: companyReview.targetName,
-      generalRating: companyReview.generalRating.toInt(),
-      prosText: companyReview.pros,
-      consText: companyReview.cons,
-      likeCount: companyReview.likes,
-      commentCount: companyReview.commentsCount,
-      shareCount: companyReview.shares,
-      liked: companyReview.liked,
+  }
+
+  Widget _buildCompanyReview() {
+    final state = ref.watch(getPostProvider(_postProviderParams));
+    CompanyReview companyReview =
+        (state as GetPostLoadedState).post as CompanyReview;
+    return CompanyReviewCard.fromCompanyReview(
+      companyReview: companyReview,
       fullscreen: true,
       onPressingComment: () {
         focusNode.requestFocus();

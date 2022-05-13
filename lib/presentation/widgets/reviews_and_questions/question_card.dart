@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:urrevs_ui_mobile/app/extensions.dart';
+import 'package:urrevs_ui_mobile/domain/models/answer.dart';
+import 'package:urrevs_ui_mobile/domain/models/quesiton.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/app_elevations.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
@@ -27,7 +29,7 @@ class QuestionCard extends StatelessWidget {
   final String questionId;
 
   /// Profile image url of the current logged in user.
-  final String imageUrl;
+  final String? imageUrl;
 
   /// Name of review author.
   final String authorName;
@@ -53,7 +55,7 @@ class QuestionCard extends StatelessWidget {
   /// Number of shares to the review
   final int shareCount;
 
-  final AnswerTree? answer;
+  final Answer? answer;
 
   final CardType cardType;
 
@@ -88,6 +90,28 @@ class QuestionCard extends StatelessWidget {
     this.answer,
   }) : super(key: key);
 
+  QuestionCard.fromQuestion(
+    Question question, {
+    Key? key,
+    required this.cardHeaderTitleType,
+    required this.cardType,
+    required this.fullscreen,
+    required this.onPressingAnswer,
+  })  : questionId = question.id,
+        userId = question.userId,
+        targetId = question.targetId,
+        targetName = question.targetName,
+        imageUrl = question.photo,
+        authorName = question.userName,
+        postedDate = question.createdAt,
+        questionText = question.content,
+        upvoteCount = question.upvotes,
+        answerCount = question.ansCount,
+        shareCount = question.shares,
+        upvoted = question.upvoted,
+        answer = question.acceptedAns,
+        super(key: key);
+
   /// An instance of [QuestionCard] filled with dummy data.
   static QuestionCard dummyInstance(
     BuildContext context, {
@@ -107,7 +131,6 @@ class QuestionCard extends StatelessWidget {
         answerCount: DummyDataManager.randomInt,
         shareCount: DummyDataManager.randomInt,
         upvoted: DummyDataManager.randomBool,
-        answer: AnswerTree.dummyInstanceInQuestionCard,
         cardType: DummyDataManager.randomBool
             ? CardType.productReview
             : CardType.companyReview,
@@ -151,7 +174,6 @@ class QuestionCard extends StatelessWidget {
       upvoted: upvoted ?? this.upvoted,
       fullscreen: fullscreen ?? this.fullscreen,
       cardType: cardType ?? this.cardType,
-      answer: answer ?? this.answer,
       onPressingAnswer: onPressingAnswer ?? this.onPressingAnswer,
     );
   }
@@ -208,6 +230,7 @@ class QuestionCard extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 8.h),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CardHeader(
                   imageUrl: imageUrl,
@@ -240,7 +263,7 @@ class QuestionCard extends StatelessWidget {
                   onShare: _onShare,
                   cardType: cardType,
                   fullscreen: fullscreen,
-                  postType: PostType.question,
+                  postType: PostType.phoneQuestion,
                   postId: questionId,
                 ),
                 if (!fullscreen && answer != null) ...[
@@ -249,20 +272,21 @@ class QuestionCard extends StatelessWidget {
                     thickness: 1.h,
                     color: ColorManager.dividerGrey,
                   ),
-                  Padding(
-                    padding:
-                        EdgeInsets.only(top: 25.h, right: 12.w, left: 12.w),
-                    child: answer!.copyWith(onTappingAnswerInCard: () {
-                      Navigator.of(context).pushNamed(
-                        FullscreenPostScreen.routeName,
-                        arguments: FullscreenPostScreenArgs(
-                          postType: PostType.question,
-                          cardType: cardType,
-                          postId: '',
-                        ),
-                      );
-                    }),
-                  ),
+                  // TODO: show accepted answer
+                  // Padding(
+                  //   padding:
+                  //       EdgeInsets.only(top: 25.h, right: 12.w, left: 12.w),
+                  //   child: answer!.copyWith(onTappingAnswerInCard: () {
+                  //     Navigator.of(context).pushNamed(
+                  //       FullscreenPostScreen.routeName,
+                  //       arguments: FullscreenPostScreenArgs(
+                  //         postType: PostType.question,
+                  //         cardType: cardType,
+                  //         postId: '',
+                  //       ),
+                  //     );
+                  //   }),
+                  // ),
                 ],
               ],
             ),
