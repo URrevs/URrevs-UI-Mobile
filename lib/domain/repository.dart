@@ -12,6 +12,7 @@ import 'package:urrevs_ui_mobile/data/remote_data_source/remote_data_source.dart
 import 'package:urrevs_ui_mobile/data/requests/reviews_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/search_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/responses/phones_api_responses.dart';
+import 'package:urrevs_ui_mobile/data/responses/questions_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/search_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/update_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/users_api_response.dart';
@@ -481,6 +482,38 @@ class Repository {
     return _tryAndCatch(() async {
       final response = await _remoteDataSource.getCompanyQuestion(questionId);
       return response.questionSubResponse.questionModel;
+    });
+  }
+
+  Future<Either<Failure, List<Question>>> getMyPhoneQuestions(int round) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.getMyPhoneQuestions(round);
+      return response.questionsModels;
+    });
+  }
+
+  Future<Either<Failure, List<Question>>> getMyCompanyQuestions(int round) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.getMyCompanyQuestions(round);
+      return response.questionsModels;
+    });
+  }
+
+  Future<Either<Failure, List<Question>>> getPhoneQuestionsOfAnotherUser(
+      String userId, int round) {
+    return _tryAndCatch(() async {
+      final response =
+          await _remoteDataSource.getPhoneQuestionsOfAnotherUser(userId, round);
+      return response.questionsModels;
+    });
+  }
+
+  Future<Either<Failure, List<Question>>> getCompanyQuestionsOfAnotherUser(
+      String userId, int round) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.getCompanyQuestionsOfAnotherUser(
+          userId, round);
+      return response.questionsModels;
     });
   }
 }

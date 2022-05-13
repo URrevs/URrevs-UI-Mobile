@@ -263,7 +263,7 @@ class QuestionCard extends StatelessWidget {
                   onShare: _onShare,
                   cardType: cardType,
                   fullscreen: fullscreen,
-                  postType: PostType.phoneQuestion,
+                  postType: PostType.question,
                   postId: questionId,
                 ),
                 if (!fullscreen && answer != null) ...[

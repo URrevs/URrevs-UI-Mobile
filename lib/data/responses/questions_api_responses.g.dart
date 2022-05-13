@@ -35,3 +35,67 @@ Map<String, dynamic> _$GetCompanyQuestionResponseToJson(
       'success': instance.success,
       'question': instance.questionSubResponse,
     };
+
+GetMyPhoneQuestionsResponse _$GetMyPhoneQuestionsResponseFromJson(
+        Map<String, dynamic> json) =>
+    GetMyPhoneQuestionsResponse(
+      success: json['success'] as bool,
+      questionsSubResponses: (json['questions'] as List<dynamic>)
+          .map((e) => QuestionSubResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$GetMyPhoneQuestionsResponseToJson(
+        GetMyPhoneQuestionsResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'questions': instance.questionsSubResponses,
+    };
+
+GetMyCompanyQuestionsResponse _$GetMyCompanyQuestionsResponseFromJson(
+        Map<String, dynamic> json) =>
+    GetMyCompanyQuestionsResponse(
+      success: json['success'] as bool,
+      questionsSubResponses: (json['questions'] as List<dynamic>)
+          .map((e) => QuestionSubResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$GetMyCompanyQuestionsResponseToJson(
+        GetMyCompanyQuestionsResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'questions': instance.questionsSubResponses,
+    };
+
+GetPhoneQuestionsOfAnotherUser _$GetPhoneQuestionsOfAnotherUserFromJson(
+        Map<String, dynamic> json) =>
+    GetPhoneQuestionsOfAnotherUser(
+      success: json['success'] as bool,
+      questionsSubResponses: (json['questions'] as List<dynamic>)
+          .map((e) => QuestionSubResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$GetPhoneQuestionsOfAnotherUserToJson(
+        GetPhoneQuestionsOfAnotherUser instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'questions': instance.questionsSubResponses,
+    };
+
+GetCompanyQuestionsOfAnotherUser _$GetCompanyQuestionsOfAnotherUserFromJson(
+        Map<String, dynamic> json) =>
+    GetCompanyQuestionsOfAnotherUser(
+      success: json['success'] as bool,
+      questionsSubResponses: (json['questions'] as List<dynamic>)
+          .map((e) => QuestionSubResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$GetCompanyQuestionsOfAnotherUserToJson(
+        GetCompanyQuestionsOfAnotherUser instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'questions': instance.questionsSubResponses,
+    };

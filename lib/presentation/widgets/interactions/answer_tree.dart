@@ -70,7 +70,7 @@ class AnswerTree extends StatefulWidget {
         replies: DummyDataManager.replies,
         answerId: DummyDataManager.randomInt.toString(),
         userId: DummyDataManager.randomInt.toString(),
-        parentPostType: PostType.phoneQuestion,
+        parentPostType: PostType.question,
       );
 
   static AnswerTree get dummyInstanceInQuestionCard => AnswerTree(
@@ -89,7 +89,7 @@ class AnswerTree extends StatefulWidget {
         onTappingAnswerInCard: () {},
         answerId: DummyDataManager.randomInt.toString(),
         userId: DummyDataManager.randomInt.toString(),
-        parentPostType: PostType.phoneQuestion,
+        parentPostType: PostType.question,
       );
 
   AnswerTree copyWith({

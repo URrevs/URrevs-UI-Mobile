@@ -7,6 +7,7 @@ import 'package:urrevs_ui_mobile/domain/failure.dart';
 
 import 'package:urrevs_ui_mobile/presentation/resources/assets_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/authentication_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/menu_screen/subscreens/questions_about_my_products_screen.dart';
@@ -82,7 +83,13 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
         title: LocaleKeys.myQuestions.tr(),
         iconData: Icons.question_answer_outlined,
         onTap: () {
-          Navigator.of(context).pushNamed(PostedQuestionsScreen.routeName);
+          Navigator.of(context).pushNamed(
+            PostedReviewsScreen.routeName,
+            arguments: PostedReviewsScreenArgs(
+              userId: null,
+              postContentType: PostContentType.question,
+            ),
+          );
         },
       ),
       ItemTile(
@@ -114,6 +121,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
               PostedReviewsScreen.routeName,
               arguments: PostedReviewsScreenArgs(
                 userId: widget.screenArgs.userId,
+                postContentType: PostContentType.review,
               ),
             );
           },
@@ -134,7 +142,13 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
           title: LocaleKeys.askedQuestions.tr(),
           iconData: Icons.devices_other_outlined,
           onTap: () {
-            Navigator.of(context).pushNamed(PostedQuestionsScreen.routeName);
+            Navigator.of(context).pushNamed(
+              PostedReviewsScreen.routeName,
+              arguments: PostedReviewsScreenArgs(
+                userId: widget.screenArgs.userId,
+                postContentType: PostContentType.question,
+              ),
+            );
           },
         ),
       ];

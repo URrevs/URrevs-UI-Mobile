@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 
 import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone_review.dart';
+import 'package:urrevs_ui_mobile/domain/models/post.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 
 abstract class GetUserPhoneReviewsState extends Equatable
@@ -20,9 +21,9 @@ class GetUserPhoneReviewsLoadingState extends GetUserPhoneReviewsState
 }
 
 class GetUserPhoneReviewsLoadedState extends GetUserPhoneReviewsState
-    implements LoadedState, InfiniteScrollingState<PhoneReview> {
+    implements LoadedState, InfiniteScrollingState<Post> {
   @override
-  final List<PhoneReview> infiniteScrollingItems;
+  final List<Post> infiniteScrollingItems;
   @override
   final bool roundsEnded;
 

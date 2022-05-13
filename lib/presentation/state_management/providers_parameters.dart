@@ -30,9 +30,13 @@ abstract class UserIdProviderParams extends NotSyncedProviderParams {
   List<Object?> get props => [providerId, userId];
 }
 
-class GetUserPhoneReviewsProviderParams extends UserIdProviderParams {
-  GetUserPhoneReviewsProviderParams({required String? userId})
-      : super(userId: userId);
+class GetUserPostsProviderParams extends UserIdProviderParams {
+  GetUserPostsProviderParams({
+    required String? userId,
+    required this.postContentType,
+  }) : super(userId: userId);
+
+  PostContentType postContentType;
 }
 
 class GetUserCompanyReviewsProviderParams extends UserIdProviderParams {

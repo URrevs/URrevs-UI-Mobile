@@ -50,7 +50,7 @@ class _HomeSubscreenState extends ConsumerState<HomeSubscreen> {
             Navigator.of(context).pushNamed(
               FullscreenPostScreen.routeName,
               arguments: FullscreenPostScreenArgs(
-                postType: PostType.phoneQuestion,
+                postType: PostType.question,
                 cardType: CardType.productQuestion,
                 postId: 'change_it',
                 focusOnTextField: true,
@@ -64,7 +64,7 @@ class _HomeSubscreenState extends ConsumerState<HomeSubscreen> {
             Navigator.of(context).pushNamed(
               FullscreenPostScreen.routeName,
               arguments: FullscreenPostScreenArgs(
-                postType: PostType.phoneQuestion,
+                postType: PostType.question,
                 cardType: CardType.companyQuestion,
                 postId: 'change_it',
                 focusOnTextField: true,

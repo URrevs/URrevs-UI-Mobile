@@ -347,7 +347,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
         return _buildPhoneReview();
       case PostType.companyReview:
         return _buildCompanyReview();
-      case PostType.phoneQuestion:
+      case PostType.question:
         return _buildQuestion();
       default:
         return SizedBox();

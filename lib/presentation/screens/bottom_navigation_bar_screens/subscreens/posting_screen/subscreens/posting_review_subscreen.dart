@@ -500,7 +500,10 @@ class _PostingReviewSubscreenState
               onPressed: () {
                 Navigator.of(context).pushNamed(
                   PostedReviewsScreen.routeName,
-                  arguments: PostedReviewsScreenArgs(userId: null),
+                  arguments: PostedReviewsScreenArgs(
+                    userId: null,
+                    postContentType: PostContentType.review,
+                  ),
                 );
               },
             ),

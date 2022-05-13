@@ -29,7 +29,7 @@ class GetPostNotifier extends StateNotifier<GetPostState> {
       case PostType.companyReview:
         response = await GetIt.I<Repository>().getCompanyReview(_postId);
         break;
-      case PostType.phoneQuestion:
+      case PostType.question:
         response = await GetIt.I<Repository>().getPhoneQuestion(_postId);
         break;
       case PostType.companyQuestion:
