@@ -71,10 +71,10 @@ class LikeProviderParams extends Equatable {
       [socialItemId, replyParentId, postType, interactionType];
 }
 
-class GetCommentsProviderParams extends NotSyncedProviderParams {
+class GetInteractionsProviderParams extends NotSyncedProviderParams {
   final String postId;
   final PostType postType;
-  GetCommentsProviderParams({
+  GetInteractionsProviderParams({
     required this.postId,
     required this.postType,
   });

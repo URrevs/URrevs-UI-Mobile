@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -7,13 +8,14 @@ import 'package:urrevs_ui_mobile/app/extensions.dart';
 import 'package:urrevs_ui_mobile/data/requests/base_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/reviews_api_requests.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
+import 'package:urrevs_ui_mobile/domain/models/answer.dart';
 import 'package:urrevs_ui_mobile/domain/models/comment.dart';
 import 'package:urrevs_ui_mobile/domain/models/company_review.dart';
+import 'package:urrevs_ui_mobile/domain/models/direct_interaction.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone_review.dart';
 import 'package:urrevs_ui_mobile/domain/models/quesiton.dart';
 import 'package:urrevs_ui_mobile/domain/models/reply_model.dart';
 import 'package:urrevs_ui_mobile/domain/models/user.dart';
-
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
@@ -25,7 +27,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/authentica
 import 'package:urrevs_ui_mobile/presentation/state_management/states/question_states/get_post_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/add_comment_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/add_review_reply_state.dart';
-import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_comments_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_interactions_state.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/empty_list_widget.dart';
@@ -36,7 +38,7 @@ import 'package:urrevs_ui_mobile/presentation/widgets/interactions/comment_tree.
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/comments_list.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/reply.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/comments_list_loading.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/interactions_list_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/company_review_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/phone_review_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/company_review_card.dart';
@@ -93,15 +95,15 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
   late final GetPostProviderParams _postProviderParams =
       GetPostProviderParams(postId: _postId, postType: _postType);
 
-  late final GetCommentsProviderParams _commentsProviderParams =
-      GetCommentsProviderParams(
+  late final GetInteractionsProviderParams _interactionsProviderParams =
+      GetInteractionsProviderParams(
     postId: _postId,
     postType: widget.screenArgs.postType,
   );
   late final _addCommentProviderParams =
       AddCommentProviderParams(postId: _postId, postType: _postType);
 
-  final List<Comment> _comments = [];
+  final List<DirectInteraction> _interactions = [];
 
   String? _idOfCommentRepliedTo;
 
@@ -129,10 +131,10 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
     ref.read(getPostProvider(_postProviderParams).notifier).getPost();
   }
 
-  void _getComments() {
+  void _getInteractions() {
     ref
-        .read(getCommentsProvider(_commentsProviderParams).notifier)
-        .getComments();
+        .read(getInteractionsProvider(_interactionsProviderParams).notifier)
+        .getInteractions();
   }
 
   void _addCommentOrReply() {
@@ -147,6 +149,53 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
     ref
         .read(addCommentProvider(_addCommentProviderParams).notifier)
         .addComment(request);
+  }
+
+  void _addAcceptedAnswerListener() {
+    // add accepted answer to interactions state when both question and
+    // interactions are loaeded
+    ref.listen(getPostProvider(_postProviderParams), (previous, next) {
+      final interactiosState =
+          ref.watch(getInteractionsProvider(_interactionsProviderParams));
+      bool isQuestion = _postType == PostType.companyQuestion ||
+          _postType == PostType.phoneQuestion;
+      bool bothLoaded =
+          next is GetPostLoadedState && interactiosState is LoadedState;
+      if (isQuestion && bothLoaded) {
+        Question question = next.post as Question;
+        if (question.acceptedAns != null) {
+          SchedulerBinding.instance!.addPostFrameCallback((timeStamp) {
+            ref
+                .read(getInteractionsProvider(_interactionsProviderParams)
+                    .notifier)
+                .addInteractionToState(question.acceptedAns!);
+          });
+        }
+      }
+    });
+    ref.listen(getInteractionsProvider(_interactionsProviderParams),
+        (previous, next) {
+      final postState = ref.watch(getPostProvider(_postProviderParams));
+      bool isQuestion = _postType == PostType.companyQuestion ||
+          _postType == PostType.phoneQuestion;
+      bool bothLoaded =
+          next is GetInteractionsLoadedState && postState is GetPostLoadedState;
+      if (!(isQuestion && bothLoaded)) return;
+      final answersList =
+          next.infiniteScrollingItems.map((i) => i as Answer).toList();
+      bool containsAccepted = answersList.any((answer) => answer.accepted);
+      if (!containsAccepted) {
+        Question question = postState.post as Question;
+        if (question.acceptedAns != null) {
+          SchedulerBinding.instance!.addPostFrameCallback((timeStamp) {
+            ref
+                .read(getInteractionsProvider(_interactionsProviderParams)
+                    .notifier)
+                .addInteractionToState(question.acceptedAns!);
+          });
+        }
+      }
+    });
   }
 
   String get _hintText {
@@ -165,7 +214,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
     print(widget.screenArgs.postId);
     Future.delayed(Duration.zero, () {
       _getPost();
-      _getComments();
+      _getInteractions();
     });
     if (widget.screenArgs.focusOnTextField) {
       focusNode.requestFocus();
@@ -174,10 +223,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ref.addErrorListener(
-      provider: getPostProvider(_postProviderParams),
-      context: context,
-    );
+    _addAcceptedAnswerListener();
     return Scaffold(
       appBar: AppBars.appBarWithActions(
         context: context,
@@ -191,14 +237,18 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
   }
 
   Widget _buildBody() {
+    ref.addErrorListener(
+      provider: getPostProvider(_postProviderParams),
+      context: context,
+    );
     final postState = ref.watch(getPostProvider(_postProviderParams));
-    final commentsState =
-        ref.watch(getCommentsProvider(_commentsProviderParams));
+    final interactionsState =
+        ref.watch(getInteractionsProvider(_interactionsProviderParams));
     Widget? widget = fullScreenErrorWidgetOrNull(
       [
         StateAndRetry(state: postState, onRetry: _getPost),
-        if (_comments.isEmpty)
-          StateAndRetry(state: commentsState, onRetry: _getComments),
+        if (_interactions.isEmpty)
+          StateAndRetry(state: interactionsState, onRetry: _getInteractions),
       ],
     );
     if (widget != null) return widget;
@@ -210,7 +260,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
             children: [
               _buildPost(),
               20.verticalSpace,
-              _buildComments(),
+              _buildInteractions(),
             ],
           ),
         ),
@@ -219,15 +269,17 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
     );
   }
 
-  Widget _buildComments() {
-    final state = ref.watch(getCommentsProvider(_commentsProviderParams));
-    bool roundsEnded = state is GetCommentsLoadedState && state.roundsEnded;
+  Widget _buildInteractions() {
+    final state =
+        ref.watch(getInteractionsProvider(_interactionsProviderParams));
+    bool roundsEnded = state is GetInteractionsLoadedState && state.roundsEnded;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildCommentsTrees(),
-        _buildCommentsListLoadingOrError(),
-        if (_comments.isNotEmpty && !roundsEnded) _buildMoreCommentsButton(),
+        _buildInteractionsTrees(),
+        _buildInteractionsListLoadingOrError(),
+        if (_interactions.isNotEmpty && !roundsEnded)
+          _buildMoreInteractionsButton(),
       ],
     );
   }
@@ -255,8 +307,20 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
   //   }
   // }
 
-  Widget _buildMoreCommentsButton() {
-    final state = ref.watch(getCommentsProvider(_commentsProviderParams));
+  Widget _buildMoreInteractionsButton() {
+    late String text;
+    switch (_postType) {
+      case PostType.phoneReview:
+      case PostType.companyReview:
+        text = LocaleKeys.moreComments.tr();
+        break;
+      case PostType.phoneQuestion:
+      case PostType.companyQuestion:
+        text = LocaleKeys.moreAnswers.tr();
+        break;
+    }
+    final state =
+        ref.watch(getInteractionsProvider(_interactionsProviderParams));
     if (state is LoadingState || state is ErrorState) {
       return SizedBox();
     }
@@ -264,53 +328,72 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
       alignment:
           context.isArabic ? Alignment.centerRight : Alignment.centerLeft,
       child: TextButton(
-        onPressed: _getComments,
+        onPressed: _getInteractions,
         style: TextButtonStyleManager.showMoreAnswers,
         child: Text(
-          LocaleKeys.moreComments.tr(),
+          text,
           style: TextStyleManager.s16w800.copyWith(color: ColorManager.black),
         ),
       ),
     );
   }
 
-  Widget _buildCommentsTrees() {
+  Widget _buildInteractionsTrees() {
     // add new comments to state
     // also show snackbar at first round error
-    ref.listen(getCommentsProvider(_commentsProviderParams), (previous, next) {
-      if (next is GetCommentsLoadedState) {
-        _comments.clear();
-        _comments.addAll(next.infiniteScrollingItems);
-      } else if (next is GetCommentsErrorState && _comments.isEmpty) {
+    ref.listen(getInteractionsProvider(_interactionsProviderParams),
+        (previous, next) {
+      if (next is GetInteractionsLoadedState) {
+        _interactions.clear();
+        _interactions.addAll(next.infiniteScrollingItems);
+      } else if (next is GetInteractionsErrorState && _interactions.isEmpty) {
         showSnackBarWithoutActionAtError(state: next, context: context);
       }
     });
-    final state = ref.watch(getCommentsProvider(_commentsProviderParams));
-    if (state is LoadedState && _comments.isEmpty) return EmptyListWidget();
-    return CommentsList(
-      comments: _comments,
-      parentPostType: widget.screenArgs.postType,
-      onPressingReplyList: List.generate(_comments.length, (i) {
-        return () {
-          _idOfCommentRepliedTo = _comments[i].id;
-          focusNode.requestFocus();
-        };
-      }),
-    );
+    final state =
+        ref.watch(getInteractionsProvider(_interactionsProviderParams));
+    if (state is LoadedState && _interactions.isEmpty) return EmptyListWidget();
+    switch (_postType) {
+      case PostType.phoneReview:
+      case PostType.companyReview:
+        return CommentsList(
+          comments: _interactions.map((i) => i as Comment).toList(),
+          parentPostType: _postType,
+          onPressingReplyList: List.generate(_interactions.length, (i) {
+            return () {
+              _idOfCommentRepliedTo = _interactions[i].id;
+              focusNode.requestFocus();
+            };
+          }),
+        );
+      case PostType.phoneQuestion:
+      case PostType.companyQuestion:
+        return AnswersList(
+          answers: _interactions.map((i) => i as Answer).toList(),
+          parentPostType: _postType,
+          onPressingReplyList: List.generate(_interactions.length, (i) {
+            return () {
+              _idOfCommentRepliedTo = _interactions[i].id;
+              focusNode.requestFocus();
+            };
+          }),
+        );
+    }
   }
 
   // always return loading widget when in loading state
   // return vertical error widget at error state accompanied by presence of
   // comments in the state (next round error)
-  Widget _buildCommentsListLoadingOrError() {
-    final state = ref.watch(getCommentsProvider(_commentsProviderParams));
-    if (state is ErrorState && _comments.isNotEmpty) {
+  Widget _buildInteractionsListLoadingOrError() {
+    final state =
+        ref.watch(getInteractionsProvider(_interactionsProviderParams));
+    if (state is ErrorState && _interactions.isNotEmpty) {
       return VerticalListErrorWidget(
-        onRetry: _getComments,
+        onRetry: _getInteractions,
         retryLastRequest: (state as ErrorState).failure is RetryFailure,
       );
     } else if (state is LoadingState) {
-      return CommentsListLoading();
+      return InteractionsListLoading();
     } else {
       return SizedBox();
     }
@@ -352,9 +435,6 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
   Widget _buildQuestion() {
     final state = ref.watch(getPostProvider(_postProviderParams));
     Question question = (state as GetPostLoadedState).post as Question;
-    PostType postType = _targetType == TargetType.phone
-        ? PostType.phoneQuestion
-        : PostType.companyQuestion;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -365,16 +445,6 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
           fullscreen: true,
           onPressingAnswer: () {},
         ),
-        if (question.acceptedAns != null)
-          AnswerTree.fromAnswer(
-            question.acceptedAns!,
-            parentPostType: postType,
-            accepted: true,
-            isQuestionAuthor: false,
-            inQuestionCard: false,
-            onTappingAnswerInCard: null,
-            onPressingReply: () {},
-          ),
       ],
     );
   }
@@ -408,8 +478,9 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
             content: _controller.text,
           );
           ref
-              .read(getCommentsProvider(_commentsProviderParams).notifier)
-              .addCommentToState(lastPostedComment);
+              .read(
+                  getInteractionsProvider(_interactionsProviderParams).notifier)
+              .addInteractionToState(lastPostedComment);
         } else {
           final User user =
               (ref.watch(authenticationProvider) as AuthenticationLoadedState)
@@ -425,7 +496,8 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
             liked: false,
           );
           ref
-              .read(getCommentsProvider(_commentsProviderParams).notifier)
+              .read(
+                  getInteractionsProvider(_interactionsProviderParams).notifier)
               .addReplyToCommentInState(
                   _idOfCommentRepliedTo!, lastPostedReply);
         }

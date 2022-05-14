@@ -37,7 +37,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/question_s
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/add_comment_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/add_phone_review_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/add_review_reply_state.dart';
-import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_comments_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_interactions_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_phone_manufacturing_company_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_reviews_on_certain_phone_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_user_phone_reviews_state.dart';
@@ -61,7 +61,7 @@ import 'notifiers/questions_notifiers/get_post_notifier.dart';
 import 'notifiers/reviews_notifiers/add_comment_notifier.dart';
 import 'notifiers/reviews_notifiers/add_phone_review_notifier.dart';
 import 'notifiers/reviews_notifiers/add_review_reply_notifier.dart';
-import 'notifiers/reviews_notifiers/get_comments_notifier.dart';
+import 'notifiers/reviews_notifiers/get_interactions_notifier.dart';
 import 'notifiers/reviews_notifiers/get_phone_manufacturing_company_notifier.dart';
 import 'notifiers/reviews_notifiers/get_reviews_on_certain_phone_notifier.dart';
 import 'notifiers/reviews_notifiers/get_user_phone_reviews_notifier.dart';
@@ -198,9 +198,12 @@ final likeProvider = StateNotifierProvider.autoDispose
   );
 });
 
-final getCommentsProvider = StateNotifierProvider.autoDispose
-    .family<GetCommentsNotifier, GetCommentsState, GetCommentsProviderParams>(
-        (ref, params) => GetCommentsNotifier(
+final getInteractionsProvider = StateNotifierProvider.autoDispose.family<
+    GetInteractionsNotifier,
+    GetInteractionsState,
+    GetInteractionsProviderParams>((ref,
+        params) =>
+    GetInteractionsNotifier(
             postId: params.postId, postType: params.postType));
 
 final addCommentProvider = StateNotifierProvider.autoDispose

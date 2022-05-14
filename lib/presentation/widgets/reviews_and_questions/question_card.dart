@@ -288,8 +288,6 @@ class QuestionCard extends StatelessWidget {
                       child: AnswerTree.fromAnswer(
                         answer!,
                         parentPostType: postType,
-                        accepted: true,
-                        isQuestionAuthor: true,
                         inQuestionCard: true,
                         onTappingAnswerInCard: () {
                           Navigator.of(context).pushNamed(

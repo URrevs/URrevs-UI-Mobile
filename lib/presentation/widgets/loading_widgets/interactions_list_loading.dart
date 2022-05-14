@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CommentsListLoading extends StatelessWidget {
-  const CommentsListLoading({Key? key}) : super(key: key);
+class InteractionsListLoading extends StatelessWidget {
+  const InteractionsListLoading({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

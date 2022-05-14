@@ -18,6 +18,7 @@ import 'package:urrevs_ui_mobile/data/responses/search_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/update_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/users_api_response.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
+import 'package:urrevs_ui_mobile/domain/models/answer.dart';
 import 'package:urrevs_ui_mobile/domain/models/comment.dart';
 import 'package:urrevs_ui_mobile/domain/models/company.dart';
 import 'package:urrevs_ui_mobile/domain/models/company_review.dart';
@@ -539,6 +540,24 @@ class Repository {
   Future<Either<Failure, void>> downvoteCompanyQuestion(String questionId) {
     return _tryAndCatch(() async {
       await _remoteDataSource.downvoteCompanyQuestion(questionId);
+    });
+  }
+
+  Future<Either<Failure, List<Answer>>> getAnswersAndRepliesForPhoneQuestion(
+      String questionId, int round) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource
+          .getAnswersAndRepliesForPhoneQuestion(questionId, round);
+      return response.answersModels;
+    });
+  }
+
+  Future<Either<Failure, List<Answer>>> getAnswersAndRepliesForCompanyQuestion(
+      String questionId, int round) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource
+          .getAnswersAndRepliesForCompanyQuestion(questionId, round);
+      return response.answersModels;
     });
   }
 }

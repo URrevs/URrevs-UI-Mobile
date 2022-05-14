@@ -32,7 +32,6 @@ class AnswerTree extends StatefulWidget {
     required this.replies,
     required this.liked,
     required this.accepted,
-    required this.isQuestionAuthor,
     required this.inQuestionCard,
     required this.onPressingReply,
     this.onTappingAnswerInCard,
@@ -46,8 +45,6 @@ class AnswerTree extends StatefulWidget {
     Answer answer, {
     Key? key,
     required this.parentPostType,
-    required this.accepted,
-    required this.isQuestionAuthor,
     required this.inQuestionCard,
     required this.onTappingAnswerInCard,
     required this.onPressingReply,
@@ -61,6 +58,7 @@ class AnswerTree extends StatefulWidget {
         datePosted = answer.createdAt,
         replies = answer.replies,
         liked = answer.upvoted,
+        accepted = answer.accepted,
         super(key: key);
 
   final String answerId;
@@ -74,7 +72,6 @@ class AnswerTree extends StatefulWidget {
   final DateTime datePosted;
   final bool liked;
   final bool accepted;
-  final bool isQuestionAuthor;
   final bool inQuestionCard;
   final List<ReplyModel> replies;
   final VoidCallback? onTappingAnswerInCard;
@@ -90,7 +87,6 @@ class AnswerTree extends StatefulWidget {
         datePosted: DummyDataManager.postedDate,
         liked: DummyDataManager.randomBool,
         accepted: DummyDataManager.randomBool,
-        isQuestionAuthor: DummyDataManager.randomBool,
         inQuestionCard: false,
         replies: [],
         answerId: DummyDataManager.randomInt.toString(),
@@ -109,7 +105,6 @@ class AnswerTree extends StatefulWidget {
         datePosted: DummyDataManager.postedDate,
         liked: DummyDataManager.randomBool,
         accepted: true,
-        isQuestionAuthor: DummyDataManager.randomBool,
         inQuestionCard: true,
         replies: [],
         onTappingAnswerInCard: () {},
@@ -146,7 +141,6 @@ class AnswerTree extends StatefulWidget {
       datePosted: datePosted ?? this.datePosted,
       liked: liked ?? this.liked,
       accepted: accepted ?? this.accepted,
-      isQuestionAuthor: isQuestionAuthor ?? this.isQuestionAuthor,
       inQuestionCard: inQuestionCard ?? this.inQuestionCard,
       replies: replies ?? this.replies,
       onTappingAnswerInCard:
@@ -171,13 +165,6 @@ class _AnswerTreeState extends State<AnswerTree> {
     });
   }
 
-  InteractionFooterFirstButtonText get firstButtonType {
-    if (widget.isQuestionAuthor) {
-      return InteractionFooterFirstButtonText.acceptAnswer;
-    } else {
-      return InteractionFooterFirstButtonText.vote;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -224,7 +211,6 @@ class _AnswerTreeState extends State<AnswerTree> {
                   datePosted: widget.datePosted,
                   maxWidth: constraints.maxWidth - 16.w,
                   liked: widget.liked,
-                  firstButtonType: firstButtonType,
                   interactionId: widget.answerId,
                   replyParentId: null,
                   interactionType: InteractionType.answer,

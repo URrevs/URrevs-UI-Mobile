@@ -329,4 +329,18 @@ abstract class RemoteDataSource {
   Future<DownvoteCompanyQuestionResponse> downvoteCompanyQuestion(
     @Path() String questionId,
   );
+
+  @GET('/questions/phone/{questionId}/answers')
+  Future<GetAnswersAndRepliesForPhoneQuestionResponse>
+      getAnswersAndRepliesForPhoneQuestion(
+    @Path() String questionId,
+    @Query('round') int round,
+  );
+
+  @GET('/questions/company/{questionId}/answers')
+  Future<GetAnswersAndRepliesForCompanyQuestionResponse>
+      getAnswersAndRepliesForCompanyQuestion(
+    @Path() String questionId,
+    @Query('round') int round,
+  );
 }

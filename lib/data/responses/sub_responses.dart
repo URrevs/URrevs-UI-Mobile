@@ -713,7 +713,7 @@ class QuestionSubResponse {
         upvoted: upvoted,
         ansCount: ansCount,
         shares: shares,
-        acceptedAns: acceptedAns?.answerModel,
+        acceptedAns: acceptedAns?.answerModel(accepted: true),
       );
 
   factory QuestionSubResponse.fromJson(Map<String, Object?> json) =>
@@ -748,7 +748,7 @@ class AnswerSubResponse {
     required this.repliesSubResponses,
   });
 
-  Answer get answerModel => Answer(
+  Answer answerModel({required bool accepted}) => Answer(
         id: id,
         userId: userId,
         userName: userName,
@@ -759,6 +759,7 @@ class AnswerSubResponse {
         upvotes: upvotes,
         upvoted: upvoted,
         replies: repliesSubResponses.map((r) => r.replyModel).toList(),
+        accepted: accepted,
       );
 
   factory AnswerSubResponse.fromJson(Map<String, Object?> json) =>

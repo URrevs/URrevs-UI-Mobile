@@ -155,3 +155,37 @@ Map<String, dynamic> _$DownvoteCompanyQuestionResponseToJson(
       'success': instance.success,
       'status': instance.status,
     };
+
+GetAnswersAndRepliesForPhoneQuestionResponse
+    _$GetAnswersAndRepliesForPhoneQuestionResponseFromJson(
+            Map<String, dynamic> json) =>
+        GetAnswersAndRepliesForPhoneQuestionResponse(
+          success: json['success'] as bool,
+          answersSubResponses: (json['answers'] as List<dynamic>)
+              .map((e) => AnswerSubResponse.fromJson(e as Map<String, dynamic>))
+              .toList(),
+        );
+
+Map<String, dynamic> _$GetAnswersAndRepliesForPhoneQuestionResponseToJson(
+        GetAnswersAndRepliesForPhoneQuestionResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'answers': instance.answersSubResponses,
+    };
+
+GetAnswersAndRepliesForCompanyQuestionResponse
+    _$GetAnswersAndRepliesForCompanyQuestionResponseFromJson(
+            Map<String, dynamic> json) =>
+        GetAnswersAndRepliesForCompanyQuestionResponse(
+          success: json['success'] as bool,
+          answersSubResponses: (json['answers'] as List<dynamic>)
+              .map((e) => AnswerSubResponse.fromJson(e as Map<String, dynamic>))
+              .toList(),
+        );
+
+Map<String, dynamic> _$GetAnswersAndRepliesForCompanyQuestionResponseToJson(
+        GetAnswersAndRepliesForCompanyQuestionResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'answers': instance.answersSubResponses,
+    };

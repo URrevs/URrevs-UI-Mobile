@@ -987,6 +987,43 @@ class _RemoteDataSource implements RemoteDataSource {
     return value;
   }
 
+  @override
+  Future<GetAnswersAndRepliesForPhoneQuestionResponse>
+      getAnswersAndRepliesForPhoneQuestion(questionId, round) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'round': round};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GetAnswersAndRepliesForPhoneQuestionResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/questions/phone/${questionId}/answers',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value =
+        GetAnswersAndRepliesForPhoneQuestionResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<GetAnswersAndRepliesForCompanyQuestionResponse>
+      getAnswersAndRepliesForCompanyQuestion(questionId, round) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'round': round};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GetAnswersAndRepliesForCompanyQuestionResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(
+                    _dio.options, '/questions/company/${questionId}/answers',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value =
+        GetAnswersAndRepliesForCompanyQuestionResponse.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

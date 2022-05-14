@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'package:urrevs_ui_mobile/data/responses/sub_responses.dart';
+import 'package:urrevs_ui_mobile/domain/models/answer.dart';
 import 'package:urrevs_ui_mobile/domain/models/quesiton.dart';
 
 import 'base_response.dart';
@@ -156,4 +157,42 @@ class DownvoteCompanyQuestionResponse extends BaseResponse {
       _$DownvoteCompanyQuestionResponseFromJson(json);
   Map<String, dynamic> toJson() =>
       _$DownvoteCompanyQuestionResponseToJson(this);
+}
+
+@JsonSerializable()
+class GetAnswersAndRepliesForPhoneQuestionResponse extends BaseResponse {
+  @JsonKey(name: 'answers')
+  List<AnswerSubResponse> answersSubResponses;
+  GetAnswersAndRepliesForPhoneQuestionResponse({
+    required bool success,
+    required this.answersSubResponses,
+  }) : super(success: success);
+
+  List<Answer> get answersModels =>
+      answersSubResponses.map((a) => a.answerModel(accepted: false)).toList();
+
+  factory GetAnswersAndRepliesForPhoneQuestionResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$GetAnswersAndRepliesForPhoneQuestionResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$GetAnswersAndRepliesForPhoneQuestionResponseToJson(this);
+}
+
+@JsonSerializable()
+class GetAnswersAndRepliesForCompanyQuestionResponse extends BaseResponse {
+  @JsonKey(name: 'answers')
+  List<AnswerSubResponse> answersSubResponses;
+  GetAnswersAndRepliesForCompanyQuestionResponse({
+    required bool success,
+    required this.answersSubResponses,
+  }) : super(success: success);
+
+  List<Answer> get answersModels =>
+      answersSubResponses.map((a) => a.answerModel(accepted: false)).toList();
+
+  factory GetAnswersAndRepliesForCompanyQuestionResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$GetAnswersAndRepliesForCompanyQuestionResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$GetAnswersAndRepliesForCompanyQuestionResponseToJson(this);
 }

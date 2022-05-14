@@ -24,7 +24,6 @@ class InteractionFooter extends ConsumerStatefulWidget {
     required this.datePosted,
     required this.maxWidth,
     required this.liked,
-    required this.firstButtonType,
     required this.onPressingReply,
     required this.interactionId,
     required this.replyParentId,
@@ -37,7 +36,6 @@ class InteractionFooter extends ConsumerStatefulWidget {
   final DateTime datePosted;
   final double maxWidth;
   final bool liked;
-  final InteractionFooterFirstButtonText firstButtonType;
   final bool posting;
   final VoidCallback onPressingReply;
   final String? interactionId;
@@ -64,15 +62,23 @@ class _InteractionFooterState extends ConsumerState<InteractionFooter> {
   String get firstButtonText {
     final state = ref.watch(likeProvider(_likeProviderParams!));
     bool liked = state is LikeLoadedState && state.liked;
-    switch (widget.firstButtonType) {
-      case InteractionFooterFirstButtonText.like:
+    switch (widget.parentPostType) {
+      case PostType.phoneReview:
+      case PostType.companyReview:
         return liked ? LocaleKeys.liked.tr() : LocaleKeys.like.tr();
-      case InteractionFooterFirstButtonText.vote:
-        return LocaleKeys.vote.tr();
-      case InteractionFooterFirstButtonText.acceptAnswer:
-        return liked
-            ? LocaleKeys.acceptedAnswer.tr()
-            : LocaleKeys.acceptAnswer.tr();
+      case PostType.phoneQuestion:
+      case PostType.companyQuestion:
+        {
+          final authState =
+              ref.watch(authenticationProvider) as AuthenticationLoadedState;
+          if (authState.user.id == widget.userId) {
+            return liked
+                ? LocaleKeys.acceptedAnswer.tr()
+                : LocaleKeys.acceptAnswer.tr();
+          } else {
+            return LocaleKeys.vote.tr();
+          }
+        }
     }
   }
 

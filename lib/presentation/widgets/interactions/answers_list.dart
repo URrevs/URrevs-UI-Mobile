@@ -1,21 +1,27 @@
-import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 
-import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
-import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
-import 'package:urrevs_ui_mobile/presentation/resources/text_button_style_manager.dart';
-import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
+import 'package:urrevs_ui_mobile/domain/models/answer.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answer_tree.dart';
-import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 class AnswersList extends StatelessWidget {
-  const AnswersList({Key? key, required this.answers}) : super(key: key);
+  const AnswersList({
+    Key? key,
+    required this.answers,
+    required this.parentPostType,
+    required this.onPressingReplyList,
+  }) : super(key: key);
 
-  final List<AnswerTree> answers;
+  final List<Answer> answers;
+  final PostType parentPostType;
+  final List<VoidCallback> onPressingReplyList;
 
-  static AnswersList get dummyInstance =>
-      AnswersList(answers: DummyDataManager.answers);
+  static AnswersList get dummyInstance => AnswersList(
+        answers: [],
+        onPressingReplyList: [],
+        parentPostType: PostType.phoneQuestion,
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -23,18 +29,16 @@ class AnswersList extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         for (int i = 0; i < answers.length; i++) ...[
-          answers[i],
+          AnswerTree.fromAnswer(
+            answers[i],
+            parentPostType: parentPostType,
+            inQuestionCard: false,
+            onTappingAnswerInCard: null,
+            onPressingReply: onPressingReplyList[i],
+          ),
           if (i != answers.length - 1) VerticalSpacesBetween.interactionTrees,
         ],
         VerticalSpacesBetween.interactionsListAndMoreCommentsButton,
-        TextButton(
-          onPressed: () {},
-          style: TextButtonStyleManager.showMoreAnswers,
-          child: Text(
-            LocaleKeys.moreAnswers.tr(),
-            style: TextStyleManager.s16w800.copyWith(color: ColorManager.black),
-          ),
-        ),
       ],
     );
   }

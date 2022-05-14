@@ -123,7 +123,6 @@ class _CommentTreeState extends State<CommentTree> {
                   datePosted: widget.datePosted,
                   maxWidth: constraints.maxWidth - 16.w,
                   liked: widget.liked,
-                  firstButtonType: InteractionFooterFirstButtonText.like,
                   posting: widget.commentId == null,
                   interactionId: widget.commentId,
                   interactionType: InteractionType.comment,

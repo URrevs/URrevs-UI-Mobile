@@ -87,7 +87,6 @@ class Reply extends StatelessWidget {
                   datePosted: datePosted,
                   maxWidth: constraints.maxWidth - 16.w,
                   liked: liked,
-                  firstButtonType: InteractionFooterFirstButtonText.like,
                   interactionId: interactionId,
                   interactionType: InteractionType.reply,
                   parentPostType: parentPostType,
