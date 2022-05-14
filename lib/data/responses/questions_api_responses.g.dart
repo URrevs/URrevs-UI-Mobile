@@ -189,3 +189,61 @@ Map<String, dynamic> _$GetAnswersAndRepliesForCompanyQuestionResponseToJson(
       'success': instance.success,
       'answers': instance.answersSubResponses,
     };
+
+AddAnswerToPhoneQuestionResponse _$AddAnswerToPhoneQuestionResponseFromJson(
+        Map<String, dynamic> json) =>
+    AddAnswerToPhoneQuestionResponse(
+      success: json['success'] as bool,
+      answerId: json['answer'] as String,
+    );
+
+Map<String, dynamic> _$AddAnswerToPhoneQuestionResponseToJson(
+        AddAnswerToPhoneQuestionResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'answer': instance.answerId,
+    };
+
+AddAnswerToCompanyQuestionResponse _$AddAnswerToCompanyQuestionResponseFromJson(
+        Map<String, dynamic> json) =>
+    AddAnswerToCompanyQuestionResponse(
+      success: json['success'] as bool,
+      answerId: json['answer'] as String,
+    );
+
+Map<String, dynamic> _$AddAnswerToCompanyQuestionResponseToJson(
+        AddAnswerToCompanyQuestionResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'answer': instance.answerId,
+    };
+
+AddReplyToPhoneQuestionAnswerResponse
+    _$AddReplyToPhoneQuestionAnswerResponseFromJson(
+            Map<String, dynamic> json) =>
+        AddReplyToPhoneQuestionAnswerResponse(
+          success: json['success'] as bool,
+          replyId: json['reply'] as String,
+        );
+
+Map<String, dynamic> _$AddReplyToPhoneQuestionAnswerResponseToJson(
+        AddReplyToPhoneQuestionAnswerResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'reply': instance.replyId,
+    };
+
+AddReplyToCompanyQuestionAnswerResponse
+    _$AddReplyToCompanyQuestionAnswerResponseFromJson(
+            Map<String, dynamic> json) =>
+        AddReplyToCompanyQuestionAnswerResponse(
+          success: json['success'] as bool,
+          replyId: json['reply'] as String,
+        );
+
+Map<String, dynamic> _$AddReplyToCompanyQuestionAnswerResponseToJson(
+        AddReplyToCompanyQuestionAnswerResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'reply': instance.replyId,
+    };

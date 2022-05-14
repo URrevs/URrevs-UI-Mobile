@@ -299,7 +299,8 @@ class QuestionCard extends StatelessWidget {
                             ),
                           );
                         },
-                        onPressingReply: () {},
+                        onPressingReply:
+                            () {}, // TODO: reply on accepted answer
                       ),
                     ),
                 ],

@@ -76,11 +76,18 @@ class GetInteractionsNotifier extends StateNotifier<GetInteractionsState> {
   void addInteractionToState(DirectInteraction interaction) {
     var currentState = state;
     if (currentState is GetInteractionsLoadedState) {
+      // preserving accepted answer at first
+      List<DirectInteraction> newInteractions = [
+        ...currentState.infiniteScrollingItems
+      ];
+      if (newInteractions.first is Answer &&
+          (newInteractions.first as Answer).accepted) {
+        newInteractions.insert(1, interaction);
+      } else {
+        newInteractions.insert(0, interaction);
+      }
       state = GetInteractionsLoadedState(
-        infiniteScrollingItems: [
-          interaction,
-          ...currentState.infiniteScrollingItems
-        ],
+        infiniteScrollingItems: [...newInteractions],
         roundsEnded: currentState.roundsEnded,
       );
       currentState = state as GetInteractionsLoadedState;

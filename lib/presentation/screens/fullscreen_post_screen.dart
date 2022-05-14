@@ -25,7 +25,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/authentication_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/question_states/get_post_state.dart';
-import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/add_comment_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/add_interaction_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/add_review_reply_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_interactions_state.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
@@ -100,12 +100,12 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
     postId: _postId,
     postType: widget.screenArgs.postType,
   );
-  late final _addCommentProviderParams =
-      AddCommentProviderParams(postId: _postId, postType: _postType);
+  late final _addInteractionProviderParams =
+      AddInteractionProviderParams(postId: _postId, postType: _postType);
 
   final List<DirectInteraction> _interactions = [];
 
-  String? _idOfCommentRepliedTo;
+  String? _idOfInteractionRepliedTo;
 
   Comment _postedCommentModel({
     required String commentId,
@@ -138,16 +138,17 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
   }
 
   void _addCommentOrReply() {
+    print('sending interaction');
     AddInteractionRequest request =
         AddInteractionRequest(content: _controller.text);
-    if (_idOfCommentRepliedTo != null) {
+    if (_idOfInteractionRepliedTo != null) {
       ref
-          .read(addCommentProvider(_addCommentProviderParams).notifier)
-          .addReply(_idOfCommentRepliedTo!, request);
+          .read(addInteractionProvider(_addInteractionProviderParams).notifier)
+          .addReply(_idOfInteractionRepliedTo!, request);
       return;
     }
     ref
-        .read(addCommentProvider(_addCommentProviderParams).notifier)
+        .read(addInteractionProvider(_addInteractionProviderParams).notifier)
         .addComment(request);
   }
 
@@ -361,7 +362,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
           parentPostType: _postType,
           onPressingReplyList: List.generate(_interactions.length, (i) {
             return () {
-              _idOfCommentRepliedTo = _interactions[i].id;
+              _idOfInteractionRepliedTo = _interactions[i].id;
               focusNode.requestFocus();
             };
           }),
@@ -373,7 +374,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
           parentPostType: _postType,
           onPressingReplyList: List.generate(_interactions.length, (i) {
             return () {
-              _idOfCommentRepliedTo = _interactions[i].id;
+              _idOfInteractionRepliedTo = _interactions[i].id;
               focusNode.requestFocus();
             };
           }),
@@ -427,7 +428,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
       fullscreen: true,
       onPressingComment: () {
         focusNode.requestFocus();
-        _idOfCommentRepliedTo = null;
+        _idOfInteractionRepliedTo = null;
       },
     );
   }
@@ -443,7 +444,10 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
           cardHeaderTitleType: _targetType,
           cardType: widget.screenArgs.cardType,
           fullscreen: true,
-          onPressingAnswer: () {},
+          onPressingAnswer: () {
+            focusNode.requestFocus();
+            _idOfInteractionRepliedTo = null;
+          },
         ),
       ],
     );
@@ -458,35 +462,57 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
       fullscreen: true,
       onPressingComment: () {
         focusNode.requestFocus();
-        _idOfCommentRepliedTo = null;
+        _idOfInteractionRepliedTo = null;
       },
     );
   }
 
   Widget _buildTextFieldSection() {
     ref.addErrorListener(
-      provider: addCommentProvider(_addCommentProviderParams),
+      provider: addInteractionProvider(_addInteractionProviderParams),
       context: context,
       margin: EdgeInsets.fromLTRB(15.h, 5.h, 15.h, 10.h + 60.h),
     );
-    ref.listen(addCommentProvider(_addCommentProviderParams), (previous, next) {
-      if (next is AddCommentLoadedState) {
-        if (_idOfCommentRepliedTo == null) {
-          Comment lastPostedComment = _postedCommentModel(
-            commentId: next.commentId,
-            createdAt: DateTime.now(),
-            content: _controller.text,
-          );
+    ref.listen(addInteractionProvider(_addInteractionProviderParams),
+        (previous, next) {
+      if (next is AddInteractionLoadedState) {
+        if (_idOfInteractionRepliedTo == null) {
+          late DirectInteraction interaction;
+          if (_postType == PostType.phoneReview ||
+              _postType == PostType.companyReview) {
+            interaction = _postedCommentModel(
+              commentId: next.interactionId,
+              createdAt: DateTime.now(),
+              content: _controller.text,
+            );
+          } else {
+            final User user =
+                (ref.watch(authenticationProvider) as AuthenticationLoadedState)
+                    .user;
+            interaction = Answer(
+              id: next.interactionId,
+              userId: user.id,
+              userName: user.name,
+              photo: user.picture,
+              createdAt: DateTime.now(),
+              ownedAt: DateTime.now(), // TODO: get owned at date
+              content: _controller.text,
+              upvotes: 0,
+              upvoted: false,
+              replies: [],
+              accepted: false,
+            );
+          }
           ref
               .read(
                   getInteractionsProvider(_interactionsProviderParams).notifier)
-              .addInteractionToState(lastPostedComment);
+              .addInteractionToState(interaction);
         } else {
           final User user =
               (ref.watch(authenticationProvider) as AuthenticationLoadedState)
                   .user;
           ReplyModel lastPostedReply = ReplyModel(
-            id: next.commentId,
+            id: next.interactionId,
             userId: user.id,
             userName: user.name,
             photo: user.picture,
@@ -499,13 +525,13 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
               .read(
                   getInteractionsProvider(_interactionsProviderParams).notifier)
               .addReplyToCommentInState(
-                  _idOfCommentRepliedTo!, lastPostedReply);
+                  _idOfInteractionRepliedTo!, lastPostedReply);
         }
         _controller.text = '';
       }
     });
     final addCommentState =
-        ref.watch(addCommentProvider(_addCommentProviderParams));
+        ref.watch(addInteractionProvider(_addInteractionProviderParams));
     late bool loading = addCommentState is LoadingState;
     ;
 

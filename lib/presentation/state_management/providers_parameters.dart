@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 
@@ -10,6 +11,7 @@ abstract class NotSyncedProviderParams extends Equatable {
       : providerId = DateTime.now().millisecondsSinceEpoch;
 
   @override
+  @mustCallSuper
   List<Object?> get props => [providerId];
 }
 
@@ -27,7 +29,7 @@ abstract class UserIdProviderParams extends NotSyncedProviderParams {
   });
 
   @override
-  List<Object?> get props => [providerId, userId];
+  List<Object?> get props => [userId, ...super.props];
 }
 
 class GetUserPostsProviderParams extends UserIdProviderParams {
@@ -36,7 +38,7 @@ class GetUserPostsProviderParams extends UserIdProviderParams {
     required this.postContentType,
   }) : super(userId: userId);
 
-  PostContentType postContentType;
+  final PostContentType postContentType;
 }
 
 class GetUserCompanyReviewsProviderParams extends UserIdProviderParams {
@@ -51,7 +53,7 @@ class GetReviewsOnCertainPhoneProviderParams extends NotSyncedProviderParams {
   });
 
   @override
-  List<Object?> get props => [providerId, phoneId];
+  List<Object?> get props => [phoneId, ...super.props];
 }
 
 class LikeProviderParams extends Equatable {
@@ -80,13 +82,13 @@ class GetInteractionsProviderParams extends NotSyncedProviderParams {
   });
 
   @override
-  List<Object?> get props => [postId, postType, providerId];
+  List<Object?> get props => [postId, postType, ...super.props];
 }
 
-class AddCommentProviderParams extends NotSyncedProviderParams {
+class AddInteractionProviderParams extends NotSyncedProviderParams {
   final String postId;
   final PostType postType;
-  AddCommentProviderParams({
+  AddInteractionProviderParams({
     required this.postId,
     required this.postType,
   });

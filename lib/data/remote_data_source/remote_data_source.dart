@@ -343,4 +343,30 @@ abstract class RemoteDataSource {
     @Path() String questionId,
     @Query('round') int round,
   );
+
+  /// 80
+  @POST('/questions/phone/{questionId}/answers')
+  Future<AddAnswerToPhoneQuestionResponse> addAnswerToPhoneQuestion(
+    @Path() String questionId,
+    @Body() AddInteractionRequest request,
+  );
+
+  @POST('/questions/company/{questionId}/answers')
+  Future<AddAnswerToCompanyQuestionResponse> addAnswerToCompanyQuestion(
+    @Path() String questionId,
+    @Body() AddInteractionRequest request,
+  );
+
+  @POST('/questions/phone/answers/{answerId}/replies')
+  Future<AddReplyToPhoneQuestionAnswerResponse> addReplyToPhoneQuestionAnswer(
+    @Path() String answerId,
+    @Body() AddInteractionRequest request,
+  );
+
+  @POST('/questions/company/answers/{answerId}/replies')
+  Future<AddReplyToCompanyQuestionAnswerResponse>
+      addReplyToCompanyQuestionAnswer(
+    @Path() String answerId,
+    @Body() AddInteractionRequest request,
+  );
 }

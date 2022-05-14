@@ -196,3 +196,67 @@ class GetAnswersAndRepliesForCompanyQuestionResponse extends BaseResponse {
   Map<String, dynamic> toJson() =>
       _$GetAnswersAndRepliesForCompanyQuestionResponseToJson(this);
 }
+
+@JsonSerializable()
+class AddAnswerToPhoneQuestionResponse extends BaseResponse {
+  @JsonKey(name: 'answer')
+  String answerId;
+  AddAnswerToPhoneQuestionResponse({
+    required bool success,
+    required this.answerId,
+  }) : super(success: success);
+
+  factory AddAnswerToPhoneQuestionResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$AddAnswerToPhoneQuestionResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$AddAnswerToPhoneQuestionResponseToJson(this);
+}
+
+@JsonSerializable()
+class AddAnswerToCompanyQuestionResponse extends BaseResponse {
+  @JsonKey(name: 'answer')
+  String answerId;
+  AddAnswerToCompanyQuestionResponse({
+    required bool success,
+    required this.answerId,
+  }) : super(success: success);
+
+  factory AddAnswerToCompanyQuestionResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$AddAnswerToCompanyQuestionResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$AddAnswerToCompanyQuestionResponseToJson(this);
+}
+
+@JsonSerializable()
+class AddReplyToPhoneQuestionAnswerResponse extends BaseResponse {
+  @JsonKey(name: 'reply')
+  String replyId;
+  AddReplyToPhoneQuestionAnswerResponse({
+    required bool success,
+    required this.replyId,
+  }) : super(success: success);
+
+  factory AddReplyToPhoneQuestionAnswerResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$AddReplyToPhoneQuestionAnswerResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$AddReplyToPhoneQuestionAnswerResponseToJson(this);
+}
+
+@JsonSerializable()
+class AddReplyToCompanyQuestionAnswerResponse extends BaseResponse {
+  @JsonKey(name: 'reply')
+  String replyId;
+  AddReplyToCompanyQuestionAnswerResponse({
+    required bool success,
+    required this.replyId,
+  }) : super(success: success);
+
+  factory AddReplyToCompanyQuestionAnswerResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$AddReplyToCompanyQuestionAnswerResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$AddReplyToCompanyQuestionAnswerResponseToJson(this);
+}

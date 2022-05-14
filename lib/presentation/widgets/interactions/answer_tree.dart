@@ -165,7 +165,6 @@ class _AnswerTreeState extends State<AnswerTree> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -207,7 +206,10 @@ class _AnswerTreeState extends State<AnswerTree> {
                   onTappingAnswerInCard: widget.onTappingAnswerInCard,
                 ),
                 InteractionFooter(
-                  onPressingReply: () {},
+                  onPressingReply: () {
+                    widget.onPressingReply();
+                    setState(() => _expandReplies = true);
+                  },
                   datePosted: widget.datePosted,
                   maxWidth: constraints.maxWidth - 16.w,
                   liked: widget.liked,
@@ -217,7 +219,9 @@ class _AnswerTreeState extends State<AnswerTree> {
                   parentPostType: widget.parentPostType,
                   userId: widget.userId,
                 ),
-                if (!widget.inQuestionCard && !_expandReplies) ...[
+                if (!widget.inQuestionCard &&
+                    !_expandReplies &&
+                    widget.replies.isNotEmpty) ...[
                   VerticalSpacesBetween.interactionBodyAndShowRepliesButton,
                   TextButton(
                     onPressed: _onPressingShowReplies,
@@ -236,7 +240,7 @@ class _AnswerTreeState extends State<AnswerTree> {
                       likeCount: widget.replies[i].likes,
                       datePosted: widget.replies[i].createdAt,
                       liked: widget.replies[i].liked,
-                      onPressingReply: () {},
+                      onPressingReply: widget.onPressingReply,
                       interactionId: widget.replies[i].id,
                       parentPostType: widget.parentPostType,
                       userId: widget.replies[i].userId,

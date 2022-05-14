@@ -560,4 +560,40 @@ class Repository {
       return response.answersModels;
     });
   }
+
+  Future<Either<Failure, String>> addAnswerToPhoneQuestion(
+      String questionId, AddInteractionRequest request) {
+    return _tryAndCatch(() async {
+      final response =
+          await _remoteDataSource.addAnswerToPhoneQuestion(questionId, request);
+      return response.answerId;
+    });
+  }
+
+  Future<Either<Failure, String>> addAnswerToCompanyQuestion(
+      String questionId, AddInteractionRequest request) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.addAnswerToCompanyQuestion(
+          questionId, request);
+      return response.answerId;
+    });
+  }
+
+  Future<Either<Failure, String>> addReplyToPhoneQuestionAnswer(
+      String answerId, AddInteractionRequest request) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.addReplyToPhoneQuestionAnswer(
+          answerId, request);
+      return response.replyId;
+    });
+  }
+
+  Future<Either<Failure, String>> addReplyToCompanyQuestionAnswer(
+      String answerId, AddInteractionRequest request) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.addReplyToCompanyQuestionAnswer(
+          answerId, request);
+      return response.replyId;
+    });
+  }
 }
