@@ -2,6 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:urrevs_ui_mobile/domain/models/answer.dart';
+import 'package:urrevs_ui_mobile/domain/models/reply_model.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
@@ -32,6 +34,7 @@ class AnswerTree extends StatefulWidget {
     required this.accepted,
     required this.isQuestionAuthor,
     required this.inQuestionCard,
+    required this.onPressingReply,
     this.onTappingAnswerInCard,
   })  : assert(
           !inQuestionCard || onTappingAnswerInCard != null,
@@ -39,10 +42,31 @@ class AnswerTree extends StatefulWidget {
         ),
         super(key: key);
 
+  AnswerTree.fromAnswer(
+    Answer answer, {
+    Key? key,
+    required this.parentPostType,
+    required this.accepted,
+    required this.isQuestionAuthor,
+    required this.inQuestionCard,
+    required this.onTappingAnswerInCard,
+    required this.onPressingReply,
+  })  : answerId = answer.id,
+        userId = answer.userId,
+        imageUrl = answer.photo,
+        authorName = answer.userName,
+        usedSinceDate = answer.ownedAt,
+        commentText = answer.content,
+        likeCount = answer.upvotes,
+        datePosted = answer.createdAt,
+        replies = answer.replies,
+        liked = answer.upvoted,
+        super(key: key);
+
   final String answerId;
   final String userId;
   final PostType parentPostType;
-  final String imageUrl;
+  final String? imageUrl;
   final String authorName;
   final DateTime usedSinceDate;
   final String commentText;
@@ -52,8 +76,9 @@ class AnswerTree extends StatefulWidget {
   final bool accepted;
   final bool isQuestionAuthor;
   final bool inQuestionCard;
-  final List<Reply> replies;
+  final List<ReplyModel> replies;
   final VoidCallback? onTappingAnswerInCard;
+  final VoidCallback onPressingReply;
 
   static AnswerTree get dummyInstance => AnswerTree(
         key: UniqueKey(),
@@ -67,10 +92,11 @@ class AnswerTree extends StatefulWidget {
         accepted: DummyDataManager.randomBool,
         isQuestionAuthor: DummyDataManager.randomBool,
         inQuestionCard: false,
-        replies: DummyDataManager.replies,
+        replies: [],
         answerId: DummyDataManager.randomInt.toString(),
         userId: DummyDataManager.randomInt.toString(),
         parentPostType: PostType.phoneQuestion,
+        onPressingReply: () {},
       );
 
   static AnswerTree get dummyInstanceInQuestionCard => AnswerTree(
@@ -85,8 +111,9 @@ class AnswerTree extends StatefulWidget {
         accepted: true,
         isQuestionAuthor: DummyDataManager.randomBool,
         inQuestionCard: true,
-        replies: DummyDataManager.replies,
+        replies: [],
         onTappingAnswerInCard: () {},
+        onPressingReply: () {},
         answerId: DummyDataManager.randomInt.toString(),
         userId: DummyDataManager.randomInt.toString(),
         parentPostType: PostType.phoneQuestion,
@@ -103,8 +130,9 @@ class AnswerTree extends StatefulWidget {
     bool? accepted,
     bool? isQuestionAuthor,
     bool? inQuestionCard,
-    List<Reply>? replies,
+    List<ReplyModel>? replies,
     VoidCallback? onTappingAnswerInCard,
+    VoidCallback? onPressingReply,
     PostType? parentPostType,
     String? answerId,
     String? userId,
@@ -126,6 +154,7 @@ class AnswerTree extends StatefulWidget {
       parentPostType: parentPostType ?? this.parentPostType,
       answerId: answerId ?? this.answerId,
       userId: userId ?? this.userId,
+      onPressingReply: onPressingReply ?? this.onPressingReply,
     );
   }
 
@@ -214,7 +243,20 @@ class _AnswerTreeState extends State<AnswerTree> {
                 if (_expandReplies) ...[
                   VerticalSpacesBetween.interactionBodyAndReplies,
                   for (int i = 0; i < widget.replies.length; i++) ...[
-                    widget.replies[i],
+                    Reply(
+                      imageUrl: widget.replies[i].photo,
+                      authorName: widget.replies[i].userName,
+                      replyText: widget.replies[i].content,
+                      likeCount: widget.replies[i].likes,
+                      datePosted: widget.replies[i].createdAt,
+                      liked: widget.replies[i].liked,
+                      onPressingReply: () {},
+                      interactionId: widget.replies[i].id,
+                      parentPostType: widget.parentPostType,
+                      userId: widget.replies[i].userId,
+                      // comment id cannot be null if there is a reply passed to the comment
+                      replyParentId: widget.answerId,
+                    ),
                     if (i != widget.replies.length - 1)
                       VerticalSpacesBetween.replies,
                   ],

@@ -15,7 +15,7 @@ class Question extends Post {
   final bool upvoted;
   final int ansCount;
   final int shares;
-  final Answer acceptedAns;
+  final Answer? acceptedAns;
   const Question({
     required String id,
     required this.type,

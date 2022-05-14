@@ -681,7 +681,7 @@ class QuestionSubResponse {
   bool upvoted;
   int ansCount;
   int shares;
-  AnswerSubResponse acceptedAns;
+  AnswerSubResponse? acceptedAns;
   QuestionSubResponse({
     required this.id,
     required this.type,
@@ -713,7 +713,7 @@ class QuestionSubResponse {
         upvoted: upvoted,
         ansCount: ansCount,
         shares: shares,
-        acceptedAns: acceptedAns.answerModel,
+        acceptedAns: acceptedAns?.answerModel,
       );
 
   factory QuestionSubResponse.fromJson(Map<String, Object?> json) =>
@@ -729,6 +729,7 @@ class AnswerSubResponse {
   String userName;
   String? photo;
   DateTime createdAt;
+  DateTime ownedAt;
   String content;
   int upvotes;
   bool upvoted;
@@ -740,6 +741,7 @@ class AnswerSubResponse {
     required this.userName,
     required this.photo,
     required this.createdAt,
+    required this.ownedAt,
     required this.content,
     required this.upvotes,
     required this.upvoted,
@@ -751,6 +753,7 @@ class AnswerSubResponse {
         userId: userId,
         userName: userName,
         createdAt: createdAt,
+        ownedAt: ownedAt,
         photo: photo,
         content: content,
         upvotes: upvotes,

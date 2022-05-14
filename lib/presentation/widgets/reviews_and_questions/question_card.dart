@@ -281,20 +281,29 @@ class QuestionCard extends StatelessWidget {
                     color: ColorManager.dividerGrey,
                   ),
                   // TODO: show accepted answer
-                  // Padding(
-                  //   padding:
-                  //       EdgeInsets.only(top: 25.h, right: 12.w, left: 12.w),
-                  //   child: answer!.copyWith(onTappingAnswerInCard: () {
-                  //     Navigator.of(context).pushNamed(
-                  //       FullscreenPostScreen.routeName,
-                  //       arguments: FullscreenPostScreenArgs(
-                  //         postType: PostType.question,
-                  //         cardType: cardType,
-                  //         postId: '',
-                  //       ),
-                  //     );
-                  //   }),
-                  // ),
+                  if (answer != null)
+                    Padding(
+                      padding:
+                          EdgeInsets.only(top: 25.h, right: 12.w, left: 12.w),
+                      child: AnswerTree.fromAnswer(
+                        answer!,
+                        parentPostType: postType,
+                        accepted: true,
+                        isQuestionAuthor: true,
+                        inQuestionCard: true,
+                        onTappingAnswerInCard: () {
+                          Navigator.of(context).pushNamed(
+                            FullscreenPostScreen.routeName,
+                            arguments: FullscreenPostScreenArgs(
+                              postType: postType,
+                              cardType: cardType,
+                              postId: questionId,
+                            ),
+                          );
+                        },
+                        onPressingReply: () {},
+                      ),
+                    ),
                 ],
               ],
             ),

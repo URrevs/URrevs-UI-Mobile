@@ -29,6 +29,7 @@ import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/empty_list_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/vertical_list_error_widget.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answer_tree.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answers_list.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/comment_tree.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/comments_list.dart';
@@ -183,7 +184,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
     print(widget.screenArgs.postId);
     Future.delayed(Duration.zero, () {
       _getPost();
-      // _getComments();
+      _getComments();
     });
     if (widget.screenArgs.focusOnTextField) {
       focusNode.requestFocus();
@@ -228,8 +229,8 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
             children: [
               _buildPost(),
               20.verticalSpace,
-              // _buildPostedComment(),
-              // _buildComments(),
+              _buildPostedComment(),
+              _buildComments(),
             ],
           ),
         ),
@@ -371,12 +372,30 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
   Widget _buildQuestion() {
     final state = ref.watch(getPostProvider(_postProviderParams));
     Question question = (state as GetPostLoadedState).post as Question;
-    return QuestionCard.fromQuestion(
-      question,
-      cardHeaderTitleType: _targetType,
-      cardType: widget.screenArgs.cardType,
-      fullscreen: true,
-      onPressingAnswer: () {},
+    PostType postType = _targetType == TargetType.phone
+        ? PostType.phoneQuestion
+        : PostType.companyQuestion;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        QuestionCard.fromQuestion(
+          question,
+          cardHeaderTitleType: _targetType,
+          cardType: widget.screenArgs.cardType,
+          fullscreen: true,
+          onPressingAnswer: () {},
+        ),
+        if (question.acceptedAns != null)
+          AnswerTree.fromAnswer(
+            question.acceptedAns!,
+            parentPostType: postType,
+            accepted: true,
+            isQuestionAuthor: false,
+            inQuestionCard: false,
+            onTappingAnswerInCard: null,
+            onPressingReply: () {},
+          ),
+      ],
     );
   }
 
