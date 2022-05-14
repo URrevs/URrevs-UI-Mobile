@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
+import 'package:urrevs_ui_mobile/data/requests/base_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/companies_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/reviews_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/search_api_requests.dart';
@@ -211,25 +212,25 @@ abstract class RemoteDataSource {
   @POST('/reviews/phone/{reviewId}/comments')
   Future<AddCommentToPhoneReviewResponse> addCommentToPhoneReview(
     @Path() String reviewId,
-    @Body() AddCommentToPhoneReviewRequest request,
+    @Body() AddInteractionRequest request,
   );
 
   @POST('/reviews/company/{reviewId}/comments')
   Future<AddCommentToCompanyReviewResponse> addCommentToCompanyReview(
     @Path() String reviewId,
-    @Body() AddCommentToCompanyReviewRequest request,
+    @Body() AddInteractionRequest request,
   );
 
   @POST('/reviews/phone/comments/{commentId}/replies')
   Future<AddReplyToPhoneReviewCommentResponse> addReplyToPhoneReviewComment(
     @Path() String commentId,
-    @Body() AddReplyToPhoneReviewCommentRequest request,
+    @Body() AddInteractionRequest request,
   );
 
   @POST('/reviews/company/comments/{commentId}/replies')
   Future<AddReplyToCompanyReviewCommentResponse> addReplyToCompanyReviewComment(
     @Path() String commentId,
-    @Body() AddReplyToCompanyReviewCommentRequest request,
+    @Body() AddInteractionRequest request,
   );
 
   @POST('/reviews/phone/comments/{commentId}/like')

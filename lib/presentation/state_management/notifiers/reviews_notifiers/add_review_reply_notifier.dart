@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
+import 'package:urrevs_ui_mobile/data/requests/base_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/reviews_api_requests.dart';
 import 'package:urrevs_ui_mobile/domain/repository.dart';
 
@@ -9,7 +10,7 @@ class AddReviewReplyNotifier extends StateNotifier<AddReviewReplyState> {
   AddReviewReplyNotifier() : super(AddReviewReplyInitialState());
 
   void addReplyToPhoneReviewComment(
-      String commentId, AddReplyToPhoneReviewCommentRequest request) async {
+      String commentId, AddInteractionRequest request) async {
     state = AddReviewReplyLoadingState();
     final response = await GetIt.I<Repository>()
         .addReplyToPhoneReviewComment(commentId, request);
@@ -22,7 +23,7 @@ class AddReviewReplyNotifier extends StateNotifier<AddReviewReplyState> {
   }
 
   void addReplyToCompanyReviewComment(
-      String commentId, AddReplyToCompanyReviewCommentRequest request) async {
+      String commentId, AddInteractionRequest request) async {
     state = AddReviewReplyLoadingState();
     final response = await GetIt.I<Repository>()
         .addReplyToCompanyReviewComment(commentId, request);

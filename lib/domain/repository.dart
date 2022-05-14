@@ -9,6 +9,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:urrevs_ui_mobile/app/exceptions.dart';
 import 'package:urrevs_ui_mobile/data/remote_data_source/remote_data_source.dart';
+import 'package:urrevs_ui_mobile/data/requests/base_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/reviews_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/search_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/responses/phones_api_responses.dart';
@@ -384,7 +385,7 @@ class Repository {
   }
 
   Future<Either<Failure, String>> addCommentToPhoneReview(
-      String reviewId, AddCommentToPhoneReviewRequest request) {
+      String reviewId, AddInteractionRequest request) {
     return _tryAndCatch(() async {
       final response =
           await _remoteDataSource.addCommentToPhoneReview(reviewId, request);
@@ -393,7 +394,7 @@ class Repository {
   }
 
   Future<Either<Failure, String>> addCommentToCompanyReview(
-      String reviewId, AddCommentToCompanyReviewRequest request) {
+      String reviewId, AddInteractionRequest request) {
     return _tryAndCatch(() async {
       final response =
           await _remoteDataSource.addCommentToCompanyReview(reviewId, request);
@@ -402,7 +403,7 @@ class Repository {
   }
 
   Future<Either<Failure, String>> addReplyToPhoneReviewComment(
-      String commentId, AddReplyToPhoneReviewCommentRequest request) {
+      String commentId, AddInteractionRequest request) {
     return _tryAndCatch(() async {
       final response = await _remoteDataSource.addReplyToPhoneReviewComment(
           commentId, request);
@@ -411,7 +412,7 @@ class Repository {
   }
 
   Future<Either<Failure, String>> addReplyToCompanyReviewComment(
-      String commentId, AddReplyToCompanyReviewCommentRequest request) {
+      String commentId, AddInteractionRequest request) {
     return _tryAndCatch(() async {
       final response = await _remoteDataSource.addReplyToCompanyReviewComment(
           commentId, request);

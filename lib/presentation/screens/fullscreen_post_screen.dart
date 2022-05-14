@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:urrevs_ui_mobile/app/extensions.dart';
+import 'package:urrevs_ui_mobile/data/requests/base_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/reviews_api_requests.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/domain/models/comment.dart';
@@ -97,8 +98,8 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
     postId: _postId,
     postType: widget.screenArgs.postType,
   );
-  final _addCommentProviderParams = AddCommentProviderParams();
-  final _addReviewReplyProviderParams = AddReviewReplyProviderParams();
+  late final _addCommentProviderParams =
+      AddCommentProviderParams(postId: _postId, postType: _postType);
 
   final List<Comment> _comments = [];
 
@@ -135,37 +136,17 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
   }
 
   void _addCommentOrReply() {
+    AddInteractionRequest request =
+        AddInteractionRequest(content: _controller.text);
     if (_idOfCommentRepliedTo != null) {
-      if (widget.screenArgs.postType == PostType.phoneReview) {
-        AddReplyToPhoneReviewCommentRequest request =
-            AddReplyToPhoneReviewCommentRequest(content: _controller.text);
-        ref
-            .read(
-                addReviewReplyProvider(_addReviewReplyProviderParams).notifier)
-            .addReplyToPhoneReviewComment(_idOfCommentRepliedTo!, request);
-      } else if (widget.screenArgs.postType == PostType.companyReview) {
-        AddReplyToCompanyReviewCommentRequest request =
-            AddReplyToCompanyReviewCommentRequest(content: _controller.text);
-        ref
-            .read(
-                addReviewReplyProvider(_addReviewReplyProviderParams).notifier)
-            .addReplyToCompanyReviewComment(_idOfCommentRepliedTo!, request);
-      }
+      ref
+          .read(addCommentProvider(_addCommentProviderParams).notifier)
+          .addReply(_idOfCommentRepliedTo!, request);
       return;
     }
-    if (widget.screenArgs.postType == PostType.phoneReview) {
-      AddCommentToPhoneReviewRequest request =
-          AddCommentToPhoneReviewRequest(content: _controller.text);
-      ref
-          .read(addCommentProvider(_addCommentProviderParams).notifier)
-          .addCommentToPhoneReview(widget.screenArgs.postId, request);
-    } else if (widget.screenArgs.postType == PostType.companyReview) {
-      AddCommentToCompanyReviewRequest request =
-          AddCommentToCompanyReviewRequest(content: _controller.text);
-      ref
-          .read(addCommentProvider(_addCommentProviderParams).notifier)
-          .addCommentToCompanyReview(widget.screenArgs.postId, request);
-    }
+    ref
+        .read(addCommentProvider(_addCommentProviderParams).notifier)
+        .addComment(request);
   }
 
   String get _hintText {
@@ -229,7 +210,6 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
             children: [
               _buildPost(),
               20.verticalSpace,
-              _buildPostedComment(),
               _buildComments(),
             ],
           ),
@@ -252,28 +232,28 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
     );
   }
 
-  Widget _buildPostedComment() {
-    final state = ref.watch(addCommentProvider(_addCommentProviderParams));
-    final user =
-        (ref.watch(authenticationProvider) as AuthenticationLoadedState).user;
-    if (state is LoadingState) {
-      return CommentTree(
-        userId: user.id,
-        commentId: null,
-        imageUrl: user.picture,
-        authorName: user.name,
-        commentText: _controller.text,
-        likeCount: 0,
-        datePosted: DateTime.now(), // not shown
-        replies: [], // not shown
-        liked: false, // not shown
-        onPressingReply: () {},
-        parentPostType: widget.screenArgs.postType,
-      );
-    } else {
-      return SizedBox();
-    }
-  }
+  // Widget _buildPostedComment() {
+  //   final state = ref.watch(addCommentProvider(_addCommentProviderParams));
+  //   final user =
+  //       (ref.watch(authenticationProvider) as AuthenticationLoadedState).user;
+  //   if (state is LoadingState) {
+  //     return CommentTree(
+  //       userId: user.id,
+  //       commentId: null,
+  //       imageUrl: user.picture,
+  //       authorName: user.name,
+  //       commentText: _controller.text,
+  //       likeCount: 0,
+  //       datePosted: DateTime.now(), // not shown
+  //       replies: [], // not shown
+  //       liked: false, // not shown
+  //       onPressingReply: () {},
+  //       parentPostType: widget.screenArgs.postType,
+  //     );
+  //   } else {
+  //     return SizedBox();
+  //   }
+  // }
 
   Widget _buildMoreCommentsButton() {
     final state = ref.watch(getCommentsProvider(_commentsProviderParams));
@@ -419,55 +399,44 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
       context: context,
       margin: EdgeInsets.fromLTRB(15.h, 5.h, 15.h, 10.h + 60.h),
     );
-    ref.addErrorListener(
-      provider: addReviewReplyProvider(_addReviewReplyProviderParams),
-      context: context,
-      margin: EdgeInsets.fromLTRB(15.h, 5.h, 15.h, 10.h + 60.h),
-    );
     ref.listen(addCommentProvider(_addCommentProviderParams), (previous, next) {
       if (next is AddCommentLoadedState) {
-        Comment lastPostedComment = _postedCommentModel(
-          commentId: next.commentId,
-          createdAt: DateTime.now(),
-          content: _controller.text,
-        );
-        ref
-            .read(getCommentsProvider(_commentsProviderParams).notifier)
-            .addCommentToState(lastPostedComment);
-        _controller.text = '';
-      }
-    });
-    ref.listen(addReviewReplyProvider(_addReviewReplyProviderParams),
-        (previous, next) {
-      final User user =
-          (ref.watch(authenticationProvider) as AuthenticationLoadedState).user;
-      if (next is AddReviewReplyLoadedState) {
-        ReplyModel lastPostedReply = ReplyModel(
-          id: next.replyId,
-          userId: user.id,
-          userName: user.name,
-          photo: user.picture,
-          createdAt: DateTime.now(),
-          content: _controller.text,
-          likes: 0,
-          liked: false,
-        );
-        ref
-            .read(getCommentsProvider(_commentsProviderParams).notifier)
-            .addReplyToCommentInState(_idOfCommentRepliedTo!, lastPostedReply);
+        if (_idOfCommentRepliedTo == null) {
+          Comment lastPostedComment = _postedCommentModel(
+            commentId: next.commentId,
+            createdAt: DateTime.now(),
+            content: _controller.text,
+          );
+          ref
+              .read(getCommentsProvider(_commentsProviderParams).notifier)
+              .addCommentToState(lastPostedComment);
+        } else {
+          final User user =
+              (ref.watch(authenticationProvider) as AuthenticationLoadedState)
+                  .user;
+          ReplyModel lastPostedReply = ReplyModel(
+            id: next.commentId,
+            userId: user.id,
+            userName: user.name,
+            photo: user.picture,
+            createdAt: DateTime.now(),
+            content: _controller.text,
+            likes: 0,
+            liked: false,
+          );
+          ref
+              .read(getCommentsProvider(_commentsProviderParams).notifier)
+              .addReplyToCommentInState(
+                  _idOfCommentRepliedTo!, lastPostedReply);
+        }
         _controller.text = '';
       }
     });
     final addCommentState =
         ref.watch(addCommentProvider(_addCommentProviderParams));
-    final addReplyState =
-        ref.watch(addReviewReplyProvider(_addReviewReplyProviderParams));
-    late bool loading;
-    if (_idOfCommentRepliedTo == null) {
-      loading = addCommentState is LoadingState;
-    } else {
-      loading = addReplyState is LoadingState;
-    }
+    late bool loading = addCommentState is LoadingState;
+    ;
+
     return Container(
       height: 60.h,
       decoration: BoxDecoration(

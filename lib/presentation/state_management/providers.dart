@@ -204,8 +204,9 @@ final getCommentsProvider = StateNotifierProvider.autoDispose
             postId: params.postId, postType: params.postType));
 
 final addCommentProvider = StateNotifierProvider.autoDispose
-    .family<AddCommentNotifier, AddCommentState, AddCommentProviderParams>(
-        (ref, params) => AddCommentNotifier());
+    .family<AddCommentNotifier, AddCommentState, AddCommentProviderParams>((ref,
+            params) =>
+        AddCommentNotifier(postId: params.postId, postType: params.postType));
 
 final addReviewReplyProvider = StateNotifierProvider.autoDispose.family<
     AddReviewReplyNotifier,

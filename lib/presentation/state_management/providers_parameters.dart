@@ -84,7 +84,12 @@ class GetCommentsProviderParams extends NotSyncedProviderParams {
 }
 
 class AddCommentProviderParams extends NotSyncedProviderParams {
-  AddCommentProviderParams();
+  final String postId;
+  final PostType postType;
+  AddCommentProviderParams({
+    required this.postId,
+    required this.postType,
+  });
 }
 
 class AddReviewReplyProviderParams extends NotSyncedProviderParams {
