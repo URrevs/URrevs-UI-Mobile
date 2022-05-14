@@ -11,6 +11,10 @@ class LikeInitialState extends LikeState implements InitialState {
 }
 
 class LikeLoadingState extends LikeState implements LoadingState {
+  bool liked;
+  LikeLoadingState({
+    required this.liked,
+  });
   @override
   List<Object?> get props => [];
 }

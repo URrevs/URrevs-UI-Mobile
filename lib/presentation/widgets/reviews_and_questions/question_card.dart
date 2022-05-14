@@ -193,6 +193,14 @@ class QuestionCard extends StatelessWidget {
     // TODO: implememnt _onShare
   }
 
+  PostType get postType {
+    if (cardHeaderTitleType == TargetType.phone) {
+      return PostType.phoneQuestion;
+    } else {
+      return PostType.companyQuestion;
+    }
+  }
+
   Positioned _buildQuestionMark(BuildContext context) {
     return Positioned(
       top: 0,
@@ -263,7 +271,7 @@ class QuestionCard extends StatelessWidget {
                   onShare: _onShare,
                   cardType: cardType,
                   fullscreen: fullscreen,
-                  postType: PostType.question,
+                  postType: postType,
                   postId: questionId,
                 ),
                 if (!fullscreen && answer != null) ...[

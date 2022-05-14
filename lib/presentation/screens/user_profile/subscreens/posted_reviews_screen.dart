@@ -139,6 +139,9 @@ class _PostedReviewsScreenState extends ConsumerState<PostedReviewsScreen> {
       CardType cardType = _filter == TargetType.phone
           ? CardType.productQuestion
           : CardType.companyQuestion;
+      PostType postType = _filter == TargetType.phone
+          ? PostType.phoneQuestion
+          : PostType.companyQuestion;
       return QuestionCard.fromQuestion(
         question,
         cardHeaderTitleType: _filter,
@@ -148,7 +151,7 @@ class _PostedReviewsScreenState extends ConsumerState<PostedReviewsScreen> {
           Navigator.of(context).pushNamed(
             FullscreenPostScreen.routeName,
             arguments: FullscreenPostScreenArgs(
-              postType: PostType.question,
+              postType: postType,
               cardType: cardType,
               postId: 'change_it',
               focusOnTextField: true,

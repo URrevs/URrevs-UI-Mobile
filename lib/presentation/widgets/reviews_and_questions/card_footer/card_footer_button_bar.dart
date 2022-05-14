@@ -9,7 +9,9 @@ import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/authentication_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/like_state.dart';
+import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_footer/card_footer_button.dart';
 
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
@@ -25,6 +27,7 @@ class CardFooterButtonBar extends ConsumerStatefulWidget {
     required this.onShare,
     required this.postId,
     required this.postType,
+    required this.userId,
   }) : super(key: key);
 
   /// Is the review liked by the current logged in user or not.
@@ -47,6 +50,8 @@ class CardFooterButtonBar extends ConsumerStatefulWidget {
 
   final PostType postType;
 
+  final String userId;
+
   @override
   ConsumerState<CardFooterButtonBar> createState() =>
       _CardFooterButtonBarState();
@@ -66,7 +71,7 @@ class _CardFooterButtonBarState extends ConsumerState<CardFooterButtonBar> {
     SchedulerBinding.instance!.addPostFrameCallback((_) {
       ref
           .read(likeProvider(_providerParams).notifier)
-          .setLikedState(widget.liked);
+          .setLoadedState(widget.liked);
     });
   }
 
@@ -77,6 +82,10 @@ class _CardFooterButtonBarState extends ConsumerState<CardFooterButtonBar> {
       context: context,
     );
 
+    final authState =
+        ref.watch(authenticationProvider) as AuthenticationLoadedState;
+    bool myCard = authState.user.id == widget.userId;
+
     String secondText = widget.useInReviewCard
         ? LocaleKeys.comment.tr()
         : LocaleKeys.answer.tr();
@@ -84,7 +93,7 @@ class _CardFooterButtonBarState extends ConsumerState<CardFooterButtonBar> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(child: _buildLikeButton()),
+        if (!myCard) Expanded(child: _buildLikeButton()),
         Expanded(
           child: CardFooterButton(
             icon: Icon(IconsManager.comment, size: 24.sp),
@@ -105,7 +114,8 @@ class _CardFooterButtonBarState extends ConsumerState<CardFooterButtonBar> {
 
   Widget _buildLikeButton() {
     final state = ref.watch(likeProvider(_providerParams));
-    bool liked = state is LikeLoadedState && state.liked;
+    bool liked = (state is LikeLoadedState && state.liked) ||
+        (state is LikeLoadingState && state.liked);
 
     String likedText = liked ? LocaleKeys.liked.tr() : LocaleKeys.like.tr();
 
@@ -130,7 +140,10 @@ class _CardFooterButtonBarState extends ConsumerState<CardFooterButtonBar> {
       text: firstText,
       liked: liked,
       onPressed: () {
-        ref.read(likeProvider(_providerParams).notifier).toggleLikeState();
+        final state = ref.watch(likeProvider(_providerParams));
+        if (state is! LoadingState) {
+          ref.read(likeProvider(_providerParams).notifier).toggleLikeState();
+        }
       },
     );
   }

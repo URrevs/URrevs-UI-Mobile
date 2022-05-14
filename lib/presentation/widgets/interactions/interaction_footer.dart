@@ -87,7 +87,7 @@ class _InteractionFooterState extends ConsumerState<InteractionFooter> {
       if (_likeProviderParams != null) {
         ref
             .read(likeProvider(_likeProviderParams!).notifier)
-            .setLikedState(widget.liked);
+            .setLoadedState(widget.liked);
       }
     });
   }

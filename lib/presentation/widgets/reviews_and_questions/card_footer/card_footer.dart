@@ -89,6 +89,7 @@ class CardFooter extends StatelessWidget {
             onShare: onShare,
             postId: postId,
             postType: postType,
+            userId: userId,
           ),
         )
       ],

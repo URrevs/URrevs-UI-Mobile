@@ -104,3 +104,56 @@ class GetCompanyQuestionsOfAnotherUser extends BaseResponse {
   Map<String, dynamic> toJson() =>
       _$GetCompanyQuestionsOfAnotherUserToJson(this);
 }
+
+@JsonSerializable()
+class UpvotePhoneQuestionResponse extends BaseResponse {
+  String status;
+  UpvotePhoneQuestionResponse({
+    required bool success,
+    required this.status,
+  }) : super(success: success);
+
+  factory UpvotePhoneQuestionResponse.fromJson(Map<String, Object?> json) =>
+      _$UpvotePhoneQuestionResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$UpvotePhoneQuestionResponseToJson(this);
+}
+
+@JsonSerializable()
+class DownvotePhoneQuestionResponse extends BaseResponse {
+  String status;
+  DownvotePhoneQuestionResponse({
+    required bool success,
+    required this.status,
+  }) : super(success: success);
+
+  factory DownvotePhoneQuestionResponse.fromJson(Map<String, Object?> json) =>
+      _$DownvotePhoneQuestionResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$DownvotePhoneQuestionResponseToJson(this);
+}
+
+@JsonSerializable()
+class UpvoteCompanyQuestionResponse extends BaseResponse {
+  String status;
+  UpvoteCompanyQuestionResponse({
+    required bool success,
+    required this.status,
+  }) : super(success: success);
+
+  factory UpvoteCompanyQuestionResponse.fromJson(Map<String, Object?> json) =>
+      _$UpvoteCompanyQuestionResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$UpvoteCompanyQuestionResponseToJson(this);
+}
+
+@JsonSerializable()
+class DownvoteCompanyQuestionResponse extends BaseResponse {
+  String status;
+  DownvoteCompanyQuestionResponse({
+    required bool success,
+    required this.status,
+  }) : super(success: success);
+
+  factory DownvoteCompanyQuestionResponse.fromJson(Map<String, Object?> json) =>
+      _$DownvoteCompanyQuestionResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$DownvoteCompanyQuestionResponseToJson(this);
+}

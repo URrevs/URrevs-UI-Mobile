@@ -307,4 +307,25 @@ abstract class RemoteDataSource {
     @Path() String userId,
     @Query('round') int round,
   );
+
+  /// 74
+  @PUT('/questions/phone/{questionId}?action=upvote')
+  Future<UpvotePhoneQuestionResponse> upvotePhoneQuestion(
+    @Path() String questionId,
+  );
+
+  @PUT('/questions/phone/{questionId}?action=downvote')
+  Future<DownvotePhoneQuestionResponse> downvotePhoneQuestion(
+    @Path() String questionId,
+  );
+
+  @PUT('/questions/company/{questionId}?action=upvote')
+  Future<UpvoteCompanyQuestionResponse> upvoteCompanyQuestion(
+    @Path() String questionId,
+  );
+
+  @PUT('/questions/company/{questionId}?action=downvote')
+  Future<DownvoteCompanyQuestionResponse> downvoteCompanyQuestion(
+    @Path() String questionId,
+  );
 }

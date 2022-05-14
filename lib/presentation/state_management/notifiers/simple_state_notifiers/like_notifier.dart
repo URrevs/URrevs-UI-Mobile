@@ -24,10 +24,11 @@ class LikeNotifier extends StateNotifier<LikeState> {
   final PostType _postType;
   final InteractionType? _interactionType;
 
-  void setLikedState(bool value) => state = LikeLoadedState(liked: value);
+  void setLoadedState(bool value) => state = LikeLoadedState(liked: value);
+  void setLoadingState(bool value) => state = LikeLoadingState(liked: value);
 
   void _like() async {
-    setLikedState(true);
+    setLoadingState(true);
     late Either<Failure, void> response;
     switch (_interactionType) {
       case InteractionType.comment:
@@ -40,7 +41,7 @@ class LikeNotifier extends StateNotifier<LikeState> {
             response = await GetIt.I<Repository>()
                 .likeCompanyReviewComment(_socialItemId);
             break;
-          case PostType.question:
+          case PostType.phoneQuestion:
             // TODO: Handle this case.
             break;
         }
@@ -58,7 +59,7 @@ class LikeNotifier extends StateNotifier<LikeState> {
             response = await GetIt.I<Repository>()
                 .likeCompanyReviewReply(_replyParentId!, _socialItemId);
             break;
-          case PostType.question:
+          case PostType.phoneQuestion:
             // TODO: Handle this case.
             break;
         }
@@ -73,22 +74,27 @@ class LikeNotifier extends StateNotifier<LikeState> {
             response =
                 await GetIt.I<Repository>().likeCompanyReview(_socialItemId);
             break;
-          case PostType.question:
-            // TODO: Handle this case.
+          case PostType.phoneQuestion:
+            response =
+                await GetIt.I<Repository>().upvotePhoneQuestion(_socialItemId);
+            break;
+          case PostType.companyQuestion:
+            response = await GetIt.I<Repository>()
+                .upvoteCompanyQuestion(_socialItemId);
             break;
         }
     }
     response.fold(
       (failure) {
         state = LikeErrorState(failure: failure);
-        setLikedState(false);
+        setLoadedState(false);
       },
-      (_) => null,
+      (_) => setLoadedState(true),
     );
   }
 
   void _unlike() async {
-    setLikedState(false);
+    setLoadingState(false);
     late Either<Failure, void> response;
     switch (_interactionType) {
       case InteractionType.comment:
@@ -101,7 +107,7 @@ class LikeNotifier extends StateNotifier<LikeState> {
             response = await GetIt.I<Repository>()
                 .unlikeCompanyReviewComment(_socialItemId);
             break;
-          case PostType.question:
+          case PostType.phoneQuestion:
             // TODO: Handle this case.
             break;
         }
@@ -119,7 +125,7 @@ class LikeNotifier extends StateNotifier<LikeState> {
             response = await GetIt.I<Repository>()
                 .unlikeCompanyReviewReply(_replyParentId!, _socialItemId);
             break;
-          case PostType.question:
+          case PostType.phoneQuestion:
             // TODO: Handle this case.
             break;
         }
@@ -134,14 +140,22 @@ class LikeNotifier extends StateNotifier<LikeState> {
             response =
                 await GetIt.I<Repository>().unlikeCompanyReview(_socialItemId);
             break;
-          case PostType.question:
-            // TODO: Handle this case.
+          case PostType.phoneQuestion:
+            response = await GetIt.I<Repository>()
+                .downvotePhoneQuestion(_socialItemId);
+            break;
+          case PostType.companyQuestion:
+            response = await GetIt.I<Repository>()
+                .downvoteCompanyQuestion(_socialItemId);
             break;
         }
     }
     response.fold(
-      (failure) => setLikedState(true),
-      (_) => null,
+      (failure) {
+        state = LikeErrorState(failure: failure);
+        setLoadedState(true);
+      },
+      (_) => setLoadedState(false),
     );
   }
 

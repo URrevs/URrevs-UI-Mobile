@@ -916,6 +916,77 @@ class _RemoteDataSource implements RemoteDataSource {
     return value;
   }
 
+  @override
+  Future<UpvotePhoneQuestionResponse> upvotePhoneQuestion(questionId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<UpvotePhoneQuestionResponse>(Options(
+                method: 'PUT', headers: _headers, extra: _extra)
+            .compose(
+                _dio.options, '/questions/phone/${questionId}?action=upvote',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = UpvotePhoneQuestionResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<DownvotePhoneQuestionResponse> downvotePhoneQuestion(
+      questionId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DownvotePhoneQuestionResponse>(Options(
+                method: 'PUT', headers: _headers, extra: _extra)
+            .compose(
+                _dio.options, '/questions/phone/${questionId}?action=downvote',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = DownvotePhoneQuestionResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<UpvoteCompanyQuestionResponse> upvoteCompanyQuestion(
+      questionId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<UpvoteCompanyQuestionResponse>(Options(
+                method: 'PUT', headers: _headers, extra: _extra)
+            .compose(
+                _dio.options, '/questions/company/${questionId}?action=upvote',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = UpvoteCompanyQuestionResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<DownvoteCompanyQuestionResponse> downvoteCompanyQuestion(
+      questionId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DownvoteCompanyQuestionResponse>(
+            Options(method: 'PUT', headers: _headers, extra: _extra)
+                .compose(_dio.options,
+                    '/questions/company/${questionId}?action=downvote',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = DownvoteCompanyQuestionResponse.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

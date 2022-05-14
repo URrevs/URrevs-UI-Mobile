@@ -516,4 +516,28 @@ class Repository {
       return response.questionsModels;
     });
   }
+
+  Future<Either<Failure, void>> upvotePhoneQuestion(String questionId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.upvotePhoneQuestion(questionId);
+    });
+  }
+
+  Future<Either<Failure, void>> downvotePhoneQuestion(String questionId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.downvotePhoneQuestion(questionId);
+    });
+  }
+
+  Future<Either<Failure, void>> upvoteCompanyQuestion(String questionId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.upvoteCompanyQuestion(questionId);
+    });
+  }
+
+  Future<Either<Failure, void>> downvoteCompanyQuestion(String questionId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.downvoteCompanyQuestion(questionId);
+    });
+  }
 }
