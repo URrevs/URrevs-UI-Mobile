@@ -299,8 +299,18 @@ class QuestionCard extends StatelessWidget {
                             ),
                           );
                         },
-                        onPressingReply:
-                            () {}, // TODO: reply on accepted answer
+                        onPressingReply: () {
+                          Navigator.of(context).pushNamed(
+                            FullscreenPostScreen.routeName,
+                            arguments: FullscreenPostScreenArgs(
+                              cardType: cardType,
+                              postId: questionId,
+                              focusOnTextField: true,
+                              postType: postType,
+                              answerId: answer!.id,
+                            ),
+                          );
+                        },
                       ),
                     ),
                 ],

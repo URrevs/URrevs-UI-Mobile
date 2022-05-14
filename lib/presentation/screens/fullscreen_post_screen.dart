@@ -53,11 +53,13 @@ class FullscreenPostScreenArgs {
   final bool focusOnTextField;
   final String postId;
   final PostType postType;
+  final String? answerId;
   FullscreenPostScreenArgs({
     required this.cardType,
     required this.postId,
     this.postType = PostType.phoneReview,
     this.focusOnTextField = false,
+    this.answerId,
   });
 
   static FullscreenPostScreenArgs get defaultArgs {
@@ -105,7 +107,9 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
 
   final List<DirectInteraction> _interactions = [];
 
-  String? _idOfInteractionRepliedTo;
+  /// answerId passed in screenArgs could be null, when this happens, posted
+  /// interactions would be an answer not a reply.
+  late String? _idOfInteractionRepliedTo = widget.screenArgs.answerId;
 
   Comment _postedCommentModel({
     required String commentId,
@@ -220,6 +224,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
     if (widget.screenArgs.focusOnTextField) {
       focusNode.requestFocus();
     }
+    
   }
 
   @override
@@ -370,6 +375,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
       case PostType.phoneQuestion:
       case PostType.companyQuestion:
         return AnswersList(
+          expandFirstAnswerReplies: widget.screenArgs.answerId != null,
           answers: _interactions.map((i) => i as Answer).toList(),
           parentPostType: _postType,
           onPressingReplyList: List.generate(_interactions.length, (i) {

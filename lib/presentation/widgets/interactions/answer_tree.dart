@@ -35,6 +35,7 @@ class AnswerTree extends StatefulWidget {
     required this.inQuestionCard,
     required this.onPressingReply,
     this.onTappingAnswerInCard,
+    this.expandReplies = false,
   })  : assert(
           !inQuestionCard || onTappingAnswerInCard != null,
           'onTappingAnswerInCard cannot be null if inQuestionCard is true.',
@@ -48,6 +49,7 @@ class AnswerTree extends StatefulWidget {
     required this.inQuestionCard,
     required this.onTappingAnswerInCard,
     required this.onPressingReply,
+    this.expandReplies = false,
   })  : answerId = answer.id,
         userId = answer.userId,
         imageUrl = answer.photo,
@@ -76,6 +78,7 @@ class AnswerTree extends StatefulWidget {
   final List<ReplyModel> replies;
   final VoidCallback? onTappingAnswerInCard;
   final VoidCallback onPressingReply;
+  final bool expandReplies;
 
   static AnswerTree get dummyInstance => AnswerTree(
         key: UniqueKey(),
@@ -157,7 +160,7 @@ class AnswerTree extends StatefulWidget {
 }
 
 class _AnswerTreeState extends State<AnswerTree> {
-  bool _expandReplies = false;
+  late bool _expandReplies = widget.expandReplies;
 
   void _onPressingShowReplies() {
     setState(() {
@@ -208,7 +211,9 @@ class _AnswerTreeState extends State<AnswerTree> {
                 InteractionFooter(
                   onPressingReply: () {
                     widget.onPressingReply();
-                    setState(() => _expandReplies = true);
+                    if (!widget.inQuestionCard) {
+                      setState(() => _expandReplies = true);
+                    }
                   },
                   datePosted: widget.datePosted,
                   maxWidth: constraints.maxWidth - 16.w,

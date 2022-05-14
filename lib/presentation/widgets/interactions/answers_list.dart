@@ -11,11 +11,13 @@ class AnswersList extends StatelessWidget {
     required this.answers,
     required this.parentPostType,
     required this.onPressingReplyList,
+      this.expandFirstAnswerReplies = false
   }) : super(key: key);
 
   final List<Answer> answers;
   final PostType parentPostType;
   final List<VoidCallback> onPressingReplyList;
+  final bool expandFirstAnswerReplies;
 
   static AnswersList get dummyInstance => AnswersList(
         answers: [],
@@ -35,6 +37,7 @@ class AnswersList extends StatelessWidget {
             inQuestionCard: false,
             onTappingAnswerInCard: null,
             onPressingReply: onPressingReplyList[i],
+            expandReplies: i == 0 && expandFirstAnswerReplies,
           ),
           if (i != answers.length - 1) VerticalSpacesBetween.interactionTrees,
         ],
