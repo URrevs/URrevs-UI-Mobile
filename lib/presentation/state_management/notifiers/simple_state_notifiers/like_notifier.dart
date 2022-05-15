@@ -42,12 +42,24 @@ class LikeNotifier extends StateNotifier<LikeState> {
                 .likeCompanyReviewComment(_socialItemId);
             break;
           case PostType.phoneQuestion:
-            // TODO: Handle this case.
-            break;
+          case PostType.companyQuestion:
+            throw UnimplementedError();
         }
         break;
       case InteractionType.answer:
-        // TODO: Handle this case.
+        switch (_postType) {
+          case PostType.phoneReview:
+          case PostType.companyReview:
+            throw UnimplementedError();
+          case PostType.phoneQuestion:
+            response = await GetIt.I<Repository>()
+                .upvotePhoneQuestionAnswer(_socialItemId);
+            break;
+          case PostType.companyQuestion:
+            response = await GetIt.I<Repository>()
+                .upvoteCompanyQuestionAnswer(_socialItemId);
+            break;
+        }
         break;
       case InteractionType.reply:
         switch (_postType) {
@@ -60,7 +72,12 @@ class LikeNotifier extends StateNotifier<LikeState> {
                 .likeCompanyReviewReply(_replyParentId!, _socialItemId);
             break;
           case PostType.phoneQuestion:
-            // TODO: Handle this case.
+            response = await GetIt.I<Repository>()
+                .likePhoneQuestionReply(_replyParentId!, _socialItemId);
+            break;
+          case PostType.companyQuestion:
+            response = await GetIt.I<Repository>()
+                .likeCompanyQuestionReply(_replyParentId!, _socialItemId);
             break;
         }
         break;
@@ -108,12 +125,24 @@ class LikeNotifier extends StateNotifier<LikeState> {
                 .unlikeCompanyReviewComment(_socialItemId);
             break;
           case PostType.phoneQuestion:
-            // TODO: Handle this case.
-            break;
+          case PostType.companyQuestion:
+            throw UnimplementedError();
         }
         break;
       case InteractionType.answer:
-        // TODO: Handle this case.
+        switch (_postType) {
+          case PostType.phoneReview:
+          case PostType.companyReview:
+            throw UnimplementedError();
+          case PostType.phoneQuestion:
+            response = await GetIt.I<Repository>()
+                .downvotePhoneQuestionAnswer(_socialItemId);
+            break;
+          case PostType.companyQuestion:
+            response = await GetIt.I<Repository>()
+                .downvoteCompanyQuestionAnswer(_socialItemId);
+            break;
+        }
         break;
       case InteractionType.reply:
         switch (_postType) {
@@ -126,7 +155,12 @@ class LikeNotifier extends StateNotifier<LikeState> {
                 .unlikeCompanyReviewReply(_replyParentId!, _socialItemId);
             break;
           case PostType.phoneQuestion:
-            // TODO: Handle this case.
+            response = await GetIt.I<Repository>()
+                .unlikePhoneQuestionReply(_replyParentId!, _socialItemId);
+            break;
+          case PostType.companyQuestion:
+            response = await GetIt.I<Repository>()
+                .unlikeCompanyQuestionReply(_replyParentId!, _socialItemId);
             break;
         }
         break;

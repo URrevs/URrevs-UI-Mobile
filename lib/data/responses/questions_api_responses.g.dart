@@ -247,3 +247,62 @@ Map<String, dynamic> _$AddReplyToCompanyQuestionAnswerResponseToJson(
       'success': instance.success,
       'reply': instance.replyId,
     };
+
+MarkAnswerAsAcceptedForPhoneResponse
+    _$MarkAnswerAsAcceptedForPhoneResponseFromJson(Map<String, dynamic> json) =>
+        MarkAnswerAsAcceptedForPhoneResponse(
+          success: json['success'] as bool,
+          id: json['_id'] as String,
+        );
+
+Map<String, dynamic> _$MarkAnswerAsAcceptedForPhoneResponseToJson(
+        MarkAnswerAsAcceptedForPhoneResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      '_id': instance.id,
+    };
+
+MarkAnswerAsAcceptedForCompanyResponse
+    _$MarkAnswerAsAcceptedForCompanyResponseFromJson(
+            Map<String, dynamic> json) =>
+        MarkAnswerAsAcceptedForCompanyResponse(
+          success: json['success'] as bool,
+          id: json['_id'] as String,
+        );
+
+Map<String, dynamic> _$MarkAnswerAsAcceptedForCompanyResponseToJson(
+        MarkAnswerAsAcceptedForCompanyResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      '_id': instance.id,
+    };
+
+UnmarkAnswerAsAcceptedForPhoneResponse
+    _$UnmarkAnswerAsAcceptedForPhoneResponseFromJson(
+            Map<String, dynamic> json) =>
+        UnmarkAnswerAsAcceptedForPhoneResponse(
+          success: json['success'] as bool,
+          id: json['_id'] as String,
+        );
+
+Map<String, dynamic> _$UnmarkAnswerAsAcceptedForPhoneResponseToJson(
+        UnmarkAnswerAsAcceptedForPhoneResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      '_id': instance.id,
+    };
+
+UnmarkAnswerAsAcceptedForCompanyResponse
+    _$UnmarkAnswerAsAcceptedForCompanyResponseFromJson(
+            Map<String, dynamic> json) =>
+        UnmarkAnswerAsAcceptedForCompanyResponse(
+          success: json['success'] as bool,
+          id: json['_id'] as String,
+        );
+
+Map<String, dynamic> _$UnmarkAnswerAsAcceptedForCompanyResponseToJson(
+        UnmarkAnswerAsAcceptedForCompanyResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      '_id': instance.id,
+    };

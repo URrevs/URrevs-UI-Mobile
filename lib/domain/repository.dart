@@ -596,4 +596,92 @@ class Repository {
       return response.replyId;
     });
   }
+
+  Future<Either<Failure, void>> upvotePhoneQuestionAnswer(String answerId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.upvotePhoneQuestionAnswer(answerId);
+    });
+  }
+
+  Future<Either<Failure, void>> downvotePhoneQuestionAnswer(String answerId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.downvotePhoneQuestionAnswer(answerId);
+    });
+  }
+
+  Future<Either<Failure, void>> upvoteCompanyQuestionAnswer(String answerId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.upvoteCompanyQuestionAnswer(answerId);
+    });
+  }
+
+  Future<Either<Failure, void>> downvoteCompanyQuestionAnswer(String answerId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.downvoteCompanyQuestionAnswer(answerId);
+    });
+  }
+
+  Future<Either<Failure, void>> likePhoneQuestionReply(
+      String answerId, String replyId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.likePhoneQuestionReply(answerId, replyId);
+    });
+  }
+
+  Future<Either<Failure, void>> unlikePhoneQuestionReply(
+      String answerId, String replyId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.unlikePhoneQuestionReply(answerId, replyId);
+    });
+  }
+
+  Future<Either<Failure, void>> likeCompanyQuestionReply(
+      String answerId, String replyId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.likeCompanyQuestionReply(answerId, replyId);
+    });
+  }
+
+  Future<Either<Failure, void>> unlikeCompanyQuestionReply(
+      String answerId, String replyId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.unlikeCompanyQuestionReply(answerId, replyId);
+    });
+  }
+
+  Future<Either<Failure, String>> markAnswerAsAcceptedForPhone(
+      String questionId, String answerId) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.markAnswerAsAcceptedForPhone(
+          questionId, answerId);
+      return response.id;
+    });
+  }
+
+  Future<Either<Failure, String>> markAnswerAsAcceptedForCompany(
+      String questionId, String answerId) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.markAnswerAsAcceptedForCompany(
+          questionId, answerId);
+      return response.id;
+    });
+  }
+
+  Future<Either<Failure, String>> unmarkAnswerAsAcceptedForPhone(
+      String questionId, String answerId) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.unmarkAnswerAsAcceptedForPhone(
+          questionId, answerId);
+      return response.id;
+    });
+  }
+
+  Future<Either<Failure, String>> unmarkAnswerAsAcceptedForCompany(
+      String questionId, String answerId) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.unmarkAnswerAsAcceptedForCompany(
+          questionId, answerId);
+      return response.id;
+    });
+  }
 }

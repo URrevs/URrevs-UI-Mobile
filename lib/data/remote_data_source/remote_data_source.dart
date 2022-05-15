@@ -5,6 +5,7 @@ import 'package:urrevs_ui_mobile/data/requests/companies_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/reviews_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/search_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/users_api_requests.dart';
+import 'package:urrevs_ui_mobile/data/responses/base_response.dart';
 import 'package:urrevs_ui_mobile/data/responses/companies_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/phones_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/questions_api_responses.dart';
@@ -368,5 +369,68 @@ abstract class RemoteDataSource {
       addReplyToCompanyQuestionAnswer(
     @Path() String answerId,
     @Body() AddInteractionRequest request,
+  );
+
+  @PUT('/questions/phone/answers/{answerId}?action=upvote')
+  Future<StatusResponse> upvotePhoneQuestionAnswer(
+    @Path() String answerId,
+  );
+  @PUT('/questions/phone/answers/{answerId}?action=downvote')
+  Future<StatusResponse> downvotePhoneQuestionAnswer(
+    @Path() String answerId,
+  );
+  @PUT('/questions/company/answers/{answerId}?action=upvote')
+  Future<StatusResponse> upvoteCompanyQuestionAnswer(
+    @Path() String answerId,
+  );
+  @PUT('/questions/phone/answers/{answerId}?action=downvote')
+  Future<StatusResponse> downvoteCompanyQuestionAnswer(
+    @Path() String answerId,
+  );
+  @PUT('/questions/phone/answers/{answerId}/replies/{replyId}?action=like')
+  Future<StatusResponse> likePhoneQuestionReply(
+    @Path() String answerId,
+    @Path() String replyId,
+  );
+  @PUT('/questions/phone/answers/{answerId}/replies/{replyId}?action=unlike')
+  Future<StatusResponse> unlikePhoneQuestionReply(
+    @Path() String answerId,
+    @Path() String replyId,
+  );
+  @PUT('/questions/company/answers/{answerId}/replies/{replyId}?action=like')
+  Future<StatusResponse> likeCompanyQuestionReply(
+    @Path() String answerId,
+    @Path() String replyId,
+  );
+  @PUT('/questions/company/answers/{answerId}/replies/{replyId}?action=unlike')
+  Future<StatusResponse> unlikeCompanyQuestionReply(
+    @Path() String answerId,
+    @Path() String replyId,
+  );
+
+  /// 94
+  @PUT('/questions/phone/{questionId}/answers/{answerId}?action=accept')
+  Future<MarkAnswerAsAcceptedForPhoneResponse> markAnswerAsAcceptedForPhone(
+    @Path() String questionId,
+    @Path() String answerId,
+  );
+
+  @PUT('/questions/company/{questionId}/answers/{answerId}?action=accept')
+  Future<MarkAnswerAsAcceptedForCompanyResponse> markAnswerAsAcceptedForCompany(
+    @Path() String questionId,
+    @Path() String answerId,
+  );
+
+  @PUT('/questions/company/{questionId}/answers/{answerId}?action=reject')
+  Future<UnmarkAnswerAsAcceptedForPhoneResponse> unmarkAnswerAsAcceptedForPhone(
+    @Path() String questionId,
+    @Path() String answerId,
+  );
+
+  @PUT('/questions/company/{questionId}/answers/{answerId}?action=reject')
+  Future<UnmarkAnswerAsAcceptedForCompanyResponse>
+      unmarkAnswerAsAcceptedForCompany(
+    @Path() String questionId,
+    @Path() String answerId,
   );
 }

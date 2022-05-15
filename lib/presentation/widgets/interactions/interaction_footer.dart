@@ -147,7 +147,8 @@ class _InteractionFooterState extends ConsumerState<InteractionFooter> {
 
   TextButton _buildLikeButton() {
     final state = ref.watch(likeProvider(_likeProviderParams!));
-    bool liked = state is LikeLoadedState && state.liked;
+    bool liked = (state is LikeLoadedState && state.liked) ||
+        (state is LikeLoadingState && state.liked);
     Color color = liked ? ColorManager.blue : ColorManager.black;
     return TextButton(
       onPressed: () {

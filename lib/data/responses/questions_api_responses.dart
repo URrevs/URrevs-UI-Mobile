@@ -260,3 +260,67 @@ class AddReplyToCompanyQuestionAnswerResponse extends BaseResponse {
   Map<String, dynamic> toJson() =>
       _$AddReplyToCompanyQuestionAnswerResponseToJson(this);
 }
+
+@JsonSerializable()
+class MarkAnswerAsAcceptedForPhoneResponse extends BaseResponse {
+  @JsonKey(name: '_id')
+  String id;
+  MarkAnswerAsAcceptedForPhoneResponse({
+    required bool success,
+    required this.id,
+  }) : super(success: success);
+
+  factory MarkAnswerAsAcceptedForPhoneResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$MarkAnswerAsAcceptedForPhoneResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$MarkAnswerAsAcceptedForPhoneResponseToJson(this);
+}
+
+@JsonSerializable()
+class MarkAnswerAsAcceptedForCompanyResponse extends BaseResponse {
+  @JsonKey(name: '_id')
+  String id;
+  MarkAnswerAsAcceptedForCompanyResponse({
+    required bool success,
+    required this.id,
+  }) : super(success: success);
+
+  factory MarkAnswerAsAcceptedForCompanyResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$MarkAnswerAsAcceptedForCompanyResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$MarkAnswerAsAcceptedForCompanyResponseToJson(this);
+}
+
+@JsonSerializable()
+class UnmarkAnswerAsAcceptedForPhoneResponse extends BaseResponse {
+  @JsonKey(name: '_id')
+  String id;
+  UnmarkAnswerAsAcceptedForPhoneResponse({
+    required bool success,
+    required this.id,
+  }) : super(success: success);
+
+  factory UnmarkAnswerAsAcceptedForPhoneResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$UnmarkAnswerAsAcceptedForPhoneResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$UnmarkAnswerAsAcceptedForPhoneResponseToJson(this);
+}
+
+@JsonSerializable()
+class UnmarkAnswerAsAcceptedForCompanyResponse extends BaseResponse {
+  @JsonKey(name: '_id')
+  String id;
+  UnmarkAnswerAsAcceptedForCompanyResponse({
+    required bool success,
+    required this.id,
+  }) : super(success: success);
+
+  factory UnmarkAnswerAsAcceptedForCompanyResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$UnmarkAnswerAsAcceptedForCompanyResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$UnmarkAnswerAsAcceptedForCompanyResponseToJson(this);
+}
