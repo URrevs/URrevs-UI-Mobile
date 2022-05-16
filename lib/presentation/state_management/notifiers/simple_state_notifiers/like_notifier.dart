@@ -1,7 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
+import 'package:urrevs_ui_mobile/domain/models/direct_interaction.dart';
 import 'package:urrevs_ui_mobile/domain/models/post.dart';
+import 'package:urrevs_ui_mobile/domain/models/reply_model.dart';
 import 'package:urrevs_ui_mobile/domain/repository.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
@@ -35,15 +37,47 @@ class LikeNotifier extends StateNotifier<LikeState> {
     post: null,
   );
 
+  late final DirectInteractionProviderParams? _directInteractionProviderParams =
+      _interactionType != null
+          ? DirectInteractionProviderParams(
+              interactionId: _socialItemId,
+              interactionType: _interactionType!,
+              interaction: DirectInteraction(id: 'dummy', replies: []),
+            )
+          : null;
+
+  late final ReplyProviderParams _replyProviderParams = ReplyProviderParams(
+    replyId: _socialItemId,
+    reply: ReplyModel.dummyInstance,
+  );
+
   void setLoadedState(bool value) => state = LikeLoadedState(liked: value);
   void setLoadingState(bool value) => state = LikeLoadingState(liked: value);
 
   void _incrementLikes() {
-    ref.read(postProvider(_postProviderParams).notifier).incrementLikes();
+    if (_interactionType == null) {
+      ref.read(postProvider(_postProviderParams).notifier).incrementLikes();
+    } else if (_interactionType != InteractionType.reply) {
+      ref
+          .read(directInteractionsProvider(_directInteractionProviderParams!)
+              .notifier)
+          .incrementLikes();
+    } else {
+      ref.read(replyProvider(_replyProviderParams).notifier).incrementLikes();
+    }
   }
 
   void _decrementLikes() {
-    ref.read(postProvider(_postProviderParams).notifier).decrementLikes();
+    if (_interactionType == null) {
+      ref.read(postProvider(_postProviderParams).notifier).decrementLikes();
+    } else if (_interactionType != InteractionType.reply) {
+      ref
+          .read(directInteractionsProvider(_directInteractionProviderParams!)
+              .notifier)
+          .decrementLikes();
+    } else {
+      ref.read(replyProvider(_replyProviderParams).notifier).incrementLikes();
+    }
   }
 
   void _like() async {

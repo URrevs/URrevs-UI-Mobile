@@ -22,22 +22,22 @@ import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 enum InteractionFooterFirstButtonText { like, vote, acceptAnswer }
 
 class InteractionFooter extends ConsumerStatefulWidget {
-  const InteractionFooter(
-      {Key? key,
-      required this.datePosted,
-      required this.maxWidth,
-      required this.liked,
-      required this.onPressingReply,
-      required this.interactionId,
-      required this.replyParentId,
-      required this.parentPostType,
-      required this.interactionType,
-      required this.userId,
-      required this.accepted,
-      required this.getInteractionsProviderParams,
-      required this.questionId,
-      required this.postUserId})
-      : assert(
+  const InteractionFooter({
+    Key? key,
+    required this.datePosted,
+    required this.maxWidth,
+    required this.liked,
+    required this.onPressingReply,
+    required this.interactionId,
+    required this.replyParentId,
+    required this.parentPostType,
+    required this.interactionType,
+    required this.userId,
+    required this.accepted,
+    required this.getInteractionsProviderParams,
+    required this.questionId,
+    required this.postUserId,
+  })  : assert(
             !(interactionType == InteractionType.answer && accepted == null)),
         assert(
             !(interactionType == InteractionType.answer && questionId == null)),

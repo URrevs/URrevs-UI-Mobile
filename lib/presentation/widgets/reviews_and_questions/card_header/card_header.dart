@@ -63,7 +63,7 @@ class CardHeader extends StatelessWidget {
               Navigator.of(context).pushNamed(
                 UserProfileScreen.routeName,
                 arguments:
-                    UserProfileScreenArgs(userId: '626b29227fe7587a42e3e9f6'),
+                    UserProfileScreenArgs(userId: userId),
               );
             },
           ),

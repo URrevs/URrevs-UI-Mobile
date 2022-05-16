@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
+import 'package:urrevs_ui_mobile/domain/models/direct_interaction.dart';
 import 'package:urrevs_ui_mobile/domain/models/post.dart';
+import 'package:urrevs_ui_mobile/domain/models/reply_model.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/authentication_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/companies_notifiers/get_all_companies_notifier.dart';
@@ -18,8 +20,10 @@ import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/search_
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/get_the_profile_of_another_user.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/give_points_to_user_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/search_notifiers/search_notifier.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/simple_state_notifiers/direct_interactions_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/simple_state_notifiers/like_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/simple_state_notifiers/post_notifier.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/simple_state_notifiers/reply_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/theme_mode_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/update_targets_from_source_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
@@ -55,6 +59,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/search_sta
 import 'package:urrevs_ui_mobile/presentation/state_management/states/update_targets_from_source_state.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/partial_error_widget.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/interactions/reply.dart';
 
 import 'notifiers/phones_notifier/get_phone_specs_notifier.dart';
 import 'notifiers/phones_notifier/get_phones_from_certain_company_notifier.dart';
@@ -265,6 +270,16 @@ final userImageUrlProvider = Provider<String>((ref) {
 final postProvider = StateNotifierProvider.autoDispose
     .family<PostNotifier, Post, PostProviderParams>((ref, params) {
   return PostNotifier(post: params.post);
+});
+final directInteractionsProvider = StateNotifierProvider.autoDispose.family<
+    DirectInteractionNotifier,
+    DirectInteraction,
+    DirectInteractionProviderParams>((ref, params) {
+  return DirectInteractionNotifier(interaction: params.interaction);
+});
+final replyProvider = StateNotifierProvider.autoDispose
+    .family<ReplyNotifier, ReplyModel, ReplyProviderParams>((ref, params) {
+  return ReplyNotifier(reply: params.reply);
 });
 
 extension WidgetRefListeners on WidgetRef {

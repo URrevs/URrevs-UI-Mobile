@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:urrevs_ui_mobile/domain/models/reply_model.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/user_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/authentication_state.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/interaction_body.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/interaction_footer.dart';
 
-class Reply extends StatelessWidget {
+class Reply extends ConsumerWidget {
   final String? imageUrl;
   final String authorName;
   final String replyText;
@@ -25,39 +27,40 @@ class Reply extends StatelessWidget {
   final String userId;
   final String postUserId;
 
-  const Reply({
-    Key? key,
-    required this.imageUrl,
-    required this.authorName,
-    required this.replyText,
-    required this.likeCount,
-    required this.datePosted,
-    required this.liked,
+  Reply.fromReplyModel(
+    ReplyModel reply, {
     required this.onPressingReply,
-    required this.interactionId,
     required this.parentPostType,
     required this.replyParentId,
-    required this.userId,
     required this.postUserId,
-  }) : super(key: key);
+    Key? key,
+  })  : imageUrl = reply.photo,
+        authorName = reply.userName,
+        replyText = reply.content,
+        likeCount = reply.likes,
+        datePosted = reply.createdAt,
+        liked = reply.liked,
+        interactionId = reply.id,
+        userId = reply.userId,
+        _replyProviderParams = ReplyProviderParams(
+          replyId: reply.id,
+          reply: reply,
+        ),
+        super(key: key);
 
-  static Reply get dummyInstance => Reply(
-        imageUrl: DummyDataManager.imageUrl,
-        authorName: DummyDataManager.authorName,
-        replyText: DummyDataManager.reply,
-        likeCount: DummyDataManager.randomInt,
-        datePosted: DummyDataManager.postedDate,
-        liked: DummyDataManager.randomBool,
+  static Reply get dummyInstance => Reply.fromReplyModel(
+        ReplyModel.dummyInstance,
         onPressingReply: () {},
-        interactionId: DummyDataManager.randomInt.toString(),
-        userId: DummyDataManager.randomInt.toString(),
         parentPostType: PostType.phoneReview,
-        replyParentId: DummyDataManager.randomInt.toString(),
-        postUserId: 'post user id',
+        replyParentId: 'dummy',
+        postUserId: 'dummy',
       );
 
+  late final ReplyProviderParams _replyProviderParams;
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
+    final reply = ref.watch(replyProvider(_replyProviderParams));
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,7 +84,7 @@ class Reply extends StatelessWidget {
                 InteractionBody(
                   authorName: authorName,
                   replyText: replyText,
-                  likeCount: likeCount,
+                  likeCount: reply.likes,
                   maxWidth: constraints.maxWidth - 16.w,
                   inQuestionCard: false,
                 ),

@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 
 import 'package:urrevs_ui_mobile/domain/models/direct_interaction.dart';
 import 'package:urrevs_ui_mobile/domain/models/reply_model.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 
 class Answer extends DirectInteraction {
   final String userId;
@@ -27,9 +28,6 @@ class Answer extends DirectInteraction {
     required this.accepted,
   }) : super(id: id, replies: replies);
 
-  @override
-  List<Object?> get props => [id, accepted];
-
   Answer copyWith({
     String? userId,
     String? userName,
@@ -40,10 +38,8 @@ class Answer extends DirectInteraction {
     int? upvotes,
     bool? upvoted,
     bool? accepted,
-    List<ReplyModel>? replies,
   }) {
     return Answer(
-      id: id,
       userId: userId ?? this.userId,
       userName: userName ?? this.userName,
       photo: photo ?? this.photo,
@@ -53,7 +49,22 @@ class Answer extends DirectInteraction {
       upvotes: upvotes ?? this.upvotes,
       upvoted: upvoted ?? this.upvoted,
       accepted: accepted ?? this.accepted,
-      replies: replies ?? this.replies,
+      id: id,
+      replies: replies,
     );
   }
+
+  static Answer get dummyInstance => Answer(
+        id: 'dummy',
+        userId: 'dummy',
+        userName: 'dummy',
+        photo: StringsManager.picsum200x200,
+        createdAt: DateTime.now(),
+        ownedAt: DateTime.now(),
+        content: 'dummy',
+        upvotes: 1,
+        upvoted: false,
+        replies: [],
+        accepted: false,
+      );
 }

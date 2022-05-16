@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/domain/models/comment.dart';
 import 'package:urrevs_ui_mobile/domain/models/reply_model.dart';
@@ -8,29 +9,15 @@ import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_button_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/user_profile_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/reply.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/interaction_body.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/interaction_footer.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
-class CommentTree extends StatefulWidget {
-  const CommentTree({
-    Key? key,
-    required this.commentId,
-    required this.imageUrl,
-    required this.authorName,
-    required this.userId,
-    required this.commentText,
-    required this.likeCount,
-    required this.datePosted,
-    required this.replies,
-    required this.liked,
-    required this.onPressingReply,
-    required this.parentPostType,
-    required this.postUserId,
-  }) : super(key: key);
-
+class CommentTree extends ConsumerStatefulWidget {
   CommentTree.fromComment(
     Comment comment, {
     Key? key,
@@ -46,6 +33,11 @@ class CommentTree extends StatefulWidget {
         replies = comment.replies,
         liked = comment.liked,
         commentId = comment.id,
+        _directInteractionProviderParams = DirectInteractionProviderParams(
+          interactionId: comment.id,
+          interactionType: InteractionType.comment,
+          interaction: comment,
+        ),
         super(key: key);
 
   final String? imageUrl;
@@ -61,27 +53,20 @@ class CommentTree extends StatefulWidget {
   final PostType parentPostType;
   final String postUserId;
 
-  static CommentTree get dummyInstance => CommentTree(
+  late final DirectInteractionProviderParams _directInteractionProviderParams;
+
+  static CommentTree get dummyInstance => CommentTree.fromComment(
+        Comment.dummyInstance,
         onPressingReply: () {},
-        key: UniqueKey(),
-        commentId: DummyDataManager.randomInt.toString(),
-        imageUrl: DummyDataManager.imageUrl,
-        authorName: DummyDataManager.authorName,
-        userId: DummyDataManager.randomInt.toString(),
-        commentText: DummyDataManager.sentenceOrMore,
-        likeCount: DummyDataManager.randomInt,
-        datePosted: DummyDataManager.postedDate,
-        liked: DummyDataManager.randomBool,
         parentPostType: PostType.phoneReview,
-        replies: [],
-        postUserId: 'post user id',
+        postUserId: 'dummy',
       );
 
   @override
-  State<CommentTree> createState() => _CommentTreeState();
+  ConsumerState<CommentTree> createState() => _CommentTreeState();
 }
 
-class _CommentTreeState extends State<CommentTree> {
+class _CommentTreeState extends ConsumerState<CommentTree> {
   bool _expandReplies = false;
 
   void _onPressingShowReplies() {
@@ -92,6 +77,9 @@ class _CommentTreeState extends State<CommentTree> {
 
   @override
   Widget build(BuildContext context) {
+    final comment = ref.watch(
+            directInteractionsProvider(widget._directInteractionProviderParams))
+        as Comment;
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,7 +103,7 @@ class _CommentTreeState extends State<CommentTree> {
                 InteractionBody(
                   authorName: widget.authorName,
                   replyText: widget.commentText,
-                  likeCount: widget.likeCount,
+                  likeCount: comment.likes,
                   maxWidth: constraints.maxWidth - 16.w,
                   inQuestionCard: false,
                 ),
@@ -149,18 +137,10 @@ class _CommentTreeState extends State<CommentTree> {
                 if (_expandReplies) ...[
                   VerticalSpacesBetween.interactionBodyAndReplies,
                   for (int i = 0; i < widget.replies.length; i++) ...[
-                    Reply(
-                      imageUrl: widget.replies[i].photo,
-                      authorName: widget.replies[i].userName,
-                      replyText: widget.replies[i].content,
-                      likeCount: widget.replies[i].likes,
-                      datePosted: widget.replies[i].createdAt,
-                      liked: widget.replies[i].liked,
+                    Reply.fromReplyModel(
+                      widget.replies[i],
                       onPressingReply: widget.onPressingReply,
-                      interactionId: widget.replies[i].id,
                       parentPostType: widget.parentPostType,
-                      userId: widget.replies[i].userId,
-                      // comment id cannot be null if there is a reply passed to the comment
                       replyParentId: widget.commentId,
                       postUserId: widget.postUserId,
                     ),

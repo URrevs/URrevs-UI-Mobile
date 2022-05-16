@@ -21,7 +21,7 @@ import 'package:urrevs_ui_mobile/presentation/widgets/interactions/interaction_f
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 class AnswerTree extends ConsumerStatefulWidget {
-  const AnswerTree({
+  AnswerTree({
     Key? key,
     required this.answerId,
     required this.questionId,
@@ -42,7 +42,12 @@ class AnswerTree extends ConsumerStatefulWidget {
     required this.getInteractionsProviderParams,
     this.onTappingAnswerInCard,
     this.expandReplies = false,
-  })  : assert(
+  })  : _directInteractionProviderParams = DirectInteractionProviderParams(
+          interactionId: 'dummy',
+          interactionType: InteractionType.answer,
+          interaction: Answer.dummyInstance,
+        ),
+        assert(
           !inQuestionCard || onTappingAnswerInCard != null,
           'onTappingAnswerInCard cannot be null if inQuestionCard is true.',
         ),
@@ -70,6 +75,11 @@ class AnswerTree extends ConsumerStatefulWidget {
         replies = answer.replies,
         liked = answer.upvoted,
         accepted = answer.accepted,
+        _directInteractionProviderParams = DirectInteractionProviderParams(
+          interactionId: answer.id,
+          interactionType: InteractionType.answer,
+          interaction: answer,
+        ),
         super(key: key);
 
   final String answerId;
@@ -91,6 +101,8 @@ class AnswerTree extends ConsumerStatefulWidget {
   final VoidCallback onPressingReply;
   final bool expandReplies;
   final GetInteractionsProviderParams? getInteractionsProviderParams;
+
+  late final DirectInteractionProviderParams _directInteractionProviderParams;
 
   static AnswerTree get dummyInstance => AnswerTree(
         key: UniqueKey(),
@@ -208,6 +220,9 @@ class _AnswerTreeState extends ConsumerState<AnswerTree> {
 
   @override
   Widget build(BuildContext context) {
+    final answer = ref.watch(
+            directInteractionsProvider(widget._directInteractionProviderParams))
+        as Answer;
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -226,8 +241,7 @@ class _AnswerTreeState extends ConsumerState<AnswerTree> {
           onTap: () {
             Navigator.of(context).pushNamed(
               UserProfileScreen.routeName,
-              arguments:
-                  UserProfileScreenArgs(userId: '626b29227fe7587a42e3e9f6'),
+              arguments: UserProfileScreenArgs(userId: widget.userId),
             );
           },
         ),
@@ -240,7 +254,7 @@ class _AnswerTreeState extends ConsumerState<AnswerTree> {
                 InteractionBody(
                   authorName: widget.authorName,
                   replyText: widget.commentText,
-                  likeCount: widget.likeCount,
+                  likeCount: answer.upvotes,
                   maxWidth: constraints.maxWidth - 16.w,
                   usedSinceDate: widget.usedSinceDate,
                   inQuestionCard: widget.inQuestionCard,
@@ -281,20 +295,12 @@ class _AnswerTreeState extends ConsumerState<AnswerTree> {
                 if (_expandReplies) ...[
                   VerticalSpacesBetween.interactionBodyAndReplies,
                   for (int i = 0; i < widget.replies.length; i++) ...[
-                    Reply(
-                      imageUrl: widget.replies[i].photo,
-                      authorName: widget.replies[i].userName,
-                      replyText: widget.replies[i].content,
-                      likeCount: widget.replies[i].likes,
-                      datePosted: widget.replies[i].createdAt,
-                      liked: widget.replies[i].liked,
-                      onPressingReply: widget.onPressingReply,
-                      interactionId: widget.replies[i].id,
-                      parentPostType: widget.parentPostType,
-                      userId: widget.replies[i].userId,
-                      // comment id cannot be null if there is a reply passed to the comment
-                      replyParentId: widget.answerId,
-                      postUserId: widget.postUserId,
+                    Reply.fromReplyModel(
+                      widget.replies[i],
+                      onPressingReply: () {},
+                      parentPostType: PostType.phoneReview,
+                      replyParentId: 'dummy',
+                      postUserId: 'dummy',
                     ),
                     if (i != widget.replies.length - 1)
                       VerticalSpacesBetween.replies,
