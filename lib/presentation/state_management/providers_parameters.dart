@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
+import 'package:urrevs_ui_mobile/domain/models/post.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 
 /// Subclasses of [NotSyncedProviderParams] do not have to extend [Equatable] as
@@ -131,4 +132,18 @@ class AcceptAnswerProviderParams extends Equatable {
   @override
   List<Object?> get props =>
       [questionId, answerId, targetType, getInteractionsProviderParams];
+}
+
+class PostProviderParams extends Equatable {
+  final String postId;
+  final PostType postType;
+  final Post? post;
+  const PostProviderParams({
+    required this.postId,
+    required this.postType,
+    required this.post,
+  });
+
+  @override
+  List<Object?> get props => [postId, postType];
 }

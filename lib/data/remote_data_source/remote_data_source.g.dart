@@ -1284,7 +1284,7 @@ class _RemoteDataSource implements RemoteDataSource {
         UnmarkAnswerAsAcceptedForPhoneResponse>(Options(
             method: 'PUT', headers: _headers, extra: _extra)
         .compose(_dio.options,
-            '/questions/company/${questionId}/answers/${answerId}?action=reject',
+            '/questions/phone/${questionId}/answers/${answerId}?action=reject',
             queryParameters: queryParameters, data: _data)
         .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value =

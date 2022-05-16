@@ -1,4 +1,5 @@
 import 'package:urrevs_ui_mobile/domain/models/post.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 
 class PhoneReview extends Post {
   final String type;
@@ -63,4 +64,81 @@ class PhoneReview extends Post {
 
   @override
   List<Object?> get props => [id];
+
+  PhoneReview copyWith({
+    String? type,
+    String? targetId,
+    String? targetName,
+    String? userId,
+    String? userName,
+    String? photo,
+    DateTime? createdAt,
+    int? views,
+    int? likes,
+    int? commentsCount,
+    int? shares,
+    DateTime? ownedAt,
+    double? generalRating,
+    int? uiRating,
+    int? manufacturingQuality,
+    int? valueForMoney,
+    int? camera,
+    int? callQuality,
+    int? battery,
+    String? pros,
+    String? cons,
+    bool? liked,
+  }) {
+    return PhoneReview(
+      id: id,
+      type: type ?? this.type,
+      targetId: targetId ?? this.targetId,
+      targetName: targetName ?? this.targetName,
+      userId: userId ?? this.userId,
+      userName: userName ?? this.userName,
+      photo: photo ?? this.photo,
+      createdAt: createdAt ?? this.createdAt,
+      views: views ?? this.views,
+      likes: likes ?? this.likes,
+      commentsCount: commentsCount ?? this.commentsCount,
+      shares: shares ?? this.shares,
+      ownedAt: ownedAt ?? this.ownedAt,
+      generalRating: generalRating ?? this.generalRating,
+      uiRating: uiRating ?? this.uiRating,
+      manufacturingQuality: manufacturingQuality ?? this.manufacturingQuality,
+      valueForMoney: valueForMoney ?? this.valueForMoney,
+      camera: camera ?? this.camera,
+      callQuality: callQuality ?? this.callQuality,
+      battery: battery ?? this.battery,
+      pros: pros ?? this.pros,
+      cons: cons ?? this.cons,
+      liked: liked ?? this.liked,
+    );
+  }
+
+  static PhoneReview get dummyInstance => PhoneReview(
+        id: 'dummy',
+        type: 'phone',
+        targetId: 'dummy',
+        targetName: 'dummy',
+        userId: 'dummy',
+        userName: 'dummy',
+        photo: StringsManager.picsum200x200,
+        createdAt: DateTime.now(),
+        views: 10,
+        likes: 10,
+        commentsCount: 10,
+        shares: 10,
+        ownedAt: DateTime.now(),
+        generalRating: 3,
+        uiRating: 3,
+        manufacturingQuality: 3,
+        valueForMoney: 3,
+        camera: 3,
+        callQuality: 3,
+        battery: 3,
+        pros: 'dummy',
+        cons: 'dummy',
+        liked: false,
+      );
 }

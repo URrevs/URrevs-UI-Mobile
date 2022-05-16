@@ -421,7 +421,7 @@ abstract class RemoteDataSource {
     @Path() String answerId,
   );
 
-  @PUT('/questions/company/{questionId}/answers/{answerId}?action=reject')
+  @PUT('/questions/phone/{questionId}/answers/{answerId}?action=reject')
   Future<UnmarkAnswerAsAcceptedForPhoneResponse> unmarkAnswerAsAcceptedForPhone(
     @Path() String questionId,
     @Path() String answerId,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
+import 'package:urrevs_ui_mobile/domain/models/post.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/authentication_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/companies_notifiers/get_all_companies_notifier.dart';
@@ -18,6 +19,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/get_the
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/give_points_to_user_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/search_notifiers/search_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/simple_state_notifiers/like_notifier.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/simple_state_notifiers/post_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/theme_mode_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/update_targets_from_source_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
@@ -197,6 +199,7 @@ final likeProvider = StateNotifierProvider.autoDispose
     replyParentId: params.replyParentId,
     postType: params.postType,
     interactionType: params.interactionType,
+    ref: ref,
   );
 });
 
@@ -208,11 +211,11 @@ final getInteractionsProvider = StateNotifierProvider.autoDispose.family<
     GetInteractionsNotifier(postId: params.postId, postType: params.postType));
 
 final addInteractionProvider = StateNotifierProvider.autoDispose.family<
-    AddInteractionNotifier,
-    AddInteractionState,
-    AddInteractionProviderParams>((ref,
-        params) =>
-    AddInteractionNotifier(postId: params.postId, postType: params.postType));
+        AddInteractionNotifier,
+        AddInteractionState,
+        AddInteractionProviderParams>(
+    (ref, params) => AddInteractionNotifier(
+        postId: params.postId, postType: params.postType, ref: ref));
 
 final addReviewReplyProvider = StateNotifierProvider.autoDispose.family<
     AddReviewReplyNotifier,
@@ -257,6 +260,11 @@ final userImageUrlProvider = Provider<String>((ref) {
   } else {
     return StringsManager.imagePlaceHolder;
   }
+});
+
+final postProvider = StateNotifierProvider.autoDispose
+    .family<PostNotifier, Post, PostProviderParams>((ref, params) {
+  return PostNotifier(post: params.post);
 });
 
 extension WidgetRefListeners on WidgetRef {

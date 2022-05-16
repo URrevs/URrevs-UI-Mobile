@@ -3,10 +3,12 @@ import 'dart:math';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:urrevs_ui_mobile/app/extensions.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone_review.dart';
+import 'package:urrevs_ui_mobile/domain/models/post.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/app_elevations.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
@@ -15,6 +17,8 @@ import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/product_profile/product_profile_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/review_card_body.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_footer/card_footer.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_header/card_header.dart';
@@ -22,7 +26,7 @@ import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 /// A card showing a review for a product.
-class ProductReviewCard extends StatelessWidget {
+class ProductReviewCard extends ConsumerWidget {
   /// Profile image url of the current logged in user.
   final String? imageUrl;
 
@@ -87,7 +91,7 @@ class ProductReviewCard extends StatelessWidget {
 
   final String productId;
 
-  const ProductReviewCard({
+  ProductReviewCard({
     Key? key,
     required this.reviewId,
     required this.userId,
@@ -107,7 +111,12 @@ class ProductReviewCard extends StatelessWidget {
     required this.liked,
     required this.fullscreen,
     required this.onPressingComment,
-  }) : super(key: key);
+  })  : _postProviderParams = PostProviderParams(
+          postId: 'dummy',
+          postType: PostType.phoneReview,
+          post: PhoneReview.dummyInstance,
+        ),
+        super(key: key);
 
   ProductReviewCard.fromPhoneReview({
     required PhoneReview phoneReview,
@@ -130,6 +139,11 @@ class ProductReviewCard extends StatelessWidget {
         commentCount = phoneReview.commentsCount,
         shareCount = phoneReview.shares,
         liked = phoneReview.liked,
+        _postProviderParams = PostProviderParams(
+          postId: phoneReview.id,
+          postType: PostType.phoneReview,
+          post: phoneReview,
+        ),
         super(key: key);
 
   /// An instance of [ProductReviewCard] filled with dummy data.
@@ -245,8 +259,12 @@ class ProductReviewCard extends StatelessWidget {
     );
   }
 
+  late final PostProviderParams _postProviderParams;
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    PhoneReview review =
+        ref.watch(postProvider(_postProviderParams)) as PhoneReview;
     return Stack(
       children: [
         Card(
@@ -288,9 +306,9 @@ class ProductReviewCard extends StatelessWidget {
                   userId: userId,
                   postId: reviewId,
                   postType: PostType.phoneReview,
-                  likeCount: likeCount,
-                  commentCount: commentCount,
-                  shareCount: shareCount,
+                  likeCount: review.likes,
+                  commentCount: review.commentsCount,
+                  shareCount: review.shares,
                   liked: liked,
                   useInReviewCard: true,
                   onLike: _onLike,

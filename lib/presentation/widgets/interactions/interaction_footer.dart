@@ -39,8 +39,6 @@ class InteractionFooter extends ConsumerStatefulWidget {
       required this.postUserId})
       : assert(
             !(interactionType == InteractionType.answer && accepted == null)),
-        assert(!(interactionType == InteractionType.answer &&
-            getInteractionsProviderParams == null)),
         assert(
             !(interactionType == InteractionType.answer && questionId == null)),
         super(key: key);

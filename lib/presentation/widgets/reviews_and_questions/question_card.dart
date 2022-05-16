@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:urrevs_ui_mobile/app/extensions.dart';
@@ -17,6 +18,8 @@ import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/company_profile/company_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_post_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/product_profile/product_profile_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answer_tree.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/question_card_body.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_footer/card_footer.dart';
@@ -25,7 +28,7 @@ import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 /// A card showing a question.
-class QuestionCard extends StatelessWidget {
+class QuestionCard extends ConsumerWidget {
   final String questionId;
 
   /// Profile image url of the current logged in user.
@@ -69,7 +72,7 @@ class QuestionCard extends StatelessWidget {
 
   final TargetType cardHeaderTitleType;
 
-  const QuestionCard({
+  QuestionCard({
     Key? key,
     required this.questionId,
     required this.userId,
@@ -88,7 +91,12 @@ class QuestionCard extends StatelessWidget {
     required this.fullscreen,
     required this.onPressingAnswer,
     this.answer,
-  }) : super(key: key);
+  })  : _postProviderParams = PostProviderParams(
+          postId: questionId,
+          postType: PostType.phoneQuestion,
+          post: Question.dummyInstance,
+        ),
+        super(key: key);
 
   QuestionCard.fromQuestion(
     Question question, {
@@ -110,6 +118,13 @@ class QuestionCard extends StatelessWidget {
         shareCount = question.shares,
         upvoted = question.upvoted,
         answer = question.acceptedAns,
+        _postProviderParams = PostProviderParams(
+          postId: question.id,
+          postType: question.type == TargetType.phone
+              ? PostType.phoneQuestion
+              : PostType.companyQuestion,
+          post: question,
+        ),
         super(key: key);
 
   /// An instance of [QuestionCard] filled with dummy data.
@@ -224,8 +239,11 @@ class QuestionCard extends StatelessWidget {
     );
   }
 
+  late final PostProviderParams _postProviderParams;
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
+    final question = ref.watch(postProvider(_postProviderParams)) as Question;
     return Stack(
       children: [
         Card(
@@ -261,9 +279,9 @@ class QuestionCard extends StatelessWidget {
                 8.verticalSpace,
                 CardFooter(
                   userId: userId,
-                  likeCount: upvoteCount,
-                  commentCount: answerCount,
-                  shareCount: shareCount,
+                  likeCount: question.upvotes,
+                  commentCount: question.ansCount,
+                  shareCount: question.shares,
                   liked: upvoted,
                   useInReviewCard: false,
                   onLike: _onUpvote,

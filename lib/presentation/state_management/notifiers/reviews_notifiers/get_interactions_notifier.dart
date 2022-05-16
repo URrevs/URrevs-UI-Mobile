@@ -75,7 +75,6 @@ class GetInteractionsNotifier extends StateNotifier<GetInteractionsState> {
           infiniteScrollingItems: currentAnswers,
           roundsEnded: currentState.roundsEnded,
         );
-        print(currentAnswers);
       }
     }
   }
@@ -101,7 +100,6 @@ class GetInteractionsNotifier extends StateNotifier<GetInteractionsState> {
         infiniteScrollingItems: currentAnswers,
         roundsEnded: currentState.roundsEnded,
       );
-      print(currentAnswers);
     }
   }
 
@@ -161,7 +159,8 @@ class GetInteractionsNotifier extends StateNotifier<GetInteractionsState> {
       List<DirectInteraction> newInteractions = [
         ...currentState.infiniteScrollingItems
       ];
-      if (newInteractions.first is Answer &&
+      if (_currentInteractions.isNotEmpty &&
+          newInteractions.first is Answer &&
           (newInteractions.first as Answer).accepted) {
         newInteractions.insert(1, interaction);
       } else {

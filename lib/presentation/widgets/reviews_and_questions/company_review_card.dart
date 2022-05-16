@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:urrevs_ui_mobile/app/extensions.dart';
@@ -14,6 +15,8 @@ import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/company_profile/company_profile_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/review_card_body.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_footer/card_footer.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_header/card_header.dart';
@@ -21,7 +24,7 @@ import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 /// A card showing a review for a product.
-class CompanyReviewCard extends StatelessWidget {
+class CompanyReviewCard extends ConsumerWidget {
   final String reviewId;
 
   /// Name of review author.
@@ -73,7 +76,7 @@ class CompanyReviewCard extends StatelessWidget {
 
   final String companyId;
 
-  const CompanyReviewCard({
+  CompanyReviewCard({
     Key? key,
     required this.reviewId,
     required this.userId,
@@ -92,7 +95,12 @@ class CompanyReviewCard extends StatelessWidget {
     required this.liked,
     required this.fullscreen,
     required this.onPressingComment,
-  }) : super(key: key);
+  })  : _postProviderParams = PostProviderParams(
+          postId: reviewId,
+          postType: PostType.companyReview,
+          post: CompanyReview.dummyInstance,
+        ),
+        super(key: key);
 
   CompanyReviewCard.fromCompanyReview({
     required CompanyReview companyReview,
@@ -114,6 +122,11 @@ class CompanyReviewCard extends StatelessWidget {
         commentCount = companyReview.commentsCount,
         shareCount = companyReview.shares,
         liked = companyReview.liked,
+        _postProviderParams = PostProviderParams(
+          postId: companyReview.id,
+          postType: PostType.companyReview,
+          post: companyReview,
+        ),
         super(key: key);
 
   /// An instance of [CompanyReviewCard] filled with dummy data.
@@ -194,6 +207,8 @@ class CompanyReviewCard extends StatelessWidget {
     // TODO: implememnt _onShare
   }
 
+  late final PostProviderParams _postProviderParams;
+
   Positioned _buildQuestionMark(BuildContext context) {
     return Positioned(
       top: 0,
@@ -228,7 +243,9 @@ class CompanyReviewCard extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
+    final companyReview =
+        ref.watch(postProvider(_postProviderParams)) as CompanyReview;
     return Stack(
       children: [
         Card(
@@ -267,9 +284,9 @@ class CompanyReviewCard extends StatelessWidget {
                 ),
                 8.verticalSpace,
                 CardFooter(
-                  likeCount: likeCount,
-                  commentCount: commentCount,
-                  shareCount: shareCount,
+                  likeCount: companyReview.likes,
+                  commentCount: companyReview.commentsCount,
+                  shareCount: companyReview.shares,
                   liked: liked,
                   useInReviewCard: true,
                   onLike: _onLike,

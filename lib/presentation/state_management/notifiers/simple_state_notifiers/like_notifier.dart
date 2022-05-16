@@ -1,8 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
+import 'package:urrevs_ui_mobile/domain/models/post.dart';
 import 'package:urrevs_ui_mobile/domain/repository.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/like_state.dart';
 
 import '../../../../domain/failure.dart';
@@ -13,6 +16,7 @@ class LikeNotifier extends StateNotifier<LikeState> {
     required String? replyParentId,
     required PostType postType,
     required InteractionType? interactionType,
+    required this.ref,
   })  : _socialItemId = socialItemId,
         _replyParentId = replyParentId,
         _postType = postType,
@@ -23,12 +27,28 @@ class LikeNotifier extends StateNotifier<LikeState> {
   final String? _replyParentId;
   final PostType _postType;
   final InteractionType? _interactionType;
+  final AutoDisposeStateNotifierProviderRef ref;
+
+  late final PostProviderParams _postProviderParams = PostProviderParams(
+    postId: _socialItemId,
+    postType: _postType,
+    post: null,
+  );
 
   void setLoadedState(bool value) => state = LikeLoadedState(liked: value);
   void setLoadingState(bool value) => state = LikeLoadingState(liked: value);
 
+  void _incrementLikes() {
+    ref.read(postProvider(_postProviderParams).notifier).incrementLikes();
+  }
+
+  void _decrementLikes() {
+    ref.read(postProvider(_postProviderParams).notifier).decrementLikes();
+  }
+
   void _like() async {
     setLoadingState(true);
+    _incrementLikes();
     late Either<Failure, void> response;
     switch (_interactionType) {
       case InteractionType.comment:
@@ -105,6 +125,7 @@ class LikeNotifier extends StateNotifier<LikeState> {
       (failure) {
         state = LikeErrorState(failure: failure);
         setLoadedState(false);
+        _decrementLikes();
       },
       (_) => setLoadedState(true),
     );
@@ -112,6 +133,7 @@ class LikeNotifier extends StateNotifier<LikeState> {
 
   void _unlike() async {
     setLoadingState(false);
+    _decrementLikes();
     late Either<Failure, void> response;
     switch (_interactionType) {
       case InteractionType.comment:
@@ -188,6 +210,7 @@ class LikeNotifier extends StateNotifier<LikeState> {
       (failure) {
         state = LikeErrorState(failure: failure);
         setLoadedState(true);
+        _incrementLikes();
       },
       (_) => setLoadedState(false),
     );

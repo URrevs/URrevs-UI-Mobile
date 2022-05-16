@@ -6,6 +6,8 @@ import 'package:urrevs_ui_mobile/data/requests/base_requests.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/domain/repository.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 
 import '../../states/reviews_states/add_interaction_state.dart';
 
@@ -13,10 +15,17 @@ class AddInteractionNotifier extends StateNotifier<AddInteractionState> {
   AddInteractionNotifier({
     required this.postId,
     required this.postType,
+    required this.ref,
   }) : super(AddInteractionInitialState());
 
   final String postId;
   final PostType postType;
+  final AutoDisposeStateNotifierProviderRef ref;
+  late final PostProviderParams _postProviderParams = PostProviderParams(
+    postId: postId,
+    postType: postType,
+    post: null,
+  );
 
   void addComment(AddInteractionRequest request) async {
     print(postType);
@@ -44,6 +53,9 @@ class AddInteractionNotifier extends StateNotifier<AddInteractionState> {
       (failure) => state = AddInteractionErrorState(failure: failure),
       (interactionId) {
         state = AddInteractionLoadedState(interactionId: interactionId);
+        ref
+            .read(postProvider(_postProviderParams).notifier)
+            .incrementComments();
       },
     );
   }
