@@ -151,9 +151,10 @@ class _PostedReviewsScreenState extends ConsumerState<PostedReviewsScreen> {
           Navigator.of(context).pushNamed(
             FullscreenPostScreen.routeName,
             arguments: FullscreenPostScreenArgs(
+              postUserId: question.userId,
               postType: postType,
               cardType: cardType,
-              postId: 'change_it',
+              postId: question.id,
               focusOnTextField: true,
             ),
           );
@@ -170,6 +171,7 @@ class _PostedReviewsScreenState extends ConsumerState<PostedReviewsScreen> {
           Navigator.of(context).pushNamed(
             FullscreenPostScreen.routeName,
             arguments: FullscreenPostScreenArgs(
+              postUserId: phoneReview.userId,
               postType: PostType.phoneReview,
               cardType: CardType.productReview,
               postId: phoneReview.id,
@@ -188,6 +190,7 @@ class _PostedReviewsScreenState extends ConsumerState<PostedReviewsScreen> {
         Navigator.of(context).pushNamed(
           FullscreenPostScreen.routeName,
           arguments: FullscreenPostScreenArgs(
+            postUserId: companyReview.userId,
             postType: PostType.companyReview,
             cardType: CardType.companyReview,
             postId: companyReview.id,

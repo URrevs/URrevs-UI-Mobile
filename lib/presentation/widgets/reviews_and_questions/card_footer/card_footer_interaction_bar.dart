@@ -78,6 +78,7 @@ class CardFooterInteractionBar extends StatelessWidget {
               Navigator.of(context).pushNamed(
                 FullscreenPostScreen.routeName,
                 arguments: FullscreenPostScreenArgs(
+                  postUserId: userId,
                   postType: postType,
                   cardType: cardType,
                   postId: postId,

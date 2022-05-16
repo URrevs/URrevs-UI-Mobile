@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
@@ -23,6 +24,86 @@ class GetInteractionsNotifier extends StateNotifier<GetInteractionsState> {
   final PostType _postType;
 
   List<DirectInteraction> _currentInteractions = [];
+
+  String? _lastAcceptedAnswerId;
+
+  void undoAcceptAnswer() {
+    final currentState = state;
+    if (currentState is GetInteractionsLoadedState &&
+        _postType.postContentType == PostContentType.question) {
+      List<Answer> currentAnswers =
+          currentState.infiniteScrollingItems.map((a) => a as Answer).toList();
+      // remove new accepted answer
+      if (currentAnswers.first.accepted) {
+        Answer unAcceptedAnswer =
+            currentAnswers.first.copyWith(accepted: false);
+        currentAnswers.removeAt(0);
+        currentAnswers.insert(0, unAcceptedAnswer);
+      }
+      // add last accepted answer
+      if (_lastAcceptedAnswerId != null) {
+        int index = currentAnswers
+            .indexWhere((answer) => answer.id == _lastAcceptedAnswerId);
+        Answer acceptedAnswer = currentAnswers[index].copyWith(accepted: true);
+        currentAnswers.removeAt(index);
+        currentAnswers.insert(0, acceptedAnswer);
+      }
+      // set state
+      state = GetInteractionsLoadedState(
+        infiniteScrollingItems: currentAnswers,
+        roundsEnded: currentState.roundsEnded,
+      );
+      // SchedulerBinding.instance!.addPostFrameCallback((timeStamp) {});
+    }
+    // clear last accepted answer
+    _lastAcceptedAnswerId = null;
+  }
+
+  void unmarkAnswerAsAcceptedAnswer() {
+    final currentState = state;
+    if (currentState is GetInteractionsLoadedState &&
+        _postType.postContentType == PostContentType.question) {
+      List<Answer> currentAnswers =
+          currentState.infiniteScrollingItems.map((a) => a as Answer).toList();
+      if (currentAnswers.first.accepted) {
+        _lastAcceptedAnswerId = currentAnswers.first.id;
+        Answer unAcceptedAnswer =
+            currentAnswers.first.copyWith(accepted: false);
+        currentAnswers.removeAt(0);
+        currentAnswers.insert(0, unAcceptedAnswer);
+        state = GetInteractionsLoadedState(
+          infiniteScrollingItems: currentAnswers,
+          roundsEnded: currentState.roundsEnded,
+        );
+        print(currentAnswers);
+      }
+    }
+  }
+
+  void markAnswerAsAccepted(String answerId) {
+    final currentState = state;
+    if (currentState is GetInteractionsLoadedState &&
+        _postType.postContentType == PostContentType.question) {
+      List<Answer> currentAnswers =
+          currentState.infiniteScrollingItems.map((a) => a as Answer).toList();
+      if (currentAnswers.first.accepted) {
+        _lastAcceptedAnswerId = currentAnswers.first.id;
+        Answer unAcceptedAnswer =
+            currentAnswers.first.copyWith(accepted: false);
+        currentAnswers.removeAt(0);
+        currentAnswers.insert(0, unAcceptedAnswer);
+      }
+      int index = currentAnswers.indexWhere((answer) => answer.id == answerId);
+      Answer acceptedAnswer = currentAnswers[index].copyWith(accepted: true);
+      currentAnswers.removeAt(index);
+      currentAnswers.insert(0, acceptedAnswer);
+      state = GetInteractionsLoadedState(
+        infiniteScrollingItems: currentAnswers,
+        roundsEnded: currentState.roundsEnded,
+      );
+      print(currentAnswers);
+    }
+  }
 
   void getInteractions() async {
     // get current items in the state

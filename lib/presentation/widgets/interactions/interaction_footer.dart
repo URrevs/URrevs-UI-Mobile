@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
@@ -12,104 +13,177 @@ import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart'
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/authentication_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/question_states/accept_answer_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/like_state.dart';
+import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 enum InteractionFooterFirstButtonText { like, vote, acceptAnswer }
 
 class InteractionFooter extends ConsumerStatefulWidget {
-  const InteractionFooter({
-    Key? key,
-    required this.datePosted,
-    required this.maxWidth,
-    required this.liked,
-    required this.onPressingReply,
-    required this.interactionId,
-    required this.replyParentId,
-    required this.parentPostType,
-    required this.interactionType,
-    required this.userId,
-    this.posting = false,
-  }) : super(key: key);
+  const InteractionFooter(
+      {Key? key,
+      required this.datePosted,
+      required this.maxWidth,
+      required this.liked,
+      required this.onPressingReply,
+      required this.interactionId,
+      required this.replyParentId,
+      required this.parentPostType,
+      required this.interactionType,
+      required this.userId,
+      required this.accepted,
+      required this.getInteractionsProviderParams,
+      required this.questionId,
+      required this.postUserId})
+      : assert(
+            !(interactionType == InteractionType.answer && accepted == null)),
+        assert(!(interactionType == InteractionType.answer &&
+            getInteractionsProviderParams == null)),
+        assert(
+            !(interactionType == InteractionType.answer && questionId == null)),
+        super(key: key);
 
   final DateTime datePosted;
   final double maxWidth;
   final bool liked;
-  final bool posting;
   final VoidCallback onPressingReply;
-  final String? interactionId;
+  final String interactionId;
   final String? replyParentId;
   final PostType parentPostType;
   final InteractionType interactionType;
   final String userId;
+  final bool? accepted;
+  final GetInteractionsProviderParams? getInteractionsProviderParams;
+  final String? questionId;
+  final String postUserId;
 
   @override
   ConsumerState<InteractionFooter> createState() => _InteractionFooterState();
 }
 
 class _InteractionFooterState extends ConsumerState<InteractionFooter> {
-  late final LikeProviderParams? _likeProviderParams =
-      widget.interactionId != null
-          ? LikeProviderParams(
-              socialItemId: widget.interactionId!,
-              replyParentId: widget.replyParentId,
-              postType: widget.parentPostType,
-              interactionType: widget.interactionType,
+  late final LikeProviderParams? _likeProviderParams = LikeProviderParams(
+    socialItemId: widget.interactionId,
+    replyParentId: widget.replyParentId,
+    postType: widget.parentPostType,
+    interactionType: widget.interactionType,
+  );
+
+  late final AcceptAnswerProviderParams? _acceptAnswerProviderParams =
+      widget.interactionType == InteractionType.answer
+          ? AcceptAnswerProviderParams(
+              questionId: widget.questionId!,
+              answerId: widget.interactionId,
+              targetType: widget.parentPostType.targetType,
+              getInteractionsProviderParams:
+                  widget.getInteractionsProviderParams,
             )
           : null;
 
+  bool get acceptAnswerMode {
+    if (isInteractionUsingLikeText) {
+      return false;
+    }
+    final authState = ref.watch(authenticationProvider);
+    final user = (authState as AuthenticationLoadedState).user;
+    if (user.id != widget.postUserId) return false;
+    return true;
+  }
+
+  bool get isInteractionUsingLikeText =>
+      widget.interactionType == InteractionType.comment ||
+      widget.interactionType == InteractionType.reply;
+
   String get firstButtonText {
-    final state = ref.watch(likeProvider(_likeProviderParams!));
-    bool liked = state is LikeLoadedState && state.liked;
-    switch (widget.parentPostType) {
-      case PostType.phoneReview:
-      case PostType.companyReview:
-        return liked ? LocaleKeys.liked.tr() : LocaleKeys.like.tr();
-      case PostType.phoneQuestion:
-      case PostType.companyQuestion:
-        {
-          final authState =
-              ref.watch(authenticationProvider) as AuthenticationLoadedState;
-          if (authState.user.id == widget.userId) {
-            return liked
-                ? LocaleKeys.acceptedAnswer.tr()
-                : LocaleKeys.acceptAnswer.tr();
-          } else {
-            return LocaleKeys.vote.tr();
-          }
-        }
+    if (!acceptAnswerMode) {
+      if (isInteractionUsingLikeText) {
+        final likedState = ref.watch(likeProvider(_likeProviderParams!));
+        return likedState.isLiked
+            ? LocaleKeys.liked.tr()
+            : LocaleKeys.like.tr();
+      } else {
+        return LocaleKeys.vote.tr();
+      }
+    } else {
+      final acceptedAnswerState =
+          ref.watch(acceptAnswerProvider(_acceptAnswerProviderParams!));
+      return acceptedAnswerState.isAccepted
+          ? LocaleKeys.acceptedAnswer.tr()
+          : LocaleKeys.acceptAnswer.tr();
     }
   }
 
-  String footerText(BuildContext context) => widget.posting
-      ? LocaleKeys.posting.tr() + '...'
-      : timeago.format(widget.datePosted, locale: context.locale.languageCode);
+  void _onPressingFirstButton() {
+    if (!acceptAnswerMode) {
+      final likedState = ref.watch(likeProvider(_likeProviderParams!));
+      if (likedState is! LoadingState) {
+        ref.read(likeProvider(_likeProviderParams!).notifier).toggleLikeState();
+      }
+    } else {
+      if (_acceptAnswerProviderParams != null) {
+        final acceptedAnswerState =
+            ref.watch(acceptAnswerProvider(_acceptAnswerProviderParams!));
+        if (acceptedAnswerState is! LoadingState) {
+          ref
+              .read(acceptAnswerProvider(_acceptAnswerProviderParams!).notifier)
+              .toggleAcceptedState();
+        }
+      }
+    }
+  }
+
+  String footerDate(BuildContext context) =>
+      timeago.format(widget.datePosted, locale: context.locale.languageCode);
+
+  bool get hideFirstButton {
+    if (acceptAnswerMode) return false;
+    final state = ref.watch(authenticationProvider);
+    bool isMyInteraction =
+        state is AuthenticationLoadedState && state.user.id == widget.userId;
+    return isMyInteraction;
+  }
 
   @override
   void initState() {
     super.initState();
     SchedulerBinding.instance!.addPostFrameCallback((_) {
-      if (_likeProviderParams != null) {
+      if (!acceptAnswerMode) {
         ref
             .read(likeProvider(_likeProviderParams!).notifier)
             .setLoadedState(widget.liked);
+      } else {
+        ref
+            .read(acceptAnswerProvider(_acceptAnswerProviderParams!).notifier)
+            .setLoadedState(widget.accepted!);
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_likeProviderParams != null) {
+    if (acceptAnswerMode) {
+      ref.addErrorListener(
+        provider: acceptAnswerProvider(_acceptAnswerProviderParams!),
+        context: context,
+      );
+      ref.listen(acceptAnswerProvider(_acceptAnswerProviderParams!),
+          (previous, next) {
+        if (next is AcceptAnswerLoadingState) {
+          context.loaderOverlay.show();
+        } else {
+          if (context.loaderOverlay.visible) {
+            context.loaderOverlay.hide();
+          }
+        }
+      });
+    } else {
       ref.addErrorListener(
         provider: likeProvider(_likeProviderParams!),
         context: context,
       );
     }
-
-    final state = ref.watch(authenticationProvider);
-    bool isMyInteraction =
-        state is AuthenticationLoadedState && state.user.id == widget.userId;
 
     EdgeInsets footerElementsPadding =
         EdgeInsets.only(top: 6.h, left: 3.w, right: 3.w);
@@ -120,22 +194,20 @@ class _InteractionFooterState extends ConsumerState<InteractionFooter> {
       textBaseline: TextBaseline.alphabetic,
       children: [
         10.horizontalSpace,
-        if (!widget.posting) ...[
-          if (!isMyInteraction) ...[
-            _buildLikeButton(),
-            20.horizontalSpace,
-          ],
-          TextButton(
-            onPressed: widget.onPressingReply,
-            style: TextButtonStyleManager.interactionFooterButton,
-            child: Text(LocaleKeys.reply.tr(), style: TextStyleManager.s13w700),
-          ),
+        if (!hideFirstButton) ...[
+          _buildLikeButton(),
           20.horizontalSpace,
         ],
+        TextButton(
+          onPressed: widget.onPressingReply,
+          style: TextButtonStyleManager.interactionFooterButton,
+          child: Text(LocaleKeys.reply.tr(), style: TextStyleManager.s13w700),
+        ),
+        20.horizontalSpace,
         Padding(
           padding: footerElementsPadding,
           child: Text(
-            footerText(context),
+            footerDate(context),
             style: TextStyleManager.s13w400.copyWith(
               color: ColorManager.grey,
             ),
@@ -146,14 +218,17 @@ class _InteractionFooterState extends ConsumerState<InteractionFooter> {
   }
 
   TextButton _buildLikeButton() {
-    final state = ref.watch(likeProvider(_likeProviderParams!));
-    bool liked = (state is LikeLoadedState && state.liked) ||
-        (state is LikeLoadingState && state.liked);
+    bool liked;
+    if (acceptAnswerMode) {
+      liked = ref
+          .watch(acceptAnswerProvider(_acceptAnswerProviderParams!))
+          .isAccepted;
+    } else {
+      liked = ref.watch(likeProvider(_likeProviderParams!)).isLiked;
+    }
     Color color = liked ? ColorManager.blue : ColorManager.black;
     return TextButton(
-      onPressed: () {
-        ref.read(likeProvider(_likeProviderParams!).notifier).toggleLikeState();
-      },
+      onPressed: _onPressingFirstButton,
       style: TextButtonStyleManager.interactionFooterButton.copyWith(
         foregroundColor: MaterialStateProperty.all(color),
       ),

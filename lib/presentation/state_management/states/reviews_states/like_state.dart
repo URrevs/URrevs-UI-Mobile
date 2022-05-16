@@ -3,7 +3,14 @@ import 'package:equatable/equatable.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 
-abstract class LikeState extends Equatable implements RequestState {}
+abstract class LikeState extends Equatable implements RequestState {
+  bool get isLiked {
+    final state = this;
+    if (state is LikeLoadingState && state.liked) return true;
+    if (state is LikeLoadedState && state.liked) return true;
+    return false;
+  }
+}
 
 class LikeInitialState extends LikeState implements InitialState {
   @override

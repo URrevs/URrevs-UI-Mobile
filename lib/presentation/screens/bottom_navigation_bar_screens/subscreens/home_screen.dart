@@ -23,6 +23,7 @@ class _HomeSubscreenState extends ConsumerState<HomeSubscreen> {
             Navigator.of(context).pushNamed(
               FullscreenPostScreen.routeName,
               arguments: FullscreenPostScreenArgs(
+                postUserId: 'post user id',
                 postType: PostType.phoneReview,
                 cardType: CardType.productReview,
                 postId: 'change_it',
@@ -36,6 +37,7 @@ class _HomeSubscreenState extends ConsumerState<HomeSubscreen> {
             Navigator.of(context).pushNamed(
               FullscreenPostScreen.routeName,
               arguments: FullscreenPostScreenArgs(
+                postUserId: 'post user id',
                 postType: PostType.companyReview,
                 cardType: CardType.companyReview,
                 postId: 'change_it',
@@ -45,11 +47,14 @@ class _HomeSubscreenState extends ConsumerState<HomeSubscreen> {
           },
         ),
         QuestionCard.dummyInstance(context).copyWith(
+          userId: '62744ec2c0b63317025a8616',
+          targetName: 'phone',
           cardType: CardType.productQuestion,
           onPressingAnswer: () {
             Navigator.of(context).pushNamed(
               FullscreenPostScreen.routeName,
               arguments: FullscreenPostScreenArgs(
+                postUserId: 'post user id',
                 postType: PostType.phoneQuestion,
                 cardType: CardType.productQuestion,
                 postId: 'change_it',
@@ -59,11 +64,14 @@ class _HomeSubscreenState extends ConsumerState<HomeSubscreen> {
           },
         ),
         QuestionCard.dummyInstance(context).copyWith(
+          userId: '62744ec2c0b63317025a8616',
+          targetName: 'company',
           cardType: CardType.companyQuestion,
           onPressingAnswer: () {
             Navigator.of(context).pushNamed(
               FullscreenPostScreen.routeName,
               arguments: FullscreenPostScreenArgs(
+                postUserId: 'post user id',
                 postType: PostType.phoneQuestion,
                 cardType: CardType.companyQuestion,
                 postId: 'change_it',

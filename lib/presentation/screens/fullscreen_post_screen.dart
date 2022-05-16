@@ -4,6 +4,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:urrevs_ui_mobile/app/extensions.dart';
 import 'package:urrevs_ui_mobile/data/requests/base_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/reviews_api_requests.dart';
@@ -52,11 +53,13 @@ class FullscreenPostScreenArgs {
   final CardType cardType;
   final bool focusOnTextField;
   final String postId;
+  final String postUserId;
   final PostType postType;
   final String? answerId;
   FullscreenPostScreenArgs({
     required this.cardType,
     required this.postId,
+    required this.postUserId,
     this.postType = PostType.phoneReview,
     this.focusOnTextField = false,
     this.answerId,
@@ -67,6 +70,7 @@ class FullscreenPostScreenArgs {
       cardType: CardType.productReview,
       postType: PostType.phoneReview,
       postId: 'change_it',
+      postUserId: 'change_it',
     );
   }
 }
@@ -224,7 +228,6 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
     if (widget.screenArgs.focusOnTextField) {
       focusNode.requestFocus();
     }
-    
   }
 
   @override
@@ -237,7 +240,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
       ),
       resizeToAvoidBottomInset: true,
       body: SafeArea(
-        child: _buildBody(),
+        child: LoaderOverlay(child: _buildBody()),
       ),
     );
   }
@@ -276,9 +279,10 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
   }
 
   Widget _buildInteractions() {
-    final state =
+    final getInteractionsState =
         ref.watch(getInteractionsProvider(_interactionsProviderParams));
-    bool roundsEnded = state is GetInteractionsLoadedState && state.roundsEnded;
+    bool roundsEnded = getInteractionsState is GetInteractionsLoadedState &&
+        getInteractionsState.roundsEnded;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -365,6 +369,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
         return CommentsList(
           comments: _interactions.map((i) => i as Comment).toList(),
           parentPostType: _postType,
+          postUserId: widget.screenArgs.postUserId,
           onPressingReplyList: List.generate(_interactions.length, (i) {
             return () {
               _idOfInteractionRepliedTo = _interactions[i].id;
@@ -378,12 +383,15 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
           expandFirstAnswerReplies: widget.screenArgs.answerId != null,
           answers: _interactions.map((i) => i as Answer).toList(),
           parentPostType: _postType,
+          questionId: _postId,
+          postUserId: widget.screenArgs.postUserId,
           onPressingReplyList: List.generate(_interactions.length, (i) {
             return () {
               _idOfInteractionRepliedTo = _interactions[i].id;
               focusNode.requestFocus();
             };
           }),
+          getInteractionsProviderParams: _interactionsProviderParams,
         );
     }
   }

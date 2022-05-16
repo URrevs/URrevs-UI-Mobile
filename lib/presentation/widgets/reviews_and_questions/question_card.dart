@@ -287,12 +287,15 @@ class QuestionCard extends StatelessWidget {
                           EdgeInsets.only(top: 25.h, right: 12.w, left: 12.w),
                       child: AnswerTree.fromAnswer(
                         answer!,
+                        postUserId: userId,
                         parentPostType: postType,
                         inQuestionCard: true,
+                        questionId: questionId,
                         onTappingAnswerInCard: () {
                           Navigator.of(context).pushNamed(
                             FullscreenPostScreen.routeName,
                             arguments: FullscreenPostScreenArgs(
+                              postUserId: userId,
                               postType: postType,
                               cardType: cardType,
                               postId: questionId,
@@ -303,6 +306,7 @@ class QuestionCard extends StatelessWidget {
                           Navigator.of(context).pushNamed(
                             FullscreenPostScreen.routeName,
                             arguments: FullscreenPostScreenArgs(
+                              postUserId: userId,
                               cardType: cardType,
                               postId: questionId,
                               focusOnTextField: true,
@@ -311,6 +315,7 @@ class QuestionCard extends StatelessWidget {
                             ),
                           );
                         },
+                        getInteractionsProviderParams: null,
                       ),
                     ),
                 ],

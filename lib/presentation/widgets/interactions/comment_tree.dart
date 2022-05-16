@@ -28,6 +28,7 @@ class CommentTree extends StatefulWidget {
     required this.liked,
     required this.onPressingReply,
     required this.parentPostType,
+    required this.postUserId,
   }) : super(key: key);
 
   CommentTree.fromComment(
@@ -35,6 +36,7 @@ class CommentTree extends StatefulWidget {
     Key? key,
     required this.onPressingReply,
     required this.parentPostType,
+    required this.postUserId,
   })  : imageUrl = comment.photo,
         authorName = comment.userName,
         userId = comment.userId,
@@ -54,9 +56,10 @@ class CommentTree extends StatefulWidget {
   final DateTime datePosted;
   final bool liked;
   final List<ReplyModel> replies;
-  final String? commentId;
+  final String commentId;
   final VoidCallback onPressingReply;
   final PostType parentPostType;
+  final String postUserId;
 
   static CommentTree get dummyInstance => CommentTree(
         onPressingReply: () {},
@@ -71,6 +74,7 @@ class CommentTree extends StatefulWidget {
         liked: DummyDataManager.randomBool,
         parentPostType: PostType.phoneReview,
         replies: [],
+        postUserId: 'post user id',
       );
 
   @override
@@ -123,12 +127,15 @@ class _CommentTreeState extends State<CommentTree> {
                   datePosted: widget.datePosted,
                   maxWidth: constraints.maxWidth - 16.w,
                   liked: widget.liked,
-                  posting: widget.commentId == null,
                   interactionId: widget.commentId,
                   interactionType: InteractionType.comment,
                   parentPostType: widget.parentPostType,
                   replyParentId: null,
                   userId: widget.userId,
+                  accepted: null,
+                  getInteractionsProviderParams: null,
+                  questionId: null,
+                  postUserId: widget.postUserId,
                 ),
                 if (!_expandReplies && widget.replies.isNotEmpty) ...[
                   VerticalSpacesBetween.interactionBodyAndShowRepliesButton,
@@ -154,7 +161,8 @@ class _CommentTreeState extends State<CommentTree> {
                       parentPostType: widget.parentPostType,
                       userId: widget.replies[i].userId,
                       // comment id cannot be null if there is a reply passed to the comment
-                      replyParentId: widget.commentId!,
+                      replyParentId: widget.commentId,
+                      postUserId: widget.postUserId,
                     ),
                     if (i != widget.replies.length - 1)
                       VerticalSpacesBetween.replies,

@@ -10,12 +10,31 @@ enum CardType {
 
 enum ReviewsFilter { phones, companies }
 
-enum PostType {
-  phoneReview,
-  companyReview,
-  phoneQuestion,
-  companyQuestion
-} //phone question - company question
+enum PostType { phoneReview, companyReview, phoneQuestion, companyQuestion }
+
+extension PostTypeExtension on PostType {
+  TargetType get targetType {
+    switch (this) {
+      case PostType.phoneReview:
+      case PostType.phoneQuestion:
+        return TargetType.phone;
+      case PostType.companyReview:
+      case PostType.companyQuestion:
+        return TargetType.company;
+    }
+  }
+
+  PostContentType get postContentType {
+    switch (this) {
+      case PostType.phoneReview:
+      case PostType.companyReview:
+        return PostContentType.review;
+      case PostType.phoneQuestion:
+      case PostType.companyQuestion:
+        return PostContentType.question;
+    }
+  }
+}
 
 enum TargetType { phone, company }
 

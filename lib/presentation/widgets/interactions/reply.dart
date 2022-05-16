@@ -23,6 +23,7 @@ class Reply extends StatelessWidget {
   final String replyParentId;
   final PostType parentPostType;
   final String userId;
+  final String postUserId;
 
   const Reply({
     Key? key,
@@ -37,6 +38,7 @@ class Reply extends StatelessWidget {
     required this.parentPostType,
     required this.replyParentId,
     required this.userId,
+    required this.postUserId,
   }) : super(key: key);
 
   static Reply get dummyInstance => Reply(
@@ -51,6 +53,7 @@ class Reply extends StatelessWidget {
         userId: DummyDataManager.randomInt.toString(),
         parentPostType: PostType.phoneReview,
         replyParentId: DummyDataManager.randomInt.toString(),
+        postUserId: 'post user id',
       );
 
   @override
@@ -92,6 +95,10 @@ class Reply extends StatelessWidget {
                   parentPostType: parentPostType,
                   replyParentId: replyParentId,
                   userId: userId,
+                  accepted: null,
+                  getInteractionsProviderParams: null,
+                  questionId: null,
+                  postUserId: postUserId,
                 ),
               ],
             );

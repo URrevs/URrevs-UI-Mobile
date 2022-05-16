@@ -19,6 +19,7 @@ class _CompanyProfileQASubscreenState extends State<CompanyProfileQASubscreen> {
             Navigator.of(context).pushNamed(
               FullscreenPostScreen.routeName,
               arguments: FullscreenPostScreenArgs(
+                postUserId: 'post user id',
                 postId: '',
                 cardType: CardType.companyQuestion,
                 focusOnTextField: true,

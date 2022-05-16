@@ -18,16 +18,19 @@ class CommentsList extends StatelessWidget {
     required this.comments,
     required this.onPressingReplyList,
     required this.parentPostType,
+    required this.postUserId,
   }) : super(key: key);
 
   final List<Comment> comments;
   final List<VoidCallback> onPressingReplyList;
   final PostType parentPostType;
+  final String postUserId;
 
   static CommentsList get dummyInstance => CommentsList(
         comments: [],
         onPressingReplyList: [],
         parentPostType: PostType.phoneReview,
+        postUserId: 'post user id',
       );
 
   @override
@@ -40,6 +43,7 @@ class CommentsList extends StatelessWidget {
             comments[i],
             onPressingReply: onPressingReplyList[i],
             parentPostType: parentPostType,
+            postUserId: postUserId,
           ),
           if (i != comments.length - 1) VerticalSpacesBetween.interactionTrees,
         ],

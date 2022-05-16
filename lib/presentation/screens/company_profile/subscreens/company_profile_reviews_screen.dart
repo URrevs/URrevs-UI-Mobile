@@ -21,6 +21,7 @@ class _CompanyProfileReviewsSubscreenState
             Navigator.of(context).pushNamed(
               FullscreenPostScreen.routeName,
               arguments: FullscreenPostScreenArgs(
+                postUserId: 'post user id',
                 postType: PostType.companyReview,
                 cardType: CardType.companyReview,
                 postId: '',

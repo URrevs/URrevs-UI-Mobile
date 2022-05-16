@@ -80,6 +80,7 @@ class _QuestionCardBodyState extends State<QuestionCardBody> {
                 hideSeeMoreIfNoNeedForExpansion: true,
                 usedInInteraction: false,
                 cardType: widget.cardType,
+                
               )
           ],
         ),

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:urrevs_ui_mobile/domain/models/answer.dart';
@@ -11,17 +12,21 @@ import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_button_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/user_profile_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/reply.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/interaction_body.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/interaction_footer.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
-class AnswerTree extends StatefulWidget {
+class AnswerTree extends ConsumerStatefulWidget {
   const AnswerTree({
     Key? key,
     required this.answerId,
+    required this.questionId,
     required this.userId,
+    required this.postUserId,
     required this.parentPostType,
     required this.imageUrl,
     required this.authorName,
@@ -34,6 +39,7 @@ class AnswerTree extends StatefulWidget {
     required this.accepted,
     required this.inQuestionCard,
     required this.onPressingReply,
+    required this.getInteractionsProviderParams,
     this.onTappingAnswerInCard,
     this.expandReplies = false,
   })  : assert(
@@ -49,6 +55,9 @@ class AnswerTree extends StatefulWidget {
     required this.inQuestionCard,
     required this.onTappingAnswerInCard,
     required this.onPressingReply,
+    required this.getInteractionsProviderParams,
+    required this.questionId,
+    required this.postUserId,
     this.expandReplies = false,
   })  : answerId = answer.id,
         userId = answer.userId,
@@ -64,7 +73,9 @@ class AnswerTree extends StatefulWidget {
         super(key: key);
 
   final String answerId;
+  final String questionId;
   final String userId;
+  final String postUserId;
   final PostType parentPostType;
   final String? imageUrl;
   final String authorName;
@@ -79,9 +90,12 @@ class AnswerTree extends StatefulWidget {
   final VoidCallback? onTappingAnswerInCard;
   final VoidCallback onPressingReply;
   final bool expandReplies;
+  final GetInteractionsProviderParams? getInteractionsProviderParams;
 
   static AnswerTree get dummyInstance => AnswerTree(
         key: UniqueKey(),
+        questionId: 'quesiton id',
+        postUserId: 'post user id',
         imageUrl: DummyDataManager.imageUrl,
         authorName: DummyDataManager.authorName,
         usedSinceDate: DummyDataManager.usedSinceDate,
@@ -96,10 +110,14 @@ class AnswerTree extends StatefulWidget {
         userId: DummyDataManager.randomInt.toString(),
         parentPostType: PostType.phoneQuestion,
         onPressingReply: () {},
+        getInteractionsProviderParams: GetInteractionsProviderParams(
+            postId: '', postType: PostType.phoneQuestion),
       );
 
   static AnswerTree get dummyInstanceInQuestionCard => AnswerTree(
         key: UniqueKey(),
+        questionId: 'quesiton id',
+        postUserId: 'post user id',
         imageUrl: DummyDataManager.imageUrl,
         authorName: DummyDataManager.authorName,
         usedSinceDate: DummyDataManager.usedSinceDate,
@@ -115,9 +133,13 @@ class AnswerTree extends StatefulWidget {
         answerId: DummyDataManager.randomInt.toString(),
         userId: DummyDataManager.randomInt.toString(),
         parentPostType: PostType.phoneQuestion,
+        getInteractionsProviderParams: GetInteractionsProviderParams(
+            postId: '', postType: PostType.phoneQuestion),
       );
 
   AnswerTree copyWith({
+    String? postUserId,
+    String? questionId,
     String? imageUrl,
     String? authorName,
     DateTime? usedSinceDate,
@@ -134,8 +156,11 @@ class AnswerTree extends StatefulWidget {
     PostType? parentPostType,
     String? answerId,
     String? userId,
+    GetInteractionsProviderParams? getInteractionsProviderParams,
   }) {
     return AnswerTree(
+      postUserId: postUserId ?? this.postUserId,
+      questionId: questionId ?? this.questionId,
       imageUrl: imageUrl ?? this.imageUrl,
       authorName: authorName ?? this.authorName,
       usedSinceDate: usedSinceDate ?? this.usedSinceDate,
@@ -152,15 +177,25 @@ class AnswerTree extends StatefulWidget {
       answerId: answerId ?? this.answerId,
       userId: userId ?? this.userId,
       onPressingReply: onPressingReply ?? this.onPressingReply,
+      getInteractionsProviderParams:
+          getInteractionsProviderParams ?? this.getInteractionsProviderParams,
     );
   }
 
   @override
-  State<AnswerTree> createState() => _AnswerTreeState();
+  ConsumerState<AnswerTree> createState() => _AnswerTreeState();
 }
 
-class _AnswerTreeState extends State<AnswerTree> {
+class _AnswerTreeState extends ConsumerState<AnswerTree> {
   late bool _expandReplies = widget.expandReplies;
+
+  late final AcceptAnswerProviderParams _acceptAnswerProviderParams =
+      AcceptAnswerProviderParams(
+    questionId: widget.questionId,
+    answerId: widget.answerId,
+    targetType: widget.parentPostType.targetType,
+    getInteractionsProviderParams: widget.getInteractionsProviderParams,
+  );
 
   void _onPressingShowReplies() {
     setState(() {
@@ -168,13 +203,16 @@ class _AnswerTreeState extends State<AnswerTree> {
     });
   }
 
+  bool get isAccepted =>
+      ref.watch(acceptAnswerProvider(_acceptAnswerProviderParams)).isAccepted;
+
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (widget.accepted) ...[
+        if (isAccepted) ...[
           FaIcon(
             IconsManager.acceptedAnswer,
             size: 30.sp,
@@ -223,6 +261,11 @@ class _AnswerTreeState extends State<AnswerTree> {
                   interactionType: InteractionType.answer,
                   parentPostType: widget.parentPostType,
                   userId: widget.userId,
+                  accepted: widget.accepted,
+                  getInteractionsProviderParams:
+                      widget.getInteractionsProviderParams,
+                  questionId: widget.questionId,
+                  postUserId: widget.postUserId,
                 ),
                 if (!widget.inQuestionCard &&
                     !_expandReplies &&
@@ -251,6 +294,7 @@ class _AnswerTreeState extends State<AnswerTree> {
                       userId: widget.replies[i].userId,
                       // comment id cannot be null if there is a reply passed to the comment
                       replyParentId: widget.answerId,
+                      postUserId: widget.postUserId,
                     ),
                     if (i != widget.replies.length - 1)
                       VerticalSpacesBetween.replies,

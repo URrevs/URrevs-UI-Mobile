@@ -115,3 +115,20 @@ class GetPostProviderParams extends NotSyncedProviderParams {
     required this.postType,
   });
 }
+
+class AcceptAnswerProviderParams extends Equatable {
+  final String questionId;
+  final String answerId;
+  final TargetType targetType;
+  final GetInteractionsProviderParams? getInteractionsProviderParams;
+  const AcceptAnswerProviderParams({
+    required this.questionId,
+    required this.answerId,
+    required this.targetType,
+    required this.getInteractionsProviderParams,
+  });
+
+  @override
+  List<Object?> get props =>
+      [questionId, answerId, targetType, getInteractionsProviderParams];
+}

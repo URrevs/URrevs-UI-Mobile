@@ -74,6 +74,7 @@ class _ProductProfileReviewsSubscreenState
               Navigator.of(context).pushNamed(
                 FullscreenPostScreen.routeName,
                 arguments: FullscreenPostScreenArgs(
+                  postUserId: phoneReview.userId,
                   postType: PostType.phoneReview,
                   cardType: CardType.productReview,
                   postId: phoneReview.id,
