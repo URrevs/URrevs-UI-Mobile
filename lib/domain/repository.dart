@@ -134,8 +134,7 @@ class Repository {
 
   Future<Either<Failure, void>> givePointsToUser() async {
     return _tryAndCatch(() async {
-      String idToken = await FirebaseAuth.instance.currentUser!.getIdToken();
-      await _remoteDataSource.givePointsToUser('bearer $idToken');
+      await _remoteDataSource.givePointsToUser();
     });
   }
 

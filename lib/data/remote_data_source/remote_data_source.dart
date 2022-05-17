@@ -28,9 +28,7 @@ abstract class RemoteDataSource {
   );
 
   @PUT('/users/login/mobile')
-  Future<GivePointsToUserResponse> givePointsToUser(
-    @Header('authorization') String authorizationHeader,
-  );
+  Future<GivePointsToUserResponse> givePointsToUser();
 
   @GET('/users/profile')
   Future<GetMyProfileResponse> getMyProfile();
