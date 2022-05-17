@@ -66,13 +66,15 @@ class _SignOutConfirmationDialogState extends State<SignOutConfirmationDialog> {
               color: ColorManager.red,
             ),
           ),
-          onPressed: () {
+          onPressed: () async {
             // removing our back end token
             GetIt.I<Dio>().options.headers[HttpHeaders.authorizationHeader] =
                 null;
-            GoogleSignIn().signOut();
-            FacebookAuth.instance.logOut();
-            FirebaseAuth.instance.signOut();
+            await Future.wait([
+              GoogleSignIn().signOut(),
+              FacebookAuth.instance.logOut(),
+              FirebaseAuth.instance.signOut(),
+            ]);
             Navigator.of(context).pushNamedAndRemoveUntil(
               AuthenticationScreen.routeName,
               (route) => false,

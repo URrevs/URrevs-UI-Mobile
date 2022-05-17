@@ -7,6 +7,21 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/authentica
 class AuthenticationNotifier extends StateNotifier<AuthenticationState> {
   AuthenticationNotifier() : super(AuthenticationInitialState());
 
+  /// Used to login user automatically when he is logged i using firebase.
+  void loginToOurBackend() async {
+    state = AuthenticationLoadingState();
+    final response = await GetIt.I<Repository>().loginToOurBackend();
+    response.fold(
+      (failure) {
+        if (failure is CancelFailure) {
+          return state = AuthenticationInitialState();
+        }
+        state = AuthenticationErrorState(failure: failure);
+      },
+      (user) => state = AuthenticationLoadedState(user: user),
+    );
+  }
+
   void authenticateWithGoogle() async {
     state = AuthenticationLoadingState();
     final response = await GetIt.I<Repository>().authenticateWithGoogle();

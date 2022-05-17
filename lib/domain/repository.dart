@@ -58,6 +58,23 @@ class Repository {
     }
   }
 
+  Future<Either<Failure, User>> loginToOurBackend() async {
+    return _tryAndCatch(() async {
+      // login to our backend
+      String idToken = await FirebaseAuth.instance.currentUser!.getIdToken();
+      String authorizationHeader = 'Bearer $idToken';
+      AuthenticationResponse response =
+          await _remoteDataSource.authenticate(authorizationHeader);
+
+      // save the token
+      GetIt.I<Dio>().options.headers[HttpHeaders.authorizationHeader] =
+          'bearer ${response.token}';
+
+      final profileRes = await _remoteDataSource.getMyProfile();
+      return profileRes.userSubResponse.userModel;
+    });
+  }
+
   Future<Either<Failure, User>> authenticateWithGoogle() async {
     return _tryAndCatch(() async {
       // login to google auth provider
@@ -73,7 +90,7 @@ class Repository {
       );
       await FirebaseAuth.instance.signInWithCredential(credential);
 
-      // login to out backend
+      // login to our backend
       String idToken = await FirebaseAuth.instance.currentUser!.getIdToken();
       String authorizationHeader = 'Bearer $idToken';
       AuthenticationResponse response =
