@@ -75,12 +75,10 @@ class _BottomNavigationBarContainerScreenState
   }
 
   PreferredSize? get appBar {
-    final state =
-        ref.watch(authenticationProvider) as AuthenticationLoadedState;
     return AppBars.appBarWithURrevsLogo(
       context: context,
       showTabBar: showTabBar,
-      imageUrl: state.user.picture,
+      imageUrl: ref.currentUser!.picture,
     );
   }
 

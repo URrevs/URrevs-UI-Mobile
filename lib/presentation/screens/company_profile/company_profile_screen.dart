@@ -49,14 +49,12 @@ class _CompanyProfileScreenState extends ConsumerState<CompanyProfileScreen>
 
   @override
   Widget build(BuildContext context) {
-    String imageUrl = ref.watch(userImageUrlProvider);
-
     return ScaffoldWithHidingFab(
       appBar: AppBars.appBarOfCompnayProfile(
         context: context,
         controller: _tabController,
         text: 'Nokia',
-        imageUrl: imageUrl,
+        imageUrl: ref.currentUser!.picture,
       ),
       fabLabel: LocaleKeys.addQuestion.tr(),
       fabIcon: Icon(FontAwesomeIcons.plus, size: AppSize.s16),

@@ -1,20 +1,15 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:urrevs_ui_mobile/app/exceptions.dart';
 import 'package:urrevs_ui_mobile/app/extensions.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/assets_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
-import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/search_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/user_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/tiles/company_horizontal_list_tile.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 class AppBars {
@@ -103,7 +98,7 @@ class AppBars {
 
   static PreferredSize appBarWithActions({
     required BuildContext context,
-    required String imageUrl,
+    required String? imageUrl,
   }) {
     return PreferredSize(
       preferredSize: Size.fromHeight(
@@ -176,7 +171,7 @@ class AppBars {
     required BuildContext context,
     required TabController controller,
     required String text,
-    required String imageUrl,
+    required String? imageUrl,
   }) {
     return PreferredSize(
       preferredSize: Size.fromHeight(
@@ -226,7 +221,7 @@ class AppBars {
     required BuildContext context,
     required TabController controller,
     required String text,
-    required String imageUrl,
+    required String? imageUrl,
   }) {
     return PreferredSize(
       preferredSize: Size.fromHeight(
@@ -271,117 +266,118 @@ class AppBars {
     );
   }
 
-  static SliverAppBar appBarWithFilters(
-      {required ValueChanged<ReviewsFilter> setFilter,
-      required bool isMobileFilterPressed,
-      required String title}) {
-    return SliverAppBar(
-      titleSpacing: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(10.r),
-          bottomRight: Radius.circular(10.r),
-        ),
-      ),
-      backgroundColor: ColorManager.white,
-      iconTheme: IconThemeData(
-        color: ColorManager.black,
-      ),
-      elevation: 3,
-      pinned: true,
-      forceElevated: true,
-      snap: true,
-      floating: true,
-      toolbarHeight: 45.h,
-      collapsedHeight: 45.h,
-      expandedHeight: 45.h,
-      flexibleSpace: Row(
-        children: [
-          SizedBox(width: 17.w),
-          TextButton(
-            style: ButtonStyle(
-              backgroundColor: isMobileFilterPressed
-                  ? MaterialStateProperty.all<Color>(ColorManager.buttonGrey)
-                  : MaterialStateProperty.all<Color>(ColorManager.white),
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(26.r),
-                  side: BorderSide(color: ColorManager.buttonGrey),
-                ),
-              ),
-            ),
-            onPressed: () {
-              setFilter(
-                ReviewsFilter.phones,
-              );
-            },
-            child: Text(
-              LocaleKeys.phones.tr(),
-              style: TextStyleManager.s14w700.copyWith(
-                color: isMobileFilterPressed
-                    ? ColorManager.white
-                    : ColorManager.buttonGrey,
-              ),
-            ),
-          ),
-          SizedBox(width: 17.w),
-          TextButton(
-            style: ButtonStyle(
-              backgroundColor: !isMobileFilterPressed
-                  ? MaterialStateProperty.all<Color>(ColorManager.buttonGrey)
-                  : MaterialStateProperty.all<Color>(ColorManager.white),
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(26.r),
-                  side: BorderSide(color: ColorManager.buttonGrey),
-                ),
-              ),
-            ),
-            onPressed: () {
-              setFilter(ReviewsFilter.companies);
-            },
-            child: Text(
-              LocaleKeys.companies.tr(),
-              style: TextStyleManager.s14w700.copyWith(
-                color: !isMobileFilterPressed
-                    ? ColorManager.white
-                    : ColorManager.buttonGrey,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  // static SliverAppBar appBarWithFilters({
+  //   required ValueChanged<ReviewsFilter> setFilter,
+  //   required bool isMobileFilterPressed,
+  //   required String title,
+  // }) {
+  //   return SliverAppBar(
+  //     titleSpacing: 0,
+  //     shape: RoundedRectangleBorder(
+  //       borderRadius: BorderRadius.only(
+  //         bottomLeft: Radius.circular(10.r),
+  //         bottomRight: Radius.circular(10.r),
+  //       ),
+  //     ),
+  //     backgroundColor: ColorManager.white,
+  //     iconTheme: IconThemeData(
+  //       color: ColorManager.black,
+  //     ),
+  //     elevation: 3,
+  //     pinned: true,
+  //     forceElevated: true,
+  //     snap: true,
+  //     floating: true,
+  //     toolbarHeight: 45.h,
+  //     collapsedHeight: 45.h,
+  //     expandedHeight: 45.h,
+  //     flexibleSpace: Row(
+  //       children: [
+  //         SizedBox(width: 17.w),
+  //         TextButton(
+  //           style: ButtonStyle(
+  //             backgroundColor: isMobileFilterPressed
+  //                 ? MaterialStateProperty.all<Color>(ColorManager.buttonGrey)
+  //                 : MaterialStateProperty.all<Color>(ColorManager.white),
+  //             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+  //               RoundedRectangleBorder(
+  //                 borderRadius: BorderRadius.circular(26.r),
+  //                 side: BorderSide(color: ColorManager.buttonGrey),
+  //               ),
+  //             ),
+  //           ),
+  //           onPressed: () {
+  //             setFilter(
+  //               ReviewsFilter.phones,
+  //             );
+  //           },
+  //           child: Text(
+  //             LocaleKeys.phones.tr(),
+  //             style: TextStyleManager.s14w700.copyWith(
+  //               color: isMobileFilterPressed
+  //                   ? ColorManager.white
+  //                   : ColorManager.buttonGrey,
+  //             ),
+  //           ),
+  //         ),
+  //         SizedBox(width: 17.w),
+  //         TextButton(
+  //           style: ButtonStyle(
+  //             backgroundColor: !isMobileFilterPressed
+  //                 ? MaterialStateProperty.all<Color>(ColorManager.buttonGrey)
+  //                 : MaterialStateProperty.all<Color>(ColorManager.white),
+  //             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+  //               RoundedRectangleBorder(
+  //                 borderRadius: BorderRadius.circular(26.r),
+  //                 side: BorderSide(color: ColorManager.buttonGrey),
+  //               ),
+  //             ),
+  //           ),
+  //           onPressed: () {
+  //             setFilter(ReviewsFilter.companies);
+  //           },
+  //           child: Text(
+  //             LocaleKeys.companies.tr(),
+  //             style: TextStyleManager.s14w700.copyWith(
+  //               color: !isMobileFilterPressed
+  //                   ? ColorManager.white
+  //                   : ColorManager.buttonGrey,
+  //             ),
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
-  static appBarWithCompaniesList() {
-    return SliverAppBar(
-      elevation: 3,
-      title: SizedBox(
-        height: 30.h,
-        width: 95.w,
-        child: Placeholder(),
-      ),
-      actions: [
-        ElevatedButton(onPressed: () {}, child: Text('PROFILE')),
-        ElevatedButton(onPressed: () {}, child: Text('SEARCH')),
-      ],
-      pinned: true,
-      forceElevated: true,
-      snap: true,
-      floating: true,
-      toolbarHeight: 45.h,
-      collapsedHeight: 45.h,
-      expandedHeight: 45.h + 95.h + 10.h,
-      flexibleSpace: Padding(
-        padding: EdgeInsets.only(top: 45.h),
-        child: ListView(
-          physics: NeverScrollableScrollPhysics(),
-          children: [
-            // CompanyHorizontalListTile(companyItems: companyItems),
-          ],
-        ),
-      ),
-    );
-  }
+  // static appBarWithCompaniesList() {
+  //   return SliverAppBar(
+  //     elevation: 3,
+  //     title: SizedBox(
+  //       height: 30.h,
+  //       width: 95.w,
+  //       child: Placeholder(),
+  //     ),
+  //     actions: [
+  //       ElevatedButton(onPressed: () {}, child: Text('PROFILE')),
+  //       ElevatedButton(onPressed: () {}, child: Text('SEARCH')),
+  //     ],
+  //     pinned: true,
+  //     forceElevated: true,
+  //     snap: true,
+  //     floating: true,
+  //     toolbarHeight: 45.h,
+  //     collapsedHeight: 45.h,
+  //     expandedHeight: 45.h + 95.h + 10.h,
+  //     flexibleSpace: Padding(
+  //       padding: EdgeInsets.only(top: 45.h),
+  //       child: ListView(
+  //         physics: NeverScrollableScrollPhysics(),
+  //         children: [
+  //           // CompanyHorizontalListTile(companyItems: companyItems),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 }

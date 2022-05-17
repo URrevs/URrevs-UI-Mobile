@@ -103,7 +103,7 @@ class _ProductProfileScreenState extends ConsumerState<ProductProfileScreen>
         context: context,
         controller: _tabController,
         text: widget.screenArgs.phoneName,
-        imageUrl: ref.watch(userImageUrlProvider),
+        imageUrl: ref.currentUser!.picture,
       ),
       fabLabel: fabLabel,
       fabIcon: fabIcon,

@@ -57,6 +57,7 @@ class _MenuSubscreenState extends ConsumerState<MenuSubscreen> {
     });
     return _buildMyProfileData();
   }
+
   Widget _buildMyProfileData() {
     final state = ref.watch(getMyProfileProvider);
     if (state is GetMyProfileInitialState ||
@@ -260,85 +261,96 @@ class _MenuSubscreenState extends ConsumerState<MenuSubscreen> {
       onTap: onTap,
     );
   }
+
   Widget _buildFooter() {
     return Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
-                child: Text(
-                  LocaleKeys.followUs.tr(),
-                  style: TextStyleManager.s22w500,
-                ),
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: Text(
+                LocaleKeys.followUs.tr(),
+                style: TextStyleManager.s22w500,
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10.w),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButton(
-                        icon: Icon(
-                          FontAwesomeIcons.facebook,
-                          color: Color(0xFF1372E6),
-                          size: 40.sp,
-                        ),
-                        onPressed: () {
-                          _launchFacebookPage();
-                        },
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.w),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        FontAwesomeIcons.facebook,
+                        color: Color(0xFF1372E6),
+                        size: 40.sp,
                       ),
-                      IconButton(
-                        icon: Icon(
-                          FontAwesomeIcons.linkedin,
-                          color: Color(0xFF0A66C2),
-                          size: 40.sp,
-                        ),
-                        onPressed: () {
-                          _launchLinkedinPage();
-                        },
+                      onPressed: () {
+                        _launchFacebookPage();
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        FontAwesomeIcons.linkedin,
+                        color: Color(0xFF0A66C2),
+                        size: 40.sp,
                       ),
-                    ]),
-              )
-            ],
-          ),
-          Spacer(),
-          Row(
-            children: [
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pushNamed(TermsAndConditionsScreen.routeName);
-                },
-                child: Text(
-                  LocaleKeys.termsOfUse.tr(),
-                  style: TextStyleManager.s16w400.copyWith(
-                    color: ColorManager.black,
-                    decoration: TextDecoration.underline,
-                  ),
+                      onPressed: () {
+                        _launchLinkedinPage();
+                      },
+                    ),
+                  ]),
+            )
+          ],
+        ),
+        Spacer(),
+        Row(
+          children: [
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context)
+                    .pushNamed(TermsAndConditionsScreen.routeName);
+              },
+              child: Text(
+                LocaleKeys.termsOfUse.tr(),
+                style: TextStyleManager.s16w400.copyWith(
+                  color: ColorManager.black,
+                  decoration: TextDecoration.underline,
                 ),
               ),
-              Text(
-                ' | ',
-                style: TextStyleManager.s16w400,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pushNamed(PrivacyPolicyScreen.routeName);
-                },
-                child: Text(
-                  LocaleKeys.privacyPolicy.tr(),
-                  style: TextStyleManager.s16w400.copyWith(
-                    color: ColorManager.black,
-                    decoration: TextDecoration.underline,
-                  ),
+            ),
+            Text(
+              ' | ',
+              style: TextStyleManager.s16w400,
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushNamed(PrivacyPolicyScreen.routeName);
+              },
+              child: Text(
+                LocaleKeys.privacyPolicy.tr(),
+                style: TextStyleManager.s16w400.copyWith(
+                  color: ColorManager.black,
+                  decoration: TextDecoration.underline,
                 ),
               ),
-              4.horizontalSpace,
-            ],
-          )
-        ],
-      );
+            ),
+            4.horizontalSpace,
+          ],
+        )
+      ],
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(
+      Duration.zero,
+      () => ref.read(getMyProfileProvider.notifier).getMyProfile(),
+    );
   }
 
   @override
@@ -356,4 +368,3 @@ class _MenuSubscreenState extends ConsumerState<MenuSubscreen> {
     ));
   }
 }
-  

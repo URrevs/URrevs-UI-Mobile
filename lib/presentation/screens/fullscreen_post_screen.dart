@@ -236,7 +236,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
     return Scaffold(
       appBar: AppBars.appBarWithActions(
         context: context,
-        imageUrl: ref.watch(userImageUrlProvider),
+        imageUrl: ref.currentUser!.picture,
       ),
       resizeToAvoidBottomInset: true,
       body: SafeArea(

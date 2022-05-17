@@ -5,6 +5,7 @@ import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/domain/models/direct_interaction.dart';
 import 'package:urrevs_ui_mobile/domain/models/post.dart';
 import 'package:urrevs_ui_mobile/domain/models/reply_model.dart';
+import 'package:urrevs_ui_mobile/domain/models/user.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/authentication_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/companies_notifiers/get_all_companies_notifier.dart';
@@ -88,7 +89,7 @@ final givePointsToUserProvider =
         (ref) => GivePointsToUserNotifier());
 
 final getMyProfileProvider =
-    StateNotifierProvider<GetMyProfileNotifier, GetMyProfileState>(
+    StateNotifierProvider.autoDispose<GetMyProfileNotifier, GetMyProfileState>(
         (ref) => GetMyProfileNotifier());
 
 final getCurrentUserImageUrlProvider = StateNotifierProvider<
@@ -254,18 +255,7 @@ final acceptAnswerProvider = StateNotifierProvider.autoDispose.family<
           getInteractionsProviderParams: params.getInteractionsProviderParams,
         ));
 
-final userImageFetchedFlagProvider = StateProvider<bool>((ref) {
-  return false;
-});
-
-final userImageUrlProvider = Provider<String>((ref) {
-  final state = ref.watch(getMyProfileProvider);
-  if (state is GetMyProfileLoadedState) {
-    return state.user.picture!;
-  } else {
-    return StringsManager.imagePlaceHolder;
-  }
-});
+// posts and interactions providers
 
 final postProvider = StateNotifierProvider.autoDispose
     .family<PostNotifier, Post, PostProviderParams>((ref, params) {
@@ -356,5 +346,11 @@ extension WidgetRefListeners on WidgetRef {
     } else {
       return SizedBox();
     }
+  }
+
+  User? get currentUser {
+    final authState = watch(authenticationProvider);
+    if (authState is! AuthenticationLoadedState) return null;
+    return authState.user;
   }
 }

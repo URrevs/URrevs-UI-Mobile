@@ -356,6 +356,7 @@ class PhoneReviewSubResponse {
   String targetName;
   String userId;
   String userName;
+  @JsonKey(name: 'picture')
   String? photo;
   DateTime createdAt;
   int views;
