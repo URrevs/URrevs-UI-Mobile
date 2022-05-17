@@ -124,6 +124,8 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
     );
   }
 
+  final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     NumberFormat numberFormat =
@@ -169,15 +171,20 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
       body: ListView(
         padding: EdgeInsets.all(20),
         children: [
-          CircularRatingIndicator(ratingTitle: 'test', rating: 5),
-          Avatar(
-            imageUrl: StringsManager.imagePlaceHolder,
-            radius: 40,
+          Form(
+            key: formKey,
+            child: Column(
+              children: [
+                MyTextFormField(),
+                ElevatedButton(
+                  onPressed: () {
+                    formKey.currentState!.validate();
+                  },
+                  child: Text('SUBMIT'),
+                )
+              ],
+            ),
           ),
-          // ElevatedButton(
-          //   onPressed: updateFirebasePhoto,
-          //   child: Text('CHANGE PHOTO'),
-          // ),
           // UpdatedListTile(title: 'قائمة الشركات المضافة حديثاً', items: items),
           // ProductReviewCard.dummyInstance(),
           // CompanyReviewCard.dummyInstance(),
@@ -192,6 +199,29 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
         ],
       ),
       //bottomNavigationBar: BottomNavBar(currentIndex: 2,onTap: (int i)=>{},),
+    );
+  }
+}
+
+class MyTextFormField extends StatefulWidget {
+  const MyTextFormField({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<MyTextFormField> createState() => _MyTextFormFieldState();
+}
+
+class _MyTextFormFieldState extends State<MyTextFormField> {
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'error text';
+        }
+        return null;
+      },
     );
   }
 }

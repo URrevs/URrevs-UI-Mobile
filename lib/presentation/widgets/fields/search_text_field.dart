@@ -103,14 +103,10 @@ class _SearchTextFieldState extends ConsumerState<SearchTextField> {
 
   @override
   Widget build(BuildContext context) {
-    FocusNode focusNode = FocusNode();
-
     return TextFormField(
       key: widget.key,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
       cursorColor: ColorManager.black,
       controller: widget.searchCtl,
-      focusNode: focusNode,
       readOnly: widget.readOnly,
       style: TextStyleManager.s18w500.copyWith(
         color: ColorManager.black,

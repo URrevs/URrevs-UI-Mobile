@@ -286,147 +286,149 @@ class _PostingReviewSubscreenState
       child: CustomScrollView(
         slivers: [
           _buildStarsCounterBar(),
-          SliverPadding(
-            padding: AppEdgeInsets.screenPadding.copyWith(bottom: 10.h),
-            sliver: SliverList(
-              delegate: SliverChildListDelegate([
-                Text(LocaleKeys.chooseProduct.tr() + ':',
-                    style: TextStyleManager.s18w500),
-                SearchTextField(
-                  fillColor: ColorManager.textFieldGrey,
-                  searchCtl: productNameController,
-                  hasErrorMsg: true,
-                  hintText: LocaleKeys.writeProductName.tr(),
-                  errorMsg: LocaleKeys.productNameErrorMsg.tr(),
-                  searchProviderParams: _searchProviderParams,
-                  readOnly: _chosenSearchResult != null,
-                  onClear: _clearChosenSearchResult,
-                  checkChosenSearchResult: true,
-                  chosenSearchResult: _chosenSearchResult,
-                ),
-                _buildSearchResults(),
-                SizedBox(height: 20.h),
-                Text(
-                  LocaleKeys.howLongHaveYouOwnedThisProduct.tr(),
-                  style: TextStyleManager.s18w500,
-                ),
-                DatePickerField(
-                  key: ValueKey('date-$_keyNumber'),
-                  dateController: usedSinceController,
-                  hintText: LocaleKeys.purchaseDate.tr(),
-                  fillColor: ColorManager.textFieldGrey,
-                  isMonthDatePicker: true,
-                  hasErrorMsg: true,
-                  errorMsg: LocaleKeys.purchaseDateErrorMsg.tr(),
-                  setChosenDate: _setChosenDate,
-                ),
-                SizedBox(height: 20.h),
-                Text(LocaleKeys.rateOverallExpericence.tr(),
-                    style: TextStyleManager.s18w500),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    // general rating bar
-                    CustomRatingBar(
-                      key: ValueKey<String>('star-0-$_keyNumber'),
-                      onRatingUpdate: (rating) {
-                        ratings[0] = rating.toInt();
-                      },
-                    ),
-                    SizedBox(height: 5.h),
-                    for (int i = 0; i < _ratingLabels.length; i++)
-                      RatingEntry(
-                        key: ValueKey<String>('star-${i + 1}-$_keyNumber'),
-                        title: _ratingLabels[i],
-                        onRatingUpdate: (rating) =>
-                            ratings[i + 1] = rating.toInt(),
+          SliverToBoxAdapter(
+            child: SingleChildScrollView(
+              padding: AppEdgeInsets.screenPadding.copyWith(bottom: 10.h),
+              child: Column(
+                children: [
+                  Text(LocaleKeys.chooseProduct.tr() + ':',
+                      style: TextStyleManager.s18w500),
+                  SearchTextField(
+                    fillColor: ColorManager.textFieldGrey,
+                    searchCtl: productNameController,
+                    hasErrorMsg: true,
+                    hintText: LocaleKeys.writeProductName.tr(),
+                    errorMsg: LocaleKeys.productNameErrorMsg.tr(),
+                    searchProviderParams: _searchProviderParams,
+                    readOnly: _chosenSearchResult != null,
+                    onClear: _clearChosenSearchResult,
+                    checkChosenSearchResult: true,
+                    chosenSearchResult: _chosenSearchResult,
+                  ),
+                  _buildSearchResults(),
+                  SizedBox(height: 20.h),
+                  Text(
+                    LocaleKeys.howLongHaveYouOwnedThisProduct.tr(),
+                    style: TextStyleManager.s18w500,
+                  ),
+                  DatePickerField(
+                    key: ValueKey('date-$_keyNumber'),
+                    dateController: usedSinceController,
+                    hintText: LocaleKeys.purchaseDate.tr(),
+                    fillColor: ColorManager.textFieldGrey,
+                    isMonthDatePicker: true,
+                    hasErrorMsg: true,
+                    errorMsg: LocaleKeys.purchaseDateErrorMsg.tr(),
+                    setChosenDate: _setChosenDate,
+                  ),
+                  SizedBox(height: 20.h),
+                  Text(LocaleKeys.rateOverallExpericence.tr(),
+                      style: TextStyleManager.s18w500),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      // general rating bar
+                      CustomRatingBar(
+                        key: ValueKey<String>('star-0-$_keyNumber'),
+                        onRatingUpdate: (rating) {
+                          ratings[0] = rating.toInt();
+                        },
                       ),
-                    5.verticalSpace,
-                    Text(
-                      _phoneRatingErrorMessage,
-                      style: TextStyleManager.s13w400.copyWith(
-                        color: ColorManager.red,
+                      SizedBox(height: 5.h),
+                      for (int i = 0; i < _ratingLabels.length; i++)
+                        RatingEntry(
+                          key: ValueKey<String>('star-${i + 1}-$_keyNumber'),
+                          title: _ratingLabels[i],
+                          onRatingUpdate: (rating) =>
+                              ratings[i + 1] = rating.toInt(),
+                        ),
+                      5.verticalSpace,
+                      Text(
+                        _phoneRatingErrorMessage,
+                        style: TextStyleManager.s13w400.copyWith(
+                          color: ColorManager.red,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20.h),
-                // what do you like about this product
-                Text(LocaleKeys.whatDoYouLikeAboutThisProduct.tr(),
-                    style: TextStyleManager.s18w500),
-                TxtField(
-                  textController: likedAboutProductController,
-                  hintText: LocaleKeys.pros.tr(),
-                  keyboardType: TextInputType.text,
-                  fillColor: ColorManager.textFieldGrey,
-                  errorMsg: LocaleKeys.likedAboutProductErrorMsg.tr(),
-                  hasErrorMsg: true,
-                ),
-                SizedBox(height: 20.h),
-                // what do you hate about this product
-                Text(LocaleKeys.whatDoYouHateAboutThisProduct.tr(),
-                    style: TextStyleManager.s18w500),
-                TxtField(
-                  textController: hatedAboutProductController,
-                  hintText: LocaleKeys.cons.tr(),
-                  keyboardType: TextInputType.text,
-                  fillColor: ColorManager.textFieldGrey,
-                  errorMsg: LocaleKeys.hateAboutProductErrorMsg.tr(),
-                  hasErrorMsg: true,
-                ),
-                SizedBox(height: 40.h),
-                _buildCompanyFields(),
-                Row(
-                  children: [
-                    Text(LocaleKeys.enterInvitationCode.tr() + ':',
-                        style: TextStyleManager.s18w500),
-                    IconButton(
-                      padding: EdgeInsets.zero,
-                      icon: context.isArabic
-                          ? Transform(
-                              alignment: Alignment.center,
-                              transform: Matrix4.rotationY(math.pi),
-                              child: Icon(
+                    ],
+                  ),
+                  SizedBox(height: 20.h),
+                  // what do you like about this product
+                  Text(LocaleKeys.whatDoYouLikeAboutThisProduct.tr(),
+                      style: TextStyleManager.s18w500),
+                  TxtField(
+                    textController: likedAboutProductController,
+                    hintText: LocaleKeys.pros.tr(),
+                    keyboardType: TextInputType.text,
+                    fillColor: ColorManager.textFieldGrey,
+                    errorMsg: LocaleKeys.likedAboutProductErrorMsg.tr(),
+                    hasErrorMsg: true,
+                  ),
+                  SizedBox(height: 20.h),
+                  // what do you hate about this product
+                  Text(LocaleKeys.whatDoYouHateAboutThisProduct.tr(),
+                      style: TextStyleManager.s18w500),
+                  TxtField(
+                    textController: hatedAboutProductController,
+                    hintText: LocaleKeys.cons.tr(),
+                    keyboardType: TextInputType.text,
+                    fillColor: ColorManager.textFieldGrey,
+                    errorMsg: LocaleKeys.hateAboutProductErrorMsg.tr(),
+                    hasErrorMsg: true,
+                  ),
+                  SizedBox(height: 40.h),
+                  _buildCompanyFields(),
+                  Row(
+                    children: [
+                      Text(LocaleKeys.enterInvitationCode.tr() + ':',
+                          style: TextStyleManager.s18w500),
+                      IconButton(
+                        padding: EdgeInsets.zero,
+                        icon: context.isArabic
+                            ? Transform(
+                                alignment: Alignment.center,
+                                transform: Matrix4.rotationY(math.pi),
+                                child: Icon(
+                                  IconsManager.help,
+                                  size: 30.sp,
+                                ),
+                              )
+                            : Icon(
                                 IconsManager.help,
                                 size: 30.sp,
                               ),
-                            )
-                          : Icon(
-                              IconsManager.help,
-                              size: 30.sp,
-                            ),
-                      color: ColorManager.blue,
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return ReferralCodeHelpDialog();
-                          },
-                        );
-                      },
-                    )
-                  ],
-                ),
-                Align(
-                  alignment: context.isArabic
-                      ? Alignment.centerRight
-                      : Alignment.centerLeft,
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: SizedBox(
-                      width: 140.w,
-                      child: TxtField(
-                        textController: invitationCodeController,
-                        hintText: LocaleKeys.invitationCode.tr(),
-                        keyboardType: TextInputType.text,
-                        fillColor: ColorManager.textFieldGrey,
+                        color: ColorManager.blue,
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return ReferralCodeHelpDialog();
+                            },
+                          );
+                        },
+                      )
+                    ],
+                  ),
+                  Align(
+                    alignment: context.isArabic
+                        ? Alignment.centerRight
+                        : Alignment.centerLeft,
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: SizedBox(
+                        width: 140.w,
+                        child: TxtField(
+                          textController: invitationCodeController,
+                          hintText: LocaleKeys.invitationCode.tr(),
+                          keyboardType: TextInputType.text,
+                          fillColor: ColorManager.textFieldGrey,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(height: 20.h),
-                _buildSubmitButton(),
-              ]),
+                  SizedBox(height: 20.h),
+                  _buildSubmitButton(),
+                ],
+              ),
             ),
           ),
         ],
