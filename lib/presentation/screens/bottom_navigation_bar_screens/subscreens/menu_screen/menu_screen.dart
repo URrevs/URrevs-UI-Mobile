@@ -27,6 +27,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/get_my_use
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/partial_error_widget.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/menu_profile_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/profile_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/invitation_code_and_link_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/sign_out_confirmation_dialog.dart';
@@ -62,7 +63,7 @@ class _MenuSubscreenState extends ConsumerState<MenuSubscreen> {
     final state = ref.watch(getMyProfileProvider);
     if (state is GetMyProfileInitialState ||
         state is GetMyProfileLoadingState) {
-      return ProfileLoading();
+      return MenuProfileLoading();
     } else if (state is GetMyProfileErrorState) {
       return PartialErrorWidget(
         onRetry: ref.read(getMyProfileProvider.notifier).getMyProfile,

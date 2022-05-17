@@ -66,9 +66,7 @@ class AppBars {
     required String? imageUrl,
   }) {
     return PreferredSize(
-      preferredSize: Size.fromHeight(
-        45.h,
-      ),
+      preferredSize: Size.fromHeight(showTabBar ? 45.h + 35.h : 45.h),
       child: AppBar(
         elevation: 3,
         leading: Padding(

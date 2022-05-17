@@ -27,6 +27,7 @@ import 'package:urrevs_ui_mobile/presentation/widgets/fields/txt_field.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/company_fields_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/suggested_searches_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/referral_code_help_dialog.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/stars_counter.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 import 'dart:math' as math;
 
@@ -242,243 +243,264 @@ class _PostingReviewSubscreenState
     );
   }
 
+  SliverAppBar _buildStarsCounterBar() {
+    return SliverAppBar(
+      elevation: 1,
+      forceElevated: true,
+      pinned: true,
+      // snap: true,
+      // floating: true,
+      toolbarHeight: 50.h,
+      collapsedHeight: 50.h,
+      expandedHeight: 50.h,
+      backgroundColor: ColorManager.transparent,
+      flexibleSpace: Container(
+        decoration: BoxDecoration(color: ColorManager.backgroundGrey),
+        child: StarsCounter(percentage: 0.5),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     //bool productSelected = ref.watch(productSelectedProvider);
-    return SingleChildScrollView(
-      padding: AppEdgeInsets.screenPadding.copyWith(bottom: 10.h),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(LocaleKeys.chooseProduct.tr() + ':',
-                style: TextStyleManager.s18w500),
-            SearchTextField(
-              fillColor: ColorManager.textFieldGrey,
-              searchCtl: productNameController,
-              hasErrorMsg: true,
-              hintText: LocaleKeys.writeProductName.tr(),
-              errorMsg: LocaleKeys.productNameErrorMsg.tr(),
-              searchProviderParams: _searchProviderParams,
-              readOnly: _chosenSearchResult != null,
-              onClear: _clearChosenSearchResult,
-              checkChosenSearchResult: true,
-              chosenSearchResult: _chosenSearchResult,
-            ),
-            _buildSearchResults(),
-            SizedBox(height: 20.h),
-            Text(
-              LocaleKeys.howLongHaveYouOwnedThisProduct.tr(),
-              style: TextStyleManager.s18w500,
-            ),
-            DatePickerField(
-              dateController: usedSinceController,
-              hintText: LocaleKeys.purchaseDate.tr(),
-              fillColor: ColorManager.textFieldGrey,
-              isMonthDatePicker: true,
-              hasErrorMsg: true,
-              errorMsg: LocaleKeys.purchaseDateErrorMsg.tr(),
-              setChosenDate: _setChosenDate,
-            ),
-            SizedBox(height: 20.h),
-            Text(LocaleKeys.rateOverallExpericence.tr(),
-                style: TextStyleManager.s18w500),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                // general rating bar
-                CustomRatingBar(
-                  onRatingUpdate: (rating) {
-                    FocusScope.of(context).unfocus();
-                    if (!star1) {
-                      setState(() {
-                        //starsPoints++;
-                      });
-                    }
-                    if (rating != 0) {
-                      star1 = true;
-                      postingReviewModel.generalRating = rating.toInt();
-                    }
-                  },
-                ),
-                SizedBox(height: 5.h),
-                // manufacturing quality bar
-                RatingEntry(
-                  title: LocaleKeys.manufacturingQuality.tr(),
-                  onRatingUpdate: (rating) {
-                    FocusScope.of(context).unfocus();
-                    if (!star2) {
-                      setState(() {
-                        //starsPoints++;
-                      });
-                    }
-                    if (rating != 0) {
-                      star2 = true;
-                      postingReviewModel.manufacturingQuality = rating.toInt();
-                    }
-                  },
-                ),
-                // user interface bar
-                RatingEntry(
-                  title: LocaleKeys.userInterface.tr(),
-                  onRatingUpdate: (rating) {
-                    FocusScope.of(context).unfocus();
-                    if (!star3) {
-                      setState(() {
-                        //starsPoints++;
-                      });
-                    }
-                    if (rating != 0) {
-                      star3 = true;
-                      postingReviewModel.userInterface = rating.toInt();
-                    }
-                  },
-                ),
-                // price quality bar
-                RatingEntry(
-                  title: LocaleKeys.priceQuality.tr(),
-                  onRatingUpdate: (rating) {
-                    FocusScope.of(context).unfocus();
-                    if (!star4) {
-                      setState(() {
-                        //starsPoints++;
-                      });
-                    }
-                    if (rating != 0) {
-                      star4 = true;
-                      postingReviewModel.priceQuality = rating.toInt();
-                    }
-                  },
-                ),
-                // camera bar
-                RatingEntry(
-                  title: LocaleKeys.camera.tr(),
-                  onRatingUpdate: (rating) {
-                    FocusScope.of(context).unfocus();
-                    if (!star5) {
-                      setState(() {
-                        //starsPoints++;
-                      });
-                    }
-                    if (rating != 0) {
-                      star5 = true;
-                      postingReviewModel.camera = rating.toInt();
-                    }
-                  },
-                ),
-                // calls quality bar
-                RatingEntry(
-                  title: LocaleKeys.callsQuality.tr(),
-                  onRatingUpdate: (rating) {
-                    FocusScope.of(context).unfocus();
-                    if (!star6) {
-                      setState(() {
-                        //starsPoints++;
-                      });
-                    }
-                    if (rating != 0) {
-                      star6 = true;
-                      postingReviewModel.callsQuality = rating.toInt();
-                    }
-                  },
-                ),
-                // battery bar
-                RatingEntry(
-                  title: LocaleKeys.battery.tr(),
-                  onRatingUpdate: (rating) {
-                    FocusScope.of(context).unfocus();
-                    if (!star7) {
-                      setState(() {
-                        //starsPoints++;
-                      });
-                    }
-                    if (rating != 0) {
-                      star7 = true;
-                      postingReviewModel.battery = rating.toInt();
-                    }
-                  },
-                ),
-              ],
-            ),
-            SizedBox(height: 20.h),
-            // what do you like about this product
-            Text(LocaleKeys.whatDoYouLikeAboutThisProduct.tr(),
-                style: TextStyleManager.s18w500),
-            TxtField(
-              textController: likedAboutProductController,
-              hintText: LocaleKeys.pros.tr(),
-              keyboardType: TextInputType.text,
-              fillColor: ColorManager.textFieldGrey,
-              errorMsg: LocaleKeys.likedAboutProductErrorMsg.tr(),
-              hasErrorMsg: true,
-            ),
-            SizedBox(height: 20.h),
-            // what do you hate about this product
-            Text(LocaleKeys.whatDoYouHateAboutThisProduct.tr(),
-                style: TextStyleManager.s18w500),
-            TxtField(
-              textController: hatedAboutProductController,
-              hintText: LocaleKeys.cons.tr(),
-              keyboardType: TextInputType.text,
-              fillColor: ColorManager.textFieldGrey,
-              errorMsg: LocaleKeys.hateAboutProductErrorMsg.tr(),
-              hasErrorMsg: true,
-            ),
-            SizedBox(height: 40.h),
-            _buildCompanyFields(),
-            Row(
-              children: [
-                Text(LocaleKeys.enterInvitationCode.tr() + ':',
-                    style: TextStyleManager.s18w500),
-                IconButton(
-                  padding: EdgeInsets.zero,
-                  icon: context.isArabic
-                      ? Transform(
-                          alignment: Alignment.center,
-                          transform: Matrix4.rotationY(math.pi),
-                          child: Icon(
+    return Form(
+      key: _formKey,
+      child: CustomScrollView(
+        slivers: [
+          _buildStarsCounterBar(),
+          SliverList(
+            delegate: SliverChildListDelegate([
+              10.verticalSpace,
+              Text(LocaleKeys.chooseProduct.tr() + ':',
+                  style: TextStyleManager.s18w500),
+              SearchTextField(
+                fillColor: ColorManager.textFieldGrey,
+                searchCtl: productNameController,
+                hasErrorMsg: true,
+                hintText: LocaleKeys.writeProductName.tr(),
+                errorMsg: LocaleKeys.productNameErrorMsg.tr(),
+                searchProviderParams: _searchProviderParams,
+                readOnly: _chosenSearchResult != null,
+                onClear: _clearChosenSearchResult,
+                checkChosenSearchResult: true,
+                chosenSearchResult: _chosenSearchResult,
+              ),
+              _buildSearchResults(),
+              SizedBox(height: 20.h),
+              Text(
+                LocaleKeys.howLongHaveYouOwnedThisProduct.tr(),
+                style: TextStyleManager.s18w500,
+              ),
+              DatePickerField(
+                dateController: usedSinceController,
+                hintText: LocaleKeys.purchaseDate.tr(),
+                fillColor: ColorManager.textFieldGrey,
+                isMonthDatePicker: true,
+                hasErrorMsg: true,
+                errorMsg: LocaleKeys.purchaseDateErrorMsg.tr(),
+                setChosenDate: _setChosenDate,
+              ),
+              SizedBox(height: 20.h),
+              Text(LocaleKeys.rateOverallExpericence.tr(),
+                  style: TextStyleManager.s18w500),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  // general rating bar
+                  CustomRatingBar(
+                    onRatingUpdate: (rating) {
+                      FocusScope.of(context).unfocus();
+                      if (!star1) {
+                        setState(() {
+                          //starsPoints++;
+                        });
+                      }
+                      if (rating != 0) {
+                        star1 = true;
+                        postingReviewModel.generalRating = rating.toInt();
+                      }
+                    },
+                  ),
+                  SizedBox(height: 5.h),
+                  // manufacturing quality bar
+                  RatingEntry(
+                    title: LocaleKeys.manufacturingQuality.tr(),
+                    onRatingUpdate: (rating) {
+                      FocusScope.of(context).unfocus();
+                      if (!star2) {
+                        setState(() {
+                          //starsPoints++;
+                        });
+                      }
+                      if (rating != 0) {
+                        star2 = true;
+                        postingReviewModel.manufacturingQuality =
+                            rating.toInt();
+                      }
+                    },
+                  ),
+                  // user interface bar
+                  RatingEntry(
+                    title: LocaleKeys.userInterface.tr(),
+                    onRatingUpdate: (rating) {
+                      FocusScope.of(context).unfocus();
+                      if (!star3) {
+                        setState(() {
+                          //starsPoints++;
+                        });
+                      }
+                      if (rating != 0) {
+                        star3 = true;
+                        postingReviewModel.userInterface = rating.toInt();
+                      }
+                    },
+                  ),
+                  // price quality bar
+                  RatingEntry(
+                    title: LocaleKeys.priceQuality.tr(),
+                    onRatingUpdate: (rating) {
+                      FocusScope.of(context).unfocus();
+                      if (!star4) {
+                        setState(() {
+                          //starsPoints++;
+                        });
+                      }
+                      if (rating != 0) {
+                        star4 = true;
+                        postingReviewModel.priceQuality = rating.toInt();
+                      }
+                    },
+                  ),
+                  // camera bar
+                  RatingEntry(
+                    title: LocaleKeys.camera.tr(),
+                    onRatingUpdate: (rating) {
+                      FocusScope.of(context).unfocus();
+                      if (!star5) {
+                        setState(() {
+                          //starsPoints++;
+                        });
+                      }
+                      if (rating != 0) {
+                        star5 = true;
+                        postingReviewModel.camera = rating.toInt();
+                      }
+                    },
+                  ),
+                  // calls quality bar
+                  RatingEntry(
+                    title: LocaleKeys.callsQuality.tr(),
+                    onRatingUpdate: (rating) {
+                      FocusScope.of(context).unfocus();
+                      if (!star6) {
+                        setState(() {
+                          //starsPoints++;
+                        });
+                      }
+                      if (rating != 0) {
+                        star6 = true;
+                        postingReviewModel.callsQuality = rating.toInt();
+                      }
+                    },
+                  ),
+                  // battery bar
+                  RatingEntry(
+                    title: LocaleKeys.battery.tr(),
+                    onRatingUpdate: (rating) {
+                      FocusScope.of(context).unfocus();
+                      if (!star7) {
+                        setState(() {
+                          //starsPoints++;
+                        });
+                      }
+                      if (rating != 0) {
+                        star7 = true;
+                        postingReviewModel.battery = rating.toInt();
+                      }
+                    },
+                  ),
+                ],
+              ),
+              SizedBox(height: 20.h),
+              // what do you like about this product
+              Text(LocaleKeys.whatDoYouLikeAboutThisProduct.tr(),
+                  style: TextStyleManager.s18w500),
+              TxtField(
+                textController: likedAboutProductController,
+                hintText: LocaleKeys.pros.tr(),
+                keyboardType: TextInputType.text,
+                fillColor: ColorManager.textFieldGrey,
+                errorMsg: LocaleKeys.likedAboutProductErrorMsg.tr(),
+                hasErrorMsg: true,
+              ),
+              SizedBox(height: 20.h),
+              // what do you hate about this product
+              Text(LocaleKeys.whatDoYouHateAboutThisProduct.tr(),
+                  style: TextStyleManager.s18w500),
+              TxtField(
+                textController: hatedAboutProductController,
+                hintText: LocaleKeys.cons.tr(),
+                keyboardType: TextInputType.text,
+                fillColor: ColorManager.textFieldGrey,
+                errorMsg: LocaleKeys.hateAboutProductErrorMsg.tr(),
+                hasErrorMsg: true,
+              ),
+              SizedBox(height: 40.h),
+              _buildCompanyFields(),
+              Row(
+                children: [
+                  Text(LocaleKeys.enterInvitationCode.tr() + ':',
+                      style: TextStyleManager.s18w500),
+                  IconButton(
+                    padding: EdgeInsets.zero,
+                    icon: context.isArabic
+                        ? Transform(
+                            alignment: Alignment.center,
+                            transform: Matrix4.rotationY(math.pi),
+                            child: Icon(
+                              IconsManager.help,
+                              size: 30.sp,
+                            ),
+                          )
+                        : Icon(
                             IconsManager.help,
                             size: 30.sp,
                           ),
-                        )
-                      : Icon(
-                          IconsManager.help,
-                          size: 30.sp,
-                        ),
-                  color: ColorManager.blue,
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return ReferralCodeHelpDialog();
-                      },
-                    );
-                  },
-                )
-              ],
-            ),
-            Align(
-              alignment: context.isArabic
-                  ? Alignment.centerRight
-                  : Alignment.centerLeft,
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                child: SizedBox(
-                  width: 140.w,
-                  child: TxtField(
-                    textController: invitationCodeController,
-                    hintText: LocaleKeys.invitationCode.tr(),
-                    keyboardType: TextInputType.text,
-                    fillColor: ColorManager.textFieldGrey,
+                    color: ColorManager.blue,
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return ReferralCodeHelpDialog();
+                        },
+                      );
+                    },
+                  )
+                ],
+              ),
+              Align(
+                alignment: context.isArabic
+                    ? Alignment.centerRight
+                    : Alignment.centerLeft,
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: SizedBox(
+                    width: 140.w,
+                    child: TxtField(
+                      textController: invitationCodeController,
+                      hintText: LocaleKeys.invitationCode.tr(),
+                      keyboardType: TextInputType.text,
+                      fillColor: ColorManager.textFieldGrey,
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: 20.h),
-            _buildSubmitButton(),
-          ],
-        ),
+              SizedBox(height: 20.h),
+              _buildSubmitButton(),
+            ]),
+          ),
+        ],
       ),
     );
   }
