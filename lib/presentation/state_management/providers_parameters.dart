@@ -18,12 +18,24 @@ abstract class NotSyncedProviderParams extends Equatable {
   List<Object?> get props => [providerId];
 }
 
+abstract class UserIdProviderParams extends NotSyncedProviderParams {
+  final String? userId;
+  UserIdProviderParams({
+    required this.userId,
+  });
+
+  @override
+  @mustCallSuper
+  List<Object?> get props => [userId, ...super.props];
+}
+
 class GetTheProfileOfAnotherUserProviderParams extends NotSyncedProviderParams {
   GetTheProfileOfAnotherUserProviderParams();
 }
 
-class GetOwnedPhonesProviderParams extends NotSyncedProviderParams {
-  GetOwnedPhonesProviderParams();
+class GetOwnedPhonesProviderParams extends UserIdProviderParams {
+  GetOwnedPhonesProviderParams({required String? userId})
+      : super(userId: userId);
 }
 
 class GetAllCompaniesProviderParams extends NotSyncedProviderParams {
@@ -59,16 +71,6 @@ class SearchProviderParams extends NotSyncedProviderParams {
   SearchProviderParams({
     required this.searchMode,
   });
-}
-
-abstract class UserIdProviderParams extends NotSyncedProviderParams {
-  final String? userId;
-  UserIdProviderParams({
-    required this.userId,
-  });
-
-  @override
-  List<Object?> get props => [userId, ...super.props];
 }
 
 class GetUserPostsProviderParams extends UserIdProviderParams {

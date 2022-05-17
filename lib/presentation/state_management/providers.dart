@@ -32,7 +32,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/authentica
 import 'package:urrevs_ui_mobile/presentation/state_management/states/companies_states/get_all_companies_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_current_user_image_url_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_info_about_latest_update_state.dart';
-import 'package:urrevs_ui_mobile/presentation/state_management/states/get_my_owned_phones_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/get_owned_phones_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_all_phones_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_phone_specs_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_phone_statistical_info_state.dart';
@@ -97,9 +97,11 @@ final getTheProfileOfAnotherUserProvider = StateNotifierProvider.autoDispose
             GetTheProfileOfAnotherUserProviderParams>(
         (ref, params) => GetTheProfileOfAnotherUserNotifier());
 
-final getOwnedPhonesProvider = StateNotifierProvider.autoDispose<
-    GetMyOwnedPhonesNotifier,
-    GetMyOwnedPhonesState>((ref) => GetMyOwnedPhonesNotifier());
+final getOwnedPhonesProvider = StateNotifierProvider.autoDispose.family<
+        GetOwnedPhonesNotifier,
+        GetOwnedPhonesState,
+        GetOwnedPhonesProviderParams>(
+    (ref, params) => GetOwnedPhonesNotifier(userId: params.userId));
 
 final updateTargetsFromSourceProvider = StateNotifierProvider.autoDispose<
     UpdateTargetsFromSourceNotifier,

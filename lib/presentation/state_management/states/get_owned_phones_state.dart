@@ -3,22 +3,22 @@ import 'package:equatable/equatable.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone.dart';
 
-abstract class GetMyOwnedPhonesState extends Equatable {}
+abstract class GetOwnedPhonesState extends Equatable {}
 
-class GetMyOwnedPhonesInitialState extends GetMyOwnedPhonesState {
+class GetOwnedPhonesInitialState extends GetOwnedPhonesState {
   @override
   List<Object?> get props => [];
 }
 
-class GetMyOwnedPhonesLoadingState extends GetMyOwnedPhonesState {
+class GetOwnedPhonesLoadingState extends GetOwnedPhonesState {
   @override
   List<Object?> get props => [];
 }
 
-class GetMyOwnedPhonesLoadedState extends GetMyOwnedPhonesState {
+class GetOwnedPhonesLoadedState extends GetOwnedPhonesState {
   final List<Phone> phones;
   final bool roundsEnded;
-  GetMyOwnedPhonesLoadedState({
+  GetOwnedPhonesLoadedState({
     required this.phones,
     this.roundsEnded = false,
   });
@@ -30,9 +30,9 @@ class GetMyOwnedPhonesLoadedState extends GetMyOwnedPhonesState {
       'GetMyOwnedPhonesLoadedState(phones: $phones, roundsEnded: $roundsEnded)';
 }
 
-class GetMyOwnedPhonesErrorState extends GetMyOwnedPhonesState {
+class GetOwnedPhonesErrorState extends GetOwnedPhonesState {
   final Failure failure;
-  GetMyOwnedPhonesErrorState({
+  GetOwnedPhonesErrorState({
     required this.failure,
   });
 

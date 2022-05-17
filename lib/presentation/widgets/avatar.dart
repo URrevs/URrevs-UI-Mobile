@@ -37,7 +37,15 @@ class Avatar extends StatelessWidget {
                     imageUrl!,
                     fit: BoxFit.cover,
                     errorBuilder: (context, _, __) {
-                      return Center(child: Text('🚫'));
+                      return Center(
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text(
+                            (['🐷', '🐮', '🐶', '🐸']..shuffle()).first,
+                            style: TextStyle(fontSize: 100),
+                          ),
+                        ),
+                      );
                     },
                   )
                 : Image.network(

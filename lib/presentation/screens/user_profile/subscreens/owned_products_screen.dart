@@ -15,7 +15,8 @@ import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_scre
 import 'package:urrevs_ui_mobile/presentation/screens/product_profile/product_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/user_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
-import 'package:urrevs_ui_mobile/presentation/state_management/states/get_my_owned_phones_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/get_owned_phones_state.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/empty_widgets/empty_list_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/fullscreen_error_widget.dart';
@@ -47,18 +48,16 @@ class OwnedProductsScreen extends ConsumerStatefulWidget {
 
 class _OwnedProductsScreenState extends ConsumerState<OwnedProductsScreen>
     with RouteAware {
+  late final GetOwnedPhonesProviderParams _ownedPhonesProviderParams =
+      GetOwnedPhonesProviderParams(userId: widget.screenArgs.userId);
+
   final PagingController<int, Phone> _pagingController =
       PagingController(firstPageKey: 0);
 
   void _getMyOwnedPhones() {
-    String? userId = widget.screenArgs.userId;
-    if (userId == null) {
-      ref.read(getOwnedPhonesProvider.notifier).getMyOwnedPhones();
-    } else {
-      ref
-          .read(getOwnedPhonesProvider.notifier)
-          .getTheOwnedPhonesOfAnotherUser(userId);
-    }
+    ref
+        .read(getOwnedPhonesProvider(_ownedPhonesProviderParams).notifier)
+        .getOwnedProducts();
   }
 
   @override
@@ -75,8 +74,8 @@ class _OwnedProductsScreenState extends ConsumerState<OwnedProductsScreen>
 
   @override
   void didPushNext() {
-    final state = ref.watch(getOwnedPhonesProvider);
-    if (state is GetMyOwnedPhonesErrorState &&
+    final state = ref.watch(getOwnedPhonesProvider(_ownedPhonesProviderParams));
+    if (state is GetOwnedPhonesErrorState &&
         state.failure is! AuthenticateFailure) {
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
     }
@@ -97,14 +96,15 @@ class _OwnedProductsScreenState extends ConsumerState<OwnedProductsScreen>
 
   @override
   Widget build(BuildContext context) {
-    ref.listen(getOwnedPhonesProvider, (previous, next) {
-      if (next is GetMyOwnedPhonesLoadedState) {
+    ref.listen(getOwnedPhonesProvider(_ownedPhonesProviderParams),
+        (previous, next) {
+      if (next is GetOwnedPhonesLoadedState) {
         if (next.roundsEnded) {
           _pagingController.itemList ??= [];
           return _pagingController.nextPageKey = null;
         }
         _pagingController.itemList = next.phones;
-      } else if (next is GetMyOwnedPhonesErrorState) {
+      } else if (next is GetOwnedPhonesErrorState) {
         _pagingController.error = next.failure.message;
         bool firstRound = _pagingController.itemList == null;
         late SnackBar snackBar;
@@ -173,6 +173,10 @@ class _OwnedProductsScreenState extends ConsumerState<OwnedProductsScreen>
                   onTap: () {
                     Navigator.of(context).pushNamed(
                       ProductProfileScreen.routeName,
+                      arguments: ProductProfileScreenArgs(
+                        phoneId: phone.id,
+                        phoneName: phone.name,
+                      ),
                     );
                   },
                 );
