@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_two_phones_specs_state.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
@@ -38,8 +39,13 @@ class ComparisonScreen extends ConsumerStatefulWidget {
 }
 
 class _ComparisonScreenState extends ConsumerState<ComparisonScreen> {
+  final GetTwoPhonesSpecsProviderParams _providerParams =
+      GetTwoPhonesSpecsProviderParams();
+
   void _getTwoPhonesSpecs() {
-    ref.read(getTwoPhonesSpecsProvider.notifier).getTwoPhonesSpecs(
+    ref
+        .read(getTwoPhonesSpecsProvider(_providerParams).notifier)
+        .getTwoPhonesSpecs(
           widget.screenArgs.firstPhoneId,
           widget.screenArgs.secondPhoneId,
         );
@@ -75,8 +81,9 @@ class _ComparisonScreenState extends ConsumerState<ComparisonScreen> {
   }
 
   Widget _buildBody() {
-    ref.addErrorListener(provider: getTwoPhonesSpecsProvider, context: context);
-    final state = ref.watch(getTwoPhonesSpecsProvider);
+    ref.addErrorListener(
+        provider: getTwoPhonesSpecsProvider(_providerParams), context: context);
+    final state = ref.watch(getTwoPhonesSpecsProvider(_providerParams));
     if (state is InitialState || state is LoadingState) {
       return ComparisonTableLoading();
     } else if (state is ErrorState) {

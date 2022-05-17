@@ -6,10 +6,10 @@ import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/domain/models/company.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
-import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/authentication_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_info_about_latest_update_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/update_targets_from_source_state.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
@@ -30,9 +30,12 @@ class UpdateProductsScreen extends ConsumerStatefulWidget {
 }
 
 class _UpdateProductsScreenState extends ConsumerState<UpdateProductsScreen> {
+  final GetInfoAboutLatestUpdateProviderParams _providerParams =
+      GetInfoAboutLatestUpdateProviderParams();
+
   void _getInfoAboutLatestUpdate() {
     ref
-        .read(getInfoAboutLatestUpdateProvider.notifier)
+        .read(getInfoAboutLatestUpdateProvider(_providerParams).notifier)
         .getInfoAboutLatestUpdate();
   }
 
@@ -50,7 +53,8 @@ class _UpdateProductsScreenState extends ConsumerState<UpdateProductsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ref.listen(getInfoAboutLatestUpdateProvider, (previous, next) {
+    ref.listen(getInfoAboutLatestUpdateProvider(_providerParams),
+        (previous, next) {
       if (next is GetInfoAboutLatestUpdateErrorState) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -95,7 +99,7 @@ class _UpdateProductsScreenState extends ConsumerState<UpdateProductsScreen> {
   }
 
   Widget _buildUpdatedItemsList() {
-    final state = ref.watch(getInfoAboutLatestUpdateProvider);
+    final state = ref.watch(getInfoAboutLatestUpdateProvider(_providerParams));
     if (state is GetInfoAboutLatestUpdateErrorState) {
       return FullscreenErrorWidget(
         onRetry: _getInfoAboutLatestUpdate,
@@ -131,6 +135,7 @@ class _UpdateProductsScreenState extends ConsumerState<UpdateProductsScreen> {
           5.verticalSpace,
           UpdatedListTile(
             title: LocaleKeys.listOfNewlyAddedProducts.tr(),
+            listType: ItemDescription.smartphone,
             items: [
               for (Phone phone in loadedState.phones)
                 Item(
@@ -141,6 +146,7 @@ class _UpdateProductsScreenState extends ConsumerState<UpdateProductsScreen> {
           ),
           UpdatedListTile(
             title: LocaleKeys.listOfNewlyAddedCompanies.tr(),
+            listType: ItemDescription.company,
             items: [
               for (Company company in loadedState.companies)
                 Item(
@@ -184,7 +190,8 @@ class _UpdateProductsScreenState extends ConsumerState<UpdateProductsScreen> {
       }
     });
 
-    final gettingState = ref.watch(getInfoAboutLatestUpdateProvider);
+    final gettingState =
+        ref.watch(getInfoAboutLatestUpdateProvider(_providerParams));
     late bool isEnabled;
     if (gettingState is GetInfoAboutLatestUpdateLoadingState ||
         gettingState is GetInfoAboutLatestUpdateInitialState) {

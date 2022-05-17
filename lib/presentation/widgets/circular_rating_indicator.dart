@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -19,12 +18,17 @@ class CircularRatingIndicator extends StatefulWidget {
   final double rating;
 
   @override
-  State<CircularRatingIndicator> createState() => _CircularRatingIndicatorState();
+  State<CircularRatingIndicator> createState() =>
+      _CircularRatingIndicatorState();
 }
 
 class _CircularRatingIndicatorState extends State<CircularRatingIndicator> {
   @override
   Widget build(BuildContext context) {
+    // if percent is 1, widget is rebuilt continuously
+    double percent = widget.rating / 5;
+    if (percent != 0) percent -= 0.001;
+
     return CircularPercentIndicator(
         restartAnimation: true,
         animationDuration: 2,
@@ -32,18 +36,15 @@ class _CircularRatingIndicatorState extends State<CircularRatingIndicator> {
         animateFromLastPercent: true,
         center: RichText(
             text: TextSpan(
-          style: TextStyleManager.s24w500
-              .copyWith(color: ColorManager.black),
+          style: TextStyleManager.s24w500.copyWith(color: ColorManager.black),
           children: [
             TextSpan(text: widget.rating.toStringAsFixed(1)),
-            TextSpan(
-                text: '/5',
-                style: TextStyleManager.s20w400),
+            TextSpan(text: '/5', style: TextStyleManager.s20w400),
           ],
         )),
         animation: true,
         progressColor: ColorManager.blue,
-        percent: widget.rating / 5,
+        percent: percent,
         footer: Padding(
           padding: EdgeInsets.only(top: 10.h),
           child: Text(

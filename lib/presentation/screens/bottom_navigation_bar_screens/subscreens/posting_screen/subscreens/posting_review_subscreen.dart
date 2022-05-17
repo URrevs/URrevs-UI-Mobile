@@ -33,7 +33,7 @@ import 'dart:math' as math;
 
 import '../../../../../../domain/failure.dart';
 import '../../../../../state_management/providers.dart';
-import '../../../../../widgets/empty_list_widget.dart';
+import '../../../../../widgets/empty_widgets/empty_list_widget.dart';
 import '../../../../../widgets/loading_widgets/small_search_list_loading.dart';
 
 final productSelectedProvider = StateProvider.autoDispose<bool>((ref) => false);

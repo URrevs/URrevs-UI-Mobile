@@ -6,9 +6,10 @@ import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/domain/models/company.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/companies_states/get_all_companies_state.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/no_glowing_scroll_behavior.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/empty_list_widget.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/empty_widgets/empty_list_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/horizontal_list_error_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/horizontal_companies_list_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/company_logo_tile.dart';
@@ -18,12 +19,14 @@ class CompanyHorizontalListTile extends ConsumerStatefulWidget {
     required this.controller,
     required this.selectedCompanyId,
     required this.setCompanyId,
+    required this.companiesProviderParams,
     Key? key,
   }) : super(key: key);
 
   final PagingController<int, Company> controller;
   final String? selectedCompanyId;
   final ValueChanged<String?> setCompanyId;
+  final GetAllCompaniesProviderParams companiesProviderParams;
 
   @override
   ConsumerState<CompanyHorizontalListTile> createState() =>
@@ -43,12 +46,12 @@ class _CompanyHorizontalListTileState
   @override
   Widget build(BuildContext context) {
     ref.addInfiniteScrollingListener(
-      getAllCompaniesProvider,
+      getAllCompaniesProvider(widget.companiesProviderParams),
       widget.controller,
     );
     // show snackbar only at first round error
     ref.addErrorListener(
-      provider: getAllCompaniesProvider,
+      provider: getAllCompaniesProvider(widget.companiesProviderParams),
       context: context,
       controller: widget.controller,
     );
@@ -79,12 +82,15 @@ class _CompanyHorizontalListTileState
               },
               firstPageErrorIndicatorBuilder: (context) => SizedBox(),
               newPageErrorIndicatorBuilder: (context) {
-                final state = ref.watch(getAllCompaniesProvider);
+                final state = ref.watch(
+                    getAllCompaniesProvider(widget.companiesProviderParams));
                 if (state is GetAllCompaniesErrorState) {
                   return HorizontalListErrorWidget(
                     onRetry: () {
                       ref
-                          .read(getAllCompaniesProvider.notifier)
+                          .read(getAllCompaniesProvider(
+                                  widget.companiesProviderParams)
+                              .notifier)
                           .getAllCompanies();
                       widget.controller.retryLastFailedRequest();
                     },

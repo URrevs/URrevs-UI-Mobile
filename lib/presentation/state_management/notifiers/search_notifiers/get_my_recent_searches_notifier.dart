@@ -31,7 +31,7 @@ class GetMyRecentSearchesNotifier
     }
   }
 
-  void addRecentSeatchToState(SearchResult searchResult) {
+  void addRecentSearchToState(SearchResult searchResult) {
     final currentState = state;
     if (currentState is GetMyRecentSearchesLoadedState) {
       List<SearchResult> newResults = [

@@ -11,7 +11,7 @@ import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/review_card_list_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/product_review_card.dart';
 
-import '../../../widgets/empty_list_widget.dart';
+import '../../../widgets/empty_widgets/empty_list_widget.dart';
 
 class ProductProfileReviewsSubscreen extends ConsumerStatefulWidget {
   const ProductProfileReviewsSubscreen({Key? key, required this.phoneId})

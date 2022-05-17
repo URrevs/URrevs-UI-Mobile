@@ -19,7 +19,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/providers_paramet
 import 'package:urrevs_ui_mobile/presentation/utils/no_glowing_scroll_behavior.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/empty_list_widget.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/empty_widgets/empty_list_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/vertical_list_error_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/review_card_list_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/company_review_card.dart';

@@ -1,13 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
-import 'package:urrevs_ui_mobile/presentation/screens/authentication_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/menu_screen/subscreens/admin_panel/subscreens.dart/update_products_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_info_about_latest_update_state.dart';
-import 'package:urrevs_ui_mobile/presentation/state_management/states/get_the_profile_of_another_user_state.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/no_glowing_scroll_behavior.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
@@ -26,9 +24,12 @@ class AdminPanelScreen extends ConsumerStatefulWidget {
 }
 
 class _AdminPanelScreenState extends ConsumerState<AdminPanelScreen> {
+  final GetInfoAboutLatestUpdateProviderParams _providerParams =
+      GetInfoAboutLatestUpdateProviderParams();
+
   void _getInfoAboutLatestUpdate() {
     ref
-        .read(getInfoAboutLatestUpdateProvider.notifier)
+        .read(getInfoAboutLatestUpdateProvider(_providerParams).notifier)
         .getInfoAboutLatestUpdate();
   }
 
@@ -40,8 +41,8 @@ class _AdminPanelScreenState extends ConsumerState<AdminPanelScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ref.listen<GetInfoAboutLatestUpdateState>(getInfoAboutLatestUpdateProvider,
-        (previous, next) {
+    ref.listen<GetInfoAboutLatestUpdateState>(
+        getInfoAboutLatestUpdateProvider(_providerParams), (previous, next) {
       showSnackBarWithoutActionAtError(state: next, context: context);
     });
 
@@ -65,7 +66,7 @@ class _AdminPanelScreenState extends ConsumerState<AdminPanelScreen> {
   }
 
   Widget _buildBody(BuildContext context) {
-    final state = ref.watch(getInfoAboutLatestUpdateProvider);
+    final state = ref.watch(getInfoAboutLatestUpdateProvider(_providerParams));
     if (state is GetInfoAboutLatestUpdateLoadingState ||
         state is GetInfoAboutLatestUpdateInitialState) {
       return AdminPanelLoading();

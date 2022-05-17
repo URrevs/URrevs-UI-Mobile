@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
-import 'package:urrevs_ui_mobile/presentation/screens/user_profile/user_profile_screen.dart';
 
 /// Build the leading part of the header.
 /// Contains the profile photo of the user.
@@ -34,7 +33,13 @@ class Avatar extends StatelessWidget {
             height: radius * 2,
             width: radius * 2,
             child: imageUrl != null
-                ? Image.network(imageUrl!, fit: BoxFit.cover)
+                ? Image.network(
+                    imageUrl!,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, _, __) {
+                      return Center(child: Text('🚫'));
+                    },
+                  )
                 : Image.network(
                     StringsManager.imagePlaceHolder,
                     fit: BoxFit.cover,

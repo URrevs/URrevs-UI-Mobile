@@ -1,8 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/authentication_screen.dart';
@@ -92,6 +89,7 @@ Widget? loadingOrErrorWidgetOrNull({
       );
     }
   }
+  return null;
 }
 
 // Widget? erroWidgetOrNull({
@@ -137,6 +135,7 @@ Widget? fullScreenErrorWidgetOrNull(List<StateAndRetry> list,
       );
     }
   }
+  return null;
 }
 
 /// A provider and its corresponding callback function to be invoked by the

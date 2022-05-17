@@ -92,16 +92,11 @@ final getMyProfileProvider =
     StateNotifierProvider.autoDispose<GetMyProfileNotifier, GetMyProfileState>(
         (ref) => GetMyProfileNotifier());
 
-final getCurrentUserImageUrlProvider = StateNotifierProvider<
-    GetCuttentUserImageUrlNotifier,
-    GetCuttentUserImageUrlState>((ref) => GetCuttentUserImageUrlNotifier());
+final getTheProfileOfAnotherUserProvider = StateNotifierProvider.autoDispose
+    .family<GetTheProfileOfAnotherUserNotifier, GetTheProfileOfAnotherUserState,
+            GetTheProfileOfAnotherUserProviderParams>(
+        (ref, params) => GetTheProfileOfAnotherUserNotifier());
 
-final getTheProfileOfAnotherUserProvider = StateNotifierProvider<
-        GetTheProfileOfAnotherUserNotifier, GetTheProfileOfAnotherUserState>(
-    (ref) => GetTheProfileOfAnotherUserNotifier());
-
-// must be auto dispose as it has additional internal state besides the original
-// state
 final getOwnedPhonesProvider = StateNotifierProvider.autoDispose<
     GetMyOwnedPhonesNotifier,
     GetMyOwnedPhonesState>((ref) => GetMyOwnedPhonesNotifier());
@@ -110,9 +105,10 @@ final updateTargetsFromSourceProvider = StateNotifierProvider.autoDispose<
     UpdateTargetsFromSourceNotifier,
     UpdateTargetsFromSourceState>((ref) => UpdateTargetsFromSourceNotifier());
 
-final getInfoAboutLatestUpdateProvider = StateNotifierProvider.autoDispose<
-    GetInfoAboutLatestUpdateNotifier,
-    GetInfoAboutLatestUpdateState>((ref) => GetInfoAboutLatestUpdateNotifier());
+final getInfoAboutLatestUpdateProvider = StateNotifierProvider.autoDispose
+    .family<GetInfoAboutLatestUpdateNotifier, GetInfoAboutLatestUpdateState,
+            GetInfoAboutLatestUpdateProviderParams>(
+        (ref, params) => GetInfoAboutLatestUpdateNotifier());
 
 final getMyRecentSearchesProvider = StateNotifierProvider.autoDispose<
     GetMyRecentSearchesNotifier,
@@ -130,30 +126,31 @@ final searchProvider = StateNotifierProvider.autoDispose
     .family<SearchNotifier, SearchState, SearchProviderParams>(
         (ref, params) => SearchNotifier(searchMode: params.searchMode));
 
-final getAllCompaniesProvider = StateNotifierProvider.autoDispose<
+final getAllCompaniesProvider = StateNotifierProvider.autoDispose.family<
     GetAllCompaniesNotifier,
-    GetAllCompaniesState>((ref) => GetAllCompaniesNotifier());
+    GetAllCompaniesState,
+    GetAllCompaniesProviderParams>((ref, params) => GetAllCompaniesNotifier());
 
-final getAllPhonesProvider =
-    StateNotifierProvider.autoDispose<GetAllPhonesNotifier, GetAllPhonesState>(
-        (ref) => GetAllPhonesNotifier());
+final getAllPhonesProvider = StateNotifierProvider.autoDispose.family<
+    GetAllPhonesNotifier,
+    GetAllPhonesState,
+    GetAllPhonesProviderParams>((ref, params) => GetAllPhonesNotifier());
 
-@Deprecated('Use [getAllPhonesProvider] instead')
-final getPhonesFromCertainCompanyProvider = StateNotifierProvider.autoDispose<
-        GetPhonesFromCertainCompanyNotifier, GetPhonesFromCertainCompanyState>(
-    (ref) => GetPhonesFromCertainCompanyNotifier());
+final getTwoPhonesSpecsProvider = StateNotifierProvider.autoDispose.family<
+        GetTwoPhonesSpecsNotifier,
+        GetTwoPhonesSpecsState,
+        GetTwoPhonesSpecsProviderParams>(
+    (ref, params) => GetTwoPhonesSpecsNotifier());
 
-final getTwoPhonesSpecsProvider = StateNotifierProvider.autoDispose<
-    GetTwoPhonesSpecsNotifier,
-    GetTwoPhonesSpecsState>((ref) => GetTwoPhonesSpecsNotifier());
-
-final getPhoneSpecsProvider = StateNotifierProvider.autoDispose<
+final getPhoneSpecsProvider = StateNotifierProvider.autoDispose.family<
     GetPhoneSpecsNotifier,
-    GetPhoneSpecsState>((ref) => GetPhoneSpecsNotifier());
+    GetPhoneSpecsState,
+    GetPhoneSpecsProviderParams>((ref, params) => GetPhoneSpecsNotifier());
 
-final getPhoneStatisticalInfoProvider = StateNotifierProvider.autoDispose<
-    GetPhoneStatisticalInfoNotifier,
-    GetPhoneStatisticalInfoState>((ref) => GetPhoneStatisticalInfoNotifier());
+final getPhoneStatisticalInfoProvider = StateNotifierProvider.autoDispose
+    .family<GetPhoneStatisticalInfoNotifier, GetPhoneStatisticalInfoState,
+            GetPhoneStatisticalInfoProviderParams>(
+        (ref, params) => GetPhoneStatisticalInfoNotifier());
 
 final indicateUserComparedBetweenTwoPhonesProvider =
     StateNotifierProvider.autoDispose<
@@ -161,9 +158,11 @@ final indicateUserComparedBetweenTwoPhonesProvider =
             IndicateUserComparedBetweenTwoPhonesState>(
         (ref) => IndicateUserComparedBetweenTwoPhonesNotifier());
 
-final getSimilarPhonesProvider = StateNotifierProvider.autoDispose<
-    GetSimilarPhonesNotifier,
-    GetSimilarPhonesState>((ref) => GetSimilarPhonesNotifier());
+final getSimilarPhonesProvider = StateNotifierProvider.autoDispose.family<
+        GetSimilarPhonesNotifier,
+        GetSimilarPhonesState,
+        GetSimilarPhonesProviderParams>(
+    (ref, params) => GetSimilarPhonesNotifier());
 
 // final getMyPhoneReviewsProvider = StateNotifierProvider.autoDispose<
 //     GetMyPhoneReviewsNotifier,
@@ -222,11 +221,6 @@ final addInteractionProvider = StateNotifierProvider.autoDispose.family<
         AddInteractionProviderParams>(
     (ref, params) => AddInteractionNotifier(
         postId: params.postId, postType: params.postType, ref: ref));
-
-final addReviewReplyProvider = StateNotifierProvider.autoDispose.family<
-    AddReviewReplyNotifier,
-    AddReviewReplyState,
-    AddReviewReplyProviderParams>((ref, params) => AddReviewReplyNotifier());
 
 final getPhoneManufacturingCompanyProvider = StateNotifierProvider.autoDispose
     .family<

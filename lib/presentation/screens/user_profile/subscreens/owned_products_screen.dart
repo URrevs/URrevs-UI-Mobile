@@ -17,7 +17,7 @@ import 'package:urrevs_ui_mobile/presentation/screens/user_profile/user_profile_
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_my_owned_phones_state.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/empty_list_widget.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/empty_widgets/empty_list_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/fullscreen_error_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/owned_prodcuts_loading.dart';

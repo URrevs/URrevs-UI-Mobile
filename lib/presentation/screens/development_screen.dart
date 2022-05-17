@@ -169,6 +169,7 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
       body: ListView(
         padding: EdgeInsets.all(20),
         children: [
+          CircularRatingIndicator(ratingTitle: 'test', rating: 5),
           Avatar(
             imageUrl: StringsManager.imagePlaceHolder,
             radius: 40,

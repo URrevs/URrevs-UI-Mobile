@@ -10,6 +10,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart'
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/product_profile/product_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_phone_specs_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_phone_statistical_info_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_similar_phones_state.dart';
@@ -67,19 +68,29 @@ class ProductProfileSpecsSubscreen extends ConsumerStatefulWidget {
 
 class _ProductProfileSpecsSubscreenState
     extends ConsumerState<ProductProfileSpecsSubscreen> {
+  final GetPhoneSpecsProviderParams _phoneSpecsProviderParams =
+      GetPhoneSpecsProviderParams();
+  final GetPhoneStatisticalInfoProviderParams _statisticalInfoProviderParams =
+      GetPhoneStatisticalInfoProviderParams();
+  final GetSimilarPhonesProviderParams _similarPhonesProviderParams =
+      GetSimilarPhonesProviderParams();
+
   void _getPhoneStatisticalInfo() {
     ref
-        .read(getPhoneStatisticalInfoProvider.notifier)
+        .read(getPhoneStatisticalInfoProvider(_statisticalInfoProviderParams)
+            .notifier)
         .getPhoneStatisticalInfo(widget.phoneId);
   }
 
   void _getPhoneSpecs() {
-    ref.read(getPhoneSpecsProvider.notifier).getPhoneSpecs(widget.phoneId);
+    ref
+        .read(getPhoneSpecsProvider(_phoneSpecsProviderParams).notifier)
+        .getPhoneSpecs(widget.phoneId);
   }
 
   void _getSimilarPhones() {
     ref
-        .read(getSimilarPhonesProvider.notifier)
+        .read(getSimilarPhonesProvider(_similarPhonesProviderParams).notifier)
         .getSimilarPhones(widget.phoneId);
   }
 
@@ -96,28 +107,30 @@ class _ProductProfileSpecsSubscreenState
   @override
   Widget build(BuildContext context) {
     ref.addErrorListener(
-      provider: getPhoneStatisticalInfoProvider,
+      provider: getPhoneStatisticalInfoProvider(_statisticalInfoProviderParams),
       context: context,
     );
     ref.addErrorListener(
-      provider: getPhoneSpecsProvider,
+      provider: getPhoneSpecsProvider(_phoneSpecsProviderParams),
       context: context,
     );
     ref.addErrorListener(
-      provider: getSimilarPhonesProvider,
+      provider: getSimilarPhonesProvider(_similarPhonesProviderParams),
       context: context,
     );
     final widget = fullScreenErrorWidgetOrNull([
       StateAndRetry(
-        state: ref.watch(getPhoneStatisticalInfoProvider),
+        state: ref.watch(
+            getPhoneStatisticalInfoProvider(_statisticalInfoProviderParams)),
         onRetry: _getPhoneStatisticalInfo,
       ),
       StateAndRetry(
-        state: ref.watch(getPhoneSpecsProvider),
+        state: ref.watch(getPhoneSpecsProvider(_phoneSpecsProviderParams)),
         onRetry: _getPhoneSpecs,
       ),
       StateAndRetry(
-        state: ref.watch(getSimilarPhonesProvider),
+        state:
+            ref.watch(getSimilarPhonesProvider(_similarPhonesProviderParams)),
         onRetry: _getSimilarPhones,
       ),
     ]);
@@ -197,7 +210,8 @@ class _ProductProfileSpecsSubscreenState
   }
 
   Widget _buildSimilarPhonesList() {
-    final state = ref.watch(getSimilarPhonesProvider);
+    final state =
+        ref.watch(getSimilarPhonesProvider(_similarPhonesProviderParams));
     final widget = loadingOrErrorWidgetOrNull(
       state: state,
       loadingWidget: SimilarPhonesLoading(),
@@ -253,16 +267,17 @@ class _ProductProfileSpecsSubscreenState
 
   Widget _buildSpecsTable() {
     final widget = loadingOrErrorWidgetOrNull(
-      state: ref.watch(getPhoneSpecsProvider),
+      state: ref.watch(getPhoneSpecsProvider(_phoneSpecsProviderParams)),
       loadingWidget: PhoneSpecsLoading(),
     );
     if (widget != null) return widget;
-    final state = ref.watch(getPhoneSpecsProvider) as GetPhoneSpecsLoadedState;
+    final state = ref.watch(getPhoneSpecsProvider(_phoneSpecsProviderParams))
+        as GetPhoneSpecsLoadedState;
     return SpecsTable(specs: state.specs);
   }
 
   Widget _buildPhonePhoto() {
-    final state = ref.watch(getPhoneSpecsProvider);
+    final state = ref.watch(getPhoneSpecsProvider(_phoneSpecsProviderParams));
     final loadingWidget = loadingOrErrorWidgetOrNull(
       state: state,
       loadingWidget: PhonePictureLoading(),
@@ -289,7 +304,8 @@ class _ProductProfileSpecsSubscreenState
 
   Widget _buildRatingOverviewCard() {
     // get phone name from specs provider
-    final specsState = ref.watch(getPhoneSpecsProvider);
+    final specsState =
+        ref.watch(getPhoneSpecsProvider(_phoneSpecsProviderParams));
     late String phoneName;
     if (specsState is LoadingState ||
         specsState is InitialState ||
@@ -300,7 +316,8 @@ class _ProductProfileSpecsSubscreenState
       phoneName = specsState.specs.name;
     }
     // show rating widget according to statistical info provider
-    final state = ref.watch(getPhoneStatisticalInfoProvider);
+    final state = ref
+        .watch(getPhoneStatisticalInfoProvider(_statisticalInfoProviderParams));
     final widget = loadingOrErrorWidgetOrNull(
       state: state,
       loadingWidget: PhoneOverviewLoading(),

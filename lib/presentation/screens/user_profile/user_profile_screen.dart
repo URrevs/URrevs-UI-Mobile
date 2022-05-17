@@ -15,6 +15,7 @@ import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/ow
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/posted_questions_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/posted_reviews_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_my_user_profile_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_the_profile_of_another_user_state.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
@@ -47,7 +48,12 @@ class UserProfileScreen extends ConsumerStatefulWidget {
 }
 
 class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
-  bool get otherUser => widget.screenArgs.userId != null;
+  final GetTheProfileOfAnotherUserProviderParams _providerParams =
+      GetTheProfileOfAnotherUserProviderParams();
+
+  bool get otherUser =>
+      widget.screenArgs.userId != null &&
+      widget.screenArgs.userId != ref.currentUser!.id;
 
   Widget _buildRefCodeTile() {
     final state = ref.watch(getMyProfileProvider);
@@ -202,7 +208,8 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
   }
 
   Widget _buildOtherUserProfileData() {
-    final state = ref.watch(getTheProfileOfAnotherUserProvider);
+    final state =
+        ref.watch(getTheProfileOfAnotherUserProvider(_providerParams));
     if (state is GetTheProfileOfAnotherUserInitialState ||
         state is GetTheProfileOfAnotherUserLoadingState) {
       return ProfileLoading();
@@ -273,7 +280,8 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
   }
 
   Widget _buildAnotherUserProfile() {
-    ref.listen(getTheProfileOfAnotherUserProvider, (previous, next) {
+    ref.listen(getTheProfileOfAnotherUserProvider(_providerParams),
+        (previous, next) {
       if (next is GetTheProfileOfAnotherUserErrorState) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(next.failure.message)),
@@ -298,7 +306,8 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
   }
 
   PreferredSize _buildAppBar() {
-    final state = ref.watch(getTheProfileOfAnotherUserProvider);
+    final state =
+        ref.watch(getTheProfileOfAnotherUserProvider(_providerParams));
 
     /// AppBar for other user profile.
     if (otherUser) {
@@ -327,7 +336,8 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
           ref.read(getMyProfileProvider.notifier).getMyProfile();
         } else {
           ref
-              .read(getTheProfileOfAnotherUserProvider.notifier)
+              .read(
+                  getTheProfileOfAnotherUserProvider(_providerParams).notifier)
               .getTheProfileOfAnotherUser(widget.screenArgs.userId!);
         }
       },

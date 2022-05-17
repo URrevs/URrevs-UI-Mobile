@@ -19,7 +19,7 @@ import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 import '../../../domain/failure.dart';
 import '../../resources/enums.dart';
 import '../../state_management/providers_parameters.dart';
-import '../empty_list_widget.dart';
+import '../empty_widgets/empty_list_widget.dart';
 import '../error_widgets/partial_error_widget.dart';
 
 /// a prompt that navigates to specs compare screen to compare between 2 products

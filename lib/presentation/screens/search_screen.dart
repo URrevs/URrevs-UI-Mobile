@@ -19,7 +19,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/search_sta
 import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/search_state.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/empty_list_widget.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/empty_widgets/empty_list_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/fullscreen_error_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/fields/search_text_field.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/recent_searches_loading.dart';
@@ -67,7 +67,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
       ref.read(addNewRecentSearchProvider.notifier).addNewRecentSearch(request);
       ref
           .read(getMyRecentSearchesProvider.notifier)
-          .addRecentSeatchToState(searchResult);
+          .addRecentSearchToState(searchResult);
     }
     if (searchResult.type == SearchType.phone) {
       Navigator.of(context).pushNamed(

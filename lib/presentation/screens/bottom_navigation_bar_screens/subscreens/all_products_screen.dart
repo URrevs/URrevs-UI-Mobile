@@ -10,10 +10,11 @@ import 'package:urrevs_ui_mobile/domain/models/phone.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/product_profile/product_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/companies_states/get_all_companies_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_all_phones_state.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/empty_list_widget.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/empty_widgets/empty_list_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/fullscreen_error_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/partial_error_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/all_products_list_loading.dart';
@@ -34,12 +35,22 @@ class _AllProductsSubscreenState extends ConsumerState<AllProductsSubscreen> {
   late PagingController<int, Company> _companiesController;
   late PagingController<int, Phone> _phonesController;
 
+  final GetAllCompaniesProviderParams _companiesProviderParams =
+      GetAllCompaniesProviderParams();
+
+  final GetAllPhonesProviderParams _phonesProviderParams =
+      GetAllPhonesProviderParams();
+
   void _getAllCompanies() {
-    ref.read(getAllCompaniesProvider.notifier).getAllCompanies();
+    ref
+        .read(getAllCompaniesProvider(_companiesProviderParams).notifier)
+        .getAllCompanies();
   }
 
   void _getPhones() {
-    ref.read(getAllPhonesProvider.notifier).getPhones(_companyId);
+    ref
+        .read(getAllPhonesProvider(_phonesProviderParams).notifier)
+        .getPhones(_companyId);
   }
 
   @override
@@ -57,8 +68,9 @@ class _AllProductsSubscreenState extends ConsumerState<AllProductsSubscreen> {
 
   @override
   Widget build(BuildContext context) {
-    final companiesState = ref.watch(getAllCompaniesProvider);
-    final phonesState = ref.watch(getAllPhonesProvider);
+    final companiesState =
+        ref.watch(getAllCompaniesProvider(_companiesProviderParams));
+    final phonesState = ref.watch(getAllPhonesProvider(_phonesProviderParams));
     // show fullscreen error widget at 1st round error of companies list
     if (companiesState is GetAllCompaniesErrorState &&
         _companiesController.itemList == null) {
@@ -112,6 +124,7 @@ class _AllProductsSubscreenState extends ConsumerState<AllProductsSubscreen> {
       flexibleSpace: CompanyHorizontalListTile(
         controller: _companiesController,
         selectedCompanyId: _companyId,
+        companiesProviderParams: _companiesProviderParams,
         setCompanyId: (id) {
           setState(() => _companyId = id);
           _phonesController.refresh();
@@ -121,9 +134,10 @@ class _AllProductsSubscreenState extends ConsumerState<AllProductsSubscreen> {
   }
 
   PagedSliverList<int, Phone> _buildPhonesList() {
-    ref.addInfiniteScrollingListener(getAllPhonesProvider, _phonesController);
+    ref.addInfiniteScrollingListener(
+        getAllPhonesProvider(_phonesProviderParams), _phonesController);
     ref.addErrorListener(
-      provider: getAllPhonesProvider,
+      provider: getAllPhonesProvider(_phonesProviderParams),
       context: context,
       controller: _phonesController,
     );
@@ -150,9 +164,10 @@ class _AllProductsSubscreenState extends ConsumerState<AllProductsSubscreen> {
         newPageErrorIndicatorBuilder: (context) {
           return ref.partialErrorWidget(
             controller: _phonesController,
-            provider: getAllPhonesProvider,
-            onRetry: () =>
-                ref.read(getAllPhonesProvider.notifier).getPhones(_companyId),
+            provider: getAllPhonesProvider(_phonesProviderParams),
+            onRetry: () => ref
+                .read(getAllPhonesProvider(_phonesProviderParams).notifier)
+                .getPhones(_companyId),
           );
         },
         firstPageProgressIndicatorBuilder: (context) =>

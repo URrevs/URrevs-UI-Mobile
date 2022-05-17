@@ -18,6 +18,42 @@ abstract class NotSyncedProviderParams extends Equatable {
   List<Object?> get props => [providerId];
 }
 
+class GetTheProfileOfAnotherUserProviderParams extends NotSyncedProviderParams {
+  GetTheProfileOfAnotherUserProviderParams();
+}
+
+class GetOwnedPhonesProviderParams extends NotSyncedProviderParams {
+  GetOwnedPhonesProviderParams();
+}
+
+class GetAllCompaniesProviderParams extends NotSyncedProviderParams {
+  GetAllCompaniesProviderParams();
+}
+
+class GetAllPhonesProviderParams extends NotSyncedProviderParams {
+  GetAllPhonesProviderParams();
+}
+
+class GetInfoAboutLatestUpdateProviderParams extends NotSyncedProviderParams {
+  GetInfoAboutLatestUpdateProviderParams();
+}
+
+class GetTwoPhonesSpecsProviderParams extends NotSyncedProviderParams {
+  GetTwoPhonesSpecsProviderParams();
+}
+
+class GetPhoneSpecsProviderParams extends NotSyncedProviderParams {
+  GetPhoneSpecsProviderParams();
+}
+
+class GetPhoneStatisticalInfoProviderParams extends NotSyncedProviderParams {
+  GetPhoneStatisticalInfoProviderParams();
+}
+
+class GetSimilarPhonesProviderParams extends NotSyncedProviderParams {
+  GetSimilarPhonesProviderParams();
+}
+
 class SearchProviderParams extends NotSyncedProviderParams {
   final SearchMode searchMode;
   SearchProviderParams({
