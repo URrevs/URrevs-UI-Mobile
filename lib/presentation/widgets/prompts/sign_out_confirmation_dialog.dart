@@ -1,7 +1,11 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
@@ -63,6 +67,9 @@ class _SignOutConfirmationDialogState extends State<SignOutConfirmationDialog> {
             ),
           ),
           onPressed: () {
+            // removing our back end token
+            GetIt.I<Dio>().options.headers[HttpHeaders.authorizationHeader] =
+                null;
             GoogleSignIn().signOut();
             FacebookAuth.instance.logOut();
             FirebaseAuth.instance.signOut();
