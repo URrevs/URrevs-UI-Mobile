@@ -112,6 +112,40 @@ class _PostingReviewSubscreenState
         TextEditingController(text: postingReviewModel.invitationCode);
   }
 
+  List<int> ratings = List.generate(8, (index) => 0);
+  final List<String> _ratingLabels = [
+    LocaleKeys.manufacturingQuality.tr(),
+    LocaleKeys.userInterface.tr(),
+    LocaleKeys.priceQuality.tr(),
+    LocaleKeys.camera.tr(),
+    LocaleKeys.callsQuality.tr(),
+    LocaleKeys.battery.tr(),
+  ];
+  int _keyNumber = 0;
+
+  String _phoneRatingErrorMessage = '';
+  String _companyRatingErrorMessage = '';
+
+  void _emptyStarsFields() {
+    ratings.fillRange(0, 8, 0);
+    setState(() => _keyNumber = (_keyNumber + 1) % 2);
+  }
+
+  void _emptyFields() {
+    productNameController.text = '';
+    usedSinceController.text = '';
+    _chosenDate = null;
+    likedAboutProductController.text = '';
+    hatedAboutProductController.text = '';
+    likedAboutCompanyController.text = '';
+    hatedAboutCompanyController.text = '';
+    invitationCodeController.text = '';
+    _phoneRatingErrorMessage = '';
+    _companyRatingErrorMessage = '';
+    _clearChosenSearchResult();
+    _emptyStarsFields();
+  }
+
   bool star1 = false;
   bool star2 = false;
   bool star3 = false;
@@ -163,6 +197,11 @@ class _PostingReviewSubscreenState
                 _manufacturingCompanyProviderParams)
             .notifier)
         .returnToInitialState();
+    ref
+        .read(searchProvider(_searchProviderParams).notifier)
+        .returnToInitialState();
+    // likedAboutCompanyController.text = '';
+    // hatedAboutCompanyController.text = '';
   }
 
   Widget _buildSearchResults() {
@@ -198,45 +237,23 @@ class _PostingReviewSubscreenState
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: 20.h),
-        Container(
-          decoration: BoxDecoration(
-              // boxShadow: [
-              //   BoxShadow(
-              //     color: ColorManager.grey,
-              //     blurRadius: 0.1,
-              //   ),
-              //   BoxShadow(
-              //     color: ColorManager.backgroundGrey,
-              //     spreadRadius: -1,
-              //     blurRadius: 8.0,
-              //     offset: Offset(10, 0),
-              //   ),
-              //   BoxShadow(
-              //     color: ColorManager.backgroundGrey,
-              //     spreadRadius: -1,
-              //     blurRadius: 8.0,
-              //     offset: Offset(-10, 0),
-              //   ),
-              // ],
-              ),
-          child: ScrollConfiguration(
-            behavior: NoGlowingScrollBehaviour(),
-            child: ListView(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              children: [
-                for (var searchResult in state.searchResults)
-                  ListTile(
-                    title: Text(
-                      searchResult.name,
-                      style: TextStyleManager.s16w400.copyWith(
-                        color: ColorManager.black,
-                      ),
+        ScrollConfiguration(
+          behavior: NoGlowingScrollBehaviour(),
+          child: ListView(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            children: [
+              for (var searchResult in state.searchResults)
+                ListTile(
+                  title: Text(
+                    searchResult.name,
+                    style: TextStyleManager.s16w400.copyWith(
+                      color: ColorManager.black,
                     ),
-                    onTap: () => _chooseSearchResult(searchResult),
-                  )
-              ],
-            ),
+                  ),
+                  onTap: () => _chooseSearchResult(searchResult),
+                )
+            ],
           ),
         ),
       ],
@@ -269,236 +286,148 @@ class _PostingReviewSubscreenState
       child: CustomScrollView(
         slivers: [
           _buildStarsCounterBar(),
-          SliverList(
-            delegate: SliverChildListDelegate([
-              10.verticalSpace,
-              Text(LocaleKeys.chooseProduct.tr() + ':',
-                  style: TextStyleManager.s18w500),
-              SearchTextField(
-                fillColor: ColorManager.textFieldGrey,
-                searchCtl: productNameController,
-                hasErrorMsg: true,
-                hintText: LocaleKeys.writeProductName.tr(),
-                errorMsg: LocaleKeys.productNameErrorMsg.tr(),
-                searchProviderParams: _searchProviderParams,
-                readOnly: _chosenSearchResult != null,
-                onClear: _clearChosenSearchResult,
-                checkChosenSearchResult: true,
-                chosenSearchResult: _chosenSearchResult,
-              ),
-              _buildSearchResults(),
-              SizedBox(height: 20.h),
-              Text(
-                LocaleKeys.howLongHaveYouOwnedThisProduct.tr(),
-                style: TextStyleManager.s18w500,
-              ),
-              DatePickerField(
-                dateController: usedSinceController,
-                hintText: LocaleKeys.purchaseDate.tr(),
-                fillColor: ColorManager.textFieldGrey,
-                isMonthDatePicker: true,
-                hasErrorMsg: true,
-                errorMsg: LocaleKeys.purchaseDateErrorMsg.tr(),
-                setChosenDate: _setChosenDate,
-              ),
-              SizedBox(height: 20.h),
-              Text(LocaleKeys.rateOverallExpericence.tr(),
-                  style: TextStyleManager.s18w500),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  // general rating bar
-                  CustomRatingBar(
-                    onRatingUpdate: (rating) {
-                      FocusScope.of(context).unfocus();
-                      if (!star1) {
-                        setState(() {
-                          //starsPoints++;
-                        });
-                      }
-                      if (rating != 0) {
-                        star1 = true;
-                        postingReviewModel.generalRating = rating.toInt();
-                      }
-                    },
-                  ),
-                  SizedBox(height: 5.h),
-                  // manufacturing quality bar
-                  RatingEntry(
-                    title: LocaleKeys.manufacturingQuality.tr(),
-                    onRatingUpdate: (rating) {
-                      FocusScope.of(context).unfocus();
-                      if (!star2) {
-                        setState(() {
-                          //starsPoints++;
-                        });
-                      }
-                      if (rating != 0) {
-                        star2 = true;
-                        postingReviewModel.manufacturingQuality =
-                            rating.toInt();
-                      }
-                    },
-                  ),
-                  // user interface bar
-                  RatingEntry(
-                    title: LocaleKeys.userInterface.tr(),
-                    onRatingUpdate: (rating) {
-                      FocusScope.of(context).unfocus();
-                      if (!star3) {
-                        setState(() {
-                          //starsPoints++;
-                        });
-                      }
-                      if (rating != 0) {
-                        star3 = true;
-                        postingReviewModel.userInterface = rating.toInt();
-                      }
-                    },
-                  ),
-                  // price quality bar
-                  RatingEntry(
-                    title: LocaleKeys.priceQuality.tr(),
-                    onRatingUpdate: (rating) {
-                      FocusScope.of(context).unfocus();
-                      if (!star4) {
-                        setState(() {
-                          //starsPoints++;
-                        });
-                      }
-                      if (rating != 0) {
-                        star4 = true;
-                        postingReviewModel.priceQuality = rating.toInt();
-                      }
-                    },
-                  ),
-                  // camera bar
-                  RatingEntry(
-                    title: LocaleKeys.camera.tr(),
-                    onRatingUpdate: (rating) {
-                      FocusScope.of(context).unfocus();
-                      if (!star5) {
-                        setState(() {
-                          //starsPoints++;
-                        });
-                      }
-                      if (rating != 0) {
-                        star5 = true;
-                        postingReviewModel.camera = rating.toInt();
-                      }
-                    },
-                  ),
-                  // calls quality bar
-                  RatingEntry(
-                    title: LocaleKeys.callsQuality.tr(),
-                    onRatingUpdate: (rating) {
-                      FocusScope.of(context).unfocus();
-                      if (!star6) {
-                        setState(() {
-                          //starsPoints++;
-                        });
-                      }
-                      if (rating != 0) {
-                        star6 = true;
-                        postingReviewModel.callsQuality = rating.toInt();
-                      }
-                    },
-                  ),
-                  // battery bar
-                  RatingEntry(
-                    title: LocaleKeys.battery.tr(),
-                    onRatingUpdate: (rating) {
-                      FocusScope.of(context).unfocus();
-                      if (!star7) {
-                        setState(() {
-                          //starsPoints++;
-                        });
-                      }
-                      if (rating != 0) {
-                        star7 = true;
-                        postingReviewModel.battery = rating.toInt();
-                      }
-                    },
-                  ),
-                ],
-              ),
-              SizedBox(height: 20.h),
-              // what do you like about this product
-              Text(LocaleKeys.whatDoYouLikeAboutThisProduct.tr(),
-                  style: TextStyleManager.s18w500),
-              TxtField(
-                textController: likedAboutProductController,
-                hintText: LocaleKeys.pros.tr(),
-                keyboardType: TextInputType.text,
-                fillColor: ColorManager.textFieldGrey,
-                errorMsg: LocaleKeys.likedAboutProductErrorMsg.tr(),
-                hasErrorMsg: true,
-              ),
-              SizedBox(height: 20.h),
-              // what do you hate about this product
-              Text(LocaleKeys.whatDoYouHateAboutThisProduct.tr(),
-                  style: TextStyleManager.s18w500),
-              TxtField(
-                textController: hatedAboutProductController,
-                hintText: LocaleKeys.cons.tr(),
-                keyboardType: TextInputType.text,
-                fillColor: ColorManager.textFieldGrey,
-                errorMsg: LocaleKeys.hateAboutProductErrorMsg.tr(),
-                hasErrorMsg: true,
-              ),
-              SizedBox(height: 40.h),
-              _buildCompanyFields(),
-              Row(
-                children: [
-                  Text(LocaleKeys.enterInvitationCode.tr() + ':',
-                      style: TextStyleManager.s18w500),
-                  IconButton(
-                    padding: EdgeInsets.zero,
-                    icon: context.isArabic
-                        ? Transform(
-                            alignment: Alignment.center,
-                            transform: Matrix4.rotationY(math.pi),
-                            child: Icon(
+          SliverPadding(
+            padding: AppEdgeInsets.screenPadding.copyWith(bottom: 10.h),
+            sliver: SliverList(
+              delegate: SliverChildListDelegate([
+                Text(LocaleKeys.chooseProduct.tr() + ':',
+                    style: TextStyleManager.s18w500),
+                SearchTextField(
+                  fillColor: ColorManager.textFieldGrey,
+                  searchCtl: productNameController,
+                  hasErrorMsg: true,
+                  hintText: LocaleKeys.writeProductName.tr(),
+                  errorMsg: LocaleKeys.productNameErrorMsg.tr(),
+                  searchProviderParams: _searchProviderParams,
+                  readOnly: _chosenSearchResult != null,
+                  onClear: _clearChosenSearchResult,
+                  checkChosenSearchResult: true,
+                  chosenSearchResult: _chosenSearchResult,
+                ),
+                _buildSearchResults(),
+                SizedBox(height: 20.h),
+                Text(
+                  LocaleKeys.howLongHaveYouOwnedThisProduct.tr(),
+                  style: TextStyleManager.s18w500,
+                ),
+                DatePickerField(
+                  key: ValueKey('date-$_keyNumber'),
+                  dateController: usedSinceController,
+                  hintText: LocaleKeys.purchaseDate.tr(),
+                  fillColor: ColorManager.textFieldGrey,
+                  isMonthDatePicker: true,
+                  hasErrorMsg: true,
+                  errorMsg: LocaleKeys.purchaseDateErrorMsg.tr(),
+                  setChosenDate: _setChosenDate,
+                ),
+                SizedBox(height: 20.h),
+                Text(LocaleKeys.rateOverallExpericence.tr(),
+                    style: TextStyleManager.s18w500),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    // general rating bar
+                    CustomRatingBar(
+                      key: ValueKey<String>('star-0-$_keyNumber'),
+                      onRatingUpdate: (rating) {
+                        ratings[0] = rating.toInt();
+                      },
+                    ),
+                    SizedBox(height: 5.h),
+                    for (int i = 0; i < _ratingLabels.length; i++)
+                      RatingEntry(
+                        key: ValueKey<String>('star-${i + 1}-$_keyNumber'),
+                        title: _ratingLabels[i],
+                        onRatingUpdate: (rating) =>
+                            ratings[i + 1] = rating.toInt(),
+                      ),
+                    5.verticalSpace,
+                    Text(
+                      _phoneRatingErrorMessage,
+                      style: TextStyleManager.s13w400.copyWith(
+                        color: ColorManager.red,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20.h),
+                // what do you like about this product
+                Text(LocaleKeys.whatDoYouLikeAboutThisProduct.tr(),
+                    style: TextStyleManager.s18w500),
+                TxtField(
+                  textController: likedAboutProductController,
+                  hintText: LocaleKeys.pros.tr(),
+                  keyboardType: TextInputType.text,
+                  fillColor: ColorManager.textFieldGrey,
+                  errorMsg: LocaleKeys.likedAboutProductErrorMsg.tr(),
+                  hasErrorMsg: true,
+                ),
+                SizedBox(height: 20.h),
+                // what do you hate about this product
+                Text(LocaleKeys.whatDoYouHateAboutThisProduct.tr(),
+                    style: TextStyleManager.s18w500),
+                TxtField(
+                  textController: hatedAboutProductController,
+                  hintText: LocaleKeys.cons.tr(),
+                  keyboardType: TextInputType.text,
+                  fillColor: ColorManager.textFieldGrey,
+                  errorMsg: LocaleKeys.hateAboutProductErrorMsg.tr(),
+                  hasErrorMsg: true,
+                ),
+                SizedBox(height: 40.h),
+                _buildCompanyFields(),
+                Row(
+                  children: [
+                    Text(LocaleKeys.enterInvitationCode.tr() + ':',
+                        style: TextStyleManager.s18w500),
+                    IconButton(
+                      padding: EdgeInsets.zero,
+                      icon: context.isArabic
+                          ? Transform(
+                              alignment: Alignment.center,
+                              transform: Matrix4.rotationY(math.pi),
+                              child: Icon(
+                                IconsManager.help,
+                                size: 30.sp,
+                              ),
+                            )
+                          : Icon(
                               IconsManager.help,
                               size: 30.sp,
                             ),
-                          )
-                        : Icon(
-                            IconsManager.help,
-                            size: 30.sp,
-                          ),
-                    color: ColorManager.blue,
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return ReferralCodeHelpDialog();
-                        },
-                      );
-                    },
-                  )
-                ],
-              ),
-              Align(
-                alignment: context.isArabic
-                    ? Alignment.centerRight
-                    : Alignment.centerLeft,
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: SizedBox(
-                    width: 140.w,
-                    child: TxtField(
-                      textController: invitationCodeController,
-                      hintText: LocaleKeys.invitationCode.tr(),
-                      keyboardType: TextInputType.text,
-                      fillColor: ColorManager.textFieldGrey,
+                      color: ColorManager.blue,
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return ReferralCodeHelpDialog();
+                          },
+                        );
+                      },
+                    )
+                  ],
+                ),
+                Align(
+                  alignment: context.isArabic
+                      ? Alignment.centerRight
+                      : Alignment.centerLeft,
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: SizedBox(
+                      width: 140.w,
+                      child: TxtField(
+                        textController: invitationCodeController,
+                        hintText: LocaleKeys.invitationCode.tr(),
+                        keyboardType: TextInputType.text,
+                        fillColor: ColorManager.textFieldGrey,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(height: 20.h),
-              _buildSubmitButton(),
-            ]),
+                SizedBox(height: 20.h),
+                _buildSubmitButton(),
+              ]),
+            ),
           ),
         ],
       ),
@@ -531,11 +460,14 @@ class _PostingReviewSubscreenState
             ),
           ),
         );
+        _emptyFields();
       }
     });
     final state = ref.watch(addPhoneReviewProvider(_addReviewProviderParams));
     late Widget icon;
+    late bool isLoading;
     if (state is LoadingState) {
+      isLoading = true;
       icon = Padding(
         padding: EdgeInsets.symmetric(horizontal: 6.w),
         child: Center(
@@ -551,46 +483,66 @@ class _PostingReviewSubscreenState
       );
     } else {
       icon = Icon(IconsManager.add, size: 28.sp);
+      isLoading = false;
     }
     return GradButton(
-        text: Text(
-          LocaleKeys.postReview.tr(),
-          style: TextStyleManager.s18w700,
-        ),
-        icon: icon,
-        width: 360.w,
-        reverseIcon: false,
-        onPressed: () {
-          if (_formKey.currentState!.validate()) {
-            String? refCode = invitationCodeController.text;
-            print(refCode);
-            if (refCode.isEmpty) refCode = null;
-            final companyState = ref.watch(getPhoneManufacturingCompanyProvider(
-                    _manufacturingCompanyProviderParams))
-                as GetPhoneManufacturingCompanyLoadedState;
-            AddPhoneReviewRequest request = AddPhoneReviewRequest(
-              phoneId: _chosenSearchResult!.id,
-              companyId: companyState.company.id,
-              ownedDate: _chosenDate!,
-              generalRating: postingReviewModel.generalRating,
-              uiRating: postingReviewModel.userInterface,
-              manQuality: postingReviewModel.manufacturingQuality,
-              valFMon: postingReviewModel.priceQuality,
-              camera: postingReviewModel.camera,
-              callQuality: postingReviewModel.callsQuality,
-              battery: postingReviewModel.battery,
-              pros: likedAboutProductController.text,
-              cons: hatedAboutProductController.text,
-              refCode: refCode,
-              companyRating: postingReviewModel.companyRating,
-              compPros: likedAboutCompanyController.text,
-              compCons: hatedAboutCompanyController.text,
-            );
-            ref
-                .read(addPhoneReviewProvider(_addReviewProviderParams).notifier)
-                .addPhoneReview(request);
-          }
-        });
+      text: Text(
+        LocaleKeys.postReview.tr(),
+        style: TextStyleManager.s18w700,
+      ),
+      icon: icon,
+      width: 360.w,
+      reverseIcon: false,
+      isEnabled: !isLoading,
+      onPressed: _submitReview,
+    );
+  }
+
+  void _submitReview() {
+    _formKey.currentState!.validate();
+    bool isError = false;
+    final starError = LocaleKeys.starRatingMissingField.tr();
+    for (int i = 0; i < ratings.length; i++) {
+      if (ratings[i] == 0) {
+        isError = true;
+        if (i <= 6) {
+          setState(() => _phoneRatingErrorMessage = starError);
+        } else {
+          setState(() => _companyRatingErrorMessage = starError);
+        }
+      }
+    }
+    if (isError) return;
+    if (_formKey.currentState!.validate()) {
+      String? refCode = invitationCodeController.text;
+      if (refCode.isEmpty) refCode = null;
+
+      final companyState = ref.watch(getPhoneManufacturingCompanyProvider(
+              _manufacturingCompanyProviderParams))
+          as GetPhoneManufacturingCompanyLoadedState;
+
+      AddPhoneReviewRequest request = AddPhoneReviewRequest(
+        phoneId: _chosenSearchResult!.id,
+        companyId: companyState.company.id,
+        ownedDate: _chosenDate!,
+        generalRating: ratings[0],
+        uiRating: ratings[1],
+        manQuality: ratings[2],
+        valFMon: ratings[3],
+        camera: ratings[4],
+        callQuality: ratings[5],
+        battery: ratings[6],
+        pros: likedAboutProductController.text,
+        cons: hatedAboutProductController.text,
+        refCode: refCode,
+        companyRating: ratings[7],
+        compPros: likedAboutCompanyController.text,
+        compCons: hatedAboutCompanyController.text,
+      );
+      ref
+          .read(addPhoneReviewProvider(_addReviewProviderParams).notifier)
+          .addPhoneReview(request);
+    }
   }
 
   Widget _buildCompanyFields() {
@@ -621,19 +573,20 @@ class _PostingReviewSubscreenState
         Text(LocaleKeys.howDoYouRateTheManufacturer.tr(),
             style: TextStyleManager.s18w500),
         Center(
-          child: CustomRatingBar(
-            onRatingUpdate: (rating) {
-              FocusScope.of(context).unfocus();
-              if (!star8) {
-                setState(() {
-                  //starsPoints++;
-                });
-              }
-              if (rating != 0) {
-                star8 = true;
-                postingReviewModel.companyRating = rating.toInt();
-              }
-            },
+          child: Column(
+            children: [
+              CustomRatingBar(
+                key: ValueKey<String>('star-7-$_keyNumber'),
+                onRatingUpdate: (rating) => ratings[7] = rating.toInt(),
+              ),
+              5.verticalSpace,
+              Text(
+                _companyRatingErrorMessage,
+                style: TextStyleManager.s13w400.copyWith(
+                  color: ColorManager.red,
+                ),
+              ),
+            ],
           ),
         ),
         SizedBox(height: 20.h),
@@ -711,6 +664,8 @@ class CustomRatingBar extends StatelessWidget {
       initialRating: 0,
       minRating: 1,
       glowRadius: 2,
+      tapOnlyMode: true,
+      glow: false,
       unratedColor: ColorManager.grey,
       maxRating: 5,
       direction: Axis.horizontal,

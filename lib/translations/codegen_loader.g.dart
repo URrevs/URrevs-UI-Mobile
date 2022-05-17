@@ -249,7 +249,8 @@ class CodegenLoader extends AssetLoader{
   "arabic": "العربية",
   "english": "الإنجليزية",
   "lightTheme": "الأبيض",
-  "darkTheme": "الأسود"
+  "darkTheme": "الأسود",
+  "starRatingMissingField": "يجب ادخال تقييمك"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -486,7 +487,8 @@ static const Map<String,dynamic> en = {
   "arabic": "Arabic",
   "english": "English",
   "lightTheme": "Light",
-  "darkTheme": "Dark"
+  "darkTheme": "Dark",
+  "starRatingMissingField": "You must enter your rating"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

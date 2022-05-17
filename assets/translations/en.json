@@ -233,5 +233,6 @@
   "arabic": "Arabic",
   "english": "English",
   "lightTheme": "Light",
-  "darkTheme": "Dark"
+  "darkTheme": "Dark",
+  "starRatingMissingField": "You must enter your rating"
 }
