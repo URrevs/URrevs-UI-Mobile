@@ -73,13 +73,8 @@ class SearchProviderParams extends NotSyncedProviderParams {
   });
 }
 
-class GetUserPostsProviderParams extends UserIdProviderParams {
-  GetUserPostsProviderParams({
-    required String? userId,
-    required this.postContentType,
-  }) : super(userId: userId);
-
-  final PostContentType postContentType;
+class GetPostsListProviderParams extends NotSyncedProviderParams {
+  GetPostsListProviderParams() : super();
 }
 
 class GetUserCompanyReviewsProviderParams extends UserIdProviderParams {

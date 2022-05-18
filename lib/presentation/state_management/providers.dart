@@ -186,12 +186,10 @@ final getSimilarPhonesProvider = StateNotifierProvider.autoDispose.family<
 //             GetCompanyReviewsOfAnotherUserState>(
 //         (ref) => GetCompanyReviewsOfAnotherUserNotifier());
 
-final getUserpostsProvider = StateNotifierProvider.autoDispose.family<
-        GetUserPostsNotifier,
-        GetUserPostsState,
-        GetUserPostsProviderParams>(
-    (ref, params) => GetUserPostsNotifier(
-        userId: params.userId, postContentType: params.postContentType));
+final getPostsListProvider = StateNotifierProvider.autoDispose.family<
+    GetPostsListNotifier,
+    GetPostsListState,
+    GetPostsListProviderParams>((ref, params) => GetPostsListNotifier());
 
 final getReviewsOnCertainPhoneProvider = StateNotifierProvider.autoDispose
     .family<GetReviewsOnCertainPhoneNotifier, GetReviewsOnCertainPhoneState,

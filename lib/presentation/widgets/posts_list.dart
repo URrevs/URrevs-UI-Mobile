@@ -30,7 +30,7 @@ class SliverPostsList extends ConsumerStatefulWidget {
   }) : super(key: key);
 
   final TargetType targetType;
-  final GetUserPostsProviderParams getUserPostsProviderParams;
+  final GetPostsListProviderParams getUserPostsProviderParams;
   final PagingController<int, Post> controller;
   final VoidCallback getPosts;
 
@@ -110,12 +110,12 @@ class _SliverPostsListState extends ConsumerState<SliverPostsList> {
   @override
   Widget build(BuildContext context) {
     ref.addErrorListener(
-      provider: getUserpostsProvider(widget.getUserPostsProviderParams),
+      provider: getPostsListProvider(widget.getUserPostsProviderParams),
       context: context,
       controller: widget.controller,
     );
     ref.addInfiniteScrollingListener(
-      getUserpostsProvider(widget.getUserPostsProviderParams),
+      getPostsListProvider(widget.getUserPostsProviderParams),
       widget.controller,
     );
     return SliverPadding(
@@ -127,7 +127,7 @@ class _SliverPostsListState extends ConsumerState<SliverPostsList> {
           firstPageErrorIndicatorBuilder: (context) => SizedBox(),
           newPageErrorIndicatorBuilder: (context) {
             final state = ref
-                .watch(getUserpostsProvider(widget.getUserPostsProviderParams));
+                .watch(getPostsListProvider(widget.getUserPostsProviderParams));
             if (state is ErrorState) {
               return VerticalListErrorWidget(
                 onRetry: widget.getPosts,

@@ -8,70 +8,116 @@ import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 
 import '../../states/reviews_states/get_user_posts_state.dart';
 
-class GetUserPostsNotifier extends StateNotifier<GetUserPostsState> {
-  GetUserPostsNotifier({
-    required String? userId,
-    required PostContentType postContentType,
-  })  : _userId = userId,
-        _postContentType = postContentType,
-        super(GetUserPostsInitialState());
+class GetPostsListNotifier extends StateNotifier<GetPostsListState> {
+  GetPostsListNotifier() : super(GetPostsListInitialState());
 
   int _round = 1;
 
-  final String? _userId;
-  final PostContentType _postContentType;
-
-  void getUserPosts(TargetType targetType) async {
-    // get current items in the state
-    List<Post> currentphoneReviews = [];
-    final currentState = state;
-    if (currentState is GetUserPostsLoadedState) {
-      currentphoneReviews = currentState.infiniteScrollingItems;
-    }
-    // send the request
-    state = GetUserPostsLoadingState();
+  Future<Either<Failure, List<Post>>> _getUserPostsResponse({
+    required String? userId,
+    required TargetType targetType,
+    required PostContentType postContentType,
+  }) async {
     late Either<Failure, List<Post>> response;
-    if (_postContentType == PostContentType.question) {
+    if (postContentType == PostContentType.question) {
       if (targetType == TargetType.phone) {
-        if (_userId == null) {
+        if (userId == null) {
           response = await GetIt.I<Repository>().getMyPhoneQuestions(_round);
         } else {
           response = await GetIt.I<Repository>()
-              .getPhoneQuestionsOfAnotherUser(_userId!, _round);
+              .getPhoneQuestionsOfAnotherUser(userId, _round);
         }
       } else {
-        if (_userId == null) {
+        if (userId == null) {
           response = await GetIt.I<Repository>().getMyCompanyQuestions(_round);
         } else {
           response = await GetIt.I<Repository>()
-              .getCompanyQuestionsOfAnotherUser(_userId!, _round);
+              .getCompanyQuestionsOfAnotherUser(userId, _round);
         }
       }
-    } else if (_postContentType == PostContentType.review) {
+    } else if (postContentType == PostContentType.review) {
       if (targetType == TargetType.phone) {
-        if (_userId == null) {
+        if (userId == null) {
           response = await GetIt.I<Repository>().getMyPhoneReviews(_round);
         } else {
           response = await GetIt.I<Repository>()
-              .getPhoneReviewsOfAnotherUser(_userId!, _round);
+              .getPhoneReviewsOfAnotherUser(userId, _round);
         }
       } else {
-        if (_userId == null) {
+        if (userId == null) {
           response = await GetIt.I<Repository>().getMyCompanyReviews(_round);
         } else {
           response = await GetIt.I<Repository>()
-              .getCompanyReviewsOfAnotherUser(_userId!, _round);
+              .getCompanyReviewsOfAnotherUser(userId, _round);
         }
       }
     }
+    return response;
+  }
+
+  Future<Either<Failure, List<Post>>> _getTargetPostsResponse({
+    required String targetId,
+    required TargetType targetType,
+    required PostContentType postContentType,
+  }) async {
+    late Either<Failure, List<Post>> response;
+    if (postContentType == PostContentType.question) {
+      if (targetType == TargetType.phone) {
+        // response = await GetIt.I<Repository>()
+        //     .getPhoneQuestionsOfAnotherUser(_userId!, _round);
+      } else if (targetType == TargetType.company) {
+        // response = await GetIt.I<Repository>()
+        //     .getCompanyQuestionsOfAnotherUser(_userId!, _round);
+      }
+    } else if (postContentType == PostContentType.review) {
+      if (targetType == TargetType.phone) {
+        response = await GetIt.I<Repository>()
+            .getReviewsOnCertainPhone(targetId, _round);
+      } else if (targetType == TargetType.company) {
+        // response = await GetIt.I<Repository>().getMyCompanyReviews(_round);
+      }
+    }
+    return response;
+  }
+
+  void getUserPosts({
+    required PostsListType postsListType,
+    required TargetType targetType,
+    required PostContentType postContentType,
+    required String? targetId,
+    required String? userId,
+  }) async {
+    assert(!(postsListType == PostsListType.target && targetId == null));
+    // get current items in the state
+    List<Post> currentphoneReviews = [];
+    final currentState = state;
+    if (currentState is GetPostsListLoadedState) {
+      currentphoneReviews = currentState.infiniteScrollingItems;
+    }
+    // send the request
+    state = GetPostsListLoadingState();
+    late Either<Failure, List<Post>> response;
+    if (postsListType == PostsListType.user) {
+      response = await _getUserPostsResponse(
+        userId: userId,
+        targetType: targetType,
+        postContentType: postContentType,
+      );
+    } else {
+      response = await _getTargetPostsResponse(
+        targetId: targetId!,
+        targetType: targetType,
+        postContentType: postContentType,
+      );
+    }
     response.fold(
       // deal with failure
-      (failure) => state = GetUserPostsErrorState(failure: failure),
+      (failure) => state = GetPostsListErrorState(failure: failure),
       (phoneReviews) {
         // add items and rounds ended state to the loaded state
         bool roundsEnded = phoneReviews.isEmpty;
         List<Post> newphoneReviews = [...currentphoneReviews, ...phoneReviews];
-        state = GetUserPostsLoadedState(
+        state = GetPostsListLoadedState(
           infiniteScrollingItems: newphoneReviews,
           roundsEnded: roundsEnded,
         );
@@ -80,4 +126,10 @@ class GetUserPostsNotifier extends StateNotifier<GetUserPostsState> {
       },
     );
   }
+
+  void getPostsOnCertainTarget({
+    required String targetId,
+    required TargetType targetType,
+    required PostContentType postContentType,
+  }) async {}
 }

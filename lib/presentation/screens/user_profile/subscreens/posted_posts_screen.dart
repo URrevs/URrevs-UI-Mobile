@@ -52,9 +52,8 @@ class _PostedReviewsScreenState extends ConsumerState<PostedPostsScreen> {
   late final PostContentType _postContentType =
       widget.screenArgs.postContentType;
 
-  late final GetUserPostsProviderParams _postsProviderParams =
-      GetUserPostsProviderParams(
-          userId: _userId, postContentType: _postContentType);
+  late final GetPostsListProviderParams _postsProviderParams =
+      GetPostsListProviderParams();
 
   bool get isMine => widget.screenArgs.userId == null;
 
@@ -74,15 +73,19 @@ class _PostedReviewsScreenState extends ConsumerState<PostedPostsScreen> {
 
   void setFilter(TargetType filter) {
     setState(() => _filter = filter);
-    ref.refresh(getUserpostsProvider(_postsProviderParams));
+    ref.refresh(getPostsListProvider(_postsProviderParams));
     _postsController.refresh();
   }
 
   void _getPosts() {
     _postsController.retryLastFailedRequest();
-    ref
-        .read(getUserpostsProvider(_postsProviderParams).notifier)
-        .getUserPosts(_filter);
+    ref.read(getPostsListProvider(_postsProviderParams).notifier).getUserPosts(
+          postsListType: PostsListType.user,
+          targetId: null,
+          targetType: _filter,
+          userId: _userId,
+          postContentType: _postContentType,
+        );
   }
 
   @override
@@ -101,7 +104,7 @@ class _PostedReviewsScreenState extends ConsumerState<PostedPostsScreen> {
   }
 
   Widget _buildBody() {
-    final postsState = ref.watch(getUserpostsProvider(_postsProviderParams));
+    final postsState = ref.watch(getPostsListProvider(_postsProviderParams));
     Widget? errWidget = fullScreenErrorWidgetOrNull(
       [
         StateAndRetry(
