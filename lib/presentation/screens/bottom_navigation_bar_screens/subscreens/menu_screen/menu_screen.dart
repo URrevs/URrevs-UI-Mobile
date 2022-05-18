@@ -20,7 +20,7 @@ import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_scre
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/menu_screen/subscreens/terms_and_conditions_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/owned_products_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/posted_questions_screen.dart';
-import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/posted_reviews_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/posted_posts_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/user_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_my_user_profile_state.dart';
@@ -138,7 +138,7 @@ class _MenuSubscreenState extends ConsumerState<MenuSubscreen> {
         title: LocaleKeys.myReviews.tr(),
         iconData: Icons.rate_review_outlined,
         onTap: () {
-          Navigator.of(context).pushNamed(PostedReviewsScreen.routeName);
+          Navigator.of(context).pushNamed(PostedPostsScreen.routeName);
         },
       ),
       ItemTile(

@@ -346,7 +346,6 @@ extension WidgetRefListeners on WidgetRef {
 
   User? get currentUser {
     final authState = watch(authenticationProvider);
-    print('current user method invoked, current state: $authState');
     if (authState is! AuthenticationLoadedState) return null;
     return authState.user;
   }

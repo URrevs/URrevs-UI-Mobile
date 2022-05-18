@@ -13,7 +13,7 @@ import 'package:urrevs_ui_mobile/presentation/screens/authentication_screen.dart
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/menu_screen/subscreens/questions_about_my_products_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/owned_products_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/posted_questions_screen.dart';
-import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/posted_reviews_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/posted_posts_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_my_user_profile_state.dart';
@@ -82,7 +82,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
         title: LocaleKeys.myReviews.tr(),
         iconData: Icons.rate_review_outlined,
         onTap: () {
-          Navigator.of(context).pushNamed(PostedReviewsScreen.routeName);
+          Navigator.of(context).pushNamed(PostedPostsScreen.routeName);
         },
       ),
       ItemTile(
@@ -90,8 +90,8 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
         iconData: Icons.question_answer_outlined,
         onTap: () {
           Navigator.of(context).pushNamed(
-            PostedReviewsScreen.routeName,
-            arguments: PostedReviewsScreenArgs(
+            PostedPostsScreen.routeName,
+            arguments: PostedPostsScreenArgs(
               userId: null,
               postContentType: PostContentType.question,
             ),
@@ -127,8 +127,8 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
           iconData: Icons.rate_review_outlined,
           onTap: () {
             Navigator.of(context).pushNamed(
-              PostedReviewsScreen.routeName,
-              arguments: PostedReviewsScreenArgs(
+              PostedPostsScreen.routeName,
+              arguments: PostedPostsScreenArgs(
                 userId: widget.screenArgs.userId,
                 postContentType: PostContentType.review,
               ),
@@ -152,8 +152,8 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
           iconData: Icons.devices_other_outlined,
           onTap: () {
             Navigator.of(context).pushNamed(
-              PostedReviewsScreen.routeName,
-              arguments: PostedReviewsScreenArgs(
+              PostedPostsScreen.routeName,
+              arguments: PostedPostsScreenArgs(
                 userId: widget.screenArgs.userId,
                 postContentType: PostContentType.question,
               ),

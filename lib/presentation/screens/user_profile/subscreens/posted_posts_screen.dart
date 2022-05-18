@@ -4,55 +4,43 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:urrevs_ui_mobile/domain/failure.dart';
-import 'package:urrevs_ui_mobile/domain/models/company_review.dart';
-import 'package:urrevs_ui_mobile/domain/models/phone_review.dart';
 import 'package:urrevs_ui_mobile/domain/models/post.dart';
-import 'package:urrevs_ui_mobile/domain/models/quesiton.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
-import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_post_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/no_glowing_scroll_behavior.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/empty_widgets/empty_list_widget.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/vertical_list_error_widget.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/review_card_list_loading.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/company_review_card.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/product_review_card.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/question_card.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/posts_list.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/scaffold_with_hiding_fab.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 import '../../../resources/text_style_manager.dart';
 
-class PostedReviewsScreenArgs {
+class PostedPostsScreenArgs {
   String? userId;
   PostContentType postContentType;
-  PostedReviewsScreenArgs(
-      {required this.userId, required this.postContentType});
+  PostedPostsScreenArgs({required this.userId, required this.postContentType});
 
-  static PostedReviewsScreenArgs get defaultArgs => PostedReviewsScreenArgs(
+  static PostedPostsScreenArgs get defaultArgs => PostedPostsScreenArgs(
       userId: null, postContentType: PostContentType.review);
 }
 
-class PostedReviewsScreen extends ConsumerStatefulWidget {
-  const PostedReviewsScreen(this.screenArgs, {Key? key}) : super(key: key);
+class PostedPostsScreen extends ConsumerStatefulWidget {
+  const PostedPostsScreen(this.screenArgs, {Key? key}) : super(key: key);
 
-  final PostedReviewsScreenArgs screenArgs;
+  final PostedPostsScreenArgs screenArgs;
 
-  static const String routeName = 'PostedReviewsScreen';
+  static const String routeName = 'PostedPostsScreen';
 
   @override
-  ConsumerState<PostedReviewsScreen> createState() =>
-      _PostedReviewsScreenState();
+  ConsumerState<PostedPostsScreen> createState() => _PostedReviewsScreenState();
 }
 
-class _PostedReviewsScreenState extends ConsumerState<PostedReviewsScreen> {
+class _PostedReviewsScreenState extends ConsumerState<PostedPostsScreen> {
   TargetType _filter = TargetType.phone;
   late final PagingController<int, Post> _postsController =
       PagingController(firstPageKey: 0)
@@ -128,114 +116,13 @@ class _PostedReviewsScreenState extends ConsumerState<PostedReviewsScreen> {
     return CustomScrollView(
       slivers: [
         _buildFilterBar(),
-        _buildPostsList(),
-      ],
-    );
-  }
-
-  Widget _buildPost(Post post) {
-    if (post is Question) {
-      Question question = post;
-      CardType cardType = _filter == TargetType.phone
-          ? CardType.productQuestion
-          : CardType.companyQuestion;
-      PostType postType = _filter == TargetType.phone
-          ? PostType.phoneQuestion
-          : PostType.companyQuestion;
-      return QuestionCard.fromQuestion(
-        question,
-        cardHeaderTitleType: _filter,
-        cardType: cardType,
-        fullscreen: false,
-        onPressingAnswer: () {
-          Navigator.of(context).pushNamed(
-            FullscreenPostScreen.routeName,
-            arguments: FullscreenPostScreenArgs(
-              postUserId: question.userId,
-              postType: postType,
-              cardType: cardType,
-              postId: question.id,
-              focusOnTextField: true,
-            ),
-          );
-        },
-      );
-    }
-    // phone reviews
-    if (post is PhoneReview) {
-      PhoneReview phoneReview = post;
-      return ProductReviewCard.fromPhoneReview(
-        phoneReview: phoneReview,
-        fullscreen: false,
-        onPressingComment: () {
-          Navigator.of(context).pushNamed(
-            FullscreenPostScreen.routeName,
-            arguments: FullscreenPostScreenArgs(
-              postUserId: phoneReview.userId,
-              postType: PostType.phoneReview,
-              cardType: CardType.productReview,
-              postId: phoneReview.id,
-              focusOnTextField: true,
-            ),
-          );
-        },
-      );
-    }
-    // company reviews
-    CompanyReview companyReview = post as CompanyReview;
-    return CompanyReviewCard.fromCompanyReview(
-      companyReview: companyReview,
-      fullscreen: false,
-      onPressingComment: () {
-        Navigator.of(context).pushNamed(
-          FullscreenPostScreen.routeName,
-          arguments: FullscreenPostScreenArgs(
-            postUserId: companyReview.userId,
-            postType: PostType.companyReview,
-            cardType: CardType.companyReview,
-            postId: companyReview.id,
-            focusOnTextField: true,
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildPostsList() {
-    ref.addErrorListener(
-      provider: getUserpostsProvider(_postsProviderParams),
-      context: context,
-      controller: _postsController,
-    );
-    ref.addInfiniteScrollingListener(
-      getUserpostsProvider(_postsProviderParams),
-      _postsController,
-    );
-    return SliverPadding(
-      padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-      sliver: PagedSliverList(
-        pagingController: _postsController,
-        builderDelegate: PagedChildBuilderDelegate<Post>(
-          itemBuilder: (context, post, index) => _buildPost(post),
-          firstPageErrorIndicatorBuilder: (context) => SizedBox(),
-          newPageErrorIndicatorBuilder: (context) {
-            final state = ref.watch(getUserpostsProvider(_postsProviderParams));
-            if (state is ErrorState) {
-              return VerticalListErrorWidget(
-                onRetry: _getPosts,
-                retryLastRequest: (state as ErrorState).failure is RetryFailure,
-              );
-            } else {
-              return SizedBox();
-            }
-          },
-          firstPageProgressIndicatorBuilder: (context) =>
-              ReviewCardsListLoading(),
-          newPageProgressIndicatorBuilder: (context) =>
-              ReviewCardsListLoading(),
-          noItemsFoundIndicatorBuilder: (context) => EmptyListWidget(),
+        SliverPostsList(
+          controller: _postsController,
+          getPosts: _getPosts,
+          getUserPostsProviderParams: _postsProviderParams,
+          targetType: _filter,
         ),
-      ),
+      ],
     );
   }
 

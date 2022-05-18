@@ -13,7 +13,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
-import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/posted_reviews_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/posted_posts_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_phone_manufacturing_company_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/search_state.dart';
@@ -452,8 +452,8 @@ class _PostingReviewSubscreenState
               label: LocaleKeys.seePost.tr(),
               onPressed: () {
                 Navigator.of(context).pushNamed(
-                  PostedReviewsScreen.routeName,
-                  arguments: PostedReviewsScreenArgs(
+                  PostedPostsScreen.routeName,
+                  arguments: PostedPostsScreenArgs(
                     userId: null,
                     postContentType: PostContentType.review,
                   ),
