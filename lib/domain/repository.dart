@@ -359,6 +359,15 @@ class Repository {
     });
   }
 
+  Future<Either<Failure, List<CompanyReview>>> getReviewsOnCertainCompany(
+      String companyId, int round) {
+    return _tryAndCatch(() async {
+      final response =
+          await _remoteDataSource.getReviewsOnCertainCompany(companyId, round);
+      return response.companyReviewsModels;
+    });
+  }
+
   Future<Either<Failure, void>> likePhoneReview(String reviewId) {
     return _tryAndCatch(() async {
       await _remoteDataSource.likePhoneReview(reviewId);
@@ -531,6 +540,24 @@ class Repository {
     return _tryAndCatch(() async {
       final response = await _remoteDataSource.getCompanyQuestionsOfAnotherUser(
           userId, round);
+      return response.questionsModels;
+    });
+  }
+  
+  Future<Either<Failure, List<Question>>> getQuestionsOnCertainPhone(
+      String phoneId, int round) {
+    return _tryAndCatch(() async {
+      final response =
+          await _remoteDataSource.getQuestionsOnCertainPhone(phoneId, round);
+      return response.questionsModels;
+    });
+  }
+
+  Future<Either<Failure, List<Question>>> getQuestionsOnCertainCompany(
+      String companyId, int round) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.getQuestionsOnCertainCompany(
+          companyId, round);
       return response.questionsModels;
     });
   }

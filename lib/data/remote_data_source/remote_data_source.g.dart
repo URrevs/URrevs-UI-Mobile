@@ -499,6 +499,23 @@ class _RemoteDataSource implements RemoteDataSource {
   }
 
   @override
+  Future<GetReviewsOnCertainCompanyResponse> getReviewsOnCertainCompany(
+      companyId, round) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'round': round};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GetReviewsOnCertainCompanyResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/reviews/company/on/${companyId}',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GetReviewsOnCertainCompanyResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<LikePhoneReviewResponse> likePhoneReview(reviewId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -912,6 +929,40 @@ class _RemoteDataSource implements RemoteDataSource {
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = GetCompanyQuestionsOfAnotherUser.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<GetQuestionsOnCertainPhoneResponse> getQuestionsOnCertainPhone(
+      phoneId, round) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'round': round};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GetQuestionsOnCertainPhoneResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/questions/phone/on/${phoneId}',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GetQuestionsOnCertainPhoneResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<GetQuestionsOnCertainCompanyResponse> getQuestionsOnCertainCompany(
+      companyId, round) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'round': round};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GetQuestionsOnCertainCompanyResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/questions/company/on/${companyId}',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GetQuestionsOnCertainCompanyResponse.fromJson(_result.data!);
     return value;
   }
 

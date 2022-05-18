@@ -145,6 +145,25 @@ class GetReviewsOnCertainPhoneResponse extends BaseResponse {
 }
 
 @JsonSerializable()
+class GetReviewsOnCertainCompanyResponse extends BaseResponse {
+  @JsonKey(name: 'reviews')
+  List<CompanyReviewSubResponse> companyReviewSubResponse;
+  GetReviewsOnCertainCompanyResponse({
+    required bool success,
+    required this.companyReviewSubResponse,
+  }) : super(success: success);
+
+  List<CompanyReview> get companyReviewsModels =>
+      companyReviewSubResponse.map((c) => c.companyReviewModel).toList();
+
+  factory GetReviewsOnCertainCompanyResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$GetReviewsOnCertainCompanyResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$GetReviewsOnCertainCompanyResponseToJson(this);
+}
+
+@JsonSerializable()
 class LikePhoneReviewResponse extends BaseResponse {
   LikePhoneReviewResponse({
     required bool success,

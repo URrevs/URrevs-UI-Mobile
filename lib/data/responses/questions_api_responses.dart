@@ -107,6 +107,44 @@ class GetCompanyQuestionsOfAnotherUser extends BaseResponse {
 }
 
 @JsonSerializable()
+class GetQuestionsOnCertainPhoneResponse extends BaseResponse {
+  @JsonKey(name: 'questions')
+  List<QuestionSubResponse> questionsSubResponses;
+  GetQuestionsOnCertainPhoneResponse({
+    required bool success,
+    required this.questionsSubResponses,
+  }) : super(success: success);
+
+  List<Question> get questionsModels =>
+      questionsSubResponses.map((q) => q.questionModel).toList();
+
+  factory GetQuestionsOnCertainPhoneResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$GetQuestionsOnCertainPhoneResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$GetQuestionsOnCertainPhoneResponseToJson(this);
+}
+
+@JsonSerializable()
+class GetQuestionsOnCertainCompanyResponse extends BaseResponse {
+  @JsonKey(name: 'questions')
+  List<QuestionSubResponse> questionsSubResponses;
+  GetQuestionsOnCertainCompanyResponse({
+    required bool success,
+    required this.questionsSubResponses,
+  }) : super(success: success);
+
+  List<Question> get questionsModels =>
+      questionsSubResponses.map((q) => q.questionModel).toList();
+
+  factory GetQuestionsOnCertainCompanyResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$GetQuestionsOnCertainCompanyResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$GetQuestionsOnCertainCompanyResponseToJson(this);
+}
+
+@JsonSerializable()
 class UpvotePhoneQuestionResponse extends BaseResponse {
   String status;
   UpvotePhoneQuestionResponse({

@@ -139,6 +139,23 @@ Map<String, dynamic> _$GetReviewsOnCertainPhoneResponseToJson(
       'reviews': instance.phoneReviewsSubResponses,
     };
 
+GetReviewsOnCertainCompanyResponse _$GetReviewsOnCertainCompanyResponseFromJson(
+        Map<String, dynamic> json) =>
+    GetReviewsOnCertainCompanyResponse(
+      success: json['success'] as bool,
+      companyReviewSubResponse: (json['reviews'] as List<dynamic>)
+          .map((e) =>
+              CompanyReviewSubResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$GetReviewsOnCertainCompanyResponseToJson(
+        GetReviewsOnCertainCompanyResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'reviews': instance.companyReviewSubResponse,
+    };
+
 LikePhoneReviewResponse _$LikePhoneReviewResponseFromJson(
         Map<String, dynamic> json) =>
     LikePhoneReviewResponse(

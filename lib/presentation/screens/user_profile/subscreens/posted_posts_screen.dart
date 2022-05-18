@@ -79,7 +79,7 @@ class _PostedReviewsScreenState extends ConsumerState<PostedPostsScreen> {
 
   void _getPosts() {
     _postsController.retryLastFailedRequest();
-    ref.read(getPostsListProvider(_postsProviderParams).notifier).getUserPosts(
+    ref.read(getPostsListProvider(_postsProviderParams).notifier).getPostsList(
           postsListType: PostsListType.user,
           targetId: null,
           targetType: _filter,
@@ -119,10 +119,10 @@ class _PostedReviewsScreenState extends ConsumerState<PostedPostsScreen> {
     return CustomScrollView(
       slivers: [
         _buildFilterBar(),
-        SliverPostsList(
+        PostsList.sliver(
           controller: _postsController,
           getPosts: _getPosts,
-          getUserPostsProviderParams: _postsProviderParams,
+          getPostsListProviderParams: _postsProviderParams,
           targetType: _filter,
         ),
       ],

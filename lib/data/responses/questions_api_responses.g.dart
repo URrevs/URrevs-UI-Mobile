@@ -100,6 +100,39 @@ Map<String, dynamic> _$GetCompanyQuestionsOfAnotherUserToJson(
       'questions': instance.questionsSubResponses,
     };
 
+GetQuestionsOnCertainPhoneResponse _$GetQuestionsOnCertainPhoneResponseFromJson(
+        Map<String, dynamic> json) =>
+    GetQuestionsOnCertainPhoneResponse(
+      success: json['success'] as bool,
+      questionsSubResponses: (json['questions'] as List<dynamic>)
+          .map((e) => QuestionSubResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$GetQuestionsOnCertainPhoneResponseToJson(
+        GetQuestionsOnCertainPhoneResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'questions': instance.questionsSubResponses,
+    };
+
+GetQuestionsOnCertainCompanyResponse
+    _$GetQuestionsOnCertainCompanyResponseFromJson(Map<String, dynamic> json) =>
+        GetQuestionsOnCertainCompanyResponse(
+          success: json['success'] as bool,
+          questionsSubResponses: (json['questions'] as List<dynamic>)
+              .map((e) =>
+                  QuestionSubResponse.fromJson(e as Map<String, dynamic>))
+              .toList(),
+        );
+
+Map<String, dynamic> _$GetQuestionsOnCertainCompanyResponseToJson(
+        GetQuestionsOnCertainCompanyResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'questions': instance.questionsSubResponses,
+    };
+
 UpvotePhoneQuestionResponse _$UpvotePhoneQuestionResponseFromJson(
         Map<String, dynamic> json) =>
     UpvotePhoneQuestionResponse(

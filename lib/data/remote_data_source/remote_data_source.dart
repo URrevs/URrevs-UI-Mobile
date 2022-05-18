@@ -173,6 +173,12 @@ abstract class RemoteDataSource {
     @Query('round') int round,
   );
 
+  @GET('/reviews/company/on/{companyId}')
+  Future<GetReviewsOnCertainCompanyResponse> getReviewsOnCertainCompany(
+    @Path() String companyId,
+    @Query('round') int round,
+  );
+
   @POST('/reviews/phone/{reviewId}/like')
   Future<LikePhoneReviewResponse> likePhoneReview(
     @Path() String reviewId,
@@ -305,6 +311,18 @@ abstract class RemoteDataSource {
   @GET('/questions/company/{userId}')
   Future<GetCompanyQuestionsOfAnotherUser> getCompanyQuestionsOfAnotherUser(
     @Path() String userId,
+    @Query('round') int round,
+  );
+
+  @GET('/questions/phone/on/{phoneId}')
+  Future<GetQuestionsOnCertainPhoneResponse> getQuestionsOnCertainPhone(
+    @Path() String phoneId,
+    @Query('round') int round,
+  );
+
+  @GET('/questions/company/on/{companyId}')
+  Future<GetQuestionsOnCertainCompanyResponse> getQuestionsOnCertainCompany(
+    @Path() String companyId,
     @Query('round') int round,
   );
 

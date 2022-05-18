@@ -20,25 +20,45 @@ import 'empty_widgets/empty_list_widget.dart';
 import 'error_widgets/vertical_list_error_widget.dart';
 import 'loading_widgets/review_card_list_loading.dart';
 
-class SliverPostsList extends ConsumerStatefulWidget {
-  const SliverPostsList({
+class PostsList extends ConsumerStatefulWidget {
+  const PostsList({
     Key? key,
     required this.targetType,
     required this.controller,
-    required this.getUserPostsProviderParams,
+    required this.getPostsListProviderParams,
     required this.getPosts,
+    required this.isSliver,
   }) : super(key: key);
 
+  const PostsList.sliver({
+    Key? key,
+    required this.targetType,
+    required this.controller,
+    required this.getPostsListProviderParams,
+    required this.getPosts,
+  })  : isSliver = true,
+        super(key: key);
+
+  const PostsList.box({
+    Key? key,
+    required this.targetType,
+    required this.controller,
+    required this.getPostsListProviderParams,
+    required this.getPosts,
+  })  : isSliver = false,
+        super(key: key);
+
   final TargetType targetType;
-  final GetPostsListProviderParams getUserPostsProviderParams;
+  final GetPostsListProviderParams getPostsListProviderParams;
   final PagingController<int, Post> controller;
   final VoidCallback getPosts;
+  final bool isSliver;
 
   @override
-  ConsumerState<SliverPostsList> createState() => _SliverPostsListState();
+  ConsumerState<PostsList> createState() => _PostsListState();
 }
 
-class _SliverPostsListState extends ConsumerState<SliverPostsList> {
+class _PostsListState extends ConsumerState<PostsList> {
   Widget _buildPost(Post post) {
     if (post is Question) {
       Question question = post;
@@ -107,42 +127,53 @@ class _SliverPostsListState extends ConsumerState<SliverPostsList> {
     );
   }
 
+  PagedChildBuilderDelegate<Post> _pagedChildBuilderDelegate() {
+    return PagedChildBuilderDelegate<Post>(
+      itemBuilder: (context, post, index) => _buildPost(post),
+      firstPageErrorIndicatorBuilder: (context) => SizedBox(),
+      newPageErrorIndicatorBuilder: (context) {
+        final state =
+            ref.watch(getPostsListProvider(widget.getPostsListProviderParams));
+        if (state is ErrorState) {
+          return VerticalListErrorWidget(
+            onRetry: widget.getPosts,
+            retryLastRequest: (state as ErrorState).failure is RetryFailure,
+          );
+        } else {
+          return SizedBox();
+        }
+      },
+      firstPageProgressIndicatorBuilder: (context) => ReviewCardsListLoading(),
+      newPageProgressIndicatorBuilder: (context) => ReviewCardsListLoading(),
+      noItemsFoundIndicatorBuilder: (context) => EmptyListWidget(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     ref.addErrorListener(
-      provider: getPostsListProvider(widget.getUserPostsProviderParams),
+      provider: getPostsListProvider(widget.getPostsListProviderParams),
       context: context,
       controller: widget.controller,
     );
     ref.addInfiniteScrollingListener(
-      getPostsListProvider(widget.getUserPostsProviderParams),
+      getPostsListProvider(widget.getPostsListProviderParams),
       widget.controller,
     );
-    return SliverPadding(
-      padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-      sliver: PagedSliverList(
-        pagingController: widget.controller,
-        builderDelegate: PagedChildBuilderDelegate<Post>(
-          itemBuilder: (context, post, index) => _buildPost(post),
-          firstPageErrorIndicatorBuilder: (context) => SizedBox(),
-          newPageErrorIndicatorBuilder: (context) {
-            final state = ref
-                .watch(getPostsListProvider(widget.getUserPostsProviderParams));
-            if (state is ErrorState) {
-              return VerticalListErrorWidget(
-                onRetry: widget.getPosts,
-                retryLastRequest: (state as ErrorState).failure is RetryFailure,
-              );
-            } else {
-              return SizedBox();
-            }
-          },
-          firstPageProgressIndicatorBuilder: (context) =>
-              ReviewCardsListLoading(),
-          newPageProgressIndicatorBuilder: (context) =>
-              ReviewCardsListLoading(),
-          noItemsFoundIndicatorBuilder: (context) => EmptyListWidget(),
+    if (widget.isSliver) {
+      return SliverPadding(
+        padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+        sliver: PagedSliverList(
+          pagingController: widget.controller,
+          builderDelegate: _pagedChildBuilderDelegate(),
         ),
+      );
+    }
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+      child: PagedListView(
+        pagingController: widget.controller,
+        builderDelegate: _pagedChildBuilderDelegate(),
       ),
     );
   }
