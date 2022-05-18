@@ -48,7 +48,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_st
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_interactions_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_phone_manufacturing_company_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_reviews_on_certain_phone_state.dart';
-import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_user_phone_reviews_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_user_posts_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/like_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/add_new_recent_search_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/delete_recent_search_state.dart';
@@ -74,7 +74,7 @@ import 'notifiers/reviews_notifiers/add_review_reply_notifier.dart';
 import 'notifiers/reviews_notifiers/get_interactions_notifier.dart';
 import 'notifiers/reviews_notifiers/get_phone_manufacturing_company_notifier.dart';
 import 'notifiers/reviews_notifiers/get_reviews_on_certain_phone_notifier.dart';
-import 'notifiers/reviews_notifiers/get_user_phone_reviews_notifier.dart';
+import 'notifiers/reviews_notifiers/get_user_posts_notifier.dart';
 import 'notifiers/search_notifiers/get_phone_statistical_info_notifier.dart';
 
 final themeModeProvider = StateNotifierProvider<ThemeModeNotifier, ThemeMode>(
@@ -188,7 +188,7 @@ final getSimilarPhonesProvider = StateNotifierProvider.autoDispose.family<
 
 final getUserpostsProvider = StateNotifierProvider.autoDispose.family<
         GetUserPostsNotifier,
-        GetUserPhoneReviewsState,
+        GetUserPostsState,
         GetUserPostsProviderParams>(
     (ref, params) => GetUserPostsNotifier(
         userId: params.userId, postContentType: params.postContentType));

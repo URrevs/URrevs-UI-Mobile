@@ -6,15 +6,15 @@ import 'package:urrevs_ui_mobile/domain/models/post.dart';
 import 'package:urrevs_ui_mobile/domain/repository.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 
-import '../../states/reviews_states/get_user_phone_reviews_state.dart';
+import '../../states/reviews_states/get_user_posts_state.dart';
 
-class GetUserPostsNotifier extends StateNotifier<GetUserPhoneReviewsState> {
+class GetUserPostsNotifier extends StateNotifier<GetUserPostsState> {
   GetUserPostsNotifier({
     required String? userId,
     required PostContentType postContentType,
   })  : _userId = userId,
         _postContentType = postContentType,
-        super(GetUserPhoneReviewsInitialState());
+        super(GetUserPostsInitialState());
 
   int _round = 1;
 
@@ -25,11 +25,11 @@ class GetUserPostsNotifier extends StateNotifier<GetUserPhoneReviewsState> {
     // get current items in the state
     List<Post> currentphoneReviews = [];
     final currentState = state;
-    if (currentState is GetUserPhoneReviewsLoadedState) {
+    if (currentState is GetUserPostsLoadedState) {
       currentphoneReviews = currentState.infiniteScrollingItems;
     }
     // send the request
-    state = GetUserPhoneReviewsLoadingState();
+    state = GetUserPostsLoadingState();
     late Either<Failure, List<Post>> response;
     if (_postContentType == PostContentType.question) {
       if (targetType == TargetType.phone) {
@@ -66,15 +66,12 @@ class GetUserPostsNotifier extends StateNotifier<GetUserPhoneReviewsState> {
     }
     response.fold(
       // deal with failure
-      (failure) => state = GetUserPhoneReviewsErrorState(failure: failure),
+      (failure) => state = GetUserPostsErrorState(failure: failure),
       (phoneReviews) {
         // add items and rounds ended state to the loaded state
         bool roundsEnded = phoneReviews.isEmpty;
-        List<Post> newphoneReviews = [
-          ...currentphoneReviews,
-          ...phoneReviews
-        ];
-        state = GetUserPhoneReviewsLoadedState(
+        List<Post> newphoneReviews = [...currentphoneReviews, ...phoneReviews];
+        state = GetUserPostsLoadedState(
           infiniteScrollingItems: newphoneReviews,
           roundsEnded: roundsEnded,
         );

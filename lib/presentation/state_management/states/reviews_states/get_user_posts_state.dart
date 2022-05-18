@@ -5,29 +5,29 @@ import 'package:urrevs_ui_mobile/domain/models/phone_review.dart';
 import 'package:urrevs_ui_mobile/domain/models/post.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 
-abstract class GetUserPhoneReviewsState extends Equatable
+abstract class GetUserPostsState extends Equatable
     implements RequestState {}
 
-class GetUserPhoneReviewsInitialState extends GetUserPhoneReviewsState
+class GetUserPostsInitialState extends GetUserPostsState
     implements InitialState {
   @override
   List<Object?> get props => [];
 }
 
-class GetUserPhoneReviewsLoadingState extends GetUserPhoneReviewsState
+class GetUserPostsLoadingState extends GetUserPostsState
     implements LoadingState {
   @override
   List<Object?> get props => [];
 }
 
-class GetUserPhoneReviewsLoadedState extends GetUserPhoneReviewsState
+class GetUserPostsLoadedState extends GetUserPostsState
     implements LoadedState, InfiniteScrollingState<Post> {
   @override
   final List<Post> infiniteScrollingItems;
   @override
   final bool roundsEnded;
 
-  GetUserPhoneReviewsLoadedState({
+  GetUserPostsLoadedState({
     required this.infiniteScrollingItems,
     required this.roundsEnded,
   });
@@ -36,11 +36,11 @@ class GetUserPhoneReviewsLoadedState extends GetUserPhoneReviewsState
   List<Object?> get props => [];
 }
 
-class GetUserPhoneReviewsErrorState extends GetUserPhoneReviewsState
+class GetUserPostsErrorState extends GetUserPostsState
     implements ErrorState {
   @override
   final Failure failure;
-  GetUserPhoneReviewsErrorState({
+  GetUserPostsErrorState({
     required this.failure,
   });
 
