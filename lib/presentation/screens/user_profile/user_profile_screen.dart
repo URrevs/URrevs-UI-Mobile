@@ -102,7 +102,10 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
         title: LocaleKeys.ownedProducts.tr(),
         iconData: Icons.devices_other_outlined,
         onTap: () {
-          Navigator.of(context).pushNamed(OwnedProductsScreen.routeName);
+          Navigator.of(context).pushNamed(
+            OwnedProductsScreen.routeName,
+            arguments: OwnedProductsScreenArgs(userId: null),
+          );
         },
       ),
       _buildRefCodeTile(),
@@ -139,7 +142,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
             Navigator.of(context).pushNamed(
               OwnedProductsScreen.routeName,
               arguments: OwnedProductsScreenArgs(
-                userId: '626b29227fe7587a42e3e9f6', // Loai AL_Jolani
+                userId: widget.screenArgs.userId,
               ),
             );
           },
