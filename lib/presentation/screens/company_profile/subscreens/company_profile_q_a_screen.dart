@@ -1,41 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
-import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
-import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_post_screen.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/question_card.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/get_posts_on_certain_target.dart';
 
-class CompanyProfileQASubscreen extends StatefulWidget {
-  const CompanyProfileQASubscreen({Key? key}) : super(key: key);
+class CompanyProfileQASubscreen extends StatelessWidget {
+  const CompanyProfileQASubscreen({
+    Key? key,
+    required this.companyId,
+  }) : super(key: key);
+  final String companyId;
 
-  @override
-  State<CompanyProfileQASubscreen> createState() =>
-      _CompanyProfileQASubscreenState();
-}
-
-class _CompanyProfileQASubscreenState extends State<CompanyProfileQASubscreen> {
-  Widget get listItem => (<Widget>[
-        QuestionCard.dummyInstance(context).copyWith(
-          onPressingAnswer: () {
-            Navigator.of(context).pushNamed(
-              FullscreenPostScreen.routeName,
-              arguments: FullscreenPostScreenArgs(
-                postUserId: 'post user id',
-                postId: '',
-                cardType: CardType.companyQuestion,
-                focusOnTextField: true,
-              ),
-            );
-          },
-        )
-      ]..shuffle())
-          .first;
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemBuilder: (context, index) {
-          return listItem;
-        },
-        itemCount: 10,
-        padding: AppEdgeInsets.screenPadding);
+    return PostsListOnCertainTarget(
+      targetId: companyId,
+      targetType: TargetType.company,
+      postContentType: PostContentType.question,
+      isSliver: false,
+    );
   }
 }

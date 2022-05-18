@@ -64,8 +64,9 @@ class _CompanyProfileScreenState extends ConsumerState<CompanyProfileScreen>
         child: TabBarView(
           controller: _tabController,
           children: [
-            CompanyProfileReviewsSubscreen(),
-            CompanyProfileQASubscreen(),
+            CompanyProfileReviewsSubscreen(
+                companyId: widget.screenArgs.companyId),
+            CompanyProfileQASubscreen(companyId: widget.screenArgs.companyId),
           ],
         ),
       ),

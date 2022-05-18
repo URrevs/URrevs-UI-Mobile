@@ -113,7 +113,7 @@ class _ProductProfileScreenState extends ConsumerState<ProductProfileScreen>
         children: [
           ProductProfileReviewsSubscreen(phoneId: widget.screenArgs.phoneId),
           ProductProfileSpecsSubscreen(phoneId: widget.screenArgs.phoneId),
-          ProductProfileQASubscreen(),
+          ProductProfileQASubscreen(phoneId: widget.screenArgs.phoneId),
         ],
       ),
     );
