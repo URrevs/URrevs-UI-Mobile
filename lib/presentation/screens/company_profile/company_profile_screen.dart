@@ -13,12 +13,15 @@ import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 class CompanyProfileScreenArgs {
   String companyId;
+  String companyName;
   CompanyProfileScreenArgs({
     required this.companyId,
+    required this.companyName,
   });
 
   static CompanyProfileScreenArgs get defaultArgs => CompanyProfileScreenArgs(
         companyId: '6256b2465f87fa90093a50e6', // Apple
+        companyName: 'Apple', // Apple
       );
 }
 
@@ -53,7 +56,7 @@ class _CompanyProfileScreenState extends ConsumerState<CompanyProfileScreen>
       appBar: AppBars.appBarOfCompnayProfile(
         context: context,
         controller: _tabController,
-        text: 'Nokia',
+        text: widget.screenArgs.companyName,
         imageUrl: ref.currentUser!.picture,
       ),
       fabLabel: LocaleKeys.addQuestion.tr(),

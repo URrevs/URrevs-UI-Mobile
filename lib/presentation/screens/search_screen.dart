@@ -80,7 +80,10 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     } else {
       Navigator.of(context).pushNamed(
         CompanyProfileScreen.routeName,
-        arguments: CompanyProfileScreenArgs(companyId: searchResult.id),
+        arguments: CompanyProfileScreenArgs(
+          companyId: searchResult.id,
+          companyName: searchResult.name,
+        ),
       );
     }
   }

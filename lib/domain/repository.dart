@@ -22,7 +22,8 @@ import 'package:urrevs_ui_mobile/domain/models/answer.dart';
 import 'package:urrevs_ui_mobile/domain/models/comment.dart';
 import 'package:urrevs_ui_mobile/domain/models/company.dart';
 import 'package:urrevs_ui_mobile/domain/models/company_review.dart';
-import 'package:urrevs_ui_mobile/domain/models/info.dart';
+import 'package:urrevs_ui_mobile/domain/models/company_stats.dart';
+import 'package:urrevs_ui_mobile/domain/models/phone_stats.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone_review.dart';
 import 'package:urrevs_ui_mobile/domain/models/quesiton.dart';
@@ -222,6 +223,15 @@ class Repository {
     });
   }
 
+  Future<Either<Failure, CompanyStats>> getCompanyStatisticalInfo(
+      String companyId) {
+    return _tryAndCatch(() async {
+      final response =
+          await _remoteDataSource.getCompanyStatisticalInfo(companyId);
+      return response.companyStatsModel;
+    });
+  }
+
   Future<Either<Failure, List<Company>>> getAllCompanies(int round) {
     return _tryAndCatch(() async {
       final response = await _remoteDataSource.getAllCompanies(round);
@@ -274,10 +284,10 @@ class Repository {
     });
   }
 
-  Future<Either<Failure, Info>> getPhoneStatisticalInfo(String phoneId) {
+  Future<Either<Failure, PhoneStats>> getPhoneStatisticalInfo(String phoneId) {
     return _tryAndCatch(() async {
       final response = await _remoteDataSource.getPhoneStatisticalInfo(phoneId);
-      return response.infoSubResponse.infoModel;
+      return response.infoSubResponse.phoneStatsModel;
     });
   }
 
@@ -543,7 +553,7 @@ class Repository {
       return response.questionsModels;
     });
   }
-  
+
   Future<Either<Failure, List<Question>>> getQuestionsOnCertainPhone(
       String phoneId, int round) {
     return _tryAndCatch(() async {

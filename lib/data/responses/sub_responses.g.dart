@@ -199,8 +199,9 @@ Map<String, dynamic> _$SpecsSubResponseToJson(SpecsSubResponse instance) =>
       'charging': instance.charging,
     };
 
-InfoSubResponse _$InfoSubResponseFromJson(Map<String, dynamic> json) =>
-    InfoSubResponse(
+PhoneStatsSubResponse _$PhoneStatsSubResponseFromJson(
+        Map<String, dynamic> json) =>
+    PhoneStatsSubResponse(
       views: json['views'] as int,
       generalRating: json['generalRating'] as num,
       companyRating: json['companyRating'] as num,
@@ -212,7 +213,8 @@ InfoSubResponse _$InfoSubResponseFromJson(Map<String, dynamic> json) =>
       battery: json['battery'] as num,
     );
 
-Map<String, dynamic> _$InfoSubResponseToJson(InfoSubResponse instance) =>
+Map<String, dynamic> _$PhoneStatsSubResponseToJson(
+        PhoneStatsSubResponse instance) =>
     <String, dynamic>{
       'views': instance.views,
       'generalRating': instance.generalRating,
@@ -223,6 +225,26 @@ Map<String, dynamic> _$InfoSubResponseToJson(InfoSubResponse instance) =>
       'camera': instance.camera,
       'callQuality': instance.callQuality,
       'battery': instance.battery,
+    };
+
+CompanyStatsSubResponse _$CompanyStatsSubResponseFromJson(
+        Map<String, dynamic> json) =>
+    CompanyStatsSubResponse(
+      id: json['_id'] as String,
+      name: json['name'] as String,
+      views: json['views'] as int,
+      rating: (json['rating'] as num).toDouble(),
+      type: json['type'] as String,
+    );
+
+Map<String, dynamic> _$CompanyStatsSubResponseToJson(
+        CompanyStatsSubResponse instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'name': instance.name,
+      'views': instance.views,
+      'rating': instance.rating,
+      'type': instance.type,
     };
 
 PhoneWithPictureSubResponse _$PhoneWithPictureSubResponseFromJson(

@@ -74,7 +74,7 @@ class CardHeader extends StatelessWidget {
               children: [
                 CardHeaderTitle(
                   authorName: authorName,
-                  productName: targetName,
+                  targetName: targetName,
                   cardType: cardType,
                   targetId: targetId,
                   type: type,

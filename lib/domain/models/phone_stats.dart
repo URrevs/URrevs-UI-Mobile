@@ -1,16 +1,16 @@
 import 'package:equatable/equatable.dart';
 
-class Info extends Equatable {
+class PhoneStats extends Equatable {
   final int views;
-  final num generalRating;
-  final num companyRating;
-  final num uiRating;
-  final num manufacturingQuality;
-  final num valueForMoney;
-  final num camera;
-  final num callQuality;
-  final num battery;
-  const Info({
+  final double generalRating;
+  final double companyRating;
+  final int uiRating;
+  final int manufacturingQuality;
+  final int valueForMoney;
+  final int camera;
+  final int callQuality;
+  final int battery;
+  const PhoneStats({
     required this.views,
     required this.generalRating,
     required this.companyRating,

@@ -166,7 +166,7 @@ class _SpecsComparisonTableState extends State<SpecsComparisonTable> {
   TableCell _companyName(String specValue, String companyId) {
     return _organizedTableCell(
       child: TextButton(
-        onPressed: () => _navigateToCompanyScreen(companyId),
+        onPressed: () => _navigateToCompanyScreen(companyId, specValue),
         style: TextButtonStyleManager.specsCompanyName,
         child: Text(
           specValue,
@@ -181,9 +181,12 @@ class _SpecsComparisonTableState extends State<SpecsComparisonTable> {
   }
 
   /// Navigates to company profile screen.
-  void _navigateToCompanyScreen(String companyId) {
+  void _navigateToCompanyScreen(String companyId, String companyName) {
     Navigator.of(context).pushNamed(CompanyProfileScreen.routeName,
-        arguments: CompanyProfileScreenArgs(companyId: companyId));
+        arguments: CompanyProfileScreenArgs(
+          companyId: companyId,
+          companyName: companyName,
+        ));
   }
 
   TableCell _pointOfComparisonCell(String text, TextStyle textStyle) {

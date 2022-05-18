@@ -84,6 +84,12 @@ abstract class RemoteDataSource {
     @Query('q') String searchWord,
   );
 
+  /// 16
+  @GET('/companies/{companyId}/stats')
+  Future<GetCompanyStatisticalInfoResponse> getCompanyStatisticalInfo(
+    @Path() String companyId,
+  );
+
   /// 17
   @GET('/companies/all')
   Future<GetAllCompaniesResponse> getAllCompanies(

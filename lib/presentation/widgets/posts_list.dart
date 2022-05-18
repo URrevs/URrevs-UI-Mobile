@@ -28,6 +28,7 @@ class PostsList extends ConsumerStatefulWidget {
     required this.getPostsListProviderParams,
     required this.getPosts,
     required this.isSliver,
+    this.noPadding = false,
   }) : super(key: key);
 
   const PostsList.sliver({
@@ -36,6 +37,7 @@ class PostsList extends ConsumerStatefulWidget {
     required this.controller,
     required this.getPostsListProviderParams,
     required this.getPosts,
+    this.noPadding = false,
   })  : isSliver = true,
         super(key: key);
 
@@ -45,6 +47,7 @@ class PostsList extends ConsumerStatefulWidget {
     required this.controller,
     required this.getPostsListProviderParams,
     required this.getPosts,
+    this.noPadding = false,
   })  : isSliver = false,
         super(key: key);
 
@@ -53,6 +56,7 @@ class PostsList extends ConsumerStatefulWidget {
   final PagingController<int, Post> controller;
   final VoidCallback getPosts;
   final bool isSliver;
+  final bool noPadding;
 
   @override
   ConsumerState<PostsList> createState() => _PostsListState();
@@ -160,9 +164,12 @@ class _PostsListState extends ConsumerState<PostsList> {
       getPostsListProvider(widget.getPostsListProviderParams),
       widget.controller,
     );
+    final padding = widget.noPadding
+        ? EdgeInsets.all(0)
+        : EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h);
     if (widget.isSliver) {
       return SliverPadding(
-        padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+        padding: padding,
         sliver: PagedSliverList(
           pagingController: widget.controller,
           builderDelegate: _pagedChildBuilderDelegate(),
@@ -170,7 +177,7 @@ class _PostsListState extends ConsumerState<PostsList> {
       );
     }
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+      padding: padding,
       child: PagedListView(
         pagingController: widget.controller,
         builderDelegate: _pagedChildBuilderDelegate(),

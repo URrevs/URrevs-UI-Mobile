@@ -6,6 +6,21 @@ part of 'companies_api_responses.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+GetCompanyStatisticalInfoResponse _$GetCompanyStatisticalInfoResponseFromJson(
+        Map<String, dynamic> json) =>
+    GetCompanyStatisticalInfoResponse(
+      success: json['success'] as bool,
+      companyStatsSubResponse: CompanyStatsSubResponse.fromJson(
+          json['stats'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$GetCompanyStatisticalInfoResponseToJson(
+        GetCompanyStatisticalInfoResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'stats': instance.companyStatsSubResponse,
+    };
+
 GetAllCompaniesResponse _$GetAllCompaniesResponseFromJson(
         Map<String, dynamic> json) =>
     GetAllCompaniesResponse(

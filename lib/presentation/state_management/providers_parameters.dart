@@ -62,6 +62,10 @@ class GetPhoneStatisticalInfoProviderParams extends NotSyncedProviderParams {
   GetPhoneStatisticalInfoProviderParams();
 }
 
+class GetCompanyStatisticalInfoProviderParams extends NotSyncedProviderParams {
+  GetCompanyStatisticalInfoProviderParams();
+}
+
 class GetSimilarPhonesProviderParams extends NotSyncedProviderParams {
   GetSimilarPhonesProviderParams();
 }

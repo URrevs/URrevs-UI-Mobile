@@ -4,9 +4,10 @@ import 'package:urrevs_ui_mobile/domain/models/answer.dart';
 import 'package:urrevs_ui_mobile/domain/models/comment.dart';
 import 'package:urrevs_ui_mobile/domain/models/company.dart';
 import 'package:urrevs_ui_mobile/domain/models/company_review.dart';
-import 'package:urrevs_ui_mobile/domain/models/info.dart';
+import 'package:urrevs_ui_mobile/domain/models/company_stats.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone_review.dart';
+import 'package:urrevs_ui_mobile/domain/models/phone_stats.dart';
 import 'package:urrevs_ui_mobile/domain/models/quesiton.dart';
 import 'package:urrevs_ui_mobile/domain/models/reply_model.dart';
 import 'package:urrevs_ui_mobile/domain/models/search_result.dart';
@@ -285,7 +286,7 @@ class SpecsSubResponse {
 }
 
 @JsonSerializable()
-class InfoSubResponse {
+class PhoneStatsSubResponse {
   int views;
   num generalRating;
   num companyRating;
@@ -296,7 +297,7 @@ class InfoSubResponse {
   num callQuality;
   num battery;
 
-  InfoSubResponse({
+  PhoneStatsSubResponse({
     required this.views,
     required this.generalRating,
     required this.companyRating,
@@ -308,21 +309,51 @@ class InfoSubResponse {
     required this.battery,
   });
 
-  Info get infoModel => Info(
+  PhoneStats get phoneStatsModel => PhoneStats(
         views: views,
-        generalRating: generalRating,
-        companyRating: companyRating,
-        uiRating: uiRating,
-        manufacturingQuality: manufacturingQuality,
-        valueForMoney: valueForMoney,
-        camera: camera,
-        callQuality: callQuality,
-        battery: battery,
+        generalRating: generalRating.toDouble(),
+        companyRating: companyRating.toDouble(),
+        uiRating: uiRating.toInt(),
+        manufacturingQuality: manufacturingQuality.toInt(),
+        valueForMoney: valueForMoney.toInt(),
+        camera: camera.toInt(),
+        callQuality: callQuality.toInt(),
+        battery: battery.toInt(),
       );
 
-  factory InfoSubResponse.fromJson(Map<String, Object?> json) =>
-      _$InfoSubResponseFromJson(json);
-  Map<String, dynamic> toJson() => _$InfoSubResponseToJson(this);
+  factory PhoneStatsSubResponse.fromJson(Map<String, Object?> json) =>
+      _$PhoneStatsSubResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$PhoneStatsSubResponseToJson(this);
+}
+
+@JsonSerializable()
+class CompanyStatsSubResponse {
+  @JsonKey(name: '_id')
+  String id;
+  String name;
+  int views;
+  double rating;
+  String type;
+
+  CompanyStatsSubResponse({
+    required this.id,
+    required this.name,
+    required this.views,
+    required this.rating,
+    required this.type,
+  });
+
+  CompanyStats get companyStatsModel => CompanyStats(
+        id: id,
+        name: name,
+        views: views,
+        rating: rating,
+        type: type,
+      );
+
+  factory CompanyStatsSubResponse.fromJson(Map<String, Object?> json) =>
+      _$CompanyStatsSubResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$CompanyStatsSubResponseToJson(this);
 }
 
 @JsonSerializable()

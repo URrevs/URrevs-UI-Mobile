@@ -75,7 +75,7 @@ GetPhoneStatisticalInfoResponse _$GetPhoneStatisticalInfoResponseFromJson(
     GetPhoneStatisticalInfoResponse(
       success: json['success'] as bool,
       infoSubResponse:
-          InfoSubResponse.fromJson(json['stats'] as Map<String, dynamic>),
+          PhoneStatsSubResponse.fromJson(json['stats'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$GetPhoneStatisticalInfoResponseToJson(

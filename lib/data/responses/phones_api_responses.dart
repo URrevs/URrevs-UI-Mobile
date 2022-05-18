@@ -77,7 +77,7 @@ class GetPhoneSpecsResponse extends BaseResponse {
 @JsonSerializable()
 class GetPhoneStatisticalInfoResponse extends BaseResponse {
   @JsonKey(name: 'stats')
-  InfoSubResponse infoSubResponse;
+  PhoneStatsSubResponse infoSubResponse;
   GetPhoneStatisticalInfoResponse({
     required bool success,
     required this.infoSubResponse,

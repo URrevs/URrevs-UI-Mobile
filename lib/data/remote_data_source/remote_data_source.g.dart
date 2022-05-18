@@ -232,6 +232,23 @@ class _RemoteDataSource implements RemoteDataSource {
   }
 
   @override
+  Future<GetCompanyStatisticalInfoResponse> getCompanyStatisticalInfo(
+      companyId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GetCompanyStatisticalInfoResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/companies/${companyId}/stats',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GetCompanyStatisticalInfoResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<GetAllCompaniesResponse> getAllCompanies(round) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'round': round};

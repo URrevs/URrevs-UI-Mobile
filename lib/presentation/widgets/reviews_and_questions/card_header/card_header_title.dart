@@ -16,7 +16,7 @@ class CardHeaderTitle extends StatelessWidget {
   const CardHeaderTitle({
     Key? key,
     required this.authorName,
-    required this.productName,
+    required this.targetName,
     required this.cardType,
     required this.userId,
     required this.targetId,
@@ -27,7 +27,7 @@ class CardHeaderTitle extends StatelessWidget {
   final String authorName;
 
   /// Name of product on which the review was posted.
-  final String productName;
+  final String targetName;
 
   final CardType cardType;
 
@@ -42,7 +42,10 @@ class CardHeaderTitle extends StatelessWidget {
       case TargetType.company:
         Navigator.of(context).pushNamed(
           CompanyProfileScreen.routeName,
-          arguments: CompanyProfileScreenArgs(companyId: targetId),
+          arguments: CompanyProfileScreenArgs(
+            companyId: targetId,
+            companyName: targetName,
+          ),
         );
         break;
       case TargetType.phone:
@@ -50,7 +53,7 @@ class CardHeaderTitle extends StatelessWidget {
           ProductProfileScreen.routeName,
           arguments: ProductProfileScreenArgs(
             phoneId: targetId,
-            phoneName: productName,
+            phoneName: targetName,
           ),
         );
         break;
@@ -92,7 +95,7 @@ class CardHeaderTitle extends StatelessWidget {
           child: GestureDetector(
             onTap: () => _onPressingTarget(context),
             child: Text(
-              productName,
+              targetName,
               textAlign: TextAlign.center,
               style: TextStyleManager.s16w700.copyWith(
                 color: ColorManager.black,

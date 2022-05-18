@@ -226,8 +226,13 @@ class _SpecsTableState extends State<SpecsTable> {
 
   /// Navigates to company profile screen.
   void _navigateToCompanyScreen() {
-    Navigator.of(context).pushNamed(CompanyProfileScreen.routeName,
-        arguments: CompanyProfileScreenArgs(companyId: widget.specs.companyId));
+    Navigator.of(context).pushNamed(
+      CompanyProfileScreen.routeName,
+      arguments: CompanyProfileScreenArgs(
+        companyId: widget.specs.companyId,
+        companyName: widget.specs.companyName,
+      ),
+    );
   }
 
   /// Returns a [TableCell] that contains the name of the specification of the

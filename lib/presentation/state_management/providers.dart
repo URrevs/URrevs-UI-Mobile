@@ -30,6 +30,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/update_
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/authentication_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/companies_states/get_all_companies_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/companies_states/get_company_statistical_info_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_current_user_image_url_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_info_about_latest_update_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_owned_phones_state.dart';
@@ -62,6 +63,7 @@ import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/partial_error_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/reply.dart';
 
+import 'notifiers/companies_notifiers/get_company_statistical_info_notifier.dart';
 import 'notifiers/phones_notifier/get_phone_specs_notifier.dart';
 import 'notifiers/phones_notifier/get_phones_from_certain_company_notifier.dart';
 import 'notifiers/phones_notifier/get_similar_phones_notifier.dart';
@@ -127,6 +129,11 @@ final deleteRecentSearchProvider = StateNotifierProvider.autoDispose<
 final searchProvider = StateNotifierProvider.autoDispose
     .family<SearchNotifier, SearchState, SearchProviderParams>(
         (ref, params) => SearchNotifier(searchMode: params.searchMode));
+
+final getCompanyStatisticalInfoProvider = StateNotifierProvider.autoDispose
+    .family<GetCompanyStatisticalInfoNotifier, GetCompanyStatisticalInfoState,
+            GetCompanyStatisticalInfoProviderParams>(
+        (ref, params) => GetCompanyStatisticalInfoNotifier());
 
 final getAllCompaniesProvider = StateNotifierProvider.autoDispose.family<
     GetAllCompaniesNotifier,

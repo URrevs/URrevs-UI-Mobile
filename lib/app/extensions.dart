@@ -10,5 +10,10 @@ extension IsArabic on BuildContext {
 }
 
 extension IsDarkMode on BuildContext {
-  bool get isDarkMode => MediaQuery.of(this).platformBrightness == Brightness.dark;
+  bool get isDarkMode =>
+      MediaQuery.of(this).platformBrightness == Brightness.dark;
+}
+
+extension StringExtension on String {
+  String get capital => this[0].toUpperCase() + substring(1);
 }
