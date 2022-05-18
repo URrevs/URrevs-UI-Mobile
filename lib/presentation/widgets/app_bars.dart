@@ -66,7 +66,7 @@ class AppBars {
     required String? imageUrl,
   }) {
     return PreferredSize(
-      preferredSize: Size.fromHeight(showTabBar ? 45.h + 35.h : 45.h),
+      preferredSize: Size.fromHeight(showTabBar ? 45.h + 45.h : 45.h),
       child: AppBar(
         elevation: 3,
         leading: Padding(
@@ -83,11 +83,14 @@ class AppBars {
         actions: AppBars.actions(
             context: context, imageUrl: imageUrl, isReversed: false),
         bottom: showTabBar
-            ? TabBar(
-                tabs: [
-                  Tab(text: LocaleKeys.tabBarReview.tr()),
-                  Tab(text: LocaleKeys.tabBarQuestion.tr()),
-                ],
+            ? PreferredSize(
+                preferredSize: Size.fromHeight(35.h),
+                child: TabBar(
+                  tabs: [
+                    Tab(text: LocaleKeys.tabBarReview.tr()),
+                    Tab(text: LocaleKeys.tabBarQuestion.tr()),
+                  ],
+                ),
               )
             : null,
       ),
