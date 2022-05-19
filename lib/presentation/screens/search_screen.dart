@@ -43,7 +43,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
   FocusNode focusNode = FocusNode();
   final TextEditingController _controller = TextEditingController();
   final SearchProviderParams _searchProviderParams =
-      SearchProviderParams(searchMode: SearchMode.phones);
+      SearchProviderParams(searchMode: SearchMode.productsAndCompanies);
 
   void _getMyRecentSearches() {
     ref.read(getMyRecentSearchesProvider.notifier).getMyRecentSearches();
