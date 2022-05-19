@@ -27,6 +27,17 @@ class GetInteractionsNotifier extends StateNotifier<GetInteractionsState> {
 
   String? _lastAcceptedAnswerId;
 
+  void toggleLikedState({
+    required String interactionId,
+    required InteractionType interactionType,
+  }) {
+    final currentState = state;
+    if (currentState is GetInteractionsLoadedState) {
+      if (interactionType != InteractionType.reply) {
+      } else if (interactionType == InteractionType.reply) {}
+    }
+  }
+
   void undoAcceptAnswer() {
     final currentState = state;
     if (currentState is GetInteractionsLoadedState &&

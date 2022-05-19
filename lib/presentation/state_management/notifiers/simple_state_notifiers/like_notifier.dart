@@ -18,6 +18,7 @@ class LikeNotifier extends StateNotifier<LikeState> {
     required String? replyParentId,
     required PostType postType,
     required InteractionType? interactionType,
+    required this.getInteractionsProviderParams,
     required this.ref,
   })  : _socialItemId = socialItemId,
         _replyParentId = replyParentId,
@@ -30,6 +31,7 @@ class LikeNotifier extends StateNotifier<LikeState> {
   final PostType _postType;
   final InteractionType? _interactionType;
   final AutoDisposeStateNotifierProviderRef ref;
+  final GetInteractionsProviderParams? getInteractionsProviderParams;
 
   late final PostProviderParams _postProviderParams = PostProviderParams(
     postId: _socialItemId,

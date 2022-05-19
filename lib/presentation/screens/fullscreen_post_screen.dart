@@ -14,7 +14,7 @@ import 'package:urrevs_ui_mobile/domain/models/comment.dart';
 import 'package:urrevs_ui_mobile/domain/models/company_review.dart';
 import 'package:urrevs_ui_mobile/domain/models/direct_interaction.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone_review.dart';
-import 'package:urrevs_ui_mobile/domain/models/quesiton.dart';
+import 'package:urrevs_ui_mobile/domain/models/question.dart';
 import 'package:urrevs_ui_mobile/domain/models/reply_model.dart';
 import 'package:urrevs_ui_mobile/domain/models/user.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
@@ -370,6 +370,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
           comments: _interactions.map((i) => i as Comment).toList(),
           parentPostType: _postType,
           postUserId: widget.screenArgs.postUserId,
+          getInteractionsProviderParams: _interactionsProviderParams,
           onPressingReplyList: List.generate(_interactions.length, (i) {
             return () {
               _idOfInteractionRepliedTo = _interactions[i].id;

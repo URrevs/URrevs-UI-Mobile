@@ -301,6 +301,13 @@ class _AnswerTreeState extends ConsumerState<AnswerTree> {
                       parentPostType: PostType.phoneReview,
                       replyParentId: 'dummy',
                       postUserId: 'dummy',
+                      /// replies would not be shown except at fullscreen post
+                      /// screen where get interactions provider params are
+                      /// passed to answer tree - the only case where answer
+                      /// tree isn't passed the params is when it is viewed in
+                      /// question card
+                      getInteractionsProviderParams:
+                          widget.getInteractionsProviderParams!,
                     ),
                     if (i != widget.replies.length - 1)
                       VerticalSpacesBetween.replies,

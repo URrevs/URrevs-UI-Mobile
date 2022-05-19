@@ -101,11 +101,13 @@ class LikeProviderParams extends Equatable {
   final String? replyParentId;
   final PostType postType;
   final InteractionType? interactionType;
+  final GetInteractionsProviderParams? getInteractionsProviderParams;
   const LikeProviderParams({
     required this.socialItemId,
     required this.replyParentId,
     required this.postType,
     required this.interactionType,
+    required this.getInteractionsProviderParams,
   });
 
   @override

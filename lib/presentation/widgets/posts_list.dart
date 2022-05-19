@@ -11,7 +11,7 @@ import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/ques
 import '../../domain/failure.dart';
 import '../../domain/models/phone_review.dart';
 import '../../domain/models/post.dart';
-import '../../domain/models/quesiton.dart';
+import '../../domain/models/question.dart';
 import '../resources/enums.dart';
 import '../screens/fullscreen_post_screen.dart';
 import '../state_management/providers_parameters.dart';

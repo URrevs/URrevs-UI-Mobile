@@ -2,14 +2,23 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
+import 'package:urrevs_ui_mobile/domain/models/company_review.dart';
+import 'package:urrevs_ui_mobile/domain/models/phone_review.dart';
 import 'package:urrevs_ui_mobile/domain/models/post.dart';
+import 'package:urrevs_ui_mobile/domain/models/question.dart';
 import 'package:urrevs_ui_mobile/domain/repository.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/question_states/get_post_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/like_state.dart';
 
 import '../../states/reviews_states/get_posts_list_state.dart';
 
 class GetPostsListNotifier extends StateNotifier<GetPostsListState> {
-  GetPostsListNotifier() : super(GetPostsListInitialState());
+  GetPostsListNotifier({required this.ref}) : super(GetPostsListInitialState());
+
+  final AutoDisposeStateNotifierProviderRef ref;
 
   int _round = 1;
 
@@ -90,11 +99,15 @@ class GetPostsListNotifier extends StateNotifier<GetPostsListState> {
   }) async {
     assert(!(postsListType == PostsListType.target && targetId == null));
     assert(!(postsListType == PostsListType.target && userId != null));
+    // do not load new posts if not in initial or loaded states
+    print(state);
+    if (state is GetPostsListLoadingState) return;
+
     // get current items in the state
-    List<Post> currentphoneReviews = [];
+    List<Post> currentPosts = [];
     final currentState = state;
     if (currentState is GetPostsListLoadedState) {
-      currentphoneReviews = currentState.infiniteScrollingItems;
+      currentPosts = currentState.infiniteScrollingItems;
     }
     // send the request
     state = GetPostsListLoadingState();
@@ -118,16 +131,49 @@ class GetPostsListNotifier extends StateNotifier<GetPostsListState> {
     response.fold(
       // deal with failure
       (failure) => state = GetPostsListErrorState(failure: failure),
-      (phoneReviews) {
+      (posts) {
         // add items and rounds ended state to the loaded state
-        bool roundsEnded = phoneReviews.isEmpty;
-        List<Post> newphoneReviews = [...currentphoneReviews, ...phoneReviews];
+        bool roundsEnded = posts.isEmpty;
+        List<Post> newPosts = [...currentPosts, ...posts];
         state = GetPostsListLoadedState(
-          infiniteScrollingItems: newphoneReviews,
+          infiniteScrollingItems: newPosts,
           roundsEnded: roundsEnded,
         );
         // increment rounds
         _round++;
+        // add listeners to like providers of these posts
+        for (Post post in posts) {
+          final params = LikeProviderParams(
+            socialItemId: post.id,
+            replyParentId: null,
+            postType: post.postType,
+            interactionType: null,
+            getInteractionsProviderParams: null,
+          );
+          ref.listen(likeProvider(params), (previous, next) {
+            final currentState = state;
+            if (currentState is GetPostsListLoadedState &&
+                next is LikeLoadedState) {
+              List<Post> posts = [...currentState.infiniteScrollingItems];
+              int index = posts.indexWhere((p) => p.id == post.id);
+              Post changedPost = posts[index];
+              if (changedPost is PhoneReview) {
+                changedPost = changedPost.copyWith(liked: next.liked);
+              } else if (changedPost is CompanyReview) {
+                changedPost = changedPost.copyWith(liked: next.liked);
+              } else {
+                changedPost =
+                    (changedPost as Question).copyWith(upvoted: next.liked);
+              }
+              posts.removeAt(index);
+              posts.insert(index, changedPost);
+              state = GetPostsListLoadedState(
+                infiniteScrollingItems: posts,
+                roundsEnded: currentState.roundsEnded,
+              );
+            }
+          });
+        }
       },
     );
   }

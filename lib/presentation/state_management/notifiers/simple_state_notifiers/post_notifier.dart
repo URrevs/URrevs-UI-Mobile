@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:urrevs_ui_mobile/domain/models/company_review.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone_review.dart';
 import 'package:urrevs_ui_mobile/domain/models/post.dart';
-import 'package:urrevs_ui_mobile/domain/models/quesiton.dart';
+import 'package:urrevs_ui_mobile/domain/models/question.dart';
 
 class PostNotifier extends StateNotifier<Post> {
   /// Post would not be null as postProvider is first invoked by widgets showing

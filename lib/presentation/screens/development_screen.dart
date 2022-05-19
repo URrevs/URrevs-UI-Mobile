@@ -50,6 +50,26 @@ import 'package:urrevs_ui_mobile/presentation/widgets/tiles/updated_list_tile.da
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
+final countProvider = StateProvider<int>((ref) {
+  return 1;
+});
+
+final squareProvider = StateNotifierProvider<SquareNotifier, int>((ref) {
+  return SquareNotifier(ref);
+});
+
+class SquareNotifier extends StateNotifier<int> {
+  SquareNotifier(this.ref) : super(1) {
+    ref.listen<int>(countProvider, (previous, next) {
+      state = state + 1;
+    });
+  }
+
+  void increment() => state = state + 1;
+
+  final StateNotifierProviderRef ref;
+}
+
 class DevelopmentScreen extends ConsumerStatefulWidget {
   const DevelopmentScreen({Key? key}) : super(key: key);
 
@@ -171,20 +191,19 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
       body: ListView(
         padding: EdgeInsets.all(20),
         children: [
-          Form(
-            key: formKey,
-            child: Column(
-              children: [
-                MyTextFormField(),
-                ElevatedButton(
-                  onPressed: () {
-                    formKey.currentState!.validate();
-                  },
-                  child: Text('SUBMIT'),
-                )
-              ],
-            ),
+          ElevatedButton(
+            onPressed: () {
+              ref.read(countProvider.notifier).update((state) => state + 1);
+            },
+            child: Text('INCREMENT COUNTER'),
           ),
+          ElevatedButton(
+            onPressed: () {
+              ref.read(squareProvider.notifier).increment();
+            },
+            child: Text('INCREMENT SQUARE'),
+          ),
+          Text(ref.watch(squareProvider).toString()),
           // UpdatedListTile(title: 'قائمة الشركات المضافة حديثاً', items: items),
           // ProductReviewCard.dummyInstance(),
           // CompanyReviewCard.dummyInstance(),

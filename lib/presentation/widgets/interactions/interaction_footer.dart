@@ -53,6 +53,7 @@ class InteractionFooter extends ConsumerStatefulWidget {
   final InteractionType interactionType;
   final String userId;
   final bool? accepted;
+  /// could be null if answer is viewed inside a question card
   final GetInteractionsProviderParams? getInteractionsProviderParams;
   final String? questionId;
   final String postUserId;
@@ -67,6 +68,7 @@ class _InteractionFooterState extends ConsumerState<InteractionFooter> {
     replyParentId: widget.replyParentId,
     postType: widget.parentPostType,
     interactionType: widget.interactionType,
+    getInteractionsProviderParams: widget.getInteractionsProviderParams,
   );
 
   late final AcceptAnswerProviderParams? _acceptAnswerProviderParams =

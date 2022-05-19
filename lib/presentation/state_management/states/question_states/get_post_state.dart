@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/domain/models/post.dart';
-import 'package:urrevs_ui_mobile/domain/models/quesiton.dart';
+import 'package:urrevs_ui_mobile/domain/models/question.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 
 abstract class GetPostState extends Equatable implements RequestState {}

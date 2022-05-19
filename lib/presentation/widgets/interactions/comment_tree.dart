@@ -24,6 +24,7 @@ class CommentTree extends ConsumerStatefulWidget {
     required this.onPressingReply,
     required this.parentPostType,
     required this.postUserId,
+    required this.getInteractionsProviderParams,
   })  : imageUrl = comment.photo,
         authorName = comment.userName,
         userId = comment.userId,
@@ -52,6 +53,7 @@ class CommentTree extends ConsumerStatefulWidget {
   final VoidCallback onPressingReply;
   final PostType parentPostType;
   final String postUserId;
+  final GetInteractionsProviderParams getInteractionsProviderParams;
 
   late final DirectInteractionProviderParams _directInteractionProviderParams;
 
@@ -60,6 +62,8 @@ class CommentTree extends ConsumerStatefulWidget {
         onPressingReply: () {},
         parentPostType: PostType.phoneReview,
         postUserId: 'dummy',
+        getInteractionsProviderParams: GetInteractionsProviderParams(
+            postId: 'dummy', postType: PostType.phoneReview),
       );
 
   @override
@@ -121,7 +125,8 @@ class _CommentTreeState extends ConsumerState<CommentTree> {
                   replyParentId: null,
                   userId: widget.userId,
                   accepted: null,
-                  getInteractionsProviderParams: null,
+                  getInteractionsProviderParams:
+                      widget.getInteractionsProviderParams,
                   questionId: null,
                   postUserId: widget.postUserId,
                 ),
@@ -143,6 +148,8 @@ class _CommentTreeState extends ConsumerState<CommentTree> {
                       parentPostType: widget.parentPostType,
                       replyParentId: widget.commentId,
                       postUserId: widget.postUserId,
+                      getInteractionsProviderParams:
+                          widget.getInteractionsProviderParams,
                     ),
                     if (i != widget.replies.length - 1)
                       VerticalSpacesBetween.replies,

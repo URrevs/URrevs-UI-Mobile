@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'package:urrevs_ui_mobile/data/responses/sub_responses.dart';
 import 'package:urrevs_ui_mobile/domain/models/answer.dart';
-import 'package:urrevs_ui_mobile/domain/models/quesiton.dart';
+import 'package:urrevs_ui_mobile/domain/models/question.dart';
 
 import 'base_response.dart';
 

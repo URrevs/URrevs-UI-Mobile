@@ -26,6 +26,7 @@ class Reply extends ConsumerWidget {
   final PostType parentPostType;
   final String userId;
   final String postUserId;
+  final GetInteractionsProviderParams getInteractionsProviderParams;
 
   Reply.fromReplyModel(
     ReplyModel reply, {
@@ -33,6 +34,7 @@ class Reply extends ConsumerWidget {
     required this.parentPostType,
     required this.replyParentId,
     required this.postUserId,
+    required this.getInteractionsProviderParams,
     Key? key,
   })  : imageUrl = reply.photo,
         authorName = reply.userName,
@@ -54,6 +56,8 @@ class Reply extends ConsumerWidget {
         parentPostType: PostType.phoneReview,
         replyParentId: 'dummy',
         postUserId: 'dummy',
+        getInteractionsProviderParams: GetInteractionsProviderParams(
+            postId: 'dummy', postType: PostType.phoneReview),
       );
 
   late final ReplyProviderParams _replyProviderParams;
@@ -99,7 +103,7 @@ class Reply extends ConsumerWidget {
                   replyParentId: replyParentId,
                   userId: userId,
                   accepted: null,
-                  getInteractionsProviderParams: null,
+                  getInteractionsProviderParams: getInteractionsProviderParams,
                   questionId: null,
                   postUserId: postUserId,
                 ),

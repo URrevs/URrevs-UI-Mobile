@@ -63,6 +63,7 @@ class _CardFooterButtonBarState extends ConsumerState<CardFooterButtonBar> {
     postType: widget.postType,
     interactionType: null,
     replyParentId: null,
+    getInteractionsProviderParams: null,
   );
 
   @override

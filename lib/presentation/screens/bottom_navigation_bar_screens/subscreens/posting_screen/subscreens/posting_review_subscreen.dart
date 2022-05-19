@@ -15,6 +15,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart'
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/posted_posts_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/add_phone_review_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/get_phone_manufacturing_company_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/search_state.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/no_glowing_scroll_behavior.dart';
@@ -443,7 +444,7 @@ class _PostingReviewSubscreenState
     );
     ref.listen(addPhoneReviewProvider(_addReviewProviderParams),
         (previous, next) {
-      if (next is LoadedState) {
+      if (next is AddPhoneReviewLoadedState) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(LocaleKeys.postedSuccessfully.tr()),
