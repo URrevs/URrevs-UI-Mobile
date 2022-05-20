@@ -486,7 +486,7 @@ QuestionSubResponse _$QuestionSubResponseFromJson(Map<String, dynamic> json) =>
       upvotes: json['upvotes'] as int,
       upvoted: json['upvoted'] as bool?,
       ansCount: json['ansCount'] as int,
-      shareCount: json['shareCount'] as int,
+      shares: json['shares'] as int,
       acceptedAns: json['acceptedAns'] == null
           ? null
           : AnswerSubResponse.fromJson(
@@ -508,7 +508,7 @@ Map<String, dynamic> _$QuestionSubResponseToJson(
       'upvotes': instance.upvotes,
       'upvoted': instance.upvoted,
       'ansCount': instance.ansCount,
-      'shareCount': instance.shareCount,
+      'shares': instance.shares,
       'acceptedAns': instance.acceptedAns,
     };
 
@@ -532,7 +532,7 @@ PhoneQuestionSubResponse _$PhoneQuestionSubResponseFromJson(
       upvotes: json['upvotes'] as int,
       upvoted: json['upvoted'] as bool?,
       ansCount: json['ansCount'] as int,
-      shareCount: json['shareCount'] as int,
+      shares: json['shares'] as int,
       acceptedAns: json['acceptedAns'] == null
           ? null
           : AnswerSubResponse.fromJson(
@@ -554,7 +554,7 @@ Map<String, dynamic> _$PhoneQuestionSubResponseToJson(
       'upvotes': instance.upvotes,
       'upvoted': instance.upvoted,
       'ansCount': instance.ansCount,
-      'shareCount': instance.shareCount,
+      'shares': instance.shares,
       'acceptedAns': instance.acceptedAns,
     };
 
@@ -573,7 +573,7 @@ CompanyQuestionSubResponse _$CompanyQuestionSubResponseFromJson(
       upvotes: json['upvotes'] as int,
       upvoted: json['upvoted'] as bool?,
       ansCount: json['ansCount'] as int,
-      shareCount: json['shareCount'] as int,
+      shares: json['shares'] as int,
       acceptedAns: json['acceptedAns'] == null
           ? null
           : AnswerSubResponse.fromJson(
@@ -595,7 +595,7 @@ Map<String, dynamic> _$CompanyQuestionSubResponseToJson(
       'upvotes': instance.upvotes,
       'upvoted': instance.upvoted,
       'ansCount': instance.ansCount,
-      'shareCount': instance.shareCount,
+      'shares': instance.shares,
       'acceptedAns': instance.acceptedAns,
     };
 

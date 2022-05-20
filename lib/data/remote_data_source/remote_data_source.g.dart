@@ -926,7 +926,7 @@ class _RemoteDataSource implements RemoteDataSource {
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<GetMyPhoneQuestionsResponse>(
             Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/questions/phone/my',
+                .compose(_dio.options, '/questions/phone/by/me',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = GetMyPhoneQuestionsResponse.fromJson(_result.data!);
@@ -942,7 +942,7 @@ class _RemoteDataSource implements RemoteDataSource {
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<GetMyCompanyQuestionsResponse>(
             Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/questions/company/my',
+                .compose(_dio.options, '/questions/company/by/me',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = GetMyCompanyQuestionsResponse.fromJson(_result.data!);
@@ -959,7 +959,7 @@ class _RemoteDataSource implements RemoteDataSource {
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<GetPhoneQuestionsOfAnotherUser>(
             Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/questions/phone/${userId}',
+                .compose(_dio.options, '/questions/phone/by/${userId}',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = GetPhoneQuestionsOfAnotherUser.fromJson(_result.data!);
@@ -976,7 +976,7 @@ class _RemoteDataSource implements RemoteDataSource {
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<GetCompanyQuestionsOfAnotherUser>(
             Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/questions/company/${userId}',
+                .compose(_dio.options, '/questions/company/by/${userId}',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = GetCompanyQuestionsOfAnotherUser.fromJson(_result.data!);

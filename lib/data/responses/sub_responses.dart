@@ -713,7 +713,7 @@ class QuestionSubResponse {
   int upvotes;
   bool? upvoted;
   int ansCount;
-  int shareCount;
+  int shares;
   AnswerSubResponse? acceptedAns;
   QuestionSubResponse({
     required this.id,
@@ -728,7 +728,7 @@ class QuestionSubResponse {
     required this.upvotes,
     required this.upvoted,
     required this.ansCount,
-    required this.shareCount,
+    required this.shares,
     required this.acceptedAns,
   });
 
@@ -745,7 +745,7 @@ class QuestionSubResponse {
         upvotes: upvotes,
         upvoted: upvoted ?? false,
         ansCount: ansCount,
-        shares: shareCount,
+        shares: shares,
         acceptedAns: acceptedAns?.answerModel(accepted: true),
       );
 
@@ -770,7 +770,7 @@ class PhoneQuestionSubResponse {
   int upvotes;
   bool? upvoted;
   int ansCount;
-  int shareCount;
+  int shares;
   AnswerSubResponse? acceptedAns;
   PhoneQuestionSubResponse({
     required this.id,
@@ -785,7 +785,7 @@ class PhoneQuestionSubResponse {
     required this.upvotes,
     required this.upvoted,
     required this.ansCount,
-    required this.shareCount,
+    required this.shares,
     required this.acceptedAns,
   });
 
@@ -802,7 +802,7 @@ class PhoneQuestionSubResponse {
         upvotes: upvotes,
         upvoted: upvoted ?? false,
         ansCount: ansCount,
-        shares: shareCount,
+        shares: shares,
         acceptedAns: acceptedAns?.answerModel(accepted: true),
       );
 
@@ -827,7 +827,7 @@ class CompanyQuestionSubResponse {
   int upvotes;
   bool? upvoted;
   int ansCount;
-  int shareCount;
+  int shares;
   AnswerSubResponse? acceptedAns;
   CompanyQuestionSubResponse({
     required this.id,
@@ -842,7 +842,7 @@ class CompanyQuestionSubResponse {
     required this.upvotes,
     required this.upvoted,
     required this.ansCount,
-    required this.shareCount,
+    required this.shares,
     required this.acceptedAns,
   });
 
@@ -859,7 +859,7 @@ class CompanyQuestionSubResponse {
         upvotes: upvotes,
         upvoted: upvoted ?? false,
         ansCount: ansCount,
-        shares: shareCount,
+        shares: shares,
         acceptedAns: acceptedAns?.answerModel(accepted: true),
       );
 

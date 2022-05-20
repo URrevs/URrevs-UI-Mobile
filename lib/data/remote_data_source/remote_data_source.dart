@@ -309,23 +309,23 @@ abstract class RemoteDataSource {
     @Path() String questionId,
   );
 
-  @GET('/questions/phone/my')
+  @GET('/questions/phone/by/me')
   Future<GetMyPhoneQuestionsResponse> getMyPhoneQuestions(
     @Query('round') int round,
   );
 
-  @GET('/questions/company/my')
+  @GET('/questions/company/by/me')
   Future<GetMyCompanyQuestionsResponse> getMyCompanyQuestions(
     @Query('round') int round,
   );
 
-  @GET('/questions/phone/{userId}')
+  @GET('/questions/phone/by/{userId}')
   Future<GetPhoneQuestionsOfAnotherUser> getPhoneQuestionsOfAnotherUser(
     @Path() String userId,
     @Query('round') int round,
   );
 
-  @GET('/questions/company/{userId}')
+  @GET('/questions/company/by/{userId}')
   Future<GetCompanyQuestionsOfAnotherUser> getCompanyQuestionsOfAnotherUser(
     @Path() String userId,
     @Query('round') int round,
