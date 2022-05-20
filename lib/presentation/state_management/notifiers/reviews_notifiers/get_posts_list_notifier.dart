@@ -10,7 +10,6 @@ import 'package:urrevs_ui_mobile/domain/repository.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
-import 'package:urrevs_ui_mobile/presentation/state_management/states/question_states/get_post_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/like_state.dart';
 
 import '../../states/reviews_states/get_posts_list_state.dart';
@@ -99,8 +98,9 @@ class GetPostsListNotifier extends StateNotifier<GetPostsListState> {
   }) async {
     assert(!(postsListType == PostsListType.target && targetId == null));
     assert(!(postsListType == PostsListType.target && userId != null));
-    // do not load new posts if not in initial or loaded states
-    print(state);
+    /// do not load new posts if not in initial or loaded states
+    /// without this statement, the posts list behaves weirdly as it removes
+    /// previous rounds posts and puts only the new round posts
     if (state is GetPostsListLoadingState) return;
 
     // get current items in the state
@@ -131,50 +131,54 @@ class GetPostsListNotifier extends StateNotifier<GetPostsListState> {
     response.fold(
       // deal with failure
       (failure) => state = GetPostsListErrorState(failure: failure),
-      (posts) {
+      (fetchedPosts) {
         // add items and rounds ended state to the loaded state
-        bool roundsEnded = posts.isEmpty;
-        List<Post> newPosts = [...currentPosts, ...posts];
+        bool roundsEnded = fetchedPosts.isEmpty;
+        List<Post> newPosts = [...currentPosts, ...fetchedPosts];
         state = GetPostsListLoadedState(
           infiniteScrollingItems: newPosts,
           roundsEnded: roundsEnded,
         );
         // increment rounds
         _round++;
-        // add listeners to like providers of these posts
-        for (Post post in posts) {
-          final params = LikeProviderParams(
-            socialItemId: post.id,
-            replyParentId: null,
-            postType: post.postType,
-            interactionType: null,
-            getInteractionsProviderParams: null,
-          );
-          ref.listen(likeProvider(params), (previous, next) {
-            final currentState = state;
-            if (currentState is GetPostsListLoadedState &&
-                next is LikeLoadedState) {
-              List<Post> posts = [...currentState.infiniteScrollingItems];
-              int index = posts.indexWhere((p) => p.id == post.id);
-              Post changedPost = posts[index];
-              if (changedPost is PhoneReview) {
-                changedPost = changedPost.copyWith(liked: next.liked);
-              } else if (changedPost is CompanyReview) {
-                changedPost = changedPost.copyWith(liked: next.liked);
-              } else {
-                changedPost =
-                    (changedPost as Question).copyWith(upvoted: next.liked);
-              }
-              posts.removeAt(index);
-              posts.insert(index, changedPost);
-              state = GetPostsListLoadedState(
-                infiniteScrollingItems: posts,
-                roundsEnded: currentState.roundsEnded,
-              );
-            }
-          });
-        }
+        _addLikeListenersToPosts(fetchedPosts);
       },
     );
+  }
+
+  void _addLikeListenersToPosts(List<Post> fetchedPosts) {
+    // add listeners to like providers of the fetched posts
+    for (Post post in fetchedPosts) {
+      final params = LikeProviderParams(
+        socialItemId: post.id,
+        replyParentId: null,
+        postType: post.postType,
+        interactionType: null,
+        getInteractionsProviderParams: null,
+      );
+      ref.listen(likeProvider(params), (previous, next) {
+        final currentState = state;
+        if (currentState is GetPostsListLoadedState &&
+            next is LikeLoadedState) {
+          List<Post> posts = [...currentState.infiniteScrollingItems];
+          int index = posts.indexWhere((p) => p.id == post.id);
+          Post changedPost = posts[index];
+          if (changedPost is PhoneReview) {
+            changedPost = changedPost.copyWith(liked: next.liked);
+          } else if (changedPost is CompanyReview) {
+            changedPost = changedPost.copyWith(liked: next.liked);
+          } else {
+            changedPost =
+                (changedPost as Question).copyWith(upvoted: next.liked);
+          }
+          posts.removeAt(index);
+          posts.insert(index, changedPost);
+          state = GetPostsListLoadedState(
+            infiniteScrollingItems: posts,
+            roundsEnded: currentState.roundsEnded,
+          );
+        }
+      });
+    }
   }
 }

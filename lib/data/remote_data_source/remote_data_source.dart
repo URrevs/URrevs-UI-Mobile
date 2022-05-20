@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 import 'package:urrevs_ui_mobile/data/requests/base_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/companies_api_requests.dart';
+import 'package:urrevs_ui_mobile/data/requests/questions_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/reviews_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/search_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/users_api_requests.dart';
@@ -286,6 +287,16 @@ abstract class RemoteDataSource {
   Future<UnlikeCompanyReviewReplyResponse> unlikeCompanyReviewReply(
     @Path() String commentId,
     @Path() String replyId,
+  );
+
+  @POST('/questions/phone')
+  Future<AddPhoneQuestionResponse> addPhoneQuestion(
+    @Body() AddPhoneQuestionRequest request,
+  );
+
+  @POST('/questions/company')
+  Future<AddCompanyQuestionResponse> addCompanyQuestion(
+    @Body() AddCompanyQuestionRequest request,
   );
 
   @GET('/questions/phone/{questionId}')

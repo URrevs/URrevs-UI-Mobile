@@ -478,15 +478,15 @@ QuestionSubResponse _$QuestionSubResponseFromJson(Map<String, dynamic> json) =>
       type: $enumDecode(_$TargetTypeEnumMap, json['type']),
       userId: json['userId'] as String,
       userName: json['userName'] as String,
-      photo: json['photo'] as String?,
+      photo: json['picture'] as String?,
       createdAt: DateTime.parse(json['createdAt'] as String),
       targetName: json['targetName'] as String,
       targetId: json['targetId'] as String,
       content: json['content'] as String,
       upvotes: json['upvotes'] as int,
-      upvoted: json['upvoted'] as bool,
+      upvoted: json['upvoted'] as bool?,
       ansCount: json['ansCount'] as int,
-      shares: json['shares'] as int,
+      shareCount: json['shareCount'] as int,
       acceptedAns: json['acceptedAns'] == null
           ? null
           : AnswerSubResponse.fromJson(
@@ -500,7 +500,7 @@ Map<String, dynamic> _$QuestionSubResponseToJson(
       'type': _$TargetTypeEnumMap[instance.type],
       'userId': instance.userId,
       'userName': instance.userName,
-      'photo': instance.photo,
+      'picture': instance.photo,
       'createdAt': instance.createdAt.toIso8601String(),
       'targetName': instance.targetName,
       'targetId': instance.targetId,
@@ -508,7 +508,7 @@ Map<String, dynamic> _$QuestionSubResponseToJson(
       'upvotes': instance.upvotes,
       'upvoted': instance.upvoted,
       'ansCount': instance.ansCount,
-      'shares': instance.shares,
+      'shareCount': instance.shareCount,
       'acceptedAns': instance.acceptedAns,
     };
 
@@ -516,6 +516,88 @@ const _$TargetTypeEnumMap = {
   TargetType.phone: 'phone',
   TargetType.company: 'company',
 };
+
+PhoneQuestionSubResponse _$PhoneQuestionSubResponseFromJson(
+        Map<String, dynamic> json) =>
+    PhoneQuestionSubResponse(
+      id: json['_id'] as String,
+      type: $enumDecode(_$TargetTypeEnumMap, json['type']),
+      userId: json['userId'] as String,
+      userName: json['userName'] as String,
+      photo: json['picture'] as String?,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      phoneName: json['phoneName'] as String,
+      phoneId: json['phoneId'] as String,
+      content: json['content'] as String,
+      upvotes: json['upvotes'] as int,
+      upvoted: json['upvoted'] as bool?,
+      ansCount: json['ansCount'] as int,
+      shareCount: json['shareCount'] as int,
+      acceptedAns: json['acceptedAns'] == null
+          ? null
+          : AnswerSubResponse.fromJson(
+              json['acceptedAns'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$PhoneQuestionSubResponseToJson(
+        PhoneQuestionSubResponse instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'type': _$TargetTypeEnumMap[instance.type],
+      'userId': instance.userId,
+      'userName': instance.userName,
+      'picture': instance.photo,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'phoneName': instance.phoneName,
+      'phoneId': instance.phoneId,
+      'content': instance.content,
+      'upvotes': instance.upvotes,
+      'upvoted': instance.upvoted,
+      'ansCount': instance.ansCount,
+      'shareCount': instance.shareCount,
+      'acceptedAns': instance.acceptedAns,
+    };
+
+CompanyQuestionSubResponse _$CompanyQuestionSubResponseFromJson(
+        Map<String, dynamic> json) =>
+    CompanyQuestionSubResponse(
+      id: json['_id'] as String,
+      type: $enumDecode(_$TargetTypeEnumMap, json['type']),
+      userId: json['userId'] as String,
+      userName: json['userName'] as String,
+      photo: json['picture'] as String?,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      companyName: json['companyName'] as String,
+      companyId: json['companyId'] as String,
+      content: json['content'] as String,
+      upvotes: json['upvotes'] as int,
+      upvoted: json['upvoted'] as bool?,
+      ansCount: json['ansCount'] as int,
+      shareCount: json['shareCount'] as int,
+      acceptedAns: json['acceptedAns'] == null
+          ? null
+          : AnswerSubResponse.fromJson(
+              json['acceptedAns'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$CompanyQuestionSubResponseToJson(
+        CompanyQuestionSubResponse instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'type': _$TargetTypeEnumMap[instance.type],
+      'userId': instance.userId,
+      'userName': instance.userName,
+      'picture': instance.photo,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'companyName': instance.companyName,
+      'companyId': instance.companyId,
+      'content': instance.content,
+      'upvotes': instance.upvotes,
+      'upvoted': instance.upvoted,
+      'ansCount': instance.ansCount,
+      'shareCount': instance.shareCount,
+      'acceptedAns': instance.acceptedAns,
+    };
 
 AnswerSubResponse _$AnswerSubResponseFromJson(Map<String, dynamic> json) =>
     AnswerSubResponse(

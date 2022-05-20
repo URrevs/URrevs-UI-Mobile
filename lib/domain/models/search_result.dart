@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 enum SearchType { phone, company }
@@ -31,6 +32,15 @@ class SearchResult extends Equatable {
         return Icons.smartphone;
       case SearchType.company:
         return Icons.business;
+    }
+  }
+
+  TargetType get targetType {
+    switch (type) {
+      case SearchType.phone:
+        return TargetType.phone;
+      case SearchType.company:
+        return TargetType.company;
     }
   }
 

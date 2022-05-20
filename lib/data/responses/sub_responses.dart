@@ -704,15 +704,16 @@ class QuestionSubResponse {
   TargetType type;
   String userId;
   String userName;
+  @JsonKey(name: 'picture')
   String? photo;
   DateTime createdAt;
   String targetName;
   String targetId;
   String content;
   int upvotes;
-  bool upvoted;
+  bool? upvoted;
   int ansCount;
-  int shares;
+  int shareCount;
   AnswerSubResponse? acceptedAns;
   QuestionSubResponse({
     required this.id,
@@ -727,7 +728,7 @@ class QuestionSubResponse {
     required this.upvotes,
     required this.upvoted,
     required this.ansCount,
-    required this.shares,
+    required this.shareCount,
     required this.acceptedAns,
   });
 
@@ -742,15 +743,129 @@ class QuestionSubResponse {
         targetName: targetName,
         targetId: targetId,
         upvotes: upvotes,
-        upvoted: upvoted,
+        upvoted: upvoted ?? false,
         ansCount: ansCount,
-        shares: shares,
+        shares: shareCount,
         acceptedAns: acceptedAns?.answerModel(accepted: true),
       );
 
   factory QuestionSubResponse.fromJson(Map<String, Object?> json) =>
       _$QuestionSubResponseFromJson(json);
   Map<String, dynamic> toJson() => _$QuestionSubResponseToJson(this);
+}
+
+@JsonSerializable()
+class PhoneQuestionSubResponse {
+  @JsonKey(name: '_id')
+  String id;
+  TargetType type;
+  String userId;
+  String userName;
+  @JsonKey(name: 'picture')
+  String? photo;
+  DateTime createdAt;
+  String phoneName;
+  String phoneId;
+  String content;
+  int upvotes;
+  bool? upvoted;
+  int ansCount;
+  int shareCount;
+  AnswerSubResponse? acceptedAns;
+  PhoneQuestionSubResponse({
+    required this.id,
+    required this.type,
+    required this.userId,
+    required this.userName,
+    required this.photo,
+    required this.createdAt,
+    required this.phoneName,
+    required this.phoneId,
+    required this.content,
+    required this.upvotes,
+    required this.upvoted,
+    required this.ansCount,
+    required this.shareCount,
+    required this.acceptedAns,
+  });
+
+  Question get questionModel => Question(
+        id: id,
+        type: type,
+        userId: userId,
+        userName: userName,
+        photo: photo,
+        createdAt: createdAt,
+        content: content,
+        targetName: phoneName,
+        targetId: phoneId,
+        upvotes: upvotes,
+        upvoted: upvoted ?? false,
+        ansCount: ansCount,
+        shares: shareCount,
+        acceptedAns: acceptedAns?.answerModel(accepted: true),
+      );
+
+  factory PhoneQuestionSubResponse.fromJson(Map<String, Object?> json) =>
+      _$PhoneQuestionSubResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$PhoneQuestionSubResponseToJson(this);
+}
+
+@JsonSerializable()
+class CompanyQuestionSubResponse {
+  @JsonKey(name: '_id')
+  String id;
+  TargetType type;
+  String userId;
+  String userName;
+  @JsonKey(name: 'picture')
+  String? photo;
+  DateTime createdAt;
+  String companyName;
+  String companyId;
+  String content;
+  int upvotes;
+  bool? upvoted;
+  int ansCount;
+  int shareCount;
+  AnswerSubResponse? acceptedAns;
+  CompanyQuestionSubResponse({
+    required this.id,
+    required this.type,
+    required this.userId,
+    required this.userName,
+    required this.photo,
+    required this.createdAt,
+    required this.companyName,
+    required this.companyId,
+    required this.content,
+    required this.upvotes,
+    required this.upvoted,
+    required this.ansCount,
+    required this.shareCount,
+    required this.acceptedAns,
+  });
+
+  Question get questionModel => Question(
+        id: id,
+        type: type,
+        userId: userId,
+        userName: userName,
+        photo: photo,
+        createdAt: createdAt,
+        content: content,
+        targetName: companyName,
+        targetId: companyId,
+        upvotes: upvotes,
+        upvoted: upvoted ?? false,
+        ansCount: ansCount,
+        shares: shareCount,
+        acceptedAns: acceptedAns?.answerModel(accepted: true),
+      );
+
+  factory CompanyQuestionSubResponse.fromJson(Map<String, Object?> json) =>
+      _$CompanyQuestionSubResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$CompanyQuestionSubResponseToJson(this);
 }
 
 @JsonSerializable()

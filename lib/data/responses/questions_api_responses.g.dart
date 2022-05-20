@@ -6,6 +6,36 @@ part of 'questions_api_responses.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+AddPhoneQuestionResponse _$AddPhoneQuestionResponseFromJson(
+        Map<String, dynamic> json) =>
+    AddPhoneQuestionResponse(
+      success: json['success'] as bool,
+      questionSubResponse: PhoneQuestionSubResponse.fromJson(
+          json['question'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$AddPhoneQuestionResponseToJson(
+        AddPhoneQuestionResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'question': instance.questionSubResponse,
+    };
+
+AddCompanyQuestionResponse _$AddCompanyQuestionResponseFromJson(
+        Map<String, dynamic> json) =>
+    AddCompanyQuestionResponse(
+      success: json['success'] as bool,
+      questionSubResponse: CompanyQuestionSubResponse.fromJson(
+          json['question'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$AddCompanyQuestionResponseToJson(
+        AddCompanyQuestionResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'question': instance.questionSubResponse,
+    };
+
 GetPhoneQuestionResponse _$GetPhoneQuestionResponseFromJson(
         Map<String, dynamic> json) =>
     GetPhoneQuestionResponse(

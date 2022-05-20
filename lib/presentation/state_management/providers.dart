@@ -42,6 +42,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_sta
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_two_phones_specs_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/indicate_user_compared_between_two_phones_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/question_states/accept_answer_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/question_states/add_question_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/question_states/get_post_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/add_interaction_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/add_phone_review_state.dart';
@@ -69,6 +70,7 @@ import 'notifiers/phones_notifier/get_phones_from_certain_company_notifier.dart'
 import 'notifiers/phones_notifier/get_similar_phones_notifier.dart';
 import 'notifiers/phones_notifier/indicate_user_compared_between_two_phones_notifier.dart';
 import 'notifiers/questions_notifiers/accept_answer_notifier.dart';
+import 'notifiers/questions_notifiers/add_question_notifier.dart';
 import 'notifiers/questions_notifiers/get_post_notifier.dart';
 import 'notifiers/reviews_notifiers/add_interaction_notifier.dart';
 import 'notifiers/reviews_notifiers/add_phone_review_notifier.dart';
@@ -194,9 +196,7 @@ final getSimilarPhonesProvider = StateNotifierProvider.autoDispose.family<
 //         (ref) => GetCompanyReviewsOfAnotherUserNotifier());
 
 final getPostsListProvider = StateNotifierProvider.autoDispose.family<
-    GetPostsListNotifier,
-    GetPostsListState,
-    GetPostsListProviderParams>(
+        GetPostsListNotifier, GetPostsListState, GetPostsListProviderParams>(
     (ref, params) => GetPostsListNotifier(ref: ref));
 
 final getReviewsOnCertainPhoneProvider = StateNotifierProvider.autoDispose
@@ -242,6 +242,10 @@ final addPhoneReviewProvider = StateNotifierProvider.autoDispose.family<
     AddPhoneReviewNotifier,
     AddPhoneReviewState,
     AddPhoneReviewProviderParams>((ref, params) => AddPhoneReviewNotifier());
+
+final addQuestionProvider =
+    StateNotifierProvider.autoDispose<AddQuestionNotifier, AddQuestionState>(
+        (ref) => AddQuestionNotifier());
 
 final getPostProvider = StateNotifierProvider.autoDispose
     .family<GetPostNotifier, GetPostState, GetPostProviderParams>(

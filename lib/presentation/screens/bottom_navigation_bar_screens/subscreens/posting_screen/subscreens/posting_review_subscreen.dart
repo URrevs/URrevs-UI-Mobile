@@ -26,8 +26,8 @@ import 'package:urrevs_ui_mobile/presentation/widgets/fields/datepicker_field.da
 import 'package:urrevs_ui_mobile/presentation/widgets/fields/search_text_field.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/fields/txt_field.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/company_fields_loading.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/suggested_searches_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/referral_code_help_dialog.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/search_results_menu.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/stars_counter.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 import 'dart:math' as math;
@@ -201,64 +201,6 @@ class _PostingReviewSubscreenState
     ref
         .read(searchProvider(_searchProviderParams).notifier)
         .returnToInitialState();
-    // likedAboutCompanyController.text = '';
-    // hatedAboutCompanyController.text = '';
-  }
-
-  Widget _buildSearchResults() {
-    ref.addErrorListener(
-      provider: searchProvider(_searchProviderParams),
-      context: context,
-    );
-    if (_chosenSearchResult != null) {
-      return SizedBox();
-    }
-    final state = ref.watch(searchProvider(_searchProviderParams));
-    if (state is InitialState) {
-      return SizedBox();
-    } else if (state is LoadingState) {
-      return SmallSearchingListLoading();
-    } else if (state is SearchErrorState) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 20.h),
-          PartialErrorWidget(
-            onRetry: _search,
-            retryLastRequest: state.failure is RetryFailure,
-          ),
-        ],
-      );
-    }
-    state as SearchLoadedState;
-    if (state.searchResults.isEmpty) {
-      return EmptyListWidget();
-    }
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(height: 20.h),
-        ScrollConfiguration(
-          behavior: NoGlowingScrollBehaviour(),
-          child: ListView(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            children: [
-              for (var searchResult in state.searchResults)
-                ListTile(
-                  title: Text(
-                    searchResult.name,
-                    style: TextStyleManager.s16w400.copyWith(
-                      color: ColorManager.black,
-                    ),
-                  ),
-                  onTap: () => _chooseSearchResult(searchResult),
-                )
-            ],
-          ),
-        ),
-      ],
-    );
   }
 
   SliverAppBar _buildStarsCounterBar() {
@@ -306,7 +248,12 @@ class _PostingReviewSubscreenState
                     checkChosenSearchResult: true,
                     chosenSearchResult: _chosenSearchResult,
                   ),
-                  _buildSearchResults(),
+                  SearchResultsMenu(
+                    searchProviderParams: _searchProviderParams,
+                    hideResults: _chosenSearchResult != null,
+                    onRetrySearch: _search,
+                    chooseSearchResult: _chooseSearchResult,
+                  ),
                   SizedBox(height: 20.h),
                   Text(
                     LocaleKeys.howLongHaveYouOwnedThisProduct.tr(),

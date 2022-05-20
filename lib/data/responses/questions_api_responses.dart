@@ -9,6 +9,34 @@ import 'base_response.dart';
 part 'questions_api_responses.g.dart';
 
 @JsonSerializable()
+class AddPhoneQuestionResponse extends BaseResponse {
+  @JsonKey(name: 'question')
+  PhoneQuestionSubResponse questionSubResponse;
+  AddPhoneQuestionResponse({
+    required bool success,
+    required this.questionSubResponse,
+  }) : super(success: success);
+
+  factory AddPhoneQuestionResponse.fromJson(Map<String, Object?> json) =>
+      _$AddPhoneQuestionResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$AddPhoneQuestionResponseToJson(this);
+}
+
+@JsonSerializable()
+class AddCompanyQuestionResponse extends BaseResponse {
+  @JsonKey(name: 'question')
+  CompanyQuestionSubResponse questionSubResponse;
+  AddCompanyQuestionResponse({
+    required bool success,
+    required this.questionSubResponse,
+  }) : super(success: success);
+
+  factory AddCompanyQuestionResponse.fromJson(Map<String, Object?> json) =>
+      _$AddCompanyQuestionResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$AddCompanyQuestionResponseToJson(this);
+}
+
+@JsonSerializable()
 class GetPhoneQuestionResponse extends BaseResponse {
   @JsonKey(name: 'question')
   QuestionSubResponse questionSubResponse;

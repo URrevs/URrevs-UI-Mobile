@@ -26,7 +26,6 @@ class TxtField extends StatelessWidget {
         borderSide: BorderSide(width: 0.8, color: ColorManager.backgroundGrey),
         borderRadius: BorderRadius.circular(5.r));
     return TextFormField(
-      autovalidateMode: AutovalidateMode.onUserInteraction,
       maxLines: null,
       keyboardType: keyboardType,
       cursorColor: ColorManager.black,

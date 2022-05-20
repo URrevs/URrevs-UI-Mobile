@@ -10,6 +10,7 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:urrevs_ui_mobile/app/exceptions.dart';
 import 'package:urrevs_ui_mobile/data/remote_data_source/remote_data_source.dart';
 import 'package:urrevs_ui_mobile/data/requests/base_requests.dart';
+import 'package:urrevs_ui_mobile/data/requests/questions_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/reviews_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/search_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/responses/phones_api_responses.dart';
@@ -505,6 +506,22 @@ class Repository {
       String commentId, String replyId) {
     return _tryAndCatch(() async {
       await _remoteDataSource.unlikeCompanyReviewReply(commentId, replyId);
+    });
+  }
+
+  Future<Either<Failure, Question>> addPhoneQuestion(
+      AddPhoneQuestionRequest request) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.addPhoneQuestion(request);
+      return response.questionSubResponse.questionModel;
+    });
+  }
+
+  Future<Either<Failure, Question>> addCompanyQuestion(
+      AddCompanyQuestionRequest request) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.addCompanyQuestion(request);
+      return response.questionSubResponse.questionModel;
     });
   }
 
