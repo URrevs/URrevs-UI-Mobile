@@ -218,11 +218,11 @@ final likeProvider = StateNotifierProvider.autoDispose
 });
 
 final getInteractionsProvider = StateNotifierProvider.autoDispose.family<
-    GetInteractionsNotifier,
-    GetInteractionsState,
-    GetInteractionsProviderParams>((ref,
-        params) =>
-    GetInteractionsNotifier(postId: params.postId, postType: params.postType));
+        GetInteractionsNotifier,
+        GetInteractionsState,
+        GetInteractionsProviderParams>(
+    (ref, params) => GetInteractionsNotifier(
+        postId: params.postId, postType: params.postType, ref: ref));
 
 final addInteractionProvider = StateNotifierProvider.autoDispose.family<
         AddInteractionNotifier,

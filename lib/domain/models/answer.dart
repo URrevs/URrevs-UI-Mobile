@@ -28,7 +28,10 @@ class Answer extends DirectInteraction {
     required this.accepted,
   }) : super(id: id, replies: replies);
 
+
+  @override
   Answer copyWith({
+    List<ReplyModel>? replies,
     String? userId,
     String? userName,
     String? photo,
@@ -40,6 +43,8 @@ class Answer extends DirectInteraction {
     bool? accepted,
   }) {
     return Answer(
+      id: id,
+      replies: replies ?? this.replies,
       userId: userId ?? this.userId,
       userName: userName ?? this.userName,
       photo: photo ?? this.photo,
@@ -49,8 +54,6 @@ class Answer extends DirectInteraction {
       upvotes: upvotes ?? this.upvotes,
       upvoted: upvoted ?? this.upvoted,
       accepted: accepted ?? this.accepted,
-      id: id,
-      replies: replies,
     );
   }
 

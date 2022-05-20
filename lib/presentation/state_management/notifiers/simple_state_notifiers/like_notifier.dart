@@ -78,7 +78,7 @@ class LikeNotifier extends StateNotifier<LikeState> {
               .notifier)
           .decrementLikes();
     } else {
-      ref.read(replyProvider(_replyProviderParams).notifier).incrementLikes();
+      ref.read(replyProvider(_replyProviderParams).notifier).decrementLikes();
     }
   }
 

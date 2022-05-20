@@ -4,16 +4,23 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/domain/models/answer.dart';
+import 'package:urrevs_ui_mobile/domain/models/comment.dart';
 import 'package:urrevs_ui_mobile/domain/models/direct_interaction.dart';
 import 'package:urrevs_ui_mobile/domain/models/reply_model.dart';
 import 'package:urrevs_ui_mobile/domain/repository.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/like_state.dart';
 
 import '../../states/reviews_states/get_interactions_state.dart';
 
 class GetInteractionsNotifier extends StateNotifier<GetInteractionsState> {
-  GetInteractionsNotifier({required String postId, required PostType postType})
-      : _postId = postId,
+  GetInteractionsNotifier({
+    required String postId,
+    required PostType postType,
+    required this.ref,
+  })  : _postId = postId,
         _postType = postType,
         super(GetInteractionsInitialState());
 
@@ -22,6 +29,8 @@ class GetInteractionsNotifier extends StateNotifier<GetInteractionsState> {
   final String _postId;
 
   final PostType _postType;
+
+  final AutoDisposeStateNotifierProviderRef ref;
 
   List<DirectInteraction> _currentInteractions = [];
 
@@ -159,6 +168,81 @@ class GetInteractionsNotifier extends StateNotifier<GetInteractionsState> {
         );
         // increment rounds
         _round++;
+        // add like listeners to interactions
+        for (DirectInteraction interaction in interactions) {
+          final params = LikeProviderParams(
+            socialItemId: interaction.id,
+            replyParentId: null,
+            postType: _postType,
+            interactionType: interaction.interactionType,
+            getInteractionsProviderParams: null,
+          );
+          ref.listen(likeProvider(params), (previous, next) {
+            final currentState = state;
+            if (currentState is GetInteractionsLoadedState &&
+                next is LikeLoadedState) {
+              List<DirectInteraction> updatedInteractions = [
+                ...currentState.infiniteScrollingItems
+              ];
+              int index =
+                  updatedInteractions.indexWhere((i) => i.id == interaction.id);
+              DirectInteraction changedInteraction = updatedInteractions[index];
+              if (changedInteraction is Comment) {
+                changedInteraction =
+                    changedInteraction.copyWith(liked: next.liked);
+              } else if (changedInteraction is Answer) {
+                changedInteraction =
+                    changedInteraction.copyWith(upvoted: next.liked);
+              }
+              updatedInteractions.removeAt(index);
+              updatedInteractions.insert(index, changedInteraction);
+              state = GetInteractionsLoadedState(
+                infiniteScrollingItems: updatedInteractions,
+                roundsEnded: currentState.roundsEnded,
+              );
+            }
+          });
+          for (ReplyModel reply in interaction.replies) {
+            final replyParams = LikeProviderParams(
+              socialItemId: reply.id,
+              replyParentId: interaction.id,
+              postType: _postType,
+              interactionType: InteractionType.reply,
+              getInteractionsProviderParams: null,
+            );
+            ref.listen(likeProvider(replyParams), (previous, next) {
+              final currentState = state;
+              if (currentState is GetInteractionsLoadedState &&
+                  next is LikeLoadedState) {
+                List<DirectInteraction> updatedInteractions = [
+                  ...currentState.infiniteScrollingItems
+                ];
+                int interactionIndex = updatedInteractions
+                    .indexWhere((i) => i.replies.any((r) => r.id == reply.id));
+                List<ReplyModel> updatedReplies = [
+                  ...updatedInteractions[interactionIndex].replies
+                ];
+                int replyIndex =
+                    updatedReplies.indexWhere((r) => r.id == reply.id);
+                ReplyModel changedReply =
+                    updatedReplies[replyIndex].copyWith(liked: next.liked);
+                updatedReplies.removeAt(replyIndex);
+                updatedReplies.insert(replyIndex, changedReply);
+                DirectInteraction changedInteraction =
+                    updatedInteractions[interactionIndex]
+                        .copyWith(replies: updatedReplies);
+                updatedInteractions.removeAt(interactionIndex);
+                updatedInteractions.insert(
+                    interactionIndex, changedInteraction);
+
+                state = GetInteractionsLoadedState(
+                  infiniteScrollingItems: updatedInteractions,
+                  roundsEnded: currentState.roundsEnded,
+                );
+              }
+            });
+          }
+        }
       },
     );
   }

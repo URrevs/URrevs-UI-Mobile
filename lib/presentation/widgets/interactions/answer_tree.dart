@@ -297,6 +297,7 @@ class _AnswerTreeState extends ConsumerState<AnswerTree> {
                   for (int i = 0; i < widget.replies.length; i++) ...[
                     Reply.fromReplyModel(
                       widget.replies[i],
+                      key: ValueKey(widget.replies[i].id),
                       onPressingReply: () {},
                       parentPostType: PostType.phoneReview,
                       replyParentId: 'dummy',

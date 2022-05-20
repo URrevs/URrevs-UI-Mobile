@@ -144,6 +144,7 @@ class _CommentTreeState extends ConsumerState<CommentTree> {
                   for (int i = 0; i < widget.replies.length; i++) ...[
                     Reply.fromReplyModel(
                       widget.replies[i],
+                      key: ValueKey(widget.replies[i].id),
                       onPressingReply: widget.onPressingReply,
                       parentPostType: widget.parentPostType,
                       replyParentId: widget.commentId,

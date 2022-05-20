@@ -46,6 +46,7 @@ class CommentsList extends StatelessWidget {
         for (int i = 0; i < comments.length; i++) ...[
           CommentTree.fromComment(
             comments[i],
+            key: ValueKey(comments[i].id),
             onPressingReply: onPressingReplyList[i],
             parentPostType: parentPostType,
             postUserId: postUserId,

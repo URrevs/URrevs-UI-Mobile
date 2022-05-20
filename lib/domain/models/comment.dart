@@ -26,6 +26,7 @@ class Comment extends DirectInteraction {
   List<Object?> get props => [id];
 
   Comment copyWith({
+    List<ReplyModel>? replies,
     String? userId,
     String? userName,
     String? photo,
@@ -36,7 +37,7 @@ class Comment extends DirectInteraction {
   }) {
     return Comment(
       id: id,
-      replies: replies,
+      replies: replies ?? this.replies,
       userId: userId ?? this.userId,
       userName: userName ?? this.userName,
       photo: photo ?? this.photo,
