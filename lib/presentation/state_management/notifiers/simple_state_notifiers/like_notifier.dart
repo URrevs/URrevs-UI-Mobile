@@ -159,6 +159,10 @@ class LikeNotifier extends StateNotifier<LikeState> {
     }
     response.fold(
       (failure) {
+        if (failure is IgnoredFailure) {
+          setLoadedState(true);
+          return;
+        }
         state = LikeErrorState(failure: failure);
         setLoadedState(false);
         _decrementLikes();
@@ -244,6 +248,10 @@ class LikeNotifier extends StateNotifier<LikeState> {
     }
     response.fold(
       (failure) {
+        if (failure is IgnoredFailure) {
+          setLoadedState(false);
+          return;
+        }
         state = LikeErrorState(failure: failure);
         setLoadedState(true);
         _incrementLikes();

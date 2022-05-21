@@ -19,6 +19,15 @@ class ServerErrorMessages {
       'there is a running update operation right now';
   static const String badRequest = 'bad request';
   static const String internalServerError = 'internal server error';
+  static const String alreadyLiked = 'already liked';
+  static const String noLikes = 'no likes';
+  // static const String trackAlreadyHated = 'track already hated';
+  // static const String trackAlreadySeemored = 'track already seemored';
+  // static const String trackAlreadyFullscreened = 'track already fullscreened';
+  // static const String trackQuestionAlreadyHated =
+  //     'track question already hated';
+  // static const String trackQuestionAlreadyFullscreened =
+  //     'track question already fullscreened';
 
   static Map<String, String> get errorMessagesMap => {
         ServerErrorMessages.tooManyRequests: LocaleKeys.tooManyRequests.tr(),
@@ -36,6 +45,8 @@ class ServerErrorMessages {
         ServerErrorMessages.badRequest: LocaleKeys.badRequest.tr(),
         ServerErrorMessages.internalServerError:
             LocaleKeys.internalServerError.tr(),
+        ServerErrorMessages.alreadyLiked: alreadyLiked,
+        ServerErrorMessages.noLikes: noLikes,
       };
 
   static List<String> get _retryActionFailures => [
@@ -50,6 +61,16 @@ class ServerErrorMessages {
         tokenExpired,
         invalidToken,
         tokenRevoked,
+      ];
+
+  static List<String> get _ignoredFailures => [
+        alreadyLiked,
+        noLikes,
+        // trackAlreadyHated,
+        // trackAlreadySeemored,
+        // trackAlreadyFullscreened,
+        // trackQuestionAlreadyHated,
+        // trackQuestionAlreadyFullscreened,
       ];
 
   static List<String> get _serverErrorMessages =>
@@ -73,6 +94,8 @@ class ServerErrorMessages {
       return RetryFailure(friendlyErrorMessage);
     } else if (_authenticateFailures.contains(errorMessage)) {
       return AuthenticateFailure(friendlyErrorMessage);
+    } else if (_ignoredFailures.contains(errorMessage)) {
+      return IgnoredFailure();
     } else {
       return Failure(friendlyErrorMessage);
     }
@@ -121,6 +144,17 @@ class AuthenticateFailure extends Failure {
   @override
   String toString() {
     return 'AuthenticateFailure: $message';
+  }
+}
+
+/// A failure that the ui would not react to.
+/// It is dealt with the same way as a successful request.
+class IgnoredFailure extends Failure {
+  IgnoredFailure() : super('');
+
+  @override
+  String toString() {
+    return 'IgnoredFailure';
   }
 }
 
