@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_post_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/send_and_forget_requests.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body_expand_circle.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body_rating_block.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body_review_text.dart';
@@ -21,6 +22,8 @@ class ReviewCardBody extends StatefulWidget {
     required this.hideSeeMoreIfNoNeedForExpansion,
     required this.cardType,
     required this.fullscreen,
+    required this.postId,
+    required this.targetType,
   }) : super(key: key);
 
   /// List of rating criteria to be show in the [CardBodyRatingBlock].
@@ -53,6 +56,9 @@ class ReviewCardBody extends StatefulWidget {
 
   final bool fullscreen;
 
+  final String postId;
+  final TargetType targetType;
+
   @override
   State<ReviewCardBody> createState() => _ReviewCardBodyState();
 }
@@ -60,6 +66,8 @@ class ReviewCardBody extends StatefulWidget {
 class _ReviewCardBodyState extends State<ReviewCardBody> {
   /// Whether the card is expanded or not.
   bool _expanded = false;
+
+  bool _viewsIncremented = false;
 
   /// The max letters limit applied at any moment to the review card.
   /// It is based on the [_expanded] condition of the review card.
@@ -81,8 +89,15 @@ class _ReviewCardBodyState extends State<ReviewCardBody> {
           AppNumericValues.collapsedMaxLetters;
 
   void setExpandedState(bool value) {
+    if (!_viewsIncremented) {
+      SendAndForgetRequests.increaseViewCount(
+          postId: widget.postId, targetType: widget.targetType);
+      SendAndForgetRequests.userPressesSeeMore(
+          postId: widget.postId, targetType: widget.targetType);
+    }
     setState(() {
       _expanded = value;
+      _viewsIncremented = true;
     });
   }
 
@@ -91,9 +106,7 @@ class _ReviewCardBodyState extends State<ReviewCardBody> {
     return InkWell(
       onTap: noNeedForExpansion
           ? null
-          : () => setState(() {
-                _expanded = !_expanded;
-              }),
+          : () => setExpandedState(!_expanded),
       child: Padding(
         padding: EdgeInsets.only(right: 16.w, left: 16.w, top: 20.h),
         child: Column(
@@ -116,7 +129,6 @@ class _ReviewCardBodyState extends State<ReviewCardBody> {
               maxLetters: maxLetters,
               expanded: _expanded,
               prosAndConsCut: prosAndConsCut,
-              setExpandedState: setExpandedState,
               noNeedForExpansion: noNeedForExpansion,
               hideSeeMoreIfNoNeedForExpansion: false,
               fullscreen: widget.fullscreen,

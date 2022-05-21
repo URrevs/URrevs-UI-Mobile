@@ -852,6 +852,185 @@ class _RemoteDataSource implements RemoteDataSource {
   }
 
   @override
+  Future<IDontLikeThisForPhoneReviewResponse> iDontLikeThisForPhoneReview(
+      reviewId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<IDontLikeThisForPhoneReviewResponse>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/reviews/phone/${reviewId}/hate',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = IDontLikeThisForPhoneReviewResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<IDontLikeThisForCompanyReviewResponse> iDontLikeThisForCompanyReview(
+      reviewId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<IDontLikeThisForCompanyReviewResponse>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/reviews/company/${reviewId}/hate',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = IDontLikeThisForCompanyReviewResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<IncreaseViewCountForPhoneReviewResponse>
+      increaseViewCountForPhoneReview(reviewId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<IncreaseViewCountForPhoneReviewResponse>(
+            Options(method: 'PUT', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/reviews/phone/${reviewId}/view',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value =
+        IncreaseViewCountForPhoneReviewResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<IncreaseViewCountForCompanyReviewResponse>
+      increaseViewCountForCompanyReview(reviewId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<IncreaseViewCountForCompanyReviewResponse>(
+            Options(method: 'PUT', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/reviews/company/${reviewId}/view',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value =
+        IncreaseViewCountForCompanyReviewResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<IncreaseShareCountForPhoneReviewResponse>
+      increaseShareCountForPhoneReview(reviewId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<IncreaseShareCountForPhoneReviewResponse>(
+            Options(method: 'PUT', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/reviews/phone/${reviewId}/share',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value =
+        IncreaseShareCountForPhoneReviewResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<IncreaseShareCountForCompanyReviewResponse>
+      increaseShareCountForCompanyReview(reviewId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<IncreaseShareCountForCompanyReviewResponse>(
+            Options(method: 'PUT', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/reviews/company/${reviewId}/share',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value =
+        IncreaseShareCountForCompanyReviewResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<UserPressesSeeMoreInPhoneReviewResponse>
+      userPressesSeeMoreInPhoneReview(reviewId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<UserPressesSeeMoreInPhoneReviewResponse>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/reviews/phone/${reviewId}/seemore',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value =
+        UserPressesSeeMoreInPhoneReviewResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<UserPressesSeeMoreInCompanyReviewResponse>
+      userPressesSeeMoreInCompanyReview(reviewId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<UserPressesSeeMoreInCompanyReviewResponse>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/reviews/company/${reviewId}/seemore',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value =
+        UserPressesSeeMoreInCompanyReviewResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<UserPressesFullscreenInPhoneReviewResponse>
+      userPressesFullscreenInPhoneReview(reviewId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<UserPressesFullscreenInPhoneReviewResponse>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/reviews/phone/${reviewId}/fullscreen',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value =
+        UserPressesFullscreenInPhoneReviewResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<UserPressesFullscreenInCompanyReviewResponse>
+      userPressesFullscreenInCompanyReview(reviewId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<UserPressesFullscreenInCompanyReviewResponse>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(
+                    _dio.options, '/reviews/company/${reviewId}/fullscreen',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value =
+        UserPressesFullscreenInCompanyReviewResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<AddPhoneQuestionResponse> addPhoneQuestion(request) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

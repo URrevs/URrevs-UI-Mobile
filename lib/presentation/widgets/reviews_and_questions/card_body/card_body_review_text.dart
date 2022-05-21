@@ -17,7 +17,6 @@ class CardBodyReviewText extends StatelessWidget {
     required this.maxLetters,
     required this.expanded,
     required this.prosAndConsCut,
-    required this.setExpandedState,
     required this.noNeedForExpansion,
     required this.hideSeeMoreIfNoNeedForExpansion,
     required this.fullscreen,
@@ -55,8 +54,6 @@ class CardBodyReviewText extends StatelessWidget {
   /// length is less than or equal collapsedMaxLetters.
   final bool noNeedForExpansion;
 
-  /// A function that is invoked to set the expanded state of the parent.
-  final void Function(bool) setExpandedState;
 
   final bool fullscreen;
 

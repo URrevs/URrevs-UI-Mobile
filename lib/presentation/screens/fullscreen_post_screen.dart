@@ -24,6 +24,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart'
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/authentication_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/send_and_forget_requests.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/authentication_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/question_states/get_post_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/add_interaction_state.dart';
@@ -145,8 +146,16 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
         .getInteractions();
   }
 
+  void _sendIndicators() {
+    // SendAndForgetRequests.increaseViewCount(
+    //     postId: _postId, targetType: _targetType);
+    SendAndForgetRequests.userPressesFullscreen(
+        postId: _postId,
+        targetType: _targetType,
+        postContentType: _postType.postContentType);
+  }
+
   void _addCommentOrReply() {
-    print('sending interaction');
     AddInteractionRequest request =
         AddInteractionRequest(content: _controller.text);
     if (_idOfInteractionRepliedTo != null) {
@@ -224,6 +233,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
     Future.delayed(Duration.zero, () {
       _getPost();
       _getInteractions();
+      _sendIndicators();
     });
     if (widget.screenArgs.focusOnTextField) {
       focusNode.requestFocus();

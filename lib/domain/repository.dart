@@ -15,6 +15,7 @@ import 'package:urrevs_ui_mobile/data/requests/reviews_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/search_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/responses/phones_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/questions_api_responses.dart';
+import 'package:urrevs_ui_mobile/data/responses/reviews_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/search_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/update_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/users_api_response.dart';
@@ -506,6 +507,74 @@ class Repository {
       String commentId, String replyId) {
     return _tryAndCatch(() async {
       await _remoteDataSource.unlikeCompanyReviewReply(commentId, replyId);
+    });
+  }
+
+  Future<Either<Failure, void>> iDontLikeThisForPhoneReview(String reviewId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.iDontLikeThisForPhoneReview(reviewId);
+    });
+  }
+
+  Future<Either<Failure, void>> iDontLikeThisForCompanyReview(String reviewId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.iDontLikeThisForCompanyReview(reviewId);
+    });
+  }
+
+  Future<Either<Failure, void>> increaseViewCountForPhoneReview(
+      String reviewId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.increaseViewCountForPhoneReview(reviewId);
+    });
+  }
+
+  Future<Either<Failure, void>> increaseViewCountForCompanyReview(
+      String reviewId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.increaseViewCountForCompanyReview(reviewId);
+    });
+  }
+
+  Future<Either<Failure, void>> increaseShareCountForPhoneReview(
+      String reviewId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.increaseShareCountForPhoneReview(reviewId);
+    });
+  }
+
+  Future<Either<Failure, void>> increaseShareCountForCompanyReview(
+      String reviewId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.increaseShareCountForCompanyReview(reviewId);
+    });
+  }
+
+  Future<Either<Failure, void>> userPressesSeeMoreInPhoneReview(
+      String reviewId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.userPressesSeeMoreInPhoneReview(reviewId);
+    });
+  }
+
+  Future<Either<Failure, void>> userPressesSeeMoreInCompanyReview(
+      String reviewId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.userPressesSeeMoreInCompanyReview(reviewId);
+    });
+  }
+
+  Future<Either<Failure, void>> userPressesFullscreenInPhoneReview(
+      String reviewId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.userPressesFullscreenInPhoneReview(reviewId);
+    });
+  }
+
+  Future<Either<Failure, void>> userPressesFullscreenInCompanyReview(
+      String reviewId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.userPressesFullscreenInCompanyReview(reviewId);
     });
   }
 

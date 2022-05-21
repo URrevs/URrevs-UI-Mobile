@@ -392,3 +392,132 @@ Map<String, dynamic> _$UnlikeCompanyReviewReplyResponseToJson(
     <String, dynamic>{
       'success': instance.success,
     };
+
+IDontLikeThisForPhoneReviewResponse
+    _$IDontLikeThisForPhoneReviewResponseFromJson(Map<String, dynamic> json) =>
+        IDontLikeThisForPhoneReviewResponse(
+          success: json['success'] as bool,
+        );
+
+Map<String, dynamic> _$IDontLikeThisForPhoneReviewResponseToJson(
+        IDontLikeThisForPhoneReviewResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+    };
+
+IDontLikeThisForCompanyReviewResponse
+    _$IDontLikeThisForCompanyReviewResponseFromJson(
+            Map<String, dynamic> json) =>
+        IDontLikeThisForCompanyReviewResponse(
+          success: json['success'] as bool,
+        );
+
+Map<String, dynamic> _$IDontLikeThisForCompanyReviewResponseToJson(
+        IDontLikeThisForCompanyReviewResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+    };
+
+IncreaseViewCountForPhoneReviewResponse
+    _$IncreaseViewCountForPhoneReviewResponseFromJson(
+            Map<String, dynamic> json) =>
+        IncreaseViewCountForPhoneReviewResponse(
+          success: json['success'] as bool,
+        );
+
+Map<String, dynamic> _$IncreaseViewCountForPhoneReviewResponseToJson(
+        IncreaseViewCountForPhoneReviewResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+    };
+
+IncreaseViewCountForCompanyReviewResponse
+    _$IncreaseViewCountForCompanyReviewResponseFromJson(
+            Map<String, dynamic> json) =>
+        IncreaseViewCountForCompanyReviewResponse(
+          success: json['success'] as bool,
+        );
+
+Map<String, dynamic> _$IncreaseViewCountForCompanyReviewResponseToJson(
+        IncreaseViewCountForCompanyReviewResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+    };
+
+IncreaseShareCountForPhoneReviewResponse
+    _$IncreaseShareCountForPhoneReviewResponseFromJson(
+            Map<String, dynamic> json) =>
+        IncreaseShareCountForPhoneReviewResponse(
+          success: json['success'] as bool,
+        );
+
+Map<String, dynamic> _$IncreaseShareCountForPhoneReviewResponseToJson(
+        IncreaseShareCountForPhoneReviewResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+    };
+
+IncreaseShareCountForCompanyReviewResponse
+    _$IncreaseShareCountForCompanyReviewResponseFromJson(
+            Map<String, dynamic> json) =>
+        IncreaseShareCountForCompanyReviewResponse(
+          success: json['success'] as bool,
+        );
+
+Map<String, dynamic> _$IncreaseShareCountForCompanyReviewResponseToJson(
+        IncreaseShareCountForCompanyReviewResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+    };
+
+UserPressesSeeMoreInPhoneReviewResponse
+    _$UserPressesSeeMoreInPhoneReviewResponseFromJson(
+            Map<String, dynamic> json) =>
+        UserPressesSeeMoreInPhoneReviewResponse(
+          success: json['success'] as bool,
+        );
+
+Map<String, dynamic> _$UserPressesSeeMoreInPhoneReviewResponseToJson(
+        UserPressesSeeMoreInPhoneReviewResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+    };
+
+UserPressesSeeMoreInCompanyReviewResponse
+    _$UserPressesSeeMoreInCompanyReviewResponseFromJson(
+            Map<String, dynamic> json) =>
+        UserPressesSeeMoreInCompanyReviewResponse(
+          success: json['success'] as bool,
+        );
+
+Map<String, dynamic> _$UserPressesSeeMoreInCompanyReviewResponseToJson(
+        UserPressesSeeMoreInCompanyReviewResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+    };
+
+UserPressesFullscreenInPhoneReviewResponse
+    _$UserPressesFullscreenInPhoneReviewResponseFromJson(
+            Map<String, dynamic> json) =>
+        UserPressesFullscreenInPhoneReviewResponse(
+          success: json['success'] as bool,
+        );
+
+Map<String, dynamic> _$UserPressesFullscreenInPhoneReviewResponseToJson(
+        UserPressesFullscreenInPhoneReviewResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+    };
+
+UserPressesFullscreenInCompanyReviewResponse
+    _$UserPressesFullscreenInCompanyReviewResponseFromJson(
+            Map<String, dynamic> json) =>
+        UserPressesFullscreenInCompanyReviewResponse(
+          success: json['success'] as bool,
+        );
+
+Map<String, dynamic> _$UserPressesFullscreenInCompanyReviewResponseToJson(
+        UserPressesFullscreenInCompanyReviewResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+    };

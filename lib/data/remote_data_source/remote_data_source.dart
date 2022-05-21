@@ -289,6 +289,64 @@ abstract class RemoteDataSource {
     @Path() String replyId,
   );
 
+  @POST('/reviews/phone/{reviewId}/hate')
+  Future<IDontLikeThisForPhoneReviewResponse> iDontLikeThisForPhoneReview(
+    @Path() String reviewId,
+  );
+
+  @POST('/reviews/company/{reviewId}/hate')
+  Future<IDontLikeThisForCompanyReviewResponse> iDontLikeThisForCompanyReview(
+    @Path() String reviewId,
+  );
+
+  @PUT('/reviews/phone/{reviewId}/view')
+  Future<IncreaseViewCountForPhoneReviewResponse>
+      increaseViewCountForPhoneReview(
+    @Path() String reviewId,
+  );
+
+  @PUT('/reviews/company/{reviewId}/view')
+  Future<IncreaseViewCountForCompanyReviewResponse>
+      increaseViewCountForCompanyReview(
+    @Path() String reviewId,
+  );
+
+  @PUT('/reviews/phone/{reviewId}/share')
+  Future<IncreaseShareCountForPhoneReviewResponse>
+      increaseShareCountForPhoneReview(
+    @Path() String reviewId,
+  );
+
+  @PUT('/reviews/company/{reviewId}/share')
+  Future<IncreaseShareCountForCompanyReviewResponse>
+      increaseShareCountForCompanyReview(
+    @Path() String reviewId,
+  );
+
+  @POST('/reviews/phone/{reviewId}/seemore')
+  Future<UserPressesSeeMoreInPhoneReviewResponse>
+      userPressesSeeMoreInPhoneReview(
+    @Path() String reviewId,
+  );
+
+  @POST('/reviews/company/{reviewId}/seemore')
+  Future<UserPressesSeeMoreInCompanyReviewResponse>
+      userPressesSeeMoreInCompanyReview(
+    @Path() String reviewId,
+  );
+
+  @POST('/reviews/phone/{reviewId}/fullscreen')
+  Future<UserPressesFullscreenInPhoneReviewResponse>
+      userPressesFullscreenInPhoneReview(
+    @Path() String reviewId,
+  );
+
+  @POST('/reviews/company/{reviewId}/fullscreen')
+  Future<UserPressesFullscreenInCompanyReviewResponse>
+      userPressesFullscreenInCompanyReview(
+    @Path() String reviewId,
+  );
+
   @POST('/questions/phone')
   Future<AddPhoneQuestionResponse> addPhoneQuestion(
     @Body() AddPhoneQuestionRequest request,

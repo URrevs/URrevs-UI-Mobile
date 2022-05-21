@@ -403,3 +403,133 @@ class UnlikeCompanyReviewReplyResponse extends BaseResponse {
   Map<String, dynamic> toJson() =>
       _$UnlikeCompanyReviewReplyResponseToJson(this);
 }
+
+@JsonSerializable()
+class IDontLikeThisForPhoneReviewResponse extends BaseResponse {
+  IDontLikeThisForPhoneReviewResponse({
+    required bool success,
+  }) : super(success: success);
+
+  factory IDontLikeThisForPhoneReviewResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$IDontLikeThisForPhoneReviewResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$IDontLikeThisForPhoneReviewResponseToJson(this);
+}
+
+@JsonSerializable()
+class IDontLikeThisForCompanyReviewResponse extends BaseResponse {
+  IDontLikeThisForCompanyReviewResponse({
+    required bool success,
+  }) : super(success: success);
+
+  factory IDontLikeThisForCompanyReviewResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$IDontLikeThisForCompanyReviewResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$IDontLikeThisForCompanyReviewResponseToJson(this);
+}
+
+@JsonSerializable()
+class IncreaseViewCountForPhoneReviewResponse extends BaseResponse {
+  IncreaseViewCountForPhoneReviewResponse({
+    required bool success,
+  }) : super(success: success);
+
+  factory IncreaseViewCountForPhoneReviewResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$IncreaseViewCountForPhoneReviewResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$IncreaseViewCountForPhoneReviewResponseToJson(this);
+}
+
+@JsonSerializable()
+class IncreaseViewCountForCompanyReviewResponse extends BaseResponse {
+  IncreaseViewCountForCompanyReviewResponse({
+    required bool success,
+  }) : super(success: success);
+
+  factory IncreaseViewCountForCompanyReviewResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$IncreaseViewCountForCompanyReviewResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$IncreaseViewCountForCompanyReviewResponseToJson(this);
+}
+
+@JsonSerializable()
+class IncreaseShareCountForPhoneReviewResponse extends BaseResponse {
+  IncreaseShareCountForPhoneReviewResponse({
+    required bool success,
+  }) : super(success: success);
+
+  factory IncreaseShareCountForPhoneReviewResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$IncreaseShareCountForPhoneReviewResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$IncreaseShareCountForPhoneReviewResponseToJson(this);
+}
+
+@JsonSerializable()
+class IncreaseShareCountForCompanyReviewResponse extends BaseResponse {
+  IncreaseShareCountForCompanyReviewResponse({
+    required bool success,
+  }) : super(success: success);
+
+  factory IncreaseShareCountForCompanyReviewResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$IncreaseShareCountForCompanyReviewResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$IncreaseShareCountForCompanyReviewResponseToJson(this);
+}
+
+@JsonSerializable()
+class UserPressesSeeMoreInPhoneReviewResponse extends BaseResponse {
+  UserPressesSeeMoreInPhoneReviewResponse({
+    required bool success,
+  }) : super(success: success);
+
+  factory UserPressesSeeMoreInPhoneReviewResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$UserPressesSeeMoreInPhoneReviewResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$UserPressesSeeMoreInPhoneReviewResponseToJson(this);
+}
+
+@JsonSerializable()
+class UserPressesSeeMoreInCompanyReviewResponse extends BaseResponse {
+  UserPressesSeeMoreInCompanyReviewResponse({
+    required bool success,
+  }) : super(success: success);
+
+  factory UserPressesSeeMoreInCompanyReviewResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$UserPressesSeeMoreInCompanyReviewResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$UserPressesSeeMoreInCompanyReviewResponseToJson(this);
+}
+
+@JsonSerializable()
+class UserPressesFullscreenInPhoneReviewResponse extends BaseResponse {
+  UserPressesFullscreenInPhoneReviewResponse({
+    required bool success,
+  }) : super(success: success);
+
+  factory UserPressesFullscreenInPhoneReviewResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$UserPressesFullscreenInPhoneReviewResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$UserPressesFullscreenInPhoneReviewResponseToJson(this);
+}
+
+@JsonSerializable()
+class UserPressesFullscreenInCompanyReviewResponse extends BaseResponse {
+  UserPressesFullscreenInCompanyReviewResponse({
+    required bool success,
+  }) : super(success: success);
+
+  factory UserPressesFullscreenInCompanyReviewResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$UserPressesFullscreenInCompanyReviewResponseFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$UserPressesFullscreenInCompanyReviewResponseToJson(this);
+}
