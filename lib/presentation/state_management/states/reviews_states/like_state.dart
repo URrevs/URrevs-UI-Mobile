@@ -18,7 +18,7 @@ class LikeInitialState extends LikeState implements InitialState {
 }
 
 class LikeLoadingState extends LikeState implements LoadingState {
-  bool liked;
+  final bool liked;
   LikeLoadingState({
     required this.liked,
   });

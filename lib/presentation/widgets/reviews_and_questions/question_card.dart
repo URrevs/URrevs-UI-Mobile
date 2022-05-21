@@ -268,7 +268,9 @@ class QuestionCard extends ConsumerWidget {
                   cardType: cardType,
                   userId: userId,
                   targetId: targetId,
-                  type: cardHeaderTitleType,
+                  targetType: cardHeaderTitleType,
+                  postContentType: PostContentType.question,
+                  postId: questionId,
                 ),
                 10.verticalSpace,
                 QuestionCardBody(

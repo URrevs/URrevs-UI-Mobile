@@ -1,31 +1,53 @@
 import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/app_elevations.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 /// Builds the trailing part of the header.
 /// It contains a [PopupMenuButton] that shows "I don't like this"
-class CardHeaderTrailer extends StatefulWidget {
-  const CardHeaderTrailer({Key? key, required this.onHatingThis})
-      : super(key: key);
+class CardHeaderTrailer extends ConsumerStatefulWidget {
+  const CardHeaderTrailer({
+    Key? key,
+    required this.postId,
+    required this.targetType,
+    required this.postContentType,
+  }) : super(key: key);
 
-  /// A callback executed when the user presses on "I don't like this".
-  final VoidCallback onHatingThis;
+  final String postId;
+  final TargetType targetType;
+  final PostContentType postContentType;
+
 
   @override
-  State<CardHeaderTrailer> createState() => _CardHeaderTrailerState();
+  ConsumerState<CardHeaderTrailer> createState() => _CardHeaderTrailerState();
 }
 
-class _CardHeaderTrailerState extends State<CardHeaderTrailer> {
+class _CardHeaderTrailerState extends ConsumerState<CardHeaderTrailer> {
   final CustomPopupMenuController controller = CustomPopupMenuController();
 
-  void _onHatingThis(dynamic _) => widget.onHatingThis();
+  late final IDontLikeThisProviderParams _iDontLikeThisParams =
+      IDontLikeThisProviderParams(
+    postId: widget.postId,
+    postContentType: widget.postContentType,
+    targetType: widget.targetType,
+  );
+
+  void _onTap() {
+    controller.hideMenu();
+    ref
+        .read(iDontLikeThisProvider(_iDontLikeThisParams).notifier)
+        .iDontLikeThis();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +63,7 @@ class _CardHeaderTrailerState extends State<CardHeaderTrailer> {
           borderRadius: BorderRadius.circular(15.r),
         ),
         child: InkWell(
-          onTap: () {
-            controller.hideMenu();
-          },
+          onTap: _onTap,
           borderRadius: BorderRadius.circular(15.r),
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 28.w, vertical: 10.h),

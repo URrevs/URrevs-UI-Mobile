@@ -19,6 +19,8 @@ import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/product_profile/product_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/i_dont_like_this_state.dart';
+import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/review_card_body.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_footer/card_footer.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_header/card_header.dart';
@@ -116,6 +118,11 @@ class ProductReviewCard extends ConsumerWidget {
           postType: PostType.phoneReview,
           post: PhoneReview.dummyInstance,
         ),
+        _iDontLikeThisParams = IDontLikeThisProviderParams(
+          postId: 'dummy',
+          postContentType: PostContentType.review,
+          targetType: TargetType.phone,
+        ),
         super(key: key);
 
   ProductReviewCard.fromPhoneReview({
@@ -143,6 +150,11 @@ class ProductReviewCard extends ConsumerWidget {
           postId: phoneReview.id,
           postType: PostType.phoneReview,
           post: phoneReview,
+        ),
+        _iDontLikeThisParams = IDontLikeThisProviderParams(
+          postId: phoneReview.id,
+          postContentType: PostContentType.review,
+          targetType: TargetType.phone,
         ),
         super(key: key);
 
@@ -260,9 +272,19 @@ class ProductReviewCard extends ConsumerWidget {
   }
 
   late final PostProviderParams _postProviderParams;
+  late final IDontLikeThisProviderParams _iDontLikeThisParams;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.addErrorListener(
+        provider: iDontLikeThisProvider(_iDontLikeThisParams),
+        context: context);
+    final hateState = ref.watch(iDontLikeThisProvider(_iDontLikeThisParams));
+    if (!fullscreen &&
+        (hateState is LoadingState || hateState is LoadedState)) {
+      return SizedBox();
+    }
+
     PhoneReview review =
         ref.watch(postProvider(_postProviderParams)) as PhoneReview;
     return Stack(
@@ -288,7 +310,9 @@ class ProductReviewCard extends ConsumerWidget {
                   cardType: CardType.productReview,
                   userId: userId,
                   targetId: productId,
-                  type: TargetType.phone,
+                  targetType: TargetType.phone,
+                  postContentType: PostContentType.review,
+                  postId: reviewId,
                 ),
                 10.verticalSpace,
                 ReviewCardBody(

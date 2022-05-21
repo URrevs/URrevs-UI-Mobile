@@ -17,6 +17,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/company_profile/company_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
+import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/review_card_body.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_footer/card_footer.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_header/card_header.dart';
@@ -100,6 +101,11 @@ class CompanyReviewCard extends ConsumerWidget {
           postType: PostType.companyReview,
           post: CompanyReview.dummyInstance,
         ),
+        _iDontLikeThisParams = IDontLikeThisProviderParams(
+          postId: 'dummy',
+          postContentType: PostContentType.review,
+          targetType: TargetType.company,
+        ),
         super(key: key);
 
   CompanyReviewCard.fromCompanyReview({
@@ -126,6 +132,11 @@ class CompanyReviewCard extends ConsumerWidget {
           postId: companyReview.id,
           postType: PostType.companyReview,
           post: companyReview,
+        ),
+        _iDontLikeThisParams = IDontLikeThisProviderParams(
+          postId: companyReview.id,
+          postContentType: PostContentType.review,
+          targetType: TargetType.company,
         ),
         super(key: key);
 
@@ -208,6 +219,7 @@ class CompanyReviewCard extends ConsumerWidget {
   }
 
   late final PostProviderParams _postProviderParams;
+  late final IDontLikeThisProviderParams _iDontLikeThisParams;
 
   Positioned _buildQuestionMark(BuildContext context) {
     return Positioned(
@@ -244,6 +256,15 @@ class CompanyReviewCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
+    ref.addErrorListener(
+        provider: iDontLikeThisProvider(_iDontLikeThisParams),
+        context: context);
+    final hateState = ref.watch(iDontLikeThisProvider(_iDontLikeThisParams));
+    if (!fullscreen &&
+        (hateState is LoadingState || hateState is LoadedState)) {
+      return SizedBox();
+    }
+    
     final companyReview =
         ref.watch(postProvider(_postProviderParams)) as CompanyReview;
     return Stack(
@@ -269,7 +290,9 @@ class CompanyReviewCard extends ConsumerWidget {
                   cardType: CardType.companyReview,
                   userId: userId,
                   targetId: companyId,
-                  type: TargetType.company,
+                  targetType: TargetType.company,
+                  postContentType: PostContentType.review,
+                  postId: reviewId,
                 ),
                 10.verticalSpace,
                 ReviewCardBody(

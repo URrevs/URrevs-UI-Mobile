@@ -21,7 +21,9 @@ class CardHeader extends StatelessWidget {
     required this.cardType,
     required this.userId,
     required this.targetId,
-    required this.type,
+    required this.postId,
+    required this.targetType,
+    required this.postContentType,
   }) : super(key: key);
 
   /// Profile image url of the current logged in user.
@@ -47,8 +49,10 @@ class CardHeader extends StatelessWidget {
   final String userId;
 
   final String targetId;
+  final String postId;
 
-  final TargetType type;
+  final TargetType targetType;
+  final PostContentType postContentType;
 
   @override
   Widget build(BuildContext context) {
@@ -62,8 +66,7 @@ class CardHeader extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pushNamed(
                 UserProfileScreen.routeName,
-                arguments:
-                    UserProfileScreenArgs(userId: userId),
+                arguments: UserProfileScreenArgs(userId: userId),
               );
             },
           ),
@@ -77,7 +80,7 @@ class CardHeader extends StatelessWidget {
                   targetName: targetName,
                   cardType: cardType,
                   targetId: targetId,
-                  type: type,
+                  type: targetType,
                   userId: userId,
                 ),
                 CardHeaderSubtitle(
@@ -88,7 +91,11 @@ class CardHeader extends StatelessWidget {
               ],
             ),
           ),
-          CardHeaderTrailer(onHatingThis: () {}),
+          CardHeaderTrailer(
+            postContentType: postContentType,
+            postId: postId,
+            targetType: targetType,
+          ),
         ],
       ),
     );
