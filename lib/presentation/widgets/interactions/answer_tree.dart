@@ -300,9 +300,9 @@ class _AnswerTreeState extends ConsumerState<AnswerTree> {
                       widget.replies[i],
                       key: ValueKey(widget.replies[i].id),
                       onPressingReply: widget.onPressingReply,
-                      parentPostType: PostType.phoneReview,
-                      replyParentId: 'dummy',
-                      postUserId: 'dummy',
+                      parentPostType: widget.parentPostType,
+                      replyParentId: widget.answerId,
+                      postUserId: widget.postUserId,
                       /// replies would not be shown except at fullscreen post
                       /// screen where get interactions provider params are
                       /// passed to answer tree - the only case where answer

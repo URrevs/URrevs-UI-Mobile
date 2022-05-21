@@ -1378,138 +1378,138 @@ class _RemoteDataSource implements RemoteDataSource {
   }
 
   @override
-  Future<StatusResponse> upvotePhoneQuestionAnswer(answerId) async {
+  Future<BaseResponse> upvotePhoneQuestionAnswer(answerId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<StatusResponse>(
-            Options(method: 'PUT', headers: _headers, extra: _extra)
-                .compose(_dio.options,
-                    '/questions/phone/answers/${answerId}?action=upvote',
+        _setStreamType<BaseResponse>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(
+                    _dio.options, '/questions/phone/answers/${answerId}/like',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = StatusResponse.fromJson(_result.data!);
+    final value = BaseResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<StatusResponse> downvotePhoneQuestionAnswer(answerId) async {
+  Future<BaseResponse> downvotePhoneQuestionAnswer(answerId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<StatusResponse>(
-            Options(method: 'PUT', headers: _headers, extra: _extra)
-                .compose(_dio.options,
-                    '/questions/phone/answers/${answerId}?action=downvote',
+        _setStreamType<BaseResponse>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(
+                    _dio.options, '/questions/phone/answers/${answerId}/unlike',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = StatusResponse.fromJson(_result.data!);
+    final value = BaseResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<StatusResponse> upvoteCompanyQuestionAnswer(answerId) async {
+  Future<BaseResponse> upvoteCompanyQuestionAnswer(answerId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<StatusResponse>(
-            Options(method: 'PUT', headers: _headers, extra: _extra)
-                .compose(_dio.options,
-                    '/questions/company/answers/${answerId}?action=upvote',
+        _setStreamType<BaseResponse>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(
+                    _dio.options, '/questions/company/answers/${answerId}/like',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = StatusResponse.fromJson(_result.data!);
+    final value = BaseResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<StatusResponse> downvoteCompanyQuestionAnswer(answerId) async {
+  Future<BaseResponse> downvoteCompanyQuestionAnswer(answerId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<StatusResponse>(
-            Options(method: 'PUT', headers: _headers, extra: _extra)
-                .compose(_dio.options,
-                    '/questions/phone/answers/${answerId}?action=downvote',
-                    queryParameters: queryParameters, data: _data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = StatusResponse.fromJson(_result.data!);
+        _setStreamType<BaseResponse>(Options(
+                method: 'POST', headers: _headers, extra: _extra)
+            .compose(
+                _dio.options, '/questions/company/answers/${answerId}/unlike',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = BaseResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<StatusResponse> likePhoneQuestionReply(answerId, replyId) async {
+  Future<BaseResponse> likePhoneQuestionReply(answerId, replyId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<BaseResponse>(Options(
+                method: 'POST', headers: _headers, extra: _extra)
+            .compose(_dio.options,
+                '/questions/phone/answers/${answerId}/replies/${replyId}/like',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = BaseResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<BaseResponse> unlikePhoneQuestionReply(answerId, replyId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<
-        StatusResponse>(Options(
-            method: 'PUT', headers: _headers, extra: _extra)
+        BaseResponse>(Options(
+            method: 'POST', headers: _headers, extra: _extra)
         .compose(_dio.options,
-            '/questions/phone/answers/${answerId}/replies/${replyId}?action=like',
+            '/questions/phone/answers/${answerId}/replies/${replyId}/unlike',
             queryParameters: queryParameters, data: _data)
         .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = StatusResponse.fromJson(_result.data!);
+    final value = BaseResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<StatusResponse> unlikePhoneQuestionReply(answerId, replyId) async {
+  Future<BaseResponse> likeCompanyQuestionReply(answerId, replyId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<
-        StatusResponse>(Options(
-            method: 'PUT', headers: _headers, extra: _extra)
+        BaseResponse>(Options(
+            method: 'POST', headers: _headers, extra: _extra)
         .compose(_dio.options,
-            '/questions/phone/answers/${answerId}/replies/${replyId}?action=unlike',
+            '/questions/company/answers/${answerId}/replies/${replyId}/like',
             queryParameters: queryParameters, data: _data)
         .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = StatusResponse.fromJson(_result.data!);
+    final value = BaseResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<StatusResponse> likeCompanyQuestionReply(answerId, replyId) async {
+  Future<BaseResponse> unlikeCompanyQuestionReply(answerId, replyId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<
-        StatusResponse>(Options(
-            method: 'PUT', headers: _headers, extra: _extra)
+        BaseResponse>(Options(
+            method: 'POST', headers: _headers, extra: _extra)
         .compose(_dio.options,
-            '/questions/company/answers/${answerId}/replies/${replyId}?action=like',
+            '/questions/company/answers/${answerId}/replies/${replyId}/unlike',
             queryParameters: queryParameters, data: _data)
         .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = StatusResponse.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<StatusResponse> unlikeCompanyQuestionReply(answerId, replyId) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<
-        StatusResponse>(Options(
-            method: 'PUT', headers: _headers, extra: _extra)
-        .compose(_dio.options,
-            '/questions/company/answers/${answerId}/replies/${replyId}?action=unlike',
-            queryParameters: queryParameters, data: _data)
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = StatusResponse.fromJson(_result.data!);
+    final value = BaseResponse.fromJson(_result.data!);
     return value;
   }
 

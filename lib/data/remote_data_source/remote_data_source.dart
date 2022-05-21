@@ -462,39 +462,39 @@ abstract class RemoteDataSource {
     @Body() AddInteractionRequest request,
   );
 
-  @PUT('/questions/phone/answers/{answerId}?action=upvote')
-  Future<StatusResponse> upvotePhoneQuestionAnswer(
+  @POST('/questions/phone/answers/{answerId}/like')
+  Future<BaseResponse> upvotePhoneQuestionAnswer(
     @Path() String answerId,
   );
-  @PUT('/questions/phone/answers/{answerId}?action=downvote')
-  Future<StatusResponse> downvotePhoneQuestionAnswer(
+  @POST('/questions/phone/answers/{answerId}/unlike')
+  Future<BaseResponse> downvotePhoneQuestionAnswer(
     @Path() String answerId,
   );
-  @PUT('/questions/company/answers/{answerId}?action=upvote')
-  Future<StatusResponse> upvoteCompanyQuestionAnswer(
+  @POST('/questions/company/answers/{answerId}/like')
+  Future<BaseResponse> upvoteCompanyQuestionAnswer(
     @Path() String answerId,
   );
-  @PUT('/questions/phone/answers/{answerId}?action=downvote')
-  Future<StatusResponse> downvoteCompanyQuestionAnswer(
+  @POST('/questions/company/answers/{answerId}/unlike')
+  Future<BaseResponse> downvoteCompanyQuestionAnswer(
     @Path() String answerId,
   );
-  @PUT('/questions/phone/answers/{answerId}/replies/{replyId}?action=like')
-  Future<StatusResponse> likePhoneQuestionReply(
-    @Path() String answerId,
-    @Path() String replyId,
-  );
-  @PUT('/questions/phone/answers/{answerId}/replies/{replyId}?action=unlike')
-  Future<StatusResponse> unlikePhoneQuestionReply(
+  @POST('/questions/phone/answers/{answerId}/replies/{replyId}/like')
+  Future<BaseResponse> likePhoneQuestionReply(
     @Path() String answerId,
     @Path() String replyId,
   );
-  @PUT('/questions/company/answers/{answerId}/replies/{replyId}?action=like')
-  Future<StatusResponse> likeCompanyQuestionReply(
+  @POST('/questions/phone/answers/{answerId}/replies/{replyId}/unlike')
+  Future<BaseResponse> unlikePhoneQuestionReply(
     @Path() String answerId,
     @Path() String replyId,
   );
-  @PUT('/questions/company/answers/{answerId}/replies/{replyId}?action=unlike')
-  Future<StatusResponse> unlikeCompanyQuestionReply(
+  @POST('/questions/company/answers/{answerId}/replies/{replyId}/like')
+  Future<BaseResponse> likeCompanyQuestionReply(
+    @Path() String answerId,
+    @Path() String replyId,
+  );
+  @POST('/questions/company/answers/{answerId}/replies/{replyId}/unlike')
+  Future<BaseResponse> unlikeCompanyQuestionReply(
     @Path() String answerId,
     @Path() String replyId,
   );
