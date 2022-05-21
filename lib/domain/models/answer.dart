@@ -9,7 +9,7 @@ class Answer extends DirectInteraction {
   final String userName;
   final String? photo;
   final DateTime createdAt;
-  final DateTime ownedAt;
+  final DateTime? ownedAt;
   final String content;
   final int upvotes;
   final bool upvoted;

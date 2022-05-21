@@ -91,6 +91,7 @@ class Reply extends ConsumerWidget {
                   likeCount: reply.likes,
                   maxWidth: constraints.maxWidth - 16.w,
                   inQuestionCard: false,
+                  interactionType: InteractionType.reply,
                 ),
                 InteractionFooter(
                   onPressingReply: onPressingReply,

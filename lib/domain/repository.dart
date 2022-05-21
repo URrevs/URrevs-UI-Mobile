@@ -722,15 +722,12 @@ class Repository {
     });
   }
 
-  Future<Either<Failure, AddAnswerReturnedVals>> addAnswerToCompanyQuestion(
+  Future<Either<Failure, String>> addAnswerToCompanyQuestion(
       String questionId, AddInteractionRequest request) {
     return _tryAndCatch(() async {
       final response = await _remoteDataSource.addAnswerToCompanyQuestion(
           questionId, request);
-      return AddAnswerReturnedVals(
-        answerId: response.answerId,
-        ownedAt: response.ownedAt,
-      );
+      return response.answerId;
     }, onDioError: (e) {
       final status = e.response?.data['status'];
       if (status != null && status == ManuallyHandlledErrorMessages.notOwned) {

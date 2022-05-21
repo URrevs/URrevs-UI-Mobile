@@ -89,7 +89,7 @@ class AnswerTree extends ConsumerStatefulWidget {
   final PostType parentPostType;
   final String? imageUrl;
   final String authorName;
-  final DateTime usedSinceDate;
+  final DateTime? usedSinceDate;
   final String commentText;
   final int likeCount;
   final DateTime datePosted;
@@ -259,6 +259,7 @@ class _AnswerTreeState extends ConsumerState<AnswerTree> {
                   usedSinceDate: widget.usedSinceDate,
                   inQuestionCard: widget.inQuestionCard,
                   onTappingAnswerInCard: widget.onTappingAnswerInCard,
+                  interactionType: InteractionType.answer,
                 ),
                 InteractionFooter(
                   onPressingReply: () {
@@ -298,7 +299,7 @@ class _AnswerTreeState extends ConsumerState<AnswerTree> {
                     Reply.fromReplyModel(
                       widget.replies[i],
                       key: ValueKey(widget.replies[i].id),
-                      onPressingReply: () {},
+                      onPressingReply: widget.onPressingReply,
                       parentPostType: PostType.phoneReview,
                       replyParentId: 'dummy',
                       postUserId: 'dummy',

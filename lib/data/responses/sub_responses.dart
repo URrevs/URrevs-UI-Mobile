@@ -877,7 +877,7 @@ class AnswerSubResponse {
   @JsonKey(name: 'picture')
   String? photo;
   DateTime createdAt;
-  DateTime ownedAt;
+  DateTime? ownedAt;
   String content;
   int upvotes;
   bool upvoted;

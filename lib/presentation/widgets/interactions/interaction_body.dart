@@ -5,6 +5,7 @@ import 'package:timeago/timeago.dart' as timeago;
 import 'package:urrevs_ui_mobile/app/extensions.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/app_elevations.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/interaction_body_text.dart';
@@ -20,6 +21,7 @@ class InteractionBody extends StatefulWidget {
     required this.likeCount,
     required this.maxWidth,
     required this.inQuestionCard,
+    required this.interactionType,
     this.usedSinceDate,
     this.onTappingAnswerInCard,
   })  : assert(
@@ -35,6 +37,7 @@ class InteractionBody extends StatefulWidget {
   final bool inQuestionCard;
   final DateTime? usedSinceDate;
   final VoidCallback? onTappingAnswerInCard;
+  final InteractionType interactionType;
 
   @override
   State<InteractionBody> createState() => _InteractionBodyState();
@@ -54,7 +57,7 @@ class _InteractionBodyState extends State<InteractionBody> {
   bool get noNeedForExpansion =>
       widget.replyText.length <= AppNumericValues.interactionsMaxLetters;
 
-  bool get isAnswer => widget.usedSinceDate != null;
+  bool get isAnswer => widget.interactionType == InteractionType.answer;
 
   void _setExpandedState(bool val) => setState(() => _expanded = val);
 

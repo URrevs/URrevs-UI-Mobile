@@ -58,29 +58,40 @@ class AddInteractionNotifier extends StateNotifier<AddInteractionState> {
         );
         break;
       case PostContentType.question:
-        Either<Failure, AddAnswerReturnedVals> answerResponse;
         switch (postType.targetType) {
           case TargetType.phone:
-            answerResponse = await GetIt.I<Repository>()
+            final answerResponse = await GetIt.I<Repository>()
                 .addAnswerToPhoneQuestion(postId, request);
+            answerResponse.fold(
+              (failure) => state = AddInteractionErrorState(failure: failure),
+              (returnedVals) {
+                state = AddInteractionLoadedState(
+                  interactionId: returnedVals.answerId,
+                  ownedAt: returnedVals.ownedAt,
+                );
+                ref
+                    .read(postProvider(_postProviderParams).notifier)
+                    .incrementComments();
+              },
+            );
             break;
           case TargetType.company:
-            answerResponse = await GetIt.I<Repository>()
+            final answerResponse = await GetIt.I<Repository>()
                 .addAnswerToCompanyQuestion(postId, request);
+            answerResponse.fold(
+              (failure) => state = AddInteractionErrorState(failure: failure),
+              (answerId) {
+                state = AddInteractionLoadedState(
+                  interactionId: answerId,
+                  ownedAt: null,
+                );
+                ref
+                    .read(postProvider(_postProviderParams).notifier)
+                    .incrementComments();
+              },
+            );
             break;
         }
-        answerResponse.fold(
-          (failure) => state = AddInteractionErrorState(failure: failure),
-          (returnedVals) {
-            state = AddInteractionLoadedState(
-              interactionId: returnedVals.answerId,
-              ownedAt: returnedVals.ownedAt,
-            );
-            ref
-                .read(postProvider(_postProviderParams).notifier)
-                .incrementComments();
-          },
-        );
         break;
     }
   }

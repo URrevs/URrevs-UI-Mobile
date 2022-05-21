@@ -96,7 +96,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
   final TextEditingController _controller = TextEditingController();
 
   late final String _postId = widget.screenArgs.postId;
-  late final TargetType _targetType = TargetType.phone;
+  late final TargetType _targetType = widget.screenArgs.postType.targetType;
   late final PostType _postType = widget.screenArgs.postType;
 
   late final GetPostProviderParams _postProviderParams =
@@ -534,8 +534,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
               userName: user.name,
               photo: user.picture,
               createdAt: DateTime.now(),
-              /// Owned at would not be null if the added interaction is answer.
-              ownedAt: next.ownedAt!,
+              ownedAt: next.ownedAt,
               content: _controller.text,
               upvotes: 0,
               upvoted: false,

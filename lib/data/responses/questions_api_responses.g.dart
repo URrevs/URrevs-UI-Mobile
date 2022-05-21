@@ -266,7 +266,6 @@ AddAnswerToCompanyQuestionResponse _$AddAnswerToCompanyQuestionResponseFromJson(
     AddAnswerToCompanyQuestionResponse(
       success: json['success'] as bool,
       answerId: json['answer'] as String,
-      ownedAt: DateTime.parse(json['ownedAt'] as String),
     );
 
 Map<String, dynamic> _$AddAnswerToCompanyQuestionResponseToJson(
@@ -274,7 +273,6 @@ Map<String, dynamic> _$AddAnswerToCompanyQuestionResponseToJson(
     <String, dynamic>{
       'success': instance.success,
       'answer': instance.answerId,
-      'ownedAt': instance.ownedAt.toIso8601String(),
     };
 
 AddReplyToPhoneQuestionAnswerResponse

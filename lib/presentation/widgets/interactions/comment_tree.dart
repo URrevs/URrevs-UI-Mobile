@@ -110,6 +110,7 @@ class _CommentTreeState extends ConsumerState<CommentTree> {
                   likeCount: comment.likes,
                   maxWidth: constraints.maxWidth - 16.w,
                   inQuestionCard: false,
+                  interactionType: InteractionType.comment,
                 ),
                 InteractionFooter(
                   onPressingReply: () {

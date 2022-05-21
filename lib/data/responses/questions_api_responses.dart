@@ -277,11 +277,9 @@ class AddAnswerToPhoneQuestionResponse extends BaseResponse {
 class AddAnswerToCompanyQuestionResponse extends BaseResponse {
   @JsonKey(name: 'answer')
   String answerId;
-  DateTime ownedAt;
   AddAnswerToCompanyQuestionResponse({
     required bool success,
     required this.answerId,
-    required this.ownedAt,
   }) : super(success: success);
 
   factory AddAnswerToCompanyQuestionResponse.fromJson(

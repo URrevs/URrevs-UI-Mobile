@@ -606,7 +606,9 @@ AnswerSubResponse _$AnswerSubResponseFromJson(Map<String, dynamic> json) =>
       userName: json['userName'] as String,
       photo: json['picture'] as String?,
       createdAt: DateTime.parse(json['createdAt'] as String),
-      ownedAt: DateTime.parse(json['ownedAt'] as String),
+      ownedAt: json['ownedAt'] == null
+          ? null
+          : DateTime.parse(json['ownedAt'] as String),
       content: json['content'] as String,
       upvotes: json['upvotes'] as int,
       upvoted: json['upvoted'] as bool,
@@ -622,7 +624,7 @@ Map<String, dynamic> _$AnswerSubResponseToJson(AnswerSubResponse instance) =>
       'userName': instance.userName,
       'picture': instance.photo,
       'createdAt': instance.createdAt.toIso8601String(),
-      'ownedAt': instance.ownedAt.toIso8601String(),
+      'ownedAt': instance.ownedAt?.toIso8601String(),
       'content': instance.content,
       'upvotes': instance.upvotes,
       'upvoted': instance.upvoted,
