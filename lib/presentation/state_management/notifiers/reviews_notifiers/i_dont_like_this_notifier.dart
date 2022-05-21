@@ -36,8 +36,16 @@ class IDontLikeThisNotifier extends StateNotifier<IDontLikeThisState> {
         }
         break;
       case PostContentType.question:
-        // TODO: add questions i dont like this
-        throw UnimplementedError();
+        switch (targetType) {
+          case TargetType.phone:
+            response = await GetIt.I<Repository>()
+                .iDontLikeThisForPhoneQuestion(postId);
+            break;
+          case TargetType.company:
+            response = await GetIt.I<Repository>()
+                .iDontLikeThisForCompanyQuestion(postId);
+            break;
+        }
         break;
     }
     response.fold(

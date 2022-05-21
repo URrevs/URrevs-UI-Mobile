@@ -499,6 +499,16 @@ abstract class RemoteDataSource {
     @Path() String replyId,
   );
 
+  @POST('/questions/phone/{questionId}/hate')
+  Future<BaseResponse> iDontLikeThisForPhoneQuestion(
+    @Path() String questionId,
+  );
+
+  @POST('/questions/company/{questionId}/hate')
+  Future<BaseResponse> iDontLikeThisForCompanyQuestion(
+    @Path() String questionId,
+  );
+
   /// 94
   @POST('/questions/phone/{questionId}/answers/{answerId}/accept')
   Future<MarkAnswerAsAcceptedForPhoneResponse> markAnswerAsAcceptedForPhone(
@@ -523,5 +533,25 @@ abstract class RemoteDataSource {
       unmarkAnswerAsAcceptedForCompany(
     @Path() String questionId,
     @Path() String answerId,
+  );
+
+  @PUT('/questions/phone/{questionId}/share')
+  Future<BaseResponse> increaseShareCountForPhoneQuestion(
+    @Path() String questionId,
+  );
+
+  @PUT('/questions/company/{questionId}/share')
+  Future<BaseResponse> increaseShareCountForCompanyQuestion(
+    @Path() String questionId,
+  );
+
+  @POST('/questions/phone/{questionId}/fullscreen')
+  Future<BaseResponse> userPressesFullscreenInPhoneQuestion(
+    @Path() String questionId,
+  );
+
+  @POST('/questions/company/{questionId}/fullscreen')
+  Future<BaseResponse> userPressesFullscreenInCompanyQuestion(
+    @Path() String questionId,
   );
 }

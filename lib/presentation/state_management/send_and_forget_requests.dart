@@ -36,7 +36,16 @@ class SendAndForgetRequests {
         }
         break;
       case PostContentType.question:
-        // TODO: Handle this case.
+        switch (targetType) {
+          case TargetType.phone:
+            await GetIt.I<Repository>()
+                .increaseShareCountForPhoneQuestion(postId);
+            break;
+          case TargetType.company:
+            await GetIt.I<Repository>()
+                .increaseShareCountForCompanyQuestion(postId);
+            break;
+        }
         break;
     }
   }
@@ -74,7 +83,16 @@ class SendAndForgetRequests {
         }
         break;
       case PostContentType.question:
-        // TODO: Handle this case.
+        switch (targetType) {
+          case TargetType.phone:
+            await GetIt.I<Repository>()
+                .userPressesFullscreenInPhoneQuestion(postId);
+            break;
+          case TargetType.company:
+            await GetIt.I<Repository>()
+                .userPressesFullscreenInCompanyQuestion(postId);
+            break;
+        }
         break;
     }
   }

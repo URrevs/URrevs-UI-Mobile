@@ -95,6 +95,7 @@ class CardHeader extends StatelessWidget {
             postContentType: postContentType,
             postId: postId,
             targetType: targetType,
+            userId: userId,
           ),
         ],
       ),

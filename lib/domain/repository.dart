@@ -807,6 +807,20 @@ class Repository {
     });
   }
 
+  Future<Either<Failure, void>> iDontLikeThisForPhoneQuestion(
+      String questionId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.iDontLikeThisForPhoneQuestion(questionId);
+    });
+  }
+
+  Future<Either<Failure, void>> iDontLikeThisForCompanyQuestion(
+      String questionId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.iDontLikeThisForCompanyQuestion(questionId);
+    });
+  }
+
   Future<Either<Failure, String>> markAnswerAsAcceptedForPhone(
       String questionId, String answerId) {
     return _tryAndCatch(() async {
@@ -840,6 +854,35 @@ class Repository {
       final response = await _remoteDataSource.unmarkAnswerAsAcceptedForCompany(
           questionId, answerId);
       return response.id;
+    });
+  }
+
+  Future<Either<Failure, void>> increaseShareCountForPhoneQuestion(
+      String questionId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.increaseShareCountForPhoneQuestion(questionId);
+    });
+  }
+
+  Future<Either<Failure, void>> increaseShareCountForCompanyQuestion(
+      String questionId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.increaseShareCountForCompanyQuestion(questionId);
+    });
+  }
+
+  Future<Either<Failure, void>> userPressesFullscreenInPhoneQuestion(
+      String questionId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.userPressesFullscreenInPhoneQuestion(questionId);
+    });
+  }
+
+  Future<Either<Failure, void>> userPressesFullscreenInCompanyQuestion(
+      String questionId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource
+          .userPressesFullscreenInCompanyQuestion(questionId);
     });
   }
 }

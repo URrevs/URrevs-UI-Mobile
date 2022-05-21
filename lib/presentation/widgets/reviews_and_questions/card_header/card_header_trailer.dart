@@ -10,6 +10,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/authentication_state.dart';
 
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
@@ -21,12 +22,13 @@ class CardHeaderTrailer extends ConsumerStatefulWidget {
     required this.postId,
     required this.targetType,
     required this.postContentType,
+    required this.userId,
   }) : super(key: key);
 
   final String postId;
   final TargetType targetType;
   final PostContentType postContentType;
-
+  final String userId;
 
   @override
   ConsumerState<CardHeaderTrailer> createState() => _CardHeaderTrailerState();
@@ -51,6 +53,11 @@ class _CardHeaderTrailerState extends ConsumerState<CardHeaderTrailer> {
 
   @override
   Widget build(BuildContext context) {
+    final authState =
+        ref.watch(authenticationProvider) as AuthenticationLoadedState;
+    if (authState.user.id == widget.userId) {
+      return SizedBox();
+    }
     return CustomPopupMenu(
       controller: controller,
       pressType: PressType.singleClick,

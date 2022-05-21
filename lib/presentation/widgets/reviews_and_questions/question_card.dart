@@ -20,6 +20,7 @@ import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_post_screen.dar
 import 'package:urrevs_ui_mobile/presentation/screens/product_profile/product_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
+import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answer_tree.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/question_card_body.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_footer/card_footer.dart';
@@ -96,6 +97,11 @@ class QuestionCard extends ConsumerWidget {
           postType: PostType.phoneQuestion,
           post: Question.dummyInstance,
         ),
+        _iDontLikeThisParams = IDontLikeThisProviderParams(
+          postId: 'dummy',
+          postContentType: PostContentType.question,
+          targetType: TargetType.phone,
+        ),
         super(key: key);
 
   QuestionCard.fromQuestion(
@@ -124,6 +130,11 @@ class QuestionCard extends ConsumerWidget {
               ? PostType.phoneQuestion
               : PostType.companyQuestion,
           post: question,
+        ),
+        _iDontLikeThisParams = IDontLikeThisProviderParams(
+          postId: question.id,
+          postContentType: PostContentType.question,
+          targetType: question.type,
         ),
         super(key: key);
 
@@ -240,9 +251,19 @@ class QuestionCard extends ConsumerWidget {
   }
 
   late final PostProviderParams _postProviderParams;
+  late final IDontLikeThisProviderParams _iDontLikeThisParams;
 
   @override
   Widget build(BuildContext context, ref) {
+    ref.addErrorListener(
+        provider: iDontLikeThisProvider(_iDontLikeThisParams),
+        context: context);
+    final hateState = ref.watch(iDontLikeThisProvider(_iDontLikeThisParams));
+    if (!fullscreen &&
+        (hateState is LoadingState || hateState is LoadedState)) {
+      return SizedBox();
+    }
+    
     final question = ref.watch(postProvider(_postProviderParams)) as Question;
     return Stack(
       children: [
