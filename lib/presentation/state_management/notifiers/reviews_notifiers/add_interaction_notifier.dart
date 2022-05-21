@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:urrevs_ui_mobile/data/requests/base_requests.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/domain/repository.dart';
+import 'package:urrevs_ui_mobile/domain/repository_returned_models.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
@@ -27,37 +28,61 @@ class AddInteractionNotifier extends StateNotifier<AddInteractionState> {
     post: null,
   );
 
-  void addComment(AddInteractionRequest request) async {
+  void addDirectInteraction(AddInteractionRequest request) async {
     print(postType);
     state = AddInteractionLoadingState();
-    late Either<Failure, String> response;
-    switch (postType) {
-      case PostType.phoneReview:
-        response = await GetIt.I<Repository>()
-            .addCommentToPhoneReview(postId, request);
+    switch (postType.postContentType) {
+      case PostContentType.review:
+        Either<Failure, String> commentResponse;
+        switch (postType.targetType) {
+          case TargetType.phone:
+            commentResponse = await GetIt.I<Repository>()
+                .addCommentToPhoneReview(postId, request);
+            break;
+          case TargetType.company:
+            commentResponse = await GetIt.I<Repository>()
+                .addCommentToCompanyReview(postId, request);
+            break;
+        }
+        commentResponse.fold(
+          (failure) => state = AddInteractionErrorState(failure: failure),
+          (interactionId) {
+            state = AddInteractionLoadedState(
+              interactionId: interactionId,
+              ownedAt: null,
+            );
+            ref
+                .read(postProvider(_postProviderParams).notifier)
+                .incrementComments();
+          },
+        );
         break;
-      case PostType.companyReview:
-        response = await GetIt.I<Repository>()
-            .addCommentToCompanyReview(postId, request);
-        break;
-      case PostType.phoneQuestion:
-        response = await GetIt.I<Repository>()
-            .addAnswerToPhoneQuestion(postId, request);
-        break;
-      case PostType.companyQuestion:
-        response = await GetIt.I<Repository>()
-            .addAnswerToCompanyQuestion(postId, request);
+      case PostContentType.question:
+        Either<Failure, AddAnswerReturnedVals> answerResponse;
+        switch (postType.targetType) {
+          case TargetType.phone:
+            answerResponse = await GetIt.I<Repository>()
+                .addAnswerToPhoneQuestion(postId, request);
+            break;
+          case TargetType.company:
+            answerResponse = await GetIt.I<Repository>()
+                .addAnswerToCompanyQuestion(postId, request);
+            break;
+        }
+        answerResponse.fold(
+          (failure) => state = AddInteractionErrorState(failure: failure),
+          (returnedVals) {
+            state = AddInteractionLoadedState(
+              interactionId: returnedVals.answerId,
+              ownedAt: returnedVals.ownedAt,
+            );
+            ref
+                .read(postProvider(_postProviderParams).notifier)
+                .incrementComments();
+          },
+        );
         break;
     }
-    response.fold(
-      (failure) => state = AddInteractionErrorState(failure: failure),
-      (interactionId) {
-        state = AddInteractionLoadedState(interactionId: interactionId);
-        ref
-            .read(postProvider(_postProviderParams).notifier)
-            .incrementComments();
-      },
-    );
   }
 
   void addReply(String parentId, AddInteractionRequest request) async {
@@ -84,7 +109,10 @@ class AddInteractionNotifier extends StateNotifier<AddInteractionState> {
     response.fold(
       (failure) => state = AddInteractionErrorState(failure: failure),
       (replyId) {
-        state = AddInteractionLoadedState(interactionId: replyId);
+        state = AddInteractionLoadedState(
+          interactionId: replyId,
+          ownedAt: null,
+        );
       },
     );
   }

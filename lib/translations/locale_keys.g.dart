@@ -237,5 +237,7 @@ abstract class  LocaleKeys {
   static const lightTheme = 'lightTheme';
   static const darkTheme = 'darkTheme';
   static const starRatingMissingField = 'starRatingMissingField';
+  static const youCantAnswerAQuestionMessage = 'youCantAnswerAQuestionMessage';
+  static const youHaventReviewedThatPhone = 'youHaventReviewedThatPhone';
 
 }

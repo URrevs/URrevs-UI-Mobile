@@ -874,6 +874,7 @@ class AnswerSubResponse {
   String id;
   String userId;
   String userName;
+  @JsonKey(name: 'picture')
   String? photo;
   DateTime createdAt;
   DateTime ownedAt;

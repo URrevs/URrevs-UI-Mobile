@@ -155,7 +155,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
         postContentType: _postType.postContentType);
   }
 
-  void _addCommentOrReply() {
+  void _addDirectInteractionOrReply() {
     AddInteractionRequest request =
         AddInteractionRequest(content: _controller.text);
     if (_idOfInteractionRepliedTo != null) {
@@ -164,9 +164,23 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
           .addReply(_idOfInteractionRepliedTo!, request);
       return;
     }
+    if (_postType.postContentType == PostContentType.question) {
+      final postState = ref.watch(getPostProvider(_postProviderParams));
+      final question = ((postState as GetPostLoadedState).post as Question);
+      switch (_targetType) {
+        case TargetType.phone:
+          request =
+              request.toAddAnswerToPhoneQuestionRequest(question.targetId);
+          break;
+        case TargetType.company:
+          request =
+              request.toAddAnswerToCompanyQuestionRequest(question.targetId);
+          break;
+      }
+    }
     ref
         .read(addInteractionProvider(_addInteractionProviderParams).notifier)
-        .addComment(request);
+        .addDirectInteraction(request);
   }
 
   void _addAcceptedAnswerListener() {
@@ -520,7 +534,8 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
               userName: user.name,
               photo: user.picture,
               createdAt: DateTime.now(),
-              ownedAt: DateTime.now(), // TODO: get owned at date
+              /// Owned at would not be null if the added interaction is answer.
+              ownedAt: next.ownedAt!,
               content: _controller.text,
               upvotes: 0,
               upvoted: false,
@@ -555,10 +570,9 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
         _controller.text = '';
       }
     });
-    final addCommentState =
+    final addDirectInteractionState =
         ref.watch(addInteractionProvider(_addInteractionProviderParams));
-    late bool loading = addCommentState is LoadingState;
-    ;
+    late bool loading = addDirectInteractionState is LoadingState;
 
     return Container(
       height: 60.h,
@@ -593,7 +607,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
                 Icons.send,
                 size: 26.sp,
               ),
-              onPressed: loading ? null : _addCommentOrReply,
+              onPressed: loading ? null : _addDirectInteractionOrReply,
               color: ColorManager.blue,
             ),
           ),

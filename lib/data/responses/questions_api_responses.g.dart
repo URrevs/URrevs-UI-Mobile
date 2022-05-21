@@ -167,56 +167,48 @@ UpvotePhoneQuestionResponse _$UpvotePhoneQuestionResponseFromJson(
         Map<String, dynamic> json) =>
     UpvotePhoneQuestionResponse(
       success: json['success'] as bool,
-      status: json['status'] as String,
     );
 
 Map<String, dynamic> _$UpvotePhoneQuestionResponseToJson(
         UpvotePhoneQuestionResponse instance) =>
     <String, dynamic>{
       'success': instance.success,
-      'status': instance.status,
     };
 
 DownvotePhoneQuestionResponse _$DownvotePhoneQuestionResponseFromJson(
         Map<String, dynamic> json) =>
     DownvotePhoneQuestionResponse(
       success: json['success'] as bool,
-      status: json['status'] as String,
     );
 
 Map<String, dynamic> _$DownvotePhoneQuestionResponseToJson(
         DownvotePhoneQuestionResponse instance) =>
     <String, dynamic>{
       'success': instance.success,
-      'status': instance.status,
     };
 
 UpvoteCompanyQuestionResponse _$UpvoteCompanyQuestionResponseFromJson(
         Map<String, dynamic> json) =>
     UpvoteCompanyQuestionResponse(
       success: json['success'] as bool,
-      status: json['status'] as String,
     );
 
 Map<String, dynamic> _$UpvoteCompanyQuestionResponseToJson(
         UpvoteCompanyQuestionResponse instance) =>
     <String, dynamic>{
       'success': instance.success,
-      'status': instance.status,
     };
 
 DownvoteCompanyQuestionResponse _$DownvoteCompanyQuestionResponseFromJson(
         Map<String, dynamic> json) =>
     DownvoteCompanyQuestionResponse(
       success: json['success'] as bool,
-      status: json['status'] as String,
     );
 
 Map<String, dynamic> _$DownvoteCompanyQuestionResponseToJson(
         DownvoteCompanyQuestionResponse instance) =>
     <String, dynamic>{
       'success': instance.success,
-      'status': instance.status,
     };
 
 GetAnswersAndRepliesForPhoneQuestionResponse
@@ -258,6 +250,7 @@ AddAnswerToPhoneQuestionResponse _$AddAnswerToPhoneQuestionResponseFromJson(
     AddAnswerToPhoneQuestionResponse(
       success: json['success'] as bool,
       answerId: json['answer'] as String,
+      ownedAt: DateTime.parse(json['ownedAt'] as String),
     );
 
 Map<String, dynamic> _$AddAnswerToPhoneQuestionResponseToJson(
@@ -265,6 +258,7 @@ Map<String, dynamic> _$AddAnswerToPhoneQuestionResponseToJson(
     <String, dynamic>{
       'success': instance.success,
       'answer': instance.answerId,
+      'ownedAt': instance.ownedAt.toIso8601String(),
     };
 
 AddAnswerToCompanyQuestionResponse _$AddAnswerToCompanyQuestionResponseFromJson(
@@ -272,6 +266,7 @@ AddAnswerToCompanyQuestionResponse _$AddAnswerToCompanyQuestionResponseFromJson(
     AddAnswerToCompanyQuestionResponse(
       success: json['success'] as bool,
       answerId: json['answer'] as String,
+      ownedAt: DateTime.parse(json['ownedAt'] as String),
     );
 
 Map<String, dynamic> _$AddAnswerToCompanyQuestionResponseToJson(
@@ -279,6 +274,7 @@ Map<String, dynamic> _$AddAnswerToCompanyQuestionResponseToJson(
     <String, dynamic>{
       'success': instance.success,
       'answer': instance.answerId,
+      'ownedAt': instance.ownedAt.toIso8601String(),
     };
 
 AddReplyToPhoneQuestionAnswerResponse

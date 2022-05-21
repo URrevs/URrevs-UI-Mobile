@@ -402,22 +402,22 @@ abstract class RemoteDataSource {
   );
 
   /// 74
-  @PUT('/questions/phone/{questionId}?action=upvote')
+  @POST('/questions/phone/{questionId}/like')
   Future<UpvotePhoneQuestionResponse> upvotePhoneQuestion(
     @Path() String questionId,
   );
 
-  @PUT('/questions/phone/{questionId}?action=downvote')
+  @POST('/questions/phone/{questionId}/unlike')
   Future<DownvotePhoneQuestionResponse> downvotePhoneQuestion(
     @Path() String questionId,
   );
 
-  @PUT('/questions/company/{questionId}?action=upvote')
+  @POST('/questions/company/{questionId}/like')
   Future<UpvoteCompanyQuestionResponse> upvoteCompanyQuestion(
     @Path() String questionId,
   );
 
-  @PUT('/questions/company/{questionId}?action=downvote')
+  @POST('/questions/company/{questionId}/unlike')
   Future<DownvoteCompanyQuestionResponse> downvoteCompanyQuestion(
     @Path() String questionId,
   );

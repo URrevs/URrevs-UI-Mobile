@@ -234,5 +234,7 @@
   "english": "الإنجليزية",
   "lightTheme": "الأبيض",
   "darkTheme": "الأسود",
-  "starRatingMissingField": "يجب ادخال تقييمك"
+  "starRatingMissingField": "يجب ادخال تقييمك",
+  "youCantAnswerAQuestionMessage": "لا يمكنك إضافة اجابة لسؤال عن شركة لم تراجع احدي منتاجاتها",
+  "youHaventReviewedThatPhone": "لم تقم بمراجعة هذا الهاتف"
 }

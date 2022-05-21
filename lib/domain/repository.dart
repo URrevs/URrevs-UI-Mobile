@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get_it/get_it.dart';
@@ -32,6 +33,8 @@ import 'package:urrevs_ui_mobile/domain/models/question.dart';
 import 'package:urrevs_ui_mobile/domain/models/search_result.dart';
 import 'package:urrevs_ui_mobile/domain/models/specs.dart';
 import 'package:urrevs_ui_mobile/domain/models/user.dart';
+import 'package:urrevs_ui_mobile/domain/repository_returned_models.dart';
+import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 class Repository {
   final RemoteDataSource _remoteDataSource;
@@ -44,8 +47,8 @@ class Repository {
     if (!hasConnection) throw NoInternetConnection();
   }
 
-  Future<Either<Failure, T>> _tryAndCatch<T>(
-      Future<T> Function() callBack) async {
+  Future<Either<Failure, T>> _tryAndCatch<T>(Future<T> Function() callBack,
+      {Left<Failure, T> Function(DioError)? onDioError}) async {
     try {
       await _checkConnection();
       T data = await callBack();
@@ -55,6 +58,7 @@ class Repository {
     } on NoInternetConnection catch (e) {
       return Left(e.failure);
     } on DioError catch (e) {
+      if (onDioError != null) return onDioError(e);
       return Left(e.failure);
     } on FirebaseAuthException catch (e) {
       return Left(e.failure);
@@ -700,21 +704,39 @@ class Repository {
     });
   }
 
-  Future<Either<Failure, String>> addAnswerToPhoneQuestion(
+  Future<Either<Failure, AddAnswerReturnedVals>> addAnswerToPhoneQuestion(
       String questionId, AddInteractionRequest request) {
     return _tryAndCatch(() async {
       final response =
           await _remoteDataSource.addAnswerToPhoneQuestion(questionId, request);
-      return response.answerId;
+      return AddAnswerReturnedVals(
+        answerId: response.answerId,
+        ownedAt: response.ownedAt,
+      );
+    }, onDioError: (e) {
+      final status = e.response?.data['status'];
+      if (status != null && status == ManuallyHandlledErrorMessages.notOwned) {
+        return Left(Failure(LocaleKeys.youHaventReviewedThatPhone.tr()));
+      }
+      return Left(e.failure);
     });
   }
 
-  Future<Either<Failure, String>> addAnswerToCompanyQuestion(
+  Future<Either<Failure, AddAnswerReturnedVals>> addAnswerToCompanyQuestion(
       String questionId, AddInteractionRequest request) {
     return _tryAndCatch(() async {
       final response = await _remoteDataSource.addAnswerToCompanyQuestion(
           questionId, request);
-      return response.answerId;
+      return AddAnswerReturnedVals(
+        answerId: response.answerId,
+        ownedAt: response.ownedAt,
+      );
+    }, onDioError: (e) {
+      final status = e.response?.data['status'];
+      if (status != null && status == ManuallyHandlledErrorMessages.notOwned) {
+        return Left(Failure(LocaleKeys.youCantAnswerAQuestionMessage.tr()));
+      }
+      return Left(e.failure);
     });
   }
 

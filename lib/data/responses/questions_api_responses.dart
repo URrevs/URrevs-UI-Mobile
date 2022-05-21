@@ -174,10 +174,8 @@ class GetQuestionsOnCertainCompanyResponse extends BaseResponse {
 
 @JsonSerializable()
 class UpvotePhoneQuestionResponse extends BaseResponse {
-  String status;
   UpvotePhoneQuestionResponse({
     required bool success,
-    required this.status,
   }) : super(success: success);
 
   factory UpvotePhoneQuestionResponse.fromJson(Map<String, Object?> json) =>
@@ -187,10 +185,8 @@ class UpvotePhoneQuestionResponse extends BaseResponse {
 
 @JsonSerializable()
 class DownvotePhoneQuestionResponse extends BaseResponse {
-  String status;
   DownvotePhoneQuestionResponse({
     required bool success,
-    required this.status,
   }) : super(success: success);
 
   factory DownvotePhoneQuestionResponse.fromJson(Map<String, Object?> json) =>
@@ -200,10 +196,8 @@ class DownvotePhoneQuestionResponse extends BaseResponse {
 
 @JsonSerializable()
 class UpvoteCompanyQuestionResponse extends BaseResponse {
-  String status;
   UpvoteCompanyQuestionResponse({
     required bool success,
-    required this.status,
   }) : super(success: success);
 
   factory UpvoteCompanyQuestionResponse.fromJson(Map<String, Object?> json) =>
@@ -213,10 +207,8 @@ class UpvoteCompanyQuestionResponse extends BaseResponse {
 
 @JsonSerializable()
 class DownvoteCompanyQuestionResponse extends BaseResponse {
-  String status;
   DownvoteCompanyQuestionResponse({
     required bool success,
-    required this.status,
   }) : super(success: success);
 
   factory DownvoteCompanyQuestionResponse.fromJson(Map<String, Object?> json) =>
@@ -267,9 +259,11 @@ class GetAnswersAndRepliesForCompanyQuestionResponse extends BaseResponse {
 class AddAnswerToPhoneQuestionResponse extends BaseResponse {
   @JsonKey(name: 'answer')
   String answerId;
+  DateTime ownedAt;
   AddAnswerToPhoneQuestionResponse({
     required bool success,
     required this.answerId,
+    required this.ownedAt,
   }) : super(success: success);
 
   factory AddAnswerToPhoneQuestionResponse.fromJson(
@@ -283,9 +277,11 @@ class AddAnswerToPhoneQuestionResponse extends BaseResponse {
 class AddAnswerToCompanyQuestionResponse extends BaseResponse {
   @JsonKey(name: 'answer')
   String answerId;
+  DateTime ownedAt;
   AddAnswerToCompanyQuestionResponse({
     required bool success,
     required this.answerId,
+    required this.ownedAt,
   }) : super(success: success);
 
   factory AddAnswerToCompanyQuestionResponse.fromJson(

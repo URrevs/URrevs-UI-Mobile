@@ -17,3 +17,31 @@ Map<String, dynamic> _$AddInteractionRequestToJson(
     <String, dynamic>{
       'content': instance.content,
     };
+
+AddAnswerToPhoneQuestionRequest _$AddAnswerToPhoneQuestionRequestFromJson(
+        Map<String, dynamic> json) =>
+    AddAnswerToPhoneQuestionRequest(
+      content: json['content'] as String,
+      phoneId: json['phoneId'] as String,
+    );
+
+Map<String, dynamic> _$AddAnswerToPhoneQuestionRequestToJson(
+        AddAnswerToPhoneQuestionRequest instance) =>
+    <String, dynamic>{
+      'content': instance.content,
+      'phoneId': instance.phoneId,
+    };
+
+AddAnswerToCompanyQuestionRequest _$AddAnswerToCompanyQuestionRequestFromJson(
+        Map<String, dynamic> json) =>
+    AddAnswerToCompanyQuestionRequest(
+      content: json['content'] as String,
+      companyId: json['companyId'] as String,
+    );
+
+Map<String, dynamic> _$AddAnswerToCompanyQuestionRequestToJson(
+        AddAnswerToCompanyQuestionRequest instance) =>
+    <String, dynamic>{
+      'content': instance.content,
+      'companyId': instance.companyId,
+    };

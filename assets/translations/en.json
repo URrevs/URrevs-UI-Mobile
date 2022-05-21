@@ -234,5 +234,7 @@
   "english": "English",
   "lightTheme": "Light",
   "darkTheme": "Dark",
-  "starRatingMissingField": "You must enter your rating"
+  "starRatingMissingField": "You must enter your rating",
+  "youCantAnswerAQuestionMessage": "You cannot add an answer to a question about a company that you haven't reviewed one of its products",
+  "youHaventReviewedThatPhone": "You haven't reviewed that phone"
 }

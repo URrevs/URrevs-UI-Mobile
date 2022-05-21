@@ -250,7 +250,9 @@ class CodegenLoader extends AssetLoader{
   "english": "الإنجليزية",
   "lightTheme": "الأبيض",
   "darkTheme": "الأسود",
-  "starRatingMissingField": "يجب ادخال تقييمك"
+  "starRatingMissingField": "يجب ادخال تقييمك",
+  "youCantAnswerAQuestionMessage": "لا يمكنك إضافة اجابة لسؤال عن شركة لم تراجع احدي منتاجاتها",
+  "youHaventReviewedThatPhone": "لم تقم بمراجعة هذا الهاتف"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -488,7 +490,9 @@ static const Map<String,dynamic> en = {
   "english": "English",
   "lightTheme": "Light",
   "darkTheme": "Dark",
-  "starRatingMissingField": "You must enter your rating"
+  "starRatingMissingField": "You must enter your rating",
+  "youCantAnswerAQuestionMessage": "You cannot add an answer to a question about a company that you haven't reviewed one of its products",
+  "youHaventReviewedThatPhone": "You haven't reviewed that phone"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

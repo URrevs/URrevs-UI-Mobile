@@ -20,8 +20,10 @@ class AddInteractionLoadingState extends AddInteractionState
 class AddInteractionLoadedState extends AddInteractionState
     implements LoadedState {
   final String interactionId;
+  final DateTime? ownedAt;
   AddInteractionLoadedState({
     required this.interactionId,
+    required this.ownedAt,
   });
 
   @override

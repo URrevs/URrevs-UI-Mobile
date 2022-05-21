@@ -5,6 +5,13 @@ import 'package:flutter/foundation.dart';
 import 'package:urrevs_ui_mobile/app/exceptions.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
+/// Error messages handled in repository:
+/// * add answer to phone question: not owned
+/// * add answer to company question: not owned
+class ManuallyHandlledErrorMessages {
+  static const String notOwned = "not owned";
+}
+
 class ServerErrorMessages {
   static const String tooManyRequests = 'too many requests';
   static const String youDoNotExistInTheSystem =
@@ -19,8 +26,10 @@ class ServerErrorMessages {
       'there is a running update operation right now';
   static const String badRequest = 'bad request';
   static const String internalServerError = 'internal server error';
+  static const String trackInternalServerError = 'track internal server error';
   static const String alreadyLiked = 'already liked';
   static const String noLikes = 'no likes';
+  static const String notOwned = 'not owned';
   // static const String trackAlreadyHated = 'track already hated';
   // static const String trackAlreadySeemored = 'track already seemored';
   // static const String trackAlreadyFullscreened = 'track already fullscreened';
@@ -45,8 +54,12 @@ class ServerErrorMessages {
         ServerErrorMessages.badRequest: LocaleKeys.badRequest.tr(),
         ServerErrorMessages.internalServerError:
             LocaleKeys.internalServerError.tr(),
+        ServerErrorMessages.trackInternalServerError:
+            LocaleKeys.internalServerError.tr(),
         ServerErrorMessages.alreadyLiked: alreadyLiked,
         ServerErrorMessages.noLikes: noLikes,
+        ServerErrorMessages.notOwned:
+            LocaleKeys.youCantAnswerAQuestionMessage.tr(),
       };
 
   static List<String> get _retryActionFailures => [

@@ -1203,12 +1203,11 @@ class _RemoteDataSource implements RemoteDataSource {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<UpvotePhoneQuestionResponse>(Options(
-                method: 'PUT', headers: _headers, extra: _extra)
-            .compose(
-                _dio.options, '/questions/phone/${questionId}?action=upvote',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        _setStreamType<UpvotePhoneQuestionResponse>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/questions/phone/${questionId}/like',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = UpvotePhoneQuestionResponse.fromJson(_result.data!);
     return value;
   }
@@ -1221,12 +1220,11 @@ class _RemoteDataSource implements RemoteDataSource {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<DownvotePhoneQuestionResponse>(Options(
-                method: 'PUT', headers: _headers, extra: _extra)
-            .compose(
-                _dio.options, '/questions/phone/${questionId}?action=downvote',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        _setStreamType<DownvotePhoneQuestionResponse>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/questions/phone/${questionId}/unlike',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = DownvotePhoneQuestionResponse.fromJson(_result.data!);
     return value;
   }
@@ -1239,12 +1237,11 @@ class _RemoteDataSource implements RemoteDataSource {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<UpvoteCompanyQuestionResponse>(Options(
-                method: 'PUT', headers: _headers, extra: _extra)
-            .compose(
-                _dio.options, '/questions/company/${questionId}?action=upvote',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        _setStreamType<UpvoteCompanyQuestionResponse>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/questions/company/${questionId}/like',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = UpvoteCompanyQuestionResponse.fromJson(_result.data!);
     return value;
   }
@@ -1258,9 +1255,9 @@ class _RemoteDataSource implements RemoteDataSource {
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DownvoteCompanyQuestionResponse>(
-            Options(method: 'PUT', headers: _headers, extra: _extra)
-                .compose(_dio.options,
-                    '/questions/company/${questionId}?action=downvote',
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(
+                    _dio.options, '/questions/company/${questionId}/unlike',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = DownvoteCompanyQuestionResponse.fromJson(_result.data!);
