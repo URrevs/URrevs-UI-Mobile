@@ -51,6 +51,10 @@ class AcceptAnswerNotifier extends StateNotifier<AcceptAnswerState> {
     }
     response.fold(
       (failure) {
+        if (failure is IgnoredFailure) {
+          setLoadedState(true);
+          return;
+        }
         state = AcceptAnswerErrorState(failure: failure);
         if (getInteractionsProviderParams != null) {
           ref
@@ -86,6 +90,10 @@ class AcceptAnswerNotifier extends StateNotifier<AcceptAnswerState> {
     }
     response.fold(
       (failure) {
+        if (failure is IgnoredFailure) {
+          setLoadedState(false);
+          return;
+        }
         state = AcceptAnswerErrorState(failure: failure);
         if (getInteractionsProviderParams != null) {
           ref

@@ -138,7 +138,7 @@ class _InteractionFooterState extends ConsumerState<InteractionFooter> {
       timeago.format(widget.datePosted, locale: context.locale.languageCode);
 
   bool get hideFirstButton {
-    if (acceptAnswerMode) return false;
+    // if (acceptAnswerMode) return false;
     final state = ref.watch(authenticationProvider);
     bool isMyInteraction =
         state is AuthenticationLoadedState && state.user.id == widget.userId;

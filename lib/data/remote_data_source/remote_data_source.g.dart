@@ -1520,13 +1520,13 @@ class _RemoteDataSource implements RemoteDataSource {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<
-        MarkAnswerAsAcceptedForPhoneResponse>(Options(
-            method: 'PUT', headers: _headers, extra: _extra)
-        .compose(_dio.options,
-            '/questions/phone/${questionId}/answers/${answerId}?action=accept',
-            queryParameters: queryParameters, data: _data)
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MarkAnswerAsAcceptedForPhoneResponse>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(_dio.options,
+                    '/questions/phone/${questionId}/answers/${answerId}/accept',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MarkAnswerAsAcceptedForPhoneResponse.fromJson(_result.data!);
     return value;
   }
@@ -1538,13 +1538,13 @@ class _RemoteDataSource implements RemoteDataSource {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<
-        MarkAnswerAsAcceptedForCompanyResponse>(Options(
-            method: 'PUT', headers: _headers, extra: _extra)
-        .compose(_dio.options,
-            '/questions/company/${questionId}/answers/${answerId}?action=accept',
-            queryParameters: queryParameters, data: _data)
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MarkAnswerAsAcceptedForCompanyResponse>(Options(
+                method: 'POST', headers: _headers, extra: _extra)
+            .compose(_dio.options,
+                '/questions/company/${questionId}/answers/${answerId}/accept',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value =
         MarkAnswerAsAcceptedForCompanyResponse.fromJson(_result.data!);
     return value;
@@ -1557,13 +1557,13 @@ class _RemoteDataSource implements RemoteDataSource {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<
-        UnmarkAnswerAsAcceptedForPhoneResponse>(Options(
-            method: 'PUT', headers: _headers, extra: _extra)
-        .compose(_dio.options,
-            '/questions/phone/${questionId}/answers/${answerId}?action=reject',
-            queryParameters: queryParameters, data: _data)
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<UnmarkAnswerAsAcceptedForPhoneResponse>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(_dio.options,
+                    '/questions/phone/${questionId}/answers/${answerId}/reject',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value =
         UnmarkAnswerAsAcceptedForPhoneResponse.fromJson(_result.data!);
     return value;
@@ -1576,13 +1576,13 @@ class _RemoteDataSource implements RemoteDataSource {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<
-        UnmarkAnswerAsAcceptedForCompanyResponse>(Options(
-            method: 'PUT', headers: _headers, extra: _extra)
-        .compose(_dio.options,
-            '/questions/company/${questionId}/answers/${answerId}?action=reject',
-            queryParameters: queryParameters, data: _data)
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<UnmarkAnswerAsAcceptedForCompanyResponse>(Options(
+                method: 'POST', headers: _headers, extra: _extra)
+            .compose(_dio.options,
+                '/questions/company/${questionId}/answers/${answerId}/reject',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value =
         UnmarkAnswerAsAcceptedForCompanyResponse.fromJson(_result.data!);
     return value;

@@ -500,25 +500,25 @@ abstract class RemoteDataSource {
   );
 
   /// 94
-  @PUT('/questions/phone/{questionId}/answers/{answerId}?action=accept')
+  @POST('/questions/phone/{questionId}/answers/{answerId}/accept')
   Future<MarkAnswerAsAcceptedForPhoneResponse> markAnswerAsAcceptedForPhone(
     @Path() String questionId,
     @Path() String answerId,
   );
 
-  @PUT('/questions/company/{questionId}/answers/{answerId}?action=accept')
+  @POST('/questions/company/{questionId}/answers/{answerId}/accept')
   Future<MarkAnswerAsAcceptedForCompanyResponse> markAnswerAsAcceptedForCompany(
     @Path() String questionId,
     @Path() String answerId,
   );
 
-  @PUT('/questions/phone/{questionId}/answers/{answerId}?action=reject')
+  @POST('/questions/phone/{questionId}/answers/{answerId}/reject')
   Future<UnmarkAnswerAsAcceptedForPhoneResponse> unmarkAnswerAsAcceptedForPhone(
     @Path() String questionId,
     @Path() String answerId,
   );
 
-  @PUT('/questions/company/{questionId}/answers/{answerId}?action=reject')
+  @POST('/questions/company/{questionId}/answers/{answerId}/reject')
   Future<UnmarkAnswerAsAcceptedForCompanyResponse>
       unmarkAnswerAsAcceptedForCompany(
     @Path() String questionId,

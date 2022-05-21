@@ -30,6 +30,8 @@ class ServerErrorMessages {
   static const String alreadyLiked = 'already liked';
   static const String noLikes = 'no likes';
   static const String notOwned = 'not owned';
+  static const String notYet = 'not yet';
+  static const String notAccepted = 'not accepted';
   // static const String trackAlreadyHated = 'track already hated';
   // static const String trackAlreadySeemored = 'track already seemored';
   // static const String trackAlreadyFullscreened = 'track already fullscreened';
@@ -60,6 +62,8 @@ class ServerErrorMessages {
         ServerErrorMessages.noLikes: noLikes,
         ServerErrorMessages.notOwned:
             LocaleKeys.youCantAnswerAQuestionMessage.tr(),
+        ServerErrorMessages.notYet: notYet,
+        ServerErrorMessages.notAccepted: notAccepted,
       };
 
   static List<String> get _retryActionFailures => [
@@ -79,6 +83,8 @@ class ServerErrorMessages {
   static List<String> get _ignoredFailures => [
         alreadyLiked,
         noLikes,
+        notYet,
+        notAccepted,
         // trackAlreadyHated,
         // trackAlreadySeemored,
         // trackAlreadyFullscreened,

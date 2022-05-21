@@ -54,7 +54,7 @@ class AnswersList extends StatelessWidget {
             getInteractionsProviderParams: getInteractionsProviderParams,
             questionId: questionId,
             postUserId: postUserId,
-            key: ValueKey(answers[i].id),
+            key: ValueKey('${answers[i].id} ${answers[i].accepted}'),
           ),
           if (i != answers.length - 1) VerticalSpacesBetween.interactionTrees,
         ],
