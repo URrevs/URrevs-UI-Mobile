@@ -229,3 +229,7 @@ class IDontLikeThisProviderParams extends Equatable {
   @override
   List<Object?> get props => [postId, postContentType, targetType];
 }
+
+class GetLatestCompetitionProviderParams extends NotSyncedProviderParams {
+  GetLatestCompetitionProviderParams();
+}

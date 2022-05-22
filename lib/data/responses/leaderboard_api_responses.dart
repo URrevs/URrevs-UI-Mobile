@@ -24,31 +24,12 @@ class AddCompetitionResponse extends BaseResponse {
 
 @JsonSerializable()
 class GetLatestCompetitionResponse extends BaseResponse {
-  @JsonKey(name: '_id')
-  String id;
-  DateTime deadline;
-  int numWinners;
-  String prize;
-  String prizePic;
-  DateTime createdAt;
+  @JsonKey(name: 'competition')
+  CompetitionSubResponse competitionSubResponse;
   GetLatestCompetitionResponse({
     required bool success,
-    required this.id,
-    required this.deadline,
-    required this.numWinners,
-    required this.prize,
-    required this.prizePic,
-    required this.createdAt,
+    required this.competitionSubResponse,
   }) : super(success: success);
-
-  Competition get competitionModel => Competition(
-        id: id,
-        deadline: deadline,
-        numWinners: numWinners,
-        prize: prize,
-        prizePic: prizePic,
-        createdAt: createdAt,
-      );
 
   factory GetLatestCompetitionResponse.fromJson(Map<String, Object?> json) =>
       _$GetLatestCompetitionResponseFromJson(json);

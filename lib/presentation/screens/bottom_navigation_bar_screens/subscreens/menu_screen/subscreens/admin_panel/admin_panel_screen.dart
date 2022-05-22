@@ -7,11 +7,12 @@ import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_scre
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_info_about_latest_update_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/leaderboard_states/get_lastest_competition_state.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/no_glowing_scroll_behavior.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/fullscreen_error_widget.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/admin_panel_loading.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/admin_panel_tile_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/adding_competition_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/item_tile.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
@@ -26,31 +27,46 @@ class AdminPanelScreen extends ConsumerStatefulWidget {
 }
 
 class _AdminPanelScreenState extends ConsumerState<AdminPanelScreen> {
-  final GetInfoAboutLatestUpdateProviderParams _providerParams =
+  final GetInfoAboutLatestUpdateProviderParams _updateProviderParams =
       GetInfoAboutLatestUpdateProviderParams();
+  final GetLatestCompetitionProviderParams _competitionProviderParams =
+      GetLatestCompetitionProviderParams();
 
   void _getInfoAboutLatestUpdate() {
     ref
-        .read(getInfoAboutLatestUpdateProvider(_providerParams).notifier)
+        .read(getInfoAboutLatestUpdateProvider(_updateProviderParams).notifier)
         .getInfoAboutLatestUpdate();
+  }
+
+  void _getLatestCompetion() {
+    ref
+        .read(getLatestCompetitionProvider(_competitionProviderParams).notifier)
+        .getLatestCompetition();
   }
 
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration.zero, _getInfoAboutLatestUpdate);
+    Future.delayed(Duration.zero, () {
+      _getInfoAboutLatestUpdate();
+      _getLatestCompetion();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    ref.listen<GetInfoAboutLatestUpdateState>(
-        getInfoAboutLatestUpdateProvider(_providerParams), (previous, next) {
-      showSnackBarWithoutActionAtError(state: next, context: context);
-    });
-
+    ref.addErrorListener(
+      provider: getInfoAboutLatestUpdateProvider(_updateProviderParams),
+      context: context,
+    );
+    ref.addErrorListener(
+      provider: getLatestCompetitionProvider(_competitionProviderParams),
+      context: context,
+    );
     return RefreshIndicator(
       onRefresh: () async {
         _getInfoAboutLatestUpdate();
+        _getLatestCompetion();
       },
       child: Scaffold(
         appBar: AppBars.appBarWithTitle(
@@ -59,7 +75,6 @@ class _AdminPanelScreenState extends ConsumerState<AdminPanelScreen> {
         ),
         body: Navigator(
           onGenerateRoute: (settings) {
-            print(settings);
             return MaterialPageRoute(builder: (dialogCtx) {
               return SafeArea(
                 child: ScrollConfiguration(
@@ -75,52 +90,99 @@ class _AdminPanelScreenState extends ConsumerState<AdminPanelScreen> {
   }
 
   Widget _buildBody(BuildContext dialogCtx) {
-    final state = ref.watch(getInfoAboutLatestUpdateProvider(_providerParams));
-    if (state is GetInfoAboutLatestUpdateLoadingState ||
-        state is GetInfoAboutLatestUpdateInitialState) {
-      return AdminPanelLoading();
-    } else if (state is GetInfoAboutLatestUpdateErrorState) {
-      return FullscreenErrorWidget(
-        onRetry: _getInfoAboutLatestUpdate,
-        retryLastRequest: state.failure is RetryFailure,
-      );
+    final updateState =
+        ref.watch(getInfoAboutLatestUpdateProvider(_updateProviderParams));
+    final competitionState =
+        ref.watch(getLatestCompetitionProvider(_competitionProviderParams));
+    final fullErr = fullScreenErrorWidgetOrNull([
+      StateAndRetry(state: updateState, onRetry: _getInfoAboutLatestUpdate),
+      StateAndRetry(state: competitionState, onRetry: _getLatestCompetion),
+    ]);
+    if (fullErr != null) return fullErr;
+
+    return ListView(
+      children: [
+        _buildUpdateTile(),
+        _buildCompetitionTile(dialogCtx),
+      ],
+    );
+  }
+
+  Widget _buildCompetitionTile(BuildContext dialogCtx) {
+    final competitionState =
+        ref.watch(getLatestCompetitionProvider(_competitionProviderParams));
+    final loadOrErr = loadingOrErrorWidgetOrNull(
+      state: competitionState,
+      loadingWidget: AdminPanelTileLoading(),
+    );
+    if (loadOrErr != null) return loadOrErr;
+
+    bool disabled;
+    String text;
+
+    if (competitionState is GetLatestCompetitionNoResultState) {
+      disabled = false;
+      text = LocaleKeys.noCompetitionsYet.tr();
     } else {
-      String? updateCompletedDate;
-      if (state is GetInfoAboutLatestUpdateLoadedState) {
-        updateCompletedDate =
-            DateFormat.yMMMMd(context.locale.languageCode).format(state.date);
-      }
-      String lastUpdateStr = updateCompletedDate == null
-          ? LocaleKeys.noUpdateOperationsYet.tr()
-          : LocaleKeys.lastUpdatedIn.tr() + ' ' + updateCompletedDate;
-      return ListView(
-        children: [
-          ItemTile(
-            title: LocaleKeys.updateProductsList.tr(),
-            subtitle: lastUpdateStr,
-            iconData: Icons.emoji_events,
-            onTap: () {
-              Navigator.of(context).pushNamed(
-                UpdateProductsScreen.routeName,
-              );
-            },
-          ),
-          ItemTile(
-            title: LocaleKeys.addACompetition.tr(),
-            subtitle: 'آخر مسابقة تمت في 20 أغسطس 2020',
-            iconData: Icons.update,
-            onTap: () {
-              showDialog(
-                context: dialogCtx,
-                useRootNavigator: false,
-                builder: (BuildContext context) {
-                  return AddingCompetitionDialog();
-                },
-              );
-            },
-          ),
-        ],
-      );
+      final competition =
+          (competitionState as GetLatestCompetitionLoadedState).competition;
+      disabled = competition.deadline.isAfter(DateTime.now());
+      text = disabled
+          ? LocaleKeys.thereIsAnActiveCompetition.tr()
+          : LocaleKeys.theLastCompetitionTookPlaceIn.tr();
     }
+
+    return ItemTile(
+      title: LocaleKeys.addACompetition.tr(),
+      subtitle: text,
+      iconData: Icons.update,
+      onTap: () {
+        if (!disabled) {
+          showDialog(
+            context: dialogCtx,
+            useRootNavigator: false,
+            builder: (BuildContext context) {
+              return AddingCompetitionDialog();
+            },
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                LocaleKeys.youCannotAddACompetitionWhileThereIsARunningOne.tr(),
+              ),
+            ),
+          );
+        }
+      },
+    );
+  }
+
+  Widget _buildUpdateTile() {
+    final updateState =
+        ref.watch(getInfoAboutLatestUpdateProvider(_updateProviderParams));
+    final loadOrErr = loadingOrErrorWidgetOrNull(
+      state: updateState,
+      loadingWidget: AdminPanelTileLoading(),
+    );
+    if (loadOrErr != null) return loadOrErr;
+    String? updateCompletedDate;
+    if (updateState is GetInfoAboutLatestUpdateLoadedState) {
+      updateCompletedDate = DateFormat.yMMMMd(context.locale.languageCode)
+          .format(updateState.date);
+    }
+    String lastUpdateStr = updateCompletedDate == null
+        ? LocaleKeys.noUpdateOperationsYet.tr()
+        : LocaleKeys.lastUpdatedIn.tr() + ' ' + updateCompletedDate;
+    return ItemTile(
+      title: LocaleKeys.updateProductsList.tr(),
+      subtitle: lastUpdateStr,
+      iconData: Icons.emoji_events,
+      onTap: () {
+        Navigator.of(context).pushNamed(
+          UpdateProductsScreen.routeName,
+        );
+      },
+    );
   }
 }

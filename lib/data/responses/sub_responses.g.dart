@@ -156,8 +156,6 @@ SpecsSubResponse _$SpecsSubResponseFromJson(Map<String, dynamic> json) =>
       companyId: json['companyId'] as String,
       companyName: json['companyName'] as String,
       priceEgp: (json['priceEgp'] as num?)?.toDouble(),
-      priceEur: (json['priceEur'] as num?)?.toDouble(),
-      priceUsd: (json['priceUsd'] as num?)?.toDouble(),
       releaseDate: json['releaseDate'] as String?,
       dimensions: json['dimensions'] as String?,
       network: json['network'] as String?,
@@ -192,8 +190,6 @@ Map<String, dynamic> _$SpecsSubResponseToJson(SpecsSubResponse instance) =>
       'companyId': instance.companyId,
       'companyName': instance.companyName,
       'priceEgp': instance.priceEgp,
-      'priceEur': instance.priceEur,
-      'priceUsd': instance.priceUsd,
       'releaseDate': instance.releaseDate,
       'dimensions': instance.dimensions,
       'network': instance.network,
@@ -649,4 +645,26 @@ Map<String, dynamic> _$AnswerSubResponseToJson(AnswerSubResponse instance) =>
       'upvotes': instance.upvotes,
       'upvoted': instance.upvoted,
       'replies': instance.repliesSubResponses,
+    };
+
+CompetitionSubResponse _$CompetitionSubResponseFromJson(
+        Map<String, dynamic> json) =>
+    CompetitionSubResponse(
+      id: json['_id'] as String,
+      deadline: DateTime.parse(json['deadline'] as String),
+      numWinners: json['numWinners'] as int,
+      prize: json['prize'] as String,
+      prizePic: json['prizePic'] as String,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+    );
+
+Map<String, dynamic> _$CompetitionSubResponseToJson(
+        CompetitionSubResponse instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'deadline': instance.deadline.toIso8601String(),
+      'numWinners': instance.numWinners,
+      'prize': instance.prize,
+      'prizePic': instance.prizePic,
+      'createdAt': instance.createdAt.toIso8601String(),
     };

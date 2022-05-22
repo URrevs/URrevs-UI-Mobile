@@ -9,8 +9,8 @@ class Specs {
   String companyId;
   String companyName;
   double? priceEgp;
-  double? priceEur;
-  double? priceUsd;
+  // double? priceEur;
+  // double? priceUsd;
   String? releaseDate;
   String? dimensions;
   String? network;
@@ -42,8 +42,8 @@ class Specs {
     required this.companyId,
     required this.companyName,
     required this.priceEgp,
-    required this.priceEur,
-    required this.priceUsd,
+    // required this.priceEur,
+    // required this.priceUsd,
     required this.releaseDate,
     required this.dimensions,
     required this.network,

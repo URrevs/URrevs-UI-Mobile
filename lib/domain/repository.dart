@@ -50,7 +50,7 @@ class Repository {
   }
 
   Future<Either<Failure, T>> _tryAndCatch<T>(Future<T> Function() callBack,
-      {Left<Failure, T> Function(DioError)? onDioError}) async {
+      {Left<Failure, T>? Function(DioError)? onDioError}) async {
     try {
       await _checkConnection();
       T data = await callBack();
@@ -60,7 +60,10 @@ class Repository {
     } on NoInternetConnection catch (e) {
       return Left(e.failure);
     } on DioError catch (e) {
-      if (onDioError != null) return onDioError(e);
+      if (onDioError != null) {
+        final Left<Failure, T>? left = onDioError(e);
+        if (left != null) return left;
+      }
       return Left(e.failure);
     } on FirebaseAuthException catch (e) {
       return Left(e.failure);
@@ -847,6 +850,11 @@ class Repository {
       final response = await _remoteDataSource.unmarkAnswerAsAcceptedForPhone(
           questionId, answerId);
       return response.id;
+    }, onDioError: (e) {
+      if (e.statusMessage == ServerErrorMessages.notYet) {
+        return Left(IgnoredFailure());
+      }
+      return null;
     });
   }
 
@@ -856,6 +864,11 @@ class Repository {
       final response = await _remoteDataSource.unmarkAnswerAsAcceptedForCompany(
           questionId, answerId);
       return response.id;
+    }, onDioError: (e) {
+      if (e.statusMessage == ServerErrorMessages.notYet) {
+        return Left(IgnoredFailure());
+      }
+      return null;
     });
   }
 
@@ -899,7 +912,12 @@ class Repository {
   Future<Either<Failure, Competition>> getLatestCompetition() {
     return _tryAndCatch(() async {
       final response = await _remoteDataSource.getLatestCompetition();
-      return response.competitionModel;
+      return response.competitionSubResponse.competitionModel;
+    }, onDioError: (e) {
+      if (e.statusMessage == ServerErrorMessages.notYet) {
+        return Left(NoResultFailure());
+      }
+      return null;
     });
   }
 

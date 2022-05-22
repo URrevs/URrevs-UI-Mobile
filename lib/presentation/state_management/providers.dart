@@ -14,6 +14,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/get_inf
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/get_my_owned_phones_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/get_my_profile_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/leaderboard_notifiers/add_competition_notifier.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/leaderboard_notifiers/get_lastest_competition_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/phones_notifier/get_all_phones_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/phones_notifier/get_two_phones_specs_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/search_notifiers/add_new_recent_search_notifier.dart';
@@ -36,6 +37,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/get_curren
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_info_about_latest_update_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_owned_phones_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/leaderboard_states/add_compeititon_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/leaderboard_states/get_lastest_competition_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_all_phones_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_phone_specs_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_phone_statistical_info_state.dart';
@@ -276,6 +278,12 @@ final iDontLikeThisProvider = StateNotifierProvider.autoDispose.family<
 final addCompetitionProvider = StateNotifierProvider.autoDispose<
     AddCompetitionNotifier,
     AddCompetitionState>((ref) => AddCompetitionNotifier());
+
+final getLatestCompetitionProvider = StateNotifierProvider.autoDispose.family<
+        GetLatestCompetitionNotifier,
+        GetLatestCompetitionState,
+        GetLatestCompetitionProviderParams>(
+    (ref, params) => GetLatestCompetitionNotifier());
 
 // posts and interactions providers
 

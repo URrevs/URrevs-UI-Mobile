@@ -5,6 +5,7 @@ import 'package:urrevs_ui_mobile/domain/models/comment.dart';
 import 'package:urrevs_ui_mobile/domain/models/company.dart';
 import 'package:urrevs_ui_mobile/domain/models/company_review.dart';
 import 'package:urrevs_ui_mobile/domain/models/company_stats.dart';
+import 'package:urrevs_ui_mobile/domain/models/competition.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone_review.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone_stats.dart';
@@ -221,8 +222,8 @@ class SpecsSubResponse {
   String companyId;
   String companyName;
   double? priceEgp;
-  double? priceEur;
-  double? priceUsd;
+  // double? priceEur;
+  // double? priceUsd;
   String? releaseDate;
   String? dimensions;
   String? network;
@@ -256,8 +257,8 @@ class SpecsSubResponse {
     required this.companyId,
     required this.companyName,
     required this.priceEgp,
-    required this.priceEur,
-    required this.priceUsd,
+    // required this.priceEur,
+    // required this.priceUsd,
     required this.releaseDate,
     required this.dimensions,
     required this.network,
@@ -292,8 +293,8 @@ class SpecsSubResponse {
       companyId: companyId,
       companyName: companyName,
       priceEgp: priceEgp,
-      priceEur: priceEur,
-      priceUsd: priceUsd,
+      // priceEur: priceEur,
+      // priceUsd: priceUsd,
       releaseDate: releaseDate,
       dimensions: dimensions,
       network: network,
@@ -953,4 +954,36 @@ class AnswerSubResponse {
   factory AnswerSubResponse.fromJson(Map<String, Object?> json) =>
       _$AnswerSubResponseFromJson(json);
   Map<String, dynamic> toJson() => _$AnswerSubResponseToJson(this);
+}
+
+@JsonSerializable()
+class CompetitionSubResponse {
+  @JsonKey(name: '_id')
+  String id;
+  DateTime deadline;
+  int numWinners;
+  String prize;
+  String prizePic;
+  DateTime createdAt;
+  CompetitionSubResponse({
+    required this.id,
+    required this.deadline,
+    required this.numWinners,
+    required this.prize,
+    required this.prizePic,
+    required this.createdAt,
+  });
+
+  Competition get competitionModel => Competition(
+        id: id,
+        deadline: deadline,
+        numWinners: numWinners,
+        prize: prize,
+        prizePic: prizePic,
+        createdAt: createdAt,
+      );
+
+  factory CompetitionSubResponse.fromJson(Map<String, Object?> json) =>
+      _$CompetitionSubResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$CompetitionSubResponseToJson(this);
 }

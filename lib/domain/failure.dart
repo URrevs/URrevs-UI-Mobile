@@ -66,6 +66,11 @@ class ServerErrorMessages {
         ServerErrorMessages.notAccepted: notAccepted,
       };
 
+  static List<String> get _noResultFailures => [
+        noUpdateOperationsYet,
+        // notYet,
+      ];
+
   static List<String> get _retryActionFailures => [
         tooManyRequests,
         processFailed,
@@ -83,7 +88,7 @@ class ServerErrorMessages {
   static List<String> get _ignoredFailures => [
         alreadyLiked,
         noLikes,
-        notYet,
+        // notYet,
         notAccepted,
         // trackAlreadyHated,
         // trackAlreadySeemored,
@@ -110,7 +115,7 @@ class ServerErrorMessages {
   static Failure getFailure(String errorMessage) {
     String friendlyErrorMessage = errorMessagesMap[errorMessage] as String;
     if (errorMessage == noUpdateOperationsYet) {
-      return NoUpdateOperationsFailure();
+      return NoResultFailure();
     }
     if (_retryActionFailures.contains(errorMessage)) {
       return RetryFailure(friendlyErrorMessage);
@@ -183,8 +188,8 @@ class IgnoredFailure extends Failure {
 
 /// A failure representing the case where there are not updates made in the
 /// system.
-class NoUpdateOperationsFailure extends Failure {
-  NoUpdateOperationsFailure() : super('');
+class NoResultFailure extends Failure {
+  NoResultFailure() : super('');
 
   @override
   String toString() {
@@ -214,6 +219,8 @@ failures requiring no action:
 */
 
 extension DioErrorFailure on DioError {
+  String? get statusMessage => response?.data['status'];
+
   Failure get failure {
     switch (type) {
       case DioErrorType.connectTimeout:

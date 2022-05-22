@@ -240,5 +240,8 @@ abstract class  LocaleKeys {
   static const youCantAnswerAQuestionMessage = 'youCantAnswerAQuestionMessage';
   static const youHaventReviewedThatPhone = 'youHaventReviewedThatPhone';
   static const enterNumberOfWinnersFormatErrorMsg = 'enterNumberOfWinnersFormatErrorMsg';
+  static const thereIsAnActiveCompetition = 'thereIsAnActiveCompetition';
+  static const noCompetitionsYet = 'noCompetitionsYet';
+  static const youCannotAddACompetitionWhileThereIsARunningOne = 'youCannotAddACompetitionWhileThereIsARunningOne';
 
 }

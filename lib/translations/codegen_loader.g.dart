@@ -253,7 +253,10 @@ class CodegenLoader extends AssetLoader{
   "starRatingMissingField": "يجب ادخال تقييمك",
   "youCantAnswerAQuestionMessage": "لا يمكنك إضافة اجابة لسؤال عن شركة لم تراجع احدي منتاجاتها",
   "youHaventReviewedThatPhone": "لم تقم بمراجعة هذا الهاتف",
-  "enterNumberOfWinnersFormatErrorMsg": "يجب ادخال عدد الفائزين بشكل صحيح."
+  "enterNumberOfWinnersFormatErrorMsg": "يجب ادخال عدد الفائزين بشكل صحيح.",
+  "thereIsAnActiveCompetition": "هناك مسابقة قائمة الآن",
+  "noCompetitionsYet": "لا توجد مسابقات بعد",
+  "youCannotAddACompetitionWhileThereIsARunningOne": "لا يمكنك إضافة مسابقة أثناء المسابقة القائمة الآن"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -494,7 +497,10 @@ static const Map<String,dynamic> en = {
   "starRatingMissingField": "You must enter your rating",
   "youCantAnswerAQuestionMessage": "You cannot add an answer to a question about a company that you haven't reviewed one of its products",
   "youHaventReviewedThatPhone": "You haven't reviewed that phone",
-  "enterNumberOfWinnersFormatErrorMsg": "The number of winners must be entered in correct format."
+  "enterNumberOfWinnersFormatErrorMsg": "The number of winners must be entered in correct format.",
+  "thereIsAnActiveCompetition": "There is an active competition running now",
+  "noCompetitionsYet": "No competitions yet",
+  "youCannotAddACompetitionWhileThereIsARunningOne": "You cannot add a competition while there is a running one"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

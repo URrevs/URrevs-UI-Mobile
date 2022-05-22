@@ -24,24 +24,15 @@ GetLatestCompetitionResponse _$GetLatestCompetitionResponseFromJson(
         Map<String, dynamic> json) =>
     GetLatestCompetitionResponse(
       success: json['success'] as bool,
-      id: json['_id'] as String,
-      deadline: DateTime.parse(json['deadline'] as String),
-      numWinners: json['numWinners'] as int,
-      prize: json['prize'] as String,
-      prizePic: json['prizePic'] as String,
-      createdAt: DateTime.parse(json['createdAt'] as String),
+      competitionSubResponse: CompetitionSubResponse.fromJson(
+          json['competition'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$GetLatestCompetitionResponseToJson(
         GetLatestCompetitionResponse instance) =>
     <String, dynamic>{
       'success': instance.success,
-      '_id': instance.id,
-      'deadline': instance.deadline.toIso8601String(),
-      'numWinners': instance.numWinners,
-      'prize': instance.prize,
-      'prizePic': instance.prizePic,
-      'createdAt': instance.createdAt.toIso8601String(),
+      'competition': instance.competitionSubResponse,
     };
 
 GetTopUsersInCompetitionResponse _$GetTopUsersInCompetitionResponseFromJson(

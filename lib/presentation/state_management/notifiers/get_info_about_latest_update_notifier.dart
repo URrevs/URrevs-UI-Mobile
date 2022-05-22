@@ -15,7 +15,7 @@ class GetInfoAboutLatestUpdateNotifier
     final response = await GetIt.I<Repository>().getInfoAboutLatestUpdate();
     response.fold(
       (failure) {
-        if (failure is NoUpdateOperationsFailure) {
+        if (failure is NoResultFailure) {
           return state = GetInfoAboutLatestUpdateNoUpdateState();
         }
         state = GetInfoAboutLatestUpdateErrorState(failure: failure);

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AdminPanelLoading extends StatelessWidget {
-  const AdminPanelLoading({Key? key}) : super(key: key);
+class AdminPanelTileLoading extends StatelessWidget {
+  const AdminPanelTileLoading({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
