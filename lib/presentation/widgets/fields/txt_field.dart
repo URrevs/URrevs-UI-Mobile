@@ -10,8 +10,9 @@ class TxtField extends StatelessWidget {
     required this.hintText,
     required this.keyboardType,
     required this.fillColor,
-    this.errorMsg='',
+    this.errorMsg = '',
     this.hasErrorMsg = false,
+    this.extraValidation,
   }) : super(key: key);
 
   final TextEditingController textController;
@@ -20,6 +21,7 @@ class TxtField extends StatelessWidget {
   final Color fillColor;
   final String errorMsg;
   final bool hasErrorMsg;
+  final String? Function(String)? extraValidation;
   @override
   Widget build(BuildContext context) {
     final InputBorder inputBorder = OutlineInputBorder(
@@ -35,24 +37,29 @@ class TxtField extends StatelessWidget {
         color: ColorManager.black,
       ),
       decoration: InputDecoration(
-          contentPadding:
-              EdgeInsets.symmetric(vertical: 20.h, horizontal: 10.w),
-          border: inputBorder,
-          hintText: hintText,
-          hintStyle:
-              TextStyleManager.s16w300.copyWith(color: ColorManager.black),
-          filled: true,
-          fillColor: fillColor,
-          errorStyle: TextStyleManager.s13w400.copyWith(color: ColorManager.red),
-          errorBorder:hasErrorMsg? inputBorder.copyWith(borderSide: BorderSide(color: ColorManager.red)):inputBorder,
-          ),
-      validator: hasErrorMsg? (value) {
-        if (value == null || value.isEmpty) {
-          return errorMsg;
-        } else {
-          return null;
-        }
-      }: null,
+        contentPadding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 10.w),
+        border: inputBorder,
+        hintText: hintText,
+        hintStyle: TextStyleManager.s16w300.copyWith(color: ColorManager.black),
+        filled: true,
+        fillColor: fillColor,
+        errorStyle: TextStyleManager.s13w400.copyWith(color: ColorManager.red),
+        errorBorder: hasErrorMsg
+            ? inputBorder.copyWith(
+                borderSide: BorderSide(color: ColorManager.red))
+            : inputBorder,
+      ),
+      validator: hasErrorMsg
+          ? (value) {
+              if (value == null || value.isEmpty) {
+                return errorMsg;
+              } else if (extraValidation != null) {
+                return extraValidation!(value);
+              } else {
+                return null;
+              }
+            }
+          : null,
     );
   }
 }

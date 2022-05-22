@@ -109,15 +109,19 @@ class ServerErrorMessages {
 
   static Failure getFailure(String errorMessage) {
     String friendlyErrorMessage = errorMessagesMap[errorMessage] as String;
+    if (errorMessage == noUpdateOperationsYet) {
+      return NoUpdateOperationsFailure();
+    }
     if (_retryActionFailures.contains(errorMessage)) {
       return RetryFailure(friendlyErrorMessage);
-    } else if (_authenticateFailures.contains(errorMessage)) {
-      return AuthenticateFailure(friendlyErrorMessage);
-    } else if (_ignoredFailures.contains(errorMessage)) {
-      return IgnoredFailure();
-    } else {
-      return Failure(friendlyErrorMessage);
     }
+    if (_authenticateFailures.contains(errorMessage)) {
+      return AuthenticateFailure(friendlyErrorMessage);
+    }
+    if (_ignoredFailures.contains(errorMessage)) {
+      return IgnoredFailure();
+    }
+    return Failure(friendlyErrorMessage);
   }
 }
 
@@ -174,6 +178,17 @@ class IgnoredFailure extends Failure {
   @override
   String toString() {
     return 'IgnoredFailure';
+  }
+}
+
+/// A failure representing the case where there are not updates made in the
+/// system.
+class NoUpdateOperationsFailure extends Failure {
+  NoUpdateOperationsFailure() : super('');
+
+  @override
+  String toString() {
+    return 'NoUpdateOperationsFailure';
   }
 }
 

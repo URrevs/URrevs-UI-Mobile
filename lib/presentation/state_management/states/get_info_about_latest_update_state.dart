@@ -10,22 +10,19 @@ import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 abstract class GetInfoAboutLatestUpdateState extends Equatable
     implements RequestState {}
 
-class GetInfoAboutLatestUpdateInitialState
-    extends GetInfoAboutLatestUpdateState
+class GetInfoAboutLatestUpdateInitialState extends GetInfoAboutLatestUpdateState
     implements InitialState {
   @override
   List<Object?> get props => [];
 }
 
-class GetInfoAboutLatestUpdateLoadingState
-    extends GetInfoAboutLatestUpdateState
+class GetInfoAboutLatestUpdateLoadingState extends GetInfoAboutLatestUpdateState
     implements LoadingState {
   @override
   List<Object?> get props => [];
 }
 
-class GetInfoAboutLatestUpdateLoadedState
-    extends GetInfoAboutLatestUpdateState
+class GetInfoAboutLatestUpdateLoadedState extends GetInfoAboutLatestUpdateState
     implements LoadedState {
   final List<Phone> phones;
   final List<Company> companies;
@@ -55,6 +52,14 @@ class GetInfoAboutLatestUpdateLoadedState
 
   String get updateMethod =>
       automatic ? LocaleKeys.automatically.tr() : LocaleKeys.manually.tr();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class GetInfoAboutLatestUpdateNoUpdateState
+    extends GetInfoAboutLatestUpdateState {
+  GetInfoAboutLatestUpdateNoUpdateState();
 
   @override
   List<Object?> get props => [];

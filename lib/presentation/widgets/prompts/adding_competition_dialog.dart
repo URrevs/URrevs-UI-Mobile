@@ -1,14 +1,17 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:urrevs_ui_mobile/app/extensions.dart';
+import 'package:urrevs_ui_mobile/data/requests/leaderboard_api_requests.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/assets_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/font_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/leaderboard_states/add_compeititon_state.dart';
+import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/alert_dialog_title.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/buttons/grad_button.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/fields/datepicker_field.dart';
@@ -18,63 +21,75 @@ import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 /// prompt that takes user input
 /// it sends a request with the new competition
 
-class AddingCompetitionPrompt extends StatefulWidget {
-  const AddingCompetitionPrompt({
-    Key? key,
-    required this.dateController,
-    required this.numberOfWinnersController,
-    required this.prizeNameController,
-    required this.imgUrlController,
-  }) : super(key: key);
-
-  /// The controller for the date field.
-  final TextEditingController dateController;
-
-  /// The controller for the number of winners field.
-  final TextEditingController numberOfWinnersController;
-
-  /// The controller for the prize name field.
-  final TextEditingController prizeNameController;
-
-  /// The controller for the image url field.
-  final TextEditingController imgUrlController;
+class AddingCompetitionDialog extends ConsumerStatefulWidget {
+  const AddingCompetitionDialog({Key? key}) : super(key: key);
 
   @override
-  State<AddingCompetitionPrompt> createState() =>
-      _AddingCompetitionPromptState();
+  ConsumerState<AddingCompetitionDialog> createState() =>
+      _AddingCompetitionDialogState();
 }
 
-class _AddingCompetitionPromptState extends State<AddingCompetitionPrompt> {
-  /// Function to build the prize image, when the a vaild URL is entered.
-  Widget prizeImageBuilder() {
-    String imgUrl = widget.imgUrlController.text;
-    // print(Uri.parse(imgUrl).isAbsolute);
-    setState(() {
-      imgUrl = widget.imgUrlController.text;
-    });
-    return Uri.parse(imgUrl).isAbsolute
-        ? Center(
-            child: SizedBox(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(15.r),
-                child: Image.network(
-                  imgUrl,
-                  fit: BoxFit.cover,
-                  filterQuality: FilterQuality.high,
-                  errorBuilder: (context, exception, stackTrace) {
-                    return Image.asset(
-                      ImageAssets.errorImage,
-                      fit: BoxFit.cover,
-                    );
-                  },
-                ),
-              ),
-            ),
-          )
-        : SizedBox();
-  }
+class _AddingCompetitionDialogState
+    extends ConsumerState<AddingCompetitionDialog> {
+  /// The controller for the date field.
+  final TextEditingController dateController = TextEditingController();
+
+  /// The controller for the number of winners field.
+  final TextEditingController numberOfWinnersController =
+      TextEditingController();
+
+  /// The controller for the prize name field.
+  final TextEditingController prizeNameController = TextEditingController();
+
+  /// The controller for the image url field.
+  final TextEditingController imgUrlController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+
+  DateTime? deadline;
+
+  /// Function to build the prize image, when the a vaild URL is entered.
+  Widget prizeImageBuilder() {
+    return StatefulBuilder(builder: (context, setBuilderState) {
+      String imgUrl = imgUrlController.text;
+      imgUrlController.addListener(() {
+        setBuilderState(() => imgUrl = imgUrlController.text);
+      });
+      if (!Uri.parse(imgUrl).isAbsolute) {
+        return SizedBox();
+      }
+      return Center(
+        child: SizedBox(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(15.r),
+            child: Image.network(
+              imgUrl,
+              fit: BoxFit.cover,
+              filterQuality: FilterQuality.high,
+              errorBuilder: (context, exception, stackTrace) {
+                return Image.asset(
+                  ImageAssets.errorImage,
+                  fit: BoxFit.cover,
+                );
+              },
+            ),
+          ),
+        ),
+      );
+    });
+  }
+
+  void _submitCompetition() {
+    if (_formKey.currentState!.validate()) {
+      final request = AddCompetitionRequest(
+        deadline: deadline!,
+        numWinners: int.parse(numberOfWinnersController.text),
+        prize: prizeNameController.text,
+        prizePic: imgUrlController.text,
+      );
+      ref.read(addCompetitionProvider.notifier).addCompetition(request);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,8 +120,10 @@ class _AddingCompetitionPromptState extends State<AddingCompetitionPrompt> {
             ),
             SizedBox(height: 5.h, width: 320.w),
             DatePickerField(
-              setChosenDate: (_) {},
-              dateController: widget.dateController,
+              setChosenDate: (dateTime) {
+                setState(() => deadline = dateTime);
+              },
+              dateController: dateController,
               hintText: LocaleKeys.competitionEndDate.tr(),
               fillColor: ColorManager.backgroundGrey,
               isMonthDatePicker: false,
@@ -123,12 +140,18 @@ class _AddingCompetitionPromptState extends State<AddingCompetitionPrompt> {
             ),
             SizedBox(height: 5.h),
             TxtField(
-              textController: widget.numberOfWinnersController,
+              textController: numberOfWinnersController,
               hintText: LocaleKeys.winnersNumber.tr(),
               keyboardType: TextInputType.number,
               fillColor: ColorManager.backgroundGrey,
               errorMsg: LocaleKeys.enterNumberOfWinnersErrorMsg.tr(),
               hasErrorMsg: true,
+              extraValidation: (value) {
+                if (int.tryParse(numberOfWinnersController.text) == null) {
+                  return LocaleKeys.enterNumberOfWinnersFormatErrorMsg.tr();
+                }
+                return null;
+              },
             ),
             SizedBox(height: 14.h),
             Text(
@@ -140,7 +163,7 @@ class _AddingCompetitionPromptState extends State<AddingCompetitionPrompt> {
             ),
             SizedBox(height: 5.h),
             TxtField(
-              textController: widget.prizeNameController,
+              textController: prizeNameController,
               hintText: LocaleKeys.prizeName.tr(),
               keyboardType: TextInputType.text,
               fillColor: ColorManager.backgroundGrey,
@@ -157,7 +180,7 @@ class _AddingCompetitionPromptState extends State<AddingCompetitionPrompt> {
             ),
             SizedBox(height: 5.h),
             TxtField(
-              textController: widget.imgUrlController,
+              textController: imgUrlController,
               hintText: LocaleKeys.prizeImageLink.tr(),
               keyboardType: TextInputType.url,
               fillColor: ColorManager.backgroundGrey,
@@ -167,29 +190,53 @@ class _AddingCompetitionPromptState extends State<AddingCompetitionPrompt> {
             SizedBox(height: 14.h),
             prizeImageBuilder(),
             SizedBox(height: 14.h),
-            GradButton(
-                text: Text(
-                  LocaleKeys.addCompetition.tr(),
-                  style: TextStyleManager.s18w700,
-                ),
-                icon: Icon(
-                  IconsManager.add,
-                  size: 28.sp,
-                ),
-                width: 250.w,
-                reverseIcon: false,
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    // If the form is valid, display a snackbar. In the real world,
-                    // you'd often call a server or save the information in a database.
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Processing Data')),
-                    );
-                  }
-                }),
+            _buildSubmitButton(),
           ],
         ),
       ),
+    );
+  }
+
+  GradButton _buildSubmitButton() {
+    ref.addErrorListener(
+      provider: addCompetitionProvider,
+      context: context,
+    );
+    ref.listen(addCompetitionProvider, (previous, next) {
+      if (next is AddCompetitionLoadedState) Navigator.of(context).pop();
+    });
+    final state = ref.watch(addCompetitionProvider);
+    late Widget icon;
+    late bool isLoading;
+    if (state is LoadingState) {
+      isLoading = true;
+      icon = Padding(
+        padding: EdgeInsets.symmetric(horizontal: 6.w),
+        child: Center(
+          child: SizedBox(
+            height: 16.sp,
+            width: 16.sp,
+            child: CircularProgressIndicator(
+              color: ColorManager.white,
+              strokeWidth: 3,
+            ),
+          ),
+        ),
+      );
+    } else {
+      icon = Icon(IconsManager.add, size: 28.sp);
+      isLoading = false;
+    }
+    return GradButton(
+      text: Text(
+        LocaleKeys.addCompetition.tr(),
+        style: TextStyleManager.s18w700,
+      ),
+      icon: icon,
+      width: 360.w,
+      reverseIcon: false,
+      isEnabled: !isLoading,
+      onPressed: _submitCompetition,
     );
   }
 }

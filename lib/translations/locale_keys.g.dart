@@ -239,5 +239,6 @@ abstract class  LocaleKeys {
   static const starRatingMissingField = 'starRatingMissingField';
   static const youCantAnswerAQuestionMessage = 'youCantAnswerAQuestionMessage';
   static const youHaventReviewedThatPhone = 'youHaventReviewedThatPhone';
+  static const enterNumberOfWinnersFormatErrorMsg = 'enterNumberOfWinnersFormatErrorMsg';
 
 }

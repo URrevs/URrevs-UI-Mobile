@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/bottom_navigation_bar_container_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/menu_screen/subscreens/admin_panel/subscreens.dart/update_products_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
@@ -11,6 +12,7 @@ import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/fullscreen_error_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/admin_panel_loading.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/prompts/adding_competition_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/item_tile.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
@@ -55,17 +57,24 @@ class _AdminPanelScreenState extends ConsumerState<AdminPanelScreen> {
           context: context,
           title: LocaleKeys.adminPanel.tr(),
         ),
-        body: SafeArea(
-          child: ScrollConfiguration(
-            behavior: NoGlowingScrollBehaviour(),
-            child: _buildBody(context),
-          ),
+        body: Navigator(
+          onGenerateRoute: (settings) {
+            print(settings);
+            return MaterialPageRoute(builder: (dialogCtx) {
+              return SafeArea(
+                child: ScrollConfiguration(
+                  behavior: NoGlowingScrollBehaviour(),
+                  child: _buildBody(dialogCtx),
+                ),
+              );
+            });
+          },
         ),
       ),
     );
   }
 
-  Widget _buildBody(BuildContext context) {
+  Widget _buildBody(BuildContext dialogCtx) {
     final state = ref.watch(getInfoAboutLatestUpdateProvider(_providerParams));
     if (state is GetInfoAboutLatestUpdateLoadingState ||
         state is GetInfoAboutLatestUpdateInitialState) {
@@ -76,15 +85,19 @@ class _AdminPanelScreenState extends ConsumerState<AdminPanelScreen> {
         retryLastRequest: state.failure is RetryFailure,
       );
     } else {
-      final loadedState = state as GetInfoAboutLatestUpdateLoadedState;
-      final String updateCompletedDate =
-          DateFormat.yMMMMd(context.locale.languageCode)
-              .format(loadedState.date);
+      String? updateCompletedDate;
+      if (state is GetInfoAboutLatestUpdateLoadedState) {
+        updateCompletedDate =
+            DateFormat.yMMMMd(context.locale.languageCode).format(state.date);
+      }
+      String lastUpdateStr = updateCompletedDate == null
+          ? LocaleKeys.noUpdateOperationsYet.tr()
+          : LocaleKeys.lastUpdatedIn.tr() + ' ' + updateCompletedDate;
       return ListView(
         children: [
           ItemTile(
             title: LocaleKeys.updateProductsList.tr(),
-            subtitle: LocaleKeys.lastUpdatedIn.tr() + ' ' + updateCompletedDate,
+            subtitle: lastUpdateStr,
             iconData: Icons.emoji_events,
             onTap: () {
               Navigator.of(context).pushNamed(
@@ -96,7 +109,15 @@ class _AdminPanelScreenState extends ConsumerState<AdminPanelScreen> {
             title: LocaleKeys.addACompetition.tr(),
             subtitle: 'آخر مسابقة تمت في 20 أغسطس 2020',
             iconData: Icons.update,
-            onTap: () {},
+            onTap: () {
+              showDialog(
+                context: dialogCtx,
+                useRootNavigator: false,
+                builder: (BuildContext context) {
+                  return AddingCompetitionDialog();
+                },
+              );
+            },
           ),
         ],
       );

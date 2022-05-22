@@ -174,11 +174,11 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
                 'https://shop.btcegyptgold.com/media/catalog/product/cache/54154f8e5f8cfdda3a2d411d19afaba5/1/k/1kg_995.5.jpg',
           ),
           SizedBox(height: 20),
-          AddingCompetitionPrompt(
-              dateController: dateCtl,
-              numberOfWinnersController: winnerNumCtl,
-              prizeNameController: prizeNameCtl,
-              imgUrlController: imgUrlCtl),
+          // AddingCompetitionDialog(
+          //     dateController: dateCtl,
+          //     numberOfWinnersController: winnerNumCtl,
+          //     prizeNameController: prizeNameCtl,
+          //     imgUrlController: imgUrlCtl),
 
           //TxtField(textCtl: textCtl, hintText: hintText),
           SizedBox(

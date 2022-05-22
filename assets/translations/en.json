@@ -236,5 +236,6 @@
   "darkTheme": "Dark",
   "starRatingMissingField": "You must enter your rating",
   "youCantAnswerAQuestionMessage": "You cannot add an answer to a question about a company that you haven't reviewed one of its products",
-  "youHaventReviewedThatPhone": "You haven't reviewed that phone"
+  "youHaventReviewedThatPhone": "You haven't reviewed that phone",
+  "enterNumberOfWinnersFormatErrorMsg": "The number of winners must be entered in correct format."
 }

@@ -45,9 +45,12 @@ class DatePickerField extends StatelessWidget {
                   firstDate: DateTime.now(),
                   lastDate: DateTime(2222))
               .then((date) {
-            dateController.text = DateFormat(
-                    "EEE, d / M /y", Localizations.localeOf(context).toString())
-                .format(date!);
+            if (date != null) {
+              setChosenDate(date);
+              dateController.text = DateFormat("EEE, d / M /y",
+                      Localizations.localeOf(context).toString())
+                  .format(date);
+            }
           });
         } else {
           showMonthPicker(

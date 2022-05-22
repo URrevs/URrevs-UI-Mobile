@@ -10,9 +10,10 @@ import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/authentication_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/companies_notifiers/get_all_companies_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/get_current_user_image_url_notifier.dart';
-import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/get_info_about_latest_update.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/get_info_about_latest_update_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/get_my_owned_phones_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/get_my_profile_notifier.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/leaderboard_notifiers/add_competition_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/phones_notifier/get_all_phones_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/phones_notifier/get_two_phones_specs_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/search_notifiers/add_new_recent_search_notifier.dart';
@@ -34,6 +35,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/companies_
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_current_user_image_url_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_info_about_latest_update_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_owned_phones_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/leaderboard_states/add_compeititon_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_all_phones_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_phone_specs_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_phone_statistical_info_state.dart';
@@ -270,6 +272,10 @@ final iDontLikeThisProvider = StateNotifierProvider.autoDispose.family<
         postId: params.postId,
         postContentType: params.postContentType,
         targetType: params.targetType));
+
+final addCompetitionProvider = StateNotifierProvider.autoDispose<
+    AddCompetitionNotifier,
+    AddCompetitionState>((ref) => AddCompetitionNotifier());
 
 // posts and interactions providers
 
