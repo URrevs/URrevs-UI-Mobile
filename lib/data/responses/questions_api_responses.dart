@@ -19,6 +19,7 @@ class AddPhoneQuestionResponse extends BaseResponse {
 
   factory AddPhoneQuestionResponse.fromJson(Map<String, Object?> json) =>
       _$AddPhoneQuestionResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$AddPhoneQuestionResponseToJson(this);
 }
 
@@ -33,6 +34,7 @@ class AddCompanyQuestionResponse extends BaseResponse {
 
   factory AddCompanyQuestionResponse.fromJson(Map<String, Object?> json) =>
       _$AddCompanyQuestionResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$AddCompanyQuestionResponseToJson(this);
 }
 
@@ -47,6 +49,7 @@ class GetPhoneQuestionResponse extends BaseResponse {
 
   factory GetPhoneQuestionResponse.fromJson(Map<String, Object?> json) =>
       _$GetPhoneQuestionResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$GetPhoneQuestionResponseToJson(this);
 }
 
@@ -61,6 +64,7 @@ class GetCompanyQuestionResponse extends BaseResponse {
 
   factory GetCompanyQuestionResponse.fromJson(Map<String, Object?> json) =>
       _$GetCompanyQuestionResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$GetCompanyQuestionResponseToJson(this);
 }
 
@@ -78,6 +82,7 @@ class GetMyPhoneQuestionsResponse extends BaseResponse {
 
   factory GetMyPhoneQuestionsResponse.fromJson(Map<String, Object?> json) =>
       _$GetMyPhoneQuestionsResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$GetMyPhoneQuestionsResponseToJson(this);
 }
 
@@ -95,6 +100,7 @@ class GetMyCompanyQuestionsResponse extends BaseResponse {
 
   factory GetMyCompanyQuestionsResponse.fromJson(Map<String, Object?> json) =>
       _$GetMyCompanyQuestionsResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$GetMyCompanyQuestionsResponseToJson(this);
 }
 
@@ -112,6 +118,7 @@ class GetPhoneQuestionsOfAnotherUser extends BaseResponse {
 
   factory GetPhoneQuestionsOfAnotherUser.fromJson(Map<String, Object?> json) =>
       _$GetPhoneQuestionsOfAnotherUserFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$GetPhoneQuestionsOfAnotherUserToJson(this);
 }
 
@@ -130,6 +137,7 @@ class GetCompanyQuestionsOfAnotherUser extends BaseResponse {
   factory GetCompanyQuestionsOfAnotherUser.fromJson(
           Map<String, Object?> json) =>
       _$GetCompanyQuestionsOfAnotherUserFromJson(json);
+  @override
   Map<String, dynamic> toJson() =>
       _$GetCompanyQuestionsOfAnotherUserToJson(this);
 }
@@ -149,6 +157,7 @@ class GetQuestionsOnCertainPhoneResponse extends BaseResponse {
   factory GetQuestionsOnCertainPhoneResponse.fromJson(
           Map<String, Object?> json) =>
       _$GetQuestionsOnCertainPhoneResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() =>
       _$GetQuestionsOnCertainPhoneResponseToJson(this);
 }
@@ -168,6 +177,7 @@ class GetQuestionsOnCertainCompanyResponse extends BaseResponse {
   factory GetQuestionsOnCertainCompanyResponse.fromJson(
           Map<String, Object?> json) =>
       _$GetQuestionsOnCertainCompanyResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() =>
       _$GetQuestionsOnCertainCompanyResponseToJson(this);
 }
@@ -180,6 +190,7 @@ class UpvotePhoneQuestionResponse extends BaseResponse {
 
   factory UpvotePhoneQuestionResponse.fromJson(Map<String, Object?> json) =>
       _$UpvotePhoneQuestionResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$UpvotePhoneQuestionResponseToJson(this);
 }
 
@@ -191,6 +202,7 @@ class DownvotePhoneQuestionResponse extends BaseResponse {
 
   factory DownvotePhoneQuestionResponse.fromJson(Map<String, Object?> json) =>
       _$DownvotePhoneQuestionResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$DownvotePhoneQuestionResponseToJson(this);
 }
 
@@ -202,6 +214,7 @@ class UpvoteCompanyQuestionResponse extends BaseResponse {
 
   factory UpvoteCompanyQuestionResponse.fromJson(Map<String, Object?> json) =>
       _$UpvoteCompanyQuestionResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$UpvoteCompanyQuestionResponseToJson(this);
 }
 
@@ -213,6 +226,7 @@ class DownvoteCompanyQuestionResponse extends BaseResponse {
 
   factory DownvoteCompanyQuestionResponse.fromJson(Map<String, Object?> json) =>
       _$DownvoteCompanyQuestionResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() =>
       _$DownvoteCompanyQuestionResponseToJson(this);
 }
@@ -232,6 +246,7 @@ class GetAnswersAndRepliesForPhoneQuestionResponse extends BaseResponse {
   factory GetAnswersAndRepliesForPhoneQuestionResponse.fromJson(
           Map<String, Object?> json) =>
       _$GetAnswersAndRepliesForPhoneQuestionResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() =>
       _$GetAnswersAndRepliesForPhoneQuestionResponseToJson(this);
 }
@@ -251,6 +266,7 @@ class GetAnswersAndRepliesForCompanyQuestionResponse extends BaseResponse {
   factory GetAnswersAndRepliesForCompanyQuestionResponse.fromJson(
           Map<String, Object?> json) =>
       _$GetAnswersAndRepliesForCompanyQuestionResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() =>
       _$GetAnswersAndRepliesForCompanyQuestionResponseToJson(this);
 }
@@ -269,6 +285,7 @@ class AddAnswerToPhoneQuestionResponse extends BaseResponse {
   factory AddAnswerToPhoneQuestionResponse.fromJson(
           Map<String, Object?> json) =>
       _$AddAnswerToPhoneQuestionResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() =>
       _$AddAnswerToPhoneQuestionResponseToJson(this);
 }
@@ -285,6 +302,7 @@ class AddAnswerToCompanyQuestionResponse extends BaseResponse {
   factory AddAnswerToCompanyQuestionResponse.fromJson(
           Map<String, Object?> json) =>
       _$AddAnswerToCompanyQuestionResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() =>
       _$AddAnswerToCompanyQuestionResponseToJson(this);
 }
@@ -301,6 +319,7 @@ class AddReplyToPhoneQuestionAnswerResponse extends BaseResponse {
   factory AddReplyToPhoneQuestionAnswerResponse.fromJson(
           Map<String, Object?> json) =>
       _$AddReplyToPhoneQuestionAnswerResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() =>
       _$AddReplyToPhoneQuestionAnswerResponseToJson(this);
 }
@@ -317,6 +336,7 @@ class AddReplyToCompanyQuestionAnswerResponse extends BaseResponse {
   factory AddReplyToCompanyQuestionAnswerResponse.fromJson(
           Map<String, Object?> json) =>
       _$AddReplyToCompanyQuestionAnswerResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() =>
       _$AddReplyToCompanyQuestionAnswerResponseToJson(this);
 }
@@ -333,6 +353,7 @@ class MarkAnswerAsAcceptedForPhoneResponse extends BaseResponse {
   factory MarkAnswerAsAcceptedForPhoneResponse.fromJson(
           Map<String, Object?> json) =>
       _$MarkAnswerAsAcceptedForPhoneResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() =>
       _$MarkAnswerAsAcceptedForPhoneResponseToJson(this);
 }
@@ -349,6 +370,7 @@ class MarkAnswerAsAcceptedForCompanyResponse extends BaseResponse {
   factory MarkAnswerAsAcceptedForCompanyResponse.fromJson(
           Map<String, Object?> json) =>
       _$MarkAnswerAsAcceptedForCompanyResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() =>
       _$MarkAnswerAsAcceptedForCompanyResponseToJson(this);
 }
@@ -365,6 +387,8 @@ class UnmarkAnswerAsAcceptedForPhoneResponse extends BaseResponse {
   factory UnmarkAnswerAsAcceptedForPhoneResponse.fromJson(
           Map<String, Object?> json) =>
       _$UnmarkAnswerAsAcceptedForPhoneResponseFromJson(json);
+  
+  @override
   Map<String, dynamic> toJson() =>
       _$UnmarkAnswerAsAcceptedForPhoneResponseToJson(this);
 }
@@ -381,6 +405,7 @@ class UnmarkAnswerAsAcceptedForCompanyResponse extends BaseResponse {
   factory UnmarkAnswerAsAcceptedForCompanyResponse.fromJson(
           Map<String, Object?> json) =>
       _$UnmarkAnswerAsAcceptedForCompanyResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() =>
       _$UnmarkAnswerAsAcceptedForCompanyResponseToJson(this);
 }

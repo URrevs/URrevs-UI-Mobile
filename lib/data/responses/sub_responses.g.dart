@@ -42,6 +42,26 @@ Map<String, dynamic> _$AnotherUserSubResponseToJson(
       'points': instance.points,
     };
 
+UserWithRankSubResponse _$UserWithRankSubResponseFromJson(
+        Map<String, dynamic> json) =>
+    UserWithRankSubResponse(
+      id: json['_id'] as String,
+      name: json['name'] as String,
+      picture: json['picture'] as String?,
+      points: json['points'] as int,
+      rank: json['rank'] as int,
+    );
+
+Map<String, dynamic> _$UserWithRankSubResponseToJson(
+        UserWithRankSubResponse instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'name': instance.name,
+      'picture': instance.picture,
+      'points': instance.points,
+      'rank': instance.rank,
+    };
+
 PhoneSubResponse _$PhoneSubResponseFromJson(Map<String, dynamic> json) =>
     PhoneSubResponse(
       id: json['_id'] as String,

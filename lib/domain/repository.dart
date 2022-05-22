@@ -11,6 +11,7 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:urrevs_ui_mobile/app/exceptions.dart';
 import 'package:urrevs_ui_mobile/data/remote_data_source/remote_data_source.dart';
 import 'package:urrevs_ui_mobile/data/requests/base_requests.dart';
+import 'package:urrevs_ui_mobile/data/requests/leaderboard_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/questions_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/reviews_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/search_api_requests.dart';
@@ -26,6 +27,7 @@ import 'package:urrevs_ui_mobile/domain/models/comment.dart';
 import 'package:urrevs_ui_mobile/domain/models/company.dart';
 import 'package:urrevs_ui_mobile/domain/models/company_review.dart';
 import 'package:urrevs_ui_mobile/domain/models/company_stats.dart';
+import 'package:urrevs_ui_mobile/domain/models/competition.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone_stats.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone_review.dart';
@@ -883,6 +885,35 @@ class Repository {
     return _tryAndCatch(() async {
       await _remoteDataSource
           .userPressesFullscreenInCompanyQuestion(questionId);
+    });
+  }
+
+  Future<Either<Failure, String>> addCompetition(
+      AddCompetitionRequest request) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.addCompetition(request);
+      return response.id;
+    });
+  }
+
+  Future<Either<Failure, Competition>> getLatestCompetition() {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.getLatestCompetition();
+      return response.competitionModel;
+    });
+  }
+
+  Future<Either<Failure, List<User>>> getTopUsersInCompetition() {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.getTopUsersInCompetition();
+      return response.usersModels;
+    });
+  }
+
+  Future<Either<Failure, User>> getMyRankInCompetition() {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.getMyRankInCompetition();
+      return response.userSubResponse.userModel;
     });
   }
 }

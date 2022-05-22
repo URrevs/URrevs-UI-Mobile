@@ -34,8 +34,13 @@ class UserSubResponse {
     required this.refCode,
   });
 
-  User get userModel =>
-      User(id: id, name: name, picture: picture, points: points);
+  User get userModel => User(
+        id: id,
+        name: name,
+        picture: picture,
+        points: points,
+        rank: null,
+      );
 
   factory UserSubResponse.fromJson(Map<String, Object?> json) =>
       _$UserSubResponseFromJson(json);
@@ -57,12 +62,47 @@ class AnotherUserSubResponse {
     required this.points,
   });
 
-  User get userModel =>
-      User(id: id, name: name, picture: picture, points: points);
+  User get userModel => User(
+        id: id,
+        name: name,
+        picture: picture,
+        points: points,
+        rank: null,
+      );
 
   factory AnotherUserSubResponse.fromJson(Map<String, Object?> json) =>
       _$AnotherUserSubResponseFromJson(json);
   Map<String, dynamic> toJson() => _$AnotherUserSubResponseToJson(this);
+}
+
+@JsonSerializable()
+class UserWithRankSubResponse {
+  @JsonKey(name: '_id')
+  String id;
+  String name;
+  String? picture;
+  int points;
+  int rank;
+
+  UserWithRankSubResponse({
+    required this.id,
+    required this.name,
+    this.picture,
+    required this.points,
+    required this.rank,
+  });
+
+  User get userModel => User(
+        id: id,
+        name: name,
+        picture: picture,
+        points: points,
+        rank: rank,
+      );
+
+  factory UserWithRankSubResponse.fromJson(Map<String, Object?> json) =>
+      _$UserWithRankSubResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$UserWithRankSubResponseToJson(this);
 }
 
 @JsonSerializable()

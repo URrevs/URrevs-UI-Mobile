@@ -5,11 +5,15 @@ class User extends Equatable {
   final String name;
   final String? picture;
   final int points;
+
+  /// Always null except in competitions screen.
+  final int? rank;
   const User({
     required this.id,
     required this.name,
-    this.picture,
+    required this.picture,
     required this.points,
+    required this.rank,
   });
 
   @override

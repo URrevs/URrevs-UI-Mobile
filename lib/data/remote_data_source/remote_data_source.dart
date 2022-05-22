@@ -2,12 +2,14 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 import 'package:urrevs_ui_mobile/data/requests/base_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/companies_api_requests.dart';
+import 'package:urrevs_ui_mobile/data/requests/leaderboard_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/questions_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/reviews_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/search_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/users_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/responses/base_response.dart';
 import 'package:urrevs_ui_mobile/data/responses/companies_api_responses.dart';
+import 'package:urrevs_ui_mobile/data/responses/leaderboard_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/phones_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/questions_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/reviews_api_responses.dart';
@@ -554,4 +556,18 @@ abstract class RemoteDataSource {
   Future<BaseResponse> userPressesFullscreenInCompanyQuestion(
     @Path() String questionId,
   );
+
+  @POST('/competitions/')
+  Future<AddCompetitionResponse> addCompetition(
+    @Body() AddCompetitionRequest request,
+  );
+
+  @GET('/competitions/latest')
+  Future<GetLatestCompetitionResponse> getLatestCompetition();
+
+  @GET('/competitions/top')
+  Future<GetTopUsersInCompetitionResponse> getTopUsersInCompetition();
+
+  @GET('/competitions/rank')
+  Future<GetMyRankInCompetitionResponse> getMyRankInCompetition();
 }
