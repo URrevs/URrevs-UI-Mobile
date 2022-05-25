@@ -73,23 +73,17 @@ class _AdminPanelScreenState extends ConsumerState<AdminPanelScreen> {
           context: context,
           title: LocaleKeys.adminPanel.tr(),
         ),
-        body: Navigator(
-          onGenerateRoute: (settings) {
-            return MaterialPageRoute(builder: (dialogCtx) {
-              return SafeArea(
-                child: ScrollConfiguration(
-                  behavior: NoGlowingScrollBehaviour(),
-                  child: _buildBody(dialogCtx),
-                ),
-              );
-            });
-          },
+        body: SafeArea(
+          child: ScrollConfiguration(
+            behavior: NoGlowingScrollBehaviour(),
+            child: _buildBody(),
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildBody(BuildContext dialogCtx) {
+  Widget _buildBody() {
     final updateState =
         ref.watch(getInfoAboutLatestUpdateProvider(_updateProviderParams));
     final competitionState =
@@ -103,12 +97,12 @@ class _AdminPanelScreenState extends ConsumerState<AdminPanelScreen> {
     return ListView(
       children: [
         _buildUpdateTile(),
-        _buildCompetitionTile(dialogCtx),
+        _buildCompetitionTile(),
       ],
     );
   }
 
-  Widget _buildCompetitionTile(BuildContext dialogCtx) {
+  Widget _buildCompetitionTile() {
     final competitionState =
         ref.watch(getLatestCompetitionProvider(_competitionProviderParams));
     final loadOrErr = loadingOrErrorWidgetOrNull(
@@ -141,8 +135,7 @@ class _AdminPanelScreenState extends ConsumerState<AdminPanelScreen> {
       onTap: () {
         if (!disabled) {
           showDialog(
-            context: dialogCtx,
-            useRootNavigator: false,
+            context: context,
             builder: (BuildContext context) {
               return AddingCompetitionDialog();
             },

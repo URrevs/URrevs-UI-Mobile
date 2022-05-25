@@ -191,19 +191,34 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
       body: ListView(
         padding: EdgeInsets.all(20),
         children: [
-          ElevatedButton(
-            onPressed: () {
-              ref.read(countProvider.notifier).update((state) => state + 1);
-            },
-            child: Text('INCREMENT COUNTER'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              ref.read(squareProvider.notifier).increment();
-            },
-            child: Text('INCREMENT SQUARE'),
-          ),
-          Text(ref.watch(squareProvider).toString()),
+          SizedBox(
+            height: 300,
+            width: 300,
+            child: Stack(
+              children: [
+                GestureDetector(
+                  onTap: () => print('red'),
+                  child: Container(
+                    color: Colors.red,
+                  ),
+                ),
+                GestureDetector(
+                  behavior: HitTestBehavior.translucent,
+                  onTap: () => print('green'),
+                  child: SizedBox(
+                    child: Container(
+                      color: Colors.green,
+                      height: 100,
+                      width: 100,
+                      child: AlertDialog(
+                        content: Container(),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          )
           // UpdatedListTile(title: 'قائمة الشركات المضافة حديثاً', items: items),
           // ProductReviewCard.dummyInstance(),
           // CompanyReviewCard.dummyInstance(),
