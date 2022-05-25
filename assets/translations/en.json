@@ -241,5 +241,6 @@
   "thereIsAnActiveCompetition": "There is an active competition running now",
   "noCompetitionsYet": "No competitions yet",
   "youCannotAddACompetitionWhileThereIsARunningOne": "You cannot add a competition while there is a running one",
-  "invitationCodeCopied": "Invitation code copied"
+  "invitationCodeCopied": "Invitation code copied",
+  "systemTheme": "system"
 }

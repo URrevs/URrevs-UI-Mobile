@@ -241,5 +241,6 @@
   "thereIsAnActiveCompetition": "هناك مسابقة قائمة الآن",
   "noCompetitionsYet": "لا توجد مسابقات بعد",
   "youCannotAddACompetitionWhileThereIsARunningOne": "لا يمكنك إضافة مسابقة أثناء المسابقة القائمة الآن",
-  "invitationCodeCopied": "تم نسخ كود الدعوة"
+  "invitationCodeCopied": "تم نسخ كود الدعوة",
+  "systemTheme": "حسب النظام"
 }

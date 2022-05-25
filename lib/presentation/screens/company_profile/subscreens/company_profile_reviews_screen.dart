@@ -84,7 +84,6 @@ class _CompanyProfileReviewsSubscreenState
 
   @override
   Widget build(BuildContext context) {
-    context.setLocale(LanguageType.ar.locale);
     Widget? errWidget = fullScreenErrorWidgetOrNull([
       StateAndRetry(
         state:

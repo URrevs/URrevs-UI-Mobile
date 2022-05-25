@@ -257,7 +257,8 @@ class CodegenLoader extends AssetLoader{
   "thereIsAnActiveCompetition": "هناك مسابقة قائمة الآن",
   "noCompetitionsYet": "لا توجد مسابقات بعد",
   "youCannotAddACompetitionWhileThereIsARunningOne": "لا يمكنك إضافة مسابقة أثناء المسابقة القائمة الآن",
-  "invitationCodeCopied": "تم نسخ كود الدعوة"
+  "invitationCodeCopied": "تم نسخ كود الدعوة",
+  "systemTheme": "حسب النظام"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -502,7 +503,8 @@ static const Map<String,dynamic> en = {
   "thereIsAnActiveCompetition": "There is an active competition running now",
   "noCompetitionsYet": "No competitions yet",
   "youCannotAddACompetitionWhileThereIsARunningOne": "You cannot add a competition while there is a running one",
-  "invitationCodeCopied": "Invitation code copied"
+  "invitationCodeCopied": "Invitation code copied",
+  "systemTheme": "system"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

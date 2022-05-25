@@ -1,5 +1,5 @@
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
 
 extension IsArabic on BuildContext {
@@ -11,7 +11,7 @@ extension IsArabic on BuildContext {
 
 extension IsDarkMode on BuildContext {
   bool get isDarkMode =>
-      MediaQuery.of(this).platformBrightness == Brightness.dark;
+      Theme.of(this).brightness == Brightness.dark;
 }
 
 extension StringExtension on String {

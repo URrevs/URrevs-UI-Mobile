@@ -356,7 +356,6 @@ class _MenuSubscreenState extends ConsumerState<MenuSubscreen> {
 
   @override
   Widget build(BuildContext context) {
-    context.setLocale(LanguageType.ar.locale);
     return Scaffold(
         body: ListView(
       padding: EdgeInsets.symmetric(vertical: 10.h),

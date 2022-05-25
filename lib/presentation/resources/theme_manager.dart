@@ -19,6 +19,7 @@ class ThemeManager {
       );
 
   static ThemeData get light => ThemeData(
+        brightness: Brightness.light,
         tabBarTheme: TabBarTheme(labelColor: ColorManager.black),
         unselectedWidgetColor: ColorManager.black,
         scaffoldBackgroundColor: ColorManager.backgroundGrey,
@@ -94,6 +95,7 @@ class ThemeManager {
       );
 
   static ThemeData get dark => ThemeData(
+        brightness: Brightness.dark,
         scaffoldBackgroundColor: Colors.black12,
         fontFamily: FontConstants.tajawal,
         colorScheme: ColorScheme.dark().copyWith(
