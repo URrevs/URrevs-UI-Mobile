@@ -186,13 +186,13 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
           ),
           //DatePickerField(dateCtl: dateCtl, hintText: competitionDate),
           SizedBox(height: 20),
-          LeaderboardEntryTile(
-            name: 'Ziad Mostafa',
-            isWinner: false,
-            imageUrl: 'https://picsum.photos/seed/picsum/200/200',
-            rank: 544,
-            starsCounter: 40002344,
-          ),
+          // LeaderboardEntryTile(
+          //   name: 'Ziad Mostafa',
+          //   isWinner: false,
+          //   userImageUrl: 'https://picsum.photos/seed/picsum/200/200',
+          //   rank: 544,
+          //   starsCounter: 40002344,
+          // ),
           SizedBox(height: 20),
           StarsCounter(percentage: 0.5),
           SizedBox(height: 20),
@@ -218,10 +218,10 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
               color: ColorManager.blue,
               onPressed: () {}),
           SizedBox(height: 20),
-          CompetitionBanner(
-            numberOfRemainingdays: 12,
-            prizeName: 'Xiaomi Mi Band 5',
-          ),
+          // CompetitionBanner(
+          //   numberOfRemainingdays: 12,
+          //   prizeName: 'Xiaomi Mi Band 5',
+          // ),
           SizedBox(
             height: 20,
           ),

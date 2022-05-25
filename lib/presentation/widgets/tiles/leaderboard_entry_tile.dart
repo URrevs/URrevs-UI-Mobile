@@ -14,30 +14,38 @@ class LeaderboardEntryTile extends StatelessWidget {
   const LeaderboardEntryTile({
     required this.name,
     required this.isWinner,
-    required this.imageUrl,
+    required this.userImageUrl,
     required this.rank,
     required this.starsCounter,
+    required this.prizeName,
+    required this.prizeImageUrl,
     Key? key,
   }) : super(key: key);
   final String name;
   final bool isWinner;
-  final String imageUrl;
+  final String? userImageUrl;
   final int rank;
   final int starsCounter;
+  final String prizeName;
+  final String prizeImageUrl;
   @override
   Widget build(BuildContext context) {
     return Card(
-        elevation: 3,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppRadius.updatedListTile),
-        ),
-        child: LeaderboardEntryData(
-            rank: rank,
-            onTap: (){},
-            imageUrl: imageUrl,
-            name: name,
-            isWinner: isWinner,
-            starsCounter: starsCounter));
+      elevation: 3,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppRadius.updatedListTile),
+      ),
+      child: LeaderboardEntryData(
+        rank: rank,
+        onTap: () {},
+        userImageUrl: userImageUrl,
+        name: name,
+        isWinner: isWinner,
+        starsCounter: starsCounter,
+        prizeName: prizeName,
+        prizeImageUrl: prizeImageUrl,
+      ),
+    );
   }
 }
 
@@ -45,19 +53,23 @@ class LeaderboardEntryData extends StatelessWidget {
   const LeaderboardEntryData({
     Key? key,
     required this.rank,
-    required this.imageUrl,
+    required this.userImageUrl,
     required this.name,
     required this.isWinner,
     required this.starsCounter,
     required this.onTap,
+    required this.prizeName,
+    required this.prizeImageUrl,
   }) : super(key: key);
 
   final int rank;
-  final String imageUrl;
+  final String? userImageUrl;
   final String name;
   final bool isWinner;
   final int starsCounter;
   final VoidCallback? onTap;
+  final String prizeName;
+  final String prizeImageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +99,7 @@ class LeaderboardEntryData extends StatelessWidget {
             ),
             SizedBox(width: 5.w),
             Avatar(
-              imageUrl: imageUrl,
+              imageUrl: userImageUrl,
               radius: 20.r,
             ),
             SizedBox(width: 5.w),
@@ -109,8 +121,9 @@ class LeaderboardEntryData extends StatelessWidget {
                         context: context,
                         builder: (BuildContext context) {
                           return PrizePhotoDialog(
-                              prizeName: 'Xiaomi Mi Band 5',
-                              imageUrl: StringsManager.prizeImageLink);
+                            prizeName: prizeName,
+                            imageUrl: prizeImageUrl,
+                          );
                         },
                       );
                     },

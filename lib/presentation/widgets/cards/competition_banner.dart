@@ -17,6 +17,7 @@ class CompetitionBanner extends StatelessWidget {
   const CompetitionBanner({
     required this.numberOfRemainingdays,
     required this.prizeName,
+    required this.prizeUrl,
     Key? key,
   }) : super(key: key);
 
@@ -25,6 +26,8 @@ class CompetitionBanner extends StatelessWidget {
 
   /// name of the prize.
   final String prizeName;
+
+  final String prizeUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -58,48 +61,50 @@ class CompetitionBanner extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: RichText(
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 4,
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                      style: TextStyleManager.s22w500.copyWith(
-                        color: ColorManager.white,
-                        fontFamily: FontConstants.tajawal,
-                      ),
-                      children: [
-                        TextSpan(
-                            text: numberOfRemainingdays.toString() +
-                                ' ' +
-                                LocaleKeys.remainigDays.tr()),
-                        TextSpan(text: '\n'),
-                        TextSpan(text: LocaleKeys.thePrizeIs.tr()),
-                        TextSpan(text: '\n'),
-                        WidgetSpan(
-                          alignment: PlaceholderAlignment.baseline,
-                          baseline: TextBaseline.alphabetic,
-                          child: GestureDetector(
-                            child: Text(
-                              prizeName,
-                              style: TextStyleManager.s22w900.copyWith(
-                                decoration: TextDecoration.underline,
-                                color: ColorManager.white,
-                                fontFamily: FontConstants.tajawal,
-                              ),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 4,
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    style: TextStyleManager.s22w500.copyWith(
+                      color: ColorManager.white,
+                      fontFamily: FontConstants.tajawal,
+                    ),
+                    children: [
+                      TextSpan(
+                          text: numberOfRemainingdays.toString() +
+                              ' ' +
+                              LocaleKeys.remainigDays.tr()),
+                      TextSpan(text: '\n'),
+                      TextSpan(text: LocaleKeys.thePrizeIs.tr()),
+                      TextSpan(text: '\n'),
+                      WidgetSpan(
+                        alignment: PlaceholderAlignment.baseline,
+                        baseline: TextBaseline.alphabetic,
+                        child: GestureDetector(
+                          child: Text(
+                            prizeName,
+                            style: TextStyleManager.s22w900.copyWith(
+                              decoration: TextDecoration.underline,
+                              color: ColorManager.white,
+                              fontFamily: FontConstants.tajawal,
                             ),
-                            onTap: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return PrizePhotoDialog(
-                                      prizeName: 'Xiaomi Mi Band 5',
-                                      imageUrl: StringsManager.prizeImageLink);
-                                },
-                              );
-                            },
                           ),
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return PrizePhotoDialog(
+                                  prizeName: prizeName,
+                                  imageUrl: prizeUrl,
+                                );
+                              },
+                            );
+                          },
                         ),
-                      ],
-                    )),
+                      ),
+                    ],
+                  ),
+                ),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 5.h),
@@ -144,8 +149,8 @@ class CompetitionBanner extends StatelessWidget {
                           context: context,
                           builder: (BuildContext context) {
                             return InvitationCodeDialog(
-                                invitationCode: 'UR1029',
-                                );
+                              invitationCode: 'UR1029',
+                            );
                           },
                         );
                       },

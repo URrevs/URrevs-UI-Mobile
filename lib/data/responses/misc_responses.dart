@@ -13,7 +13,7 @@ part 'misc_responses.g.dart';
 @JsonSerializable()
 class GetPostsForHomeScreenResponse extends BaseResponse {
   @JsonKey(name: 'phoneRevs')
-  List<PhoneReviewForAddPhoneReviewSubResponse> phoneReviewsSubResponses;
+  List<PhoneReviewSubResponse> phoneReviewsSubResponses;
   @JsonKey(name: 'companyRevs')
   List<CompanyReviewSubResponse> companyReviewsSubResponses;
   @JsonKey(name: 'phoneQuestions')

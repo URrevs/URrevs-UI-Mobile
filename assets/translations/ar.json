@@ -240,5 +240,6 @@
   "enterNumberOfWinnersFormatErrorMsg": "يجب ادخال عدد الفائزين بشكل صحيح.",
   "thereIsAnActiveCompetition": "هناك مسابقة قائمة الآن",
   "noCompetitionsYet": "لا توجد مسابقات بعد",
-  "youCannotAddACompetitionWhileThereIsARunningOne": "لا يمكنك إضافة مسابقة أثناء المسابقة القائمة الآن"
+  "youCannotAddACompetitionWhileThereIsARunningOne": "لا يمكنك إضافة مسابقة أثناء المسابقة القائمة الآن",
+  "invitationCodeCopied": "تم نسخ كود الدعوة"
 }

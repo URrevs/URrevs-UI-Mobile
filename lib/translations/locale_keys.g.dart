@@ -243,5 +243,6 @@ abstract class  LocaleKeys {
   static const thereIsAnActiveCompetition = 'thereIsAnActiveCompetition';
   static const noCompetitionsYet = 'noCompetitionsYet';
   static const youCannotAddACompetitionWhileThereIsARunningOne = 'youCannotAddACompetitionWhileThereIsARunningOne';
+  static const invitationCodeCopied = 'invitationCodeCopied';
 
 }

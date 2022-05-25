@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
@@ -140,6 +141,13 @@ class GetPostsListNotifier extends StateNotifier<GetPostsListState> {
       // deal with failure
       (failure) => state = GetPostsListErrorState(failure: failure),
       (fetchedPosts) {
+        // filter fetchedPosts from redundancy in case of home screen
+        if (postsListType == PostsListType.home) {
+          fetchedPosts = fetchedPosts.where((post) {
+            bool isDuplicate = currentPosts.any((p) => p.id == post.id);
+            return isDuplicate ? false : true;
+          }).toList();
+        }
         // add items and rounds ended state to the loaded state
         bool roundsEnded = fetchedPosts.isEmpty;
         List<Post> newPosts = [...currentPosts, ...fetchedPosts];
@@ -155,6 +163,7 @@ class GetPostsListNotifier extends StateNotifier<GetPostsListState> {
   }
 
   void _addLikeListenersToPosts(List<Post> fetchedPosts) {
+    print('likes listeners added to posts');
     // add listeners to like providers of the fetched posts
     for (Post post in fetchedPosts) {
       final params = LikeProviderParams(

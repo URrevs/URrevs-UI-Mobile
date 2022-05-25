@@ -29,14 +29,14 @@ class _HomeSubscreenState extends ConsumerState<HomeSubscreen> {
       GetPostsListProviderParams();
 
   void _getPostsForHomeScreen() {
-    // _controller.retryLastFailedRequest();
-    // ref.read(getPostsListProvider(_providerParams).notifier).getPostsList(
-    //       postsListType: PostsListType.home,
-    //       targetType: null,
-    //       postContentType: null,
-    //       targetId: null,
-    //       userId: null,
-    //     );
+    _controller.retryLastFailedRequest();
+    ref.read(getPostsListProvider(_providerParams).notifier).getPostsList(
+          postsListType: PostsListType.home,
+          targetType: null,
+          postContentType: null,
+          targetId: null,
+          userId: null,
+        );
   }
 
   @override

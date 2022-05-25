@@ -233,3 +233,11 @@ class IDontLikeThisProviderParams extends Equatable {
 class GetLatestCompetitionProviderParams extends NotSyncedProviderParams {
   GetLatestCompetitionProviderParams();
 }
+
+class GetTopUsersInCompetitionProviderParams extends NotSyncedProviderParams {
+  GetTopUsersInCompetitionProviderParams();
+}
+
+class GetMyRankInCompetitionProviderParams extends NotSyncedProviderParams {
+  GetMyRankInCompetitionProviderParams();
+}

@@ -11,8 +11,8 @@ GetPostsForHomeScreenResponse _$GetPostsForHomeScreenResponseFromJson(
     GetPostsForHomeScreenResponse(
       success: json['success'] as bool,
       phoneReviewsSubResponses: (json['phoneRevs'] as List<dynamic>)
-          .map((e) => PhoneReviewForAddPhoneReviewSubResponse.fromJson(
-              e as Map<String, dynamic>))
+          .map(
+              (e) => PhoneReviewSubResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
       companyReviewsSubResponses: (json['companyRevs'] as List<dynamic>)
           .map((e) =>

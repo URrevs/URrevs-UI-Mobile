@@ -1,4 +1,3 @@
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,80 +24,100 @@ class InvitationCodeDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController invitationPromptCtl = TextEditingController();
     invitationPromptCtl.text = invitationCode;
-    return CustomAlertDialog(
-        title: LocaleKeys.yourInvitationCode.tr() + ':',
-        hasTitle: true,
-        content: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                LocaleKeys.invitationCodePrompt.tr(),
-                style: TextStyleManager.s16w400,
+    return ScaffoldMessenger(
+      child: Builder(builder: (context) {
+        return Stack(
+          children: [
+            IgnorePointer(
+              child: Scaffold(
+                backgroundColor: ColorManager.transparent,
               ),
-              SizedBox(height: 10.h),
-              Row(
+            ),
+            CustomAlertDialog(
+              title: LocaleKeys.yourInvitationCode.tr() + ':',
+              hasTitle: true,
+              content: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: context.isArabic
-                        ? EdgeInsets.only(right: 80.w)
-                        : EdgeInsets.only(left: 80.w),
-                    child: SizedBox(
-                      height: 60.h,
-                      width: 120.w,
-                      child: TextField(
-                        controller: invitationPromptCtl,
-                        readOnly: true,
-                        textAlign: TextAlign.center,
-                        style: TextStyleManager.s22w500.copyWith(
+                  Text(
+                    LocaleKeys.invitationCodePrompt.tr(),
+                    style: TextStyleManager.s16w400,
+                  ),
+                  SizedBox(height: 10.h),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: context.isArabic
+                            ? EdgeInsets.only(right: 80.w)
+                            : EdgeInsets.only(left: 80.w),
+                        child: SizedBox(
+                          height: 60.h,
+                          width: 120.w,
+                          child: TextField(
+                            controller: invitationPromptCtl,
+                            readOnly: true,
+                            textAlign: TextAlign.center,
+                            style: TextStyleManager.s22w500.copyWith(
+                              color: ColorManager.black,
+                            ),
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.symmetric(
+                                  vertical: 20.h, horizontal: 5.w),
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: ColorManager.backgroundGrey),
+                                  borderRadius: BorderRadius.circular(5.r)),
+                              filled: true,
+                              fillColor:
+                                  ColorManager.dialogCloseIconBackgroundGrey,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 10.w),
+                      IconButton(
+                        icon: Icon(
+                          IconsManager.copy,
+                          size: 30.sp,
                           color: ColorManager.black,
                         ),
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(
-                              vertical: 20.h, horizontal: 5.w),
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: ColorManager.backgroundGrey),
-                              borderRadius: BorderRadius.circular(5.r)),
-                          filled: true,
-                          fillColor: ColorManager.dialogCloseIconBackgroundGrey,
-                        ),
-                      ),
-                    ),
+                        onPressed: () {
+                          Clipboard.setData(
+                              ClipboardData(text: invitationPromptCtl.text));
+                          // show snackbar with text copied to clipboard
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                LocaleKeys.invitationCodeCopied.tr(),
+                              ),
+                            ),
+                          );
+                        },
+                      )
+                    ],
                   ),
-                  SizedBox(width: 10.w),
-                  IconButton(
-                      icon: Icon(
-                        IconsManager.copy,
-                        size: 30.sp,
-                        color: ColorManager.black,
-                      ),
-                      onPressed: () {
-                        Clipboard.setData(ClipboardData(
-                            text: invitationPromptCtl.text));
-                        // show snackbar with text copied to clipboard
-                        // ScaffoldMessenger.of(context)
-                        //     .showSnackBar(SnackBar(
-                        //   content: Text('Copied to clipboard'),
-                        //)
-                        //);
-                      })
+                  SizedBox(height: 15.h),
+                  // Grad button contains share invitation code and share icon
+                  GradButton(
+                    text: Text(
+                      LocaleKeys.shareInvitationLink.tr(),
+                      style: TextStyleManager.s18w700,
+                    ),
+                    icon: Icon(
+                      IconsManager.share,
+                      size: 23.sp,
+                      color: ColorManager.white,
+                    ),
+                    width: 325.w,
+                    reverseIcon: false,
+                    onPressed: () {},
+                  )
                 ],
               ),
-              SizedBox(height: 15.h),
-              // Grad button contains share invitation code and share icon
-              GradButton(
-                  text: Text(
-                    LocaleKeys.shareInvitationLink.tr(),
-                    style: TextStyleManager.s18w700,
-                  ),
-                  icon: Icon(
-                    IconsManager.share,
-                    size: 23.sp,
-                    color: ColorManager.white,
-                  ),
-                  width: 325.w,
-                  reverseIcon: false,
-                  onPressed: () {})
-            ]));
+            ),
+          ],
+        );
+      }),
+    );
   }
 }
