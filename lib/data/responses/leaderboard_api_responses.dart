@@ -2,7 +2,6 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'package:urrevs_ui_mobile/data/responses/base_response.dart';
 import 'package:urrevs_ui_mobile/data/responses/sub_responses.dart';
-import 'package:urrevs_ui_mobile/domain/models/competition.dart';
 import 'package:urrevs_ui_mobile/domain/models/user.dart';
 
 part 'leaderboard_api_responses.g.dart';

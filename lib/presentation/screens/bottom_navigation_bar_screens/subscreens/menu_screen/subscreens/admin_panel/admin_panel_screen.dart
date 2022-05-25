@@ -126,10 +126,12 @@ class _AdminPanelScreenState extends ConsumerState<AdminPanelScreen> {
     } else {
       final competition =
           (competitionState as GetLatestCompetitionLoadedState).competition;
+      final String lastCompDate = DateFormat.yMMMMd(context.locale.languageCode)
+          .format(competition.deadline);
       disabled = competition.deadline.isAfter(DateTime.now());
       text = disabled
           ? LocaleKeys.thereIsAnActiveCompetition.tr()
-          : LocaleKeys.theLastCompetitionTookPlaceIn.tr();
+          : LocaleKeys.theLastCompetitionTookPlaceIn.tr() + lastCompDate;
     }
 
     return ItemTile(

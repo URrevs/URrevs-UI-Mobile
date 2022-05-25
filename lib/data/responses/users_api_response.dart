@@ -18,6 +18,7 @@ class AuthenticationResponse extends BaseResponse {
 
   factory AuthenticationResponse.fromJson(Map<String, Object?> json) =>
       _$AuthenticationResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$AuthenticationResponseToJson(this);
 
   @override
@@ -36,6 +37,7 @@ class GetMyProfileResponse extends BaseResponse {
 
   factory GetMyProfileResponse.fromJson(Map<String, Object?> json) =>
       _$GetMyProfileResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$GetMyProfileResponseToJson(this);
 }
 
@@ -51,6 +53,7 @@ class GetTheProfileOfAnotherUserResponse extends BaseResponse {
   factory GetTheProfileOfAnotherUserResponse.fromJson(
           Map<String, Object?> json) =>
       _$GetTheProfileOfAnotherUserResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() =>
       _$GetTheProfileOfAnotherUserResponseToJson(this);
 }
@@ -69,6 +72,7 @@ class GetMyOwnedPhonesResponse extends BaseResponse {
 
   factory GetMyOwnedPhonesResponse.fromJson(Map<String, Object?> json) =>
       _$GetMyOwnedPhonesResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$GetMyOwnedPhonesResponseToJson(this);
 }
 
@@ -87,6 +91,7 @@ class GetTheOwnedPhonesOfAnotherUserResponse extends BaseResponse {
   factory GetTheOwnedPhonesOfAnotherUserResponse.fromJson(
           Map<String, Object?> json) =>
       _$GetTheOwnedPhonesOfAnotherUserResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() =>
       _$GetTheOwnedPhonesOfAnotherUserResponseToJson(this);
 }
@@ -101,5 +106,6 @@ class GivePointsToUserResponse extends BaseResponse {
 
   factory GivePointsToUserResponse.fromJson(Map<String, Object?> json) =>
       _$GivePointsToUserResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$GivePointsToUserResponseToJson(this);
 }

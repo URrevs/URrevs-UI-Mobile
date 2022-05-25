@@ -23,6 +23,7 @@ class GetCompanyStatisticalInfoResponse extends BaseResponse {
   factory GetCompanyStatisticalInfoResponse.fromJson(
           Map<String, Object?> json) =>
       _$GetCompanyStatisticalInfoResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() =>
       _$GetCompanyStatisticalInfoResponseToJson(this);
 }
@@ -41,5 +42,6 @@ class GetAllCompaniesResponse extends BaseResponse {
 
   factory GetAllCompaniesResponse.fromJson(Map<String, Object?> json) =>
       _$GetAllCompaniesResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$GetAllCompaniesResponseToJson(this);
 }

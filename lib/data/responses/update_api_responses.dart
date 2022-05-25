@@ -17,6 +17,7 @@ class UpdateTargetFromSourceResponse extends BaseResponse {
 
   factory UpdateTargetFromSourceResponse.fromJson(Map<String, Object?> json) =>
       _$UpdateTargetFromSourceResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$UpdateTargetFromSourceResponseToJson(this);
 }
 
@@ -53,6 +54,7 @@ class GetInfoAboutLatestUpdateResponse extends BaseResponse {
   factory GetInfoAboutLatestUpdateResponse.fromJson(
           Map<String, Object?> json) =>
       _$GetInfoAboutLatestUpdateResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() =>
       _$GetInfoAboutLatestUpdateResponseToJson(this);
 }

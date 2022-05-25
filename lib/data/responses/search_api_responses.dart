@@ -22,6 +22,7 @@ class GetMyRecentSearchesResponse extends BaseResponse {
 
   factory GetMyRecentSearchesResponse.fromJson(Map<String, Object?> json) =>
       _$GetMyRecentSearchesResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$GetMyRecentSearchesResponseToJson(this);
 }
 
@@ -35,6 +36,7 @@ class AddNewRecentSearchResponse extends BaseResponse {
 
   factory AddNewRecentSearchResponse.fromJson(Map<String, Object?> json) =>
       _$AddNewRecentSearchResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$AddNewRecentSearchResponseToJson(this);
 }
 
@@ -48,6 +50,7 @@ class DeleteRecentSearchResponse extends BaseResponse {
 
   factory DeleteRecentSearchResponse.fromJson(Map<String, Object?> json) =>
       _$DeleteRecentSearchResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$DeleteRecentSearchResponseToJson(this);
 }
 
@@ -85,6 +88,7 @@ class SearchProductsAndCompaiesResponse extends BaseResponse {
   factory SearchProductsAndCompaiesResponse.fromJson(
           Map<String, Object?> json) =>
       _$SearchProductsAndCompaiesResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() =>
       _$SearchProductsAndCompaiesResponseToJson(this);
 }
@@ -103,5 +107,6 @@ class SearchPhonesResponse extends BaseResponse {
 
   factory SearchPhonesResponse.fromJson(Map<String, Object?> json) =>
       _$SearchPhonesResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$SearchPhonesResponseToJson(this);
 }

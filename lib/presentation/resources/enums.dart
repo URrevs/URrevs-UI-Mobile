@@ -44,4 +44,4 @@ enum SearchMode { productsAndCompanies, phones }
 
 enum PostContentType { review, question }
 
-enum PostsListType { user, target }
+enum PostsListType { user, target, home }

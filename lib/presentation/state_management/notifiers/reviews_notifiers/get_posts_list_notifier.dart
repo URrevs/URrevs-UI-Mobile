@@ -91,13 +91,18 @@ class GetPostsListNotifier extends StateNotifier<GetPostsListState> {
 
   void getPostsList({
     required PostsListType postsListType,
-    required TargetType targetType,
-    required PostContentType postContentType,
+    required TargetType? targetType,
+    required PostContentType? postContentType,
     required String? targetId,
     required String? userId,
   }) async {
     assert(!(postsListType == PostsListType.target && targetId == null));
     assert(!(postsListType == PostsListType.target && userId != null));
+    assert(!(postsListType == PostsListType.user && postContentType == null));
+    assert(!(postsListType == PostsListType.target && postContentType == null));
+    assert(!(postsListType == PostsListType.user && targetType == null));
+    assert(!(postsListType == PostsListType.target && targetType == null));
+
     /// do not load new posts if not in initial or loaded states
     /// without this statement, the posts list behaves weirdly as it removes
     /// previous rounds posts and puts only the new round posts
@@ -116,16 +121,19 @@ class GetPostsListNotifier extends StateNotifier<GetPostsListState> {
       case PostsListType.user:
         response = await _getUserPostsResponse(
           userId: userId,
-          targetType: targetType,
-          postContentType: postContentType,
+          targetType: targetType!,
+          postContentType: postContentType!,
         );
         break;
       case PostsListType.target:
         response = await _getTargetPostsResponse(
           targetId: targetId!,
-          targetType: targetType,
-          postContentType: postContentType,
+          targetType: targetType!,
+          postContentType: postContentType!,
         );
+        break;
+      case PostsListType.home:
+        response = await GetIt.I<Repository>().getPostsForHomeScreen(_round);
         break;
     }
     response.fold(

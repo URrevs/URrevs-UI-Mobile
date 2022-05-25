@@ -1,94 +1,59 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:urrevs_ui_mobile/domain/models/post.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
-import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_post_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/question_card_body.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/company_review_card.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/product_review_card.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/question_card.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
+import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/posts_list.dart';
 
 class HomeSubscreen extends ConsumerStatefulWidget {
-  const HomeSubscreen({Key? key}) : super(key: key);
+  const HomeSubscreen({
+    Key? key,
+  }) : super(key: key);
+
 
   @override
   ConsumerState<HomeSubscreen> createState() => _HomeSubscreenState();
 }
 
 class _HomeSubscreenState extends ConsumerState<HomeSubscreen> {
-  Widget get listItem => (<Widget>[
-        ProductReviewCard.dummyInstance().copyWith(
-          onPressingComment: () {
-            Navigator.of(context).pushNamed(
-              FullscreenPostScreen.routeName,
-              arguments: FullscreenPostScreenArgs(
-                postUserId: 'post user id',
-                postType: PostType.phoneReview,
-                cardType: CardType.productReview,
-                postId: 'change_it',
-                focusOnTextField: true,
-              ),
-            );
-          },
-        ),
-        CompanyReviewCard.dummyInstance().copyWith(
-          onPressingComment: () {
-            Navigator.of(context).pushNamed(
-              FullscreenPostScreen.routeName,
-              arguments: FullscreenPostScreenArgs(
-                postUserId: 'post user id',
-                postType: PostType.companyReview,
-                cardType: CardType.companyReview,
-                postId: 'change_it',
-                focusOnTextField: true,
-              ),
-            );
-          },
-        ),
-        QuestionCard.dummyInstance(context).copyWith(
-          userId: '62744ec2c0b63317025a8616',
-          targetName: 'phone',
-          cardType: CardType.productQuestion,
-          onPressingAnswer: () {
-            Navigator.of(context).pushNamed(
-              FullscreenPostScreen.routeName,
-              arguments: FullscreenPostScreenArgs(
-                postUserId: 'post user id',
-                postType: PostType.phoneQuestion,
-                cardType: CardType.productQuestion,
-                postId: 'change_it',
-                focusOnTextField: true,
-              ),
-            );
-          },
-        ),
-        QuestionCard.dummyInstance(context).copyWith(
-          userId: '62744ec2c0b63317025a8616',
-          targetName: 'company',
-          cardType: CardType.companyQuestion,
-          onPressingAnswer: () {
-            Navigator.of(context).pushNamed(
-              FullscreenPostScreen.routeName,
-              arguments: FullscreenPostScreenArgs(
-                postUserId: 'post user id',
-                postType: PostType.phoneQuestion,
-                cardType: CardType.companyQuestion,
-                postId: 'change_it',
-                focusOnTextField: true,
-              ),
-            );
-          },
-        ),
-      ]..shuffle())
-          .first;
+  late final PagingController<int, Post> _controller =
+      PagingController(firstPageKey: 0)
+        ..addPageRequestListener((_) {
+          Future.delayed(Duration.zero, _getPostsForHomeScreen);
+        });
+
+  late final GetPostsListProviderParams _providerParams =
+      GetPostsListProviderParams();
+
+  void _getPostsForHomeScreen() {
+    // _controller.retryLastFailedRequest();
+    // ref.read(getPostsListProvider(_providerParams).notifier).getPostsList(
+    //       postsListType: PostsListType.home,
+    //       targetType: null,
+    //       postContentType: null,
+    //       targetId: null,
+    //       userId: null,
+    //     );
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 20.h),
-      itemBuilder: (context, index) => listItem,
-      itemCount: 10,
+    Widget? errWidget = fullScreenErrorWidgetOrNull([
+      StateAndRetry(
+        state: ref.watch(getPostsListProvider(_providerParams)),
+        onRetry: _getPostsForHomeScreen,
+        controller: _controller,
+      ),
+    ]);
+    if (errWidget != null) return errWidget;
+    return PostsList(
+      controller: _controller,
+      getPostsListProviderParams: _providerParams,
+      getPosts: _getPostsForHomeScreen,
+      isSliver: false,
     );
   }
 }

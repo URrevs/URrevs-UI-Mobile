@@ -119,7 +119,6 @@ class _CompanyProfileReviewsSubscreenState
             ]),
           ),
           PostsList.sliver(
-            targetType: TargetType.company,
             controller: _controller,
             getPostsListProviderParams: _postsProviderParams,
             getPosts: _getPostsOnCertainTarget,

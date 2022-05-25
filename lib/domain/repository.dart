@@ -31,6 +31,7 @@ import 'package:urrevs_ui_mobile/domain/models/competition.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone_stats.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone_review.dart';
+import 'package:urrevs_ui_mobile/domain/models/post.dart';
 import 'package:urrevs_ui_mobile/domain/models/question.dart';
 import 'package:urrevs_ui_mobile/domain/models/search_result.dart';
 import 'package:urrevs_ui_mobile/domain/models/specs.dart';
@@ -932,6 +933,13 @@ class Repository {
     return _tryAndCatch(() async {
       final response = await _remoteDataSource.getMyRankInCompetition();
       return response.userSubResponse.userModel;
+    });
+  }
+
+  Future<Either<Failure, List<Post>>> getPostsForHomeScreen(int round) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.getPostsForHomeScreen(round);
+      return response.postsModels;
     });
   }
 }

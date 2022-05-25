@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'package:urrevs_ui_mobile/data/responses/base_response.dart';
@@ -22,6 +21,7 @@ class GetAllPhonesResponse extends BaseResponse {
 
   factory GetAllPhonesResponse.fromJson(Map<String, Object?> json) =>
       _$GetAllPhonesResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$GetAllPhonesResponseToJson(this);
 }
 
@@ -40,6 +40,7 @@ class GetPhonesFromCertainCompanyResponse extends BaseResponse {
   factory GetPhonesFromCertainCompanyResponse.fromJson(
           Map<String, Object?> json) =>
       _$GetPhonesFromCertainCompanyResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() =>
       _$GetPhonesFromCertainCompanyResponseToJson(this);
 }
@@ -56,6 +57,7 @@ class GetPhoneManufacturingCompanyResponse extends BaseResponse {
   factory GetPhoneManufacturingCompanyResponse.fromJson(
           Map<String, Object?> json) =>
       _$GetPhoneManufacturingCompanyResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() =>
       _$GetPhoneManufacturingCompanyResponseToJson(this);
 }
@@ -71,6 +73,7 @@ class GetPhoneSpecsResponse extends BaseResponse {
 
   factory GetPhoneSpecsResponse.fromJson(Map<String, Object?> json) =>
       _$GetPhoneSpecsResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$GetPhoneSpecsResponseToJson(this);
 }
 
@@ -85,6 +88,7 @@ class GetPhoneStatisticalInfoResponse extends BaseResponse {
 
   factory GetPhoneStatisticalInfoResponse.fromJson(Map<String, Object?> json) =>
       _$GetPhoneStatisticalInfoResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() =>
       _$GetPhoneStatisticalInfoResponseToJson(this);
 }
@@ -100,6 +104,7 @@ class IndicateUserComparedBetweenTwoPhonesResponse extends BaseResponse {
   factory IndicateUserComparedBetweenTwoPhonesResponse.fromJson(
           Map<String, Object?> json) =>
       _$IndicateUserComparedBetweenTwoPhonesResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() =>
       _$IndicateUserComparedBetweenTwoPhonesResponseToJson(this);
 }
@@ -118,5 +123,6 @@ class GetSimilarPhonesResponse extends BaseResponse {
 
   factory GetSimilarPhonesResponse.fromJson(Map<String, Object?> json) =>
       _$GetSimilarPhonesResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$GetSimilarPhonesResponseToJson(this);
 }

@@ -64,7 +64,6 @@ class _PostsListOnCertainTargetState
     ]);
     if (errWidget != null) return errWidget;
     return PostsList(
-      targetType: _targetType,
       controller: _controller,
       getPostsListProviderParams: _providerParams,
       getPosts: _getPostsOnCertainTarget,

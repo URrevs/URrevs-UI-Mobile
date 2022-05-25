@@ -123,7 +123,6 @@ class _PostedReviewsScreenState extends ConsumerState<PostedPostsScreen> {
           controller: _postsController,
           getPosts: _getPosts,
           getPostsListProviderParams: _postsProviderParams,
-          targetType: _filter,
         ),
       ],
     );

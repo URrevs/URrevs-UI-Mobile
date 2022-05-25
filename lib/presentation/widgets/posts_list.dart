@@ -23,7 +23,6 @@ import 'loading_widgets/review_card_list_loading.dart';
 class PostsList extends ConsumerStatefulWidget {
   const PostsList({
     Key? key,
-    required this.targetType,
     required this.controller,
     required this.getPostsListProviderParams,
     required this.getPosts,
@@ -33,7 +32,6 @@ class PostsList extends ConsumerStatefulWidget {
 
   const PostsList.sliver({
     Key? key,
-    required this.targetType,
     required this.controller,
     required this.getPostsListProviderParams,
     required this.getPosts,
@@ -43,7 +41,6 @@ class PostsList extends ConsumerStatefulWidget {
 
   const PostsList.box({
     Key? key,
-    required this.targetType,
     required this.controller,
     required this.getPostsListProviderParams,
     required this.getPosts,
@@ -51,7 +48,6 @@ class PostsList extends ConsumerStatefulWidget {
   })  : isSliver = false,
         super(key: key);
 
-  final TargetType targetType;
   final GetPostsListProviderParams getPostsListProviderParams;
   final PagingController<int, Post> controller;
   final VoidCallback getPosts;
@@ -66,15 +62,15 @@ class _PostsListState extends ConsumerState<PostsList> {
   Widget _buildPost(Post post) {
     if (post is Question) {
       Question question = post;
-      CardType cardType = widget.targetType == TargetType.phone
+      CardType cardType = question.type == TargetType.phone
           ? CardType.productQuestion
           : CardType.companyQuestion;
-      PostType postType = widget.targetType == TargetType.phone
+      PostType postType = question.type == TargetType.phone
           ? PostType.phoneQuestion
           : PostType.companyQuestion;
       return QuestionCard.fromQuestion(
         question,
-        cardHeaderTitleType: widget.targetType,
+        cardHeaderTitleType: question.type,
         cardType: cardType,
         fullscreen: false,
         onPressingAnswer: () {
