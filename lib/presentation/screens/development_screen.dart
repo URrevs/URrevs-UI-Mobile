@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:faker/faker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -191,34 +192,19 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
       body: ListView(
         padding: EdgeInsets.all(20),
         children: [
-          SizedBox(
-            height: 300,
-            width: 300,
-            child: Stack(
-              children: [
-                GestureDetector(
-                  onTap: () => print('red'),
-                  child: Container(
-                    color: Colors.red,
-                  ),
-                ),
-                GestureDetector(
-                  behavior: HitTestBehavior.translucent,
-                  onTap: () => print('green'),
-                  child: SizedBox(
-                    child: Container(
-                      color: Colors.green,
-                      height: 100,
-                      width: 100,
-                      child: AlertDialog(
-                        content: Container(),
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            ),
-          )
+          ElevatedButton(
+              onPressed: () async {
+                final dynamicLinkParams = DynamicLinkParameters(
+                  link: Uri.parse("https://www.example.com/"),
+                  uriPrefix: "https://urevs.page.link",
+                  androidParameters: const AndroidParameters(
+                      packageName: "com.example.urrevs_ui_mobile"),
+                );
+                final dynamicLink = await FirebaseDynamicLinks.instance
+                    .buildLink(dynamicLinkParams);
+                print(dynamicLink);
+              },
+              child: Text('CLICK'))
           // UpdatedListTile(title: 'قائمة الشركات المضافة حديثاً', items: items),
           // ProductReviewCard.dummyInstance(),
           // CompanyReviewCard.dummyInstance(),

@@ -242,5 +242,6 @@
   "noCompetitionsYet": "No competitions yet",
   "youCannotAddACompetitionWhileThereIsARunningOne": "You cannot add a competition while there is a running one",
   "invitationCodeCopied": "Invitation code copied",
-  "systemTheme": "system"
+  "systemTheme": "system",
+  "youCannotUseYourInvitationCode": "You cannot use your invitation code"
 }

@@ -146,14 +146,7 @@ class _OwnedProductsScreenState extends ConsumerState<OwnedProductsScreen>
             title: LocaleKeys.ownedProducts.tr(),
           ),
         ),
-        onPressingFab: () {
-          Navigator.of(context).pushNamed(
-            BottomNavigationBarContainerScreen.routeName,
-            arguments: BottomNavigationBarContainerScreenArgs(
-              screenIndex: BottomNavBarIndeces.postingSubscreen,
-            ),
-          );
-        },
+        onPressingFab: () {},
         fabLabel: LocaleKeys.addOwnedProduct.tr(),
         fabIcon: Icon(FontAwesomeIcons.plus, size: AppSize.s16),
         body: GestureDetector(

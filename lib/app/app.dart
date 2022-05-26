@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,6 +13,7 @@ import 'package:urrevs_ui_mobile/presentation/screens/authentication_screen.dart
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/bottom_navigation_bar_container_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/menu_screen/subscreens/admin_panel/admin_panel_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/menu_screen/subscreens/admin_panel/subscreens.dart/update_products_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/menu_screen/subscreens/settings_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/company_profile/company_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/comparison_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/development_screen.dart';
@@ -33,13 +35,31 @@ import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 
 class MyApp extends ConsumerStatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({
+    Key? key,
+    required this.initialLink,
+  }) : super(key: key);
+
+  final PendingDynamicLinkData? initialLink;
 
   @override
   ConsumerState<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends ConsumerState<MyApp> {
+  void _handleDynLinks() async {
+    if (widget.initialLink != null) {
+      final Uri deepLink = widget.initialLink!.link;
+      print('first time: $deepLink');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _handleDynLinks();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -52,7 +72,22 @@ class _MyAppState extends ConsumerState<MyApp> {
         // initialRoute: FullscreenPostScreen.routeName,
         // initialRoute: DevelopmentScreen.routeName,
         navigatorObservers: [routeObserver],
-        onGenerateRoute: RouteGenerator.getRoute,
+        onGenerateRoute: RouteGenerator.generateRoute,
+        onGenerateInitialRoutes: (String routeName) {
+          if (routeName == AuthenticationScreen.routeName) {
+            return [
+              RouteGenerator.generateRoute(
+                RouteSettings(
+                  name: AuthenticationScreen.routeName,
+                  arguments: AuthenticationScreenArgs(
+                    initialLink: widget.initialLink,
+                  ),
+                ),
+              ),
+            ];
+          }
+          return [RouteGenerator.generateRoute(RouteSettings(name: routeName))];
+        },
         debugShowCheckedModeBanner: false,
         themeMode: ref.watch(themeModeProvider),
         theme: ThemeManager.light,

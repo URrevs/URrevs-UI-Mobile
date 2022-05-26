@@ -71,7 +71,7 @@ class Repository {
     }
   }
 
-  Future<Either<Failure, User>> loginToOurBackend() async {
+  Future<Either<Failure, AuthReturnedVals>> loginToOurBackend() async {
     return _tryAndCatch(() async {
       // login to our backend
       String idToken = await FirebaseAuth.instance.currentUser!.getIdToken();
@@ -84,11 +84,14 @@ class Repository {
           'bearer ${response.token}';
 
       final profileRes = await _remoteDataSource.getMyProfile();
-      return profileRes.userSubResponse.userModel;
+      return AuthReturnedVals(
+        user: profileRes.userSubResponse.userModel,
+        refCode: profileRes.userSubResponse.refCode,
+      );
     });
   }
 
-  Future<Either<Failure, User>> authenticateWithGoogle() async {
+  Future<Either<Failure, AuthReturnedVals>> authenticateWithGoogle() async {
     return _tryAndCatch(() async {
       // login to google auth provider
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -114,11 +117,14 @@ class Repository {
           'bearer ${response.token}';
 
       final profileRes = await _remoteDataSource.getMyProfile();
-      return profileRes.userSubResponse.userModel;
+      return AuthReturnedVals(
+        user: profileRes.userSubResponse.userModel,
+        refCode: profileRes.userSubResponse.refCode,
+      );
     });
   }
 
-  Future<Either<Failure, User>> authenticateWithFacebook() async {
+  Future<Either<Failure, AuthReturnedVals>> authenticateWithFacebook() async {
     return _tryAndCatch(() async {
       // login to facebook auth provider
       await FacebookAuth.instance.logOut();
@@ -141,7 +147,10 @@ class Repository {
           'bearer ${response.token}';
 
       final profileRes = await _remoteDataSource.getMyProfile();
-      return profileRes.userSubResponse.userModel;
+      return AuthReturnedVals(
+        user: profileRes.userSubResponse.userModel,
+        refCode: profileRes.userSubResponse.refCode,
+      );
     });
   }
 

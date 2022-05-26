@@ -11,42 +11,48 @@ class AuthenticationNotifier extends StateNotifier<AuthenticationState> {
   void loginToOurBackend() async {
     state = AuthenticationLoadingState();
     final response = await GetIt.I<Repository>().loginToOurBackend();
-    response.fold(
-      (failure) {
-        if (failure is CancelFailure) {
-          return state = AuthenticationInitialState();
-        }
-        state = AuthenticationErrorState(failure: failure);
-      },
-      (user) => state = AuthenticationLoadedState(user: user),
-    );
+    response.fold((failure) {
+      if (failure is CancelFailure) {
+        return state = AuthenticationInitialState();
+      }
+      state = AuthenticationErrorState(failure: failure);
+    }, (returnedVals) {
+      return state = AuthenticationLoadedState(
+        user: returnedVals.user,
+        refCode: returnedVals.refCode,
+      );
+    });
   }
 
   void authenticateWithGoogle() async {
     state = AuthenticationLoadingState();
     final response = await GetIt.I<Repository>().authenticateWithGoogle();
-    response.fold(
-      (failure) {
-        if (failure is CancelFailure) {
-          return state = AuthenticationInitialState();
-        }
-        state = AuthenticationErrorState(failure: failure);
-      },
-      (user) => state = AuthenticationLoadedState(user: user),
-    );
+    response.fold((failure) {
+      if (failure is CancelFailure) {
+        return state = AuthenticationInitialState();
+      }
+      state = AuthenticationErrorState(failure: failure);
+    }, (returnedVals) {
+      return state = AuthenticationLoadedState(
+        user: returnedVals.user,
+        refCode: returnedVals.refCode,
+      );
+    });
   }
 
   void authenticateWithFacebook() async {
     state = AuthenticationLoadingState();
     final response = await GetIt.I<Repository>().authenticateWithFacebook();
-    response.fold(
-      (failure) {
-        if (failure is CancelFailure) {
-          return state = AuthenticationInitialState();
-        }
-        state = AuthenticationErrorState(failure: failure);
-      },
-      (user) => state = AuthenticationLoadedState(user: user),
-    );
+    response.fold((failure) {
+      if (failure is CancelFailure) {
+        return state = AuthenticationInitialState();
+      }
+      state = AuthenticationErrorState(failure: failure);
+    }, (returnedVals) {
+      return state = AuthenticationLoadedState(
+        user: returnedVals.user,
+        refCode: returnedVals.refCode,
+      );
+    });
   }
 }

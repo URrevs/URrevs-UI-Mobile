@@ -34,6 +34,34 @@ extension PostTypeExtension on PostType {
         return PostContentType.question;
     }
   }
+
+  CardType get cardType {
+    switch (this) {
+      case PostType.phoneReview:
+        return CardType.productReview;
+      case PostType.companyReview:
+        return CardType.companyReview;
+      case PostType.phoneQuestion:
+        return CardType.productQuestion;
+      case PostType.companyQuestion:
+        return CardType.companyQuestion;
+    }
+  }
+
+  static PostType? parse(String postTypeStr) {
+    switch (postTypeStr) {
+      case 'phoneReview':
+        return PostType.phoneReview;
+      case 'companyReview':
+        return PostType.companyReview;
+      case 'phoneQuestion':
+        return PostType.phoneQuestion;
+      case 'companyQuestion':
+        return PostType.companyQuestion;
+      default:
+        return null;
+    }
+  }
 }
 
 enum TargetType { phone, company }
@@ -45,3 +73,18 @@ enum SearchMode { productsAndCompanies, phones }
 enum PostContentType { review, question }
 
 enum PostsListType { user, target, home }
+
+enum LinkType { post, refCode }
+
+extension LinkTypeExtension on LinkType {
+  static LinkType? parse(String linkTypeStr) {
+    switch (linkTypeStr) {
+      case 'post':
+        return LinkType.post;
+      case 'refCode':
+        return LinkType.refCode;
+      default:
+        return null;
+    }
+  }
+}

@@ -1,10 +1,14 @@
+import 'dart:async';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+
 import 'package:urrevs_ui_mobile/app/extensions.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/assets_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
@@ -18,8 +22,20 @@ import 'package:urrevs_ui_mobile/presentation/widgets/buttons/auth_button.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/urrevs_logo.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
+class AuthenticationScreenArgs {
+  PendingDynamicLinkData? initialLink;
+  AuthenticationScreenArgs({
+    required this.initialLink,
+  });
+}
+
 class AuthenticationScreen extends ConsumerStatefulWidget {
-  const AuthenticationScreen({Key? key}) : super(key: key);
+  const AuthenticationScreen({
+    Key? key,
+    required this.screenArgs,
+  }) : super(key: key);
+
+  final AuthenticationScreenArgs screenArgs;
 
   static const String routeName = 'AuthenticationScreen';
 
@@ -29,6 +45,10 @@ class AuthenticationScreen extends ConsumerStatefulWidget {
 }
 
 class _AuthenticationScreenState extends ConsumerState<AuthenticationScreen> {
+  late PendingDynamicLinkData? _initialLink = widget.screenArgs.initialLink;
+
+  late final StreamSubscription<PendingDynamicLinkData> _dynLinkSubs;
+
   Align _buildLanguageButton() {
     Locale targetLocale =
         context.isArabic ? LanguageType.en.locale : LanguageType.ar.locale;
@@ -85,12 +105,28 @@ class _AuthenticationScreenState extends ConsumerState<AuthenticationScreen> {
   @override
   void initState() {
     super.initState();
+
+    // should subscibe to the stream in initState only !!
+    _dynLinkSubs = FirebaseDynamicLinks.instance.onLink
+        .listen((PendingDynamicLinkData dynamicLinkData) {
+      _initialLink = dynamicLinkData;
+    })
+      ..onError((error) {
+        print('dynamic link error');
+      });
+
     // login user automatically
     SchedulerBinding.instance!.addPostFrameCallback((timeStamp) {
       if (FirebaseAuth.instance.currentUser != null) {
         ref.read(authenticationProvider.notifier).loginToOurBackend();
       }
     });
+  }
+
+  @override
+  void dispose() {
+    _dynLinkSubs.cancel();
+    super.dispose();
   }
 
   @override
@@ -111,9 +147,14 @@ class _AuthenticationScreenState extends ConsumerState<AuthenticationScreen> {
         );
       }
       if (next is AuthenticationLoadedState) {
+        print('pushing bottom nav bar screen');
         Navigator.of(context).pushNamedAndRemoveUntil(
           BottomNavigationBarContainerScreen.routeName,
           (route) => false,
+          arguments: BottomNavigationBarContainerScreenArgs(
+            screenIndex: BottomNavBarIndeces.homeSubscreen,
+            initialLink: _initialLink,
+          ),
         );
       }
     });

@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -106,7 +108,30 @@ class _CardFooterButtonBarState extends ConsumerState<CardFooterButtonBar> {
           child: CardFooterButton(
             icon: Icon(IconsManager.share, size: 24.sp),
             text: LocaleKeys.share.tr(),
-            onPressed: widget.onShare,
+            onPressed: () async {
+              Uri uri = Uri.https('example.com', '', <String, String>{
+                'linkType': LinkType.post.name,
+                'postId': widget.postId,
+                'userId': widget.userId,
+                'postType': widget.postType.name,
+              });
+              final dynamicLinkParams = DynamicLinkParameters(
+                link: uri,
+                uriPrefix: "https://urevs.page.link",
+                androidParameters: AndroidParameters(
+                  packageName: "com.example.urrevs_ui_mobile",
+                  fallbackUrl: uri,
+                ),
+              );
+              final dynamicLink = await FirebaseDynamicLinks.instance
+                  .buildLink(dynamicLinkParams);
+              await Clipboard.setData(
+                ClipboardData(text: dynamicLink.toString()),
+              );
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Copied to clipboard')),
+              );
+            },
           ),
         ),
       ],

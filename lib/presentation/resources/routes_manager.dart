@@ -26,17 +26,15 @@ class Routes {
 }
 
 class RouteGenerator {
-  static Route<dynamic> getRoute(RouteSettings routeSettings) {
+  static Route<dynamic> generateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case DevelopmentScreen.routeName:
         return MaterialPageRoute(builder: (_) => DevelopmentScreen());
       case PresentationScreen.routeName:
         return MaterialPageRoute(builder: (_) => PresentationScreen());
       case BottomNavigationBarContainerScreen.routeName:
-        final screenArgs = routeSettings.arguments
-                as BottomNavigationBarContainerScreenArgs? ??
-            BottomNavigationBarContainerScreenArgs(
-                screenIndex: BottomNavBarIndeces.homeSubscreen);
+        final screenArgs =
+            routeSettings.arguments as BottomNavigationBarContainerScreenArgs;
         return MaterialPageRoute(
           builder: (_) => BottomNavigationBarContainerScreen(screenArgs),
         );
@@ -47,8 +45,7 @@ class RouteGenerator {
           builder: (_) => UserProfileScreen(screenArgs),
         );
       case PostedPostsScreen.routeName:
-        final screenArgs =
-            routeSettings.arguments as PostedPostsScreenArgs? ??
+        final screenArgs = routeSettings.arguments as PostedPostsScreenArgs? ??
             PostedPostsScreenArgs.defaultArgs;
         return MaterialPageRoute(
           builder: (_) => PostedPostsScreen(screenArgs),
@@ -107,8 +104,9 @@ class RouteGenerator {
           builder: (_) => ProductProfileScreen(screenArgs),
         );
       case AuthenticationScreen.routeName:
+        final screenArgs = routeSettings.arguments as AuthenticationScreenArgs;
         return MaterialPageRoute(
-          builder: (_) => AuthenticationScreen(),
+          builder: (_) => AuthenticationScreen(screenArgs: screenArgs),
         );
       case ComparisonScreen.routeName:
         ComparisonScreenArgs screenArgs =

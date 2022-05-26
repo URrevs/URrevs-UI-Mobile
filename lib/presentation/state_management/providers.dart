@@ -398,4 +398,10 @@ extension WidgetRefListeners on WidgetRef {
     if (authState is! AuthenticationLoadedState) return null;
     return authState.user;
   }
+
+  String? get currentRefCode {
+    final authState = watch(authenticationProvider);
+    if (authState is! AuthenticationLoadedState) return null;
+    return authState.refCode;
+  }
 }

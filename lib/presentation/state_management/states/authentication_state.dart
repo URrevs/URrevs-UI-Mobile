@@ -18,8 +18,10 @@ class AuthenticationLoadingState extends AuthenticationState {
 
 class AuthenticationLoadedState extends AuthenticationState {
   final User user;
+  final String refCode;
   AuthenticationLoadedState({
     required this.user,
+    required this.refCode,
   });
   @override
   List<Object?> get props => [];

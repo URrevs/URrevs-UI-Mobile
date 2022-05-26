@@ -78,6 +78,7 @@ class _SignOutConfirmationDialogState extends State<SignOutConfirmationDialog> {
             Navigator.of(context).pushNamedAndRemoveUntil(
               AuthenticationScreen.routeName,
               (route) => false,
+              arguments: AuthenticationScreenArgs(initialLink: null),
             );
           },
         ),

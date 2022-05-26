@@ -61,7 +61,7 @@ class FullscreenPostScreenArgs {
     required this.cardType,
     required this.postId,
     required this.postUserId,
-    this.postType = PostType.phoneReview,
+    required this.postType,
     this.focusOnTextField = false,
     this.answerId,
   });
@@ -231,9 +231,8 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
   }
 
   String get _hintText {
-    switch (widget.screenArgs.cardType) {
-      case CardType.productQuestion:
-      case CardType.companyQuestion:
+    switch (widget.screenArgs.postType.postContentType) {
+      case PostContentType.question:
         return LocaleKeys.writeAnAnswer.tr();
       default:
         return LocaleKeys.writeAComment.tr();

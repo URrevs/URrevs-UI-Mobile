@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -40,7 +41,12 @@ import '../../../../../widgets/loading_widgets/small_search_list_loading.dart';
 final productSelectedProvider = StateProvider.autoDispose<bool>((ref) => false);
 
 class PostingReviewSubscreen extends ConsumerStatefulWidget {
-  const PostingReviewSubscreen({Key? key}) : super(key: key);
+  const PostingReviewSubscreen({
+    Key? key,
+    required this.refCode,
+  }) : super(key: key);
+
+  final String? refCode;
 
   @override
   ConsumerState<PostingReviewSubscreen> createState() =>
@@ -56,6 +62,8 @@ class _PostingReviewSubscreenState
       GetPhoneManufacturingCompanyProviderParams();
   final AddPhoneReviewProviderParams _addReviewProviderParams =
       AddPhoneReviewProviderParams();
+
+  final refCodeKey = GlobalKey();
 
   SearchResult? _chosenSearchResult;
 
@@ -97,6 +105,14 @@ class _PostingReviewSubscreenState
   @override
   void initState() {
     super.initState();
+    // show refcode text field if refcode is passed to the screen
+    if (widget.refCode != null) {
+      SchedulerBinding.instance!.addPostFrameCallback((timeStamp) {
+        if (refCodeKey.currentContext != null) {
+          Scrollable.ensureVisible(refCodeKey.currentContext!);
+        }
+      });
+    }
     productNameController =
         TextEditingController(text: postingReviewModel.productName);
     // NOTE: I am not sure about this controller.
@@ -110,7 +126,7 @@ class _PostingReviewSubscreenState
     hatedAboutCompanyController = TextEditingController(
         text: postingReviewModel.whatUserHatedAboutCompany);
     invitationCodeController =
-        TextEditingController(text: postingReviewModel.invitationCode);
+        TextEditingController(text: widget.refCode ?? '');
   }
 
   List<int> ratings = List.generate(8, (index) => 0);
@@ -365,6 +381,7 @@ class _PostingReviewSubscreenState
                       child: SizedBox(
                         width: 140.w,
                         child: TxtField(
+                          key: refCodeKey,
                           textController: invitationCodeController,
                           hintText: LocaleKeys.invitationCode.tr(),
                           keyboardType: TextInputType.text,

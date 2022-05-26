@@ -1,9 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/app/extensions.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/buttons/grad_button.dart';
@@ -110,7 +112,28 @@ class InvitationCodeDialog extends StatelessWidget {
                     ),
                     width: 325.w,
                     reverseIcon: false,
-                    onPressed: () {},
+                    onPressed: () async {
+                      Uri uri = Uri.https('example.com', '', <String, String>{
+                        'linkType': LinkType.refCode.name,
+                        'refCode': invitationCode,
+                      });
+                      final dynamicLinkParams = DynamicLinkParameters(
+                        link: uri,
+                        uriPrefix: "https://urevs.page.link",
+                        androidParameters: AndroidParameters(
+                          packageName: "com.example.urrevs_ui_mobile",
+                          fallbackUrl: uri,
+                        ),
+                      );
+                      final dynamicLink = await FirebaseDynamicLinks.instance
+                          .buildLink(dynamicLinkParams);
+                      await Clipboard.setData(
+                        ClipboardData(text: dynamicLink.toString()),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Copied to clipboard')),
+                      );
+                    },
                   )
                 ],
               ),
