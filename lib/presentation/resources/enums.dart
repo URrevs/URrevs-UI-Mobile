@@ -68,11 +68,11 @@ enum TargetType { phone, company }
 
 enum InteractionType { comment, answer, reply }
 
-enum SearchMode { productsAndCompanies, phones }
+enum SearchMode { productsAndCompanies, products, phones }
 
 enum PostContentType { review, question }
 
-enum PostsListType { user, target, home }
+enum PostsListType { user, target, home, questionsOnMyOwnedPhones }
 
 enum LinkType { post, refCode }
 

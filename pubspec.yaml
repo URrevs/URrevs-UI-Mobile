@@ -96,6 +96,9 @@ flutter:
   assets:
     - assets/translations/
     - assets/images/
+    - assets/images/razer.png
+    - assets/images/lenovo.png
+    - assets/images/lenovo-small.png
     - assets/images/svg/star-solid.svg
     - assets/images/svg/upvote.svg
     - assets/images/svg/facebook_logo.svg

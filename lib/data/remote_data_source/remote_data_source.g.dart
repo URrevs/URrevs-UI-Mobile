@@ -216,6 +216,22 @@ class _RemoteDataSource implements RemoteDataSource {
   }
 
   @override
+  Future<SearchProductsResponse> searchProducts(searchWord) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'q': searchWord};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<SearchProductsResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/search/products',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = SearchProductsResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<SearchPhonesResponse> searchPhones(searchWord) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'q': searchWord};
@@ -1159,6 +1175,24 @@ class _RemoteDataSource implements RemoteDataSource {
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = GetCompanyQuestionsOfAnotherUser.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<GetQuestionsAboutMyOwnedPhonesResponse> getQuestionsAboutMyOwnedPhones(
+      round) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'round': round};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GetQuestionsAboutMyOwnedPhonesResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/questions/phone/owned/by/me',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value =
+        GetQuestionsAboutMyOwnedPhonesResponse.fromJson(_result.data!);
     return value;
   }
 

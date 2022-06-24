@@ -189,34 +189,59 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
           // ),
         ],
       ),
-      body: ListView(
-        padding: EdgeInsets.all(20),
-        children: [
-          ElevatedButton(
-              onPressed: () async {
-                final dynamicLinkParams = DynamicLinkParameters(
-                  link: Uri.parse("https://www.example.com/"),
-                  uriPrefix: "https://urevs.page.link",
-                  androidParameters: const AndroidParameters(
-                      packageName: "com.example.urrevs_ui_mobile"),
-                );
-                final dynamicLink = await FirebaseDynamicLinks.instance
-                    .buildLink(dynamicLinkParams);
-                print(dynamicLink);
-              },
-              child: Text('CLICK'))
-          // UpdatedListTile(title: 'قائمة الشركات المضافة حديثاً', items: items),
-          // ProductReviewCard.dummyInstance(),
-          // CompanyReviewCard.dummyInstance(),
-          // QuestionCard.dummyInstance(context),
-          // CommentTree.dummyInstance,
-          // AnswerTree.dummyInstance,
-          // CommentsList.dummyInstance,
-          // AnswersList.dummyInstance,
-          // SpecsTable.dummyInstance,
-          // SpecsComparisonTable.dummyInstance,
-          // SvgPicture.asset(SvgAssets.upvote, color: Colors.red),
-        ],
+      body: Container(
+        color: Colors.grey[700],
+        child: ListView(
+          padding: EdgeInsets.all(20),
+          children: [
+            Center(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(50),
+                child: Container(
+                  height: 100,
+                  width: 100,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.blue,
+                        Colors.white,
+                      ],
+                    ),
+                  ),
+                  child: Image.asset(
+                    ImageAssets.lenovoSmallLogo,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
+            // ElevatedButton(
+            //     onPressed: () async {
+            //       final dynamicLinkParams = DynamicLinkParameters(
+            //         link: Uri.parse("https://www.example.com/"),
+            //         uriPrefix: "https://urevs.page.link",
+            //         androidParameters: const AndroidParameters(
+            //             packageName: "com.example.urrevs_ui_mobile"),
+            //       );
+            //       final dynamicLink = await FirebaseDynamicLinks.instance
+            //           .buildLink(dynamicLinkParams);
+            //       print(dynamicLink);
+            //     },
+            //     child: Text('CLICK'))
+            // UpdatedListTile(title: 'قائمة الشركات المضافة حديثاً', items: items),
+            // ProductReviewCard.dummyInstance(),
+            // CompanyReviewCard.dummyInstance(),
+            // QuestionCard.dummyInstance(context),
+            // CommentTree.dummyInstance,
+            // AnswerTree.dummyInstance,
+            // CommentsList.dummyInstance,
+            // AnswersList.dummyInstance,
+            // SpecsTable.dummyInstance,
+            // SpecsComparisonTable.dummyInstance,
+            // SvgPicture.asset(SvgAssets.upvote, color: Colors.red),
+          ],
+        ),
       ),
       //bottomNavigationBar: BottomNavBar(currentIndex: 2,onTap: (int i)=>{},),
     );

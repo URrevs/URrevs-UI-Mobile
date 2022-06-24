@@ -71,6 +71,22 @@ Map<String, dynamic> _$SearchProductsAndCompaiesResponseToJson(
       'companies': instance.companiesSubResponses,
     };
 
+SearchProductsResponse _$SearchProductsResponseFromJson(
+        Map<String, dynamic> json) =>
+    SearchProductsResponse(
+      success: json['success'] as bool,
+      phonesSubResponses: (json['phones'] as List<dynamic>)
+          .map((e) => PhoneSubResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$SearchProductsResponseToJson(
+        SearchProductsResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'phones': instance.phonesSubResponses,
+    };
+
 SearchPhonesResponse _$SearchPhonesResponseFromJson(
         Map<String, dynamic> json) =>
     SearchPhonesResponse(

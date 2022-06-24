@@ -56,7 +56,7 @@ class PostingReviewSubscreen extends ConsumerStatefulWidget {
 class _PostingReviewSubscreenState
     extends ConsumerState<PostingReviewSubscreen> {
   final SearchProviderParams _searchProviderParams =
-      SearchProviderParams(searchMode: SearchMode.phones);
+      SearchProviderParams(searchMode: SearchMode.products);
   final GetPhoneManufacturingCompanyProviderParams
       _manufacturingCompanyProviderParams =
       GetPhoneManufacturingCompanyProviderParams();

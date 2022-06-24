@@ -20,6 +20,8 @@ class GetPostsForHomeScreenResponse extends BaseResponse {
   List<QuestionSubResponse> phoneQuestionsSubResponses;
   @JsonKey(name: 'companyQuestions')
   List<QuestionSubResponse> companyQuestionsSubResponses;
+  @JsonKey(name: 'total')
+  List<String> postsIds;
 
   GetPostsForHomeScreenResponse({
     required bool success,
@@ -27,6 +29,7 @@ class GetPostsForHomeScreenResponse extends BaseResponse {
     required this.companyReviewsSubResponses,
     required this.phoneQuestionsSubResponses,
     required this.companyQuestionsSubResponses,
+    required this.postsIds,
   }) : super(success: success);
 
   List<Post> get postsModels {
@@ -39,12 +42,22 @@ class GetPostsForHomeScreenResponse extends BaseResponse {
     List<Question> companyQuestionModels =
         companyQuestionsSubResponses.map((cq) => cq.questionModel).toList();
 
-    return [
+    List<Post> allPosts = [
       ...phoneReviewModels,
       ...companyReviewModels,
       ...phoneQuestionsModels,
       ...companyQuestionModels
     ];
+
+    List<Post> arrangedPosts = [];
+
+    for (String id in postsIds) {
+      int index = allPosts.indexWhere((p) => p.id == id);
+      arrangedPosts.add(allPosts[index]);
+      allPosts.removeAt(index);
+    }
+
+    return arrangedPosts;
   }
 
   factory GetPostsForHomeScreenResponse.fromJson(Map<String, Object?> json) =>

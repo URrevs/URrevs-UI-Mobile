@@ -24,6 +24,8 @@ GetPostsForHomeScreenResponse _$GetPostsForHomeScreenResponseFromJson(
       companyQuestionsSubResponses: (json['companyQuestions'] as List<dynamic>)
           .map((e) => QuestionSubResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
+      postsIds:
+          (json['total'] as List<dynamic>).map((e) => e as String).toList(),
     );
 
 Map<String, dynamic> _$GetPostsForHomeScreenResponseToJson(
@@ -34,4 +36,5 @@ Map<String, dynamic> _$GetPostsForHomeScreenResponseToJson(
       'companyRevs': instance.companyReviewsSubResponses,
       'phoneQuestions': instance.phoneQuestionsSubResponses,
       'companyQuestions': instance.companyQuestionsSubResponses,
+      'total': instance.postsIds,
     };

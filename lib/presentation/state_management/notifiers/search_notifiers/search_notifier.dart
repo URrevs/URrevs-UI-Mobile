@@ -20,6 +20,9 @@ class SearchNotifier extends StateNotifier<SearchState> {
         response =
             await GetIt.I<Repository>().searchProductsAndCompanies(searchWord);
         break;
+      case SearchMode.products:
+        response = await GetIt.I<Repository>().searchProducts(searchWord);
+        break;
       case SearchMode.phones:
         response = await GetIt.I<Repository>().searchPhones(searchWord);
         break;

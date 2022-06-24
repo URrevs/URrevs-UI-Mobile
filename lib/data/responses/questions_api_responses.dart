@@ -143,6 +143,26 @@ class GetCompanyQuestionsOfAnotherUser extends BaseResponse {
 }
 
 @JsonSerializable()
+class GetQuestionsAboutMyOwnedPhonesResponse extends BaseResponse {
+  @JsonKey(name: 'questions')
+  List<QuestionSubResponse> questionsSubResponses;
+  GetQuestionsAboutMyOwnedPhonesResponse({
+    required bool success,
+    required this.questionsSubResponses,
+  }) : super(success: success);
+
+  List<Question> get questionsModels =>
+      questionsSubResponses.map((q) => q.questionModel).toList();
+
+  factory GetQuestionsAboutMyOwnedPhonesResponse.fromJson(
+          Map<String, Object?> json) =>
+      _$GetQuestionsAboutMyOwnedPhonesResponseFromJson(json);
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetQuestionsAboutMyOwnedPhonesResponseToJson(this);
+}
+
+@JsonSerializable()
 class GetQuestionsOnCertainPhoneResponse extends BaseResponse {
   @JsonKey(name: 'questions')
   List<QuestionSubResponse> questionsSubResponses;

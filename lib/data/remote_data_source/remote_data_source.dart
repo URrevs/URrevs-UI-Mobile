@@ -83,6 +83,11 @@ abstract class RemoteDataSource {
     @Query('q') String searchWord,
   );
 
+  @GET('/search/products')
+  Future<SearchProductsResponse> searchProducts(
+    @Query('q') String searchWord,
+  );
+
   @GET('/search/products/phones')
   Future<SearchPhonesResponse> searchPhones(
     @Query('q') String searchWord,
@@ -389,6 +394,11 @@ abstract class RemoteDataSource {
   @GET('/questions/company/by/{userId}')
   Future<GetCompanyQuestionsOfAnotherUser> getCompanyQuestionsOfAnotherUser(
     @Path() String userId,
+    @Query('round') int round,
+  );
+
+  @GET('/questions/phone/owned/by/me')
+  Future<GetQuestionsAboutMyOwnedPhonesResponse> getQuestionsAboutMyOwnedPhones(
     @Query('round') int round,
   );
 

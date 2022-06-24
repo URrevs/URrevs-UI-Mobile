@@ -20,6 +20,13 @@ class Avatar extends StatelessWidget {
 
   final VoidCallback? onTap;
 
+  String _imageWithHeight(String imageUrl) {
+    if (imageUrl.contains('https://graph.facebook.com')) {
+      return '$imageUrl?height=${(radius * 2).toInt()}';
+    }
+    return imageUrl;
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -34,7 +41,7 @@ class Avatar extends StatelessWidget {
             width: radius * 2,
             child: imageUrl != null
                 ? Image.network(
-                    imageUrl!,
+                    _imageWithHeight(imageUrl!),
                     fit: BoxFit.cover,
                     errorBuilder: (context, _, __) {
                       return Center(
@@ -48,9 +55,10 @@ class Avatar extends StatelessWidget {
                       );
                     },
                   )
-                : Image.network(
-                    StringsManager.imagePlaceHolder,
-                    fit: BoxFit.cover,
+                : Icon(
+                    Icons.account_circle,
+                    color: ColorManager.grey,
+                    size: radius * 2,
                   ),
           ),
         ),

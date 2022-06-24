@@ -236,6 +236,14 @@ class Repository {
     });
   }
 
+  Future<Either<Failure, List<SearchResult>>> searchProducts(
+      String searchWord) async {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.searchProducts(searchWord);
+      return response.searchResults;
+    });
+  }
+
   Future<Either<Failure, List<SearchResult>>> searchPhones(
       String searchWord) async {
     return _tryAndCatch(() async {
@@ -655,6 +663,15 @@ class Repository {
     return _tryAndCatch(() async {
       final response = await _remoteDataSource.getCompanyQuestionsOfAnotherUser(
           userId, round);
+      return response.questionsModels;
+    });
+  }
+
+  Future<Either<Failure, List<Question>>> getQuestionsAboutMyOwnedPhones(
+      int round) {
+    return _tryAndCatch(() async {
+      final response =
+          await _remoteDataSource.getQuestionsAboutMyOwnedPhones(round);
       return response.questionsModels;
     });
   }

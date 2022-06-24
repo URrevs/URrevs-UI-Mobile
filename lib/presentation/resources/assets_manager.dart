@@ -9,6 +9,10 @@ class ImageAssets {
   static const String fullLogo = "${AssetsPaths.images}/full_logo.png";
   static const String errorImage = "${AssetsPaths.images}/error.jpeg";
   static const String appBarLogo = "${AssetsPaths.images}/app_bar_logo.png";
+  static const String lenovoLogo = "${AssetsPaths.images}/lenovo.png";
+  static const String lenovoSmallLogo =
+      "${AssetsPaths.images}/lenovo-small.png";
+  static const String razerLogo = "${AssetsPaths.images}/razer.png";
 }
 
 class SvgAssets {

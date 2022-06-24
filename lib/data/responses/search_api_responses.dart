@@ -94,6 +94,24 @@ class SearchProductsAndCompaiesResponse extends BaseResponse {
 }
 
 @JsonSerializable()
+class SearchProductsResponse extends BaseResponse {
+  @JsonKey(name: 'phones')
+  List<PhoneSubResponse> phonesSubResponses;
+  SearchProductsResponse({
+    required bool success,
+    required this.phonesSubResponses,
+  }) : super(success: success);
+
+  List<SearchResult> get searchResults =>
+      phonesSubResponses.map((p) => p.phoneModel.toSearchResult).toList();
+
+  factory SearchProductsResponse.fromJson(Map<String, Object?> json) =>
+      _$SearchProductsResponseFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$SearchProductsResponseToJson(this);
+}
+
+@JsonSerializable()
 class SearchPhonesResponse extends BaseResponse {
   @JsonKey(name: 'phones')
   List<PhoneSubResponse> phonesSubResponses;

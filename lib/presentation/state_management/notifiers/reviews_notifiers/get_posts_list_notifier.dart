@@ -136,18 +136,22 @@ class GetPostsListNotifier extends StateNotifier<GetPostsListState> {
       case PostsListType.home:
         response = await GetIt.I<Repository>().getPostsForHomeScreen(_round);
         break;
+      case PostsListType.questionsOnMyOwnedPhones:
+        response =
+            await GetIt.I<Repository>().getQuestionsAboutMyOwnedPhones(_round);
+        break;
     }
     response.fold(
       // deal with failure
       (failure) => state = GetPostsListErrorState(failure: failure),
       (fetchedPosts) {
         // filter fetchedPosts from redundancy in case of home screen
-        if (postsListType == PostsListType.home) {
-          fetchedPosts = fetchedPosts.where((post) {
-            bool isDuplicate = currentPosts.any((p) => p.id == post.id);
-            return isDuplicate ? false : true;
-          }).toList();
-        }
+        // if (postsListType == PostsListType.home) {
+        //   fetchedPosts = fetchedPosts.where((post) {
+        //     bool isDuplicate = currentPosts.any((p) => p.id == post.id);
+        //     return isDuplicate ? false : true;
+        //   }).toList();
+        // }
         // add items and rounds ended state to the loaded state
         bool roundsEnded = fetchedPosts.isEmpty;
         List<Post> newPosts = [...currentPosts, ...fetchedPosts];
