@@ -129,6 +129,7 @@ class _OwnedProductsScreenState extends ConsumerState<OwnedProductsScreen>
           Navigator.of(context).pushNamedAndRemoveUntil(
             AuthenticationScreen.routeName,
             (route) => false,
+            arguments: AuthenticationScreenArgs(initialLink: null),
           );
         }
       }

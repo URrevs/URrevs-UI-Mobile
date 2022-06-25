@@ -275,6 +275,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
           Navigator.of(context).pushNamedAndRemoveUntil(
             AuthenticationScreen.routeName,
             (route) => false,
+            arguments: AuthenticationScreenArgs(initialLink: null),
           );
         }
       }
@@ -293,6 +294,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
           Navigator.of(context).pushNamedAndRemoveUntil(
             AuthenticationScreen.routeName,
             (route) => false,
+            arguments: AuthenticationScreenArgs(initialLink: null),
           );
         }
       }

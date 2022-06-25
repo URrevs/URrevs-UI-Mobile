@@ -159,6 +159,12 @@ class Repository {
       await _remoteDataSource.givePointsToUser();
     });
   }
+  
+  Future<Either<Failure, void>> logoutFromAllDevices() async {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.logoutFromAllDevices();
+    });
+  }
 
   Future<Either<Failure, GetMyProfileResponse>> getMyProfile() async {
     return _tryAndCatch(() async {

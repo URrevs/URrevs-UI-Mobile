@@ -243,5 +243,6 @@
   "youCannotAddACompetitionWhileThereIsARunningOne": "You cannot add a competition while there is a running one",
   "invitationCodeCopied": "Invitation code copied",
   "systemTheme": "system",
-  "youCannotUseYourInvitationCode": "You cannot use your invitation code"
+  "youCannotUseYourInvitationCode": "You cannot use your invitation code",
+  "cantLogoutFromAllDevices": "Can't logout from all devices"
 }

@@ -51,6 +51,22 @@ class _RemoteDataSource implements RemoteDataSource {
   }
 
   @override
+  Future<StatusResponse> logoutFromAllDevices() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<StatusResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/users/logout',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = StatusResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<GetMyProfileResponse> getMyProfile() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

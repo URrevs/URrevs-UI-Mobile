@@ -24,5 +24,6 @@ class StatusResponse extends BaseResponse {
 
   factory StatusResponse.fromJson(Map<String, Object?> json) =>
       _$StatusResponseFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$StatusResponseToJson(this);
 }

@@ -17,6 +17,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/leaderb
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/leaderboard_notifiers/get_lastest_competition_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/leaderboard_notifiers/get_my_rank_in_competition_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/leaderboard_notifiers/get_top_users_in_competition_notifier.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/logout_from_all_devices_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/phones_notifier/get_all_phones_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/phones_notifier/get_two_phones_specs_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/search_notifiers/add_new_recent_search_notifier.dart';
@@ -42,6 +43,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/leaderboar
 import 'package:urrevs_ui_mobile/presentation/state_management/states/leaderboard_states/get_lastest_competition_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/leaderboard_states/get_my_rank_in_competition_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/leaderboard_states/get_top_users_in_competition_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/logout_from_all_devices_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_all_phones_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_phone_specs_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_states/get_phone_statistical_info_state.dart';
@@ -101,6 +103,10 @@ final authenticationProvider =
 final givePointsToUserProvider =
     StateNotifierProvider<GivePointsToUserNotifier, GivePointsToUserState>(
         (ref) => GivePointsToUserNotifier());
+
+final logoutFromAllDevicesProvider = StateNotifierProvider<
+    LogoutFromAllDevicesNotifier,
+    LogoutFromAllDevicesState>((ref) => LogoutFromAllDevicesNotifier());
 
 final getMyProfileProvider =
     StateNotifierProvider.autoDispose<GetMyProfileNotifier, GetMyProfileState>(

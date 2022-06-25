@@ -34,6 +34,9 @@ abstract class RemoteDataSource {
   @PUT('/users/login/mobile')
   Future<GivePointsToUserResponse> givePointsToUser();
 
+  @GET('/users/logout')
+  Future<StatusResponse> logoutFromAllDevices();
+
   @GET('/users/profile')
   Future<GetMyProfileResponse> getMyProfile();
 

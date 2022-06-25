@@ -67,6 +67,7 @@ class _UpdateProductsScreenState extends ConsumerState<UpdateProductsScreen> {
           Navigator.of(context).pushNamedAndRemoveUntil(
             AuthenticationScreen.routeName,
             (route) => false,
+            arguments: AuthenticationScreenArgs(initialLink: null),
           );
         }
       }
@@ -188,6 +189,7 @@ class _UpdateProductsScreenState extends ConsumerState<UpdateProductsScreen> {
           Navigator.of(context).pushNamedAndRemoveUntil(
             AuthenticationScreen.routeName,
             (route) => false,
+            arguments: AuthenticationScreenArgs(initialLink: null),
           );
         }
       }

@@ -52,6 +52,7 @@ class _MenuSubscreenState extends ConsumerState<MenuSubscreen> {
           Navigator.of(context).pushNamedAndRemoveUntil(
             AuthenticationScreen.routeName,
             (route) => false,
+            arguments: AuthenticationScreenArgs(initialLink: null),
           );
         }
       }

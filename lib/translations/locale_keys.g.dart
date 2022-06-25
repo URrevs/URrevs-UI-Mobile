@@ -246,5 +246,6 @@ abstract class  LocaleKeys {
   static const invitationCodeCopied = 'invitationCodeCopied';
   static const systemTheme = 'systemTheme';
   static const youCannotUseYourInvitationCode = 'youCannotUseYourInvitationCode';
+  static const cantLogoutFromAllDevices = 'cantLogoutFromAllDevices';
 
 }
