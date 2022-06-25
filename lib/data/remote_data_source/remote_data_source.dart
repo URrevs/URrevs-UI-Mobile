@@ -583,7 +583,5 @@ abstract class RemoteDataSource {
   Future<GetMyRankInCompetitionResponse> getMyRankInCompetition();
 
   @GET('/home/recommended')
-  Future<GetPostsForHomeScreenResponse> getPostsForHomeScreen(
-    @Query('round') int round,
-  );
+  Future<GetPostsForHomeScreenResponse> getPostsForHomeScreen();
 }

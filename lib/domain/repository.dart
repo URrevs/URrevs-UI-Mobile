@@ -964,7 +964,7 @@ class Repository {
 
   Future<Either<Failure, List<Post>>> getPostsForHomeScreen(int round) {
     return _tryAndCatch(() async {
-      final response = await _remoteDataSource.getPostsForHomeScreen(round);
+      final response = await _remoteDataSource.getPostsForHomeScreen();
       return response.postsModels;
     });
   }

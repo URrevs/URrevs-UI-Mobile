@@ -53,9 +53,14 @@ class GetPostsForHomeScreenResponse extends BaseResponse {
 
     for (String id in postsIds) {
       int index = allPosts.indexWhere((p) => p.id == id);
+      if (index < 0) {
+        continue; // for the case where some ids are not in allPosts
+      }
       arrangedPosts.add(allPosts[index]);
       allPosts.removeAt(index);
     }
+    // add remaining posts (in the case where some ids are not in allPosts)
+    arrangedPosts.addAll(allPosts);
 
     return arrangedPosts;
   }

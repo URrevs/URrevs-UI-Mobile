@@ -1787,9 +1787,9 @@ class _RemoteDataSource implements RemoteDataSource {
   }
 
   @override
-  Future<GetPostsForHomeScreenResponse> getPostsForHomeScreen(round) async {
+  Future<GetPostsForHomeScreenResponse> getPostsForHomeScreen() async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'round': round};
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(

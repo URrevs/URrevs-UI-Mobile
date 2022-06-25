@@ -11,6 +11,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/send_and_forget_requests.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/authentication_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/like_state.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
@@ -60,7 +61,7 @@ class CardFooterButtonBar extends ConsumerStatefulWidget {
 }
 
 class _CardFooterButtonBarState extends ConsumerState<CardFooterButtonBar> {
-  late final LikeProviderParams _providerParams = LikeProviderParams(
+  late final LikeProviderParams _likeProviderParams = LikeProviderParams(
     socialItemId: widget.postId,
     postType: widget.postType,
     interactionType: null,
@@ -68,12 +69,18 @@ class _CardFooterButtonBarState extends ConsumerState<CardFooterButtonBar> {
     getInteractionsProviderParams: null,
   );
 
+  late final PostProviderParams _postProviderParams = PostProviderParams(
+    postId: widget.postId,
+    postType: widget.postType,
+    post: null,
+  );
+
   @override
   void initState() {
     super.initState();
     SchedulerBinding.instance!.addPostFrameCallback((_) {
       ref
-          .read(likeProvider(_providerParams).notifier)
+          .read(likeProvider(_likeProviderParams).notifier)
           .setLoadedState(widget.liked);
     });
   }
@@ -81,7 +88,7 @@ class _CardFooterButtonBarState extends ConsumerState<CardFooterButtonBar> {
   @override
   Widget build(BuildContext context) {
     ref.addErrorListener(
-      provider: likeProvider(_providerParams),
+      provider: likeProvider(_likeProviderParams),
       context: context,
     );
 
@@ -109,6 +116,14 @@ class _CardFooterButtonBarState extends ConsumerState<CardFooterButtonBar> {
             icon: Icon(IconsManager.share, size: 24.sp),
             text: LocaleKeys.share.tr(),
             onPressed: () async {
+              SendAndForgetRequests.increaseShareCount(
+                postId: widget.postId,
+                targetType: widget.postType.targetType,
+                postContentType: widget.postType.postContentType,
+              );
+              ref
+                  .read(postProvider(_postProviderParams).notifier)
+                  .incrementShares();
               Uri uri = Uri.https('example.com', '', <String, String>{
                 'linkType': LinkType.post.name,
                 'postId': widget.postId,
@@ -139,7 +154,7 @@ class _CardFooterButtonBarState extends ConsumerState<CardFooterButtonBar> {
   }
 
   Widget _buildLikeButton() {
-    final state = ref.watch(likeProvider(_providerParams));
+    final state = ref.watch(likeProvider(_likeProviderParams));
     bool liked = (state is LikeLoadedState && state.liked) ||
         (state is LikeLoadingState && state.liked);
 
@@ -166,9 +181,11 @@ class _CardFooterButtonBarState extends ConsumerState<CardFooterButtonBar> {
       text: firstText,
       liked: liked,
       onPressed: () {
-        final state = ref.watch(likeProvider(_providerParams));
+        final state = ref.watch(likeProvider(_likeProviderParams));
         if (state is! LoadingState) {
-          ref.read(likeProvider(_providerParams).notifier).toggleLikeState();
+          ref
+              .read(likeProvider(_likeProviderParams).notifier)
+              .toggleLikeState();
         }
       },
     );

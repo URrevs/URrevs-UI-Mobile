@@ -15,7 +15,6 @@ class PostNotifier extends StateNotifier<Post> {
   /// widgets showing the post (ProductReviewCard - CompanyReviewCard -
   /// QuestionCard).
   PostNotifier({required Post? post}) : super(post!);
-
   void incrementLikes() {
     final post = state;
     if (post is PhoneReview) {
@@ -45,7 +44,6 @@ class PostNotifier extends StateNotifier<Post> {
     } else if (post is CompanyReview) {
       state = post.copyWith(commentsCount: post.commentsCount + 1);
     } else if (post is Question) {
-      print('incremented answer count');
       state = post.copyWith(ansCount: post.ansCount + 1);
     }
   }
@@ -64,6 +62,18 @@ class PostNotifier extends StateNotifier<Post> {
       if (post.ansCount > 0) {
         state = post.copyWith(ansCount: post.ansCount - 1);
       }
+    }
+  }
+
+  void incrementShares() {
+    final post = state;
+    print(post);
+    if (post is PhoneReview) {
+      state = post.copyWith(shares: post.shares + 1);
+    } else if (post is CompanyReview) {
+      state = post.copyWith(shares: post.shares + 1);
+    } else if (post is Question) {
+      state = post.copyWith(shares: post.shares + 1);
     }
   }
 }
