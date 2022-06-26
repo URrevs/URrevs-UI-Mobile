@@ -244,5 +244,9 @@
   "invitationCodeCopied": "Invitation code copied",
   "systemTheme": "system",
   "youCannotUseYourInvitationCode": "You cannot use your invitation code",
-  "cantLogoutFromAllDevices": "Can't logout from all devices"
+  "cantLogoutFromAllDevices": "Can't logout from all devices",
+  "youHaveEarned": "You have earned",
+  "point": "point",
+  "youHaveAlreadyReviewedThisPhoneBefore": "You have already reviewed this phone before",
+  "theEnteredReferralCodeIsInvalid": "The entered referral code is invalid."
 }

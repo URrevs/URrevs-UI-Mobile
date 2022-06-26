@@ -244,5 +244,9 @@
   "invitationCodeCopied": "تم نسخ كود الدعوة",
   "systemTheme": "حسب النظام",
   "youCannotUseYourInvitationCode": "لا يمكنك استخدام كود الدعوة الخاص بك",
-  "cantLogoutFromAllDevices": "لا يمكن تسجيل الخروج من جميع الأجهزة"
+  "cantLogoutFromAllDevices": "لا يمكن تسجيل الخروج من جميع الأجهزة",
+  "youHaveEarned": "لقد حصلت على",
+  "point": "نقطة",
+  "youHaveAlreadyReviewedThisPhoneBefore": "لقد قمت بالفعل بمراجعة هذا الهاتف من قبل",
+  "theEnteredReferralCodeIsInvalid": "كود الدعوة الذي تم إدخاله غير صالح"
 }

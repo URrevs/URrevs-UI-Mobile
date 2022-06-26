@@ -247,5 +247,9 @@ abstract class  LocaleKeys {
   static const systemTheme = 'systemTheme';
   static const youCannotUseYourInvitationCode = 'youCannotUseYourInvitationCode';
   static const cantLogoutFromAllDevices = 'cantLogoutFromAllDevices';
+  static const youHaveEarned = 'youHaveEarned';
+  static const point = 'point';
+  static const youHaveAlreadyReviewedThisPhoneBefore = 'youHaveAlreadyReviewedThisPhoneBefore';
+  static const theEnteredReferralCodeIsInvalid = 'theEnteredReferralCodeIsInvalid';
 
 }

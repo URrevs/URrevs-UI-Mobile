@@ -260,7 +260,11 @@ class CodegenLoader extends AssetLoader{
   "invitationCodeCopied": "تم نسخ كود الدعوة",
   "systemTheme": "حسب النظام",
   "youCannotUseYourInvitationCode": "لا يمكنك استخدام كود الدعوة الخاص بك",
-  "cantLogoutFromAllDevices": "لا يمكن تسجيل الخروج من جميع الأجهزة"
+  "cantLogoutFromAllDevices": "لا يمكن تسجيل الخروج من جميع الأجهزة",
+  "youHaveEarned": "لقد حصلت على",
+  "point": "نقطة",
+  "youHaveAlreadyReviewedThisPhoneBefore": "لقد قمت بالفعل بمراجعة هذا الهاتف من قبل",
+  "theEnteredReferralCodeIsInvalid": "كود الدعوة الذي تم إدخاله غير صالح"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -508,7 +512,11 @@ static const Map<String,dynamic> en = {
   "invitationCodeCopied": "Invitation code copied",
   "systemTheme": "system",
   "youCannotUseYourInvitationCode": "You cannot use your invitation code",
-  "cantLogoutFromAllDevices": "Can't logout from all devices"
+  "cantLogoutFromAllDevices": "Can't logout from all devices",
+  "youHaveEarned": "You have earned",
+  "point": "point",
+  "youHaveAlreadyReviewedThisPhoneBefore": "You have already reviewed this phone before",
+  "theEnteredReferralCodeIsInvalid": "The entered referral code is invalid."
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

@@ -21,8 +21,12 @@ class AddPhoneReviewLoadingState extends AddPhoneReviewState
 class AddPhoneReviewLoadedState extends AddPhoneReviewState
     implements LoadedState {
   final PhoneReview phoneReview;
+  final int earnedPoints;
 
-  AddPhoneReviewLoadedState({required this.phoneReview});
+  AddPhoneReviewLoadedState({
+    required this.phoneReview,
+    required this.earnedPoints,
+  });
   @override
   List<Object?> get props => [];
 }

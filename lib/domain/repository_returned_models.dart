@@ -1,3 +1,4 @@
+import 'package:urrevs_ui_mobile/domain/models/phone_review.dart';
 import 'package:urrevs_ui_mobile/domain/models/user.dart';
 
 class AddAnswerReturnedVals {
@@ -15,5 +16,14 @@ class AuthReturnedVals {
   AuthReturnedVals({
     required this.user,
     required this.refCode,
+  });
+}
+
+class AddPhoneReviewReturnedVals {
+  PhoneReview phoneReview;
+  int earnedPoints;
+  AddPhoneReviewReturnedVals({
+    required this.phoneReview,
+    required this.earnedPoints,
   });
 }

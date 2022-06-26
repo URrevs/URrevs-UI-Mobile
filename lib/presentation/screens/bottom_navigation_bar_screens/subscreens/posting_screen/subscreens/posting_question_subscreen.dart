@@ -10,6 +10,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_post_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/posted_posts_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/question_states/add_question_state.dart';
@@ -131,7 +132,31 @@ class _PostingQuestionSubscreenState
       context: context,
     );
     ref.listen(addQuestionProvider, (previous, next) {
-      if (next is AddQuestionLoadedState) _emptyFields();
+      if (next is AddQuestionLoadedState) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(LocaleKeys.postedSuccessfully.tr()),
+            action: SnackBarAction(
+              label: LocaleKeys.seePost.tr(),
+              onPressed: () {
+                PostType postType = next.question.type == TargetType.phone
+                    ? PostType.phoneQuestion
+                    : PostType.companyQuestion;
+                Navigator.of(context).pushNamed(
+                  FullscreenPostScreen.routeName,
+                  arguments: FullscreenPostScreenArgs(
+                    cardType: postType.cardType,
+                    postId: next.question.id,
+                    postUserId: next.question.userId,
+                    postType: postType,
+                  ),
+                );
+              },
+            ),
+          ),
+        );
+        _emptyFields();
+      }
     });
     final state = ref.watch(addQuestionProvider);
     late Widget icon;

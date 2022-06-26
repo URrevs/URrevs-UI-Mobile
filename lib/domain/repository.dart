@@ -341,11 +341,11 @@ class Repository {
     });
   }
 
-  Future<Either<Failure, PhoneReview>> addPhoneReview(
+  Future<Either<Failure, AddPhoneReviewReturnedVals>> addPhoneReview(
       AddPhoneReviewRequest request) {
     return _tryAndCatch(() async {
       final response = await _remoteDataSource.addPhoneReview(request);
-      return response.phoneReviewSubRespone.phoneReviewModel;
+      return response.addPhoneReviewReturnedVals;
     });
   }
 

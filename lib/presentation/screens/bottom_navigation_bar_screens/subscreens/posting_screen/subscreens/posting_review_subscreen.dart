@@ -14,6 +14,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_post_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/posted_posts_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/add_phone_review_state.dart';
@@ -409,18 +410,21 @@ class _PostingReviewSubscreenState
     ref.listen(addPhoneReviewProvider(_addReviewProviderParams),
         (previous, next) {
       if (next is AddPhoneReviewLoadedState) {
+        String message =
+            '${LocaleKeys.postedSuccessfully.tr()}. ${LocaleKeys.youHaveEarned.tr()} ${next.earnedPoints} ${LocaleKeys.point.tr()}';
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(LocaleKeys.postedSuccessfully.tr()),
-            margin: EdgeInsets.fromLTRB(15.w, 5.h, 15.w, 10.h + 50.h),
+            content: Text(message),
             action: SnackBarAction(
               label: LocaleKeys.seePost.tr(),
               onPressed: () {
                 Navigator.of(context).pushNamed(
-                  PostedPostsScreen.routeName,
-                  arguments: PostedPostsScreenArgs(
-                    userId: null,
-                    postContentType: PostContentType.review,
+                  FullscreenPostScreen.routeName,
+                  arguments: FullscreenPostScreenArgs(
+                    cardType: CardType.productReview,
+                    postId: next.phoneReview.id,
+                    postUserId: next.phoneReview.userId,
+                    postType: PostType.phoneReview,
                   ),
                 );
               },

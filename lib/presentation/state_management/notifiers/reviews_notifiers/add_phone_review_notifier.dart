@@ -13,8 +13,11 @@ class AddPhoneReviewNotifier extends StateNotifier<AddPhoneReviewState> {
     final response = await GetIt.I<Repository>().addPhoneReview(request);
     response.fold(
       (failure) => state = AddPhoneReviewErrorState(failure: failure),
-      (phoneReview) {
-        state = AddPhoneReviewLoadedState(phoneReview: phoneReview);
+      (returnedVals) {
+        state = AddPhoneReviewLoadedState(
+          phoneReview: returnedVals.phoneReview,
+          earnedPoints: returnedVals.earnedPoints,
+        );
       },
     );
   }

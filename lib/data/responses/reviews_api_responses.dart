@@ -4,6 +4,7 @@ import 'package:urrevs_ui_mobile/data/responses/sub_responses.dart';
 import 'package:urrevs_ui_mobile/domain/models/comment.dart';
 import 'package:urrevs_ui_mobile/domain/models/company_review.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone_review.dart';
+import 'package:urrevs_ui_mobile/domain/repository_returned_models.dart';
 
 import 'base_response.dart';
 
@@ -19,6 +20,13 @@ class AddPhoneReviewResponse extends BaseResponse {
     required this.phoneReviewSubRespone,
     required this.earnedPoints,
   }) : super(success: success);
+
+  AddPhoneReviewReturnedVals get addPhoneReviewReturnedVals {
+    return AddPhoneReviewReturnedVals(
+      phoneReview: phoneReviewSubRespone.phoneReviewModel,
+      earnedPoints: earnedPoints,
+    );
+  }
 
   factory AddPhoneReviewResponse.fromJson(Map<String, Object?> json) =>
       _$AddPhoneReviewResponseFromJson(json);
