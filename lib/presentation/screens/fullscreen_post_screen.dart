@@ -231,6 +231,9 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
   }
 
   String get _hintText {
+    if (_idOfInteractionRepliedTo != null) {
+      return LocaleKeys.writeAReply.tr();
+    }
     switch (widget.screenArgs.postType.postContentType) {
       case PostContentType.question:
         return LocaleKeys.writeAnAnswer.tr();
@@ -396,7 +399,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
           getInteractionsProviderParams: _interactionsProviderParams,
           onPressingReplyList: List.generate(_interactions.length, (i) {
             return () {
-              _idOfInteractionRepliedTo = _interactions[i].id;
+              setState(() => _idOfInteractionRepliedTo = _interactions[i].id);
               focusNode.requestFocus();
             };
           }),
@@ -411,7 +414,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
           postUserId: widget.screenArgs.postUserId,
           onPressingReplyList: List.generate(_interactions.length, (i) {
             return () {
-              _idOfInteractionRepliedTo = _interactions[i].id;
+              setState(() => _idOfInteractionRepliedTo = _interactions[i].id);
               focusNode.requestFocus();
             };
           }),
@@ -466,7 +469,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
       fullscreen: true,
       onPressingComment: () {
         focusNode.requestFocus();
-        _idOfInteractionRepliedTo = null;
+        setState(() => _idOfInteractionRepliedTo = null);
       },
     );
   }
@@ -484,7 +487,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
           fullscreen: true,
           onPressingAnswer: () {
             focusNode.requestFocus();
-            _idOfInteractionRepliedTo = null;
+            setState(() => _idOfInteractionRepliedTo = null);
           },
         ),
       ],
@@ -500,7 +503,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
       fullscreen: true,
       onPressingComment: () {
         focusNode.requestFocus();
-        _idOfInteractionRepliedTo = null;
+        setState(() => _idOfInteractionRepliedTo = null);
       },
     );
   }

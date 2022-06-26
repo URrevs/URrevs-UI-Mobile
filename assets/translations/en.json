@@ -248,5 +248,6 @@
   "youHaveEarned": "You have earned",
   "point": "point",
   "youHaveAlreadyReviewedThisPhoneBefore": "You have already reviewed this phone before",
-  "theEnteredReferralCodeIsInvalid": "The entered referral code is invalid."
+  "theEnteredReferralCodeIsInvalid": "The entered referral code is invalid.",
+  "writeAReply": "Write a reply"
 }

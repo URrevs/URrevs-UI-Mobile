@@ -111,7 +111,7 @@ class CodegenLoader extends AssetLoader{
   "short_billions": "مليار",
   "setAsOwnedPhone": "تعيين كمنتج ممتلك",
   "generalCompanyRating": "التقييم العام للشركة",
-  "writeAComment": "اكتب تعليق",
+  "writeAComment": "اكتب تعليقاً",
   "writeAnAnswer": "اكتب إجابة",
   "shareInvitationLink": "مشاركة رابط الدعوة",
   "updateProducts": "تحديث المنتجات",
@@ -264,7 +264,8 @@ class CodegenLoader extends AssetLoader{
   "youHaveEarned": "لقد حصلت على",
   "point": "نقطة",
   "youHaveAlreadyReviewedThisPhoneBefore": "لقد قمت بالفعل بمراجعة هذا الهاتف من قبل",
-  "theEnteredReferralCodeIsInvalid": "كود الدعوة الذي تم إدخاله غير صالح"
+  "theEnteredReferralCodeIsInvalid": "كود الدعوة الذي تم إدخاله غير صالح",
+  "writeAReply": "اكتب رداً"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -516,7 +517,8 @@ static const Map<String,dynamic> en = {
   "youHaveEarned": "You have earned",
   "point": "point",
   "youHaveAlreadyReviewedThisPhoneBefore": "You have already reviewed this phone before",
-  "theEnteredReferralCodeIsInvalid": "The entered referral code is invalid."
+  "theEnteredReferralCodeIsInvalid": "The entered referral code is invalid.",
+  "writeAReply": "Write a reply"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

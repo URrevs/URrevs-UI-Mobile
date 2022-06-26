@@ -251,5 +251,6 @@ abstract class  LocaleKeys {
   static const point = 'point';
   static const youHaveAlreadyReviewedThisPhoneBefore = 'youHaveAlreadyReviewedThisPhoneBefore';
   static const theEnteredReferralCodeIsInvalid = 'theEnteredReferralCodeIsInvalid';
+  static const writeAReply = 'writeAReply';
 
 }

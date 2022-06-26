@@ -95,7 +95,7 @@
   "short_billions": "مليار",
   "setAsOwnedPhone": "تعيين كمنتج ممتلك",
   "generalCompanyRating": "التقييم العام للشركة",
-  "writeAComment": "اكتب تعليق",
+  "writeAComment": "اكتب تعليقاً",
   "writeAnAnswer": "اكتب إجابة",
   "shareInvitationLink": "مشاركة رابط الدعوة",
   "updateProducts": "تحديث المنتجات",
@@ -248,5 +248,6 @@
   "youHaveEarned": "لقد حصلت على",
   "point": "نقطة",
   "youHaveAlreadyReviewedThisPhoneBefore": "لقد قمت بالفعل بمراجعة هذا الهاتف من قبل",
-  "theEnteredReferralCodeIsInvalid": "كود الدعوة الذي تم إدخاله غير صالح"
+  "theEnteredReferralCodeIsInvalid": "كود الدعوة الذي تم إدخاله غير صالح",
+  "writeAReply": "اكتب رداً"
 }
