@@ -144,9 +144,10 @@ class _LeaderboardSubscreenState extends ConsumerState<LeaderboardSubscreen> {
           itemCount: 10,
           itemBuilder: (context, index) {
             final user = users[index];
-            Competition competition =
-                (competitionState as GetLatestCompetitionLoadedState)
-                    .competition;
+            Competition? competition;
+            if (competitionState is GetLatestCompetitionLoadedState) {
+              competition = competitionState.competition;
+            }
             return LeaderboardEntryData(
               onTap: () {
                 Navigator.of(context).pushNamed(
@@ -157,10 +158,11 @@ class _LeaderboardSubscreenState extends ConsumerState<LeaderboardSubscreen> {
               rank: index + 1,
               userImageUrl: user.picture,
               name: user.name,
-              isWinner: index + 1 <= competition.numWinners,
+              isWinner:
+                  competition != null && index + 1 <= competition.numWinners,
               starsCounter: user.points,
-              prizeName: competition.prize,
-              prizeImageUrl: competition.prizePic,
+              prizeName: competition?.prize,
+              prizeImageUrl: competition?.prizePic,
             );
           },
         ),
@@ -190,16 +192,18 @@ class _LeaderboardSubscreenState extends ConsumerState<LeaderboardSubscreen> {
     if (loadOrErr != null) return loadOrErr;
 
     final user = (myRankState as GetMyRankInCompetitionLoadedState).user;
-    Competition competition =
-        (competitionState as GetLatestCompetitionLoadedState).competition;
+    Competition? competition;
+    if (competitionState is GetLatestCompetitionLoadedState) {
+      competition = competitionState.competition;
+    }
     return LeaderboardEntryTile(
       name: user.name,
-      isWinner: user.rank! <= competition.numWinners,
+      isWinner: competition != null && user.rank! <= competition.numWinners,
       userImageUrl: user.picture,
       rank: user.rank!,
       starsCounter: user.points,
-      prizeName: competition.prize,
-      prizeImageUrl: competition.prizePic,
+      prizeName: competition?.prize,
+      prizeImageUrl: competition?.prizePic,
     );
   }
 

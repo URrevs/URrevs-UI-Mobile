@@ -41,8 +41,8 @@ class DatePickerField extends StatelessWidget {
         if (!isMonthDatePicker) {
           showDatePicker(
                   context: context,
-                  initialDate: DateTime.now().add(Duration(days: 0)),
-                  firstDate: DateTime.now().add(Duration(days: 0)),
+                  initialDate: DateTime.now().add(Duration(days: 1)),
+                  firstDate: DateTime.now().add(Duration(days: 1)),
                   lastDate: DateTime(2222))
               .then((date) {
             if (date != null) {

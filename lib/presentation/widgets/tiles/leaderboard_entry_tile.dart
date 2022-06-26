@@ -26,8 +26,8 @@ class LeaderboardEntryTile extends StatelessWidget {
   final String? userImageUrl;
   final int rank;
   final int starsCounter;
-  final String prizeName;
-  final String prizeImageUrl;
+  final String? prizeName;
+  final String? prizeImageUrl;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -68,8 +68,8 @@ class LeaderboardEntryData extends StatelessWidget {
   final bool isWinner;
   final int starsCounter;
   final VoidCallback? onTap;
-  final String prizeName;
-  final String prizeImageUrl;
+  final String? prizeName;
+  final String? prizeImageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -121,8 +121,8 @@ class LeaderboardEntryData extends StatelessWidget {
                         context: context,
                         builder: (BuildContext context) {
                           return PrizePhotoDialog(
-                            prizeName: prizeName,
-                            imageUrl: prizeImageUrl,
+                            prizeName: prizeName!,
+                            imageUrl: prizeImageUrl!,
                           );
                         },
                       );
