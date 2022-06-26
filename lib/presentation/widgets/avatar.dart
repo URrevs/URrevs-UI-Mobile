@@ -9,6 +9,7 @@ class Avatar extends StatelessWidget {
     Key? key,
     required this.imageUrl,
     required this.radius,
+    this.placeholder = Icons.account_circle,
     this.onTap,
   }) : super(key: key);
 
@@ -19,6 +20,8 @@ class Avatar extends StatelessWidget {
   final double radius;
 
   final VoidCallback? onTap;
+
+  final IconData? placeholder;
 
   String _imageWithHeight(String imageUrl) {
     if (imageUrl.contains('https://graph.facebook.com')) {
@@ -56,7 +59,7 @@ class Avatar extends StatelessWidget {
                     },
                   )
                 : Icon(
-                    Icons.account_circle,
+                    placeholder,
                     color: ColorManager.grey,
                     size: radius * 2,
                   ),

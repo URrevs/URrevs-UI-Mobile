@@ -63,7 +63,11 @@ class ItemTile extends StatelessWidget {
               : null,
           leading: iconData != null
               ? Icon(iconData, size: 40.sp)
-              : Avatar(imageUrl: imageUrl, radius: AppRadius.companyLogo),
+              : Avatar(
+                  imageUrl: imageUrl,
+                  radius: AppRadius.companyLogo,
+                  placeholder: Icons.smartphone,
+                ),
           trailing: trailing,
         ),
         if (showDivider)

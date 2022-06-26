@@ -28,7 +28,7 @@ class CompanyLogoTile extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Avatar(imageUrl: imageUrl, radius: 25.r),
+          Avatar(imageUrl: imageUrl, radius: 25.r, placeholder: Icons.business),
           Container(
             alignment: Alignment.bottomCenter,
             child: Text(
