@@ -147,6 +147,7 @@ class _OwnedProductsScreenState extends ConsumerState<OwnedProductsScreen>
             title: LocaleKeys.ownedProducts.tr(),
           ),
         ),
+        hideFab: widget.screenArgs.userId != null,
         onPressingFab: () {},
         fabLabel: LocaleKeys.addOwnedProduct.tr(),
         fabIcon: Icon(FontAwesomeIcons.plus, size: AppSize.s16),

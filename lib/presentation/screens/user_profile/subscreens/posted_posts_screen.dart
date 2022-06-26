@@ -91,6 +91,7 @@ class _PostedReviewsScreenState extends ConsumerState<PostedPostsScreen> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWithHidingFab(
+      hideFab: widget.screenArgs.userId != null,
       onPressingFab: () {},
       fabLabel: fabLabel,
       fabIcon: Icon(FontAwesomeIcons.plus, size: AppSize.s16),
