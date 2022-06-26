@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:urrevs_ui_mobile/domain/models/post.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
@@ -63,11 +64,16 @@ class _PostsListOnCertainTargetState
       ),
     ]);
     if (errWidget != null) return errWidget;
-    return PostsList(
-      controller: _controller,
-      getPostsListProviderParams: _providerParams,
-      getPosts: _getPostsOnCertainTarget,
-      isSliver: widget.isSliver,
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(child: SizedBox(height: 10.h)),
+        PostsList(
+          controller: _controller,
+          getPostsListProviderParams: _providerParams,
+          getPosts: _getPostsOnCertainTarget,
+          isSliver: widget.isSliver,
+        ),
+      ],
     );
   }
 }

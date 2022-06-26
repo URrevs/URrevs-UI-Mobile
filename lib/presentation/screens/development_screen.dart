@@ -80,10 +80,10 @@ class DevelopmentScreen extends ConsumerStatefulWidget {
   ConsumerState<DevelopmentScreen> createState() => _DevelopmentScreenState();
 }
 
-List<Item> items = [
-  Item(itemName: 'Xiaomi Redmi Note 6', type: ItemDescription.smartphone),
-  Item(itemName: 'Xiaomi', type: ItemDescription.company),
-];
+// List<Item> items = [
+//   Item(itemName: 'Xiaomi Redmi Note 6', type: ItemDescription.smartphone),
+//   Item(itemName: 'Xiaomi', type: ItemDescription.company),
+// ];
 
 class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
   bool isSelected = false;

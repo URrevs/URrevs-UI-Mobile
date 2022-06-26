@@ -51,10 +51,8 @@ class _QuestionsAboutMyProductsScreenState
         );
   }
 
-
   @override
   Widget build(BuildContext context) {
-    
     return ScaffoldWithHidingFab(
       appBar: AppBars.appBarWithTitle(
         context: context,
@@ -78,11 +76,15 @@ class _QuestionsAboutMyProductsScreenState
       ),
     ]);
     if (errWidget != null) return errWidget;
-    return PostsList(
-      controller: _controller,
-      getPostsListProviderParams: _providerParams,
-      getPosts: _getQuestionsAboutMyOwnedPhones,
-      isSliver: false,
+    return CustomScrollView(
+      slivers: [
+        PostsList(
+          controller: _controller,
+          getPostsListProviderParams: _providerParams,
+          getPosts: _getQuestionsAboutMyOwnedPhones,
+          isSliver: true,
+        ),
+      ],
     );
   }
 }

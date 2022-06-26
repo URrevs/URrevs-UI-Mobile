@@ -13,7 +13,6 @@ class HomeSubscreen extends ConsumerStatefulWidget {
     Key? key,
   }) : super(key: key);
 
-
   @override
   ConsumerState<HomeSubscreen> createState() => _HomeSubscreenState();
 }
@@ -49,11 +48,15 @@ class _HomeSubscreenState extends ConsumerState<HomeSubscreen> {
       ),
     ]);
     if (errWidget != null) return errWidget;
-    return PostsList(
-      controller: _controller,
-      getPostsListProviderParams: _providerParams,
-      getPosts: _getPostsForHomeScreen,
-      isSliver: false,
+    return CustomScrollView(
+      slivers: [
+        PostsList(
+          controller: _controller,
+          getPostsListProviderParams: _providerParams,
+          getPosts: _getPostsForHomeScreen,
+          isSliver: true,
+        ),
+      ],
     );
   }
 }

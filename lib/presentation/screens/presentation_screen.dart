@@ -74,10 +74,10 @@ class PresentationScreen extends ConsumerStatefulWidget {
   ConsumerState<PresentationScreen> createState() => _PresentationScreenState();
 }
 
-List<Item> items = [
-  Item(itemName: 'Xiaomi Redmi Note 6', type: ItemDescription.smartphone),
-  Item(itemName: 'Xiaomi', type: ItemDescription.company),
-];
+// List<Item> items = [
+//   Item(itemName: 'Xiaomi Redmi Note 6', type: ItemDescription.smartphone),
+//   Item(itemName: 'Xiaomi', type: ItemDescription.company),
+// ];
 
 class _PresentationScreenState extends ConsumerState<PresentationScreen> {
   bool isSelected = false;

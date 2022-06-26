@@ -143,6 +143,7 @@ class _UpdateProductsScreenState extends ConsumerState<UpdateProductsScreen> {
             items: [
               for (Phone phone in loadedState.phones)
                 Item(
+                  itemId: phone.id,
                   itemName: phone.name,
                   type: ItemDescription.smartphone,
                 ),
@@ -154,6 +155,7 @@ class _UpdateProductsScreenState extends ConsumerState<UpdateProductsScreen> {
             items: [
               for (Company company in loadedState.companies)
                 Item(
+                  itemId: company.id,
                   itemName: company.name,
                   type: ItemDescription.company,
                 ),

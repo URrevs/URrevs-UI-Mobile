@@ -6,6 +6,8 @@ import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/company_profile/company_profile_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/product_profile/product_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/empty_widgets/empty_updated_companies.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/empty_widgets/empty_updated_products.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/item_tile.dart';
@@ -16,20 +18,25 @@ enum ItemDescription { smartphone, company }
 
 ///A class that represents a tile that contains an item.
 class Item {
+  final String itemId;
   final String itemName;
   final ItemDescription type;
 
-  Item({required this.itemName, required this.type});
+  Item({
+    required this.itemId,
+    required this.itemName,
+    required this.type,
+  });
 }
 
 ///Expanable list tile that contains newely updated items, it may contain a products or companies.
 class UpdatedListTile extends StatefulWidget {
-  const UpdatedListTile(
-      {Key? key,
-      required this.title,
-      required this.items,
-      required this.listType})
-      : super(key: key);
+  const UpdatedListTile({
+    Key? key,
+    required this.title,
+    required this.items,
+    required this.listType,
+  }) : super(key: key);
 
   ///The title of the updated list tile.
   final String title;
@@ -126,12 +133,32 @@ class _UpdatedListTileState extends State<UpdatedListTile> {
               : 4 * (90.h),
           child: ListView.builder(
             itemBuilder: (context, index) {
+              Item item = widget.items[index];
               return ItemTile(
-                title: widget.items[index].itemName,
-                subtitle: getItemDescription(widget.items[index].type),
-                iconData: chooseSuitableItemIcon(widget.items[index].type),
+                title: item.itemName,
+                subtitle: getItemDescription(item.type),
+                iconData: chooseSuitableItemIcon(item.type),
                 showDivider: true,
-                onTap: () {},
+                onTap: () {
+                  if (item.type == ItemDescription.smartphone) {
+                    Navigator.of(context).pushNamed(
+                      ProductProfileScreen.routeName,
+                      arguments: ProductProfileScreenArgs(
+                        phoneId: item.itemId,
+                        phoneName: item.itemName,
+                      ),
+                    );
+                  } else {
+                    // company
+                    Navigator.of(context).pushNamed(
+                      CompanyProfileScreen.routeName,
+                      arguments: CompanyProfileScreenArgs(
+                        companyId: item.itemId,
+                        companyName: item.itemName,
+                      ),
+                    );
+                  }
+                },
               );
             },
             itemCount: widget.items.length,

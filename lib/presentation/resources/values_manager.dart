@@ -14,6 +14,8 @@ class AppEdgeInsets{
   static EdgeInsets get screenPadding => EdgeInsets.only(left: 8.w, right: 8.w, top: 12.h, bottom: 70.h);
   static EdgeInsets get screenWithoutFabPadding =>
       EdgeInsets.only(left: 8.w, right: 8.w, top: 12.h, bottom: 12.h);
+  static EdgeInsets get screenWithoutFabHorizontalPadding =>
+      EdgeInsets.only(left: 8.w, right: 8.w);
 }
 class AppWidth {
   static double get w1 => 1.w;

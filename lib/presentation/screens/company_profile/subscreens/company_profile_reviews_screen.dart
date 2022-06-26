@@ -98,9 +98,10 @@ class _CompanyProfileReviewsSubscreenState
     ]);
     if (errWidget != null) return errWidget;
     return Padding(
-      padding: AppEdgeInsets.screenWithoutFabPadding,
+      padding: AppEdgeInsets.screenWithoutFabHorizontalPadding,
       child: CustomScrollView(
         slivers: [
+          SliverToBoxAdapter(child: SizedBox(height: 10.h)),
           SliverToBoxAdapter(
             child: _buildCompanyOverview(),
           ),
