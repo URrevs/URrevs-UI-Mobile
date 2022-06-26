@@ -83,11 +83,7 @@ class Repository {
       GetIt.I<Dio>().options.headers[HttpHeaders.authorizationHeader] =
           'bearer ${response.token}';
 
-      final profileRes = await _remoteDataSource.getMyProfile();
-      return AuthReturnedVals(
-        user: profileRes.userSubResponse.userModel,
-        refCode: profileRes.userSubResponse.refCode,
-      );
+      return response.authReturnedVals;
     });
   }
 
@@ -116,11 +112,7 @@ class Repository {
       GetIt.I<Dio>().options.headers[HttpHeaders.authorizationHeader] =
           'bearer ${response.token}';
 
-      final profileRes = await _remoteDataSource.getMyProfile();
-      return AuthReturnedVals(
-        user: profileRes.userSubResponse.userModel,
-        refCode: profileRes.userSubResponse.refCode,
-      );
+      return response.authReturnedVals;
     });
   }
 
@@ -146,11 +138,7 @@ class Repository {
       GetIt.I<Dio>().options.headers[HttpHeaders.authorizationHeader] =
           'bearer ${response.token}';
 
-      final profileRes = await _remoteDataSource.getMyProfile();
-      return AuthReturnedVals(
-        user: profileRes.userSubResponse.userModel,
-        refCode: profileRes.userSubResponse.refCode,
-      );
+      return response.authReturnedVals;
     });
   }
 
@@ -159,7 +147,7 @@ class Repository {
       await _remoteDataSource.givePointsToUser();
     });
   }
-  
+
   Future<Either<Failure, void>> logoutFromAllDevices() async {
     return _tryAndCatch(() async {
       await _remoteDataSource.logoutFromAllDevices();

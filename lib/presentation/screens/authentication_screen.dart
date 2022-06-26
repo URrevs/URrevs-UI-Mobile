@@ -118,6 +118,7 @@ class _AuthenticationScreenState extends ConsumerState<AuthenticationScreen> {
     // login user automatically
     SchedulerBinding.instance!.addPostFrameCallback((timeStamp) {
       if (FirebaseAuth.instance.currentUser != null) {
+        print('sent login to backend request');
         ref.read(authenticationProvider.notifier).loginToOurBackend();
       }
     });

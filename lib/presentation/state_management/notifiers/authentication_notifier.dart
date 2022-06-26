@@ -20,6 +20,7 @@ class AuthenticationNotifier extends StateNotifier<AuthenticationState> {
       return state = AuthenticationLoadedState(
         user: returnedVals.user,
         refCode: returnedVals.refCode,
+        admin: returnedVals.admin,
       );
     });
   }
@@ -36,6 +37,7 @@ class AuthenticationNotifier extends StateNotifier<AuthenticationState> {
       return state = AuthenticationLoadedState(
         user: returnedVals.user,
         refCode: returnedVals.refCode,
+        admin: returnedVals.admin,
       );
     });
   }
@@ -52,6 +54,7 @@ class AuthenticationNotifier extends StateNotifier<AuthenticationState> {
       return state = AuthenticationLoadedState(
         user: returnedVals.user,
         refCode: returnedVals.refCode,
+        admin: returnedVals.admin,
       );
     });
   }

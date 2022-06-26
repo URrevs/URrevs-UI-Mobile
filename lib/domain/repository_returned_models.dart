@@ -13,9 +13,13 @@ class AddAnswerReturnedVals {
 class AuthReturnedVals {
   User user;
   String refCode;
+  int exp;
+  bool admin;
   AuthReturnedVals({
     required this.user,
     required this.refCode,
+    required this.exp,
+    required this.admin,
   });
 }
 

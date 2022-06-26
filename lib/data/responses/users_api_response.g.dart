@@ -12,6 +12,10 @@ AuthenticationResponse _$AuthenticationResponseFromJson(
       success: json['success'] as bool,
       status: json['status'] as String,
       token: json['token'] as String,
+      exp: json['exp'] as int,
+      admin: json['admin'] as bool,
+      userSubResponse:
+          UserSubResponse.fromJson(json['profile'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$AuthenticationResponseToJson(
@@ -20,6 +24,9 @@ Map<String, dynamic> _$AuthenticationResponseToJson(
       'success': instance.success,
       'status': instance.status,
       'token': instance.token,
+      'exp': instance.exp,
+      'admin': instance.admin,
+      'profile': instance.userSubResponse,
     };
 
 GetMyProfileResponse _$GetMyProfileResponseFromJson(

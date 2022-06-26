@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:urrevs_ui_mobile/data/responses/base_response.dart';
 import 'package:urrevs_ui_mobile/data/responses/sub_responses.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone.dart';
+import 'package:urrevs_ui_mobile/domain/repository_returned_models.dart';
 
 part 'users_api_response.g.dart';
 
@@ -10,11 +11,27 @@ part 'users_api_response.g.dart';
 class AuthenticationResponse extends BaseResponse {
   String status;
   String token;
-  AuthenticationResponse({
-    required bool success,
-    required this.status,
-    required this.token,
-  }) : super(success: success);
+  int exp;
+  bool admin;
+  @JsonKey(name: 'profile')
+  UserSubResponse userSubResponse;
+  AuthenticationResponse(
+      {required bool success,
+      required this.status,
+      required this.token,
+      required this.exp,
+      required this.admin,
+      required this.userSubResponse})
+      : super(success: success);
+
+  AuthReturnedVals get authReturnedVals {
+    return AuthReturnedVals(
+      user: userSubResponse.userModel,
+      refCode: userSubResponse.refCode,
+      exp: exp,
+      admin: admin,
+    );
+  }
 
   factory AuthenticationResponse.fromJson(Map<String, Object?> json) =>
       _$AuthenticationResponseFromJson(json);

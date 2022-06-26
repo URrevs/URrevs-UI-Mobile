@@ -23,6 +23,7 @@ import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/po
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/posted_posts_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/user_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/authentication_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_my_user_profile_state.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
@@ -134,6 +135,7 @@ class _MenuSubscreenState extends ConsumerState<MenuSubscreen> {
   }
 
   List<Widget> myProfileListItems() {
+    final state = ref.watch(authenticationProvider);
     return [
       ItemTile(
         title: LocaleKeys.myReviews.tr(),
@@ -166,14 +168,14 @@ class _MenuSubscreenState extends ConsumerState<MenuSubscreen> {
         },
       ),
       _buildRefCodeTile(),
-      //TODO: if not admin it won't be visible.
-      ItemTile(
-        title: LocaleKeys.adminPanel.tr(),
-        iconData: Icons.admin_panel_settings_outlined,
-        onTap: () {
-          Navigator.of(context).pushNamed(AdminPanelScreen.routeName);
-        },
-      ),
+      if (state is AuthenticationLoadedState && state.admin)
+        ItemTile(
+          title: LocaleKeys.adminPanel.tr(),
+          iconData: Icons.admin_panel_settings_outlined,
+          onTap: () {
+            Navigator.of(context).pushNamed(AdminPanelScreen.routeName);
+          },
+        ),
       ItemTile(
         title: LocaleKeys.settings.tr(),
         iconData: Icons.settings_outlined,
