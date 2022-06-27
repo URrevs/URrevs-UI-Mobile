@@ -123,6 +123,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
               searchCtl: _controller,
               searchProviderParams: _searchProviderParams,
               hasErrorMsg: false,
+              requestFoucus: true,
             ),
             16.verticalSpace,
             _buildRecentSearches(),

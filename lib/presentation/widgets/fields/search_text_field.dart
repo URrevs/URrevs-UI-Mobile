@@ -28,6 +28,7 @@ class SearchTextField extends ConsumerStatefulWidget {
     this.hasErrorMsg = false,
     this.readOnly = false,
     this.onClear,
+    this.requestFoucus = false,
   }) : super(key: key);
 
   final TextEditingController searchCtl;
@@ -40,6 +41,7 @@ class SearchTextField extends ConsumerStatefulWidget {
   final VoidCallback? onClear;
   final SearchResult? chosenSearchResult;
   final bool checkChosenSearchResult;
+  final bool requestFoucus;
 
   @override
   ConsumerState<SearchTextField> createState() => _SearchTextFieldState();
@@ -49,6 +51,7 @@ class _SearchTextFieldState extends ConsumerState<SearchTextField> {
   Timer? _timer;
   late final TextEditingController _controller = widget.searchCtl;
   late final SearchProviderParams _providerParams = widget.searchProviderParams;
+  final FocusNode _focusNode = FocusNode();
 
   void _search() {
     ref.read(searchProvider(_providerParams).notifier).search(_controller.text);
@@ -96,6 +99,14 @@ class _SearchTextFieldState extends ConsumerState<SearchTextField> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    if (widget.requestFoucus) {
+      _focusNode.requestFocus();
+    }
+  }
+
+  @override
   void dispose() {
     _timer?.cancel();
     super.dispose();
@@ -107,6 +118,7 @@ class _SearchTextFieldState extends ConsumerState<SearchTextField> {
       key: widget.key,
       cursorColor: ColorManager.black,
       controller: widget.searchCtl,
+      focusNode: _focusNode,
       readOnly: widget.readOnly,
       style: TextStyleManager.s18w500.copyWith(
         color: ColorManager.black,
