@@ -251,6 +251,7 @@ class _PostingReviewSubscreenState
             child: SingleChildScrollView(
               padding: AppEdgeInsets.screenPadding.copyWith(bottom: 10.h),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(LocaleKeys.chooseProduct.tr() + ':',
                       style: TextStyleManager.s18w500),

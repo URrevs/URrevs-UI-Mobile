@@ -153,10 +153,15 @@ class AppBars {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Text(
-              title,
-              style:
-                  TextStyleManager.s20w700.copyWith(color: ColorManager.black),
+            SizedBox(
+              width: 300.w,
+              child: Text(
+                title,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.left,
+                style: TextStyleManager.s20w700
+                    .copyWith(color: ColorManager.black),
+              ),
             ),
           ],
         ),
@@ -199,10 +204,15 @@ class AppBars {
                 top: 10.h,
                 right: !context.isArabic ? 15.w : 0,
                 left: !context.isArabic ? 0 : 15.w),
-            child: Text(
-              text,
-              style:
-                  TextStyleManager.s20w700.copyWith(color: ColorManager.black),
+            child: SizedBox(
+              width: 240.w,
+              child: Text(
+                text,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.left,
+                style: TextStyleManager.s20w700
+                    .copyWith(color: ColorManager.black),
+              ),
             ),
           )
         ],
@@ -244,15 +254,20 @@ class AppBars {
           ).reversed.toList(),
         ),
         actions: [
-          Padding(
-            padding: EdgeInsets.only(
-                top: 10.h,
-                right: !context.isArabic ? 15.w : 0,
-                left: !context.isArabic ? 0 : 15.w),
-            child: Text(
-              text,
-              style:
-                  TextStyleManager.s20w700.copyWith(color: ColorManager.black),
+          SizedBox(
+            width: 240.w,
+            child: Padding(
+              padding: EdgeInsets.only(
+                  top: 10.h,
+                  right: !context.isArabic ? 15.w : 0,
+                  left: !context.isArabic ? 0 : 15.w),
+              child: Text(
+                text,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.left,
+                style: TextStyleManager.s20w700
+                    .copyWith(color: ColorManager.black),
+              ),
             ),
           )
         ],
