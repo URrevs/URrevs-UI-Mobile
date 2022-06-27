@@ -15,7 +15,6 @@ class CompanyProfileQASubscreen extends StatelessWidget {
       targetId: companyId,
       targetType: TargetType.company,
       postContentType: PostContentType.question,
-      isSliver: false,
     );
   }
 }

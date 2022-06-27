@@ -15,7 +15,6 @@ class ProductProfileQASubscreen extends StatelessWidget {
       targetId: phoneId,
       targetType: TargetType.phone,
       postContentType: PostContentType.question,
-      isSliver: false,
     );
   }
 }

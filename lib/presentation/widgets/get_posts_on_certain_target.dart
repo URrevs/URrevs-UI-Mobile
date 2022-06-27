@@ -15,13 +15,11 @@ class PostsListOnCertainTarget extends ConsumerStatefulWidget {
     required this.targetId,
     required this.targetType,
     required this.postContentType,
-    required this.isSliver,
   }) : super(key: key);
 
   final String targetId;
   final TargetType targetType;
   final PostContentType postContentType;
-  final bool isSliver;
 
   @override
   ConsumerState<PostsListOnCertainTarget> createState() =>
@@ -66,12 +64,11 @@ class _PostsListOnCertainTargetState
     if (errWidget != null) return errWidget;
     return CustomScrollView(
       slivers: [
-        SliverToBoxAdapter(child: SizedBox(height: 10.h)),
         PostsList(
           controller: _controller,
           getPostsListProviderParams: _providerParams,
           getPosts: _getPostsOnCertainTarget,
-          isSliver: widget.isSliver,
+          isSliver: true,
         ),
       ],
     );

@@ -15,7 +15,6 @@ class ProductProfileReviewsSubscreen extends StatelessWidget {
       targetId: phoneId,
       targetType: TargetType.phone,
       postContentType: PostContentType.review,
-      isSliver: false,
     );
   }
 }
