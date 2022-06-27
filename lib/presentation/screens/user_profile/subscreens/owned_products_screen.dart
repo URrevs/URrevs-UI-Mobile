@@ -8,10 +8,12 @@ import 'package:urrevs_ui_mobile/app/app.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
 
 import 'package:urrevs_ui_mobile/domain/models/phone.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/authentication_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/bottom_navigation_bar_container_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/posting_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/product_profile/product_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/user_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
@@ -148,7 +150,14 @@ class _OwnedProductsScreenState extends ConsumerState<OwnedProductsScreen>
           ),
         ),
         hideFab: widget.screenArgs.userId != null,
-        onPressingFab: () {},
+        onPressingFab: () {
+          Navigator.of(context).pushNamed(
+            PostingScreen.routeName,
+            arguments: PostingScreenArgs(
+              postContentType: PostContentType.review,
+            ),
+          );
+        },
         fabLabel: LocaleKeys.addOwnedProduct.tr(),
         fabIcon: Icon(FontAwesomeIcons.plus, size: AppSize.s16),
         body: GestureDetector(

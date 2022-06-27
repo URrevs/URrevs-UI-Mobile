@@ -337,6 +337,7 @@ class PhoneStatsSubResponse {
   num camera;
   num callQuality;
   num battery;
+  bool owned;
 
   PhoneStatsSubResponse({
     required this.views,
@@ -348,6 +349,7 @@ class PhoneStatsSubResponse {
     required this.camera,
     required this.callQuality,
     required this.battery,
+    required this.owned,
   });
 
   PhoneStats get phoneStatsModel => PhoneStats(
@@ -360,6 +362,7 @@ class PhoneStatsSubResponse {
         camera: camera.toInt(),
         callQuality: callQuality.toInt(),
         battery: battery.toInt(),
+        owned: owned,
       );
 
   factory PhoneStatsSubResponse.fromJson(Map<String, Object?> json) =>

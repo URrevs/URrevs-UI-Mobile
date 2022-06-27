@@ -13,6 +13,7 @@ import 'package:urrevs_ui_mobile/presentation/screens/company_profile/company_pr
 import 'package:urrevs_ui_mobile/presentation/screens/comparison_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/development_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_post_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/posting_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/presentation_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/product_profile/product_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/search_screen.dart';
@@ -126,6 +127,12 @@ class RouteGenerator {
       case SearchScreen.routeName:
         return MaterialPageRoute(
           builder: (_) => SearchScreen(),
+        );
+      case PostingScreen.routeName:
+        PostingScreenArgs screenArgs =
+            routeSettings.arguments as PostingScreenArgs;
+        return MaterialPageRoute(
+          builder: (_) => PostingScreen(screenArgs: screenArgs),
         );
       default:
         return unDefinedRoute(routeSettings.name);

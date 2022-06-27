@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/app/extensions.dart';
 import 'package:urrevs_ui_mobile/data/requests/reviews_api_requests.dart';
 import 'package:urrevs_ui_mobile/domain/models/company.dart';
+import 'package:urrevs_ui_mobile/domain/models/phone.dart';
 import 'package:urrevs_ui_mobile/domain/models/search_result.dart';
 import 'package:urrevs_ui_mobile/presentation/presentation_models/posting_review_model.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
@@ -46,9 +47,11 @@ class PostingReviewSubscreen extends ConsumerStatefulWidget {
   const PostingReviewSubscreen({
     Key? key,
     required this.refCode,
+    this.phone,
   }) : super(key: key);
 
   final String? refCode;
+  final Phone? phone;
 
   @override
   ConsumerState<PostingReviewSubscreen> createState() =>
@@ -115,6 +118,13 @@ class _PostingReviewSubscreenState
         }
       });
     }
+
+    SchedulerBinding.instance!.addPostFrameCallback((timeStamp) {
+      if (widget.phone != null) {
+        _chooseSearchResult(widget.phone!.toSearchResult);
+      }
+    });
+
     productNameController =
         TextEditingController(text: postingReviewModel.productName);
     // NOTE: I am not sure about this controller.

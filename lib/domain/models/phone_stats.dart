@@ -10,6 +10,7 @@ class PhoneStats extends Equatable {
   final int camera;
   final int callQuality;
   final int battery;
+  final bool owned;
   const PhoneStats({
     required this.views,
     required this.generalRating,
@@ -20,6 +21,7 @@ class PhoneStats extends Equatable {
     required this.camera,
     required this.callQuality,
     required this.battery,
+    required this.owned,
   });
 
   @override

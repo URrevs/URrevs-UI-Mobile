@@ -196,16 +196,16 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
           SizedBox(height: 20),
           StarsCounter(percentage: 0.5),
           SizedBox(height: 20),
-          RatingOverviewCard(
-            productName: 'Nokia 7 Plus',
-            scores: DummyDataManager.productOverviewScores,
-            generalProductRating:
-                DummyDataManager.randomCircularIndicatorDouble,
-            generalCompanyRating:
-                DummyDataManager.randomCircularIndicatorDouble,
-            viewsCounter: DummyDataManager.randomInt,
-            isProduct: true,
-          ),
+          // RatingOverviewCard(
+          //   productName: 'Nokia 7 Plus',
+          //   scores: DummyDataManager.productOverviewScores,
+          //   generalProductRating:
+          //       DummyDataManager.randomCircularIndicatorDouble,
+          //   generalCompanyRating:
+          //       DummyDataManager.randomCircularIndicatorDouble,
+          //   viewsCounter: DummyDataManager.randomInt,
+          //   isProduct: true,
+          // ),
           AuthButton(
               text: LocaleKeys.googleAuth.tr(),
               imagePath: SvgAssets.googleLogo,
@@ -242,16 +242,16 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
           SizedBox(height: 20),
 
           SizedBox(height: 20),
-          RatingOverviewCard(
-            productName: 'Nokia',
-            scores: DummyDataManager.productOverviewScores,
-            generalProductRating:
-                DummyDataManager.randomCircularIndicatorDouble,
-            generalCompanyRating:
-                DummyDataManager.randomCircularIndicatorDouble,
-            viewsCounter: DummyDataManager.randomInt,
-            isProduct: false,
-          ),
+          // RatingOverviewCard(
+          //   productName: 'Nokia',
+          //   scores: DummyDataManager.productOverviewScores,
+          //   generalProductRating:
+          //       DummyDataManager.randomCircularIndicatorDouble,
+          //   generalCompanyRating:
+          //       DummyDataManager.randomCircularIndicatorDouble,
+          //   viewsCounter: DummyDataManager.randomInt,
+          //   isProduct: false,
+          // ),
           SizedBox(height: 20),
           // UpdatedListTile(
           //   title: 'قائمة المنتجات المضافة حديثاً',

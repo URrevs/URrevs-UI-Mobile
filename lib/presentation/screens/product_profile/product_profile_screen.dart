@@ -4,9 +4,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:urrevs_ui_mobile/domain/models/phone.dart';
 
 import 'package:urrevs_ui_mobile/presentation/resources/assets_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/posting_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/product_profile/subscreens/product_profile_q_a_subscreen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/product_profile/subscreens/product_profile_reviews_subscreen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/product_profile/subscreens/product_profile_specs_subscreen.dart';
@@ -71,7 +74,21 @@ class _ProductProfileScreenState extends ConsumerState<ProductProfileScreen>
   }
 
   VoidCallback get onPressingFab {
+    Phone phone = Phone(
+      id: widget.screenArgs.phoneId,
+      name: widget.screenArgs.phoneName,
+    );
     switch (_tabController.index) {
+      case 0: //reviews
+        return () {
+          Navigator.of(context).pushNamed(
+            PostingScreen.routeName,
+            arguments: PostingScreenArgs(
+              postContentType: PostContentType.review,
+              phone: phone,
+            ),
+          );
+        };
       case 1:
         return () {
           showDialog(
@@ -82,9 +99,17 @@ class _ProductProfileScreenState extends ConsumerState<ProductProfileScreen>
             ),
           );
         };
-      case 2:
-        return () {};
-      default: // 0
+      case 2: //questions
+        return () {
+          Navigator.of(context).pushNamed(
+            PostingScreen.routeName,
+            arguments: PostingScreenArgs(
+              postContentType: PostContentType.question,
+              phone: phone,
+            ),
+          );
+        };
+      default:
         return () {};
     }
   }

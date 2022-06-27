@@ -9,6 +9,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/posting_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/no_glowing_scroll_behavior.dart';
@@ -88,11 +89,20 @@ class _PostedReviewsScreenState extends ConsumerState<PostedPostsScreen> {
         );
   }
 
+  void _onPressingFab() {
+    Navigator.of(context).pushNamed(
+      PostingScreen.routeName,
+      arguments: PostingScreenArgs(
+        postContentType: widget.screenArgs.postContentType,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ScaffoldWithHidingFab(
       hideFab: widget.screenArgs.userId != null,
-      onPressingFab: () {},
+      onPressingFab: _onPressingFab,
       fabLabel: fabLabel,
       fabIcon: Icon(FontAwesomeIcons.plus, size: AppSize.s16),
       appBar: AppBars.appBarWithTitle(

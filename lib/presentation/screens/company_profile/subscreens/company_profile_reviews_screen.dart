@@ -73,6 +73,7 @@ class _CompanyProfileReviewsSubscreenState
       generalCompanyRating: state.companyStats.rating,
       viewsCounter: state.companyStats.views,
       isProduct: false,
+
     );
   }
 

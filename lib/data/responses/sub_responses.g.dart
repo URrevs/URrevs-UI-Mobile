@@ -227,6 +227,7 @@ PhoneStatsSubResponse _$PhoneStatsSubResponseFromJson(
       camera: json['camera'] as num,
       callQuality: json['callQuality'] as num,
       battery: json['battery'] as num,
+      owned: json['owned'] as bool,
     );
 
 Map<String, dynamic> _$PhoneStatsSubResponseToJson(
@@ -241,6 +242,7 @@ Map<String, dynamic> _$PhoneStatsSubResponseToJson(
       'camera': instance.camera,
       'callQuality': instance.callQuality,
       'battery': instance.battery,
+      'owned': instance.owned,
     };
 
 CompanyStatsSubResponse _$CompanyStatsSubResponseFromJson(

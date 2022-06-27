@@ -1,11 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:urrevs_ui_mobile/domain/models/phone.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/app_elevations.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/posting_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/circular_rating_indicator.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body_rating_block.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
@@ -14,7 +17,9 @@ import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 class RatingOverviewCard extends StatelessWidget {
   const RatingOverviewCard({
     Key? key,
+    this.productId,
     required this.productName,
+    this.owned,
     this.generalProductRating,
     required this.generalCompanyRating,
     this.scores,
@@ -26,8 +31,13 @@ class RatingOverviewCard extends StatelessWidget {
         ),
         super(key: key);
 
+  /// The id of the product.
+  final String? productId;
+
   /// The name of the product.
   final String productName;
+
+  final bool? owned;
 
   /// The general scores of the product.
   final List<int>? scores;
@@ -53,6 +63,9 @@ class RatingOverviewCard extends StatelessWidget {
     LocaleKeys.callsQuality,
     LocaleKeys.battery,
   ];
+
+  bool get setAsOwnedDisabled => productId == null || (owned != null && owned!);
+
   @override
   Widget build(BuildContext context) {
     NumberFormat numberFormat =
@@ -119,7 +132,9 @@ class RatingOverviewCard extends StatelessWidget {
                   fit: BoxFit.scaleDown,
                   child: Container(
                     decoration: ShapeDecoration(
-                      color: ColorManager.blue.withOpacity(0.35),
+                      color: setAsOwnedDisabled
+                          ? ColorManager.grey.withOpacity(0.35)
+                          : ColorManager.blue.withOpacity(0.35),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16.r),
                       ),
@@ -127,19 +142,36 @@ class RatingOverviewCard extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(16.r),
                       child: TextButton(
-                          onPressed: () {},
+                          onPressed: setAsOwnedDisabled
+                              ? null
+                              : () {
+                                  Navigator.of(context).pushNamed(
+                                    PostingScreen.routeName,
+                                    arguments: PostingScreenArgs(
+                                      postContentType: PostContentType.review,
+                                      phone: Phone(
+                                        id: productId!,
+                                        name: productName,
+                                      ),
+                                    ),
+                                  );
+                                },
                           child: Row(
                             children: [
                               Icon(
                                 IconsManager.addToOwnedProducts,
                                 size: AppSize.s28,
-                                color: ColorManager.black,
+                                color: setAsOwnedDisabled
+                                    ? ColorManager.black.withOpacity(0.6)
+                                    : ColorManager.black,
                               ),
                               SizedBox(width: 5.w),
                               Text(
                                 LocaleKeys.setAsOwnedPhone.tr(),
-                                style: TextStyleManager.s14w400
-                                    .copyWith(color: ColorManager.black),
+                                style: TextStyleManager.s14w400.copyWith(
+                                    color: setAsOwnedDisabled
+                                        ? ColorManager.black.withOpacity(0.6)
+                                        : ColorManager.black),
                               ),
                             ],
                           )),

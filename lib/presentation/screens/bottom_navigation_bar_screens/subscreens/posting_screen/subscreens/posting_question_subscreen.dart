@@ -1,8 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/data/requests/questions_api_requests.dart';
+import 'package:urrevs_ui_mobile/domain/models/company.dart';
+import 'package:urrevs_ui_mobile/domain/models/phone.dart';
 import 'package:urrevs_ui_mobile/domain/models/search_result.dart';
 import 'package:urrevs_ui_mobile/presentation/presentation_models/posting_question_model.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
@@ -25,7 +28,14 @@ import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 import '../../../../../state_management/providers_parameters.dart';
 
 class PostingQuestionSubscreen extends ConsumerStatefulWidget {
-  const PostingQuestionSubscreen({Key? key}) : super(key: key);
+  const PostingQuestionSubscreen({
+    Key? key,
+    this.phone,
+    this.company,
+  }) : super(key: key);
+
+  final Phone? phone;
+  final Company? company;
 
   @override
   ConsumerState<PostingQuestionSubscreen> createState() =>
@@ -72,6 +82,13 @@ class _PostingQuestionSubscreenState
   @override
   void initState() {
     super.initState();
+    SchedulerBinding.instance!.addPostFrameCallback((timeStamp) {
+      if (widget.phone != null) {
+        _chooseSearchResult(widget.phone!.toSearchResult);
+      } else if (widget.company != null) {
+        _chooseSearchResult(widget.company!.toSearchResult);
+      }
+    });
   }
 
   @override

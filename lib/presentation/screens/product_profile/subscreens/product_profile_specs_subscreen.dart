@@ -306,14 +306,17 @@ class _ProductProfileSpecsSubscreenState
     // get phone name from specs provider
     final specsState =
         ref.watch(getPhoneSpecsProvider(_phoneSpecsProviderParams));
+    String? productId;
     late String phoneName;
     if (specsState is LoadingState ||
         specsState is InitialState ||
         specsState is ErrorState) {
       phoneName = '';
+      productId = null;
     } else {
       specsState as GetPhoneSpecsLoadedState;
       phoneName = specsState.specs.name;
+      productId = specsState.specs.id;
     }
     // show rating widget according to statistical info provider
     final state = ref
@@ -325,7 +328,9 @@ class _ProductProfileSpecsSubscreenState
     if (widget != null) return widget;
     state as GetPhoneStatisticalInfoLoadedState;
     return RatingOverviewCard(
+      productId: productId,
       productName: phoneName,
+      owned: state.info.owned,
       generalProductRating: state.info.generalRating.toDouble(),
       generalCompanyRating: state.info.generalRating.toDouble(),
       scores: [

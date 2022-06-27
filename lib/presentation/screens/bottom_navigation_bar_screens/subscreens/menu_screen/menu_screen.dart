@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
@@ -148,7 +149,13 @@ class _MenuSubscreenState extends ConsumerState<MenuSubscreen> {
         title: LocaleKeys.myQuestions.tr(),
         iconData: Icons.question_answer_outlined,
         onTap: () {
-          Navigator.of(context).pushNamed(PostedQuestionsScreen.routeName);
+          Navigator.of(context).pushNamed(
+            PostedPostsScreen.routeName,
+            arguments: PostedPostsScreenArgs(
+              userId: null,
+              postContentType: PostContentType.question,
+            ),
+          );
         },
       ),
       ItemTile(
