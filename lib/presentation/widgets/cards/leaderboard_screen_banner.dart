@@ -1,9 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/authentication_state.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/buttons/grad_button.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/buttons/txt_button.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/how_to_collect_points_dialog.dart';
@@ -11,11 +14,11 @@ import 'package:urrevs_ui_mobile/presentation/widgets/prompts/how_to_win_dialog.
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/invitation_code_and_link_dialog.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
-class LeaderboardScreenBanner extends StatelessWidget {
+class LeaderboardScreenBanner extends ConsumerWidget {
   const LeaderboardScreenBanner({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     return Container(
       decoration: ShapeDecoration(
         shape: RoundedRectangleBorder(
@@ -53,7 +56,8 @@ class LeaderboardScreenBanner extends StatelessWidget {
                       text: Text(
                         LocaleKeys.howToCollectPoints.tr(),
                         style: TextStyleManager.s14w700.copyWith(
-                          color: ColorManager.white,),
+                          color: ColorManager.white,
+                        ),
                       ),
                       icon: Icon(
                         IconsManager.howTowin,
@@ -74,7 +78,8 @@ class LeaderboardScreenBanner extends StatelessWidget {
                       text: Text(
                         LocaleKeys.inviteFriends.tr(),
                         style: TextStyleManager.s14w700.copyWith(
-                          color: ColorManager.white,),
+                          color: ColorManager.white,
+                        ),
                       ),
                       icon: Icon(
                         IconsManager.inviteFriends,
@@ -83,11 +88,13 @@ class LeaderboardScreenBanner extends StatelessWidget {
                       ),
                       reverseIcon: false,
                       onPressed: () {
+                        final state = ref.watch(authenticationProvider)
+                            as AuthenticationLoadedState;
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
                             return InvitationCodeDialog(
-                              invitationCode: 'UR1029',
+                              invitationCode: state.refCode,
                             );
                           },
                         );

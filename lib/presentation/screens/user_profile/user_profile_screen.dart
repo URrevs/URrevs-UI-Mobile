@@ -16,6 +16,7 @@ import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/po
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/posted_posts_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/authentication_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_my_user_profile_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_the_profile_of_another_user_state.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
@@ -23,6 +24,7 @@ import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/partial_error_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/profile_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/error_dialog.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/prompts/invitation_code_and_link_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/item_tile.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
@@ -60,11 +62,15 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
     VoidCallback? onTap;
     if (state is GetMyProfileLoadedState) {
       onTap = () {
+        final state =
+            ref.watch(authenticationProvider) as AuthenticationLoadedState;
         showDialog(
           context: context,
-          builder: (context) => Dialog(
-            child: Text(state.refCode),
-          ),
+          builder: (BuildContext context) {
+            return InvitationCodeDialog(
+              invitationCode: state.refCode,
+            );
+          },
         );
       };
     }

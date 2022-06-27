@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
@@ -7,13 +8,15 @@ import 'package:urrevs_ui_mobile/presentation/resources/font_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/authentication_state.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/buttons/grad_button.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/how_to_win_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/invitation_code_and_link_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/prize_photo_dialog.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
-class CompetitionBanner extends StatelessWidget {
+class CompetitionBanner extends ConsumerWidget {
   const CompetitionBanner({
     required this.numberOfRemainingdays,
     required this.prizeName,
@@ -30,7 +33,7 @@ class CompetitionBanner extends StatelessWidget {
   final String prizeUrl;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     return Container(
       decoration: ShapeDecoration(
         shape: RoundedRectangleBorder(
@@ -145,11 +148,13 @@ class CompetitionBanner extends StatelessWidget {
                       width: 50.w,
                       reverseIcon: false,
                       onPressed: () {
+                        final state = ref.watch(authenticationProvider)
+                            as AuthenticationLoadedState;
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
                             return InvitationCodeDialog(
-                              invitationCode: 'UR1029',
+                              invitationCode: state.refCode,
                             );
                           },
                         );
