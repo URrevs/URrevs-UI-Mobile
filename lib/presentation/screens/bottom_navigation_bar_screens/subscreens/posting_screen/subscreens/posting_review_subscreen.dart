@@ -12,6 +12,7 @@ import 'package:urrevs_ui_mobile/presentation/presentation_models/posting_review
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_post_screen.dart';
@@ -348,19 +349,10 @@ class _PostingReviewSubscreenState
                           style: TextStyleManager.s18w500),
                       IconButton(
                         padding: EdgeInsets.zero,
-                        icon: context.isArabic
-                            ? Transform(
-                                alignment: Alignment.center,
-                                transform: Matrix4.rotationY(math.pi),
-                                child: Icon(
-                                  IconsManager.help,
-                                  size: 30.sp,
-                                ),
-                              )
-                            : Icon(
-                                IconsManager.help,
-                                size: 30.sp,
-                              ),
+                        icon: Icon(
+                          IconsManager.help,
+                          size: 30.sp,
+                        ),
                         color: ColorManager.blue,
                         onPressed: () {
                           showDialog(
