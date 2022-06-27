@@ -593,10 +593,13 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
         child: TextField(
           controller: _controller,
           focusNode: focusNode,
-          style: TextStyleManager.s16w300,
+          style: TextStyleManager.s18w500.copyWith(color: ColorManager.black),
           enabled: !loading,
           decoration: InputDecoration(
             hintText: _hintText,
+            hintStyle: TextStyleManager.s16w300.copyWith(
+              color: ColorManager.black,
+            ),
             filled: true,
             fillColor: ColorManager.textFieldGrey,
             border: OutlineInputBorder(
