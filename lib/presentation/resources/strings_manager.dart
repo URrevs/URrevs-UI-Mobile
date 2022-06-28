@@ -15,4 +15,7 @@ class StringsManager {
       'Asus Zenfone Max Pro (M1) ZB601KL/ZB602K';
   static const String longestCompanyName = 'Sony Ericsson';
   static const String prizeImageLink = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVmqetlFGRGEri6eONcKzyUluyk5LGFNNDXA&usqp=CAU';
+  static const String webDomain = 'urrevstest.netlify.app';
+  static const String uriPrefix = 'https://urevs.page.link';
+  static const String packageName = 'com.example.urrevs_ui_mobile';
 }

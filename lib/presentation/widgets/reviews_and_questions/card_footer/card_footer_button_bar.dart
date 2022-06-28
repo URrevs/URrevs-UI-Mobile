@@ -6,9 +6,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/send_and_forget_requests.dart';
@@ -85,6 +87,63 @@ class _CardFooterButtonBarState extends ConsumerState<CardFooterButtonBar> {
     });
   }
 
+  String _getWebPath(PostType postType) {
+    switch (postType) {
+      case PostType.phoneReview:
+        return 'phone-review';
+      case PostType.companyReview:
+        return 'company-review';
+      case PostType.phoneQuestion:
+        return 'phone-question';
+      case PostType.companyQuestion:
+        return 'company-question';
+    }
+  }
+
+  void _sharePost() async {
+    Uri androidLink = Uri.https(
+      StringsManager.webDomain,
+      _getWebPath(widget.postType),
+      <String, String>{
+        'id': widget.postId,
+        'linkType': LinkType.post.name,
+        'postId': widget.postId,
+        'userId': widget.userId,
+        'postType': widget.postType.name,
+      },
+    );
+
+    Uri webLink = Uri.https(
+      StringsManager.webDomain,
+      _getWebPath(widget.postType),
+      <String, String>{'id': widget.postId},
+    );
+
+    final dynamicLinkParams = DynamicLinkParameters(
+      link: androidLink,
+      uriPrefix: StringsManager.uriPrefix,
+      androidParameters: AndroidParameters(
+        packageName: StringsManager.packageName,
+        fallbackUrl: webLink,
+      ),
+    );
+
+    final dynamicLink =
+        await FirebaseDynamicLinks.instance.buildShortLink(dynamicLinkParams);
+
+    final result = await Share.shareWithResult(dynamicLink.shortUrl.toString());
+    print(dynamicLink.shortUrl.toString());
+
+    if (result.status == ShareResultStatus.success) {
+      SendAndForgetRequests.increaseShareCount(
+        postId: widget.postId,
+        targetType: widget.postType.targetType,
+        postContentType: widget.postType.postContentType,
+      );
+      ref.read(postProvider(_postProviderParams).notifier).incrementShares();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     ref.addErrorListener(
@@ -115,38 +174,7 @@ class _CardFooterButtonBarState extends ConsumerState<CardFooterButtonBar> {
           child: CardFooterButton(
             icon: Icon(IconsManager.share, size: 24.sp),
             text: LocaleKeys.share.tr(),
-            onPressed: () async {
-              SendAndForgetRequests.increaseShareCount(
-                postId: widget.postId,
-                targetType: widget.postType.targetType,
-                postContentType: widget.postType.postContentType,
-              );
-              ref
-                  .read(postProvider(_postProviderParams).notifier)
-                  .incrementShares();
-              Uri uri = Uri.https('example.com', '', <String, String>{
-                'linkType': LinkType.post.name,
-                'postId': widget.postId,
-                'userId': widget.userId,
-                'postType': widget.postType.name,
-              });
-              final dynamicLinkParams = DynamicLinkParameters(
-                link: uri,
-                uriPrefix: "https://urevs.page.link",
-                androidParameters: AndroidParameters(
-                  packageName: "com.example.urrevs_ui_mobile",
-                  fallbackUrl: uri,
-                ),
-              );
-              final dynamicLink = await FirebaseDynamicLinks.instance
-                  .buildLink(dynamicLinkParams);
-              await Clipboard.setData(
-                ClipboardData(text: dynamicLink.toString()),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Copied to clipboard')),
-              );
-            },
+            onPressed: _sharePost,
           ),
         ),
       ],

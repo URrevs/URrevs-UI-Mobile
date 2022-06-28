@@ -3,10 +3,12 @@ import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:urrevs_ui_mobile/app/extensions.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/buttons/grad_button.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/custom_alert_dialog.dart';
@@ -22,6 +24,37 @@ class InvitationCodeDialog extends StatelessWidget {
 
   /// the controller that holds the invitation code, you should set the value of the invitation code through invitationPromptCtl.text = 'your invitation code'.
   final String invitationCode;
+
+  void _shareInvitationLink() async {
+    Uri androidLink = Uri.https(
+      StringsManager.webDomain,
+      '/add-review',
+      <String, String>{
+        'linkType': LinkType.refCode.name,
+        'refCode': invitationCode,
+      },
+    );
+
+    Uri webLink = Uri.https(
+      StringsManager.webDomain,
+      '/add-review',
+      <String, String>{'refCode': invitationCode},
+    );
+
+    final dynamicLinkParams = DynamicLinkParameters(
+      link: androidLink,
+      uriPrefix: StringsManager.uriPrefix,
+      androidParameters: AndroidParameters(
+        packageName: StringsManager.packageName,
+        fallbackUrl: webLink,
+      ),
+    );
+    final dynamicLink =
+        await FirebaseDynamicLinks.instance.buildShortLink(dynamicLinkParams);
+
+    Share.shareWithResult(dynamicLink.shortUrl.toString());
+  }
+
   @override
   Widget build(BuildContext context) {
     TextEditingController invitationPromptCtl = TextEditingController();
@@ -112,28 +145,7 @@ class InvitationCodeDialog extends StatelessWidget {
                     ),
                     width: 325.w,
                     reverseIcon: false,
-                    onPressed: () async {
-                      Uri uri = Uri.https('example.com', '', <String, String>{
-                        'linkType': LinkType.refCode.name,
-                        'refCode': invitationCode,
-                      });
-                      final dynamicLinkParams = DynamicLinkParameters(
-                        link: uri,
-                        uriPrefix: "https://urevs.page.link",
-                        androidParameters: AndroidParameters(
-                          packageName: "com.example.urrevs_ui_mobile",
-                          fallbackUrl: uri,
-                        ),
-                      );
-                      final dynamicLink = await FirebaseDynamicLinks.instance
-                          .buildLink(dynamicLinkParams);
-                      await Clipboard.setData(
-                        ClipboardData(text: dynamicLink.toString()),
-                      );
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Copied to clipboard')),
-                      );
-                    },
+                    onPressed: _shareInvitationLink,
                   )
                 ],
               ),
