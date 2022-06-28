@@ -255,5 +255,6 @@
   "minute": "minute",
   "lessThanAMinute": "Less than a minute",
   "competitionEnded": "Competition ended",
-  "priceWhenReleased": "Price when released"
+  "priceWhenReleased": "Price when released",
+  "noMoreComments": "No more comments"
 }

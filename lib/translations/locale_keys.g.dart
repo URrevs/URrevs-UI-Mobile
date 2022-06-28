@@ -258,5 +258,6 @@ abstract class  LocaleKeys {
   static const lessThanAMinute = 'lessThanAMinute';
   static const competitionEnded = 'competitionEnded';
   static const priceWhenReleased = 'priceWhenReleased';
+  static const noMoreComments = 'noMoreComments';
 
 }

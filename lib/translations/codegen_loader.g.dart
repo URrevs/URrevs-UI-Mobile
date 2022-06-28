@@ -271,7 +271,8 @@ class CodegenLoader extends AssetLoader{
   "minute": "دقيقة",
   "lessThanAMinute": "أقل من دقيقة",
   "competitionEnded": "انتهت المسابقة",
-  "priceWhenReleased": "السعر عند صدوره"
+  "priceWhenReleased": "السعر عند صدوره",
+  "noMoreComments": "لا مزيد من التعليقات"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -530,7 +531,8 @@ static const Map<String,dynamic> en = {
   "minute": "minute",
   "lessThanAMinute": "Less than a minute",
   "competitionEnded": "Competition ended",
-  "priceWhenReleased": "Price when released"
+  "priceWhenReleased": "Price when released",
+  "noMoreComments": "No more comments"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

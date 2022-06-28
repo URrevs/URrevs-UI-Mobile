@@ -382,6 +382,13 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
       if (next is GetInteractionsLoadedState) {
         _interactions.clear();
         _interactions.addAll(next.infiniteScrollingItems);
+        if (next.roundsEnded &&
+            previous is! GetInteractionsLoadedState &&
+            next.infiniteScrollingItems.isNotEmpty) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(LocaleKeys.noMoreComments.tr())),
+          );
+        }
       } else if (next is GetInteractionsErrorState && _interactions.isEmpty) {
         showSnackBarWithoutActionAtError(state: next, context: context);
       }

@@ -255,5 +255,6 @@
   "minute": "دقيقة",
   "lessThanAMinute": "أقل من دقيقة",
   "competitionEnded": "انتهت المسابقة",
-  "priceWhenReleased": "السعر عند صدوره"
+  "priceWhenReleased": "السعر عند صدوره",
+  "noMoreComments": "لا مزيد من التعليقات"
 }
