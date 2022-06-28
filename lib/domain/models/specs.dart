@@ -81,7 +81,7 @@ class Specs {
     if (strPrice != null) strPrice += " " + LocaleKeys.egyptianPound.tr();
     // String strReleaseDate = DateFormat.yMMMM(languageCode).format(releaseDate);
     return {
-      LocaleKeys.price: strPrice ?? '-',
+      LocaleKeys.priceWhenReleased: strPrice ?? '-',
       LocaleKeys.manufacturingCompany: companyName,
       LocaleKeys.releaseDate: releaseDate ?? '-',
       LocaleKeys.productDimensions: dimensions ?? '-',

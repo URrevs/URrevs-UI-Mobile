@@ -19,7 +19,6 @@ abstract class  LocaleKeys {
   static const seeLess = 'seeLess';
   static const iDontLikeThis = 'iDontLikeThis';
   static const reply = 'reply';
-  static const price = 'price';
   static const manufacturingCompany = 'manufacturingCompany';
   static const releaseDate = 'releaseDate';
   static const productDimensions = 'productDimensions';
@@ -258,5 +257,6 @@ abstract class  LocaleKeys {
   static const minute = 'minute';
   static const lessThanAMinute = 'lessThanAMinute';
   static const competitionEnded = 'competitionEnded';
+  static const priceWhenReleased = 'priceWhenReleased';
 
 }

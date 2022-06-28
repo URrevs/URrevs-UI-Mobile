@@ -72,7 +72,7 @@ class _SpecsComparisonTableState extends State<SpecsComparisonTable> {
   /// locale. This is because the price value is the only cell that contains
   /// both arabic letters and english numbers (in the arabic locale).
   TextDirection? _getTextDirection(String specName) {
-    final bool isPrice = specName == LocaleKeys.price;
+    final bool isPrice = specName == LocaleKeys.priceWhenReleased;
     final TextDirection? textDirection = isPrice ? null : TextDirection.ltr;
     return textDirection;
   }

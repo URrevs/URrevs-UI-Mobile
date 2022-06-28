@@ -36,7 +36,6 @@
   "manufacturingCompany": "Manufacturing Company",
   "networkType": "Network Type",
   "operatingSystem": "Operating System",
-  "price": "Price",
   "productDimensions": "Product Dimensions",
   "productWeight": "Product Weight",
   "radio": "Radio",
@@ -255,5 +254,6 @@
   "hour": "hour",
   "minute": "minute",
   "lessThanAMinute": "Less than a minute",
-  "competitionEnded": "Competition ended"
+  "competitionEnded": "Competition ended",
+  "priceWhenReleased": "Price when released"
 }

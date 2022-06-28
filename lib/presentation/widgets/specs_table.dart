@@ -79,7 +79,7 @@ class SpecsDummyData {
     String strPrice = price.toString() + " " + LocaleKeys.egyptianPound.tr();
     String strReleaseDate = DateFormat.yMMMM(languageCode).format(releaseDate);
     return {
-      LocaleKeys.price: strPrice,
+      LocaleKeys.priceWhenReleased: strPrice,
       LocaleKeys.manufacturingCompany: manufacturingCompany,
       LocaleKeys.releaseDate: strReleaseDate,
       LocaleKeys.productDimensions: productDimensions,
@@ -179,7 +179,7 @@ class _SpecsTableState extends State<SpecsTable> {
 
   /// Returns a [TableCell] that contains the specification value of the phone.
   TableCell _specValue(String specValue, String specName) {
-    final bool isPrice = specName == LocaleKeys.price;
+    final bool isPrice = specName == LocaleKeys.priceWhenReleased;
 
     /// Always the text direction would be from left to right except in the case
     /// of price, the text direction would be left to be determined by the

@@ -17,7 +17,6 @@
   "seeLess": "أقل",
   "iDontLikeThis": "لا يعجبني هذا",
   "reply": "رد",
-  "price": "السعر",
   "manufacturingCompany": "الشركة المصنعة",
   "releaseDate": "تاريخ الاصدار",
   "productDimensions": "أبعاد المنتج",
@@ -255,5 +254,6 @@
   "hour": "ساعة",
   "minute": "دقيقة",
   "lessThanAMinute": "أقل من دقيقة",
-  "competitionEnded": "انتهت المسابقة"
+  "competitionEnded": "انتهت المسابقة",
+  "priceWhenReleased": "السعر عند صدوره"
 }

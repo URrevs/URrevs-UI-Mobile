@@ -33,7 +33,6 @@ class CodegenLoader extends AssetLoader{
   "seeLess": "أقل",
   "iDontLikeThis": "لا يعجبني هذا",
   "reply": "رد",
-  "price": "السعر",
   "manufacturingCompany": "الشركة المصنعة",
   "releaseDate": "تاريخ الاصدار",
   "productDimensions": "أبعاد المنتج",
@@ -271,7 +270,8 @@ class CodegenLoader extends AssetLoader{
   "hour": "ساعة",
   "minute": "دقيقة",
   "lessThanAMinute": "أقل من دقيقة",
-  "competitionEnded": "انتهت المسابقة"
+  "competitionEnded": "انتهت المسابقة",
+  "priceWhenReleased": "السعر عند صدوره"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -311,7 +311,6 @@ static const Map<String,dynamic> en = {
   "manufacturingCompany": "Manufacturing Company",
   "networkType": "Network Type",
   "operatingSystem": "Operating System",
-  "price": "Price",
   "productDimensions": "Product Dimensions",
   "productWeight": "Product Weight",
   "radio": "Radio",
@@ -530,7 +529,8 @@ static const Map<String,dynamic> en = {
   "hour": "hour",
   "minute": "minute",
   "lessThanAMinute": "Less than a minute",
-  "competitionEnded": "Competition ended"
+  "competitionEnded": "Competition ended",
+  "priceWhenReleased": "Price when released"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }
