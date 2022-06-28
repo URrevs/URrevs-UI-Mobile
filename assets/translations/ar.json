@@ -249,5 +249,11 @@
   "point": "نقطة",
   "youHaveAlreadyReviewedThisPhoneBefore": "لقد قمت بالفعل بمراجعة هذا الهاتف من قبل",
   "theEnteredReferralCodeIsInvalid": "كود الدعوة الذي تم إدخاله غير صالح",
-  "writeAReply": "اكتب رداً"
+  "writeAReply": "اكتب رداً",
+  "tillCompetitionEnds": "وتنتهي المسابقة",
+  "day": "يوم",
+  "hour": "ساعة",
+  "minute": "دقيقة",
+  "lessThanAMinute": "أقل من دقيقة",
+  "competitionEnded": "انتهت المسابقة"
 }

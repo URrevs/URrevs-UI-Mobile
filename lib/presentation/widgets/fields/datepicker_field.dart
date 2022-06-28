@@ -36,36 +36,45 @@ class DatePickerField extends StatelessWidget {
       textAlignVertical: TextAlignVertical.center,
       readOnly: true,
       controller: dateController,
-      onTap: () {
+      onTap: () async {
         FocusScope.of(context).requestFocus(FocusNode());
         if (!isMonthDatePicker) {
-          showDatePicker(
-                  context: context,
-                  initialDate: DateTime.now().add(Duration(days: 1)),
-                  firstDate: DateTime.now().add(Duration(days: 1)),
-                  lastDate: DateTime(2222))
-              .then((date) {
-            if (date != null) {
-              setChosenDate(date);
-              dateController.text = DateFormat("EEE, d / M /y",
-                      Localizations.localeOf(context).toString())
-                  .format(date);
-            }
-          });
+          DateTime? date = await showDatePicker(
+            context: context,
+            initialDate: DateTime.now().add(Duration(days: 1)),
+            firstDate: DateTime.now().add(Duration(days: 1)),
+            lastDate: DateTime(2222),
+          );
+          if (date == null) return;
+
+          TimeOfDay? time = await showTimePicker(
+            context: context,
+            initialTime: TimeOfDay(hour: 0, minute: 0),
+          );
+          if (time != null) {
+            date = DateTime(
+                date.year, date.month, date.day, time.hour, time.minute);
+          }
+
+          setChosenDate(date.toUtc());
+          dateController.text = DateFormat(
+            "EEE, d / M /y",
+            Localizations.localeOf(context).toString(),
+          ).addPattern('Hm', '   ').format(date);
         } else {
           showMonthPicker(
-                  context: context,
-                  firstDate: DateTime(2007, 1),
-                  lastDate: DateTime(DateTime.now().year, DateTime.now().month),
-                  initialDate:
-                      DateTime(DateTime.now().year, DateTime.now().month),
-                  locale: Localizations.localeOf(context))
-              .then((date) {
+            context: context,
+            firstDate: DateTime(2007, 1),
+            lastDate: DateTime(DateTime.now().year, DateTime.now().month),
+            initialDate: DateTime(DateTime.now().year, DateTime.now().month),
+            locale: Localizations.localeOf(context),
+          ).then((date) {
             if (date != null) {
               setChosenDate(date);
               dateController.text = DateFormat(
-                      "yMMMM", Localizations.localeOf(context).toString())
-                  .format(date);
+                "yMMMM",
+                Localizations.localeOf(context).toString(),
+              ).format(date);
             }
           });
         }

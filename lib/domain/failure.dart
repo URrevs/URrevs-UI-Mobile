@@ -28,7 +28,9 @@ class ServerErrorMessages {
   static const String internalServerError = 'internal server error';
   static const String trackInternalServerError = 'track internal server error';
   static const String alreadyLiked = 'already liked';
+  static const String alreadyUnliked = 'already unliked';
   static const String noLikes = 'no likes';
+  static const String notFound = 'not found';
   static const String notOwned = 'not owned';
   static const String notYet = 'not yet';
   static const String notAccepted = 'not accepted';
@@ -61,7 +63,9 @@ class ServerErrorMessages {
         ServerErrorMessages.trackInternalServerError:
             LocaleKeys.internalServerError.tr(),
         ServerErrorMessages.alreadyLiked: alreadyLiked,
+        ServerErrorMessages.alreadyUnliked: alreadyUnliked,
         ServerErrorMessages.noLikes: noLikes,
+        ServerErrorMessages.notFound: notFound,
         ServerErrorMessages.notOwned:
             LocaleKeys.youCantAnswerAQuestionMessage.tr(),
         ServerErrorMessages.notYet: notYet,
@@ -93,7 +97,9 @@ class ServerErrorMessages {
 
   static List<String> get _ignoredFailures => [
         alreadyLiked,
+        alreadyUnliked,
         noLikes,
+        notFound,
         // notYet,
         notAccepted,
         // trackAlreadyHated,

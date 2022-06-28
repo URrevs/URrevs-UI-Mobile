@@ -265,7 +265,13 @@ class CodegenLoader extends AssetLoader{
   "point": "نقطة",
   "youHaveAlreadyReviewedThisPhoneBefore": "لقد قمت بالفعل بمراجعة هذا الهاتف من قبل",
   "theEnteredReferralCodeIsInvalid": "كود الدعوة الذي تم إدخاله غير صالح",
-  "writeAReply": "اكتب رداً"
+  "writeAReply": "اكتب رداً",
+  "tillCompetitionEnds": "وتنتهي المسابقة",
+  "day": "يوم",
+  "hour": "ساعة",
+  "minute": "دقيقة",
+  "lessThanAMinute": "أقل من دقيقة",
+  "competitionEnded": "انتهت المسابقة"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -518,7 +524,13 @@ static const Map<String,dynamic> en = {
   "point": "point",
   "youHaveAlreadyReviewedThisPhoneBefore": "You have already reviewed this phone before",
   "theEnteredReferralCodeIsInvalid": "The entered referral code is invalid.",
-  "writeAReply": "Write a reply"
+  "writeAReply": "Write a reply",
+  "tillCompetitionEnds": "till competition ends",
+  "day": "da",
+  "hour": "hour",
+  "minute": "minute",
+  "lessThanAMinute": "Less than a minute",
+  "competitionEnded": "Competition ended"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

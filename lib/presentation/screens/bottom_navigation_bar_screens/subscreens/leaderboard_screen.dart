@@ -225,14 +225,12 @@ class _LeaderboardSubscreenState extends ConsumerState<LeaderboardSubscreen> {
     }
 
     final competition = (state as GetLatestCompetitionLoadedState).competition;
-
     if (competition.deadline.isBefore(DateTime.now())) {
       return LeaderboardScreenBanner();
     }
-    int remainingDays =
-        competition.deadline.difference(DateTime.now()).inDays + 1;
+
     return CompetitionBanner(
-      numberOfRemainingdays: remainingDays,
+      deadline: competition.deadline,
       prizeName: competition.prize,
       prizeUrl: competition.prizePic,
     );

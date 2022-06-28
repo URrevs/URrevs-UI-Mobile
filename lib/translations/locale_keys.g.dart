@@ -252,5 +252,11 @@ abstract class  LocaleKeys {
   static const youHaveAlreadyReviewedThisPhoneBefore = 'youHaveAlreadyReviewedThisPhoneBefore';
   static const theEnteredReferralCodeIsInvalid = 'theEnteredReferralCodeIsInvalid';
   static const writeAReply = 'writeAReply';
+  static const tillCompetitionEnds = 'tillCompetitionEnds';
+  static const day = 'day';
+  static const hour = 'hour';
+  static const minute = 'minute';
+  static const lessThanAMinute = 'lessThanAMinute';
+  static const competitionEnded = 'competitionEnded';
 
 }

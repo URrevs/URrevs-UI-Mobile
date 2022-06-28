@@ -249,5 +249,11 @@
   "point": "point",
   "youHaveAlreadyReviewedThisPhoneBefore": "You have already reviewed this phone before",
   "theEnteredReferralCodeIsInvalid": "The entered referral code is invalid.",
-  "writeAReply": "Write a reply"
+  "writeAReply": "Write a reply",
+  "tillCompetitionEnds": "till competition ends",
+  "day": "da",
+  "hour": "hour",
+  "minute": "minute",
+  "lessThanAMinute": "Less than a minute",
+  "competitionEnded": "Competition ended"
 }
