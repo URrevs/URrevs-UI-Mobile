@@ -65,15 +65,6 @@ class FullscreenPostScreenArgs {
     this.focusOnTextField = false,
     this.answerId,
   });
-
-  static FullscreenPostScreenArgs get defaultArgs {
-    return FullscreenPostScreenArgs(
-      cardType: CardType.productReview,
-      postType: PostType.phoneReview,
-      postId: 'change_it',
-      postUserId: 'change_it',
-    );
-  }
 }
 
 class FullscreenPostScreen extends ConsumerStatefulWidget {

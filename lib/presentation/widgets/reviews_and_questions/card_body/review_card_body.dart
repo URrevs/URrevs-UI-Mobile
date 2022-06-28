@@ -24,7 +24,12 @@ class ReviewCardBody extends StatefulWidget {
     required this.fullscreen,
     required this.postId,
     required this.targetType,
+      required this.userId,
+      required this.postType
   }) : super(key: key);
+
+  final String userId;
+  final PostType postType;
 
   /// List of rating criteria to be show in the [CardBodyRatingBlock].
   final List<String> ratingCriteria;
@@ -104,9 +109,7 @@ class _ReviewCardBodyState extends State<ReviewCardBody> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: noNeedForExpansion
-          ? null
-          : () => setExpandedState(!_expanded),
+      onTap: noNeedForExpansion ? null : () => setExpandedState(!_expanded),
       child: Padding(
         padding: EdgeInsets.only(right: 16.w, left: 16.w, top: 20.h),
         child: Column(
@@ -143,6 +146,9 @@ class _ReviewCardBodyState extends State<ReviewCardBody> {
                     widget.hideSeeMoreIfNoNeedForExpansion,
                 usedInInteraction: false,
                 cardType: widget.cardType,
+                postId: widget.postId,
+                postUserId: widget.userId,
+                postType: widget.postType,
               )
           ],
         ),

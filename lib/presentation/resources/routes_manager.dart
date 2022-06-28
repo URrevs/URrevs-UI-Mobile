@@ -119,8 +119,7 @@ class RouteGenerator {
       case FullscreenPostScreen.routeName:
         // TODO: remove default screen arguments value
         FullscreenPostScreenArgs screenArgs =
-            routeSettings.arguments as FullscreenPostScreenArgs? ??
-                FullscreenPostScreenArgs.defaultArgs;
+            routeSettings.arguments as FullscreenPostScreenArgs;
         return MaterialPageRoute(
           builder: (_) => FullscreenPostScreen(screenArgs),
         );

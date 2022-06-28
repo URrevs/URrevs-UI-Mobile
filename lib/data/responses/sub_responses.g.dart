@@ -179,6 +179,11 @@ SpecsSubResponse _$SpecsSubResponseFromJson(Map<String, dynamic> json) =>
       sensors: json['sensors'] as String?,
       battery: json['battery'] as String?,
       charging: json['charging'] as String?,
+      weight: json['weight'] as String?,
+      sim: json['sim'] as String?,
+      screenType: json['screenType'] as String?,
+      screenSize: json['screenSize'] as String?,
+      screenResolution: json['screenResolution'] as String?,
     );
 
 Map<String, dynamic> _$SpecsSubResponseToJson(SpecsSubResponse instance) =>
@@ -213,6 +218,11 @@ Map<String, dynamic> _$SpecsSubResponseToJson(SpecsSubResponse instance) =>
       'sensors': instance.sensors,
       'battery': instance.battery,
       'charging': instance.charging,
+      'weight': instance.weight,
+      'sim': instance.sim,
+      'screenType': instance.screenType,
+      'screenSize': instance.screenSize,
+      'screenResolution': instance.screenResolution,
     };
 
 PhoneStatsSubResponse _$PhoneStatsSubResponseFromJson(

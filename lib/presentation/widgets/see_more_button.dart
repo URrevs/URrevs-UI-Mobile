@@ -18,10 +18,13 @@ class SeeMoreButton extends StatelessWidget {
     required this.hideSeeMoreIfNoNeedForExpansion,
     required this.usedInInteraction,
     required this.cardType,
-    // required this.postId,
-    // required this.postUserId,
-    // required this.postType,
-  }) : super(key: key);
+    required this.postId,
+    required this.postUserId,
+    required this.postType,
+  })  : assert(usedInInteraction || postId != null),
+        assert(usedInInteraction || postUserId != null),
+        assert(usedInInteraction || postType != null),
+        super(key: key);
 
   /// Whether the card is expanded or not.
   final bool expanded;
@@ -52,9 +55,9 @@ class SeeMoreButton extends StatelessWidget {
 
   final CardType cardType;
 
-  // final String postId;
-  // final String postUserId;
-  // final PostType postType;
+  final String? postId;
+  final String? postUserId;
+  final PostType? postType;
 
   /// Decide what would be shown on the [TextButton] shown after pros & cons
   /// section:
@@ -96,10 +99,10 @@ class SeeMoreButton extends StatelessWidget {
     Navigator.of(context).pushNamed(
       FullscreenPostScreen.routeName,
       arguments: FullscreenPostScreenArgs(
-        postUserId: 'change_it',
-        postType: PostType.phoneReview,
+        postUserId: postUserId!,
+        postType: postType!,
         cardType: cardType,
-        postId: 'change_it',
+        postId: postId!,
       ),
     );
   }

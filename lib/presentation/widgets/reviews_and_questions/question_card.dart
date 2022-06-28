@@ -263,7 +263,7 @@ class QuestionCard extends ConsumerWidget {
         (hateState is LoadingState || hateState is LoadedState)) {
       return SizedBox();
     }
-    
+
     final question = ref.watch(postProvider(_postProviderParams)) as Question;
     return Stack(
       children: [
@@ -298,6 +298,11 @@ class QuestionCard extends ConsumerWidget {
                   questionText: questionText,
                   fullscreen: fullscreen,
                   cardType: cardType,
+                  postId: questionId,
+                  userId: userId,
+                  postType: question.type == TargetType.phone
+                      ? PostType.phoneQuestion
+                      : PostType.companyQuestion,
                 ),
                 8.verticalSpace,
                 CardFooter(

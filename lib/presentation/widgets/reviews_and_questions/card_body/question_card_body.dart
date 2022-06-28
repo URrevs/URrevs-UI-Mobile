@@ -14,7 +14,14 @@ class QuestionCardBody extends StatefulWidget {
     required this.questionText,
     required this.fullscreen,
     required this.cardType,
+    required this.postId,
+    required this.userId,
+    required this.postType,
   }) : super(key: key);
+
+  final String postId;
+  final String userId;
+  final PostType postType;
 
   /// Question text viewed by the card.
   final String questionText;
@@ -80,7 +87,10 @@ class _QuestionCardBodyState extends State<QuestionCardBody> {
                 hideSeeMoreIfNoNeedForExpansion: true,
                 usedInInteraction: false,
                 cardType: widget.cardType,
-                
+                postId: widget.postId,
+                postUserId: widget.userId,
+                postType: widget.postType,
+                // postId: ,
               )
           ],
         ),

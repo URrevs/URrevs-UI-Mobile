@@ -326,6 +326,8 @@ class ProductReviewCard extends ConsumerWidget {
                   fullscreen: fullscreen,
                   postId: reviewId,
                   targetType: TargetType.phone,
+                  postType: PostType.phoneReview,
+                  userId: userId,
                 ),
                 8.verticalSpace,
                 CardFooter(

@@ -34,6 +34,12 @@ class Specs {
   String? sensors;
   String? battery;
   String? charging;
+  String? productWeight;
+  String? simCard;
+  String? displayType;
+  String? displaySize;
+  String? displayResolution;
+
   Specs({
     required this.id,
     required this.name,
@@ -67,6 +73,11 @@ class Specs {
     required this.sensors,
     required this.battery,
     required this.charging,
+    required this.productWeight,
+    required this.simCard,
+    required this.displayType,
+    required this.displaySize,
+    required this.displayResolution,
   });
 
   Map<String, String> toMap({required String languageCode}) {
@@ -86,6 +97,11 @@ class Specs {
       LocaleKeys.releaseDate: releaseDate ?? '-',
       LocaleKeys.productDimensions: dimensions ?? '-',
       LocaleKeys.networkType: network ?? '-',
+      LocaleKeys.productWeight: productWeight ?? '-',
+      LocaleKeys.simCard: simCard ?? '-',
+      LocaleKeys.displayType: displayType ?? '-',
+      LocaleKeys.displaySize: displaySize ?? '-',
+      LocaleKeys.displayResolution: displayResolution ?? '-',
       LocaleKeys.screenProtection: screenProtection ?? '-',
       LocaleKeys.operatingSystem: os ?? '-',
       LocaleKeys.chipset: chipset ?? '-',

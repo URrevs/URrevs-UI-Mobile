@@ -248,6 +248,11 @@ class SpecsSubResponse {
   String? sensors;
   String? battery;
   String? charging;
+  String? weight;
+  String? sim;
+  String? screenType;
+  String? screenSize;
+  String? screenResolution;
 
   SpecsSubResponse({
     required this.id,
@@ -282,6 +287,11 @@ class SpecsSubResponse {
     required this.sensors,
     required this.battery,
     required this.charging,
+    required this.weight,
+    required this.sim,
+    required this.screenType,
+    required this.screenSize,
+    required this.screenResolution,
   });
 
   Specs get specsModel {
@@ -318,6 +328,11 @@ class SpecsSubResponse {
       sensors: sensors,
       battery: battery,
       charging: charging,
+      productWeight: weight,
+      simCard: sim,
+      displayType: screenType,
+      displaySize: screenSize,
+      displayResolution: screenResolution,
     );
   }
 
