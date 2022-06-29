@@ -10,7 +10,7 @@ part of 'remote_data_source.dart';
 
 class _RemoteDataSource implements RemoteDataSource {
   _RemoteDataSource(this._dio, {this.baseUrl}) {
-    baseUrl ??= 'https://urrevs-api-dev-mobile.herokuapp.com';
+    baseUrl ??= 'https://urrevs.com/api';
   }
 
   final Dio _dio;
@@ -1815,6 +1815,75 @@ class _RemoteDataSource implements RemoteDataSource {
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = GetPostsForHomeScreenResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<BaseResponse> reportPhoneReview(reviewId, request) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<BaseResponse>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/reports/review/phone/${reviewId}',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = BaseResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<BaseResponse> reportCompanyReview(reviewId, request) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<BaseResponse>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/reports/review/company/${reviewId}',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = BaseResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<BaseResponse> reportPhoneQuestion(questionId, request) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<BaseResponse>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/reports/question/phone/${questionId}',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = BaseResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<BaseResponse> reportCompanyQuestion(questionId, request) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<BaseResponse>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(
+                    _dio.options, '/reports/question/company/${questionId}',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = BaseResponse.fromJson(_result.data!);
     return value;
   }
 

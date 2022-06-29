@@ -13,6 +13,7 @@ import 'package:urrevs_ui_mobile/data/remote_data_source/remote_data_source.dart
 import 'package:urrevs_ui_mobile/data/requests/base_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/leaderboard_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/questions_api_requests.dart';
+import 'package:urrevs_ui_mobile/data/requests/reports_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/reviews_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/search_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/responses/phones_api_responses.dart';
@@ -960,6 +961,34 @@ class Repository {
     return _tryAndCatch(() async {
       final response = await _remoteDataSource.getPostsForHomeScreen();
       return response.postsModels;
+    });
+  }
+
+  Future<Either<Failure, void>> reportPhoneReview(
+      String reviewId, ReportPostRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.reportPhoneReview(reviewId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> reportCompanyReview(
+      String reviewId, ReportPostRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.reportCompanyReview(reviewId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> reportPhoneQuestion(
+      String questionId, ReportPostRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.reportPhoneQuestion(questionId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> reportCompanyQuestion(
+      String questionId, ReportPostRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.reportCompanyQuestion(questionId, request);
     });
   }
 }

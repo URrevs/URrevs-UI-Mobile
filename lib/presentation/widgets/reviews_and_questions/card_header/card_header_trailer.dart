@@ -11,6 +11,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart'
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/authentication_state.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/prompts/send_report_dialog.dart';
 
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
@@ -44,15 +45,38 @@ class _CardHeaderTrailerState extends ConsumerState<CardHeaderTrailer> {
     targetType: widget.targetType,
   );
 
-  void _onTap() {
+  late final ReportPostProviderParams _reportPostProviderParams =
+      ReportPostProviderParams(
+    postId: widget.postId,
+    postContentType: widget.postContentType,
+    targetType: widget.targetType,
+  );
+
+  void _onPressingIDontLikeThis() {
     controller.hideMenu();
     ref
         .read(iDontLikeThisProvider(_iDontLikeThisParams).notifier)
         .iDontLikeThis();
   }
 
+  void _onPressingReport() {
+    controller.hideMenu();
+    showDialog(
+      context: context,
+      builder: (context) => SendReportDialog(
+        postId: widget.postId,
+        postContentType: widget.postContentType,
+        targetType: widget.targetType,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    ref.addErrorListener(
+      provider: reportPostProvider(_reportPostProviderParams),
+      context: context,
+    );
     final authState =
         ref.watch(authenticationProvider) as AuthenticationLoadedState;
     if (authState.user.id == widget.userId) {
@@ -69,14 +93,35 @@ class _CardHeaderTrailerState extends ConsumerState<CardHeaderTrailer> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.r),
         ),
-        child: InkWell(
-          onTap: _onTap,
-          borderRadius: BorderRadius.circular(15.r),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 28.w, vertical: 10.h),
-            child: Text(
-              LocaleKeys.iDontLikeThis.tr(),
-              style: TextStyleManager.s16w700,
+        child: Padding(
+          padding: EdgeInsets.all(8.sp),
+          child: SizedBox(
+            width: 170.w,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                InkWell(
+                  onTap: _onPressingIDontLikeThis,
+                  borderRadius: BorderRadius.circular(15.r),
+                  child: Text(
+                    LocaleKeys.iDontLikeThis.tr(),
+                    style: TextStyleManager.s16w700,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                5.verticalSpace,
+                Divider(),
+                5.verticalSpace,
+                InkWell(
+                  onTap: _onPressingReport,
+                  borderRadius: BorderRadius.circular(15.r),
+                  child: Text(
+                    LocaleKeys.report.tr(),
+                    style: TextStyleManager.s16w700,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
             ),
           ),
         ),

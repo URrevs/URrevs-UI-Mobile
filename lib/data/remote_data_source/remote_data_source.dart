@@ -4,6 +4,7 @@ import 'package:urrevs_ui_mobile/data/requests/base_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/companies_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/leaderboard_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/questions_api_requests.dart';
+import 'package:urrevs_ui_mobile/data/requests/reports_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/reviews_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/search_api_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/users_api_requests.dart';
@@ -588,4 +589,26 @@ abstract class RemoteDataSource {
 
   @GET('/home/recommended')
   Future<GetPostsForHomeScreenResponse> getPostsForHomeScreen();
+
+  // REPORTS API
+  @POST('/reports/review/phone/{reviewId}')
+  Future<BaseResponse> reportPhoneReview(
+    @Path() String reviewId,
+    @Body() ReportPostRequest request,
+  );
+  @POST('/reports/review/company/{reviewId}')
+  Future<BaseResponse> reportCompanyReview(
+    @Path() String reviewId,
+    @Body() ReportPostRequest request,
+  );
+  @POST('/reports/question/phone/{questionId}')
+  Future<BaseResponse> reportPhoneQuestion(
+    @Path() String questionId,
+    @Body() ReportPostRequest request,
+  );
+  @POST('/reports/question/company/{questionId}')
+  Future<BaseResponse> reportCompanyQuestion(
+    @Path() String questionId,
+    @Body() ReportPostRequest request,
+  );
 }

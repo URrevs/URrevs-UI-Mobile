@@ -215,6 +215,20 @@ class ReplyProviderParams extends Equatable {
   List<Object?> get props => [replyId];
 }
 
+class ReportPostProviderParams extends Equatable {
+  final String postId;
+  final PostContentType postContentType;
+  final TargetType targetType;
+  const ReportPostProviderParams({
+    required this.postId,
+    required this.postContentType,
+    required this.targetType,
+  });
+
+  @override
+  List<Object?> get props => [postId, postContentType, targetType];
+}
+
 class IDontLikeThisProviderParams extends Equatable {
   final String postId;
   final PostContentType postContentType;

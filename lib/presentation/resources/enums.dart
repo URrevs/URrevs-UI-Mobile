@@ -88,3 +88,16 @@ extension LinkTypeExtension on LinkType {
     }
   }
 }
+
+enum ComplaintReason {
+  spam,
+  violentContent,
+  harassment,
+  hateContent,
+  nudity,
+  other
+}
+
+extension ComplaintReasonExtension on ComplaintReason {
+  int get indexForRequest => index + 1;
+}

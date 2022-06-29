@@ -20,6 +20,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/leaderb
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/logout_from_all_devices_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/phones_notifier/get_all_phones_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/phones_notifier/get_two_phones_specs_notifier.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/reports_notifiers/report_post_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/search_notifiers/add_new_recent_search_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/search_notifiers/delete_recent_search_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/search_notifiers/get_my_recent_searches_notifier.dart';
@@ -54,6 +55,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_sta
 import 'package:urrevs_ui_mobile/presentation/state_management/states/question_states/accept_answer_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/question_states/add_question_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/question_states/get_post_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/reports_states/report_post_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/add_interaction_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/add_phone_review_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/add_review_reply_state.dart';
@@ -305,6 +307,13 @@ final getMyRankInCompetitionProvider = StateNotifierProvider.autoDispose.family<
         GetMyRankInCompetitionState,
         GetMyRankInCompetitionProviderParams>(
     (ref, params) => GetMyRankInCompetitionNotifier());
+
+final reportPostProvider = StateNotifierProvider.autoDispose
+    .family<ReportPostNotifier, ReportPostState, ReportPostProviderParams>(
+        (ref, params) => ReportPostNotifier(
+            postId: params.postId,
+            postContentType: params.postContentType,
+            targetType: params.targetType));
 
 // posts and interactions providers
 

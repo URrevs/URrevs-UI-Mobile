@@ -256,5 +256,18 @@
   "lessThanAMinute": "أقل من دقيقة",
   "competitionEnded": "انتهت المسابقة",
   "priceWhenReleased": "السعر عند صدوره",
-  "noMoreComments": "لا مزيد من التعليقات"
+  "noMoreComments": "لا مزيد من التعليقات",
+  "enterAdditionalInformationRegardingTheComplaint": "أدخل معلومات إضافية بخصوص الشكوى",
+  "harrasment": "تحرش",
+  "hateContent": "محتوى يدعو الى الكراهية",
+  "nudity": "محتوى إباحي",
+  "other": "أخرى",
+  "report": "إبلاغ",
+  "selectTheReasonForTheComplaint": "قم باختيار سبب الشكوى",
+  "send": "إرسال",
+  "spam": "إزعاج",
+  "violentContent": "محتوى يحث على العنف",
+  "theReasonForTheComplaintMustBeSelectd": "يجب تحديد سبب الشكوى",
+  "youAreBlockedCannotTakeThatAction": "أنت محظور، لا يمكن اتخاذ هذا الإجراء",
+  "youHaveAlreadyReportedThisElement": "لقد أبلغت بالفعل عن هذا العنصر"
 }

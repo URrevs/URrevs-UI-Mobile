@@ -36,6 +36,8 @@ class ServerErrorMessages {
   static const String notAccepted = 'not accepted';
   static const String alreadyReviewed = 'already reviewed';
   static const String invalidReferralCode = 'invalid referral code';
+  static const String alreadyReported = 'already reported';
+  static const String blocked = 'blocked';
   // static const String trackAlreadyHated = 'track already hated';
   // static const String trackAlreadySeemored = 'track already seemored';
   // static const String trackAlreadyFullscreened = 'track already fullscreened';
@@ -74,6 +76,10 @@ class ServerErrorMessages {
             LocaleKeys.youHaveAlreadyReviewedThisPhoneBefore.tr(),
         ServerErrorMessages.invalidReferralCode:
             LocaleKeys.theEnteredReferralCodeIsInvalid.tr(),
+        ServerErrorMessages.alreadyReported:
+            LocaleKeys.youHaveAlreadyReportedThisElement.tr(),
+        ServerErrorMessages.blocked:
+            LocaleKeys.youAreBlockedCannotTakeThatAction.tr(),
       };
 
   static List<String> get _noResultFailures => [

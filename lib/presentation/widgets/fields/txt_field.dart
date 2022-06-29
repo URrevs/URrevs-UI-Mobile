@@ -13,6 +13,7 @@ class TxtField extends StatelessWidget {
     this.errorMsg = '',
     this.hasErrorMsg = false,
     this.extraValidation,
+    this.maxLines,
   }) : super(key: key);
 
   final TextEditingController textController;
@@ -21,6 +22,7 @@ class TxtField extends StatelessWidget {
   final Color fillColor;
   final String errorMsg;
   final bool hasErrorMsg;
+  final int? maxLines;
   final String? Function(String)? extraValidation;
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class TxtField extends StatelessWidget {
         borderSide: BorderSide(width: 0.8, color: ColorManager.backgroundGrey),
         borderRadius: BorderRadius.circular(5.r));
     return TextFormField(
-      maxLines: null,
+      maxLines: maxLines,
       keyboardType: keyboardType,
       cursorColor: ColorManager.black,
       textAlignVertical: TextAlignVertical.center,

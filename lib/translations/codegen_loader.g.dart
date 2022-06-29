@@ -272,7 +272,20 @@ class CodegenLoader extends AssetLoader{
   "lessThanAMinute": "أقل من دقيقة",
   "competitionEnded": "انتهت المسابقة",
   "priceWhenReleased": "السعر عند صدوره",
-  "noMoreComments": "لا مزيد من التعليقات"
+  "noMoreComments": "لا مزيد من التعليقات",
+  "enterAdditionalInformationRegardingTheComplaint": "أدخل معلومات إضافية بخصوص الشكوى",
+  "harrasment": "تحرش",
+  "hateContent": "محتوى يدعو الى الكراهية",
+  "nudity": "محتوى إباحي",
+  "other": "أخرى",
+  "report": "إبلاغ",
+  "selectTheReasonForTheComplaint": "قم باختيار سبب الشكوى",
+  "send": "إرسال",
+  "spam": "إزعاج",
+  "violentContent": "محتوى يحث على العنف",
+  "theReasonForTheComplaintMustBeSelectd": "يجب تحديد سبب الشكوى",
+  "youAreBlockedCannotTakeThatAction": "أنت محظور، لا يمكن اتخاذ هذا الإجراء",
+  "youHaveAlreadyReportedThisElement": "لقد أبلغت بالفعل عن هذا العنصر"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -532,7 +545,20 @@ static const Map<String,dynamic> en = {
   "lessThanAMinute": "Less than a minute",
   "competitionEnded": "Competition ended",
   "priceWhenReleased": "Price when released",
-  "noMoreComments": "No more comments"
+  "noMoreComments": "No more comments",
+  "report": "Report",
+  "selectTheReasonForTheComplaint": "Select the reason for the complaint",
+  "spam": "Spam",
+  "violentContent": "Violent content",
+  "harrasment": "harrasment",
+  "hateContent": "Hate Content",
+  "nudity": "Nudity",
+  "other": "Other",
+  "enterAdditionalInformationRegardingTheComplaint": "Enter additional information regarding the complaint",
+  "send": "Send",
+  "theReasonForTheComplaintMustBeSelectd": "The reason for the complaint must be selected",
+  "youHaveAlreadyReportedThisElement": "You have already reported this element",
+  "youAreBlockedCannotTakeThatAction": "You are blocked, Cannot take that action"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

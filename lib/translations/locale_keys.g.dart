@@ -259,5 +259,17 @@ abstract class  LocaleKeys {
   static const competitionEnded = 'competitionEnded';
   static const priceWhenReleased = 'priceWhenReleased';
   static const noMoreComments = 'noMoreComments';
+  static const enterAdditionalInformationRegardingTheComplaint = 'enterAdditionalInformationRegardingTheComplaint';
+  static const harrasment = 'harrasment';
+  static const hateContent = 'hateContent';
+  static const nudity = 'nudity';
+  static const report = 'report';
+  static const selectTheReasonForTheComplaint = 'selectTheReasonForTheComplaint';
+  static const send = 'send';
+  static const spam = 'spam';
+  static const violentContent = 'violentContent';
+  static const theReasonForTheComplaintMustBeSelectd = 'theReasonForTheComplaintMustBeSelectd';
+  static const youAreBlockedCannotTakeThatAction = 'youAreBlockedCannotTakeThatAction';
+  static const youHaveAlreadyReportedThisElement = 'youHaveAlreadyReportedThisElement';
 
 }

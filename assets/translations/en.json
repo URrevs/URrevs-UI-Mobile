@@ -256,5 +256,18 @@
   "lessThanAMinute": "Less than a minute",
   "competitionEnded": "Competition ended",
   "priceWhenReleased": "Price when released",
-  "noMoreComments": "No more comments"
+  "noMoreComments": "No more comments",
+  "report": "Report",
+  "selectTheReasonForTheComplaint": "Select the reason for the complaint",
+  "spam": "Spam",
+  "violentContent": "Violent content",
+  "harrasment": "harrasment",
+  "hateContent": "Hate Content",
+  "nudity": "Nudity",
+  "other": "Other",
+  "enterAdditionalInformationRegardingTheComplaint": "Enter additional information regarding the complaint",
+  "send": "Send",
+  "theReasonForTheComplaintMustBeSelectd": "The reason for the complaint must be selected",
+  "youHaveAlreadyReportedThisElement": "You have already reported this element",
+  "youAreBlockedCannotTakeThatAction": "You are blocked, Cannot take that action"
 }
