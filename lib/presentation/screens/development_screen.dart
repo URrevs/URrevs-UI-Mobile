@@ -135,14 +135,14 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
     await FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
 
     String idToken = await FirebaseAuth.instance.currentUser!.getIdToken();
-    await Dio().get(
-      'https://urrevs-api-dev-mobile.herokuapp.com/users/authenticate',
-      options: Options(
-        headers: {
-          'Authorization': 'Bearer $idToken',
-        },
-      ),
-    );
+    // await Dio().get(
+    //   'https://urrevs-api-dev-mobile.herokuapp.com/users/authenticate',
+    //   options: Options(
+    //     headers: {
+    //       'Authorization': 'Bearer $idToken',
+    //     },
+    //   ),
+    // );
   }
 
   final formKey = GlobalKey<FormState>();

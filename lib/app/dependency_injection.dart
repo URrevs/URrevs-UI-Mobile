@@ -6,6 +6,7 @@ import 'package:urrevs_ui_mobile/data/dio_factory.dart';
 import 'package:urrevs_ui_mobile/data/remote_data_source/remote_data_source.dart';
 import 'package:urrevs_ui_mobile/domain/repository.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/flags_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 
 Future<void> initAppModule() async {
   final sharedPreferences = await SharedPreferences.getInstance();
@@ -19,8 +20,8 @@ Future<void> initAppModule() async {
     () => RemoteDataSource(
       GetIt.I<Dio>(),
       baseUrl: FlagsManager.useMockApi
-          ? 'http://10.0.2.2:3000/'
-          : 'https://urrevs-api-dev-mobile.herokuapp.com',
+          ? StringsManager.mockApiUrl
+          : StringsManager.currentBackendApi,
     ),
   );
   GetIt.I.registerLazySingleton<Repository>(

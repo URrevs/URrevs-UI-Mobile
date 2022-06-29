@@ -18,4 +18,7 @@ class StringsManager {
   static const String webDomain = 'urrevstest.netlify.app';
   static const String uriPrefix = 'https://urevs.page.link';
   static const String packageName = 'com.example.urrevs_ui_mobile';
+  static const String awsBackendApi = 'https://urrevs.com/api';
+  static const String currentBackendApi = awsBackendApi;
+  static const String mockApiUrl = 'http://10.0.2.2:3000/';
 }
