@@ -114,20 +114,12 @@ class _AuthenticationScreenState extends ConsumerState<AuthenticationScreen> {
       ..onError((error) {
         print('dynamic link error');
       });
-
-    // login user automatically
-    SchedulerBinding.instance!.addPostFrameCallback((timeStamp) {
-      if (FirebaseAuth.instance.currentUser != null) {
-        print('sent login to backend request');
-        ref.read(authenticationProvider.notifier).loginToOurBackend();
-      }
-    });
   }
 
   @override
   void dispose() {
-    _dynLinkSubs.cancel();
     super.dispose();
+    _dynLinkSubs.cancel();
   }
 
   @override
@@ -148,7 +140,6 @@ class _AuthenticationScreenState extends ConsumerState<AuthenticationScreen> {
         );
       }
       if (next is AuthenticationLoadedState) {
-        print('pushing bottom nav bar screen');
         Navigator.of(context).pushNamedAndRemoveUntil(
           BottomNavigationBarContainerScreen.routeName,
           (route) => false,

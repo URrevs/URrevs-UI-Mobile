@@ -21,6 +21,7 @@ import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_post_screen.dar
 import 'package:urrevs_ui_mobile/presentation/screens/presentation_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/product_profile/product_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/search_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/splash_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/owned_products_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/posted_questions_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/posted_posts_screen.dart';
@@ -68,18 +69,18 @@ class _MyAppState extends ConsumerState<MyApp> {
       splitScreenMode: false,
       builder: (_) => MaterialApp(
         title: LocaleKeys.urrevs.tr(),
-        initialRoute: AuthenticationScreen.routeName,
+        initialRoute: SplashScreen.routeName,
         // initialRoute: FullscreenPostScreen.routeName,
         // initialRoute: DevelopmentScreen.routeName,
         navigatorObservers: [routeObserver],
         onGenerateRoute: RouteGenerator.generateRoute,
         onGenerateInitialRoutes: (String routeName) {
-          if (routeName == AuthenticationScreen.routeName) {
+          if (routeName == SplashScreen.routeName) {
             return [
               RouteGenerator.generateRoute(
                 RouteSettings(
-                  name: AuthenticationScreen.routeName,
-                  arguments: AuthenticationScreenArgs(
+                  name: SplashScreen.routeName,
+                  arguments: SplashScreenArgs(
                     initialLink: widget.initialLink,
                   ),
                 ),

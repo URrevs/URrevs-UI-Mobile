@@ -17,6 +17,7 @@ import 'package:urrevs_ui_mobile/presentation/screens/posting_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/presentation_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/product_profile/product_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/search_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/splash_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/owned_products_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/posted_questions_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/posted_posts_screen.dart';
@@ -132,6 +133,12 @@ class RouteGenerator {
             routeSettings.arguments as PostingScreenArgs;
         return MaterialPageRoute(
           builder: (_) => PostingScreen(screenArgs: screenArgs),
+        );
+      case SplashScreen.routeName:
+        SplashScreenArgs screenArgs =
+            routeSettings.arguments as SplashScreenArgs;
+        return MaterialPageRoute(
+          builder: (_) => SplashScreen(screenArgs: screenArgs),
         );
       default:
         return unDefinedRoute(routeSettings.name);
