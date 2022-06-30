@@ -286,7 +286,6 @@ class QuestionCard extends ConsumerWidget {
                   postedDate: postedDate,
                   usedSinceDate: null,
                   views: null,
-                  cardType: cardType,
                   userId: userId,
                   targetId: targetId,
                   targetType: cardHeaderTitleType,

@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 enum CardType {
   productReview,
   companyReview,
@@ -13,6 +15,8 @@ enum ReviewsFilter { phones, companies }
 enum PostType { phoneReview, companyReview, phoneQuestion, companyQuestion }
 
 extension PostTypeExtension on PostType {
+  String get translatedName => name.tr();
+
   TargetType get targetType {
     switch (this) {
       case PostType.phoneReview:
@@ -100,4 +104,6 @@ enum ComplaintReason {
 
 extension ComplaintReasonExtension on ComplaintReason {
   int get indexForRequest => index + 1;
+
+  String get translatedName => name.tr();
 }

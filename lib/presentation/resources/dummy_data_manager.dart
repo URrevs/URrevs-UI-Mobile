@@ -45,14 +45,14 @@ class DummyDataManager {
   static String get reply =>
       faker.lorem.sentences(Random().nextInt(3) + 1).join(' ');
 
-  static List<Reply> get replies => List.generate(
-        Random().nextInt(3) + 1,
-        (_) => Reply.dummyInstance,
-      );
-  static List<CommentTree> get comments => List.generate(
-        Random().nextInt(3) + 1,
-        (_) => CommentTree.dummyInstance,
-      );
+  // static List<Reply> get replies => List.generate(
+  //       Random().nextInt(3) + 1,
+  //       (_) => Reply.dummyInstance,
+  //     );
+  // static List<CommentTree> get comments => List.generate(
+  //       Random().nextInt(3) + 1,
+  //       (_) => CommentTree.dummyInstance,
+  //     );
   static List<AnswerTree> get answers => List.generate(
         Random().nextInt(3) + 1,
         (_) => AnswerTree.dummyInstance,

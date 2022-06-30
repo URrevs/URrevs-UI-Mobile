@@ -45,11 +45,14 @@ class _CardHeaderTrailerState extends ConsumerState<CardHeaderTrailer> {
     targetType: widget.targetType,
   );
 
-  late final ReportPostProviderParams _reportPostProviderParams =
-      ReportPostProviderParams(
-    postId: widget.postId,
+  late final ReportProviderParams _reportPostProviderParams =
+      ReportProviderParams(
+    socialItemId: widget.postId,
     postContentType: widget.postContentType,
     targetType: widget.targetType,
+    interactionType: null,
+    parentDirectInteractionId: null,
+    parentPostId: null,
   );
 
   void _onPressingIDontLikeThis() {
@@ -64,9 +67,12 @@ class _CardHeaderTrailerState extends ConsumerState<CardHeaderTrailer> {
     showDialog(
       context: context,
       builder: (context) => SendReportDialog(
-        postId: widget.postId,
+        socialItemId: widget.postId,
         postContentType: widget.postContentType,
         targetType: widget.targetType,
+        interactionType: null,
+        parentDirectInteractionId: null,
+        parentPostId: null,
       ),
     );
   }

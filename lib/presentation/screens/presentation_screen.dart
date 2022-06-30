@@ -262,7 +262,7 @@ class _PresentationScreenState extends ConsumerState<PresentationScreen> {
           ProductReviewCard.dummyInstance(),
           CompanyReviewCard.dummyInstance(),
           QuestionCard.dummyInstance(context),
-          CommentTree.dummyInstance,
+          // CommentTree.dummyInstance,
           AnswerTree.dummyInstance,
           // CommentsList.dummyInstance,
           // AnswersList.dummyInstance,

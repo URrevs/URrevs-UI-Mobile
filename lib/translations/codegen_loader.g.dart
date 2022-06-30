@@ -285,7 +285,22 @@ class CodegenLoader extends AssetLoader{
   "violentContent": "محتوى يحث على العنف",
   "theReasonForTheComplaintMustBeSelectd": "يجب تحديد سبب الشكوى",
   "youAreBlockedCannotTakeThatAction": "أنت محظور، لا يمكن اتخاذ هذا الإجراء",
-  "youHaveAlreadyReportedThisElement": "لقد أبلغت بالفعل عن هذا العنصر"
+  "youHaveAlreadyReportedThisElement": "لقد أبلغت بالفعل عن هذا العنصر",
+  "thereAre": "يوجد",
+  "openReports": "بلاغ مفتوح",
+  "reports": "البلاغات",
+  "open": "المفتوحة",
+  "closed": "المغلقة",
+  "postType": "نوع المنشور",
+  "phoneReview": "مراجعة عن هاتف",
+  "phoneQuestion": "سؤال عن هاتف",
+  "companyQuestion": "سؤال عن شركة",
+  "reason": "السبب",
+  "complaintContent": "محتوى الشكوى",
+  "showContent": "أظهر المحتوى",
+  "closeComplaint": "أغلق الشكوى",
+  "hideThisContent": "منع عرض هذا المحتوى",
+  "blockThisUsersAccount": "إيقاف حساب هذا المستخدم"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -558,7 +573,22 @@ static const Map<String,dynamic> en = {
   "send": "Send",
   "theReasonForTheComplaintMustBeSelectd": "The reason for the complaint must be selected",
   "youHaveAlreadyReportedThisElement": "You have already reported this element",
-  "youAreBlockedCannotTakeThatAction": "You are blocked, Cannot take that action"
+  "youAreBlockedCannotTakeThatAction": "You are blocked, Cannot take that action",
+  "thereAre": "There are",
+  "openReports": "open reports",
+  "reports": "Reports",
+  "open": "Open",
+  "closed": "Closed",
+  "postType": "Post type",
+  "phoneReview": "phone review",
+  "phoneQuestion": "phone question",
+  "companyQuestion": "company question",
+  "reason": "Reason",
+  "complaintContent": "Complaint content",
+  "showContent": "Show content",
+  "closeComplaint": "Close complaint",
+  "hideThisContent": "Hide this content",
+  "blockThisUsersAccount": "Block this user's account"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

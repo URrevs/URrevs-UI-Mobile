@@ -260,6 +260,12 @@ class _AnswerTreeState extends ConsumerState<AnswerTree> {
                   inQuestionCard: widget.inQuestionCard,
                   onTappingAnswerInCard: widget.onTappingAnswerInCard,
                   interactionType: InteractionType.answer,
+                  parentDirectInteractionId: null,
+                  parentPostId: widget.questionId,
+                  postContentType: widget.parentPostType.postContentType,
+                  interactionId: widget.answerId,
+                  targetType: widget.parentPostType.targetType,
+                  authorId: widget.userId,
                 ),
                 InteractionFooter(
                   onPressingReply: () {
@@ -303,6 +309,8 @@ class _AnswerTreeState extends ConsumerState<AnswerTree> {
                       parentPostType: widget.parentPostType,
                       replyParentId: widget.answerId,
                       postUserId: widget.postUserId,
+                      parentDirectInteractionId: widget.answerId,
+                      parentPostId: widget.questionId,
                       /// replies would not be shown except at fullscreen post
                       /// screen where get interactions provider params are
                       /// passed to answer tree - the only case where answer

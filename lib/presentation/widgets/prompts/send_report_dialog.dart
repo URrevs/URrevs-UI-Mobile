@@ -15,14 +15,20 @@ import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 class SendReportDialog extends ConsumerStatefulWidget {
   const SendReportDialog({
     Key? key,
-    required this.postId,
+    required this.socialItemId,
     required this.postContentType,
     required this.targetType,
+    required this.parentPostId,
+    required this.parentDirectInteractionId,
+    required this.interactionType,
   }) : super(key: key);
 
-  final String postId;
+  final String socialItemId;
   final PostContentType postContentType;
   final TargetType targetType;
+  final String? parentPostId;
+  final String? parentDirectInteractionId;
+  final InteractionType? interactionType;
 
   @override
   ConsumerState<SendReportDialog> createState() => _SendReportDialogState();
@@ -41,11 +47,13 @@ class _SendReportDialogState extends ConsumerState<SendReportDialog> {
     'other'.tr(),
   ];
 
-  late final ReportPostProviderParams _providerParams =
-      ReportPostProviderParams(
-    postId: widget.postId,
+  late final ReportProviderParams _providerParams = ReportProviderParams(
+    socialItemId: widget.socialItemId,
     postContentType: widget.postContentType,
     targetType: widget.targetType,
+    interactionType: widget.interactionType,
+    parentDirectInteractionId: widget.parentDirectInteractionId,
+    parentPostId: widget.parentPostId,
   );
 
   void _sendReport() {
@@ -55,7 +63,7 @@ class _SendReportDialogState extends ConsumerState<SendReportDialog> {
       });
       return;
     }
-    ReportPostRequest request = ReportPostRequest(
+    ReportSocialItemRequest request = ReportSocialItemRequest(
       reason: _complaintReason!.indexForRequest,
       info: _controller.text.isNotEmpty ? _controller.text : null,
     );

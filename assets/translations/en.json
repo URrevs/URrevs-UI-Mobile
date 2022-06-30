@@ -269,5 +269,20 @@
   "send": "Send",
   "theReasonForTheComplaintMustBeSelectd": "The reason for the complaint must be selected",
   "youHaveAlreadyReportedThisElement": "You have already reported this element",
-  "youAreBlockedCannotTakeThatAction": "You are blocked, Cannot take that action"
+  "youAreBlockedCannotTakeThatAction": "You are blocked, Cannot take that action",
+  "thereAre": "There are",
+  "openReports": "open reports",
+  "reports": "Reports",
+  "open": "Open",
+  "closed": "Closed",
+  "postType": "Post type",
+  "phoneReview": "phone review",
+  "phoneQuestion": "phone question",
+  "companyQuestion": "company question",
+  "reason": "Reason",
+  "complaintContent": "Complaint content",
+  "showContent": "Show content",
+  "closeComplaint": "Close complaint",
+  "hideThisContent": "Hide this content",
+  "blockThisUsersAccount": "Block this user's account"
 }

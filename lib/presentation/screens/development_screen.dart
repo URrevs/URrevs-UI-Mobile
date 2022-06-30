@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:faker/faker.dart';
@@ -19,6 +21,7 @@ import 'package:urrevs_ui_mobile/domain/repository.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/assets_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/dummy_data_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
@@ -30,6 +33,7 @@ import 'package:urrevs_ui_mobile/presentation/widgets/bottom_navigation_bar.dart
 import 'package:urrevs_ui_mobile/presentation/widgets/buttons/auth_button.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/buttons/grad_button.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/cards/rating_overview_card.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/cards/report_card.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/circular_rating_indicator.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answer_tree.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answers_list.dart';
@@ -88,6 +92,7 @@ class DevelopmentScreen extends ConsumerStatefulWidget {
 class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
   bool isSelected = false;
   int selectedIndex = -1;
+  String _userAgent = 'User Agent Header';
 
   void updateFirebasePhoto() async {
     await signInWithGoogle();
@@ -189,59 +194,67 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
           // ),
         ],
       ),
-      body: Container(
-        color: Colors.grey[700],
-        child: ListView(
-          padding: EdgeInsets.all(20),
-          children: [
-            Center(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(50),
-                child: Container(
-                  height: 100,
-                  width: 100,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    gradient: LinearGradient(
-                      colors: [
-                        Colors.blue,
-                        Colors.white,
-                      ],
-                    ),
-                  ),
-                  child: Image.asset(
-                    ImageAssets.lenovoSmallLogo,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            ),
-            // ElevatedButton(
-            //     onPressed: () async {
-            //       final dynamicLinkParams = DynamicLinkParameters(
-            //         link: Uri.parse("https://www.example.com/"),
-            //         uriPrefix: "https://urevs.page.link",
-            //         androidParameters: const AndroidParameters(
-            //             packageName: "com.example.urrevs_ui_mobile"),
-            //       );
-            //       final dynamicLink = await FirebaseDynamicLinks.instance
-            //           .buildLink(dynamicLinkParams);
-            //       print(dynamicLink);
-            //     },
-            //     child: Text('CLICK'))
-            // UpdatedListTile(title: 'قائمة الشركات المضافة حديثاً', items: items),
-            // ProductReviewCard.dummyInstance(),
-            // CompanyReviewCard.dummyInstance(),
-            // QuestionCard.dummyInstance(context),
-            // CommentTree.dummyInstance,
-            // AnswerTree.dummyInstance,
-            // CommentsList.dummyInstance,
-            // AnswersList.dummyInstance,
-            // SpecsTable.dummyInstance,
-            // SpecsComparisonTable.dummyInstance,
-            // SvgPicture.asset(SvgAssets.upvote, color: Colors.red),
-          ],
-        ),
+      body: ListView(
+        padding: EdgeInsets.all(20),
+        children: [
+          ReportCard(
+            imageUrl: null,
+            authorName: 'Amr Fatouh',
+            authorId: 'authorId',
+            targetUserName: 'Fady Ahmed',
+            targetUserId: 'targetUserId',
+            postedDate: DateTime.now(),
+            postType: PostType.phoneReview,
+            complaintReason: ComplaintReason.spam,
+            complaintContent: 'this is complaint content',
+          )
+          // Center(
+          //   child: ClipRRect(
+          //     borderRadius: BorderRadius.circular(50),
+          //     child: Container(
+          //       height: 100,
+          //       width: 100,
+          //       decoration: BoxDecoration(
+          //         shape: BoxShape.circle,
+          //         gradient: LinearGradient(
+          //           colors: [
+          //             Colors.blue,
+          //             Colors.white,
+          //           ],
+          //         ),
+          //       ),
+          //       child: Image.asset(
+          //         ImageAssets.lenovoSmallLogo,
+          //         fit: BoxFit.cover,
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          // ElevatedButton(
+          //     onPressed: () async {
+          //       final dynamicLinkParams = DynamicLinkParameters(
+          //         link: Uri.parse("https://www.example.com/"),
+          //         uriPrefix: "https://urevs.page.link",
+          //         androidParameters: const AndroidParameters(
+          //             packageName: "com.example.urrevs_ui_mobile"),
+          //       );
+          //       final dynamicLink = await FirebaseDynamicLinks.instance
+          //           .buildLink(dynamicLinkParams);
+          //       print(dynamicLink);
+          //     },
+          //     child: Text('CLICK'))
+          // UpdatedListTile(title: 'قائمة الشركات المضافة حديثاً', items: items),
+          // ProductReviewCard.dummyInstance(),
+          // CompanyReviewCard.dummyInstance(),
+          // QuestionCard.dummyInstance(context),
+          // CommentTree.dummyInstance,
+          // AnswerTree.dummyInstance,
+          // CommentsList.dummyInstance,
+          // AnswersList.dummyInstance,
+          // SpecsTable.dummyInstance,
+          // SpecsComparisonTable.dummyInstance,
+          // SvgPicture.asset(SvgAssets.upvote, color: Colors.red),
+        ],
       ),
       //bottomNavigationBar: BottomNavBar(currentIndex: 2,onTap: (int i)=>{},),
     );

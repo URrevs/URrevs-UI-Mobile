@@ -269,5 +269,20 @@
   "violentContent": "محتوى يحث على العنف",
   "theReasonForTheComplaintMustBeSelectd": "يجب تحديد سبب الشكوى",
   "youAreBlockedCannotTakeThatAction": "أنت محظور، لا يمكن اتخاذ هذا الإجراء",
-  "youHaveAlreadyReportedThisElement": "لقد أبلغت بالفعل عن هذا العنصر"
+  "youHaveAlreadyReportedThisElement": "لقد أبلغت بالفعل عن هذا العنصر",
+  "thereAre": "يوجد",
+  "openReports": "بلاغ مفتوح",
+  "reports": "البلاغات",
+  "open": "المفتوحة",
+  "closed": "المغلقة",
+  "postType": "نوع المنشور",
+  "phoneReview": "مراجعة عن هاتف",
+  "phoneQuestion": "سؤال عن هاتف",
+  "companyQuestion": "سؤال عن شركة",
+  "reason": "السبب",
+  "complaintContent": "محتوى الشكوى",
+  "showContent": "أظهر المحتوى",
+  "closeComplaint": "أغلق الشكوى",
+  "hideThisContent": "منع عرض هذا المحتوى",
+  "blockThisUsersAccount": "إيقاف حساب هذا المستخدم"
 }

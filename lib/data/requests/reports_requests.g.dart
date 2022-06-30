@@ -6,13 +6,15 @@ part of 'reports_requests.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ReportPostRequest _$ReportPostRequestFromJson(Map<String, dynamic> json) =>
-    ReportPostRequest(
+ReportSocialItemRequest _$ReportSocialItemRequestFromJson(
+        Map<String, dynamic> json) =>
+    ReportSocialItemRequest(
       reason: json['reason'] as int,
       info: json['info'] as String?,
     );
 
-Map<String, dynamic> _$ReportPostRequestToJson(ReportPostRequest instance) {
+Map<String, dynamic> _$ReportSocialItemRequestToJson(
+    ReportSocialItemRequest instance) {
   final val = <String, dynamic>{
     'reason': instance.reason,
   };

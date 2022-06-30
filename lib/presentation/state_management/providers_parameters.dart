@@ -215,18 +215,24 @@ class ReplyProviderParams extends Equatable {
   List<Object?> get props => [replyId];
 }
 
-class ReportPostProviderParams extends Equatable {
-  final String postId;
+class ReportProviderParams extends Equatable {
+  final String socialItemId;
   final PostContentType postContentType;
   final TargetType targetType;
-  const ReportPostProviderParams({
-    required this.postId,
+  final String? parentPostId;
+  final String? parentDirectInteractionId;
+  final InteractionType? interactionType;
+  const ReportProviderParams({
+    required this.socialItemId,
     required this.postContentType,
     required this.targetType,
+    required this.parentPostId,
+    required this.parentDirectInteractionId,
+    required this.interactionType,
   });
 
   @override
-  List<Object?> get props => [postId, postContentType, targetType];
+  List<Object?> get props => [socialItemId, postContentType, targetType];
 }
 
 class IDontLikeThisProviderParams extends Equatable {

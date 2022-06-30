@@ -594,21 +594,77 @@ abstract class RemoteDataSource {
   @POST('/reports/review/phone/{reviewId}')
   Future<BaseResponse> reportPhoneReview(
     @Path() String reviewId,
-    @Body() ReportPostRequest request,
+    @Body() ReportSocialItemRequest request,
   );
   @POST('/reports/review/company/{reviewId}')
   Future<BaseResponse> reportCompanyReview(
     @Path() String reviewId,
-    @Body() ReportPostRequest request,
+    @Body() ReportSocialItemRequest request,
   );
   @POST('/reports/question/phone/{questionId}')
   Future<BaseResponse> reportPhoneQuestion(
     @Path() String questionId,
-    @Body() ReportPostRequest request,
+    @Body() ReportSocialItemRequest request,
   );
   @POST('/reports/question/company/{questionId}')
   Future<BaseResponse> reportCompanyQuestion(
     @Path() String questionId,
-    @Body() ReportPostRequest request,
+    @Body() ReportSocialItemRequest request,
+  );
+  @POST('/reports/review/phone/{reviewId}/comments/{commentId}')
+  Future<BaseResponse> reportPhoneReviewComment(
+    @Path() String reviewId,
+    @Path() String commentId,
+    @Body() ReportSocialItemRequest request,
+  );
+  @POST('/reports/review/company/{reviewId}/comments/{commentId}')
+  Future<BaseResponse> reportCompanyReviewComment(
+    @Path() String reviewId,
+    @Path() String commentId,
+    @Body() ReportSocialItemRequest request,
+  );
+  @POST('/reports/question/phone/{questionId}/answers/{answerId}')
+  Future<BaseResponse> reportPhoneQuestionAnswer(
+    @Path() String questionId,
+    @Path() String answerId,
+    @Body() ReportSocialItemRequest request,
+  );
+  @POST('/reports/question/company/{questionId}/answers/{answerId}')
+  Future<BaseResponse> reportCompanyQuestionAnswer(
+    @Path() String questionId,
+    @Path() String answerId,
+    @Body() ReportSocialItemRequest request,
+  );
+  @POST(
+      '/reports/review/phone/{reviewId}/comments/{commentId}/replies/{replyId}')
+  Future<BaseResponse> reportPhoneReviewCommentReply(
+    @Path() String reviewId,
+    @Path() String commentId,
+    @Path() String replyId,
+    @Body() ReportSocialItemRequest request,
+  );
+  @POST(
+      '/reports/review/company/{reviewId}/comments/{commentId}/replies/{replyId}')
+  Future<BaseResponse> reportCompanyReviewCommentReply(
+    @Path() String reviewId,
+    @Path() String commentId,
+    @Path() String replyId,
+    @Body() ReportSocialItemRequest request,
+  );
+  @POST(
+      '/reports/question/phone/{questionId}/answers/{answerId}/replies/{replyId}')
+  Future<BaseResponse> reportPhoneQuestionAnswerReply(
+    @Path() String questionId,
+    @Path() String answerId,
+    @Path() String replyId,
+    @Body() ReportSocialItemRequest request,
+  );
+  @POST(
+      '/reports/question/company/{questionId}/answers/{answerId}/replies/{replyId}')
+  Future<BaseResponse> reportCompanyQuestionAnswerReply(
+    @Path() String questionId,
+    @Path() String answerId,
+    @Path() String replyId,
+    @Body() ReportSocialItemRequest request,
   );
 }

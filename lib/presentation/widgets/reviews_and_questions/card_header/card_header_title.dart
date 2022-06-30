@@ -17,11 +17,12 @@ class CardHeaderTitle extends StatelessWidget {
     Key? key,
     required this.authorName,
     required this.targetName,
-    required this.cardType,
     required this.userId,
     required this.targetId,
     required this.type,
-  }) : super(key: key);
+    this.usedInReportCard = false,
+  })  : assert(usedInReportCard || type != null),
+        super(key: key);
 
   /// Name of review author.
   final String authorName;
@@ -29,13 +30,13 @@ class CardHeaderTitle extends StatelessWidget {
   /// Name of product on which the review was posted.
   final String targetName;
 
-  final CardType cardType;
-
   final String userId;
 
   final String targetId;
 
-  final TargetType type;
+  final TargetType? type;
+
+  final bool usedInReportCard;
 
   void _onPressingTarget(BuildContext context) {
     switch (type) {
@@ -55,6 +56,12 @@ class CardHeaderTitle extends StatelessWidget {
             phoneId: targetId,
             phoneName: targetName,
           ),
+        );
+        break;
+      case null:
+        Navigator.of(context).pushNamed(
+          UserProfileScreen.routeName,
+          arguments: UserProfileScreenArgs(userId: targetId),
         );
         break;
     }

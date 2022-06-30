@@ -3,27 +3,27 @@ import 'package:equatable/equatable.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 
-abstract class ReportPostState extends Equatable implements RequestState {}
+abstract class ReportState extends Equatable implements RequestState {}
 
-class ReportPostInitialState extends ReportPostState implements InitialState {
+class ReportInitialState extends ReportState implements InitialState {
   @override
   List<Object?> get props => [];
 }
 
-class ReportPostLoadingState extends ReportPostState implements LoadingState {
+class ReportLoadingState extends ReportState implements LoadingState {
   @override
   List<Object?> get props => [];
 }
 
-class ReportPostLoadedState extends ReportPostState implements LoadedState {
+class ReportLoadedState extends ReportState implements LoadedState {
   @override
   List<Object?> get props => [];
 }
 
-class ReportPostErrorState extends ReportPostState implements ErrorState {
+class ReportErrorState extends ReportState implements ErrorState {
   @override
   final Failure failure;
-  ReportPostErrorState({
+  ReportErrorState({
     required this.failure,
   });
 

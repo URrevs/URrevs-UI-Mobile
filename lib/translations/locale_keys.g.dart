@@ -271,5 +271,20 @@ abstract class  LocaleKeys {
   static const theReasonForTheComplaintMustBeSelectd = 'theReasonForTheComplaintMustBeSelectd';
   static const youAreBlockedCannotTakeThatAction = 'youAreBlockedCannotTakeThatAction';
   static const youHaveAlreadyReportedThisElement = 'youHaveAlreadyReportedThisElement';
+  static const thereAre = 'thereAre';
+  static const openReports = 'openReports';
+  static const reports = 'reports';
+  static const open = 'open';
+  static const closed = 'closed';
+  static const postType = 'postType';
+  static const phoneReview = 'phoneReview';
+  static const phoneQuestion = 'phoneQuestion';
+  static const companyQuestion = 'companyQuestion';
+  static const reason = 'reason';
+  static const complaintContent = 'complaintContent';
+  static const showContent = 'showContent';
+  static const closeComplaint = 'closeComplaint';
+  static const hideThisContent = 'hideThisContent';
+  static const blockThisUsersAccount = 'blockThisUsersAccount';
 
 }

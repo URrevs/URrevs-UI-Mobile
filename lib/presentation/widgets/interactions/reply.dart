@@ -26,6 +26,8 @@ class Reply extends ConsumerWidget {
   final PostType parentPostType;
   final String userId;
   final String postUserId;
+  final String parentDirectInteractionId;
+  final String parentPostId;
   final GetInteractionsProviderParams getInteractionsProviderParams;
 
   Reply.fromReplyModel(
@@ -35,6 +37,8 @@ class Reply extends ConsumerWidget {
     required this.replyParentId,
     required this.postUserId,
     required this.getInteractionsProviderParams,
+    required this.parentDirectInteractionId,
+    required this.parentPostId,
     Key? key,
   })  : imageUrl = reply.photo,
         authorName = reply.userName,
@@ -50,15 +54,15 @@ class Reply extends ConsumerWidget {
         ),
         super(key: key);
 
-  static Reply get dummyInstance => Reply.fromReplyModel(
-        ReplyModel.dummyInstance,
-        onPressingReply: () {},
-        parentPostType: PostType.phoneReview,
-        replyParentId: 'dummy',
-        postUserId: 'dummy',
-        getInteractionsProviderParams: GetInteractionsProviderParams(
-            postId: 'dummy', postType: PostType.phoneReview),
-      );
+  // static Reply get dummyInstance => Reply.fromReplyModel(
+  //       ReplyModel.dummyInstance,
+  //       onPressingReply: () {},
+  //       parentPostType: PostType.phoneReview,
+  //       replyParentId: 'dummy',
+  //       postUserId: 'dummy',
+  //       getInteractionsProviderParams: GetInteractionsProviderParams(
+  //           postId: 'dummy', postType: PostType.phoneReview),
+  //     );
 
   late final ReplyProviderParams _replyProviderParams;
 
@@ -92,6 +96,12 @@ class Reply extends ConsumerWidget {
                   maxWidth: constraints.maxWidth - 16.w,
                   inQuestionCard: false,
                   interactionType: InteractionType.reply,
+                  parentDirectInteractionId: parentDirectInteractionId,
+                  parentPostId: parentPostId,
+                  postContentType: parentPostType.postContentType,
+                  interactionId: interactionId,
+                  targetType: parentPostType.targetType,
+                  authorId: userId,
                 ),
                 InteractionFooter(
                   onPressingReply: onPressingReply,

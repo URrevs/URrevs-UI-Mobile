@@ -67,6 +67,7 @@ dependencies:
   webview_flutter: ^3.0.2
   firebase_dynamic_links: ^4.2.4
   share_plus: ^4.0.10
+  device_info_plus: ^4.0.0
 
 
 dev_dependencies:

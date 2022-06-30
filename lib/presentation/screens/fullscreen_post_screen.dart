@@ -387,6 +387,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
     final state =
         ref.watch(getInteractionsProvider(_interactionsProviderParams));
     if (state is LoadedState && _interactions.isEmpty) return EmptyListWidget();
+    print('fullscreen post id: ${widget.screenArgs.postId}');
     switch (_postType) {
       case PostType.phoneReview:
       case PostType.companyReview:
@@ -401,6 +402,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
               focusNode.requestFocus();
             };
           }),
+          parentPostId: widget.screenArgs.postId,
         );
       case PostType.phoneQuestion:
       case PostType.companyQuestion:

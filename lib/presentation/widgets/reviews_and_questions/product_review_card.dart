@@ -307,7 +307,6 @@ class ProductReviewCard extends ConsumerWidget {
                   postedDate: postedDate,
                   usedSinceDate: usedSinceDate,
                   views: views,
-                  cardType: CardType.productReview,
                   userId: userId,
                   targetId: productId,
                   targetType: TargetType.phone,

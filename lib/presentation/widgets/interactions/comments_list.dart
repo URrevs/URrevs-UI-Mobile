@@ -20,6 +20,7 @@ class CommentsList extends StatelessWidget {
     required this.onPressingReplyList,
     required this.parentPostType,
     required this.postUserId,
+    required this.parentPostId,
     required this.getInteractionsProviderParams,
   }) : super(key: key);
 
@@ -27,16 +28,17 @@ class CommentsList extends StatelessWidget {
   final List<VoidCallback> onPressingReplyList;
   final PostType parentPostType;
   final String postUserId;
+  final String parentPostId;
   final GetInteractionsProviderParams getInteractionsProviderParams;
 
-  static CommentsList get dummyInstance => CommentsList(
-        comments: [],
-        onPressingReplyList: [],
-        parentPostType: PostType.phoneReview,
-        postUserId: 'post user id',
-        getInteractionsProviderParams: GetInteractionsProviderParams(
-            postId: 'dummy', postType: PostType.phoneReview),
-      );
+  // static CommentsList get dummyInstance => CommentsList(
+  //       comments: [],
+  //       onPressingReplyList: [],
+  //       parentPostType: PostType.phoneReview,
+  //       postUserId: 'post user id',
+  //       getInteractionsProviderParams: GetInteractionsProviderParams(
+  //           postId: 'dummy', postType: PostType.phoneReview),
+  //     );
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +53,7 @@ class CommentsList extends StatelessWidget {
             parentPostType: parentPostType,
             postUserId: postUserId,
             getInteractionsProviderParams: getInteractionsProviderParams,
+            parentPostId: parentPostId,
           ),
           if (i != comments.length - 1) VerticalSpacesBetween.interactionTrees,
         ],

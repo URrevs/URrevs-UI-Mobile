@@ -25,6 +25,7 @@ class CommentTree extends ConsumerStatefulWidget {
     required this.parentPostType,
     required this.postUserId,
     required this.getInteractionsProviderParams,
+    required this.parentPostId,
   })  : imageUrl = comment.photo,
         authorName = comment.userName,
         userId = comment.userId,
@@ -53,18 +54,19 @@ class CommentTree extends ConsumerStatefulWidget {
   final VoidCallback onPressingReply;
   final PostType parentPostType;
   final String postUserId;
+  final String parentPostId;
   final GetInteractionsProviderParams getInteractionsProviderParams;
 
   late final DirectInteractionProviderParams _directInteractionProviderParams;
 
-  static CommentTree get dummyInstance => CommentTree.fromComment(
-        Comment.dummyInstance,
-        onPressingReply: () {},
-        parentPostType: PostType.phoneReview,
-        postUserId: 'dummy',
-        getInteractionsProviderParams: GetInteractionsProviderParams(
-            postId: 'dummy', postType: PostType.phoneReview),
-      );
+  // static CommentTree get dummyInstance => CommentTree.fromComment(
+  //       Comment.dummyInstance,
+  //       onPressingReply: () {},
+  //       parentPostType: PostType.phoneReview,
+  //       postUserId: 'dummy',
+  //       getInteractionsProviderParams: GetInteractionsProviderParams(
+  //           postId: 'dummy', postType: PostType.phoneReview),
+  //     );
 
   @override
   ConsumerState<CommentTree> createState() => _CommentTreeState();
@@ -111,6 +113,12 @@ class _CommentTreeState extends ConsumerState<CommentTree> {
                   maxWidth: constraints.maxWidth - 16.w,
                   inQuestionCard: false,
                   interactionType: InteractionType.comment,
+                  parentDirectInteractionId: null,
+                  parentPostId: widget.parentPostId,
+                  postContentType: widget.parentPostType.postContentType,
+                  interactionId: widget.commentId,
+                  targetType: widget.parentPostType.targetType,
+                  authorId: widget.userId,
                 ),
                 InteractionFooter(
                   onPressingReply: () {
@@ -152,6 +160,8 @@ class _CommentTreeState extends ConsumerState<CommentTree> {
                       postUserId: widget.postUserId,
                       getInteractionsProviderParams:
                           widget.getInteractionsProviderParams,
+                      parentDirectInteractionId: widget.commentId,
+                      parentPostId: widget.parentPostId,
                     ),
                     if (i != widget.replies.length - 1)
                       VerticalSpacesBetween.replies,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/bottom_navigation_bar_container_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/menu_screen/subscreens/admin_panel/subscreens.dart/reports_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/menu_screen/subscreens/admin_panel/subscreens.dart/update_products_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
@@ -98,7 +99,18 @@ class _AdminPanelScreenState extends ConsumerState<AdminPanelScreen> {
       children: [
         _buildUpdateTile(),
         _buildCompetitionTile(),
+        _buildReportsTile(),
       ],
+    );
+  }
+
+  Widget _buildReportsTile() {
+    return ItemTile(
+      title: LocaleKeys.reports.tr(),
+      iconData: Icons.report_gmailerrorred,
+      onTap: () {
+        Navigator.of(context).pushNamed(ReportsScreen.routeName);
+      },
     );
   }
 

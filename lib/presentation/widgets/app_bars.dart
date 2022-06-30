@@ -282,6 +282,33 @@ class AppBars {
     );
   }
 
+  static PreferredSize appBarofReportsScreen({
+    required BuildContext context,
+    required TabController controller,
+  }) {
+    return PreferredSize(
+      preferredSize: Size.fromHeight(
+        82.h,
+      ),
+      child: AppBar(
+        elevation: 3,
+        titleSpacing: 0,
+        backgroundColor: ColorManager.white,
+        iconTheme: IconThemeData(
+          color: ColorManager.black,
+        ),
+        title: Text(LocaleKeys.reports.tr()),
+        bottom: TabBar(
+          controller: controller,
+          tabs: [
+            Tab(text: LocaleKeys.open.tr()),
+            Tab(text: LocaleKeys.closed.tr()),
+          ],
+        ),
+      ),
+    );
+  }
+
   // static SliverAppBar appBarWithFilters({
   //   required ValueChanged<ReviewsFilter> setFilter,
   //   required bool isMobileFilterPressed,

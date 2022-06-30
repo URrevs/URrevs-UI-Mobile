@@ -965,30 +965,100 @@ class Repository {
   }
 
   Future<Either<Failure, void>> reportPhoneReview(
-      String reviewId, ReportPostRequest request) {
+      String reviewId, ReportSocialItemRequest request) {
     return _tryAndCatch(() async {
       await _remoteDataSource.reportPhoneReview(reviewId, request);
     });
   }
 
   Future<Either<Failure, void>> reportCompanyReview(
-      String reviewId, ReportPostRequest request) {
+      String reviewId, ReportSocialItemRequest request) {
     return _tryAndCatch(() async {
       await _remoteDataSource.reportCompanyReview(reviewId, request);
     });
   }
 
   Future<Either<Failure, void>> reportPhoneQuestion(
-      String questionId, ReportPostRequest request) {
+      String questionId, ReportSocialItemRequest request) {
     return _tryAndCatch(() async {
       await _remoteDataSource.reportPhoneQuestion(questionId, request);
     });
   }
 
   Future<Either<Failure, void>> reportCompanyQuestion(
-      String questionId, ReportPostRequest request) {
+      String questionId, ReportSocialItemRequest request) {
     return _tryAndCatch(() async {
       await _remoteDataSource.reportCompanyQuestion(questionId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> reportPhoneReviewComment(
+      String reviewId, String commentId, ReportSocialItemRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.reportPhoneReviewComment(
+          reviewId, commentId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> reportCompanyReviewComment(
+      String reviewId, String commentId, ReportSocialItemRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.reportCompanyReviewComment(
+          reviewId, commentId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> reportPhoneQuestionAnswer(
+      String questionId, String answerId, ReportSocialItemRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.reportPhoneQuestionAnswer(
+          questionId, answerId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> reportCompanyQuestionAnswer(
+      String questionId, String answerId, ReportSocialItemRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.reportCompanyQuestionAnswer(
+          questionId, answerId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> reportPhoneReviewCommentReply(String reviewId,
+      String commentId, String replyId, ReportSocialItemRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.reportPhoneReviewCommentReply(
+          reviewId, commentId, replyId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> reportCompanyReviewCommentReply(String reviewId,
+      String commentId, String replyId, ReportSocialItemRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.reportCompanyReviewCommentReply(
+          reviewId, commentId, replyId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> reportPhoneQuestionAnswerReply(
+      String questionId,
+      String answerId,
+      String replyId,
+      ReportSocialItemRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.reportPhoneQuestionAnswerReply(
+          questionId, answerId, replyId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> reportCompanyQuestionAnswerReply(
+      String questionId,
+      String answerId,
+      String replyId,
+      ReportSocialItemRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.reportCompanyQuestionAnswerReply(
+          questionId, answerId, replyId, request);
     });
   }
 }

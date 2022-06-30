@@ -26,35 +26,6 @@ import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/custom_network_image.dart';
 import 'dart:math' as math;
 
-class SuggestedItem {
-  final String name;
-  final String imageUrl;
-
-  SuggestedItem({
-    required this.name,
-    required this.imageUrl,
-  });
-}
-
-/// Testing data for similar phones widget.
-List<SuggestedItem> suggestedItems = [
-  SuggestedItem(
-      name: 'Samsung Galaxy A52s',
-      imageUrl: 'https://picsum.photos/seed/picsum/200/200'),
-  SuggestedItem(
-      name: 'Samsung Galaxy A32',
-      imageUrl: 'https://picsum.photos/seed/picsum/200/200'),
-  SuggestedItem(
-      name: 'Samsung Galaxy A72',
-      imageUrl: 'https://picsum.photos/seed/picsum/200/200'),
-  SuggestedItem(
-      name: 'Samsung Galaxy A72sdfsd gasdfgadfgas',
-      imageUrl: 'https://picsum.photos/seed/picsum/200/200'),
-  SuggestedItem(
-      name: 'Samsung Galaxy A72',
-      imageUrl: 'https://picsum.photos/seed/picsum/200/200'),
-];
-
 class ProductProfileSpecsSubscreen extends ConsumerStatefulWidget {
   const ProductProfileSpecsSubscreen({Key? key, required this.phoneId})
       : super(key: key);
@@ -220,7 +191,7 @@ class _ProductProfileSpecsSubscreenState
     state as GetSimilarPhonesLoadedState;
     return ListView.builder(
       scrollDirection: Axis.horizontal,
-      itemCount: suggestedItems.length,
+      itemCount: state.phones.length,
       itemBuilder: (context, index) {
         final phone = state.phones[index];
         return Padding(

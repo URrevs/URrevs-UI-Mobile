@@ -287,7 +287,6 @@ class CompanyReviewCard extends ConsumerWidget {
                   postedDate: postedDate,
                   usedSinceDate: null,
                   views: views,
-                  cardType: CardType.companyReview,
                   userId: userId,
                   targetId: companyId,
                   targetType: TargetType.company,

@@ -3,16 +3,16 @@ import 'package:json_annotation/json_annotation.dart';
 part 'reports_requests.g.dart';
 
 @JsonSerializable()
-class ReportPostRequest {
+class ReportSocialItemRequest {
   int reason;
   @JsonKey(includeIfNull: false)
   String? info;
-  ReportPostRequest({
+  ReportSocialItemRequest({
     required this.reason,
     required this.info,
   });
 
-  factory ReportPostRequest.fromJson(Map<String, Object?> json) =>
-      _$ReportPostRequestFromJson(json);
-  Map<String, dynamic> toJson() => _$ReportPostRequestToJson(this);
+  factory ReportSocialItemRequest.fromJson(Map<String, Object?> json) =>
+      _$ReportSocialItemRequestFromJson(json);
+  Map<String, dynamic> toJson() => _$ReportSocialItemRequestToJson(this);
 }

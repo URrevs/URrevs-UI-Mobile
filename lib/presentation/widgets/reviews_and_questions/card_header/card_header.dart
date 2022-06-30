@@ -18,13 +18,16 @@ class CardHeader extends StatelessWidget {
     required this.authorName,
     required this.imageUrl,
     required this.targetName,
-    required this.cardType,
     required this.userId,
     required this.targetId,
     required this.postId,
     required this.targetType,
     required this.postContentType,
-  }) : super(key: key);
+    this.usedInReportCard = false,
+  })  : assert(usedInReportCard || targetType != null),
+        assert(usedInReportCard || postId != null),
+        assert(usedInReportCard || postContentType != null),
+        super(key: key);
 
   /// Profile image url of the current logged in user.
   final String? imageUrl;
@@ -44,15 +47,14 @@ class CardHeader extends StatelessWidget {
   /// How many times this review was viewed.
   final int? views;
 
-  final CardType cardType;
-
   final String userId;
 
   final String targetId;
-  final String postId;
+  final String? postId;
 
-  final TargetType targetType;
-  final PostContentType postContentType;
+  final TargetType? targetType;
+  final PostContentType? postContentType;
+  final bool usedInReportCard;
 
   @override
   Widget build(BuildContext context) {
@@ -78,10 +80,10 @@ class CardHeader extends StatelessWidget {
                 CardHeaderTitle(
                   authorName: authorName,
                   targetName: targetName,
-                  cardType: cardType,
                   targetId: targetId,
                   type: targetType,
                   userId: userId,
+                  usedInReportCard: usedInReportCard,
                 ),
                 CardHeaderSubtitle(
                   postedDate: postedDate,
@@ -91,12 +93,13 @@ class CardHeader extends StatelessWidget {
               ],
             ),
           ),
-          CardHeaderTrailer(
-            postContentType: postContentType,
-            postId: postId,
-            targetType: targetType,
-            userId: userId,
-          ),
+          if (!usedInReportCard)
+            CardHeaderTrailer(
+              postContentType: postContentType!,
+              postId: postId!,
+              targetType: targetType!,
+              userId: userId,
+            ),
         ],
       ),
     );
