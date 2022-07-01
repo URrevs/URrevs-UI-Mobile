@@ -133,7 +133,7 @@ class _InteractionBodyState extends ConsumerState<InteractionBody> {
   @override
   Widget build(BuildContext context) {
     ref.addErrorListener(
-      provider: reportPostProvider(_reportPostProviderParams),
+      provider: reportProvider(_reportPostProviderParams),
       context: context,
     );
     String? usedSinceStr;

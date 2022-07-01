@@ -14,6 +14,7 @@ import 'package:urrevs_ui_mobile/data/responses/leaderboard_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/misc_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/phones_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/questions_api_responses.dart';
+import 'package:urrevs_ui_mobile/data/responses/reports_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/reviews_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/search_api_responses.dart';
 import 'package:urrevs_ui_mobile/data/responses/update_api_responses.dart';
@@ -666,5 +667,15 @@ abstract class RemoteDataSource {
     @Path() String answerId,
     @Path() String replyId,
     @Body() ReportSocialItemRequest request,
+  );
+
+  @GET('/reports/open')
+  Future<GetReportsResponse> getOpenReports(
+    @Query('round') int round,
+  );
+
+  @GET('/reports/closed')
+  Future<GetReportsResponse> getClosedReports(
+    @Query('round') int round,
   );
 }

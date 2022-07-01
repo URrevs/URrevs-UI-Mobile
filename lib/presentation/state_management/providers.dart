@@ -20,6 +20,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/leaderb
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/logout_from_all_devices_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/phones_notifier/get_all_phones_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/phones_notifier/get_two_phones_specs_notifier.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/reports_notifiers/get_reports_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/reports_notifiers/report_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/search_notifiers/add_new_recent_search_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/search_notifiers/delete_recent_search_notifier.dart';
@@ -55,6 +56,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_sta
 import 'package:urrevs_ui_mobile/presentation/state_management/states/question_states/accept_answer_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/question_states/add_question_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/question_states/get_post_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/reports_states/get_reports_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reports_states/report_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/add_interaction_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/add_phone_review_state.dart';
@@ -308,7 +310,7 @@ final getMyRankInCompetitionProvider = StateNotifierProvider.autoDispose.family<
         GetMyRankInCompetitionProviderParams>(
     (ref, params) => GetMyRankInCompetitionNotifier());
 
-final reportPostProvider = StateNotifierProvider.autoDispose
+final reportProvider = StateNotifierProvider.autoDispose
     .family<ReportNotifier, ReportState, ReportProviderParams>((ref, params) =>
         ReportNotifier(
             socialItemId: params.socialItemId,
@@ -317,6 +319,10 @@ final reportPostProvider = StateNotifierProvider.autoDispose
             interactionType: params.interactionType,
             parentDirectInteractionId: params.parentDirectInteractionId,
             parentPostId: params.parentPostId));
+
+final getReportsProvider = StateNotifierProvider.autoDispose
+    .family<GetReportsNotifier, GetReportsState, GetReportsProviderParams>(
+        (ref, params) => GetReportsNotifier(reportStatus: params.reportStatus));
 
 // posts and interactions providers
 

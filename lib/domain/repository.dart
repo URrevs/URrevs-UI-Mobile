@@ -34,6 +34,7 @@ import 'package:urrevs_ui_mobile/domain/models/phone.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone_review.dart';
 import 'package:urrevs_ui_mobile/domain/models/post.dart';
 import 'package:urrevs_ui_mobile/domain/models/question.dart';
+import 'package:urrevs_ui_mobile/domain/models/report.dart';
 import 'package:urrevs_ui_mobile/domain/models/search_result.dart';
 import 'package:urrevs_ui_mobile/domain/models/specs.dart';
 import 'package:urrevs_ui_mobile/domain/models/user.dart';
@@ -1059,6 +1060,20 @@ class Repository {
     return _tryAndCatch(() async {
       await _remoteDataSource.reportCompanyQuestionAnswerReply(
           questionId, answerId, replyId, request);
+    });
+  }
+
+  Future<Either<Failure, List<Report>>> getOpenReports(int round) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.getOpenReports(round);
+      return response.reportsModels;
+    });
+  }
+
+  Future<Either<Failure, List<Report>>> getClosedReports(int round) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.getClosedReports(round);
+      return response.reportsModels;
     });
   }
 }

@@ -261,7 +261,7 @@
   "selectTheReasonForTheComplaint": "Select the reason for the complaint",
   "spam": "Spam",
   "violentContent": "Violent content",
-  "harrasment": "harrasment",
+  "harassment": "harassment",
   "hateContent": "Hate Content",
   "nudity": "Nudity",
   "other": "Other",
@@ -284,5 +284,15 @@
   "showContent": "Show content",
   "closeComplaint": "Close complaint",
   "hideThisContent": "Hide this content",
-  "blockThisUsersAccount": "Block this user's account"
+  "blockThisUsersAccount": "Block this user's account",
+  "phoneComment": "phone review comment",
+  "companyCommment": "company review commment",
+  "phoneAnswer": "phone question answer",
+  "companyAnswer": "company question answer",
+  "phoneCommentReply": "phone review comment reply",
+  "companyCommmentReply": "company review commment reply",
+  "phoneAnswerReply": "phone question answer reply",
+  "companyAnswerReply": "company question answer reply",
+  "letThisContentBeViewed": "Let this content be viewed",
+  "unblockThisUsersAccount": "Unblock this user's account"
 }

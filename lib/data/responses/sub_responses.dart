@@ -11,6 +11,7 @@ import 'package:urrevs_ui_mobile/domain/models/phone_review.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone_stats.dart';
 import 'package:urrevs_ui_mobile/domain/models/question.dart';
 import 'package:urrevs_ui_mobile/domain/models/reply_model.dart';
+import 'package:urrevs_ui_mobile/domain/models/report.dart';
 import 'package:urrevs_ui_mobile/domain/models/search_result.dart';
 import 'package:urrevs_ui_mobile/domain/models/specs.dart';
 import 'package:urrevs_ui_mobile/domain/models/user.dart';
@@ -1004,4 +1005,104 @@ class CompetitionSubResponse {
   factory CompetitionSubResponse.fromJson(Map<String, Object?> json) =>
       _$CompetitionSubResponseFromJson(json);
   Map<String, dynamic> toJson() => _$CompetitionSubResponseToJson(this);
+}
+
+@JsonSerializable()
+class ReportSubResponse {
+  @JsonKey(name: '_id')
+  String id;
+  ReportType type;
+  DateTime createdAt;
+  @JsonKey(fromJson: _intToComplaintReason, toJson: _complaintReasonToInt)
+  ComplaintReason reason;
+  String? info;
+  String reporterId;
+  String reporterName;
+  String? reporterPicture;
+  String reporteeId;
+  String reporteeName;
+  @JsonKey(name: 'phoneRev')
+  String? phoneReviewSubResponse;
+  @JsonKey(name: 'companyRev')
+  String? companyReviewSubResponse;
+  @JsonKey(name: 'phoneQues')
+  String? phoneQuestionSubResponse;
+  @JsonKey(name: 'companyQues')
+  String? companyQuestionSubResponse;
+  @JsonKey(name: 'phoneComment')
+  String? phoneCommentSubResponse;
+  @JsonKey(name: 'companyComment')
+  String? companyCommentSubResponse;
+  @JsonKey(name: 'phoneAnswer')
+  String? phoneAnswerSubResponse;
+  @JsonKey(name: 'companyAnswer')
+  String? companyAnswerSubResponse;
+  @JsonKey(name: 'phoneCommentReply')
+  String? phoneCommentReplySubResponse;
+  @JsonKey(name: 'companyCommentReply')
+  String? companyCommentReplySubResponse;
+  @JsonKey(name: 'phoneAnswerReply')
+  String? phoneAnswerReplySubResponse;
+  @JsonKey(name: 'companyAnswerReply')
+  String? companyAnswerReplySubResponse;
+  bool reporteeBlocked;
+  bool contentHidden;
+  ReportSubResponse({
+    required this.id,
+    required this.type,
+    required this.createdAt,
+    required this.reason,
+    this.info,
+    required this.reporterId,
+    required this.reporterName,
+    this.reporterPicture,
+    required this.reporteeId,
+    required this.reporteeName,
+    this.phoneReviewSubResponse,
+    this.companyReviewSubResponse,
+    this.phoneQuestionSubResponse,
+    this.companyQuestionSubResponse,
+    this.phoneCommentSubResponse,
+    this.companyCommentSubResponse,
+    this.phoneAnswerSubResponse,
+    this.companyAnswerSubResponse,
+    this.phoneCommentReplySubResponse,
+    this.companyCommentReplySubResponse,
+    this.phoneAnswerReplySubResponse,
+    this.companyAnswerReplySubResponse,
+    required this.reporteeBlocked,
+    required this.contentHidden,
+  });
+
+  static ComplaintReason _intToComplaintReason(int reasonNum) =>
+      ComplaintReason.values[reasonNum - 1];
+  static int _complaintReasonToInt(ComplaintReason reason) => reason.index + 1;
+
+  Report get reportModel => Report(
+        id: id,
+        type: type,
+        createdAt: createdAt,
+        reason: reason,
+        info: info,
+        reporterId: reporterId,
+        reporterName: reporterName,
+        reporterPicture: reporterPicture,
+        reporteeId: reporteeId,
+        reporteeName: reporteeName,
+        phoneReview: phoneReviewSubResponse,
+        companyReview: companyReviewSubResponse,
+        question: phoneQuestionSubResponse ?? companyQuestionSubResponse,
+        comment: phoneCommentSubResponse ?? companyCommentSubResponse,
+        answer: phoneAnswerSubResponse ?? companyAnswerSubResponse,
+        reply: phoneCommentReplySubResponse ??
+            companyCommentReplySubResponse ??
+            phoneAnswerReplySubResponse ??
+            companyAnswerReplySubResponse,
+        reporteeBlocked: reporteeBlocked,
+        contentHidden: contentHidden,
+      );
+
+  factory ReportSubResponse.fromJson(Map<String, Object?> json) =>
+      _$ReportSubResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$ReportSubResponseToJson(this);
 }

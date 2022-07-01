@@ -107,3 +107,24 @@ extension ComplaintReasonExtension on ComplaintReason {
 
   String get translatedName => name.tr();
 }
+
+enum ReportType {
+  phoneReview,
+  companyReview,
+  phoneQuestion,
+  companyQuestion,
+  phoneComment,
+  companyComment,
+  phoneAnswer,
+  companyAnswer,
+  phoneCommentReply,
+  companyCommentReply,
+  phoneAnswerReply,
+  companyAnswerReply,
+}
+
+extension ReportTypeExtension on ReportType {
+  String get translatedName => name.tr();
+}
+
+enum ReportStatus { open, closed }

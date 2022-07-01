@@ -260,7 +260,7 @@ abstract class  LocaleKeys {
   static const priceWhenReleased = 'priceWhenReleased';
   static const noMoreComments = 'noMoreComments';
   static const enterAdditionalInformationRegardingTheComplaint = 'enterAdditionalInformationRegardingTheComplaint';
-  static const harrasment = 'harrasment';
+  static const harassment = 'harassment';
   static const hateContent = 'hateContent';
   static const nudity = 'nudity';
   static const report = 'report';
@@ -286,5 +286,15 @@ abstract class  LocaleKeys {
   static const closeComplaint = 'closeComplaint';
   static const hideThisContent = 'hideThisContent';
   static const blockThisUsersAccount = 'blockThisUsersAccount';
+  static const phoneComment = 'phoneComment';
+  static const companyCommment = 'companyCommment';
+  static const phoneAnswer = 'phoneAnswer';
+  static const companyAnswer = 'companyAnswer';
+  static const phoneCommentReply = 'phoneCommentReply';
+  static const companyCommmentReply = 'companyCommmentReply';
+  static const phoneAnswerReply = 'phoneAnswerReply';
+  static const companyAnswerReply = 'companyAnswerReply';
+  static const letThisContentBeViewed = 'letThisContentBeViewed';
+  static const unblockThisUsersAccount = 'unblockThisUsersAccount';
 
 }

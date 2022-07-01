@@ -261,3 +261,8 @@ class GetTopUsersInCompetitionProviderParams extends NotSyncedProviderParams {
 class GetMyRankInCompetitionProviderParams extends NotSyncedProviderParams {
   GetMyRankInCompetitionProviderParams();
 }
+
+class GetReportsProviderParams extends NotSyncedProviderParams {
+  final ReportStatus reportStatus;
+  GetReportsProviderParams({required this.reportStatus});
+}

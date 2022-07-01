@@ -197,17 +197,17 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
       body: ListView(
         padding: EdgeInsets.all(20),
         children: [
-          ReportCard(
-            imageUrl: null,
-            authorName: 'Amr Fatouh',
-            authorId: 'authorId',
-            targetUserName: 'Fady Ahmed',
-            targetUserId: 'targetUserId',
-            postedDate: DateTime.now(),
-            postType: PostType.phoneReview,
-            complaintReason: ComplaintReason.spam,
-            complaintContent: 'this is complaint content',
-          )
+          // ReportCard(
+          //   imageUrl: null,
+          //   authorName: 'Amr Fatouh',
+          //   authorId: 'authorId',
+          //   targetUserName: 'Fady Ahmed',
+          //   targetUserId: 'targetUserId',
+          //   postedDate: DateTime.now(),
+          //   postType: PostType.phoneReview,
+          //   complaintReason: ComplaintReason.spam,
+          //   complaintContent: 'this is complaint content',
+          // )
           // Center(
           //   child: ClipRRect(
           //     borderRadius: BorderRadius.circular(50),

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:urrevs_ui_mobile/domain/models/report.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/app_elevations.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
@@ -13,27 +14,12 @@ import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 class ReportCard extends StatelessWidget {
   const ReportCard({
     Key? key,
-    required this.imageUrl,
-    required this.authorName,
-    required this.authorId,
-    required this.targetUserName,
-    required this.targetUserId,
-    required this.postedDate,
-    required this.postType,
-    required this.complaintReason,
-    required this.complaintContent,
+    required this.report,
+    required this.reportStatus,
   }) : super(key: key);
 
-  final String? imageUrl;
-  final String authorName;
-  final String authorId;
-  final String targetUserName;
-  final String targetUserId;
-  final DateTime postedDate;
-
-  final PostType postType;
-  final ComplaintReason complaintReason;
-  final String? complaintContent;
+  final Report report;
+  final ReportStatus reportStatus;
 
   Widget _buildElevatedButton({
     required VoidCallback onPressed,
@@ -76,12 +62,12 @@ class ReportCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CardHeader(
-              imageUrl: imageUrl,
-              authorName: authorName,
-              targetName: targetUserName,
-              postedDate: postedDate,
-              userId: authorId,
-              targetId: targetUserId,
+              imageUrl: report.reporterPicture,
+              authorName: report.reporterName,
+              targetName: report.reporteeName,
+              postedDate: report.createdAt,
+              userId: report.reporterId,
+              targetId: report.reporteeId,
               targetType: null,
               postContentType: null,
               postId: null,
@@ -113,7 +99,7 @@ class ReportCard extends StatelessWidget {
                   style: TextStyleManager.s16w500,
                 ),
                 TextSpan(
-                  text: '${postType.translatedName}\n',
+                  text: '${report.type.translatedName}\n',
                   style: TextStyleManager.s16w400,
                 ),
               ],
@@ -127,7 +113,7 @@ class ReportCard extends StatelessWidget {
                   style: TextStyleManager.s16w500,
                 ),
                 TextSpan(
-                  text: '${complaintReason.translatedName}\n',
+                  text: '${report.reason.translatedName}\n',
                   style: TextStyleManager.s16w400,
                 ),
               ],
@@ -141,7 +127,7 @@ class ReportCard extends StatelessWidget {
                   style: TextStyleManager.s16w500,
                 ),
                 TextSpan(
-                  text: '\n$complaintContent',
+                  text: '\n${report.info ?? '-'}',
                   style: TextStyleManager.s16w400,
                 ),
               ],
@@ -166,12 +152,14 @@ class ReportCard extends StatelessWidget {
                 color: ColorManager.blue,
                 text: LocaleKeys.showContent.tr(),
               ),
-              10.horizontalSpace,
-              _buildElevatedButton(
-                onPressed: () {},
-                color: ColorManager.blue,
-                text: LocaleKeys.closeComplaint.tr(),
-              ),
+              if (reportStatus == ReportStatus.open) ...[
+                10.horizontalSpace,
+                _buildElevatedButton(
+                  onPressed: () {},
+                  color: ColorManager.blue,
+                  text: LocaleKeys.closeComplaint.tr(),
+                ),
+              ],
             ],
           ),
           8.verticalSpace,
@@ -181,13 +169,17 @@ class ReportCard extends StatelessWidget {
               _buildElevatedButton(
                 onPressed: () {},
                 color: ColorManager.red,
-                text: LocaleKeys.hideThisContent.tr(),
+                text: !report.contentHidden
+                    ? LocaleKeys.hideThisContent.tr()
+                    : LocaleKeys.letThisContentBeViewed.tr(),
               ),
               10.horizontalSpace,
               _buildElevatedButton(
                 onPressed: () {},
                 color: ColorManager.red,
-                text: LocaleKeys.blockThisUsersAccount.tr(),
+                text: !report.reporteeBlocked
+                    ? LocaleKeys.blockThisUsersAccount.tr()
+                    : LocaleKeys.unblockThisUsersAccount.tr(),
               ),
             ],
           ),

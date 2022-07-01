@@ -274,7 +274,7 @@ class CodegenLoader extends AssetLoader{
   "priceWhenReleased": "السعر عند صدوره",
   "noMoreComments": "لا مزيد من التعليقات",
   "enterAdditionalInformationRegardingTheComplaint": "أدخل معلومات إضافية بخصوص الشكوى",
-  "harrasment": "تحرش",
+  "harassment": "تحرش",
   "hateContent": "محتوى يدعو الى الكراهية",
   "nudity": "محتوى إباحي",
   "other": "أخرى",
@@ -300,7 +300,17 @@ class CodegenLoader extends AssetLoader{
   "showContent": "أظهر المحتوى",
   "closeComplaint": "أغلق الشكوى",
   "hideThisContent": "منع عرض هذا المحتوى",
-  "blockThisUsersAccount": "إيقاف حساب هذا المستخدم"
+  "blockThisUsersAccount": "إيقاف حساب هذا المستخدم",
+  "phoneComment": "تعليق على مراجعة هاتف",
+  "companyCommment": "تعليق على مراجعة شركة",
+  "phoneAnswer": "إجابة سؤال على هاتف",
+  "companyAnswer": "إجابة سؤال على شركة",
+  "phoneCommentReply": "رد على تعليق على مراجعة هاتف",
+  "companyCommmentReply": "رد على تعليق على مراجعة شركة",
+  "phoneAnswerReply": "رد على إجابة سؤال على هاتف",
+  "companyAnswerReply": "رد على إجابة سؤال على شركة",
+  "letThisContentBeViewed": "إتاحة عرض هذا المحتوى",
+  "unblockThisUsersAccount": "إعادة تشغيل حساب هذا المستخدم"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -565,7 +575,7 @@ static const Map<String,dynamic> en = {
   "selectTheReasonForTheComplaint": "Select the reason for the complaint",
   "spam": "Spam",
   "violentContent": "Violent content",
-  "harrasment": "harrasment",
+  "harassment": "harassment",
   "hateContent": "Hate Content",
   "nudity": "Nudity",
   "other": "Other",
@@ -588,7 +598,17 @@ static const Map<String,dynamic> en = {
   "showContent": "Show content",
   "closeComplaint": "Close complaint",
   "hideThisContent": "Hide this content",
-  "blockThisUsersAccount": "Block this user's account"
+  "blockThisUsersAccount": "Block this user's account",
+  "phoneComment": "phone review comment",
+  "companyCommment": "company review commment",
+  "phoneAnswer": "phone question answer",
+  "companyAnswer": "company question answer",
+  "phoneCommentReply": "phone review comment reply",
+  "companyCommmentReply": "company review commment reply",
+  "phoneAnswerReply": "phone question answer reply",
+  "companyAnswerReply": "company question answer reply",
+  "letThisContentBeViewed": "Let this content be viewed",
+  "unblockThisUsersAccount": "Unblock this user's account"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

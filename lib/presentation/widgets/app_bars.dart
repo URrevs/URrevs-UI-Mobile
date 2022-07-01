@@ -297,7 +297,10 @@ class AppBars {
         iconTheme: IconThemeData(
           color: ColorManager.black,
         ),
-        title: Text(LocaleKeys.reports.tr()),
+        title: Text(
+          LocaleKeys.reports.tr(),
+          style: TextStyleManager.s20w700.copyWith(color: ColorManager.black),
+        ),
         bottom: TabBar(
           controller: controller,
           tabs: [

@@ -67,7 +67,7 @@ class _SendReportDialogState extends ConsumerState<SendReportDialog> {
       reason: _complaintReason!.indexForRequest,
       info: _controller.text.isNotEmpty ? _controller.text : null,
     );
-    ref.read(reportPostProvider(_providerParams).notifier).reportPost(request);
+    ref.read(reportProvider(_providerParams).notifier).reportPost(request);
     Navigator.of(context).pop();
   }
 
