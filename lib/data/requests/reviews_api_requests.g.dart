@@ -28,25 +28,34 @@ AddPhoneReviewRequest _$AddPhoneReviewRequestFromJson(
     );
 
 Map<String, dynamic> _$AddPhoneReviewRequestToJson(
-        AddPhoneReviewRequest instance) =>
-    <String, dynamic>{
-      'phoneId': instance.phoneId,
-      'companyId': instance.companyId,
-      'ownedDate': instance.ownedDate.toIso8601String(),
-      'generalRating': instance.generalRating,
-      'uiRating': instance.uiRating,
-      'manQuality': instance.manQuality,
-      'valFMon': instance.valFMon,
-      'camera': instance.camera,
-      'callQuality': instance.callQuality,
-      'battery': instance.battery,
-      'pros': instance.pros,
-      'cons': instance.cons,
-      'refCode': instance.refCode,
-      'companyRating': instance.companyRating,
-      'compPros': instance.compPros,
-      'compCons': instance.compCons,
-    };
+    AddPhoneReviewRequest instance) {
+  final val = <String, dynamic>{
+    'phoneId': instance.phoneId,
+    'companyId': instance.companyId,
+    'ownedDate': instance.ownedDate.toIso8601String(),
+    'generalRating': instance.generalRating,
+    'uiRating': instance.uiRating,
+    'manQuality': instance.manQuality,
+    'valFMon': instance.valFMon,
+    'camera': instance.camera,
+    'callQuality': instance.callQuality,
+    'battery': instance.battery,
+    'pros': instance.pros,
+    'cons': instance.cons,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('refCode', instance.refCode);
+  val['companyRating'] = instance.companyRating;
+  val['compPros'] = instance.compPros;
+  val['compCons'] = instance.compCons;
+  return val;
+}
 
 AddCommentToPhoneReviewRequest _$AddCommentToPhoneReviewRequestFromJson(
         Map<String, dynamic> json) =>

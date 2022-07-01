@@ -41,7 +41,7 @@ class _SendReportDialogState extends ConsumerState<SendReportDialog> {
   List<String> translatedLabels = [
     LocaleKeys.spam.tr(),
     LocaleKeys.violentContent.tr(),
-    LocaleKeys.harrasment.tr(),
+    LocaleKeys.harassment.tr(),
     LocaleKeys.hateContent.tr(),
     LocaleKeys.nudity.tr(),
     'other'.tr(),

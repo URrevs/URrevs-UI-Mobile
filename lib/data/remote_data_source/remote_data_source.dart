@@ -669,6 +669,111 @@ abstract class RemoteDataSource {
     @Body() ReportSocialItemRequest request,
   );
 
+  @PUT('/reviews/phone/{reviewId}/hide')
+  Future<BaseResponse> hidePhoneReview(
+    @Path() String reviewId,
+  );
+  @PUT('/reviews/company/{reviewId}/hide')
+  Future<BaseResponse> hideCompanyReview(
+    @Path() String reviewId,
+  );
+  @PUT('/reviews/phone/{reviewId}/unhide')
+  Future<BaseResponse> unhidePhoneReview(
+    @Path() String reviewId,
+  );
+  @PUT('/reviews/company/{reviewId}/unhide')
+  Future<BaseResponse> unhideCompanyReview(
+    @Path() String reviewId,
+  );
+  @PUT('/questions/phone/{questionId}/hide')
+  Future<BaseResponse> hidePhoneQuestion(
+    @Path() String questionId,
+  );
+  @PUT('/questions/company/{questionId}/hide')
+  Future<BaseResponse> hideCompanyQuestion(
+    @Path() String questionId,
+  );
+  @PUT('/questions/phone/{questionId}/unhide')
+  Future<BaseResponse> unhidePhoneQuestion(
+    @Path() String questionId,
+  );
+  @PUT('/questions/company/{questionId}/unhide')
+  Future<BaseResponse> unhideCompanyQuestion(
+    @Path() String questionId,
+  );
+  @PUT('/reviews/phone/comments/{commentId}/hide')
+  Future<BaseResponse> hidePhoneReviewComment(
+    @Path() String commentId,
+  );
+  @PUT('/reviews/company/comments/{commentId}/hide')
+  Future<BaseResponse> hideCompanyReviewComment(
+    @Path() String commentId,
+  );
+  @PUT('/reviews/phone/comments/{commentId}/unhide')
+  Future<BaseResponse> unhidePhoneReviewComment(
+    @Path() String commentId,
+  );
+  @PUT('/reviews/company/comments/{commentId}/unhide')
+  Future<BaseResponse> unhideCompanyReviewComment(
+    @Path() String commentId,
+  );
+  @PUT('/questions/phone/answers/{answerId}/hide')
+  Future<BaseResponse> hidePhoneQuestionAnswer(
+    @Path() String answerId,
+  );
+  @PUT('/questions/company/answers/{answerId}/hide')
+  Future<BaseResponse> hideCompanyQuestionAnswer(
+    @Path() String answerId,
+  );
+  @PUT('/questions/phone/answers/{answerId}/unhide')
+  Future<BaseResponse> unhidePhoneQuestionAnswer(
+    @Path() String answerId,
+  );
+  @PUT('/questions/company/answers/{answerId}/unhide')
+  Future<BaseResponse> unhideCompanyQuestionAnswer(
+    @Path() String answerId,
+  );
+  @PUT('/reviews/phone/comments/{commentId}/replies/{replyId}/hide')
+  Future<BaseResponse> hidePhoneReviewReply(
+    @Path() String commentId,
+    @Path() String replyId,
+  );
+  @PUT('/reviews/company/comments/{commentId}/replies/{replyId}/hide')
+  Future<BaseResponse> hideCompanyReviewReply(
+    @Path() String commentId,
+    @Path() String replyId,
+  );
+  @PUT('/questions/phone/answers/{answerId}/replies/{replyId}/hide')
+  Future<BaseResponse> hidePhoneQuestionReply(
+    @Path() String answerId,
+    @Path() String replyId,
+  );
+  @PUT('/questions/company/answers/{answerId}/replies/{replyId}/hide')
+  Future<BaseResponse> hideCompanyQuestionReply(
+    @Path() String answerId,
+    @Path() String replyId,
+  );
+  @PUT('/reviews/phone/comments/{commentId}/replies/{replyId}/unhide')
+  Future<BaseResponse> unhidePhoneReviewReply(
+    @Path() String commentId,
+    @Path() String replyId,
+  );
+  @PUT('/reviews/company/comments/{commentId}/replies/{replyId}/unhide')
+  Future<BaseResponse> unhideCompanyReviewReply(
+    @Path() String commentId,
+    @Path() String replyId,
+  );
+  @PUT('/questions/phone/answers/{answerId}/replies/{replyId}/unhide')
+  Future<BaseResponse> unhidePhoneQuestionReply(
+    @Path() String answerId,
+    @Path() String replyId,
+  );
+  @PUT('/questions/company/answers/{answerId}/replies/{replyId}/unhide')
+  Future<BaseResponse> unhideCompanyQuestionReply(
+    @Path() String answerId,
+    @Path() String replyId,
+  );
+
   @GET('/reports/open')
   Future<GetReportsResponse> getOpenReports(
     @Query('round') int round,
@@ -677,5 +782,11 @@ abstract class RemoteDataSource {
   @GET('/reports/closed')
   Future<GetReportsResponse> getClosedReports(
     @Query('round') int round,
+  );
+
+  @PUT('/reports/{reportId}/actions')
+  Future<BaseResponse> updateReportState(
+    @Path() String reportId,
+    @Body() UpdateReportStateRequest request,
   );
 }

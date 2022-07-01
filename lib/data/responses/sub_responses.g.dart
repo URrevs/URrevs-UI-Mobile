@@ -15,14 +15,23 @@ UserSubResponse _$UserSubResponseFromJson(Map<String, dynamic> json) =>
       refCode: json['refCode'] as String,
     );
 
-Map<String, dynamic> _$UserSubResponseToJson(UserSubResponse instance) =>
-    <String, dynamic>{
-      '_id': instance.id,
-      'name': instance.name,
-      'picture': instance.picture,
-      'points': instance.points,
-      'refCode': instance.refCode,
-    };
+Map<String, dynamic> _$UserSubResponseToJson(UserSubResponse instance) {
+  final val = <String, dynamic>{
+    '_id': instance.id,
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('picture', instance.picture);
+  val['points'] = instance.points;
+  val['refCode'] = instance.refCode;
+  return val;
+}
 
 AnotherUserSubResponse _$AnotherUserSubResponseFromJson(
         Map<String, dynamic> json) =>
@@ -34,13 +43,22 @@ AnotherUserSubResponse _$AnotherUserSubResponseFromJson(
     );
 
 Map<String, dynamic> _$AnotherUserSubResponseToJson(
-        AnotherUserSubResponse instance) =>
-    <String, dynamic>{
-      '_id': instance.id,
-      'name': instance.name,
-      'picture': instance.picture,
-      'points': instance.points,
-    };
+    AnotherUserSubResponse instance) {
+  final val = <String, dynamic>{
+    '_id': instance.id,
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('picture', instance.picture);
+  val['points'] = instance.points;
+  return val;
+}
 
 UserWithRankSubResponse _$UserWithRankSubResponseFromJson(
         Map<String, dynamic> json) =>
@@ -53,14 +71,23 @@ UserWithRankSubResponse _$UserWithRankSubResponseFromJson(
     );
 
 Map<String, dynamic> _$UserWithRankSubResponseToJson(
-        UserWithRankSubResponse instance) =>
-    <String, dynamic>{
-      '_id': instance.id,
-      'name': instance.name,
-      'picture': instance.picture,
-      'points': instance.points,
-      'rank': instance.rank,
-    };
+    UserWithRankSubResponse instance) {
+  final val = <String, dynamic>{
+    '_id': instance.id,
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('picture', instance.picture);
+  val['points'] = instance.points;
+  val['rank'] = instance.rank;
+  return val;
+}
 
 PhoneSubResponse _$PhoneSubResponseFromJson(Map<String, dynamic> json) =>
     PhoneSubResponse(
@@ -121,13 +148,22 @@ CompanyWithLogoSubResponse _$CompanyWithLogoSubResponseFromJson(
     );
 
 Map<String, dynamic> _$CompanyWithLogoSubResponseToJson(
-        CompanyWithLogoSubResponse instance) =>
-    <String, dynamic>{
-      '_id': instance.id,
-      'type': instance.type,
-      'name': instance.name,
-      'logo': instance.logo,
-    };
+    CompanyWithLogoSubResponse instance) {
+  final val = <String, dynamic>{
+    '_id': instance.id,
+    'type': instance.type,
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('logo', instance.logo);
+  return val;
+}
 
 PhoneWithCompanyLogogSubResponse _$PhoneWithCompanyLogogSubResponseFromJson(
         Map<String, dynamic> json) =>
@@ -139,13 +175,22 @@ PhoneWithCompanyLogogSubResponse _$PhoneWithCompanyLogogSubResponseFromJson(
     );
 
 Map<String, dynamic> _$PhoneWithCompanyLogogSubResponseToJson(
-        PhoneWithCompanyLogogSubResponse instance) =>
-    <String, dynamic>{
-      '_id': instance.id,
-      'type': instance.type,
-      'name': instance.name,
-      'companyLogo': instance.companyLogo,
-    };
+    PhoneWithCompanyLogogSubResponse instance) {
+  final val = <String, dynamic>{
+    '_id': instance.id,
+    'type': instance.type,
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('companyLogo', instance.companyLogo);
+  return val;
+}
 
 SpecsSubResponse _$SpecsSubResponseFromJson(Map<String, dynamic> json) =>
     SpecsSubResponse(
@@ -186,44 +231,53 @@ SpecsSubResponse _$SpecsSubResponseFromJson(Map<String, dynamic> json) =>
       screenResolution: json['screenResolution'] as String?,
     );
 
-Map<String, dynamic> _$SpecsSubResponseToJson(SpecsSubResponse instance) =>
-    <String, dynamic>{
-      '_id': instance.id,
-      'name': instance.name,
-      'type': instance.type,
-      'picture': instance.picture,
-      'companyId': instance.companyId,
-      'companyName': instance.companyName,
-      'priceEgp': instance.priceEgp,
-      'releaseDate': instance.releaseDate,
-      'dimensions': instance.dimensions,
-      'network': instance.network,
-      'screenProtection': instance.screenProtection,
-      'os': instance.os,
-      'chipset': instance.chipset,
-      'cpu': instance.cpu,
-      'gpu': instance.gpu,
-      'externalMem': instance.externalMem,
-      'internalMem': instance.internalMem,
-      'mainCam': instance.mainCam,
-      'selfieCam': instance.selfieCam,
-      'loudspeaker': instance.loudspeaker,
-      'slot3.5mm': instance.slot3_5mm,
-      'wlan': instance.wlan,
-      'bluetooth': instance.bluetooth,
-      'gps': instance.gps,
-      'nfc': instance.nfc,
-      'radio': instance.radio,
-      'usb': instance.usb,
-      'sensors': instance.sensors,
-      'battery': instance.battery,
-      'charging': instance.charging,
-      'weight': instance.weight,
-      'sim': instance.sim,
-      'screenType': instance.screenType,
-      'screenSize': instance.screenSize,
-      'screenResolution': instance.screenResolution,
-    };
+Map<String, dynamic> _$SpecsSubResponseToJson(SpecsSubResponse instance) {
+  final val = <String, dynamic>{
+    '_id': instance.id,
+    'name': instance.name,
+    'type': instance.type,
+    'picture': instance.picture,
+    'companyId': instance.companyId,
+    'companyName': instance.companyName,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('priceEgp', instance.priceEgp);
+  writeNotNull('releaseDate', instance.releaseDate);
+  writeNotNull('dimensions', instance.dimensions);
+  writeNotNull('network', instance.network);
+  writeNotNull('screenProtection', instance.screenProtection);
+  writeNotNull('os', instance.os);
+  writeNotNull('chipset', instance.chipset);
+  writeNotNull('cpu', instance.cpu);
+  writeNotNull('gpu', instance.gpu);
+  writeNotNull('externalMem', instance.externalMem);
+  writeNotNull('internalMem', instance.internalMem);
+  writeNotNull('mainCam', instance.mainCam);
+  writeNotNull('selfieCam', instance.selfieCam);
+  writeNotNull('loudspeaker', instance.loudspeaker);
+  writeNotNull('slot3.5mm', instance.slot3_5mm);
+  writeNotNull('wlan', instance.wlan);
+  writeNotNull('bluetooth', instance.bluetooth);
+  writeNotNull('gps', instance.gps);
+  writeNotNull('nfc', instance.nfc);
+  writeNotNull('radio', instance.radio);
+  writeNotNull('usb', instance.usb);
+  writeNotNull('sensors', instance.sensors);
+  writeNotNull('battery', instance.battery);
+  writeNotNull('charging', instance.charging);
+  writeNotNull('weight', instance.weight);
+  writeNotNull('sim', instance.sim);
+  writeNotNull('screenType', instance.screenType);
+  writeNotNull('screenSize', instance.screenSize);
+  writeNotNull('screenResolution', instance.screenResolution);
+  return val;
+}
 
 PhoneStatsSubResponse _$PhoneStatsSubResponseFromJson(
         Map<String, dynamic> json) =>
@@ -322,32 +376,41 @@ PhoneReviewSubResponse _$PhoneReviewSubResponseFromJson(
     );
 
 Map<String, dynamic> _$PhoneReviewSubResponseToJson(
-        PhoneReviewSubResponse instance) =>
-    <String, dynamic>{
-      '_id': instance.id,
-      'type': instance.type,
-      'targetId': instance.targetId,
-      'targetName': instance.targetName,
-      'userId': instance.userId,
-      'userName': instance.userName,
-      'picture': instance.photo,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'views': instance.views,
-      'likes': instance.likes,
-      'commentsCount': instance.commentsCount,
-      'shares': instance.shares,
-      'ownedAt': instance.ownedAt.toIso8601String(),
-      'generalRating': instance.generalRating,
-      'uiRating': instance.uiRating,
-      'manufacturingQuality': instance.manufacturingQuality,
-      'valueForMoney': instance.valueForMoney,
-      'camera': instance.camera,
-      'callQuality': instance.callQuality,
-      'battery': instance.battery,
-      'pros': instance.pros,
-      'cons': instance.cons,
-      'liked': instance.liked,
-    };
+    PhoneReviewSubResponse instance) {
+  final val = <String, dynamic>{
+    '_id': instance.id,
+    'type': instance.type,
+    'targetId': instance.targetId,
+    'targetName': instance.targetName,
+    'userId': instance.userId,
+    'userName': instance.userName,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('picture', instance.photo);
+  val['createdAt'] = instance.createdAt.toIso8601String();
+  val['views'] = instance.views;
+  val['likes'] = instance.likes;
+  val['commentsCount'] = instance.commentsCount;
+  val['shares'] = instance.shares;
+  val['ownedAt'] = instance.ownedAt.toIso8601String();
+  val['generalRating'] = instance.generalRating;
+  val['uiRating'] = instance.uiRating;
+  val['manufacturingQuality'] = instance.manufacturingQuality;
+  val['valueForMoney'] = instance.valueForMoney;
+  val['camera'] = instance.camera;
+  val['callQuality'] = instance.callQuality;
+  val['battery'] = instance.battery;
+  val['pros'] = instance.pros;
+  val['cons'] = instance.cons;
+  val['liked'] = instance.liked;
+  return val;
+}
 
 PhoneReviewForAddPhoneReviewSubResponse
     _$PhoneReviewForAddPhoneReviewSubResponseFromJson(
@@ -378,31 +441,40 @@ PhoneReviewForAddPhoneReviewSubResponse
         );
 
 Map<String, dynamic> _$PhoneReviewForAddPhoneReviewSubResponseToJson(
-        PhoneReviewForAddPhoneReviewSubResponse instance) =>
-    <String, dynamic>{
-      '_id': instance.id,
-      'type': instance.type,
-      'phoneId': instance.phoneId,
-      'phoneName': instance.phoneName,
-      'userId': instance.userId,
-      'userName': instance.userName,
-      'picture': instance.photo,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'ownedAt': instance.ownedAt.toIso8601String(),
-      'views': instance.views,
-      'likes': instance.likes,
-      'commentsCount': instance.commentsCount,
-      'shares': instance.shares,
-      'generalRating': instance.generalRating,
-      'uiRating': instance.uiRating,
-      'manufacturingQuality': instance.manufacturingQuality,
-      'valueForMoney': instance.valueForMoney,
-      'camera': instance.camera,
-      'callQuality': instance.callQuality,
-      'battery': instance.battery,
-      'pros': instance.pros,
-      'cons': instance.cons,
-    };
+    PhoneReviewForAddPhoneReviewSubResponse instance) {
+  final val = <String, dynamic>{
+    '_id': instance.id,
+    'type': instance.type,
+    'phoneId': instance.phoneId,
+    'phoneName': instance.phoneName,
+    'userId': instance.userId,
+    'userName': instance.userName,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('picture', instance.photo);
+  val['createdAt'] = instance.createdAt.toIso8601String();
+  val['ownedAt'] = instance.ownedAt.toIso8601String();
+  val['views'] = instance.views;
+  val['likes'] = instance.likes;
+  val['commentsCount'] = instance.commentsCount;
+  val['shares'] = instance.shares;
+  val['generalRating'] = instance.generalRating;
+  val['uiRating'] = instance.uiRating;
+  val['manufacturingQuality'] = instance.manufacturingQuality;
+  val['valueForMoney'] = instance.valueForMoney;
+  val['camera'] = instance.camera;
+  val['callQuality'] = instance.callQuality;
+  val['battery'] = instance.battery;
+  val['pros'] = instance.pros;
+  val['cons'] = instance.cons;
+  return val;
+}
 
 CompanyReviewSubResponse _$CompanyReviewSubResponseFromJson(
         Map<String, dynamic> json) =>
@@ -427,26 +499,35 @@ CompanyReviewSubResponse _$CompanyReviewSubResponseFromJson(
     );
 
 Map<String, dynamic> _$CompanyReviewSubResponseToJson(
-        CompanyReviewSubResponse instance) =>
-    <String, dynamic>{
-      '_id': instance.id,
-      'type': instance.type,
-      'targetId': instance.targetId,
-      'targetName': instance.targetName,
-      'userId': instance.userId,
-      'userName': instance.userName,
-      'picture': instance.photo,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'corresPhoneRev': instance.corresPhoneRev,
-      'views': instance.views,
-      'likes': instance.likes,
-      'commentsCount': instance.commentsCount,
-      'shares': instance.shares,
-      'generalRating': instance.generalRating,
-      'pros': instance.pros,
-      'cons': instance.cons,
-      'liked': instance.liked,
-    };
+    CompanyReviewSubResponse instance) {
+  final val = <String, dynamic>{
+    '_id': instance.id,
+    'type': instance.type,
+    'targetId': instance.targetId,
+    'targetName': instance.targetName,
+    'userId': instance.userId,
+    'userName': instance.userName,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('picture', instance.photo);
+  val['createdAt'] = instance.createdAt.toIso8601String();
+  val['corresPhoneRev'] = instance.corresPhoneRev;
+  val['views'] = instance.views;
+  val['likes'] = instance.likes;
+  val['commentsCount'] = instance.commentsCount;
+  val['shares'] = instance.shares;
+  val['generalRating'] = instance.generalRating;
+  val['pros'] = instance.pros;
+  val['cons'] = instance.cons;
+  val['liked'] = instance.liked;
+  return val;
+}
 
 ReplySubResponse _$ReplySubResponseFromJson(Map<String, dynamic> json) =>
     ReplySubResponse(
@@ -460,17 +541,26 @@ ReplySubResponse _$ReplySubResponseFromJson(Map<String, dynamic> json) =>
       liked: json['liked'] as bool,
     );
 
-Map<String, dynamic> _$ReplySubResponseToJson(ReplySubResponse instance) =>
-    <String, dynamic>{
-      '_id': instance.id,
-      'userId': instance.userId,
-      'userName': instance.userName,
-      'userPicture': instance.photo,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'content': instance.content,
-      'likes': instance.likes,
-      'liked': instance.liked,
-    };
+Map<String, dynamic> _$ReplySubResponseToJson(ReplySubResponse instance) {
+  final val = <String, dynamic>{
+    '_id': instance.id,
+    'userId': instance.userId,
+    'userName': instance.userName,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('userPicture', instance.photo);
+  val['createdAt'] = instance.createdAt.toIso8601String();
+  val['content'] = instance.content;
+  val['likes'] = instance.likes;
+  val['liked'] = instance.liked;
+  return val;
+}
 
 CommentSubResponse _$CommentSubResponseFromJson(Map<String, dynamic> json) =>
     CommentSubResponse(
@@ -487,18 +577,27 @@ CommentSubResponse _$CommentSubResponseFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$CommentSubResponseToJson(CommentSubResponse instance) =>
-    <String, dynamic>{
-      '_id': instance.id,
-      'userId': instance.userId,
-      'userName': instance.userName,
-      'userPicture': instance.photo,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'content': instance.content,
-      'likes': instance.likes,
-      'liked': instance.liked,
-      'replies': instance.repliesSubResponses,
-    };
+Map<String, dynamic> _$CommentSubResponseToJson(CommentSubResponse instance) {
+  final val = <String, dynamic>{
+    '_id': instance.id,
+    'userId': instance.userId,
+    'userName': instance.userName,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('userPicture', instance.photo);
+  val['createdAt'] = instance.createdAt.toIso8601String();
+  val['content'] = instance.content;
+  val['likes'] = instance.likes;
+  val['liked'] = instance.liked;
+  val['replies'] = instance.repliesSubResponses;
+  return val;
+}
 
 QuestionSubResponse _$QuestionSubResponseFromJson(Map<String, dynamic> json) =>
     QuestionSubResponse(
@@ -521,24 +620,32 @@ QuestionSubResponse _$QuestionSubResponseFromJson(Map<String, dynamic> json) =>
               json['acceptedAns'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$QuestionSubResponseToJson(
-        QuestionSubResponse instance) =>
-    <String, dynamic>{
-      '_id': instance.id,
-      'type': _$TargetTypeEnumMap[instance.type],
-      'userId': instance.userId,
-      'userName': instance.userName,
-      'picture': instance.photo,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'targetName': instance.targetName,
-      'targetId': instance.targetId,
-      'content': instance.content,
-      'upvotes': instance.upvotes,
-      'upvoted': instance.upvoted,
-      'ansCount': instance.ansCount,
-      'shares': instance.shares,
-      'acceptedAns': instance.acceptedAns,
-    };
+Map<String, dynamic> _$QuestionSubResponseToJson(QuestionSubResponse instance) {
+  final val = <String, dynamic>{
+    '_id': instance.id,
+    'type': _$TargetTypeEnumMap[instance.type],
+    'userId': instance.userId,
+    'userName': instance.userName,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('picture', instance.photo);
+  val['createdAt'] = instance.createdAt.toIso8601String();
+  val['targetName'] = instance.targetName;
+  val['targetId'] = instance.targetId;
+  val['content'] = instance.content;
+  val['upvotes'] = instance.upvotes;
+  writeNotNull('upvoted', instance.upvoted);
+  val['ansCount'] = instance.ansCount;
+  val['shares'] = instance.shares;
+  writeNotNull('acceptedAns', instance.acceptedAns);
+  return val;
+}
 
 const _$TargetTypeEnumMap = {
   TargetType.phone: 'phone',
@@ -568,23 +675,32 @@ PhoneQuestionSubResponse _$PhoneQuestionSubResponseFromJson(
     );
 
 Map<String, dynamic> _$PhoneQuestionSubResponseToJson(
-        PhoneQuestionSubResponse instance) =>
-    <String, dynamic>{
-      '_id': instance.id,
-      'type': _$TargetTypeEnumMap[instance.type],
-      'userId': instance.userId,
-      'userName': instance.userName,
-      'picture': instance.photo,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'phoneName': instance.phoneName,
-      'phoneId': instance.phoneId,
-      'content': instance.content,
-      'upvotes': instance.upvotes,
-      'upvoted': instance.upvoted,
-      'ansCount': instance.ansCount,
-      'shares': instance.shares,
-      'acceptedAns': instance.acceptedAns,
-    };
+    PhoneQuestionSubResponse instance) {
+  final val = <String, dynamic>{
+    '_id': instance.id,
+    'type': _$TargetTypeEnumMap[instance.type],
+    'userId': instance.userId,
+    'userName': instance.userName,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('picture', instance.photo);
+  val['createdAt'] = instance.createdAt.toIso8601String();
+  val['phoneName'] = instance.phoneName;
+  val['phoneId'] = instance.phoneId;
+  val['content'] = instance.content;
+  val['upvotes'] = instance.upvotes;
+  writeNotNull('upvoted', instance.upvoted);
+  val['ansCount'] = instance.ansCount;
+  val['shares'] = instance.shares;
+  writeNotNull('acceptedAns', instance.acceptedAns);
+  return val;
+}
 
 CompanyQuestionSubResponse _$CompanyQuestionSubResponseFromJson(
         Map<String, dynamic> json) =>
@@ -609,23 +725,32 @@ CompanyQuestionSubResponse _$CompanyQuestionSubResponseFromJson(
     );
 
 Map<String, dynamic> _$CompanyQuestionSubResponseToJson(
-        CompanyQuestionSubResponse instance) =>
-    <String, dynamic>{
-      '_id': instance.id,
-      'type': _$TargetTypeEnumMap[instance.type],
-      'userId': instance.userId,
-      'userName': instance.userName,
-      'picture': instance.photo,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'companyName': instance.companyName,
-      'companyId': instance.companyId,
-      'content': instance.content,
-      'upvotes': instance.upvotes,
-      'upvoted': instance.upvoted,
-      'ansCount': instance.ansCount,
-      'shares': instance.shares,
-      'acceptedAns': instance.acceptedAns,
-    };
+    CompanyQuestionSubResponse instance) {
+  final val = <String, dynamic>{
+    '_id': instance.id,
+    'type': _$TargetTypeEnumMap[instance.type],
+    'userId': instance.userId,
+    'userName': instance.userName,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('picture', instance.photo);
+  val['createdAt'] = instance.createdAt.toIso8601String();
+  val['companyName'] = instance.companyName;
+  val['companyId'] = instance.companyId;
+  val['content'] = instance.content;
+  val['upvotes'] = instance.upvotes;
+  writeNotNull('upvoted', instance.upvoted);
+  val['ansCount'] = instance.ansCount;
+  val['shares'] = instance.shares;
+  writeNotNull('acceptedAns', instance.acceptedAns);
+  return val;
+}
 
 AnswerSubResponse _$AnswerSubResponseFromJson(Map<String, dynamic> json) =>
     AnswerSubResponse(
@@ -645,19 +770,28 @@ AnswerSubResponse _$AnswerSubResponseFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$AnswerSubResponseToJson(AnswerSubResponse instance) =>
-    <String, dynamic>{
-      '_id': instance.id,
-      'userId': instance.userId,
-      'userName': instance.userName,
-      'picture': instance.photo,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'ownedAt': instance.ownedAt?.toIso8601String(),
-      'content': instance.content,
-      'upvotes': instance.upvotes,
-      'upvoted': instance.upvoted,
-      'replies': instance.repliesSubResponses,
-    };
+Map<String, dynamic> _$AnswerSubResponseToJson(AnswerSubResponse instance) {
+  final val = <String, dynamic>{
+    '_id': instance.id,
+    'userId': instance.userId,
+    'userName': instance.userName,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('picture', instance.photo);
+  val['createdAt'] = instance.createdAt.toIso8601String();
+  writeNotNull('ownedAt', instance.ownedAt?.toIso8601String());
+  val['content'] = instance.content;
+  val['upvotes'] = instance.upvotes;
+  val['upvoted'] = instance.upvoted;
+  val['replies'] = instance.repliesSubResponses;
+  return val;
+}
 
 CompetitionSubResponse _$CompetitionSubResponseFromJson(
         Map<String, dynamic> json) =>
@@ -709,33 +843,43 @@ ReportSubResponse _$ReportSubResponseFromJson(Map<String, dynamic> json) =>
       contentHidden: json['contentHidden'] as bool,
     );
 
-Map<String, dynamic> _$ReportSubResponseToJson(ReportSubResponse instance) =>
-    <String, dynamic>{
-      '_id': instance.id,
-      'type': _$ReportTypeEnumMap[instance.type],
-      'createdAt': instance.createdAt.toIso8601String(),
-      'reason': ReportSubResponse._complaintReasonToInt(instance.reason),
-      'info': instance.info,
-      'reporterId': instance.reporterId,
-      'reporterName': instance.reporterName,
-      'reporterPicture': instance.reporterPicture,
-      'reporteeId': instance.reporteeId,
-      'reporteeName': instance.reporteeName,
-      'phoneRev': instance.phoneReviewSubResponse,
-      'companyRev': instance.companyReviewSubResponse,
-      'phoneQues': instance.phoneQuestionSubResponse,
-      'companyQues': instance.companyQuestionSubResponse,
-      'phoneComment': instance.phoneCommentSubResponse,
-      'companyComment': instance.companyCommentSubResponse,
-      'phoneAnswer': instance.phoneAnswerSubResponse,
-      'companyAnswer': instance.companyAnswerSubResponse,
-      'phoneCommentReply': instance.phoneCommentReplySubResponse,
-      'companyCommentReply': instance.companyCommentReplySubResponse,
-      'phoneAnswerReply': instance.phoneAnswerReplySubResponse,
-      'companyAnswerReply': instance.companyAnswerReplySubResponse,
-      'reporteeBlocked': instance.reporteeBlocked,
-      'contentHidden': instance.contentHidden,
-    };
+Map<String, dynamic> _$ReportSubResponseToJson(ReportSubResponse instance) {
+  final val = <String, dynamic>{
+    '_id': instance.id,
+    'type': _$ReportTypeEnumMap[instance.type],
+    'createdAt': instance.createdAt.toIso8601String(),
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'reason', ReportSubResponse._complaintReasonToInt(instance.reason));
+  writeNotNull('info', instance.info);
+  val['reporterId'] = instance.reporterId;
+  val['reporterName'] = instance.reporterName;
+  writeNotNull('reporterPicture', instance.reporterPicture);
+  val['reporteeId'] = instance.reporteeId;
+  val['reporteeName'] = instance.reporteeName;
+  writeNotNull('phoneRev', instance.phoneReviewSubResponse);
+  writeNotNull('companyRev', instance.companyReviewSubResponse);
+  writeNotNull('phoneQues', instance.phoneQuestionSubResponse);
+  writeNotNull('companyQues', instance.companyQuestionSubResponse);
+  writeNotNull('phoneComment', instance.phoneCommentSubResponse);
+  writeNotNull('companyComment', instance.companyCommentSubResponse);
+  writeNotNull('phoneAnswer', instance.phoneAnswerSubResponse);
+  writeNotNull('companyAnswer', instance.companyAnswerSubResponse);
+  writeNotNull('phoneCommentReply', instance.phoneCommentReplySubResponse);
+  writeNotNull('companyCommentReply', instance.companyCommentReplySubResponse);
+  writeNotNull('phoneAnswerReply', instance.phoneAnswerReplySubResponse);
+  writeNotNull('companyAnswerReply', instance.companyAnswerReplySubResponse);
+  val['reporteeBlocked'] = instance.reporteeBlocked;
+  val['contentHidden'] = instance.contentHidden;
+  return val;
+}
 
 const _$ReportTypeEnumMap = {
   ReportType.phoneReview: 'phoneReview',

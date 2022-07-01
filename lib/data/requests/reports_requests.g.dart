@@ -28,3 +28,35 @@ Map<String, dynamic> _$ReportSocialItemRequestToJson(
   writeNotNull('info', instance.info);
   return val;
 }
+
+HideReplyRequest _$HideReplyRequestFromJson(Map<String, dynamic> json) =>
+    HideReplyRequest(
+      index: json['index'] as int,
+    );
+
+Map<String, dynamic> _$HideReplyRequestToJson(HideReplyRequest instance) =>
+    <String, dynamic>{
+      'index': instance.index,
+    };
+
+UpdateReportStateRequest _$UpdateReportStateRequestFromJson(
+        Map<String, dynamic> json) =>
+    UpdateReportStateRequest(
+      blockUser: json['blockUser'] as bool?,
+      hideContent: json['hideContent'] as bool?,
+    );
+
+Map<String, dynamic> _$UpdateReportStateRequestToJson(
+    UpdateReportStateRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('blockUser', instance.blockUser);
+  writeNotNull('hideContent', instance.hideContent);
+  return val;
+}

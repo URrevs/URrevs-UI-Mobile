@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:urrevs_ui_mobile/domain/models/direct_interaction.dart';
 import 'package:urrevs_ui_mobile/domain/models/post.dart';
 import 'package:urrevs_ui_mobile/domain/models/reply_model.dart';
+import 'package:urrevs_ui_mobile/domain/models/report.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 
 /// Subclasses of [NotSyncedProviderParams] do not have to extend [Equatable] as
@@ -248,6 +249,19 @@ class IDontLikeThisProviderParams extends Equatable {
 
   @override
   List<Object?> get props => [postId, postContentType, targetType];
+}
+
+class HideProviderParams extends Equatable {
+  final String reportId;
+  final Report report;
+
+  const HideProviderParams({
+    required this.reportId,
+    required this.report,
+  });
+
+  @override
+  List<Object?> get props => [reportId];
 }
 
 class GetLatestCompetitionProviderParams extends NotSyncedProviderParams {

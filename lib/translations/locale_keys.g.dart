@@ -284,17 +284,17 @@ abstract class  LocaleKeys {
   static const complaintContent = 'complaintContent';
   static const showContent = 'showContent';
   static const closeComplaint = 'closeComplaint';
-  static const hideThisContent = 'hideThisContent';
+  static const preventViewingThisContent = 'preventViewingThisContent';
   static const blockThisUsersAccount = 'blockThisUsersAccount';
   static const phoneComment = 'phoneComment';
-  static const companyCommment = 'companyCommment';
+  static const companyComment = 'companyComment';
   static const phoneAnswer = 'phoneAnswer';
   static const companyAnswer = 'companyAnswer';
   static const phoneCommentReply = 'phoneCommentReply';
-  static const companyCommmentReply = 'companyCommmentReply';
+  static const companyCommentReply = 'companyCommentReply';
   static const phoneAnswerReply = 'phoneAnswerReply';
   static const companyAnswerReply = 'companyAnswerReply';
-  static const letThisContentBeViewed = 'letThisContentBeViewed';
+  static const permitViewingThisContent = 'permitViewingThisContent';
   static const unblockThisUsersAccount = 'unblockThisUsersAccount';
 
 }

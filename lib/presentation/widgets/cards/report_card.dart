@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/domain/models/report.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/app_elevations.dart';
@@ -8,10 +9,13 @@ import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/font_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/reports_states/hide_state.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_header/card_header.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
-class ReportCard extends StatelessWidget {
+class ReportCard extends ConsumerStatefulWidget {
   const ReportCard({
     Key? key,
     required this.report,
@@ -20,6 +24,14 @@ class ReportCard extends StatelessWidget {
 
   final Report report;
   final ReportStatus reportStatus;
+
+  @override
+  ConsumerState<ReportCard> createState() => _ReportCardState();
+}
+
+class _ReportCardState extends ConsumerState<ReportCard> {
+  late final HideProviderParams _hideProviderParams =
+      HideProviderParams(reportId: widget.report.id, report: widget.report);
 
   Widget _buildElevatedButton({
     required VoidCallback onPressed,
@@ -62,12 +74,12 @@ class ReportCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CardHeader(
-              imageUrl: report.reporterPicture,
-              authorName: report.reporterName,
-              targetName: report.reporteeName,
-              postedDate: report.createdAt,
-              userId: report.reporterId,
-              targetId: report.reporteeId,
+              imageUrl: widget.report.reporterPicture,
+              authorName: widget.report.reporterName,
+              targetName: widget.report.reporteeName,
+              postedDate: widget.report.createdAt,
+              userId: widget.report.reporterId,
+              targetId: widget.report.reporteeId,
               targetType: null,
               postContentType: null,
               postId: null,
@@ -78,7 +90,7 @@ class ReportCard extends StatelessWidget {
             20.verticalSpace,
             _buildReportBodyText(),
             8.verticalSpace,
-            _buildReportButtons(),
+            _buildReportButtons(ref),
           ],
         ),
       ),
@@ -99,7 +111,7 @@ class ReportCard extends StatelessWidget {
                   style: TextStyleManager.s16w500,
                 ),
                 TextSpan(
-                  text: '${report.type.translatedName}\n',
+                  text: '${widget.report.type.translatedName}\n',
                   style: TextStyleManager.s16w400,
                 ),
               ],
@@ -113,7 +125,7 @@ class ReportCard extends StatelessWidget {
                   style: TextStyleManager.s16w500,
                 ),
                 TextSpan(
-                  text: '${report.reason.translatedName}\n',
+                  text: '${widget.report.reason.translatedName}\n',
                   style: TextStyleManager.s16w400,
                 ),
               ],
@@ -127,7 +139,7 @@ class ReportCard extends StatelessWidget {
                   style: TextStyleManager.s16w500,
                 ),
                 TextSpan(
-                  text: '\n${report.info ?? '-'}',
+                  text: '\n${widget.report.info ?? '-'}',
                   style: TextStyleManager.s16w400,
                 ),
               ],
@@ -138,7 +150,7 @@ class ReportCard extends StatelessWidget {
     );
   }
 
-  Widget _buildReportButtons() {
+  Widget _buildReportButtons(WidgetRef ref) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Column(
@@ -152,7 +164,7 @@ class ReportCard extends StatelessWidget {
                 color: ColorManager.blue,
                 text: LocaleKeys.showContent.tr(),
               ),
-              if (reportStatus == ReportStatus.open) ...[
+              if (widget.reportStatus == ReportStatus.open) ...[
                 10.horizontalSpace,
                 _buildElevatedButton(
                   onPressed: () {},
@@ -166,18 +178,12 @@ class ReportCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              _buildElevatedButton(
-                onPressed: () {},
-                color: ColorManager.red,
-                text: !report.contentHidden
-                    ? LocaleKeys.hideThisContent.tr()
-                    : LocaleKeys.letThisContentBeViewed.tr(),
-              ),
+              _buildHideButton(),
               10.horizontalSpace,
               _buildElevatedButton(
                 onPressed: () {},
                 color: ColorManager.red,
-                text: !report.reporteeBlocked
+                text: !widget.report.reporteeBlocked
                     ? LocaleKeys.blockThisUsersAccount.tr()
                     : LocaleKeys.unblockThisUsersAccount.tr(),
               ),
@@ -185,6 +191,29 @@ class ReportCard extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildHideButton() {
+    ref.addErrorListener(
+      provider: hideProvider(_hideProviderParams),
+      context: context,
+    );
+    final state = ref.watch(hideProvider(_hideProviderParams));
+    bool hidden = state is HideInitialState && state.hidden ||
+        state is HideLoadingState && state.hidden ||
+        state is HideLoadedState && state.hidden;
+    return _buildElevatedButton(
+      onPressed: () {
+        final state = ref.watch(hideProvider(_hideProviderParams));
+        if (state is! HideLoadingState) {
+          ref.read(hideProvider(_hideProviderParams).notifier).toggle();
+        }
+      },
+      color: ColorManager.red,
+      text: !hidden
+          ? LocaleKeys.preventViewingThisContent.tr()
+          : LocaleKeys.permitViewingThisContent.tr(),
     );
   }
 }

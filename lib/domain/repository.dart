@@ -1063,6 +1063,198 @@ class Repository {
     });
   }
 
+  Future<Either<Failure, void>> hidePhoneReview(
+      String reviewId, String reportId, UpdateReportStateRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.hidePhoneReview(reviewId);
+      await _remoteDataSource.updateReportState(reportId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> hideCompanyReview(
+      String reviewId, String reportId, UpdateReportStateRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.hideCompanyReview(reviewId);
+      await _remoteDataSource.updateReportState(reportId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> unhidePhoneReview(
+      String reviewId, String reportId, UpdateReportStateRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.unhidePhoneReview(reviewId);
+      await _remoteDataSource.updateReportState(reportId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> unhideCompanyReview(
+      String reviewId, String reportId, UpdateReportStateRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.unhideCompanyReview(reviewId);
+      await _remoteDataSource.updateReportState(reportId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> hidePhoneQuestion(
+      String questionId, String reportId, UpdateReportStateRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.hidePhoneQuestion(questionId);
+      await _remoteDataSource.updateReportState(reportId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> hideCompanyQuestion(
+      String questionId, String reportId, UpdateReportStateRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.hideCompanyQuestion(questionId);
+      await _remoteDataSource.updateReportState(reportId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> unhidePhoneQuestion(
+      String questionId, String reportId, UpdateReportStateRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.unhidePhoneQuestion(questionId);
+      await _remoteDataSource.updateReportState(reportId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> unhideCompanyQuestion(
+      String questionId, String reportId, UpdateReportStateRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.unhideCompanyQuestion(questionId);
+      await _remoteDataSource.updateReportState(reportId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> hidePhoneReviewComment(
+      String commentId, String reportId, UpdateReportStateRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.hidePhoneReviewComment(commentId);
+      await _remoteDataSource.updateReportState(reportId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> hideCompanyReviewComment(
+      String commentId, String reportId, UpdateReportStateRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.hideCompanyReviewComment(commentId);
+      await _remoteDataSource.updateReportState(reportId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> unhidePhoneReviewComment(
+      String commentId, String reportId, UpdateReportStateRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.unhidePhoneReviewComment(commentId);
+      await _remoteDataSource.updateReportState(reportId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> unhideCompanyReviewComment(
+      String commentId, String reportId, UpdateReportStateRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.unhideCompanyReviewComment(commentId);
+      await _remoteDataSource.updateReportState(reportId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> hidePhoneQuestionAnswer(
+      String answerId, String reportId, UpdateReportStateRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.hidePhoneQuestionAnswer(answerId);
+      await _remoteDataSource.updateReportState(reportId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> hideCompanyQuestionAnswer(
+      String answerId, String reportId, UpdateReportStateRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.hideCompanyQuestionAnswer(answerId);
+      await _remoteDataSource.updateReportState(reportId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> unhidePhoneQuestionAnswer(
+      String answerId, String reportId, UpdateReportStateRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.unhidePhoneQuestionAnswer(answerId);
+      await _remoteDataSource.updateReportState(reportId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> unhideCompanyQuestionAnswer(
+      String answerId, String reportId, UpdateReportStateRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.unhideCompanyQuestionAnswer(answerId);
+      await _remoteDataSource.updateReportState(reportId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> hidePhoneReviewReply(String commentId,
+      String replyId, String reportId, UpdateReportStateRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.hidePhoneReviewReply(commentId, replyId);
+      await _remoteDataSource.updateReportState(reportId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> hideCompanyReviewReply(String commentId,
+      String replyId, String reportId, UpdateReportStateRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.hideCompanyReviewReply(commentId, replyId);
+      await _remoteDataSource.updateReportState(reportId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> hidePhoneQuestionReply(String answerId,
+      String replyId, String reportId, UpdateReportStateRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.hidePhoneQuestionReply(answerId, replyId);
+      await _remoteDataSource.updateReportState(reportId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> hideCompanyQuestionReply(String answerId,
+      String replyId, String reportId, UpdateReportStateRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.hideCompanyQuestionReply(answerId, replyId);
+      await _remoteDataSource.updateReportState(reportId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> unhidePhoneReviewReply(String commentId,
+      String replyId, String reportId, UpdateReportStateRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.unhidePhoneReviewReply(commentId, replyId);
+      await _remoteDataSource.updateReportState(reportId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> unhideCompanyReviewReply(String commentId,
+      String replyId, String reportId, UpdateReportStateRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.unhideCompanyReviewReply(commentId, replyId);
+      await _remoteDataSource.updateReportState(reportId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> unhidePhoneQuestionReply(String answerId,
+      String replyId, String reportId, UpdateReportStateRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.unhidePhoneQuestionReply(answerId, replyId);
+      await _remoteDataSource.updateReportState(reportId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> unhideCompanyQuestionReply(String answerId,
+      String replyId, String reportId, UpdateReportStateRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.unhideCompanyQuestionReply(answerId, replyId);
+      await _remoteDataSource.updateReportState(reportId, request);
+    });
+  }
+
   Future<Either<Failure, List<Report>>> getOpenReports(int round) {
     return _tryAndCatch(() async {
       final response = await _remoteDataSource.getOpenReports(round);
@@ -1074,6 +1266,13 @@ class Repository {
     return _tryAndCatch(() async {
       final response = await _remoteDataSource.getClosedReports(round);
       return response.reportsModels;
+    });
+  }
+
+  Future<Either<Failure, void>> updateReportState(
+      String reportId, UpdateReportStateRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.updateReportState(reportId, request);
     });
   }
 }
