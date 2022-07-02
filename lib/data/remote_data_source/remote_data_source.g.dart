@@ -2489,6 +2489,219 @@ class _RemoteDataSource implements RemoteDataSource {
     return value;
   }
 
+  @override
+  Future<GetPhoneReviewResponse> showReportPhoneReview(reviewId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GetPhoneReviewResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(
+                    _dio.options, '/reports/content/review/phone/${reviewId}',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GetPhoneReviewResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<GetCompanyReviewResponse> showReportCompanyReview(reviewId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GetCompanyReviewResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(
+                    _dio.options, '/reports/content/review/company/${reviewId}',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GetCompanyReviewResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ShowReportCommentResponse> showReportPhoneReviewComment(
+      commentId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ShowReportCommentResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options,
+                    '/reports/content/review/phone/comments/${commentId}',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ShowReportCommentResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ShowReportCommentResponse> showReportCompanyReviewComment(
+      commentId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ShowReportCommentResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options,
+                    '/reports/content/review/company/comments/${commentId}',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ShowReportCommentResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ShowReportReplyResponse> showReportPhoneReviewCommentReply(
+      commentId, replyId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<
+        ShowReportReplyResponse>(Options(
+            method: 'GET', headers: _headers, extra: _extra)
+        .compose(_dio.options,
+            '/reports/content/review/phone/comments/${commentId}/replies/${replyId}',
+            queryParameters: queryParameters, data: _data)
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ShowReportReplyResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ShowReportReplyResponse> showReportCompanyReviewCommentReply(
+      commentId, replyId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<
+        ShowReportReplyResponse>(Options(
+            method: 'GET', headers: _headers, extra: _extra)
+        .compose(_dio.options,
+            '/reports/content/review/company/comments/${commentId}/replies/${replyId}',
+            queryParameters: queryParameters, data: _data)
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ShowReportReplyResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<GetPhoneQuestionResponse> showReportPhoneQuestion(questionId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GetPhoneQuestionResponse>(Options(
+                method: 'GET', headers: _headers, extra: _extra)
+            .compose(
+                _dio.options, '/reports/content/question/phone/${questionId}',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GetPhoneQuestionResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<GetCompanyQuestionResponse> showReportCompanyQuestion(
+      questionId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GetCompanyQuestionResponse>(Options(
+                method: 'GET', headers: _headers, extra: _extra)
+            .compose(
+                _dio.options, '/reports/content/question/company/${questionId}',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GetCompanyQuestionResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ShowReportAnswerResponse> showReportPhoneQuestionAnswer(
+      answerId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ShowReportAnswerResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options,
+                    '/reports/content/question/phone/answers/${answerId}',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ShowReportAnswerResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ShowReportAnswerResponse> showReportCompanyQuestionAnswer(
+      answerId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ShowReportAnswerResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options,
+                    '/reports/content/question/company/answers/${answerId}',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ShowReportAnswerResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ShowReportReplyResponse> showReportPhoneQuestionAnswerReply(
+      answerId, replyId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<
+        ShowReportReplyResponse>(Options(
+            method: 'GET', headers: _headers, extra: _extra)
+        .compose(_dio.options,
+            '/reports/content/question/phone/answers/${answerId}/replies/${replyId}',
+            queryParameters: queryParameters, data: _data)
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ShowReportReplyResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ShowReportReplyResponse> showReportCompanyQuestionAnswerReply(
+      answerId, replyId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<
+        ShowReportReplyResponse>(Options(
+            method: 'GET', headers: _headers, extra: _extra)
+        .compose(_dio.options,
+            '/reports/content/question/company/answers/${answerId}/replies/${replyId}',
+            queryParameters: queryParameters, data: _data)
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ShowReportReplyResponse.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

@@ -727,7 +727,7 @@ class CommentSubResponse {
   int likes;
   bool liked;
   @JsonKey(name: 'replies')
-  List<ReplySubResponse> repliesSubResponses;
+  List<ReplySubResponse>? repliesSubResponses;
   CommentSubResponse({
     required this.id,
     required this.userId,
@@ -749,7 +749,7 @@ class CommentSubResponse {
         likes: likes,
         liked: liked,
         photo: photo,
-        replies: repliesSubResponses.map((r) => r.replyModel).toList(),
+        replies: repliesSubResponses?.map((r) => r.replyModel).toList() ?? [],
       );
 
   factory CommentSubResponse.fromJson(Map<String, Object?> json) =>
@@ -942,7 +942,7 @@ class AnswerSubResponse {
   int upvotes;
   bool upvoted;
   @JsonKey(name: 'replies')
-  List<ReplySubResponse> repliesSubResponses;
+  List<ReplySubResponse>? repliesSubResponses;
   AnswerSubResponse({
     required this.id,
     required this.userId,
@@ -966,7 +966,7 @@ class AnswerSubResponse {
         content: content,
         upvotes: upvotes,
         upvoted: upvoted,
-        replies: repliesSubResponses.map((r) => r.replyModel).toList(),
+        replies: repliesSubResponses?.map((r) => r.replyModel).toList() ?? [],
         accepted: accepted,
       );
 

@@ -24,6 +24,7 @@ class CardFooter extends StatelessWidget {
     required this.postType,
     required this.postId,
     required this.userId,
+    required this.postForReportCard,
   }) : super(key: key);
 
   /// Is the review liked by the current logged in user or not.
@@ -59,6 +60,7 @@ class CardFooter extends StatelessWidget {
 
   final String postId;
   final String userId;
+  final bool postForReportCard;
 
   @override
   Widget build(BuildContext context) {
@@ -90,6 +92,7 @@ class CardFooter extends StatelessWidget {
             postId: postId,
             postType: postType,
             userId: userId,
+            postForReportCard: postForReportCard,
           ),
         )
       ],

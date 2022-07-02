@@ -92,6 +92,7 @@ class ProductReviewCard extends ConsumerWidget {
   final String userId;
 
   final String productId;
+  final bool postForReportCard;
 
   ProductReviewCard({
     Key? key,
@@ -113,6 +114,7 @@ class ProductReviewCard extends ConsumerWidget {
     required this.liked,
     required this.fullscreen,
     required this.onPressingComment,
+    required this.postForReportCard,
   })  : _postProviderParams = PostProviderParams(
           postId: 'dummy',
           postType: PostType.phoneReview,
@@ -129,6 +131,7 @@ class ProductReviewCard extends ConsumerWidget {
     required PhoneReview phoneReview,
     required this.fullscreen,
     required this.onPressingComment,
+    this.postForReportCard = false,
     Key? key,
   })  : reviewId = phoneReview.id,
         userId = phoneReview.userId,
@@ -159,27 +162,27 @@ class ProductReviewCard extends ConsumerWidget {
         super(key: key);
 
   /// An instance of [ProductReviewCard] filled with dummy data.
-  static ProductReviewCard dummyInstance({bool fullscreen = false}) =>
-      ProductReviewCard(
-        reviewId: 'dummyReviewId-${DateTime.now().microsecondsSinceEpoch}',
-        userId: 'userId-${DateTime.now().microsecondsSinceEpoch}',
-        productId: 'productId-${DateTime.now().microsecondsSinceEpoch}',
-        postedDate: faker.date.dateTime(minYear: 2000, maxYear: 2022),
-        usedSinceDate: faker.date.dateTime(minYear: 2000, maxYear: 2021),
-        views: DummyDataManager.randomInt,
-        authorName: faker.person.name(),
-        imageUrl: StringsManager.picsum200x200,
-        productName: 'Oppo Reno 5',
-        scores: List.generate(7, (_) => Random().nextInt(5) + 1),
-        prosText: StringsManager.longestReviewPros,
-        consText: StringsManager.longestReviewCons,
-        likeCount: DummyDataManager.randomInt,
-        commentCount: DummyDataManager.randomInt,
-        shareCount: DummyDataManager.randomInt,
-        liked: Random().nextBool(),
-        fullscreen: fullscreen,
-        onPressingComment: () {},
-      );
+  // static ProductReviewCard dummyInstance({bool fullscreen = false}) =>
+  //     ProductReviewCard(
+  //       reviewId: 'dummyReviewId-${DateTime.now().microsecondsSinceEpoch}',
+  //       userId: 'userId-${DateTime.now().microsecondsSinceEpoch}',
+  //       productId: 'productId-${DateTime.now().microsecondsSinceEpoch}',
+  //       postedDate: faker.date.dateTime(minYear: 2000, maxYear: 2022),
+  //       usedSinceDate: faker.date.dateTime(minYear: 2000, maxYear: 2021),
+  //       views: DummyDataManager.randomInt,
+  //       authorName: faker.person.name(),
+  //       imageUrl: StringsManager.picsum200x200,
+  //       productName: 'Oppo Reno 5',
+  //       scores: List.generate(7, (_) => Random().nextInt(5) + 1),
+  //       prosText: StringsManager.longestReviewPros,
+  //       consText: StringsManager.longestReviewCons,
+  //       likeCount: DummyDataManager.randomInt,
+  //       commentCount: DummyDataManager.randomInt,
+  //       shareCount: DummyDataManager.randomInt,
+  //       liked: Random().nextBool(),
+  //       fullscreen: fullscreen,
+  //       onPressingComment: () {},
+  //     );
 
   ProductReviewCard copyWith({
     String? reviewId,
@@ -200,6 +203,7 @@ class ProductReviewCard extends ConsumerWidget {
     int? shareCount,
     bool? fullscreen,
     VoidCallback? onPressingComment,
+    bool? postForReportCard,
   }) {
     return ProductReviewCard(
       reviewId: reviewId ?? this.reviewId,
@@ -220,6 +224,7 @@ class ProductReviewCard extends ConsumerWidget {
       liked: liked ?? this.liked,
       fullscreen: fullscreen ?? this.fullscreen,
       onPressingComment: onPressingComment ?? this.onPressingComment,
+      postForReportCard: postForReportCard ?? this.postForReportCard,
     );
   }
 
@@ -343,6 +348,7 @@ class ProductReviewCard extends ConsumerWidget {
                   onShare: _onShare,
                   cardType: CardType.productReview,
                   fullscreen: fullscreen,
+                  postForReportCard: postForReportCard,
                 ),
               ],
             ),

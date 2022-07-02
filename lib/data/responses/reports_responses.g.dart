@@ -19,3 +19,48 @@ Map<String, dynamic> _$GetReportsResponseToJson(GetReportsResponse instance) =>
       'success': instance.success,
       'reports': instance.reportsSubResponses,
     };
+
+ShowReportCommentResponse _$ShowReportCommentResponseFromJson(
+        Map<String, dynamic> json) =>
+    ShowReportCommentResponse(
+      success: json['success'] as bool,
+      commentsSubResponse:
+          CommentSubResponse.fromJson(json['comment'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ShowReportCommentResponseToJson(
+        ShowReportCommentResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'comment': instance.commentsSubResponse,
+    };
+
+ShowReportAnswerResponse _$ShowReportAnswerResponseFromJson(
+        Map<String, dynamic> json) =>
+    ShowReportAnswerResponse(
+      success: json['success'] as bool,
+      answerSubResponse:
+          AnswerSubResponse.fromJson(json['answer'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ShowReportAnswerResponseToJson(
+        ShowReportAnswerResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'answer': instance.answerSubResponse,
+    };
+
+ShowReportReplyResponse _$ShowReportReplyResponseFromJson(
+        Map<String, dynamic> json) =>
+    ShowReportReplyResponse(
+      success: json['success'] as bool,
+      replySubResponse:
+          ReplySubResponse.fromJson(json['reply'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ShowReportReplyResponseToJson(
+        ShowReportReplyResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'reply': instance.replySubResponse,
+    };

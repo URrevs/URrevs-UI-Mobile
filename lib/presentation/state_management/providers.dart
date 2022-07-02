@@ -20,6 +20,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/leaderb
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/logout_from_all_devices_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/phones_notifier/get_all_phones_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/phones_notifier/get_two_phones_specs_notifier.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/reports_notifiers/get_report_interaction_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/reports_notifiers/get_reports_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/reports_notifiers/hide_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/reports_notifiers/report_notifier.dart';
@@ -57,6 +58,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_sta
 import 'package:urrevs_ui_mobile/presentation/state_management/states/question_states/accept_answer_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/question_states/add_question_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/question_states/get_post_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/reports_states/get_report_interaction_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reports_states/get_reports_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reports_states/hide_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reports_states/report_state.dart';
@@ -271,8 +273,10 @@ final addQuestionProvider =
 
 final getPostProvider = StateNotifierProvider.autoDispose
     .family<GetPostNotifier, GetPostState, GetPostProviderParams>(
-        (ref, params) =>
-            GetPostNotifier(postId: params.postId, postType: params.postType));
+        (ref, params) => GetPostNotifier(
+            postId: params.postId,
+            postType: params.postType,
+            getPostForReport: params.getPostForReport));
 
 final acceptAnswerProvider = StateNotifierProvider.autoDispose.family<
         AcceptAnswerNotifier, AcceptAnswerState, AcceptAnswerProviderParams>(
@@ -329,6 +333,12 @@ final getReportsProvider = StateNotifierProvider.autoDispose
 final hideProvider = StateNotifierProvider.autoDispose
     .family<HideNotifier, HideState, HideProviderParams>(
         (ref, params) => HideNotifier(report: params.report));
+
+final getReportInteractionProvider = StateNotifierProvider.autoDispose.family<
+        GetReportInteractionNotifier,
+        GetReportInteractionState,
+        GetReportInteractionProviderParams>(
+    (ref, params) => GetReportInteractionNotifier(report: params.report));
 
 // posts and interactions providers
 

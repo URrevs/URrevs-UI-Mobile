@@ -25,7 +25,7 @@ class CardFooterButton extends StatelessWidget {
   final String text;
 
   /// Callback function executed on pressing on the button.
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   /// Returns a [SizedBox] with the fixed size 100x40.
   ///

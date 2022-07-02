@@ -57,6 +57,7 @@ class FullscreenPostScreenArgs {
   final String postUserId;
   final PostType postType;
   final String? answerId;
+  final bool getPostForReport;
   FullscreenPostScreenArgs({
     required this.cardType,
     required this.postId,
@@ -64,6 +65,7 @@ class FullscreenPostScreenArgs {
     required this.postType,
     this.focusOnTextField = false,
     this.answerId,
+    this.getPostForReport = false,
   });
 }
 
@@ -90,8 +92,11 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
   late final TargetType _targetType = widget.screenArgs.postType.targetType;
   late final PostType _postType = widget.screenArgs.postType;
 
-  late final GetPostProviderParams _postProviderParams =
-      GetPostProviderParams(postId: _postId, postType: _postType);
+  late final GetPostProviderParams _postProviderParams = GetPostProviderParams(
+    postId: _postId,
+    postType: _postType,
+    getPostForReport: widget.screenArgs.getPostForReport,
+  );
 
   late final GetInteractionsProviderParams _interactionsProviderParams =
       GetInteractionsProviderParams(
@@ -467,6 +472,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
     return ProductReviewCard.fromPhoneReview(
       phoneReview: phoneReview,
       fullscreen: true,
+      postForReportCard: widget.screenArgs.getPostForReport,
       onPressingComment: () {
         focusNode.requestFocus();
         setState(() => _idOfInteractionRepliedTo = null);
@@ -484,6 +490,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
           question,
           cardHeaderTitleType: _targetType,
           cardType: widget.screenArgs.cardType,
+          postForReportCard: widget.screenArgs.getPostForReport,
           fullscreen: true,
           onPressingAnswer: () {
             focusNode.requestFocus();
@@ -501,6 +508,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
     return CompanyReviewCard.fromCompanyReview(
       companyReview: companyReview,
       fullscreen: true,
+      postForReportCard: widget.screenArgs.getPostForReport,
       onPressingComment: () {
         focusNode.requestFocus();
         setState(() => _idOfInteractionRepliedTo = null);

@@ -294,5 +294,6 @@
   "phoneAnswerReply": "phone question answer reply",
   "companyAnswerReply": "company question answer reply",
   "permitViewingThisContent": "Permit viewing this content",
-  "unblockThisUsersAccount": "Unblock this user's account"
+  "unblockThisUsersAccount": "Unblock this user's account",
+  "hideContent": "Hide content"
 }

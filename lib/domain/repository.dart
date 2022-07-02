@@ -34,6 +34,7 @@ import 'package:urrevs_ui_mobile/domain/models/phone.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone_review.dart';
 import 'package:urrevs_ui_mobile/domain/models/post.dart';
 import 'package:urrevs_ui_mobile/domain/models/question.dart';
+import 'package:urrevs_ui_mobile/domain/models/reply_model.dart';
 import 'package:urrevs_ui_mobile/domain/models/report.dart';
 import 'package:urrevs_ui_mobile/domain/models/search_result.dart';
 import 'package:urrevs_ui_mobile/domain/models/specs.dart';
@@ -1273,6 +1274,111 @@ class Repository {
       String reportId, UpdateReportStateRequest request) {
     return _tryAndCatch(() async {
       await _remoteDataSource.updateReportState(reportId, request);
+    });
+  }
+
+  Future<Either<Failure, PhoneReview>> showReportPhoneReview(String reviewId) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.showReportPhoneReview(reviewId);
+      return response.phoneReviewSubRespone.phoneReviewModel;
+    });
+  }
+
+  Future<Either<Failure, CompanyReview>> showReportCompanyReview(
+      String reviewId) {
+    return _tryAndCatch(() async {
+      final response =
+          await _remoteDataSource.showReportCompanyReview(reviewId);
+      return response.companyReviewSubResponses.companyReviewModel;
+    });
+  }
+
+  Future<Either<Failure, Comment>> showReportPhoneReviewComment(
+      String commentId) {
+    return _tryAndCatch(() async {
+      final response =
+          await _remoteDataSource.showReportPhoneReviewComment(commentId);
+      return response.commentModel;
+    });
+  }
+
+  Future<Either<Failure, Comment>> showReportCompanyReviewComment(
+      String commentId) {
+    return _tryAndCatch(() async {
+      final response =
+          await _remoteDataSource.showReportCompanyReviewComment(commentId);
+      return response.commentModel;
+    });
+  }
+
+  Future<Either<Failure, ReplyModel>> showReportPhoneReviewCommentReply(
+      String commentId, String replyId) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource
+          .showReportPhoneReviewCommentReply(commentId, replyId);
+      return response.replyModel;
+    });
+  }
+
+  Future<Either<Failure, ReplyModel>> showReportCompanyReviewCommentReply(
+      String commentId, String replyId) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource
+          .showReportCompanyReviewCommentReply(commentId, replyId);
+      return response.replyModel;
+    });
+  }
+
+  Future<Either<Failure, Question>> showReportPhoneQuestion(String questionId) {
+    return _tryAndCatch(() async {
+      final response =
+          await _remoteDataSource.showReportPhoneQuestion(questionId);
+      return response.questionSubResponse.questionModel;
+    });
+  }
+
+  Future<Either<Failure, Question>> showReportCompanyQuestion(
+      String questionId) {
+    return _tryAndCatch(() async {
+      final response =
+          await _remoteDataSource.showReportCompanyQuestion(questionId);
+      return response.questionSubResponse.questionModel;
+    });
+  }
+
+  Future<Either<Failure, Answer>> showReportPhoneQuestionAnswer(
+      String answerId) {
+    return _tryAndCatch(() async {
+      final response =
+          await _remoteDataSource.showReportPhoneQuestionAnswer(answerId);
+      return response.answerModel;
+    });
+  }
+
+  Future<Either<Failure, Answer>> showReportCompanyQuestionAnswer(
+      String answerId) {
+    return _tryAndCatch(() async {
+      final response =
+          await _remoteDataSource.showReportCompanyQuestionAnswer(answerId);
+      return response.answerModel;
+    });
+  }
+
+  Future<Either<Failure, ReplyModel>> showReportPhoneQuestionAnswerReply(
+      String answerId, String replyId) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource
+          .showReportPhoneQuestionAnswerReply(answerId, replyId);
+      return response.replyModel;
+    });
+  }
+
+  Future<Either<Failure, ReplyModel>> showReportCompanyQuestionAnswerReply(
+      String answerId, String replyId) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource
+          .showReportCompanyQuestionAnswerReply(answerId, replyId);
+      return response.replyModel;
     });
   }
 }

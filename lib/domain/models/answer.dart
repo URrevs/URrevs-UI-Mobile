@@ -1,10 +1,11 @@
 import 'package:equatable/equatable.dart';
 
 import 'package:urrevs_ui_mobile/domain/models/direct_interaction.dart';
+import 'package:urrevs_ui_mobile/domain/models/interaction.dart';
 import 'package:urrevs_ui_mobile/domain/models/reply_model.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 
-class Answer extends DirectInteraction {
+class Answer extends DirectInteraction implements Interaction {
   final String userId;
   final String userName;
   final String? photo;

@@ -33,6 +33,7 @@ class CardFooterButtonBar extends ConsumerStatefulWidget {
     required this.postId,
     required this.postType,
     required this.userId,
+    required this.postForReportCard,
   }) : super(key: key);
 
   /// Is the review liked by the current logged in user or not.
@@ -56,6 +57,7 @@ class CardFooterButtonBar extends ConsumerStatefulWidget {
   final PostType postType;
 
   final String userId;
+  final bool postForReportCard;
 
   @override
   ConsumerState<CardFooterButtonBar> createState() =>
@@ -208,14 +210,16 @@ class _CardFooterButtonBarState extends ConsumerState<CardFooterButtonBar> {
       icon: firstIcon,
       text: firstText,
       liked: liked,
-      onPressed: () {
-        final state = ref.watch(likeProvider(_likeProviderParams));
-        if (state is! LoadingState) {
-          ref
-              .read(likeProvider(_likeProviderParams).notifier)
-              .toggleLikeState();
-        }
-      },
+      onPressed: widget.postForReportCard
+          ? null
+          : () {
+              final state = ref.watch(likeProvider(_likeProviderParams));
+              if (state is! LoadingState) {
+                ref
+                    .read(likeProvider(_likeProviderParams).notifier)
+                    .toggleLikeState();
+              }
+            },
     );
   }
 }

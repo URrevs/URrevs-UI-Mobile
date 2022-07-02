@@ -26,11 +26,11 @@ class _PostedQuestionsScreenState extends State<PostedQuestionsScreen> {
   ReviewsFilter _filter = ReviewsFilter.phones;
   bool isMobileFilterPressed = true;
 
-  Widget get post => QuestionCard.dummyInstance(context).copyWith(
-        cardType: _filter == ReviewsFilter.phones
-            ? CardType.productQuestion
-            : CardType.companyQuestion,
-      );
+  // Widget get post => QuestionCard.dummyInstance(context).copyWith(
+  //       cardType: _filter == ReviewsFilter.phones
+  //           ? CardType.productQuestion
+  //           : CardType.companyQuestion,
+  //     );
 
   void _setFilter(ReviewsFilter filter) => setState(() {
         if (isMobileFilterPressed && filter == ReviewsFilter.phones) {
@@ -62,7 +62,7 @@ class _PostedQuestionsScreenState extends State<PostedQuestionsScreen> {
               delegate: SliverChildBuilderDelegate(
                 (context, index) => Column(
                   children: [
-                    post,
+                    // post,
                     10.verticalSpace,
                   ],
                 ),

@@ -572,8 +572,8 @@ CommentSubResponse _$CommentSubResponseFromJson(Map<String, dynamic> json) =>
       content: json['content'] as String,
       likes: json['likes'] as int,
       liked: json['liked'] as bool,
-      repliesSubResponses: (json['replies'] as List<dynamic>)
-          .map((e) => ReplySubResponse.fromJson(e as Map<String, dynamic>))
+      repliesSubResponses: (json['replies'] as List<dynamic>?)
+          ?.map((e) => ReplySubResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -595,7 +595,7 @@ Map<String, dynamic> _$CommentSubResponseToJson(CommentSubResponse instance) {
   val['content'] = instance.content;
   val['likes'] = instance.likes;
   val['liked'] = instance.liked;
-  val['replies'] = instance.repliesSubResponses;
+  writeNotNull('replies', instance.repliesSubResponses);
   return val;
 }
 
@@ -765,8 +765,8 @@ AnswerSubResponse _$AnswerSubResponseFromJson(Map<String, dynamic> json) =>
       content: json['content'] as String,
       upvotes: json['upvotes'] as int,
       upvoted: json['upvoted'] as bool,
-      repliesSubResponses: (json['replies'] as List<dynamic>)
-          .map((e) => ReplySubResponse.fromJson(e as Map<String, dynamic>))
+      repliesSubResponses: (json['replies'] as List<dynamic>?)
+          ?.map((e) => ReplySubResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -789,7 +789,7 @@ Map<String, dynamic> _$AnswerSubResponseToJson(AnswerSubResponse instance) {
   val['content'] = instance.content;
   val['upvotes'] = instance.upvotes;
   val['upvoted'] = instance.upvoted;
-  val['replies'] = instance.repliesSubResponses;
+  writeNotNull('replies', instance.repliesSubResponses);
   return val;
 }
 

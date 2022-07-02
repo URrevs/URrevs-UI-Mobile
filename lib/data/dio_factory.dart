@@ -12,7 +12,7 @@ Dio get getDio {
   Map<String, String> headers = {
     HttpHeaders.contentTypeHeader: 'application/json',
     HttpHeaders.acceptHeader: 'application/json',
-    // HttpHeaders.connectionHeader: 'keep-alive',
+    HttpHeaders.connectionHeader: 'keep-alive',
   };
 
   dio.options = BaseOptions(

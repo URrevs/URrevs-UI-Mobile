@@ -153,9 +153,11 @@ class AddPhoneReviewProviderParams extends NotSyncedProviderParams {
 class GetPostProviderParams extends NotSyncedProviderParams {
   final String postId;
   final PostType postType;
+  final bool getPostForReport;
   GetPostProviderParams({
     required this.postId,
     required this.postType,
+    this.getPostForReport = false,
   });
 }
 
@@ -256,6 +258,19 @@ class HideProviderParams extends Equatable {
   final Report report;
 
   const HideProviderParams({
+    required this.reportId,
+    required this.report,
+  });
+
+  @override
+  List<Object?> get props => [reportId];
+}
+
+class GetReportInteractionProviderParams extends Equatable {
+  final String reportId;
+  final Report report;
+
+  const GetReportInteractionProviderParams({
     required this.reportId,
     required this.report,
   });

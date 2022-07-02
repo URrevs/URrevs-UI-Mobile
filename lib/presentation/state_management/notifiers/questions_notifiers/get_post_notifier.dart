@@ -12,29 +12,51 @@ class GetPostNotifier extends StateNotifier<GetPostState> {
   GetPostNotifier({
     required String postId,
     required PostType postType,
+    required this.getPostForReport,
   })  : _postId = postId,
         _postType = postType,
         super(GetPostInitialState());
 
   final String _postId;
   final PostType _postType;
+  final bool getPostForReport;
 
   void getPost() async {
     state = GetQuestionLoadingState();
     Either<Failure, Post> response;
-    switch (_postType) {
-      case PostType.phoneReview:
-        response = await GetIt.I<Repository>().getPhoneReview(_postId);
-        break;
-      case PostType.companyReview:
-        response = await GetIt.I<Repository>().getCompanyReview(_postId);
-        break;
-      case PostType.phoneQuestion:
-        response = await GetIt.I<Repository>().getPhoneQuestion(_postId);
-        break;
-      case PostType.companyQuestion:
-        response = await GetIt.I<Repository>().getCompanyQuestion(_postId);
-        break;
+    if (getPostForReport) {
+      switch (_postType) {
+        case PostType.phoneReview:
+          response = await GetIt.I<Repository>().showReportPhoneReview(_postId);
+          break;
+        case PostType.companyReview:
+          response =
+              await GetIt.I<Repository>().showReportCompanyReview(_postId);
+          break;
+        case PostType.phoneQuestion:
+          response =
+              await GetIt.I<Repository>().showReportPhoneQuestion(_postId);
+          break;
+        case PostType.companyQuestion:
+          response =
+              await GetIt.I<Repository>().showReportCompanyQuestion(_postId);
+          break;
+      }
+    } else {
+      switch (_postType) {
+        case PostType.phoneReview:
+          response = await GetIt.I<Repository>().getPhoneReview(_postId);
+          break;
+        case PostType.companyReview:
+          response = await GetIt.I<Repository>().getCompanyReview(_postId);
+          break;
+        case PostType.phoneQuestion:
+          response = await GetIt.I<Repository>().getPhoneQuestion(_postId);
+          break;
+        case PostType.companyQuestion:
+          response = await GetIt.I<Repository>().getCompanyQuestion(_postId);
+          break;
+      }
     }
     response.fold(
       (failure) => state = GetPostErrorState(failure: failure),

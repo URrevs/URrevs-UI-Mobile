@@ -72,6 +72,7 @@ class QuestionCard extends ConsumerWidget {
   final String targetId;
 
   final TargetType cardHeaderTitleType;
+  final bool postForReportCard;
 
   QuestionCard({
     Key? key,
@@ -92,6 +93,7 @@ class QuestionCard extends ConsumerWidget {
     required this.fullscreen,
     required this.onPressingAnswer,
     this.answer,
+    required this.postForReportCard,
   })  : _postProviderParams = PostProviderParams(
           postId: questionId,
           postType: PostType.phoneQuestion,
@@ -111,6 +113,7 @@ class QuestionCard extends ConsumerWidget {
     required this.cardType,
     required this.fullscreen,
     required this.onPressingAnswer,
+    this.postForReportCard = false,
   })  : questionId = question.id,
         userId = question.userId,
         targetId = question.targetId,
@@ -139,30 +142,30 @@ class QuestionCard extends ConsumerWidget {
         super(key: key);
 
   /// An instance of [QuestionCard] filled with dummy data.
-  static QuestionCard dummyInstance(
-    BuildContext context, {
-    bool fullscreen = false,
-  }) =>
-      QuestionCard(
-        questionId: DummyDataManager.randomInt.toString(),
-        userId: DummyDataManager.randomInt.toString(),
-        targetId: DummyDataManager.randomInt.toString(),
-        cardHeaderTitleType: TargetType.phone,
-        postedDate: DummyDataManager.postedDate,
-        authorName: DummyDataManager.authorName,
-        imageUrl: DummyDataManager.imageUrl,
-        targetName: DummyDataManager.targetName,
-        questionText: StringsManager.lorem,
-        upvoteCount: DummyDataManager.randomInt,
-        answerCount: DummyDataManager.randomInt,
-        shareCount: DummyDataManager.randomInt,
-        upvoted: DummyDataManager.randomBool,
-        cardType: DummyDataManager.randomBool
-            ? CardType.productReview
-            : CardType.companyReview,
-        fullscreen: fullscreen,
-        onPressingAnswer: () {},
-      );
+  // static QuestionCard dummyInstance(
+  //   BuildContext context, {
+  //   bool fullscreen = false,
+  // }) =>
+  //     QuestionCard(
+  //       questionId: DummyDataManager.randomInt.toString(),
+  //       userId: DummyDataManager.randomInt.toString(),
+  //       targetId: DummyDataManager.randomInt.toString(),
+  //       cardHeaderTitleType: TargetType.phone,
+  //       postedDate: DummyDataManager.postedDate,
+  //       authorName: DummyDataManager.authorName,
+  //       imageUrl: DummyDataManager.imageUrl,
+  //       targetName: DummyDataManager.targetName,
+  //       questionText: StringsManager.lorem,
+  //       upvoteCount: DummyDataManager.randomInt,
+  //       answerCount: DummyDataManager.randomInt,
+  //       shareCount: DummyDataManager.randomInt,
+  //       upvoted: DummyDataManager.randomBool,
+  //       cardType: DummyDataManager.randomBool
+  //           ? CardType.productReview
+  //           : CardType.companyReview,
+  //       fullscreen: fullscreen,
+  //       onPressingAnswer: () {},
+  //     );
 
   QuestionCard copyWith({
     String? questionId,
@@ -183,6 +186,7 @@ class QuestionCard extends ConsumerWidget {
     CardType? cardType,
     AnswerTree? answer,
     VoidCallback? onPressingAnswer,
+    bool? postForReportCard,
   }) {
     return QuestionCard(
       questionId: questionId ?? this.questionId,
@@ -201,6 +205,7 @@ class QuestionCard extends ConsumerWidget {
       fullscreen: fullscreen ?? this.fullscreen,
       cardType: cardType ?? this.cardType,
       onPressingAnswer: onPressingAnswer ?? this.onPressingAnswer,
+      postForReportCard: postForReportCard ?? this.postForReportCard,
     );
   }
 
@@ -318,6 +323,7 @@ class QuestionCard extends ConsumerWidget {
                   fullscreen: fullscreen,
                   postType: postType,
                   postId: questionId,
+                  postForReportCard: postForReportCard,
                 ),
                 if (!fullscreen && answer != null) ...[
                   Divider(

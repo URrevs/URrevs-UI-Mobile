@@ -789,4 +789,62 @@ abstract class RemoteDataSource {
     @Path() String reportId,
     @Body() UpdateReportStateRequest request,
   );
+
+  @GET('/reports/content/review/phone/{reviewId}')
+  Future<GetPhoneReviewResponse> showReportPhoneReview(
+    @Path() String reviewId,
+  );
+  @GET('/reports/content/review/company/{reviewId}')
+  Future<GetCompanyReviewResponse> showReportCompanyReview(
+    @Path() String reviewId,
+  );
+
+  @GET('/reports/content/review/phone/comments/{commentId}')
+  Future<ShowReportCommentResponse> showReportPhoneReviewComment(
+    @Path() String commentId,
+  );
+  @GET('/reports/content/review/company/comments/{commentId}')
+  Future<ShowReportCommentResponse> showReportCompanyReviewComment(
+    @Path() String commentId,
+  );
+
+  @GET('/reports/content/review/phone/comments/{commentId}/replies/{replyId}')
+  Future<ShowReportReplyResponse> showReportPhoneReviewCommentReply(
+    @Path() String commentId,
+    @Path() String replyId,
+  );
+  @GET('/reports/content/review/company/comments/{commentId}/replies/{replyId}')
+  Future<ShowReportReplyResponse> showReportCompanyReviewCommentReply(
+    @Path() String commentId,
+    @Path() String replyId,
+  );
+
+  @GET('/reports/content/question/phone/{questionId}')
+  Future<GetPhoneQuestionResponse> showReportPhoneQuestion(
+    @Path() String questionId,
+  );
+  @GET('/reports/content/question/company/{questionId}')
+  Future<GetCompanyQuestionResponse> showReportCompanyQuestion(
+    @Path() String questionId,
+  );
+
+  @GET('/reports/content/question/phone/answers/{answerId}')
+  Future<ShowReportAnswerResponse> showReportPhoneQuestionAnswer(
+    @Path() String answerId,
+  );
+  @GET('/reports/content/question/company/answers/{answerId}')
+  Future<ShowReportAnswerResponse> showReportCompanyQuestionAnswer(
+    @Path() String answerId,
+  );
+
+  @GET('/reports/content/question/phone/answers/{answerId}/replies/{replyId}')
+  Future<ShowReportReplyResponse> showReportPhoneQuestionAnswerReply(
+    @Path() String answerId,
+    @Path() String replyId,
+  );
+  @GET('/reports/content/question/company/answers/{answerId}/replies/{replyId}')
+  Future<ShowReportReplyResponse> showReportCompanyQuestionAnswerReply(
+    @Path() String answerId,
+    @Path() String replyId,
+  );
 }

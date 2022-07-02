@@ -296,5 +296,6 @@ abstract class  LocaleKeys {
   static const companyAnswerReply = 'companyAnswerReply';
   static const permitViewingThisContent = 'permitViewingThisContent';
   static const unblockThisUsersAccount = 'unblockThisUsersAccount';
+  static const hideContent = 'hideContent';
 
 }

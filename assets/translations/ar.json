@@ -294,5 +294,6 @@
   "phoneAnswerReply": "رد على إجابة سؤال على هاتف",
   "companyAnswerReply": "رد على إجابة سؤال على شركة",
   "permitViewingThisContent": "إتاحة عرض هذا المحتوى",
-  "unblockThisUsersAccount": "إعادة تشغيل حساب هذا المستخدم"
+  "unblockThisUsersAccount": "إعادة تشغيل حساب هذا المستخدم",
+  "hideContent": "اخفِ المحتوى"
 }

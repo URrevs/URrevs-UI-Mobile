@@ -1,7 +1,8 @@
 import 'package:equatable/equatable.dart';
+import 'package:urrevs_ui_mobile/domain/models/interaction.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 
-class ReplyModel extends Equatable {
+class ReplyModel extends Equatable implements Interaction {
   final String id;
   final String userId;
   final String userName;

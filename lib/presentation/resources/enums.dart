@@ -125,6 +125,52 @@ enum ReportType {
 
 extension ReportTypeExtension on ReportType {
   String get translatedName => name.tr();
+
+  bool get isPost => [
+        ReportType.phoneReview,
+        ReportType.companyReview,
+        ReportType.phoneQuestion,
+        ReportType.companyQuestion
+      ].contains(this);
+
+  CardType get cardType {
+    switch (this) {
+      case ReportType.phoneReview:
+        return CardType.productReview;
+      case ReportType.companyReview:
+        return CardType.companyReview;
+      case ReportType.phoneQuestion:
+        return CardType.productQuestion;
+      case ReportType.companyQuestion:
+        return CardType.companyQuestion;
+      case ReportType.phoneComment:
+      case ReportType.companyComment:
+        return CardType.comment;
+      case ReportType.phoneAnswer:
+      case ReportType.companyAnswer:
+        return CardType.answer;
+      case ReportType.phoneCommentReply:
+      case ReportType.companyCommentReply:
+      case ReportType.phoneAnswerReply:
+      case ReportType.companyAnswerReply:
+        return CardType.reply;
+    }
+  }
+
+  PostType? get postType {
+    switch (this) {
+      case ReportType.phoneReview:
+        return PostType.phoneReview;
+      case ReportType.companyReview:
+        return PostType.companyReview;
+      case ReportType.phoneQuestion:
+        return PostType.phoneQuestion;
+      case ReportType.companyQuestion:
+        return PostType.companyQuestion;
+      default:
+        return null;
+    }
+  }
 }
 
 enum ReportStatus { open, closed }

@@ -65,5 +65,16 @@ class Report {
         assert(!(type == ReportType.phoneAnswerReply &&
             (question == null || answer == null || reply == null))),
         assert(!(type == ReportType.companyAnswerReply &&
-            (question == null || answer == null || reply == null)));
+            (question == null || answer == null || reply == null))),
+        assert(!(phoneReview != null &&
+            (companyReview != null || question != null))),
+        assert(!(companyReview != null &&
+            (phoneReview != null || question != null))),
+        assert(!(question != null &&
+            (phoneReview != null || companyReview != null))),
+        assert(!(phoneReview == null &&
+            companyReview == null &&
+            question == null));
+
+  String get postId => phoneReview ?? companyReview ?? question!;
 }

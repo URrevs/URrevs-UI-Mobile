@@ -76,6 +76,7 @@ class CompanyReviewCard extends ConsumerWidget {
   final String userId;
 
   final String companyId;
+  final bool postForReportCard;
 
   CompanyReviewCard({
     Key? key,
@@ -96,6 +97,7 @@ class CompanyReviewCard extends ConsumerWidget {
     required this.liked,
     required this.fullscreen,
     required this.onPressingComment,
+    required this.postForReportCard,
   })  : _postProviderParams = PostProviderParams(
           postId: reviewId,
           postType: PostType.companyReview,
@@ -112,6 +114,7 @@ class CompanyReviewCard extends ConsumerWidget {
     required CompanyReview companyReview,
     required this.fullscreen,
     required this.onPressingComment,
+    this.postForReportCard = false,
     Key? key,
   })  : reviewId = companyReview.id,
         userId = companyReview.userId,
@@ -141,26 +144,26 @@ class CompanyReviewCard extends ConsumerWidget {
         super(key: key);
 
   /// An instance of [CompanyReviewCard] filled with dummy data.
-  static CompanyReviewCard dummyInstance({bool fullscreen = false}) =>
-      CompanyReviewCard(
-        reviewId: DateTime.now().microsecondsSinceEpoch.toString(),
-        userId: DateTime.now().microsecondsSinceEpoch.toString(),
-        companyId: DateTime.now().microsecondsSinceEpoch.toString(),
-        postedDate: DateTime.now(),
-        views: 100,
-        authorName: faker.person.name(),
-        imageUrl: StringsManager.picsum200x200,
-        companyName: faker.company.name(),
-        generalRating: Random().nextInt(5) + 1,
-        prosText: StringsManager.lorem,
-        consText: StringsManager.lorem,
-        likeCount: 100,
-        commentCount: 5,
-        shareCount: 20,
-        liked: Random().nextBool(),
-        fullscreen: fullscreen,
-        onPressingComment: () {},
-      );
+  // static CompanyReviewCard dummyInstance({bool fullscreen = false}) =>
+  //     CompanyReviewCard(
+  //       reviewId: DateTime.now().microsecondsSinceEpoch.toString(),
+  //       userId: DateTime.now().microsecondsSinceEpoch.toString(),
+  //       companyId: DateTime.now().microsecondsSinceEpoch.toString(),
+  //       postedDate: DateTime.now(),
+  //       views: 100,
+  //       authorName: faker.person.name(),
+  //       imageUrl: StringsManager.picsum200x200,
+  //       companyName: faker.company.name(),
+  //       generalRating: Random().nextInt(5) + 1,
+  //       prosText: StringsManager.lorem,
+  //       consText: StringsManager.lorem,
+  //       likeCount: 100,
+  //       commentCount: 5,
+  //       shareCount: 20,
+  //       liked: Random().nextBool(),
+  //       fullscreen: fullscreen,
+  //       onPressingComment: () {},
+  //     );
 
   CompanyReviewCard copyWith({
     String? reviewId,
@@ -181,6 +184,7 @@ class CompanyReviewCard extends ConsumerWidget {
     int? shareCount,
     bool? fullscreen,
     VoidCallback? onPressingComment,
+    bool? postForReportCard,
   }) {
     return CompanyReviewCard(
       reviewId: reviewId ?? this.reviewId,
@@ -200,6 +204,7 @@ class CompanyReviewCard extends ConsumerWidget {
       liked: liked ?? this.liked,
       fullscreen: fullscreen ?? this.fullscreen,
       onPressingComment: onPressingComment ?? this.onPressingComment,
+      postForReportCard: postForReportCard ?? this.postForReportCard,
     );
   }
 
@@ -323,6 +328,7 @@ class CompanyReviewCard extends ConsumerWidget {
                   postType: PostType.companyReview,
                   postId: reviewId,
                   userId: userId,
+                  postForReportCard: postForReportCard,
                 ),
               ],
             ),
