@@ -2040,6 +2040,38 @@ class _RemoteDataSource implements RemoteDataSource {
   }
 
   @override
+  Future<BaseResponse> blockUser(userId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<BaseResponse>(
+            Options(method: 'PUT', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/users/${userId}/block/all',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = BaseResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<BaseResponse> unblockUser(userId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<BaseResponse>(
+            Options(method: 'PUT', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/users/${userId}/unblock/all',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = BaseResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<BaseResponse> hidePhoneReview(reviewId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -2473,6 +2505,22 @@ class _RemoteDataSource implements RemoteDataSource {
   }
 
   @override
+  Future<BaseResponse> closeReport(reportId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<BaseResponse>(
+            Options(method: 'PUT', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/reports/${reportId}/close',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = BaseResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<BaseResponse> updateReportState(reportId, request) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -2699,6 +2747,80 @@ class _RemoteDataSource implements RemoteDataSource {
             queryParameters: queryParameters, data: _data)
         .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = ShowReportReplyResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ShowReportPhoneReviewCommentContextResponse>
+      showReportPhoneReviewCommentContext(reviewId, commentId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<
+        ShowReportPhoneReviewCommentContextResponse>(Options(
+            method: 'GET', headers: _headers, extra: _extra)
+        .compose(_dio.options,
+            '/reports/context/review/phone/${reviewId}/comments/${commentId}',
+            queryParameters: queryParameters, data: _data)
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value =
+        ShowReportPhoneReviewCommentContextResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ShowReportCompanyReviewCommentContextResponse>
+      showReportCompanyReviewCommentContext(reviewId, commentId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<
+        ShowReportCompanyReviewCommentContextResponse>(Options(
+            method: 'GET', headers: _headers, extra: _extra)
+        .compose(_dio.options,
+            '/reports/context/review/company/${reviewId}/comments/${commentId}',
+            queryParameters: queryParameters, data: _data)
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value =
+        ShowReportCompanyReviewCommentContextResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ShowReportAnswerContextResponse> showReportPhoneQuestionAnswerContext(
+      questionId, answerId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<
+        ShowReportAnswerContextResponse>(Options(
+            method: 'GET', headers: _headers, extra: _extra)
+        .compose(_dio.options,
+            '/reports/context/question/phone/${questionId}/answers/${answerId}',
+            queryParameters: queryParameters, data: _data)
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ShowReportAnswerContextResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ShowReportAnswerContextResponse>
+      showReportCompanyQuestionAnswerContext(questionId, answerId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<
+        ShowReportAnswerContextResponse>(Options(
+            method: 'GET', headers: _headers, extra: _extra)
+        .compose(_dio.options,
+            '/reports/context/question/company/${questionId}/answers/${answerId}',
+            queryParameters: queryParameters, data: _data)
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ShowReportAnswerContextResponse.fromJson(_result.data!);
     return value;
   }
 

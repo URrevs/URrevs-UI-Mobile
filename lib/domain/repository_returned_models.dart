@@ -1,4 +1,10 @@
+import 'package:urrevs_ui_mobile/domain/models/answer.dart';
+import 'package:urrevs_ui_mobile/domain/models/comment.dart';
+import 'package:urrevs_ui_mobile/domain/models/company_review.dart';
+import 'package:urrevs_ui_mobile/domain/models/direct_interaction.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone_review.dart';
+import 'package:urrevs_ui_mobile/domain/models/post.dart';
+import 'package:urrevs_ui_mobile/domain/models/question.dart';
 import 'package:urrevs_ui_mobile/domain/models/user.dart';
 
 class AddAnswerReturnedVals {
@@ -29,5 +35,14 @@ class AddPhoneReviewReturnedVals {
   AddPhoneReviewReturnedVals({
     required this.phoneReview,
     required this.earnedPoints,
+  });
+}
+
+class ShowReportContextReturnedVals {
+  Post post;
+  DirectInteraction directInteraction;
+  ShowReportContextReturnedVals({
+    required this.post,
+    required this.directInteraction,
   });
 }

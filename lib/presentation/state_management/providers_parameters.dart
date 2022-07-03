@@ -279,6 +279,32 @@ class GetReportInteractionProviderParams extends Equatable {
   List<Object?> get props => [reportId];
 }
 
+class GetReportContextProviderParams extends Equatable {
+  final String reportId;
+  final Report report;
+
+  const GetReportContextProviderParams({
+    required this.reportId,
+    required this.report,
+  });
+
+  @override
+  List<Object?> get props => [reportId];
+}
+
+class BlockUserProviderParamss extends Equatable {
+  final String reportId;
+  final Report report;
+
+  const BlockUserProviderParamss({
+    required this.reportId,
+    required this.report,
+  });
+
+  @override
+  List<Object?> get props => [reportId];
+}
+
 class GetLatestCompetitionProviderParams extends NotSyncedProviderParams {
   GetLatestCompetitionProviderParams();
 }

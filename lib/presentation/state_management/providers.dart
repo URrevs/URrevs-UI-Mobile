@@ -20,6 +20,8 @@ import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/leaderb
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/logout_from_all_devices_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/phones_notifier/get_all_phones_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/phones_notifier/get_two_phones_specs_notifier.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/reports_notifiers/block_user_notifier.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/reports_notifiers/get_report_context_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/reports_notifiers/get_report_interaction_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/reports_notifiers/get_reports_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/reports_notifiers/hide_notifier.dart';
@@ -58,6 +60,8 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/phones_sta
 import 'package:urrevs_ui_mobile/presentation/state_management/states/question_states/accept_answer_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/question_states/add_question_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/question_states/get_post_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/reports_states/block_user_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/reports_states/get_report_context_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reports_states/get_report_interaction_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reports_states/get_reports_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reports_states/hide_state.dart';
@@ -339,6 +343,16 @@ final getReportInteractionProvider = StateNotifierProvider.autoDispose.family<
         GetReportInteractionState,
         GetReportInteractionProviderParams>(
     (ref, params) => GetReportInteractionNotifier(report: params.report));
+
+final getReportContextProvider = StateNotifierProvider.autoDispose.family<
+        GetReportContextNotifier,
+        GetReportContextState,
+        GetReportContextProviderParams>(
+    (ref, params) => GetReportContextNotifier(report: params.report));
+
+final blockUserProvider = StateNotifierProvider.autoDispose
+    .family<BlockUserNotifier, BlockUserState, BlockUserProviderParamss>(
+        (ref, params) => BlockUserNotifier(report: params.report));
 
 // posts and interactions providers
 

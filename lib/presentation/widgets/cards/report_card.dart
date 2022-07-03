@@ -13,9 +13,11 @@ import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/font_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/menu_screen/subscreens/admin_panel/subscreens.dart/reports_screen/subscreens/report_context_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_post_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/reports_states/block_user_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reports_states/get_report_interaction_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reports_states/get_reports_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reports_states/hide_state.dart';
@@ -49,6 +51,10 @@ class _ReportCardState extends ConsumerState<ReportCard> {
 
   late final GetReportInteractionProviderParams _getRepIntProvParams =
       GetReportInteractionProviderParams(
+          reportId: widget.report.id, report: widget.report);
+
+  late final BlockUserProviderParamss _blockUserProvParams =
+      BlockUserProviderParamss(
           reportId: widget.report.id, report: widget.report);
 
   void _getReportInteraction() {
@@ -201,13 +207,7 @@ class _ReportCardState extends ConsumerState<ReportCard> {
             children: [
               _buildHideButton(),
               10.horizontalSpace,
-              _buildElevatedButton(
-                onPressed: () {},
-                color: ColorManager.red,
-                text: !widget.report.reporteeBlocked
-                    ? LocaleKeys.blockThisUsersAccount.tr()
-                    : LocaleKeys.unblockThisUsersAccount.tr(),
-              ),
+              _buildBlockButton(),
             ],
           ),
         ],
@@ -215,9 +215,33 @@ class _ReportCardState extends ConsumerState<ReportCard> {
     );
   }
 
+  Widget _buildBlockButton() {
+    ref.addErrorListener(
+      provider: blockUserProvider(_blockUserProvParams),
+      context: context,
+    );
+    final state = ref.watch(blockUserProvider(_blockUserProvParams));
+    bool blocked = state is BlockUserInitialState && state.blocked ||
+        state is BlockUserLoadingState && state.blocked ||
+        state is BlockUserLoadedState && state.blocked;
+    return _buildElevatedButton(
+      onPressed: () {
+        ref
+            .read(blockUserProvider(_blockUserProvParams).notifier)
+            .toggleBlockState();
+      },
+      color: ColorManager.red,
+      text: !blocked
+          ? LocaleKeys.blockThisUsersAccount.tr()
+          : LocaleKeys.unblockThisUsersAccount.tr(),
+    );
+  }
+
   Widget _buildShowContentButton() {
     ReportType reportType = widget.report.type;
-    final state = ref.watch(getReportInteractionProvider(_getRepIntProvParams));
+    final state = widget.report.type.isPost
+        ? null
+        : ref.watch(getReportInteractionProvider(_getRepIntProvParams));
     bool textIsShow = state is! GetReportInteractionLoadedState;
     return _buildElevatedButton(
       onPressed: () {
@@ -267,6 +291,7 @@ class _ReportCardState extends ConsumerState<ReportCard> {
   }
 
   Widget _buildReportInteraction() {
+    if (widget.report.type.isPost) return SizedBox();
     ref.addErrorListener(
       provider: getReportInteractionProvider(_getRepIntProvParams),
       context: context,
@@ -283,15 +308,27 @@ class _ReportCardState extends ConsumerState<ReportCard> {
     return Padding(
       padding: EdgeInsets.all(8.sp),
       child: Center(
-        child: Builder(builder: (context) {
-          if (interaction is Comment) {
-            return ReportCommentTree.fromComment(interaction);
-          } else if (interaction is Answer) {
-            return ReportAnswerTree.fromAnswer(interaction);
-          } else {
-            return ReportReply.fromReplyModel(interaction as ReplyModel);
-          }
-        }),
+        child: GestureDetector(
+          onTap: () {
+            Navigator.of(context).pushNamed(
+              ReportContextScreen.routeName,
+              arguments: ReportContextScreenArgs(
+                report: widget.report,
+                reportedReplyId:
+                    interaction is ReplyModel ? interaction.id : null,
+              ),
+            );
+          },
+          child: Builder(builder: (context) {
+            if (interaction is Comment) {
+              return ReportCommentTree.fromComment(interaction);
+            } else if (interaction is Answer) {
+              return ReportAnswerTree.fromAnswer(interaction);
+            } else {
+              return ReportReply.fromReplyModel(interaction as ReplyModel);
+            }
+          }),
+        ),
       ),
     );
   }

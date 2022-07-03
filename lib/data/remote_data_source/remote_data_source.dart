@@ -669,6 +669,15 @@ abstract class RemoteDataSource {
     @Body() ReportSocialItemRequest request,
   );
 
+  @PUT('/users/{userId}/block/all')
+  Future<BaseResponse> blockUser(
+    @Path() String userId,
+  );
+  @PUT('/users/{userId}/unblock/all')
+  Future<BaseResponse> unblockUser(
+    @Path() String userId,
+  );
+
   @PUT('/reviews/phone/{reviewId}/hide')
   Future<BaseResponse> hidePhoneReview(
     @Path() String reviewId,
@@ -784,6 +793,11 @@ abstract class RemoteDataSource {
     @Query('round') int round,
   );
 
+  @PUT('/reports/{reportId}/close')
+  Future<BaseResponse> closeReport(
+    @Path() String reportId,
+  );
+
   @PUT('/reports/{reportId}/actions')
   Future<BaseResponse> updateReportState(
     @Path() String reportId,
@@ -846,5 +860,32 @@ abstract class RemoteDataSource {
   Future<ShowReportReplyResponse> showReportCompanyQuestionAnswerReply(
     @Path() String answerId,
     @Path() String replyId,
+  );
+
+  @GET('/reports/context/review/phone/{reviewId}/comments/{commentId}')
+  Future<ShowReportPhoneReviewCommentContextResponse>
+      showReportPhoneReviewCommentContext(
+    @Path() String reviewId,
+    @Path() String commentId,
+  );
+
+  @GET('/reports/context/review/company/{reviewId}/comments/{commentId}')
+  Future<ShowReportCompanyReviewCommentContextResponse>
+      showReportCompanyReviewCommentContext(
+    @Path() String reviewId,
+    @Path() String commentId,
+  );
+
+  @GET('/reports/context/question/phone/{questionId}/answers/{answerId}')
+  Future<ShowReportAnswerContextResponse> showReportPhoneQuestionAnswerContext(
+    @Path() String questionId,
+    @Path() String answerId,
+  );
+
+  @GET('/reports/context/question/company/{questionId}/answers/{answerId}')
+  Future<ShowReportAnswerContextResponse>
+      showReportCompanyQuestionAnswerContext(
+    @Path() String questionId,
+    @Path() String answerId,
   );
 }

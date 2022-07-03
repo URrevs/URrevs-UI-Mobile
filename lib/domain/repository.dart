@@ -1072,6 +1072,22 @@ class Repository {
     });
   }
 
+  Future<Either<Failure, void>> blockUser(
+      String userId, String reportId, UpdateReportStateRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.blockUser(userId);
+      await _remoteDataSource.updateReportState(reportId, request);
+    });
+  }
+
+  Future<Either<Failure, void>> unblockUser(
+      String userId, String reportId, UpdateReportStateRequest request) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.unblockUser(userId);
+      await _remoteDataSource.updateReportState(reportId, request);
+    });
+  }
+
   Future<Either<Failure, void>> hideCompanyReview(
       String reviewId, String reportId, UpdateReportStateRequest request) {
     return _tryAndCatch(() async {
@@ -1277,6 +1293,12 @@ class Repository {
     });
   }
 
+  Future<Either<Failure, void>> closeReport(String reportId) {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.closeReport(reportId);
+    });
+  }
+
   Future<Either<Failure, PhoneReview>> showReportPhoneReview(String reviewId) {
     return _tryAndCatch(() async {
       final response = await _remoteDataSource.showReportPhoneReview(reviewId);
@@ -1379,6 +1401,43 @@ class Repository {
       final response = await _remoteDataSource
           .showReportCompanyQuestionAnswerReply(answerId, replyId);
       return response.replyModel;
+    });
+  }
+
+  Future<Either<Failure, ShowReportContextReturnedVals>>
+      showReportPhoneReviewCommentContext(String reviewId, String commentId) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource
+          .showReportPhoneReviewCommentContext(reviewId, commentId);
+      return response.returnedVals;
+    });
+  }
+
+  Future<Either<Failure, ShowReportContextReturnedVals>>
+      showReportCompanyReviewCommentContext(String reviewId, String commentId) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource
+          .showReportCompanyReviewCommentContext(reviewId, commentId);
+      return response.returnedVals;
+    });
+  }
+
+  Future<Either<Failure, ShowReportContextReturnedVals>>
+      showReportPhoneQuestionAnswerContext(String questionId, String answerId) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource
+          .showReportPhoneQuestionAnswerContext(questionId, answerId);
+      return response.returnedVals;
+    });
+  }
+
+  Future<Either<Failure, ShowReportContextReturnedVals>>
+      showReportCompanyQuestionAnswerContext(
+          String questionId, String answerId) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource
+          .showReportCompanyQuestionAnswerContext(questionId, answerId);
+      return response.returnedVals;
     });
   }
 }

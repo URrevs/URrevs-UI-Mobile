@@ -5,6 +5,7 @@ import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_scre
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/menu_screen/subscreens/about_us_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/menu_screen/subscreens/admin_panel/admin_panel_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/menu_screen/subscreens/admin_panel/subscreens.dart/reports_screen/reports_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/menu_screen/subscreens/admin_panel/subscreens.dart/reports_screen/subscreens/report_context_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/menu_screen/subscreens/admin_panel/subscreens.dart/update_products_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/menu_screen/subscreens/privacy_policy_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/menu_screen/subscreens/questions_about_my_products_screen.dart';
@@ -143,6 +144,12 @@ class RouteGenerator {
         );
       case ReportsScreen.routeName:
         return MaterialPageRoute(builder: (_) => ReportsScreen());
+      case ReportContextScreen.routeName:
+        ReportContextScreenArgs screenArgs =
+            routeSettings.arguments as ReportContextScreenArgs;
+        return MaterialPageRoute(
+          builder: (_) => ReportContextScreen(screenArgs: screenArgs),
+        );
       default:
         return unDefinedRoute(routeSettings.name);
     }
