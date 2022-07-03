@@ -160,7 +160,9 @@ class _InteractionBodyState extends ConsumerState<InteractionBody> {
               ? ColorManager.backgroundGrey
               : ColorManager.white,
           child: InkWell(
-            onTap: noNeedForExpansion ? null : _onTappingReplyBody,
+            onTap: noNeedForExpansion && !widget.inQuestionCard
+                ? null
+                : _onTappingReplyBody,
             onLongPress: _onHoldingInteractionBody,
             borderRadius:
                 BorderRadius.circular(AppRadius.interactionBodyRadius),

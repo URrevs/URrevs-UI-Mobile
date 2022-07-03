@@ -14,6 +14,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/user_profile_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/question_states/accept_answer_state.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/avatar.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/reply.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/interaction_body.dart';
@@ -215,8 +216,12 @@ class _AnswerTreeState extends ConsumerState<AnswerTree> {
     });
   }
 
-  bool get isAccepted =>
-      ref.watch(acceptAnswerProvider(_acceptAnswerProviderParams)).isAccepted;
+  bool get isAccepted {
+    final state = ref.watch(acceptAnswerProvider(_acceptAnswerProviderParams));
+    if (state is AcceptAnswerLoadingState) return state.accepted;
+    if (state is AcceptAnswerLoadedState) return state.accepted;
+    return widget.accepted;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -311,6 +316,7 @@ class _AnswerTreeState extends ConsumerState<AnswerTree> {
                       postUserId: widget.postUserId,
                       parentDirectInteractionId: widget.answerId,
                       parentPostId: widget.questionId,
+
                       /// replies would not be shown except at fullscreen post
                       /// screen where get interactions provider params are
                       /// passed to answer tree - the only case where answer

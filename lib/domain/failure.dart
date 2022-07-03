@@ -38,6 +38,7 @@ class ServerErrorMessages {
   static const String invalidReferralCode = 'invalid referral code';
   static const String alreadyReported = 'already reported';
   static const String blocked = 'blocked';
+  static const String alreadyAccepted = 'already accepted';
   // static const String trackAlreadyHated = 'track already hated';
   // static const String trackAlreadySeemored = 'track already seemored';
   // static const String trackAlreadyFullscreened = 'track already fullscreened';
@@ -67,6 +68,7 @@ class ServerErrorMessages {
         ServerErrorMessages.alreadyLiked: alreadyLiked,
         ServerErrorMessages.alreadyUnliked: alreadyUnliked,
         ServerErrorMessages.noLikes: noLikes,
+        ServerErrorMessages.alreadyAccepted: alreadyAccepted,
         ServerErrorMessages.notFound: notFound,
         ServerErrorMessages.notOwned:
             LocaleKeys.youCantAnswerAQuestionMessage.tr(),
@@ -106,6 +108,7 @@ class ServerErrorMessages {
         alreadyUnliked,
         noLikes,
         notFound,
+        alreadyAccepted,
         // notYet,
         notAccepted,
         // trackAlreadyHated,

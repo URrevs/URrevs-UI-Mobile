@@ -107,6 +107,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
       AddInteractionProviderParams(postId: _postId, postType: _postType);
 
   final List<DirectInteraction> _interactions = [];
+  bool _acceptedAnswerAddedToList = false;
 
   /// answerId passed in screenArgs could be null, when this happens, posted
   /// interactions would be an answer not a reply.
@@ -183,6 +184,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
     // add accepted answer to interactions state when both question and
     // interactions are loaeded
     ref.listen(getPostProvider(_postProviderParams), (previous, next) {
+      if (_acceptedAnswerAddedToList) return;
       final interactiosState =
           ref.watch(getInteractionsProvider(_interactionsProviderParams));
       bool isQuestion = _postType == PostType.companyQuestion ||
@@ -197,12 +199,14 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
                 .read(getInteractionsProvider(_interactionsProviderParams)
                     .notifier)
                 .addInteractionToState(question.acceptedAns!);
+            _acceptedAnswerAddedToList = true;
           });
         }
       }
     });
     ref.listen(getInteractionsProvider(_interactionsProviderParams),
         (previous, next) {
+      if (_acceptedAnswerAddedToList) return;
       final postState = ref.watch(getPostProvider(_postProviderParams));
       bool isQuestion = _postType == PostType.companyQuestion ||
           _postType == PostType.phoneQuestion;
@@ -220,6 +224,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
                 .read(getInteractionsProvider(_interactionsProviderParams)
                     .notifier)
                 .addInteractionToState(question.acceptedAns!);
+            _acceptedAnswerAddedToList = true;
           });
         }
       }
