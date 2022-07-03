@@ -21,6 +21,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/logout_
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/phones_notifier/get_all_phones_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/phones_notifier/get_two_phones_specs_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/reports_notifiers/block_user_notifier.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/reports_notifiers/close_report_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/reports_notifiers/get_report_context_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/reports_notifiers/get_report_interaction_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/reports_notifiers/get_reports_notifier.dart';
@@ -61,6 +62,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/question_s
 import 'package:urrevs_ui_mobile/presentation/state_management/states/question_states/add_question_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/question_states/get_post_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reports_states/block_user_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/reports_states/close_report_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reports_states/get_report_context_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reports_states/get_report_interaction_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reports_states/get_reports_state.dart';
@@ -353,6 +355,10 @@ final getReportContextProvider = StateNotifierProvider.autoDispose.family<
 final blockUserProvider = StateNotifierProvider.autoDispose
     .family<BlockUserNotifier, BlockUserState, BlockUserProviderParamss>(
         (ref, params) => BlockUserNotifier(report: params.report));
+
+final closeReportProvider = StateNotifierProvider.autoDispose
+    .family<CloseReportNotifier, CloseReportState, CloseReportProviderParams>(
+        (ref, params) => CloseReportNotifier(report: params.report));
 
 // posts and interactions providers
 

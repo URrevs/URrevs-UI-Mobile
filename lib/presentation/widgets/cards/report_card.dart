@@ -18,6 +18,7 @@ import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_post_screen.dar
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reports_states/block_user_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/reports_states/close_report_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reports_states/get_report_interaction_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reports_states/get_reports_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reports_states/hide_state.dart';
@@ -57,6 +58,10 @@ class _ReportCardState extends ConsumerState<ReportCard> {
       BlockUserProviderParamss(
           reportId: widget.report.id, report: widget.report);
 
+  late final CloseReportProviderParams _closeReportProvParams =
+      CloseReportProviderParams(
+          reportId: widget.report.id, report: widget.report);
+
   void _getReportInteraction() {
     ref
         .read(getReportInteractionProvider(_getRepIntProvParams).notifier)
@@ -64,7 +69,7 @@ class _ReportCardState extends ConsumerState<ReportCard> {
   }
 
   Widget _buildElevatedButton({
-    required VoidCallback onPressed,
+    required VoidCallback? onPressed,
     required Color color,
     required String text,
   }) {
@@ -91,6 +96,9 @@ class _ReportCardState extends ConsumerState<ReportCard> {
 
   @override
   Widget build(BuildContext context) {
+    final closeReportState =
+        ref.watch(closeReportProvider(_closeReportProvParams));
+    if (closeReportState is CloseReportLoadedState) return SizedBox();
     return Card(
       elevation: AppElevations.ev3,
       shape: RoundedRectangleBorder(
@@ -194,7 +202,12 @@ class _ReportCardState extends ConsumerState<ReportCard> {
               if (widget.reportStatus == ReportStatus.open) ...[
                 10.horizontalSpace,
                 _buildElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    ref
+                        .read(closeReportProvider(_closeReportProvParams)
+                            .notifier)
+                        .closeReport();
+                  },
                   color: ColorManager.blue,
                   text: LocaleKeys.closeComplaint.tr(),
                 ),
@@ -221,15 +234,18 @@ class _ReportCardState extends ConsumerState<ReportCard> {
       context: context,
     );
     final state = ref.watch(blockUserProvider(_blockUserProvParams));
+    bool loading = state is BlockUserLoadingState;
     bool blocked = state is BlockUserInitialState && state.blocked ||
         state is BlockUserLoadingState && state.blocked ||
         state is BlockUserLoadedState && state.blocked;
     return _buildElevatedButton(
-      onPressed: () {
-        ref
-            .read(blockUserProvider(_blockUserProvParams).notifier)
-            .toggleBlockState();
-      },
+      onPressed: loading
+          ? null
+          : () {
+              ref
+                  .read(blockUserProvider(_blockUserProvParams).notifier)
+                  .toggleBlockState();
+            },
       color: ColorManager.red,
       text: !blocked
           ? LocaleKeys.blockThisUsersAccount.tr()
@@ -273,16 +289,19 @@ class _ReportCardState extends ConsumerState<ReportCard> {
       context: context,
     );
     final state = ref.watch(hideProvider(_hideProviderParams));
+    bool loading = state is HideLoadingState;
     bool hidden = state is HideInitialState && state.hidden ||
         state is HideLoadingState && state.hidden ||
         state is HideLoadedState && state.hidden;
     return _buildElevatedButton(
-      onPressed: () {
-        final state = ref.watch(hideProvider(_hideProviderParams));
-        if (state is! HideLoadingState) {
-          ref.read(hideProvider(_hideProviderParams).notifier).toggle();
-        }
-      },
+      onPressed: loading
+          ? null
+          : () {
+              final state = ref.watch(hideProvider(_hideProviderParams));
+              if (state is! HideLoadingState) {
+                ref.read(hideProvider(_hideProviderParams).notifier).toggle();
+              }
+            },
       color: ColorManager.red,
       text: !hidden
           ? LocaleKeys.preventViewingThisContent.tr()

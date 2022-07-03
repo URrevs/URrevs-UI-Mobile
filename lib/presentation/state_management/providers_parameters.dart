@@ -305,6 +305,19 @@ class BlockUserProviderParamss extends Equatable {
   List<Object?> get props => [reportId];
 }
 
+class CloseReportProviderParams extends Equatable {
+  final String reportId;
+  final Report report;
+
+  const CloseReportProviderParams({
+    required this.reportId,
+    required this.report,
+  });
+
+  @override
+  List<Object?> get props => [reportId];
+}
+
 class GetLatestCompetitionProviderParams extends NotSyncedProviderParams {
   GetLatestCompetitionProviderParams();
 }

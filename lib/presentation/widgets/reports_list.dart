@@ -61,34 +61,31 @@ class _ReportsListState extends ConsumerState<ReportsList> {
       ),
     ]);
     if (errWidget != null) return errWidget;
-    return Padding(
+    return PagedListView(
       padding: AppEdgeInsets.screenWithoutFabPadding,
-      child: PagedListView(
-        pagingController: _controller,
-        builderDelegate: PagedChildBuilderDelegate<Report>(
-          itemBuilder: (context, report, index) => ReportCard(
-            report: report,
-            reportStatus: widget.reportStatus,
-          ),
-          firstPageErrorIndicatorBuilder: (context) => SizedBox(),
-          newPageErrorIndicatorBuilder: (context) {
-            final state =
-                ref.watch(getReportsProvider(_getReportsProviderParams));
-            if (state is ErrorState) {
-              return VerticalListErrorWidget(
-                onRetry: _getReports,
-                retryLastRequest: (state as ErrorState).failure is RetryFailure,
-              );
-            } else {
-              return SizedBox();
-            }
-          },
-          firstPageProgressIndicatorBuilder: (context) =>
-              ReportCardsListLoading(),
-          newPageProgressIndicatorBuilder: (context) =>
-              ReportCardsListLoading(),
-          noItemsFoundIndicatorBuilder: (context) => EmptyListWidget(),
+      pagingController: _controller,
+      builderDelegate: PagedChildBuilderDelegate<Report>(
+        itemBuilder: (context, report, index) => ReportCard(
+          report: report,
+          reportStatus: widget.reportStatus,
         ),
+        firstPageErrorIndicatorBuilder: (context) => SizedBox(),
+        newPageErrorIndicatorBuilder: (context) {
+          final state =
+              ref.watch(getReportsProvider(_getReportsProviderParams));
+          if (state is ErrorState) {
+            return VerticalListErrorWidget(
+              onRetry: _getReports,
+              retryLastRequest: (state as ErrorState).failure is RetryFailure,
+            );
+          } else {
+            return SizedBox();
+          }
+        },
+        firstPageProgressIndicatorBuilder: (context) =>
+            ReportCardsListLoading(),
+        newPageProgressIndicatorBuilder: (context) => ReportCardsListLoading(),
+        noItemsFoundIndicatorBuilder: (context) => EmptyListWidget(),
       ),
     );
   }
