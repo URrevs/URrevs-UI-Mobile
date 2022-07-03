@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/authentication_screen.dart';
@@ -31,6 +32,7 @@ class Routes {
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings routeSettings) {
+    FirebaseAnalytics.instance.logScreenView(screenName: routeSettings.name);
     switch (routeSettings.name) {
       case DevelopmentScreen.routeName:
         return MaterialPageRoute(builder: (_) => DevelopmentScreen());

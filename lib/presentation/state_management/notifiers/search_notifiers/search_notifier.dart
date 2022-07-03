@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
@@ -31,6 +32,7 @@ class SearchNotifier extends StateNotifier<SearchState> {
       (failure) => state = SearchErrorState(failure: failure),
       (searchResults) {
         state = SearchLoadedState(searchResults: searchResults);
+        FirebaseAnalytics.instance.logSearch(searchTerm: searchWord);
       },
     );
   }

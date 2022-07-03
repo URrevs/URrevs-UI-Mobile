@@ -197,6 +197,10 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
       body: ListView(
         padding: EdgeInsets.all(20),
         children: [
+          ElevatedButton(
+            onPressed: () => throw Exception('testing crashlytics'),
+            child: Text('THROW ERROR'),
+          )
           // ReportCard(
           //   imageUrl: null,
           //   authorName: 'Amr Fatouh',

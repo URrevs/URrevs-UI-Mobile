@@ -21,7 +21,8 @@ class ServerErrorMessages {
   static const String invalidToken = 'invalid token';
   static const String processFailed = 'process failed';
   static const String noUpdateOperationsYet = 'no update operations yet';
-  static const String youAreNotAnAdmin = 'you are not admin';
+  static const String youAreNotAdmin = 'you are not admin';
+  static const String youAreNotAnAdmin = 'you are not an admin';
   static const String thereIsARunningUpdateOperationRightNow =
       'there is a running update operation right now';
   static const String badRequest = 'bad request';
@@ -39,6 +40,7 @@ class ServerErrorMessages {
   static const String alreadyReported = 'already reported';
   static const String blocked = 'blocked';
   static const String alreadyAccepted = 'already accepted';
+  static const String alreadyRunningCompetition = 'already running competition';
   // static const String trackAlreadyHated = 'track already hated';
   // static const String trackAlreadySeemored = 'track already seemored';
   // static const String trackAlreadyFullscreened = 'track already fullscreened';
@@ -57,6 +59,7 @@ class ServerErrorMessages {
         ServerErrorMessages.processFailed: LocaleKeys.processFailed.tr(),
         ServerErrorMessages.noUpdateOperationsYet:
             LocaleKeys.noUpdateOperationsYet.tr(),
+        ServerErrorMessages.youAreNotAdmin: LocaleKeys.youAreNotAdmin.tr(),
         ServerErrorMessages.youAreNotAnAdmin: LocaleKeys.youAreNotAdmin.tr(),
         ServerErrorMessages.thereIsARunningUpdateOperationRightNow:
             LocaleKeys.thereIsARunningUpdateOperationRightNow.tr(),
@@ -82,6 +85,8 @@ class ServerErrorMessages {
             LocaleKeys.youHaveAlreadyReportedThisElement.tr(),
         ServerErrorMessages.blocked:
             LocaleKeys.youAreBlockedCannotTakeThatAction.tr(),
+        ServerErrorMessages.alreadyRunningCompetition:
+            LocaleKeys.thereIsAnActiveCompetition.tr(),
       };
 
   static List<String> get _noResultFailures => [

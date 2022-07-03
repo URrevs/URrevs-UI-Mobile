@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -143,6 +144,11 @@ class _CardFooterButtonBarState extends ConsumerState<CardFooterButtonBar> {
         postContentType: widget.postType.postContentType,
       );
       ref.read(postProvider(_postProviderParams).notifier).incrementShares();
+      FirebaseAnalytics.instance.logShare(
+        contentType: widget.postType.name,
+        itemId: widget.postId,
+        method: 'unknown',
+      );
     }
   }
 

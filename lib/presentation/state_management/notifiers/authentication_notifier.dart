@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
@@ -34,6 +35,7 @@ class AuthenticationNotifier extends StateNotifier<AuthenticationState> {
       }
       state = AuthenticationErrorState(failure: failure);
     }, (returnedVals) {
+      FirebaseAnalytics.instance.logLogin(loginMethod: 'google');
       return state = AuthenticationLoadedState(
         user: returnedVals.user,
         refCode: returnedVals.refCode,
@@ -51,6 +53,7 @@ class AuthenticationNotifier extends StateNotifier<AuthenticationState> {
       }
       state = AuthenticationErrorState(failure: failure);
     }, (returnedVals) {
+      FirebaseAnalytics.instance.logLogin(loginMethod: 'facebook');
       return state = AuthenticationLoadedState(
         user: returnedVals.user,
         refCode: returnedVals.refCode,
