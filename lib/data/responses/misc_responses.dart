@@ -21,7 +21,7 @@ class GetPostsForHomeScreenResponse extends BaseResponse {
   @JsonKey(name: 'companyQuestions')
   List<QuestionSubResponse> companyQuestionsSubResponses;
   @JsonKey(name: 'total')
-  List<String> postsIds;
+  List<String>? postsIds;
 
   GetPostsForHomeScreenResponse({
     required bool success,
@@ -49,9 +49,14 @@ class GetPostsForHomeScreenResponse extends BaseResponse {
       ...companyQuestionModels
     ];
 
+    // handle the case where total field is not sent
+    // if (postsIds == null) {
+    //   return allPosts..shuffle();
+    // }
+
     List<Post> arrangedPosts = [];
 
-    for (String id in postsIds) {
+    for (String id in postsIds!) {
       int index = allPosts.indexWhere((p) => p.id == id);
       if (index < 0) {
         continue; // for the case where some ids are not in allPosts

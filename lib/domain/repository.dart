@@ -53,6 +53,13 @@ class Repository {
     if (!hasConnection) throw NoInternetConnection();
   }
 
+  // Future<void> _renewTokenIfEnded() async {
+  //   if (tokenExpiryDate != null &&
+  //       tokenExpiryDate! < DateTime.now().millisecondsSinceEpoch) {
+  //         final response = await _remoteDataSource.
+  //       }
+  // }
+
   Future<Either<Failure, T>> _tryAndCatch<T>(Future<T> Function() callBack,
       {Left<Failure, T>? Function(DioError)? onDioError}) async {
     try {

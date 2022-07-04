@@ -295,5 +295,7 @@
   "companyAnswerReply": "company question answer reply",
   "permitViewingThisContent": "Permit viewing this content",
   "unblockThisUsersAccount": "Unblock this user's account",
-  "hideContent": "Hide content"
+  "hideContent": "Hide content",
+  "additionalInfoShallBeEntered": "Additional Info shall be entered when choosing \"other\" as a complaint reason",
+  "successfullyReported": "Successfully reported"
 }

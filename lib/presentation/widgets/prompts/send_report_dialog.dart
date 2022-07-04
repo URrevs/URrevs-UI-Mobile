@@ -35,6 +35,7 @@ class SendReportDialog extends ConsumerStatefulWidget {
 }
 
 class _SendReportDialogState extends ConsumerState<SendReportDialog> {
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController _controller = TextEditingController();
   ComplaintReason? _complaintReason;
   String? _errMsg;
@@ -61,8 +62,10 @@ class _SendReportDialogState extends ConsumerState<SendReportDialog> {
       setState(() {
         _errMsg = LocaleKeys.theReasonForTheComplaintMustBeSelectd.tr();
       });
-      return;
+    } else {
+      setState(() => _errMsg = null);
     }
+    if (!_formKey.currentState!.validate() || _complaintReason == null) return;
     ReportSocialItemRequest request = ReportSocialItemRequest(
       reason: _complaintReason!.indexForRequest,
       info: _controller.text.isNotEmpty ? _controller.text : null,
@@ -108,6 +111,7 @@ class _SendReportDialogState extends ConsumerState<SendReportDialog> {
             5.verticalSpace,
           ],
           Form(
+            key: _formKey,
             child: TxtField(
               textController: _controller,
               hintText: LocaleKeys
@@ -116,6 +120,16 @@ class _SendReportDialogState extends ConsumerState<SendReportDialog> {
               keyboardType: TextInputType.text,
               fillColor: ColorManager.textFieldGrey,
               maxLines: 5,
+              hasErrorMsg: true,
+              errorMsg: LocaleKeys.additionalInfoShallBeEntered.tr(),
+              errorMaxLines: 2,
+              validator: (value) {
+                if (_complaintReason != ComplaintReason.other) return null;
+                if (value == null || value.isEmpty) {
+                  return LocaleKeys.additionalInfoShallBeEntered.tr();
+                }
+                return null;
+              },
             ),
           )
         ],

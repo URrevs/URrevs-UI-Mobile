@@ -297,5 +297,7 @@ abstract class  LocaleKeys {
   static const permitViewingThisContent = 'permitViewingThisContent';
   static const unblockThisUsersAccount = 'unblockThisUsersAccount';
   static const hideContent = 'hideContent';
+  static const additionalInfoShallBeEntered = 'additionalInfoShallBeEntered';
+  static const successfullyReported = 'successfullyReported';
 
 }

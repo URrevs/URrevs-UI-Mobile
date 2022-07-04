@@ -81,7 +81,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
         Navigator.of(context).pushNamedAndRemoveUntil(
           AuthenticationScreen.routeName,
           (route) => false,
-          arguments: SplashScreenArgs(
+          arguments: AuthenticationScreenArgs(
             initialLink: _initialLink,
           ),
         );

@@ -14,6 +14,8 @@ class TxtField extends StatelessWidget {
     this.hasErrorMsg = false,
     this.extraValidation,
     this.maxLines,
+    this.errorMaxLines = 1,
+    this.validator,
   }) : super(key: key);
 
   final TextEditingController textController;
@@ -24,6 +26,9 @@ class TxtField extends StatelessWidget {
   final bool hasErrorMsg;
   final int? maxLines;
   final String? Function(String)? extraValidation;
+  final int errorMaxLines;
+  final String? Function(String?)? validator;
+
   @override
   Widget build(BuildContext context) {
     final InputBorder inputBorder = OutlineInputBorder(
@@ -45,6 +50,7 @@ class TxtField extends StatelessWidget {
         hintStyle: TextStyleManager.s16w300.copyWith(color: ColorManager.black),
         filled: true,
         fillColor: fillColor,
+        errorMaxLines: errorMaxLines,
         errorStyle: TextStyleManager.s13w400.copyWith(color: ColorManager.red),
         errorBorder: hasErrorMsg
             ? inputBorder.copyWith(
@@ -53,6 +59,9 @@ class TxtField extends StatelessWidget {
       ),
       validator: hasErrorMsg
           ? (value) {
+              if (validator != null) {
+                return validator!(value);
+              }
               if (value == null || value.isEmpty) {
                 return errorMsg;
               } else if (extraValidation != null) {

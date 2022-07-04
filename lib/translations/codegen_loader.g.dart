@@ -311,7 +311,9 @@ class CodegenLoader extends AssetLoader{
   "companyAnswerReply": "رد على إجابة سؤال على شركة",
   "permitViewingThisContent": "إتاحة عرض هذا المحتوى",
   "unblockThisUsersAccount": "إعادة تشغيل حساب هذا المستخدم",
-  "hideContent": "اخفِ المحتوى"
+  "hideContent": "اخفِ المحتوى",
+  "additionalInfoShallBeEntered": "يجب ادخال معلومات اضافية عند اختيار \"أخرى\" كسبب للشكوى",
+  "successfullyReported": "تم الإبلاغ بنجاح"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -610,7 +612,9 @@ static const Map<String,dynamic> en = {
   "companyAnswerReply": "company question answer reply",
   "permitViewingThisContent": "Permit viewing this content",
   "unblockThisUsersAccount": "Unblock this user's account",
-  "hideContent": "Hide content"
+  "hideContent": "Hide content",
+  "additionalInfoShallBeEntered": "Additional Info shall be entered when choosing \"other\" as a complaint reason",
+  "successfullyReported": "Successfully reported"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

@@ -151,11 +151,9 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
   }
 
   final formKey = GlobalKey<FormState>();
-
+  bool b = false;
   @override
   Widget build(BuildContext context) {
-    NumberFormat numberFormat =
-        NumberFormat.compact(locale: context.locale.languageCode);
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -179,85 +177,35 @@ class _DevelopmentScreenState extends ConsumerState<DevelopmentScreen> {
                 .setThemeMode(ThemeMode.light),
             child: Text('☀'),
           ),
-          ElevatedButton(
-            onPressed: () => print(FirebaseAuth.instance.currentUser),
-            child: Text('hhh'),
-          ),
-          // ElevatedButton(
-          //   onPressed: () {
-          //     print("scale width: ${ScreenUtil().scaleWidth}");
-          //     print("scale height: ${ScreenUtil().scaleHeight}");
-          //     print("screen width: ${ScreenUtil().screenWidth}");
-          //     print("ui size: ${ScreenUtil().uiSize}");
-          //   },
-          //   child: Text('screen util'),
-          // ),
         ],
       ),
       body: ListView(
         padding: EdgeInsets.all(20),
         children: [
+          Form(
+            key: formKey,
+            child: TextFormField(
+              validator: (value) {
+                if (b) return null;
+                if (value == null || value.isEmpty) return 'error';
+                return null;
+              },
+            ),
+          ),
           ElevatedButton(
-            onPressed: () => throw Exception('testing crashlytics'),
-            child: Text('THROW ERROR'),
-          )
-          // ReportCard(
-          //   imageUrl: null,
-          //   authorName: 'Amr Fatouh',
-          //   authorId: 'authorId',
-          //   targetUserName: 'Fady Ahmed',
-          //   targetUserId: 'targetUserId',
-          //   postedDate: DateTime.now(),
-          //   postType: PostType.phoneReview,
-          //   complaintReason: ComplaintReason.spam,
-          //   complaintContent: 'this is complaint content',
-          // )
-          // Center(
-          //   child: ClipRRect(
-          //     borderRadius: BorderRadius.circular(50),
-          //     child: Container(
-          //       height: 100,
-          //       width: 100,
-          //       decoration: BoxDecoration(
-          //         shape: BoxShape.circle,
-          //         gradient: LinearGradient(
-          //           colors: [
-          //             Colors.blue,
-          //             Colors.white,
-          //           ],
-          //         ),
-          //       ),
-          //       child: Image.asset(
-          //         ImageAssets.lenovoSmallLogo,
-          //         fit: BoxFit.cover,
-          //       ),
-          //     ),
-          //   ),
-          // ),
-          // ElevatedButton(
-          //     onPressed: () async {
-          //       final dynamicLinkParams = DynamicLinkParameters(
-          //         link: Uri.parse("https://www.example.com/"),
-          //         uriPrefix: "https://urevs.page.link",
-          //         androidParameters: const AndroidParameters(
-          //             packageName: "com.example.urrevs_ui_mobile"),
-          //       );
-          //       final dynamicLink = await FirebaseDynamicLinks.instance
-          //           .buildLink(dynamicLinkParams);
-          //       print(dynamicLink);
-          //     },
-          //     child: Text('CLICK'))
-          // UpdatedListTile(title: 'قائمة الشركات المضافة حديثاً', items: items),
-          // ProductReviewCard.dummyInstance(),
-          // CompanyReviewCard.dummyInstance(),
-          // QuestionCard.dummyInstance(context),
-          // CommentTree.dummyInstance,
-          // AnswerTree.dummyInstance,
-          // CommentsList.dummyInstance,
-          // AnswersList.dummyInstance,
-          // SpecsTable.dummyInstance,
-          // SpecsComparisonTable.dummyInstance,
-          // SvgPicture.asset(SvgAssets.upvote, color: Colors.red),
+            onPressed: () {
+              print(formKey.currentState!.validate());
+            },
+            child: Text('VALIDATE'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              setState(() {
+                b = !b;
+              });
+            },
+            child: Text('TOGGLE ($b)'),
+          ),
         ],
       ),
       //bottomNavigationBar: BottomNavBar(currentIndex: 2,onTap: (int i)=>{},),

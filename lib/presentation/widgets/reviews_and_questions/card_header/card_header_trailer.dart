@@ -11,6 +11,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart'
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/authentication_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/reports_states/report_state.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/send_report_dialog.dart';
 
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
@@ -83,6 +84,15 @@ class _CardHeaderTrailerState extends ConsumerState<CardHeaderTrailer> {
       provider: reportProvider(_reportPostProviderParams),
       context: context,
     );
+    ref.listen(reportProvider(_reportPostProviderParams), (previous, next) {
+      if (next is ReportLoadedState) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(LocaleKeys.successfullyReported.tr()),
+          ),
+        );
+      }
+    });
     final authState =
         ref.watch(authenticationProvider) as AuthenticationLoadedState;
     if (authState.user.id == widget.userId) {

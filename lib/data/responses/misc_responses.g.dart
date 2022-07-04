@@ -25,16 +25,25 @@ GetPostsForHomeScreenResponse _$GetPostsForHomeScreenResponseFromJson(
           .map((e) => QuestionSubResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
       postsIds:
-          (json['total'] as List<dynamic>).map((e) => e as String).toList(),
+          (json['total'] as List<dynamic>?)?.map((e) => e as String).toList(),
     );
 
 Map<String, dynamic> _$GetPostsForHomeScreenResponseToJson(
-        GetPostsForHomeScreenResponse instance) =>
-    <String, dynamic>{
-      'success': instance.success,
-      'phoneRevs': instance.phoneReviewsSubResponses,
-      'companyRevs': instance.companyReviewsSubResponses,
-      'phoneQuestions': instance.phoneQuestionsSubResponses,
-      'companyQuestions': instance.companyQuestionsSubResponses,
-      'total': instance.postsIds,
-    };
+    GetPostsForHomeScreenResponse instance) {
+  final val = <String, dynamic>{
+    'success': instance.success,
+    'phoneRevs': instance.phoneReviewsSubResponses,
+    'companyRevs': instance.companyReviewsSubResponses,
+    'phoneQuestions': instance.phoneQuestionsSubResponses,
+    'companyQuestions': instance.companyQuestionsSubResponses,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('total', instance.postsIds);
+  return val;
+}
