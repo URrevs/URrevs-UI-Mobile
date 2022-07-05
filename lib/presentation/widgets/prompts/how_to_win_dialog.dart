@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/font_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
@@ -15,11 +16,11 @@ class HowToWinDialog extends StatelessWidget {
   }) : super(key: key);
 
   Future launchGooglePlay() async {
-    /// this is the url of the app in the google play store
-    String url = 'https://flutter.dev';
+    String url =
+        'https://play.google.com/store/apps/details?id=${StringsManager.packageName}';
     final Uri _url = Uri.parse(url);
     if (await canLaunchUrl(_url)) {
-      await launchUrl(_url);
+      await launchUrl(_url, mode: LaunchMode.externalApplication);
     } else {
       throw 'Could not launch $url';
     }
