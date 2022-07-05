@@ -47,7 +47,7 @@ class CardHeaderSubtitle extends StatelessWidget {
     TextStyle style = TextStyle(
       fontSize: 14.sp,
       fontWeight: FontWeight.w400,
-      color: Colors.grey[400],
+      color: ColorManager.grey,
     );
 
     final String postedDateStr =

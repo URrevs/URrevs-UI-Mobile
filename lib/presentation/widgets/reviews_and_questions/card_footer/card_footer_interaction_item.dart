@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 
 /// Returns a row containing a text and an icon.
@@ -24,7 +25,12 @@ class CardFooterInteractionItem extends StatelessWidget {
     return Row(
       textDirection: TextDirection.ltr,
       children: [
-        Text(text, style: TextStyleManager.s14w400),
+        Text(
+          text,
+          style: TextStyleManager.s14w400.copyWith(
+            color: ColorManager.black,
+          ),
+        ),
         5.horizontalSpace,
         Padding(
           padding: EdgeInsets.only(bottom: 5.h),

@@ -124,7 +124,9 @@ class _MenuSubscreenState extends ConsumerState<MenuSubscreen> {
             Expanded(
               child: Text(
                 name,
-                style: TextStyleManager.s20w700,
+                style: TextStyleManager.s20w700.copyWith(
+                  color: ColorManager.black,
+                ),
                 textAlign: TextAlign.start,
               ),
             ),
@@ -297,7 +299,9 @@ class _MenuSubscreenState extends ConsumerState<MenuSubscreen> {
               padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: Text(
                 LocaleKeys.followUs.tr(),
-                style: TextStyleManager.s22w500,
+                style: TextStyleManager.s22w500.copyWith(
+                  color: ColorManager.black,
+                ),
               ),
             ),
             Padding(

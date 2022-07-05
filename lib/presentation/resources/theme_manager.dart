@@ -20,9 +20,10 @@ class ThemeManager {
 
   static ThemeData get light => ThemeData(
         brightness: Brightness.light,
-        appBarTheme: AppBarTheme(
-          shadowColor: ColorManager.grey.withOpacity(0.7),
-        ),
+        shadowColor: ColorManager.grey,
+        toggleableActiveColor: ColorManager.blue,
+        cardColor: ColorManager.white,
+        dialogBackgroundColor: ColorManager.white,
         tabBarTheme: TabBarTheme(labelColor: ColorManager.black),
         unselectedWidgetColor: ColorManager.black,
         scaffoldBackgroundColor: ColorManager.backgroundGrey,
@@ -99,9 +100,9 @@ class ThemeManager {
 
   static ThemeData get dark => ThemeData(
         brightness: Brightness.dark,
-        appBarTheme: AppBarTheme(
-          shadowColor: ColorManager.grey.withOpacity(0.7),
-        ),
+        shadowColor: ColorManager.grey,
+        toggleableActiveColor: ColorManager.blue,
+        cardColor: ColorManager.white,
         tabBarTheme: TabBarTheme(
           labelColor: ColorManager.black,
           indicator: UnderlineTabIndicator(

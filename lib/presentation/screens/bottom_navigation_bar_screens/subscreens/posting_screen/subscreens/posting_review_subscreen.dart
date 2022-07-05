@@ -263,8 +263,12 @@ class _PostingReviewSubscreenState
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(LocaleKeys.chooseProduct.tr() + ':',
-                      style: TextStyleManager.s18w500),
+                  Text(
+                    LocaleKeys.chooseProduct.tr() + ':',
+                    style: TextStyleManager.s18w500.copyWith(
+                      color: ColorManager.black,
+                    ),
+                  ),
                   SearchTextField(
                     fillColor: ColorManager.textFieldGrey,
                     searchCtl: productNameController,
@@ -286,7 +290,9 @@ class _PostingReviewSubscreenState
                   SizedBox(height: 20.h),
                   Text(
                     LocaleKeys.howLongHaveYouOwnedThisProduct.tr(),
-                    style: TextStyleManager.s18w500,
+                    style: TextStyleManager.s18w500.copyWith(
+                      color: ColorManager.black,
+                    ),
                   ),
                   DatePickerField(
                     key: ValueKey('date-$_keyNumber'),
@@ -299,8 +305,12 @@ class _PostingReviewSubscreenState
                     setChosenDate: _setChosenDate,
                   ),
                   SizedBox(height: 20.h),
-                  Text(LocaleKeys.rateOverallExpericence.tr(),
-                      style: TextStyleManager.s18w500),
+                  Text(
+                    LocaleKeys.rateOverallExpericence.tr(),
+                    style: TextStyleManager.s18w500.copyWith(
+                      color: ColorManager.black,
+                    ),
+                  ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -330,8 +340,12 @@ class _PostingReviewSubscreenState
                   ),
                   SizedBox(height: 20.h),
                   // what do you like about this product
-                  Text(LocaleKeys.whatDoYouLikeAboutThisProduct.tr(),
-                      style: TextStyleManager.s18w500),
+                  Text(
+                    LocaleKeys.whatDoYouLikeAboutThisProduct.tr(),
+                    style: TextStyleManager.s18w500.copyWith(
+                      color: ColorManager.black,
+                    ),
+                  ),
                   TxtField(
                     textController: likedAboutProductController,
                     hintText: LocaleKeys.pros.tr(),
@@ -342,8 +356,12 @@ class _PostingReviewSubscreenState
                   ),
                   SizedBox(height: 20.h),
                   // what do you hate about this product
-                  Text(LocaleKeys.whatDoYouHateAboutThisProduct.tr(),
-                      style: TextStyleManager.s18w500),
+                  Text(
+                    LocaleKeys.whatDoYouHateAboutThisProduct.tr(),
+                    style: TextStyleManager.s18w500.copyWith(
+                      color: ColorManager.black,
+                    ),
+                  ),
                   TxtField(
                     textController: hatedAboutProductController,
                     hintText: LocaleKeys.cons.tr(),
@@ -356,8 +374,12 @@ class _PostingReviewSubscreenState
                   _buildCompanyFields(),
                   Row(
                     children: [
-                      Text(LocaleKeys.enterInvitationCode.tr() + ':',
-                          style: TextStyleManager.s18w500),
+                      Text(
+                        LocaleKeys.enterInvitationCode.tr() + ':',
+                        style: TextStyleManager.s18w500.copyWith(
+                          color: ColorManager.black,
+                        ),
+                      ),
                       IconButton(
                         padding: EdgeInsets.zero,
                         icon: Icon(
@@ -544,8 +566,12 @@ class _PostingReviewSubscreenState
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // rate the manufacturer
-        Text(LocaleKeys.howDoYouRateTheManufacturer.tr(),
-            style: TextStyleManager.s18w500),
+        Text(
+          LocaleKeys.howDoYouRateTheManufacturer.tr(),
+          style: TextStyleManager.s18w500.copyWith(
+            color: ColorManager.black,
+          ),
+        ),
         Center(
           child: Column(
             children: [
@@ -565,8 +591,12 @@ class _PostingReviewSubscreenState
         ),
         SizedBox(height: 20.h),
         // what do you like about the manufacturer
-        Text(LocaleKeys.WhatDoYouLikeAbout.tr() + ' ' + company.name,
-            style: TextStyleManager.s18w500),
+        Text(
+          LocaleKeys.WhatDoYouLikeAbout.tr() + ' ' + company.name,
+          style: TextStyleManager.s18w500.copyWith(
+            color: ColorManager.black,
+          ),
+        ),
         TxtField(
           textController: likedAboutCompanyController,
           hintText: LocaleKeys.pros.tr(),
@@ -577,8 +607,12 @@ class _PostingReviewSubscreenState
         ),
         SizedBox(height: 20.h),
         // what do you hate about the manufacturer
-        Text(LocaleKeys.whatDoYouHateAbout.tr() + ' ' + company.name,
-            style: TextStyleManager.s18w500),
+        Text(
+          LocaleKeys.whatDoYouHateAbout.tr() + ' ' + company.name,
+          style: TextStyleManager.s18w500.copyWith(
+            color: ColorManager.black,
+          ),
+        ),
         TxtField(
           textController: hatedAboutCompanyController,
           hintText: LocaleKeys.cons.tr(),
@@ -614,7 +648,9 @@ class RatingEntry extends StatelessWidget {
                 padding: EdgeInsets.only(top: 5.h),
                 child: Text(
                   title + ':',
-                  style: TextStyleManager.s18w500,
+                  style: TextStyleManager.s18w500.copyWith(
+                    color: ColorManager.black,
+                  ),
                 ),
               ),
               CustomRatingBar(onRatingUpdate: onRatingUpdate),

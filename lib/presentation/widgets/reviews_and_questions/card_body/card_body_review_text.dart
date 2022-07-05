@@ -54,7 +54,6 @@ class CardBodyReviewText extends StatelessWidget {
   /// length is less than or equal collapsedMaxLetters.
   final bool noNeedForExpansion;
 
-
   final bool fullscreen;
 
   /// Cut the pros text according to the expanded state and [maxLetters] of
@@ -107,7 +106,9 @@ class CardBodyReviewText extends StatelessWidget {
       children: [
         Text(
           LocaleKeys.pros.tr() + ':',
-          style: TextStyleManager.s18w500,
+          style: TextStyleManager.s18w500.copyWith(
+            color: ColorManager.black,
+          ),
         ),
         Text(
           cutPros(prosText),
@@ -123,7 +124,9 @@ class CardBodyReviewText extends StatelessWidget {
               10.verticalSpace,
               Text(
                 LocaleKeys.cons.tr() + ':',
-                style: TextStyleManager.s18w500,
+                style: TextStyleManager.s18w500.copyWith(
+                  color: ColorManager.black,
+                ),
               ),
               Text(
                 cutCons(consText),

@@ -41,12 +41,12 @@ class ColorManager {
 
   static Color get grey => ColorPair(
         light: Color(0xff65676B),
-        dark: Color(0xff9a9894),
+        dark: Color(0xffB0B3B8), // facebook icons and hint
       ).pickColor();
 
   static Color get red => ColorPair(
         light: Color(0xffE41D1D),
-        dark: Color(0xffE41D1D),
+        dark: Color.fromARGB(255, 231, 90, 90),
       ).pickColor();
 
   static Color get dividerGrey => ColorPair(
@@ -56,7 +56,7 @@ class ColorManager {
 
   static Color get buttonGrey => ColorPair(
         light: Color(0xff606266),
-        dark: Color(0xff9f9d99),
+        dark: Color(0xffB0B3B8), // facebook icons and hint
       ).pickColor();
 
   static Color get strokeGrey => ColorPair(
@@ -71,17 +71,17 @@ class ColorManager {
 
   static Color get textFieldGrey => ColorPair(
         light: Color(0xffF9F9F9),
-        dark: Color(0xff060606),
+        dark: Color(0xff3A3B3C), // facebook text field background
       ).pickColor();
 
   static Color get dialogCloseIconBackgroundGrey => ColorPair(
         light: Color(0xffe8e8e8),
-        dark: Color(0xff171717),
+        dark: Color(0xff3a3b3c), // facebook icons background
       ).pickColor();
 
   static Color get appBarIconBackground => ColorPair(
         light: Color(0xffE5E5E7),
-        dark: Color(0xff1a1a18),
+        dark: Color(0xff3a3b3c), // facebook icons background
       ).pickColor();
 
   static Color get snackBarGrey => ColorPair(
@@ -91,17 +91,22 @@ class ColorManager {
 
   static Color get black => ColorPair(
         light: Color.fromARGB(255, 5, 5, 5),
-        dark: Color.fromARGB(255, 250, 250, 250),
+        dark: Color(0xffE4E6EB), // facebook text white
+      ).pickColor();
+
+  static Color get hintColor => ColorPair(
+        light: Color.fromARGB(255, 5, 5, 5),
+        dark: Color(0xffB0B3B8), // facebook icons and hint
       ).pickColor();
 
   static Color get commentBlack => ColorPair(
         light: Color(0xff000000),
-        dark: Color(0xffffffff),
+        dark: Color(0xffE4E6EB), // facebook white text
       ).pickColor();
 
   static Color get white => ColorPair(
         light: Colors.white,
-        dark: Colors.black,
+        dark: Color(0xff242526), // facebook cards color
       ).pickColor();
 
   static Color get transparent => ColorPair(

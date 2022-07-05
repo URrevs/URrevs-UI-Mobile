@@ -613,7 +613,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
           decoration: InputDecoration(
             hintText: _hintText,
             hintStyle: TextStyleManager.s16w300.copyWith(
-              color: ColorManager.black,
+              color: ColorManager.hintColor,
             ),
             filled: true,
             fillColor: ColorManager.textFieldGrey,

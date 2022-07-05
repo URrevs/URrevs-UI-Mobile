@@ -106,6 +106,7 @@ class _CardHeaderTrailerState extends ConsumerState<CardHeaderTrailer> {
       showArrow: false,
       menuBuilder: () => Card(
         elevation: AppElevations.ev3,
+        shadowColor: ColorManager.grey,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.r),
         ),
