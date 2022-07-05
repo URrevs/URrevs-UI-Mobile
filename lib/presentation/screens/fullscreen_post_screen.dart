@@ -589,7 +589,7 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
     late bool loading = addDirectInteractionState is LoadingState;
 
     return Container(
-      height: 60.h,
+      constraints: BoxConstraints(maxHeight: 160.h),
       decoration: BoxDecoration(
         color: ColorManager.white,
         boxShadow: [
@@ -604,6 +604,8 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
         child: TextField(
+          maxLines: null,
+          textInputAction: TextInputAction.newline,
           controller: _controller,
           focusNode: focusNode,
           style: TextStyleManager.s18w500.copyWith(color: ColorManager.black),

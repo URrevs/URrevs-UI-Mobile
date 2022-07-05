@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher.dart' show launchUrl;
 import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
@@ -35,6 +35,7 @@ import 'package:urrevs_ui_mobile/presentation/widgets/prompts/invitation_code_an
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/sign_out_confirmation_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/tiles/item_tile.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
+import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 
 class MenuSubscreen extends ConsumerStatefulWidget {
   const MenuSubscreen({Key? key}) : super(key: key);
@@ -44,6 +45,28 @@ class MenuSubscreen extends ConsumerStatefulWidget {
 }
 
 class _MenuSubscreenState extends ConsumerState<MenuSubscreen> {
+  void _launchUrlWithCustomTabs(BuildContext context, String stringUrl) async {
+    try {
+      await launch(
+        stringUrl,
+        customTabsOption: CustomTabsOption(
+          toolbarColor: Theme.of(context).primaryColor,
+          enableDefaultShare: true,
+          enableUrlBarHiding: true,
+          showPageTitle: true,
+          animation: CustomTabsSystemAnimation.slideIn(),
+          extraCustomTabs: const <String>[
+            'org.mozilla.firefox',
+            'com.microsoft.emmx',
+          ],
+        ),
+      );
+    } catch (e) {
+      // An exception is thrown if browser app is not installed on Android device.
+      debugPrint(e.toString());
+    }
+  }
+
   Widget _buildMyProfile() {
     ref.listen(getMyProfileProvider, (previous, next) {
       if (next is GetMyProfileErrorState) {
@@ -222,23 +245,13 @@ class _MenuSubscreenState extends ConsumerState<MenuSubscreen> {
   Future _launchFacebookPage() async {
     /// this is the url of the app in the google play store
     String url = 'https://www.facebook.com/URrevs';
-    final Uri _url = Uri.parse(url);
-    if (await canLaunchUrl(_url)) {
-      await launchUrl(_url);
-    } else {
-      throw 'Could not launch $url';
-    }
+    _launchUrlWithCustomTabs(context, url);
   }
 
   Future _launchLinkedinPage() async {
     /// this is the url of the app in the google play store
     String url = 'https://eg.linkedin.com/company/urrevs?trk=ppro_cprof';
-    final Uri _url = Uri.parse(url);
-    if (await canLaunchUrl(_url)) {
-      await launchUrl(_url);
-    } else {
-      throw 'Could not launch $url';
-    }
+    _launchUrlWithCustomTabs(context, url);
   }
 
   Future _sendEmail() async {
