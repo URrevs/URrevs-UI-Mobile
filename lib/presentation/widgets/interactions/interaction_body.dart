@@ -158,7 +158,7 @@ class _InteractionBodyState extends ConsumerState<InteractionBody> {
           ),
           color: widget.inQuestionCard
               ? ColorManager.backgroundGrey
-              : ColorManager.white,
+              : null,
           child: InkWell(
             onTap: noNeedForExpansion && !widget.inQuestionCard
                 ? null

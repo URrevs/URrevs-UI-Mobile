@@ -44,8 +44,11 @@ class CardHeaderSubtitle extends StatelessWidget {
     // actually, there is no overflow anymore, arabic and english fonts seem
     // to have the same sizes now
     double size = context.isArabic ? 14.sp : 14.sp;
-    TextStyle style =
-        Theme.of(context).textTheme.subtitle1!.copyWith(fontSize: size);
+    TextStyle style = TextStyle(
+      fontSize: 14.sp,
+      fontWeight: FontWeight.w400,
+      color: Colors.grey[400],
+    );
 
     final String postedDateStr =
         DateFormat.yMMMMd(context.locale.languageCode).format(postedDate);

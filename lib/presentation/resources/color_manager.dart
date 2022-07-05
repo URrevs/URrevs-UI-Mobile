@@ -26,7 +26,7 @@ class ColorManager {
 
   static Color get pink => ColorPair(
         light: Color(0xffFF6C89),
-        dark: Colors.red,
+        dark: Color(0xffFF6C89)
       ).pickColor();
 
   static Color get orange => ColorPair(
@@ -41,7 +41,7 @@ class ColorManager {
 
   static Color get grey => ColorPair(
         light: Color(0xff65676B),
-        dark: Color(0xff65676B),
+        dark: Color(0xff9a9894),
       ).pickColor();
 
   static Color get red => ColorPair(
@@ -51,57 +51,57 @@ class ColorManager {
 
   static Color get dividerGrey => ColorPair(
         light: Color(0xffCED0D4),
-        dark: Color(0xffCED0D4),
+        dark: Color(0xff312f2b),
       ).pickColor();
 
   static Color get buttonGrey => ColorPair(
         light: Color(0xff606266),
-        dark: Color(0xff606266),
+        dark: Color(0xff9f9d99),
       ).pickColor();
 
   static Color get strokeGrey => ColorPair(
         light: Color(0xff606266),
-        dark: Color(0xff606266),
+        dark: Color(0xff9f9d99),
       ).pickColor();
 
   static Color get backgroundGrey => ColorPair(
-        light: Color(0xffF0F2F5),
-        dark: Color(0xffF0F2F5),
+        light: Color(0xFFF0F2F5),
+        dark: Color(0xff18191A), // facebook background black
       ).pickColor();
 
   static Color get textFieldGrey => ColorPair(
         light: Color(0xffF9F9F9),
-        dark: Color(0xffF9F9F9),
+        dark: Color(0xff060606),
       ).pickColor();
 
   static Color get dialogCloseIconBackgroundGrey => ColorPair(
         light: Color(0xffe8e8e8),
-        dark: Color(0xffe8e8e8),
+        dark: Color(0xff171717),
       ).pickColor();
 
   static Color get appBarIconBackground => ColorPair(
         light: Color(0xffE5E5E7),
-        dark: Color(0xffE5E5E7),
+        dark: Color(0xff1a1a18),
       ).pickColor();
 
   static Color get snackBarGrey => ColorPair(
         light: Color(0xffc4c4c4),
-        dark: Color(0xffc4c4c4),
+        dark: Color(0xff3b3b3b),
       ).pickColor();
 
   static Color get black => ColorPair(
-        light: Color(0xff050505),
-        dark: Color(0xff050505),
+        light: Color.fromARGB(255, 5, 5, 5),
+        dark: Color.fromARGB(255, 250, 250, 250),
       ).pickColor();
 
   static Color get commentBlack => ColorPair(
         light: Color(0xff000000),
-        dark: Color(0xff000000),
+        dark: Color(0xffffffff),
       ).pickColor();
 
   static Color get white => ColorPair(
         light: Colors.white,
-        dark: Colors.white,
+        dark: Colors.black,
       ).pickColor();
 
   static Color get transparent => ColorPair(
