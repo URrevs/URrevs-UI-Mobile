@@ -48,15 +48,22 @@ class _HomeSubscreenState extends ConsumerState<HomeSubscreen> {
       ),
     ]);
     if (errWidget != null) return errWidget;
-    return CustomScrollView(
-      slivers: [
-        PostsList(
-          controller: _controller,
-          getPostsListProviderParams: _providerParams,
-          getPosts: _getPostsForHomeScreen,
-          isSliver: true,
-        ),
-      ],
+    return RefreshIndicator(
+      onRefresh: () async {
+        ref.refresh(getPostsListProvider(_providerParams));
+        _controller.refresh();
+        return Future.delayed(Duration(seconds: 2));
+      },
+      child: CustomScrollView(
+        slivers: [
+          PostsList(
+            controller: _controller,
+            getPostsListProviderParams: _providerParams,
+            getPosts: _getPostsForHomeScreen,
+            isSliver: true,
+          ),
+        ],
+      ),
     );
   }
 }
