@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/circular_loading.dart';
 
 class TopUsersInCompetitionLoading extends StatelessWidget {
   const TopUsersInCompetitionLoading({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: EdgeInsets.all(50.sp),
-        child: Text('تحميل...'),
-      ),
-    );
+    return CircularLoading();
   }
 }

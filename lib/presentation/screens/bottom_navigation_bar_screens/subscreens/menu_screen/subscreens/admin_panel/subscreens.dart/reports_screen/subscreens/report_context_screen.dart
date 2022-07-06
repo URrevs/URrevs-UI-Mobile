@@ -19,7 +19,7 @@ import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/fullscreen_error_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions_for_reports/report_answer_tree.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions_for_reports/report_comment_tree.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/phone_review_loading.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/post_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/company_review_card.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/product_review_card.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/question_card.dart';
@@ -94,7 +94,7 @@ class _ReportContextScreenState extends ConsumerState<ReportContextScreen> {
   Widget _buildPostAndInteraction() {
     final state = ref.watch(getReportContextProvider(_providerParams));
     if (state is InitialState || state is LoadingState) {
-      return PhoneReviewLoading();
+      return PostLoading();
     } else if (state is ErrorState) {
       return FullscreenErrorWidget(onRetry: _getReportContext);
     }

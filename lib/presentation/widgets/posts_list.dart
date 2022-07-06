@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:skeleton_loader/skeleton_loader.dart';
+import 'package:skeleton_text/skeleton_text.dart';
 import 'package:urrevs_ui_mobile/domain/models/company_review.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/post_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/company_review_card.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/product_review_card.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/question_card.dart';
@@ -18,7 +21,7 @@ import '../state_management/providers_parameters.dart';
 import '../utils/states_util.dart';
 import 'empty_widgets/empty_list_widget.dart';
 import 'error_widgets/vertical_list_error_widget.dart';
-import 'loading_widgets/review_card_list_loading.dart';
+import 'loading_widgets/post_list_loading.dart';
 
 class PostsList extends ConsumerStatefulWidget {
   const PostsList({
@@ -143,8 +146,8 @@ class _PostsListState extends ConsumerState<PostsList> {
           return SizedBox();
         }
       },
-      firstPageProgressIndicatorBuilder: (context) => ReviewCardsListLoading(),
-      newPageProgressIndicatorBuilder: (context) => ReviewCardsListLoading(),
+      firstPageProgressIndicatorBuilder: (context) => PostListLoading(),
+      newPageProgressIndicatorBuilder: (context) => PostListLoading(),
       noItemsFoundIndicatorBuilder: (context) => EmptyListWidget(),
     );
   }

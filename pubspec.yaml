@@ -72,6 +72,7 @@ dependencies:
   firebase_crashlytics: ^2.7.0
   firebase_performance: ^0.8.1+1
   flutter_custom_tabs: ^1.0.4
+  skeleton_text: ^3.0.0
 
 
 dev_dependencies:

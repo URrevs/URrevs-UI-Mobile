@@ -297,5 +297,8 @@
   "unblockThisUsersAccount": "إعادة تشغيل حساب هذا المستخدم",
   "hideContent": "اخفِ المحتوى",
   "additionalInfoShallBeEntered": "يجب ادخال معلومات اضافية عند اختيار \"أخرى\" كسبب للشكوى",
-  "successfullyReported": "تم الإبلاغ بنجاح"
+  "successfullyReported": "تم الإبلاغ بنجاح",
+  "itemsNotFound": "لم يتم العثور على العناصر",
+  "noNewCompaniesFound": "لم يتم العثور على شركات جديدة",
+  "noNewProductsFound": "لم يتم العثور على منتجات جديدة"
 }

@@ -39,10 +39,10 @@ import 'package:urrevs_ui_mobile/presentation/widgets/interactions/answers_list.
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/comment_tree.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/comments_list.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/reply.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/circular_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/interactions_list_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/company_review_loading.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/phone_review_loading.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/post_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/company_review_card.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/product_review_card.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/question_card.dart';
@@ -455,7 +455,10 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
     final state = ref.watch(getPostProvider(_postProviderParams));
     Widget? loadingOrErrorwidget = loadingOrErrorWidgetOrNull(
       state: state,
-      loadingWidget: PhoneReviewLoading(),
+      loadingWidget: PostLoading(
+        isQuestion: widget.screenArgs.postType.postContentType ==
+            PostContentType.question,
+      ),
     );
     if (loadingOrErrorwidget != null) return loadingOrErrorwidget;
     switch (widget.screenArgs.postType) {

@@ -299,5 +299,8 @@ abstract class  LocaleKeys {
   static const hideContent = 'hideContent';
   static const additionalInfoShallBeEntered = 'additionalInfoShallBeEntered';
   static const successfullyReported = 'successfullyReported';
+  static const itemsNotFound = 'itemsNotFound';
+  static const noNewCompaniesFound = 'noNewCompaniesFound';
+  static const noNewProductsFound = 'noNewProductsFound';
 
 }

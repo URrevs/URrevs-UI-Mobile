@@ -22,7 +22,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/get_owned_
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/empty_widgets/empty_list_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/fullscreen_error_widget.dart';
-import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/circular_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/owned_prodcuts_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/error_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/scaffold_with_hiding_fab.dart';

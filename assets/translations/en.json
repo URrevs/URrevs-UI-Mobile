@@ -297,5 +297,8 @@
   "unblockThisUsersAccount": "Unblock this user's account",
   "hideContent": "Hide content",
   "additionalInfoShallBeEntered": "Additional Info shall be entered when choosing \"other\" as a complaint reason",
-  "successfullyReported": "Successfully reported"
+  "successfullyReported": "Successfully reported",
+  "itemsNotFound": "Items not found",
+  "noNewCompaniesFound": "No new companies found",
+  "noNewProductsFound": "No new products found"
 }

@@ -313,7 +313,10 @@ class CodegenLoader extends AssetLoader{
   "unblockThisUsersAccount": "إعادة تشغيل حساب هذا المستخدم",
   "hideContent": "اخفِ المحتوى",
   "additionalInfoShallBeEntered": "يجب ادخال معلومات اضافية عند اختيار \"أخرى\" كسبب للشكوى",
-  "successfullyReported": "تم الإبلاغ بنجاح"
+  "successfullyReported": "تم الإبلاغ بنجاح",
+  "itemsNotFound": "لم يتم العثور على العناصر",
+  "noNewCompaniesFound": "لم يتم العثور على شركات جديدة",
+  "noNewProductsFound": "لم يتم العثور على منتجات جديدة"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -614,7 +617,10 @@ static const Map<String,dynamic> en = {
   "unblockThisUsersAccount": "Unblock this user's account",
   "hideContent": "Hide content",
   "additionalInfoShallBeEntered": "Additional Info shall be entered when choosing \"other\" as a complaint reason",
-  "successfullyReported": "Successfully reported"
+  "successfullyReported": "Successfully reported",
+  "itemsNotFound": "Items not found",
+  "noNewCompaniesFound": "No new companies found",
+  "noNewProductsFound": "No new products found"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }
