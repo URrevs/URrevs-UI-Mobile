@@ -81,6 +81,13 @@ class Repository {
     }
   }
 
+  Left<Failure, T>? _handleAlreadyUnlikedError<T>(DioError e) {
+    if (e.statusMessage == ManuallyHandlledErrorMessages.notFound) {
+      return Left(IgnoredFailure());
+    }
+    return null;
+  }
+
   Future<Either<Failure, AuthReturnedVals>> loginToOurBackend() async {
     return _tryAndCatch(() async {
       // login to our backend
@@ -498,7 +505,7 @@ class Repository {
   Future<Either<Failure, void>> unlikePhoneReviewComment(String commentId) {
     return _tryAndCatch(() async {
       await _remoteDataSource.unlikePhoneReviewComment(commentId);
-    });
+    }, onDioError: _handleAlreadyUnlikedError);
   }
 
   Future<Either<Failure, void>> likeCompanyReviewComment(String commentId) {
@@ -510,7 +517,7 @@ class Repository {
   Future<Either<Failure, void>> unlikeCompanyReviewComment(String commentId) {
     return _tryAndCatch(() async {
       await _remoteDataSource.unlikeCompanyReviewComment(commentId);
-    });
+    }, onDioError: _handleAlreadyUnlikedError);
   }
 
   Future<Either<Failure, void>> likePhoneReviewReply(
@@ -524,7 +531,7 @@ class Repository {
       String commentId, String replyId) {
     return _tryAndCatch(() async {
       await _remoteDataSource.unlikePhoneReviewReply(commentId, replyId);
-    });
+    }, onDioError: _handleAlreadyUnlikedError);
   }
 
   Future<Either<Failure, void>> likeCompanyReviewReply(
@@ -538,7 +545,7 @@ class Repository {
       String commentId, String replyId) {
     return _tryAndCatch(() async {
       await _remoteDataSource.unlikeCompanyReviewReply(commentId, replyId);
-    });
+    }, onDioError: _handleAlreadyUnlikedError);
   }
 
   Future<Either<Failure, void>> iDontLikeThisForPhoneReview(String reviewId) {
@@ -800,7 +807,7 @@ class Repository {
   Future<Either<Failure, void>> downvotePhoneQuestionAnswer(String answerId) {
     return _tryAndCatch(() async {
       await _remoteDataSource.downvotePhoneQuestionAnswer(answerId);
-    });
+    }, onDioError: _handleAlreadyUnlikedError);
   }
 
   Future<Either<Failure, void>> upvoteCompanyQuestionAnswer(String answerId) {
@@ -812,7 +819,7 @@ class Repository {
   Future<Either<Failure, void>> downvoteCompanyQuestionAnswer(String answerId) {
     return _tryAndCatch(() async {
       await _remoteDataSource.downvoteCompanyQuestionAnswer(answerId);
-    });
+    }, onDioError: _handleAlreadyUnlikedError);
   }
 
   Future<Either<Failure, void>> likePhoneQuestionReply(
@@ -826,7 +833,7 @@ class Repository {
       String answerId, String replyId) {
     return _tryAndCatch(() async {
       await _remoteDataSource.unlikePhoneQuestionReply(answerId, replyId);
-    });
+    }, onDioError: _handleAlreadyUnlikedError);
   }
 
   Future<Either<Failure, void>> likeCompanyQuestionReply(
@@ -840,7 +847,7 @@ class Repository {
       String answerId, String replyId) {
     return _tryAndCatch(() async {
       await _remoteDataSource.unlikeCompanyQuestionReply(answerId, replyId);
-    });
+    }, onDioError: _handleAlreadyUnlikedError);
   }
 
   Future<Either<Failure, void>> iDontLikeThisForPhoneQuestion(
@@ -892,7 +899,7 @@ class Repository {
           questionId, answerId);
       return response.id;
     }, onDioError: (e) {
-      if (e.statusMessage == ServerErrorMessages.notYet ||
+      if (e.statusMessage == ManuallyHandlledErrorMessages.notYet ||
           e.statusMessage == ManuallyHandlledErrorMessages.notFound) {
         return Left(IgnoredFailure());
       }
@@ -907,7 +914,7 @@ class Repository {
           questionId, answerId);
       return response.id;
     }, onDioError: (e) {
-      if (e.statusMessage == ServerErrorMessages.notYet ||
+      if (e.statusMessage == ManuallyHandlledErrorMessages.notYet ||
           e.statusMessage == ManuallyHandlledErrorMessages.notFound) {
         return Left(IgnoredFailure());
       }
@@ -957,7 +964,7 @@ class Repository {
       final response = await _remoteDataSource.getLatestCompetition();
       return response.competitionSubResponse.competitionModel;
     }, onDioError: (e) {
-      if (e.statusMessage == ServerErrorMessages.notYet) {
+      if (e.statusMessage == ManuallyHandlledErrorMessages.notYet) {
         return Left(NoResultFailure());
       }
       return null;

@@ -11,6 +11,7 @@ import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 class ManuallyHandlledErrorMessages {
   static const String notOwned = "not owned";
   static const String notFound = "not found";
+  static const String notYet = "not yet";
 }
 
 class ServerErrorMessages {
@@ -34,7 +35,6 @@ class ServerErrorMessages {
   static const String noLikes = 'no likes';
   static const String notFound = 'not found';
   static const String notOwned = 'not owned';
-  static const String notYet = 'not yet';
   static const String notAccepted = 'not accepted';
   static const String alreadyReviewed = 'already reviewed';
   static const String invalidReferralCode = 'invalid referral code';
@@ -43,6 +43,13 @@ class ServerErrorMessages {
   static const String alreadyAccepted = 'already accepted';
   static const String alreadyRunningCompetition = 'already running competition';
   static const String pastDate = 'past date';
+  static const String reviewNotFound = 'review not found';
+  static const String commentNotFound = 'comment not found';
+  static const String trackReviewNotFound = 'track review not found';
+  static const String questionNotFound = 'question not found';
+  static const String answerNotFound = 'answer not found';
+  static const String questionOrAnswerNotFound = 'question or answer not found';
+  static const String parentNotFound = 'parent not found';
   // static const String trackAlreadyHated = 'track already hated';
   // static const String trackAlreadySeemored = 'track already seemored';
   // static const String trackAlreadyFullscreened = 'track already fullscreened';
@@ -75,9 +82,22 @@ class ServerErrorMessages {
         ServerErrorMessages.noLikes: noLikes,
         ServerErrorMessages.alreadyAccepted: alreadyAccepted,
         ServerErrorMessages.notFound: LocaleKeys.contentIsUnavailable.tr(),
+        ServerErrorMessages.reviewNotFound:
+            LocaleKeys.contentIsUnavailable.tr(),
+        ServerErrorMessages.commentNotFound:
+            LocaleKeys.contentIsUnavailable.tr(),
+        ServerErrorMessages.trackReviewNotFound:
+            LocaleKeys.contentIsUnavailable.tr(),
+        ServerErrorMessages.questionNotFound:
+            LocaleKeys.contentIsUnavailable.tr(),
+        ServerErrorMessages.answerNotFound:
+            LocaleKeys.contentIsUnavailable.tr(),
+        ServerErrorMessages.questionOrAnswerNotFound:
+            LocaleKeys.contentIsUnavailable.tr(),
+        ServerErrorMessages.parentNotFound:
+            LocaleKeys.contentIsUnavailable.tr(),
         ServerErrorMessages.notOwned:
             LocaleKeys.youCantAnswerAQuestionMessage.tr(),
-        ServerErrorMessages.notYet: notYet,
         ServerErrorMessages.notAccepted: notAccepted,
         ServerErrorMessages.alreadyReviewed:
             LocaleKeys.youHaveAlreadyReviewedThisPhoneBefore.tr(),
@@ -95,7 +115,6 @@ class ServerErrorMessages {
 
   static List<String> get _noResultFailures => [
         noUpdateOperationsYet,
-        // notYet,
       ];
 
   static List<String> get _retryActionFailures => [
@@ -117,7 +136,6 @@ class ServerErrorMessages {
         alreadyUnliked,
         noLikes,
         alreadyAccepted,
-        // notYet,
         notAccepted,
         // trackAlreadyHated,
         // trackAlreadySeemored,
