@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 
 class VerticalSpacesBetween {
   static Widget get replies => 9.verticalSpace;
@@ -9,14 +11,16 @@ class VerticalSpacesBetween {
   static Widget get interactionsListAndMoreCommentsButton => 9.verticalSpace;
 }
 
-class AppEdgeInsets{
+class AppEdgeInsets {
   /// The edge insets for the app screen.
-  static EdgeInsets get screenPadding => EdgeInsets.only(left: 8.w, right: 8.w, top: 12.h, bottom: 70.h);
+  static EdgeInsets get screenPadding =>
+      EdgeInsets.only(left: 8.w, right: 8.w, top: 12.h, bottom: 70.h);
   static EdgeInsets get screenWithoutFabPadding =>
       EdgeInsets.only(left: 8.w, right: 8.w, top: 12.h, bottom: 12.h);
   static EdgeInsets get screenWithoutFabHorizontalPadding =>
       EdgeInsets.only(left: 8.w, right: 8.w);
 }
+
 class AppWidth {
   static double get w1 => 1.w;
   static double get w2 => 2.w;
@@ -60,6 +64,7 @@ class AppNumericValues {
   static int get expandedMaxLetters => 1200;
 
   static int get interactionsMaxLetters => 50;
+  static int get fullPointsCharsNum => 50;
 }
 
 class AppDuration {
@@ -67,3 +72,5 @@ class AppDuration {
   static Duration get typingThrottling => Duration(milliseconds: 1000);
   static Duration get skeletonLoading => Duration(milliseconds: 1000);
 }
+
+

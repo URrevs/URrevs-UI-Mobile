@@ -107,6 +107,26 @@ class _PostingReviewSubscreenState
   late TextEditingController hatedAboutCompanyController;
   late TextEditingController invitationCodeController;
 
+  List<bool> givePoints = List.generate(11, (_) => false);
+
+  double get _percentage {
+    double percentage = givePoints.fold<double>(
+        0, (total, giveFlag) => total + (giveFlag ? 0.5 / 11 : 0));
+    List<TextEditingController> prosAndConsControllers = [
+      likedAboutProductController,
+      hatedAboutProductController,
+      likedAboutCompanyController,
+      hatedAboutCompanyController
+    ];
+    double prosAndConsPercent = 0;
+    for (var controller in prosAndConsControllers) {
+      prosAndConsPercent +=
+          controller.text.length / AppNumericValues.fullPointsCharsNum;
+    }
+    percentage += prosAndConsPercent > 0.5 ? 0.5 : prosAndConsPercent;
+    return percentage > 1 ? 1 : percentage;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -125,20 +145,27 @@ class _PostingReviewSubscreenState
       }
     });
 
-    productNameController =
-        TextEditingController(text: postingReviewModel.productName);
-    // NOTE: I am not sure about this controller.
-    usedSinceController = TextEditingController(text: '');
-    likedAboutProductController = TextEditingController(
-        text: postingReviewModel.whatUserLikedAboutProduct);
-    hatedAboutProductController = TextEditingController(
-        text: postingReviewModel.whatUserHatedAboutProduct);
-    likedAboutCompanyController = TextEditingController(
-        text: postingReviewModel.whatUserLikedAboutCompany);
-    hatedAboutCompanyController = TextEditingController(
-        text: postingReviewModel.whatUserHatedAboutCompany);
-    invitationCodeController =
-        TextEditingController(text: widget.refCode ?? '');
+    productNameController = TextEditingController()
+      ..addListener(() {
+        setState(() => givePoints[0] = productNameController.text.isNotEmpty);
+      });
+    usedSinceController = TextEditingController()
+      ..addListener(() {
+        setState(() => givePoints[1] = usedSinceController.text.isNotEmpty);
+      });
+    likedAboutProductController = TextEditingController()
+      ..addListener(() => setState(() {}));
+    hatedAboutProductController = TextEditingController()
+      ..addListener(() => setState(() {}));
+    likedAboutCompanyController = TextEditingController()
+      ..addListener(() => setState(() {}));
+    hatedAboutCompanyController = TextEditingController()
+      ..addListener(() => setState(() {}));
+    invitationCodeController = TextEditingController(text: widget.refCode ?? '')
+      ..addListener(() {
+        setState(
+            () => givePoints[10] = invitationCodeController.text.isNotEmpty);
+      });
   }
 
   List<int> ratings = List.generate(8, (index) => 0);
@@ -171,6 +198,7 @@ class _PostingReviewSubscreenState
     invitationCodeController.text = '';
     _phoneRatingErrorMessage = '';
     _companyRatingErrorMessage = '';
+    givePoints = List.generate(11, (index) => false);
     _clearChosenSearchResult();
     _emptyStarsFields();
   }
@@ -234,6 +262,7 @@ class _PostingReviewSubscreenState
   SliverAppBar _buildStarsCounterBar() {
     return SliverAppBar(
       elevation: 1,
+      
       forceElevated: true,
       pinned: true,
       // snap: true,
@@ -244,7 +273,7 @@ class _PostingReviewSubscreenState
       backgroundColor: ColorManager.transparent,
       flexibleSpace: Container(
         decoration: BoxDecoration(color: ColorManager.backgroundGrey),
-        child: StarsCounter(percentage: 0.5),
+        child: StarsCounter(percentage: _percentage),
       ),
     );
   }
@@ -256,7 +285,7 @@ class _PostingReviewSubscreenState
       key: _formKey,
       child: CustomScrollView(
         slivers: [
-          _buildStarsCounterBar(),
+          if (_percentage > 0) _buildStarsCounterBar(),
           SliverToBoxAdapter(
             child: SingleChildScrollView(
               padding: AppEdgeInsets.screenPadding.copyWith(bottom: 10.h),
@@ -318,6 +347,7 @@ class _PostingReviewSubscreenState
                       CustomRatingBar(
                         key: ValueKey<String>('star-0-$_keyNumber'),
                         onRatingUpdate: (rating) {
+                          setState(() => givePoints[2] = true);
                           ratings[0] = rating.toInt();
                         },
                       ),
@@ -326,8 +356,10 @@ class _PostingReviewSubscreenState
                         RatingEntry(
                           key: ValueKey<String>('star-${i + 1}-$_keyNumber'),
                           title: _ratingLabels[i],
-                          onRatingUpdate: (rating) =>
-                              ratings[i + 1] = rating.toInt(),
+                          onRatingUpdate: (rating) {
+                            ratings[i + 1] = rating.toInt();
+                            setState(() => givePoints[i + 3] = true);
+                          },
                         ),
                       5.verticalSpace,
                       Text(
@@ -577,7 +609,10 @@ class _PostingReviewSubscreenState
             children: [
               CustomRatingBar(
                 key: ValueKey<String>('star-7-$_keyNumber'),
-                onRatingUpdate: (rating) => ratings[7] = rating.toInt(),
+                onRatingUpdate: (rating) {
+                  ratings[7] = rating.toInt();
+                  setState(() => givePoints[9] = true);
+                },
               ),
               5.verticalSpace,
               Text(

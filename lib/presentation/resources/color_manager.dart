@@ -86,7 +86,7 @@ class ColorManager {
 
   static Color get snackBarGrey => ColorPair(
         light: Color(0xffc4c4c4),
-        dark: Color(0xff3b3b3b),
+        dark: Color(0xffc4c4c4),
       ).pickColor();
 
   static Color get black => ColorPair(

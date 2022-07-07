@@ -11,6 +11,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart'
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/reports_states/report_state.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/interaction_body_text.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/interaction_body_title.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/interaction_like_counter.dart';
@@ -136,6 +137,15 @@ class _InteractionBodyState extends ConsumerState<InteractionBody> {
       provider: reportProvider(_reportPostProviderParams),
       context: context,
     );
+    ref.listen(reportProvider(_reportPostProviderParams), (previous, next) {
+      if (next is ReportLoadedState) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(LocaleKeys.successfullyReported.tr()),
+          ),
+        );
+      }
+    });
     String? usedSinceStr;
     if (widget.usedSinceDate != null) {
       usedSinceStr = LocaleKeys.usedThisProductFor.tr() +

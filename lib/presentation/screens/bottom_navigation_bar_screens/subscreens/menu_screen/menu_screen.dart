@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart' show launchUrl;
+import 'package:urrevs_ui_mobile/app/extensions.dart';
+import 'package:urrevs_ui_mobile/app/helpers.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
@@ -11,6 +13,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/authentication_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/menu_screen/subscreens/about_us_screen.dart';
 
@@ -45,28 +48,6 @@ class MenuSubscreen extends ConsumerStatefulWidget {
 }
 
 class _MenuSubscreenState extends ConsumerState<MenuSubscreen> {
-  void _launchUrlWithCustomTabs(BuildContext context, String stringUrl) async {
-    try {
-      await launch(
-        stringUrl,
-        customTabsOption: CustomTabsOption(
-          toolbarColor: Theme.of(context).primaryColor,
-          enableDefaultShare: true,
-          enableUrlBarHiding: true,
-          showPageTitle: true,
-          animation: CustomTabsSystemAnimation.slideIn(),
-          extraCustomTabs: const <String>[
-            'org.mozilla.firefox',
-            'com.microsoft.emmx',
-          ],
-        ),
-      );
-    } catch (e) {
-      // An exception is thrown if browser app is not installed on Android device.
-      debugPrint(e.toString());
-    }
-  }
-
   Widget _buildMyProfile() {
     ref.listen(getMyProfileProvider, (previous, next) {
       if (next is GetMyProfileErrorState) {
@@ -247,13 +228,13 @@ class _MenuSubscreenState extends ConsumerState<MenuSubscreen> {
   Future _launchFacebookPage() async {
     /// this is the url of the app in the google play store
     String url = 'https://www.facebook.com/URrevs';
-    _launchUrlWithCustomTabs(context, url);
+    launchUrlWithCustomTabs(url);
   }
 
   Future _launchLinkedinPage() async {
     /// this is the url of the app in the google play store
     String url = 'https://eg.linkedin.com/company/urrevs?trk=ppro_cprof';
-    _launchUrlWithCustomTabs(context, url);
+    launchUrlWithCustomTabs(url);
   }
 
   Future _sendEmail() async {
@@ -338,8 +319,10 @@ class _MenuSubscreenState extends ConsumerState<MenuSubscreen> {
           children: [
             GestureDetector(
               onTap: () {
-                Navigator.of(context)
-                    .pushNamed(TermsAndConditionsScreen.routeName);
+                // Navigator.of(context)
+                //     .pushNamed(TermsAndConditionsScreen.routeName);
+                launchUrlWithCustomTabs(
+                    StringsManager.termsAndConditionsUrl(context.isArabic));
               },
               child: Text(
                 LocaleKeys.termsOfUse.tr(),
@@ -355,7 +338,9 @@ class _MenuSubscreenState extends ConsumerState<MenuSubscreen> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.of(context).pushNamed(PrivacyPolicyScreen.routeName);
+                // Navigator.of(context).pushNamed(PrivacyPolicyScreen.routeName);
+                launchUrlWithCustomTabs(
+                    StringsManager.privacyPolicyUrl(context.isArabic));
               },
               child: Text(
                 LocaleKeys.privacyPolicy.tr(),

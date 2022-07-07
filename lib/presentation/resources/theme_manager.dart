@@ -20,7 +20,6 @@ class ThemeManager {
 
   static ThemeData get light => ThemeData(
         brightness: Brightness.light,
-        shadowColor: ColorManager.grey,
         toggleableActiveColor: ColorManager.blue,
         cardColor: ColorManager.white,
         dialogBackgroundColor: ColorManager.white,
@@ -100,7 +99,6 @@ class ThemeManager {
 
   static ThemeData get dark => ThemeData(
         brightness: Brightness.dark,
-        shadowColor: ColorManager.grey,
         toggleableActiveColor: ColorManager.blue,
         cardColor: ColorManager.white,
         tabBarTheme: TabBarTheme(

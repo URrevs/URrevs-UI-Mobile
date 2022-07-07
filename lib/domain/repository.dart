@@ -863,6 +863,11 @@ class Repository {
       final response = await _remoteDataSource.markAnswerAsAcceptedForPhone(
           questionId, answerId);
       return response.id;
+    }, onDioError: (e) {
+      if (e.statusMessage == ManuallyHandlledErrorMessages.notFound) {
+        return Left(IgnoredFailure());
+      }
+      return null;
     });
   }
 
@@ -872,6 +877,11 @@ class Repository {
       final response = await _remoteDataSource.markAnswerAsAcceptedForCompany(
           questionId, answerId);
       return response.id;
+    }, onDioError: (e) {
+      if (e.statusMessage == ManuallyHandlledErrorMessages.notFound) {
+        return Left(IgnoredFailure());
+      }
+      return null;
     });
   }
 
@@ -882,7 +892,8 @@ class Repository {
           questionId, answerId);
       return response.id;
     }, onDioError: (e) {
-      if (e.statusMessage == ServerErrorMessages.notYet) {
+      if (e.statusMessage == ServerErrorMessages.notYet ||
+          e.statusMessage == ManuallyHandlledErrorMessages.notFound) {
         return Left(IgnoredFailure());
       }
       return null;
@@ -896,7 +907,8 @@ class Repository {
           questionId, answerId);
       return response.id;
     }, onDioError: (e) {
-      if (e.statusMessage == ServerErrorMessages.notYet) {
+      if (e.statusMessage == ServerErrorMessages.notYet ||
+          e.statusMessage == ManuallyHandlledErrorMessages.notFound) {
         return Left(IgnoredFailure());
       }
       return null;
@@ -1084,6 +1096,11 @@ class Repository {
     return _tryAndCatch(() async {
       await _remoteDataSource.blockUser(userId);
       await _remoteDataSource.updateReportState(reportId, request);
+    }, onDioError: (e) {
+      if (e.statusMessage == ManuallyHandlledErrorMessages.notFound) {
+        return Left(Failure(LocaleKeys.userIsAdminOrDoesntExist.tr()));
+      }
+      return null;
     });
   }
 

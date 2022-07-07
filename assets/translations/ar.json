@@ -300,5 +300,8 @@
   "successfullyReported": "تم الإبلاغ بنجاح",
   "itemsNotFound": "لم يتم العثور على العناصر",
   "noNewCompaniesFound": "لم يتم العثور على شركات جديدة",
-  "noNewProductsFound": "لم يتم العثور على منتجات جديدة"
+  "noNewProductsFound": "لم يتم العثور على منتجات جديدة",
+  "userIsAdminOrDoesntExist": "هذا المستخدم إما مشرف أو غير موجود",
+  "contentIsUnavailable": "هذا المحتوى غير متاح حاليا",
+  "dateOfOwnershipPrecedesDateOfIssue": "تاريخ الامتلاك المدخل يسبق تاريخ اصدار الهاتف"
 }

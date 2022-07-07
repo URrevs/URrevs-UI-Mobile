@@ -302,5 +302,8 @@ abstract class  LocaleKeys {
   static const itemsNotFound = 'itemsNotFound';
   static const noNewCompaniesFound = 'noNewCompaniesFound';
   static const noNewProductsFound = 'noNewProductsFound';
+  static const userIsAdminOrDoesntExist = 'userIsAdminOrDoesntExist';
+  static const contentIsUnavailable = 'contentIsUnavailable';
+  static const dateOfOwnershipPrecedesDateOfIssue = 'dateOfOwnershipPrecedesDateOfIssue';
 
 }

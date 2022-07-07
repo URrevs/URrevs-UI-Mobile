@@ -10,6 +10,7 @@ import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 /// * add answer to company question: not owned
 class ManuallyHandlledErrorMessages {
   static const String notOwned = "not owned";
+  static const String notFound = "not found";
 }
 
 class ServerErrorMessages {
@@ -41,6 +42,7 @@ class ServerErrorMessages {
   static const String blocked = 'blocked';
   static const String alreadyAccepted = 'already accepted';
   static const String alreadyRunningCompetition = 'already running competition';
+  static const String pastDate = 'past date';
   // static const String trackAlreadyHated = 'track already hated';
   // static const String trackAlreadySeemored = 'track already seemored';
   // static const String trackAlreadyFullscreened = 'track already fullscreened';
@@ -72,7 +74,7 @@ class ServerErrorMessages {
         ServerErrorMessages.alreadyUnliked: alreadyUnliked,
         ServerErrorMessages.noLikes: noLikes,
         ServerErrorMessages.alreadyAccepted: alreadyAccepted,
-        ServerErrorMessages.notFound: notFound,
+        ServerErrorMessages.notFound: LocaleKeys.contentIsUnavailable.tr(),
         ServerErrorMessages.notOwned:
             LocaleKeys.youCantAnswerAQuestionMessage.tr(),
         ServerErrorMessages.notYet: notYet,
@@ -87,6 +89,8 @@ class ServerErrorMessages {
             LocaleKeys.youAreBlockedCannotTakeThatAction.tr(),
         ServerErrorMessages.alreadyRunningCompetition:
             LocaleKeys.thereIsAnActiveCompetition.tr(),
+        ServerErrorMessages.pastDate:
+            LocaleKeys.dateOfOwnershipPrecedesDateOfIssue.tr(),
       };
 
   static List<String> get _noResultFailures => [
@@ -112,7 +116,6 @@ class ServerErrorMessages {
         alreadyLiked,
         alreadyUnliked,
         noLikes,
-        notFound,
         alreadyAccepted,
         // notYet,
         notAccepted,

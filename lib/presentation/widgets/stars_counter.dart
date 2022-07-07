@@ -34,6 +34,7 @@ class StarsCounter extends StatelessWidget {
             percent: percentage,
             backgroundColor: ColorManager.white,
             progressColor: ColorManager.blue,
+            animateFromLastPercent: true,
           ),
         ],
       ),

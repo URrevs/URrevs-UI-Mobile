@@ -50,12 +50,16 @@ class CardHeaderSubtitle extends StatelessWidget {
       color: ColorManager.grey,
     );
 
-    final String postedDateStr =
-        DateFormat.yMMMMd(context.locale.languageCode).format(postedDate);
+    final String postedDateStr = DateFormat.yMMMMd(context.locale.languageCode)
+        .format(postedDate.toLocal());
     String? usedSinceDateStr;
     if (usedSinceDate != null) {
+      DateTime truncatedUsedSinceDate = DateTime(
+        usedSinceDate!.year,
+        usedSinceDate!.month,
+      );
       usedSinceDateStr = timeago.format(
-        usedSinceDate!,
+        truncatedUsedSinceDate,
         locale: context.locale.languageCode,
         clock: postedDate,
       );
