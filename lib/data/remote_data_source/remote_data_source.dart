@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 import 'package:urrevs_ui_mobile/data/requests/base_requests.dart';
@@ -153,6 +155,7 @@ abstract class RemoteDataSource {
   @POST('/reviews/phone')
   Future<AddPhoneReviewResponse> addPhoneReview(
     @Body() AddPhoneReviewRequest request,
+    @Header(HttpHeaders.userAgentHeader) String userAgentHeader,
   );
 
   /// 26

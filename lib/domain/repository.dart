@@ -4,7 +4,9 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
+import 'package:flutter/services.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:flutter_user_agentx/flutter_user_agent.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -115,6 +117,15 @@ class Repository {
       return Left(IgnoredFailure());
     }
     return null;
+  }
+
+  Future<String?> get _webUserAgent async {
+    try {
+      await FlutterUserAgent.init();
+      return FlutterUserAgent.webViewUserAgent;
+    } on PlatformException {
+      return null;
+    }
   }
 
   Future<Either<Failure, AuthReturnedVals>> loginToOurBackend() async {
@@ -348,7 +359,8 @@ class Repository {
   Future<Either<Failure, AddPhoneReviewReturnedVals>> addPhoneReview(
       AddPhoneReviewRequest request) {
     return _tryAndCatch(() async {
-      final response = await _remoteDataSource.addPhoneReview(request);
+      final response = await _remoteDataSource.addPhoneReview(
+          request, await _webUserAgent ?? '');
       return response.addPhoneReviewReturnedVals;
     });
   }

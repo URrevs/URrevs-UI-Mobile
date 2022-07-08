@@ -415,10 +415,12 @@ class _RemoteDataSource implements RemoteDataSource {
   }
 
   @override
-  Future<AddPhoneReviewResponse> addPhoneReview(request) async {
+  Future<AddPhoneReviewResponse> addPhoneReview(
+      request, userAgentHeader) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'user-agent': userAgentHeader};
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(request.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
