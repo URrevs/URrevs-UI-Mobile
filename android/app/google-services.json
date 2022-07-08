@@ -109,6 +109,50 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1037779383625:android:cfd8741ffd855763dd1698",
+        "android_client_info": {
+          "package_name": "com.urrevs.urrevsmobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1037779383625-463r17f6cge2edh040kcemv69hadnp9i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.urrevs.urrevsmobile",
+            "certificate_hash": "46f77b2351847f8c45fe0087d111ab7dff96cc36"
+          }
+        },
+        {
+          "client_id": "1037779383625-i46rhqhdrtl8hkbn15qhgr77nn9jbv17.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbxIi7JY0gnSZfz-Y-ydZvougIIVT2Kac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1037779383625-i46rhqhdrtl8hkbn15qhgr77nn9jbv17.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1037779383625-os7mahque55895al98cr6t0lnrtq0q7t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.urevs"
+              }
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

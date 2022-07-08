@@ -1,4 +1,4 @@
-package com.example.urrevs_ui_mobile
+package com.urrevs.urrevsmobile
 
 import io.flutter.embedding.android.FlutterActivity
 

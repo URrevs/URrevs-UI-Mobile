@@ -22,7 +22,7 @@ class StringsManager {
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVmqetlFGRGEri6eONcKzyUluyk5LGFNNDXA&usqp=CAU';
   static const String webDomain = 'urrevstest.netlify.app';
   static const String uriPrefix = 'https://urevs.page.link';
-  static const String packageName = 'com.example.urrevs_ui_mobile';
+  static const String packageName = 'com.urrevs.urrevsmobile';
   static const String awsBackendApi = 'https://urrevs.com/api';
   static const String currentBackendApi = awsBackendApi;
   static const String mockApiUrl = 'http://10.0.2.2:3000/';
