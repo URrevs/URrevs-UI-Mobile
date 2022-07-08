@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:urrevs_ui_mobile/app/exceptions.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
@@ -287,6 +288,16 @@ extension DioErrorFailure on DioError {
             ServerErrorMessages.isAServerErrorMessage(errorMessage)) {
           return ServerErrorMessages.getFailure(errorMessage);
         }
+        FirebaseCrashlytics.instance.recordError(
+          'DioError not translated',
+          StackTrace.current,
+          fatal: true,
+          information: [
+            DiagnosticsNode.message('statusCode: ${response?.statusCode}'),
+            DiagnosticsNode.message('data: ${response?.data}'),
+            DiagnosticsNode.message('headers: ${response?.headers}'),
+          ],
+        );
         switch (response?.statusCode) {
           case 400:
             return Failure('unknown error');

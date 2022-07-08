@@ -40,6 +40,6 @@ void main() async {
       // MyApp(),
     );
   }, (error, stack) {
-    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: false);
   });
 }
