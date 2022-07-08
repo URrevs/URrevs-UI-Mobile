@@ -15,7 +15,7 @@ class GetReportsNotifier extends StateNotifier<GetReportsState> {
 
   int _round = 1;
 
-  void getReports() async {
+  Future<void> getReports() async {
     // get current items in the state
     List<Report> currentReports = [];
     final currentState = state;

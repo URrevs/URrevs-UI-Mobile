@@ -304,7 +304,8 @@ extension DioErrorFailure on DioError {
 }
 
 extension NoInternetConnectionExceptionFailure on NoInternetConnection {
-  Failure get failure => Failure(LocaleKeys.thereIsNoInternetConnection.tr());
+  Failure get failure =>
+      RetryFailure(LocaleKeys.thereIsNoInternetConnection.tr());
 }
 
 extension FirebaseAuthExceptionFailure on FirebaseAuthException {

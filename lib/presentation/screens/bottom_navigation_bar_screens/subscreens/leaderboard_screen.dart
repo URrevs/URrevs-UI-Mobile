@@ -37,20 +37,20 @@ class _LeaderboardSubscreenState extends ConsumerState<LeaderboardSubscreen> {
   final GetTopUsersInCompetitionProviderParams _topUsersProvParams =
       GetTopUsersInCompetitionProviderParams();
 
-  void _getLatestCompeition() {
-    ref
+  Future<void> _getLatestCompeition() {
+    return ref
         .read(getLatestCompetitionProvider(_competitionProvParams).notifier)
         .getLatestCompetition();
   }
 
-  void _getMyRank() {
-    ref
+  Future<void> _getMyRank() {
+    return ref
         .read(getMyRankInCompetitionProvider(_myRankProvParams).notifier)
         .getMyRankInCompetition();
   }
 
-  void _getTopUsers() {
-    ref
+  Future<void> _getTopUsers() {
+    return ref
         .read(getTopUsersInCompetitionProvider(_topUsersProvParams).notifier)
         .getTopUsersInCompetition();
   }
@@ -80,23 +80,32 @@ class _LeaderboardSubscreenState extends ConsumerState<LeaderboardSubscreen> {
     ]);
     if (errWid != null) return errWid;
 
-    return SingleChildScrollView(
-      padding: AppEdgeInsets.screenPadding.copyWith(bottom: 0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          _buildBanner(),
-          SizedBox(height: 10.h),
-          Text(
-            LocaleKeys.yourRanking.tr(),
-            style: TextStyleManager.s18w700,
-          ),
-          _buildMyRank(),
-          SizedBox(height: 10.h),
-          Text(LocaleKeys.usersRanking.tr(), style: TextStyleManager.s18w700),
-          // users ranking card
-          _buildTopUsers(),
-        ],
+    return RefreshIndicator(
+      onRefresh: () async {
+        await Future.wait([
+          _getLatestCompeition(),
+          _getMyRank(),
+          _getTopUsers(),
+        ]);
+      },
+      child: SingleChildScrollView(
+        padding: AppEdgeInsets.screenPadding.copyWith(bottom: 0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            _buildBanner(),
+            SizedBox(height: 10.h),
+            Text(
+              LocaleKeys.yourRanking.tr(),
+              style: TextStyleManager.s18w700,
+            ),
+            _buildMyRank(),
+            SizedBox(height: 10.h),
+            Text(LocaleKeys.usersRanking.tr(), style: TextStyleManager.s18w700),
+            // users ranking card
+            _buildTopUsers(),
+          ],
+        ),
       ),
     );
   }

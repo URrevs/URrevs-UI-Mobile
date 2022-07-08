@@ -53,7 +53,7 @@ class PostsList extends ConsumerStatefulWidget {
 
   final GetPostsListProviderParams getPostsListProviderParams;
   final PagingController<int, Post> controller;
-  final VoidCallback getPosts;
+  final Future<void> Function() getPosts;
   final bool isSliver;
   final bool noPadding;
 
@@ -175,9 +175,12 @@ class _PostsListState extends ConsumerState<PostsList> {
         ),
       );
     }
-    return Padding(
-      padding: padding,
+    return ref.postsListRefreshIndicator(
+      controller: widget.controller,
+      getPosts: widget.getPosts,
+      provider: getPostsListProvider(widget.getPostsListProviderParams),
       child: PagedListView(
+        padding: padding,
         pagingController: widget.controller,
         builderDelegate: _pagedChildBuilderDelegate(),
       ),

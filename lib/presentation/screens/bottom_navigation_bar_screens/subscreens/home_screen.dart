@@ -27,9 +27,11 @@ class _HomeSubscreenState extends ConsumerState<HomeSubscreen> {
   late final GetPostsListProviderParams _providerParams =
       GetPostsListProviderParams();
 
-  void _getPostsForHomeScreen() {
+  Future<void> _getPostsForHomeScreen() async {
     _controller.retryLastFailedRequest();
-    ref.read(getPostsListProvider(_providerParams).notifier).getPostsList(
+    return ref
+        .read(getPostsListProvider(_providerParams).notifier)
+        .getPostsList(
           postsListType: PostsListType.home,
           targetType: null,
           postContentType: null,
@@ -48,22 +50,11 @@ class _HomeSubscreenState extends ConsumerState<HomeSubscreen> {
       ),
     ]);
     if (errWidget != null) return errWidget;
-    return RefreshIndicator(
-      onRefresh: () async {
-        ref.refresh(getPostsListProvider(_providerParams));
-        _controller.refresh();
-        return Future.delayed(Duration(seconds: 2));
-      },
-      child: CustomScrollView(
-        slivers: [
-          PostsList(
-            controller: _controller,
-            getPostsListProviderParams: _providerParams,
-            getPosts: _getPostsForHomeScreen,
-            isSliver: true,
-          ),
-        ],
-      ),
+    return PostsList(
+      controller: _controller,
+      getPostsListProviderParams: _providerParams,
+      getPosts: _getPostsForHomeScreen,
+      isSliver: false,
     );
   }
 }

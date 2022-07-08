@@ -48,9 +48,11 @@ class _CompanyProfileReviewsSubscreenState
         .getCompanyStatisticalInfo(widget.companyId);
   }
 
-  void _getPostsOnCertainTarget() {
+  Future<void> _getPostsOnCertainTarget() async {
     _controller.retryLastFailedRequest();
-    ref.read(getPostsListProvider(_postsProviderParams).notifier).getPostsList(
+    return ref
+        .read(getPostsListProvider(_postsProviderParams).notifier)
+        .getPostsList(
           postsListType: PostsListType.target,
           targetType: TargetType.company,
           postContentType: PostContentType.review,
@@ -73,7 +75,6 @@ class _CompanyProfileReviewsSubscreenState
       generalCompanyRating: state.companyStats.rating,
       viewsCounter: state.companyStats.views,
       isProduct: false,
-
     );
   }
 
@@ -100,32 +101,38 @@ class _CompanyProfileReviewsSubscreenState
     if (errWidget != null) return errWidget;
     return Padding(
       padding: AppEdgeInsets.screenWithoutFabHorizontalPadding,
-      child: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(child: SizedBox(height: 10.h)),
-          SliverToBoxAdapter(
-            child: _buildCompanyOverview(),
-          ),
-          SliverList(
-            delegate: SliverChildListDelegate([
-              10.verticalSpace,
-              Row(
-                children: [
-                  Text(
-                    LocaleKeys.reviews.tr().capital + ':',
-                    style: TextStyleManager.s18w700,
-                  )
-                ],
-              ),
-            ]),
-          ),
-          PostsList.sliver(
-            controller: _controller,
-            getPostsListProviderParams: _postsProviderParams,
-            getPosts: _getPostsOnCertainTarget,
-            noPadding: true,
-          ),
-        ],
+      child: ref.postsListRefreshIndicator(
+        controller: _controller,
+        getPosts: _getPostsOnCertainTarget,
+        provider: getPostsListProvider(_postsProviderParams),
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(child: SizedBox(height: 10.h)),
+            SliverToBoxAdapter(
+              child: _buildCompanyOverview(),
+            ),
+            SliverList(
+              delegate: SliverChildListDelegate([
+                10.verticalSpace,
+                Row(
+                  children: [
+                    Text(
+                      LocaleKeys.reviews.tr().capital + ':',
+                      style: TextStyleManager.s18w700,
+                    )
+                  ],
+                ),
+              ]),
+            ),
+            PostsList(
+              controller: _controller,
+              getPostsListProviderParams: _postsProviderParams,
+              getPosts: _getPostsOnCertainTarget,
+              noPadding: true,
+              isSliver: true,
+            ),
+          ],
+        ),
       ),
     );
   }

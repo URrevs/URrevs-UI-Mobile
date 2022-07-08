@@ -40,9 +40,11 @@ class _QuestionsAboutMyProductsScreenState
   late final GetPostsListProviderParams _providerParams =
       GetPostsListProviderParams();
 
-  void _getQuestionsAboutMyOwnedPhones() {
+  Future<void> _getQuestionsAboutMyOwnedPhones() async {
     _controller.retryLastFailedRequest();
-    ref.read(getPostsListProvider(_providerParams).notifier).getPostsList(
+    return ref
+        .read(getPostsListProvider(_providerParams).notifier)
+        .getPostsList(
           postsListType: PostsListType.questionsOnMyOwnedPhones,
           targetType: null,
           postContentType: null,
@@ -76,15 +78,11 @@ class _QuestionsAboutMyProductsScreenState
       ),
     ]);
     if (errWidget != null) return errWidget;
-    return CustomScrollView(
-      slivers: [
-        PostsList(
-          controller: _controller,
-          getPostsListProviderParams: _providerParams,
-          getPosts: _getQuestionsAboutMyOwnedPhones,
-          isSliver: true,
-        ),
-      ],
+    return PostsList(
+      controller: _controller,
+      getPostsListProviderParams: _providerParams,
+      getPosts: _getQuestionsAboutMyOwnedPhones,
+      isSliver: false,
     );
   }
 }

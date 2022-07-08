@@ -41,9 +41,11 @@ class _PostsListOnCertainTargetState
   late final GetPostsListProviderParams _providerParams =
       GetPostsListProviderParams();
 
-  void _getPostsOnCertainTarget() {
+  Future<void> _getPostsOnCertainTarget() async {
     _controller.retryLastFailedRequest();
-    ref.read(getPostsListProvider(_providerParams).notifier).getPostsList(
+    return ref
+        .read(getPostsListProvider(_providerParams).notifier)
+        .getPostsList(
           postsListType: PostsListType.target,
           targetType: _targetType,
           postContentType: _postContentType,
@@ -62,15 +64,11 @@ class _PostsListOnCertainTargetState
       ),
     ]);
     if (errWidget != null) return errWidget;
-    return CustomScrollView(
-      slivers: [
-        PostsList(
-          controller: _controller,
-          getPostsListProviderParams: _providerParams,
-          getPosts: _getPostsOnCertainTarget,
-          isSliver: true,
-        ),
-      ],
+    return PostsList(
+      controller: _controller,
+      getPostsListProviderParams: _providerParams,
+      getPosts: _getPostsOnCertainTarget,
+      isSliver: false,
     );
   }
 }

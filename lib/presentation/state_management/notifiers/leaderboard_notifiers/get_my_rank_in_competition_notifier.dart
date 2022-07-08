@@ -8,7 +8,7 @@ class GetMyRankInCompetitionNotifier
   GetMyRankInCompetitionNotifier()
       : super(GetMyRankInCompetitionInitialState());
 
-  void getMyRankInCompetition() async {
+  Future<void> getMyRankInCompetition() async {
     state = GetMyRankInCompetitionLoadingState();
     final response = await GetIt.I<Repository>().getMyRankInCompetition();
     response.fold(

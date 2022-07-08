@@ -8,7 +8,7 @@ class GetLatestCompetitionNotifier
     extends StateNotifier<GetLatestCompetitionState> {
   GetLatestCompetitionNotifier() : super(GetLatestCompetitionInitialState());
 
-  void getLatestCompetition() async {
+  Future<void> getLatestCompetition() async {
     state = GetLatestCompetitionLoadingState();
     final response = await GetIt.I<Repository>().getLatestCompetition();
     response.fold(

@@ -90,7 +90,7 @@ class GetPostsListNotifier extends StateNotifier<GetPostsListState> {
     return response;
   }
 
-  void getPostsList({
+  Future<void> getPostsList({
     required PostsListType postsListType,
     required TargetType? targetType,
     required PostContentType? postContentType,

@@ -35,9 +35,9 @@ class _ReportsListState extends ConsumerState<ReportsList> {
   late final _getReportsProviderParams =
       GetReportsProviderParams(reportStatus: widget.reportStatus);
 
-  void _getReports() {
+  Future<void> _getReports() async {
     _controller.retryLastFailedRequest();
-    ref
+    return ref
         .read(getReportsProvider(_getReportsProviderParams).notifier)
         .getReports();
   }
@@ -61,31 +61,37 @@ class _ReportsListState extends ConsumerState<ReportsList> {
       ),
     ]);
     if (errWidget != null) return errWidget;
-    return PagedListView(
-      padding: AppEdgeInsets.screenWithoutFabPadding,
-      pagingController: _controller,
-      builderDelegate: PagedChildBuilderDelegate<Report>(
-        itemBuilder: (context, report, index) => ReportCard(
-          report: report,
-          reportStatus: widget.reportStatus,
+    return ref.postsListRefreshIndicator(
+      controller: _controller,
+      getPosts: _getReports,
+      provider: getReportsProvider(_getReportsProviderParams),
+      child: PagedListView(
+        padding: AppEdgeInsets.screenWithoutFabPadding,
+        pagingController: _controller,
+        builderDelegate: PagedChildBuilderDelegate<Report>(
+          itemBuilder: (context, report, index) => ReportCard(
+            report: report,
+            reportStatus: widget.reportStatus,
+          ),
+          firstPageErrorIndicatorBuilder: (context) => SizedBox(),
+          newPageErrorIndicatorBuilder: (context) {
+            final state =
+                ref.watch(getReportsProvider(_getReportsProviderParams));
+            if (state is ErrorState) {
+              return VerticalListErrorWidget(
+                onRetry: _getReports,
+                retryLastRequest: (state as ErrorState).failure is RetryFailure,
+              );
+            } else {
+              return SizedBox();
+            }
+          },
+          firstPageProgressIndicatorBuilder: (context) =>
+              ReportCardsListLoading(),
+          newPageProgressIndicatorBuilder: (context) =>
+              ReportCardsListLoading(),
+          noItemsFoundIndicatorBuilder: (context) => EmptyListWidget(),
         ),
-        firstPageErrorIndicatorBuilder: (context) => SizedBox(),
-        newPageErrorIndicatorBuilder: (context) {
-          final state =
-              ref.watch(getReportsProvider(_getReportsProviderParams));
-          if (state is ErrorState) {
-            return VerticalListErrorWidget(
-              onRetry: _getReports,
-              retryLastRequest: (state as ErrorState).failure is RetryFailure,
-            );
-          } else {
-            return SizedBox();
-          }
-        },
-        firstPageProgressIndicatorBuilder: (context) =>
-            ReportCardsListLoading(),
-        newPageProgressIndicatorBuilder: (context) => ReportCardsListLoading(),
-        noItemsFoundIndicatorBuilder: (context) => EmptyListWidget(),
       ),
     );
   }

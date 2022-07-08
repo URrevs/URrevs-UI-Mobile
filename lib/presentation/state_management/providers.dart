@@ -464,4 +464,20 @@ extension WidgetRefListeners on WidgetRef {
     if (authState is! AuthenticationLoadedState) return null;
     return authState.refCode;
   }
+
+  RefreshIndicator postsListRefreshIndicator({
+    required ProviderBase provider,
+    required PagingController controller,
+    required Future<void> Function() getPosts,
+    required Widget child,
+  }) {
+    return RefreshIndicator(
+      onRefresh: () async {
+        refresh(provider);
+        Future.delayed(Duration.zero, () => controller.refresh());
+        return getPosts();
+      },
+      child: child,
+    );
+  }
 }

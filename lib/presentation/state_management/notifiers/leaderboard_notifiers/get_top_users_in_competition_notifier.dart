@@ -8,7 +8,7 @@ class GetTopUsersInCompetitionNotifier
   GetTopUsersInCompetitionNotifier()
       : super(GetTopUsersInCompetitionInitialState());
 
-  void getTopUsersInCompetition() async {
+  Future<void> getTopUsersInCompetition() async {
     state = GetTopUsersInCompetitionLoadingState();
     final response = await GetIt.I<Repository>().getTopUsersInCompetition();
     response.fold(

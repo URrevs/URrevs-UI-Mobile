@@ -78,9 +78,11 @@ class _PostedReviewsScreenState extends ConsumerState<PostedPostsScreen> {
     _postsController.refresh();
   }
 
-  void _getPosts() {
+  Future<void> _getPosts() async {
     _postsController.retryLastFailedRequest();
-    ref.read(getPostsListProvider(_postsProviderParams).notifier).getPostsList(
+    return ref
+        .read(getPostsListProvider(_postsProviderParams).notifier)
+        .getPostsList(
           postsListType: PostsListType.user,
           targetId: null,
           targetType: _filter,
@@ -127,15 +129,20 @@ class _PostedReviewsScreenState extends ConsumerState<PostedPostsScreen> {
       retryOtherFailedRequests: false,
     );
     if (errWidget != null) return errWidget;
-    return CustomScrollView(
-      slivers: [
-        _buildFilterBar(),
-        PostsList.sliver(
-          controller: _postsController,
-          getPosts: _getPosts,
-          getPostsListProviderParams: _postsProviderParams,
-        ),
-      ],
+    return ref.postsListRefreshIndicator(
+      controller: _postsController,
+      getPosts: _getPosts,
+      provider: getPostsListProvider(_postsProviderParams),
+      child: CustomScrollView(
+        slivers: [
+          _buildFilterBar(),
+          PostsList.sliver(
+            controller: _postsController,
+            getPosts: _getPosts,
+            getPostsListProviderParams: _postsProviderParams,
+          ),
+        ],
+      ),
     );
   }
 
