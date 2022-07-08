@@ -101,7 +101,6 @@ class _LeaderboardSubscreenState extends ConsumerState<LeaderboardSubscreen> {
             ),
             _buildMyRank(),
             SizedBox(height: 10.h),
-            Text(LocaleKeys.usersRanking.tr(), style: TextStyleManager.s18w700),
             // users ranking card
             _buildTopUsers(),
           ],
@@ -132,50 +131,62 @@ class _LeaderboardSubscreenState extends ConsumerState<LeaderboardSubscreen> {
     if (loadOrErr != null) return loadOrErr;
 
     final users = (topUsersState as GetTopUsersInCompetitionLoadedState).users;
-    return ScrollConfiguration(
-      behavior: const ScrollBehavior().copyWith(overscroll: false),
-      child: Card(
-        elevation: AppElevations.ev3,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(
-            AppRadius.updatedListTile,
-          ),
+    Competition? competition;
+    if (competitionState is GetLatestCompetitionLoadedState) {
+      competition = competitionState.competition;
+    }
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          competition?.inProgress == true
+              ? LocaleKeys.rankingOfUsersInTheCompetition.tr()
+              : LocaleKeys.usersRanking.tr(),
+          style: TextStyleManager.s18w700,
         ),
-        child: ListView.separated(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          separatorBuilder: (context, index) => Divider(
-            thickness: 0.5,
-            color: ColorManager.dividerGrey,
-            indent: 10.w,
-            endIndent: 10.w,
-          ),
-          itemCount: 10,
-          itemBuilder: (context, index) {
-            final user = users[index];
-            Competition? competition;
-            if (competitionState is GetLatestCompetitionLoadedState) {
-              competition = competitionState.competition;
-            }
-            return LeaderboardEntryData(
-              onTap: () {
-                Navigator.of(context).pushNamed(
-                  UserProfileScreen.routeName,
-                  arguments: UserProfileScreenArgs(userId: user.id),
+        ScrollConfiguration(
+          behavior: const ScrollBehavior().copyWith(overscroll: false),
+          child: Card(
+            elevation: AppElevations.ev3,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(
+                AppRadius.updatedListTile,
+              ),
+            ),
+            child: ListView.separated(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              separatorBuilder: (context, index) => Divider(
+                thickness: 0.5,
+                color: ColorManager.dividerGrey,
+                indent: 10.w,
+                endIndent: 10.w,
+              ),
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                final user = users[index];
+                return LeaderboardEntryData(
+                  onTap: () {
+                    Navigator.of(context).pushNamed(
+                      UserProfileScreen.routeName,
+                      arguments: UserProfileScreenArgs(userId: user.id),
+                    );
+                  },
+                  rank: index + 1,
+                  userImageUrl: user.picture,
+                  name: user.name,
+                  isWinner: competition != null &&
+                      competition.inProgress &&
+                      index + 1 <= competition.numWinners,
+                  starsCounter: user.points,
+                  prizeName: competition?.prize,
+                  prizeImageUrl: competition?.prizePic,
                 );
               },
-              rank: index + 1,
-              userImageUrl: user.picture,
-              name: user.name,
-              isWinner:
-                  competition != null && index + 1 <= competition.numWinners,
-              starsCounter: user.points,
-              prizeName: competition?.prize,
-              prizeImageUrl: competition?.prizePic,
-            );
-          },
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
 
@@ -207,7 +218,9 @@ class _LeaderboardSubscreenState extends ConsumerState<LeaderboardSubscreen> {
     }
     return LeaderboardEntryTile(
       name: user.name,
-      isWinner: competition != null && user.rank! <= competition.numWinners,
+      isWinner: competition != null &&
+          competition.inProgress &&
+          user.rank! <= competition.numWinners,
       userImageUrl: user.picture,
       rank: user.rank!,
       starsCounter: user.points,

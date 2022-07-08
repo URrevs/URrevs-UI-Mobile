@@ -304,5 +304,6 @@
   "userIsAdminOrDoesntExist": "هذا المستخدم إما مشرف أو غير موجود",
   "contentIsUnavailable": "هذا المحتوى غير متاح حاليا",
   "dateOfOwnershipPrecedesDateOfIssue": "تاريخ الامتلاك المدخل يسبق تاريخ اصدار الهاتف",
-  "enterAValidRefCode": "ادخل كود دعوة صحيح"
+  "enterAValidRefCode": "ادخل كود دعوة صحيح",
+  "rankingOfUsersInTheCompetition": "ترتيب المستخدمين في المسابقة"
 }

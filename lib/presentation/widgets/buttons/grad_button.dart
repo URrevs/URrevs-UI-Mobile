@@ -38,6 +38,7 @@ class GradButton extends StatelessWidget {
       isEnabled: isEnabled,
       callback: onPressed,
       increaseWidthBy: width,
+      increaseHeightBy: 0,
       shadowColor: ColorManager.black.withOpacity(0.5).withOpacity(0.5),
       elevation: 3,
       shape: RoundedRectangleBorder(
@@ -54,10 +55,7 @@ class GradButton extends StatelessWidget {
                     child: icon)
                 : icon,
             SizedBox(width: 5),
-            Padding(
-              padding: EdgeInsets.only(top: 6.h),
-              child: text,
-            ),
+            text,
           ],
         ),
       ),

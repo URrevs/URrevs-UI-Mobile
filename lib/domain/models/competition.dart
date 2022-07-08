@@ -16,6 +16,8 @@ class Competition extends Equatable {
     required this.createdAt,
   });
 
+  bool get inProgress => deadline.isAfter(DateTime.now());
+
   @override
   List<Object?> get props => [id];
 }
