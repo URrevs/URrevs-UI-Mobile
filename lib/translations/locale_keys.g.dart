@@ -305,5 +305,6 @@ abstract class  LocaleKeys {
   static const userIsAdminOrDoesntExist = 'userIsAdminOrDoesntExist';
   static const contentIsUnavailable = 'contentIsUnavailable';
   static const dateOfOwnershipPrecedesDateOfIssue = 'dateOfOwnershipPrecedesDateOfIssue';
+  static const enterAValidRefCode = 'enterAValidRefCode';
 
 }

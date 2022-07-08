@@ -319,7 +319,8 @@ class CodegenLoader extends AssetLoader{
   "noNewProductsFound": "لم يتم العثور على منتجات جديدة",
   "userIsAdminOrDoesntExist": "هذا المستخدم إما مشرف أو غير موجود",
   "contentIsUnavailable": "هذا المحتوى غير متاح حاليا",
-  "dateOfOwnershipPrecedesDateOfIssue": "تاريخ الامتلاك المدخل يسبق تاريخ اصدار الهاتف"
+  "dateOfOwnershipPrecedesDateOfIssue": "تاريخ الامتلاك المدخل يسبق تاريخ اصدار الهاتف",
+  "enterAValidRefCode": "ادخل كود دعوة صحيح"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -626,7 +627,8 @@ static const Map<String,dynamic> en = {
   "noNewProductsFound": "No new products found",
   "userIsAdminOrDoesntExist": "This user is an admin or doesn't exist",
   "contentIsUnavailable": "Content is not available right now",
-  "dateOfOwnershipPrecedesDateOfIssue": "The date of ownership entered precedes the date of issue of the phone"
+  "dateOfOwnershipPrecedesDateOfIssue": "The date of ownership entered precedes the date of issue of the phone",
+  "enterAValidRefCode": "Enter a valid referral code"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

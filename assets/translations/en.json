@@ -303,5 +303,6 @@
   "noNewProductsFound": "No new products found",
   "userIsAdminOrDoesntExist": "This user is an admin or doesn't exist",
   "contentIsUnavailable": "Content is not available right now",
-  "dateOfOwnershipPrecedesDateOfIssue": "The date of ownership entered precedes the date of issue of the phone"
+  "dateOfOwnershipPrecedesDateOfIssue": "The date of ownership entered precedes the date of issue of the phone",
+  "enterAValidRefCode": "Enter a valid referral code"
 }

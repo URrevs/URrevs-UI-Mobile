@@ -9,6 +9,7 @@ import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:urrevs_ui_mobile/app/exceptions.dart';
+import 'package:urrevs_ui_mobile/app/globals.dart';
 import 'package:urrevs_ui_mobile/data/remote_data_source/remote_data_source.dart';
 import 'package:urrevs_ui_mobile/data/requests/base_requests.dart';
 import 'package:urrevs_ui_mobile/data/requests/leaderboard_api_requests.dart';
@@ -64,6 +65,9 @@ class Repository {
       {Left<Failure, T>? Function(DioError)? onDioError}) async {
     try {
       await _checkConnection();
+      await _checkTokenExpiryDate();
+      print(
+          'request is sent @${DateTime.now()}, tokenExpiryDate: $tokenExpiryDate');
       T data = await callBack();
       return Right(data);
     } on AuthenticationCancelled catch (e) {
@@ -81,6 +85,31 @@ class Repository {
     }
   }
 
+  Future<void> _checkTokenExpiryDate() async {
+    DateTime? expiryDate = tokenExpiryDate?.subtract(Duration(minutes: 1));
+    if (expiryDate == null) return; // first authentication request
+    if (DateTime.now().isAfter(expiryDate)) {
+      print('updating expired token');
+      await _loginToBackendWithoutChecking();
+      print('token updated, new expiry date: $tokenExpiryDate');
+    }
+  }
+
+  Future<AuthReturnedVals> _loginToBackendWithoutChecking() async {
+    // login to our backend
+    String idToken = await FirebaseAuth.instance.currentUser!.getIdToken();
+    String authorizationHeader = 'Bearer $idToken';
+    AuthenticationResponse response =
+        await _remoteDataSource.authenticate(authorizationHeader);
+
+    // save the token and expiry date
+    GetIt.I<Dio>().options.headers[HttpHeaders.authorizationHeader] =
+        'bearer ${response.token}';
+    tokenExpiryDate = DateTime.fromMillisecondsSinceEpoch(response.exp * 1000);
+
+    return response.authReturnedVals;
+  }
+
   Left<Failure, T>? _handleAlreadyUnlikedError<T>(DioError e) {
     if (e.statusMessage == ManuallyHandlledErrorMessages.notFound) {
       return Left(IgnoredFailure());
@@ -90,17 +119,7 @@ class Repository {
 
   Future<Either<Failure, AuthReturnedVals>> loginToOurBackend() async {
     return _tryAndCatch(() async {
-      // login to our backend
-      String idToken = await FirebaseAuth.instance.currentUser!.getIdToken();
-      String authorizationHeader = 'Bearer $idToken';
-      AuthenticationResponse response =
-          await _remoteDataSource.authenticate(authorizationHeader);
-
-      // save the token
-      GetIt.I<Dio>().options.headers[HttpHeaders.authorizationHeader] =
-          'bearer ${response.token}';
-
-      return response.authReturnedVals;
+      return _loginToBackendWithoutChecking();
     });
   }
 
@@ -119,17 +138,7 @@ class Repository {
       );
       await FirebaseAuth.instance.signInWithCredential(credential);
 
-      // login to our backend
-      String idToken = await FirebaseAuth.instance.currentUser!.getIdToken();
-      String authorizationHeader = 'Bearer $idToken';
-      AuthenticationResponse response =
-          await _remoteDataSource.authenticate(authorizationHeader);
-
-      // save the token
-      GetIt.I<Dio>().options.headers[HttpHeaders.authorizationHeader] =
-          'bearer ${response.token}';
-
-      return response.authReturnedVals;
+      return _loginToBackendWithoutChecking();
     });
   }
 
@@ -145,17 +154,7 @@ class Repository {
           FacebookAuthProvider.credential(loginResult.accessToken!.token);
       await FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
 
-      // login to our backend
-      String idToken = await FirebaseAuth.instance.currentUser!.getIdToken();
-      String authorizationHeader = 'Bearer $idToken';
-      AuthenticationResponse response =
-          await _remoteDataSource.authenticate(authorizationHeader);
-
-      // saving token
-      GetIt.I<Dio>().options.headers[HttpHeaders.authorizationHeader] =
-          'bearer ${response.token}';
-
-      return response.authReturnedVals;
+      return _loginToBackendWithoutChecking();
     });
   }
 
