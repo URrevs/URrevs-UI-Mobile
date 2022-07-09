@@ -92,10 +92,13 @@ class CardHeaderTitle extends StatelessWidget {
           ),
         ),
         8.horizontalSpace,
-        FaIcon(
-          context.isArabic ? IconsManager.caretLeft : IconsManager.caretRight,
-          textDirection: TextDirection.ltr,
-          size: 16.sp,
+        Padding(
+          padding:  EdgeInsets.only(bottom: 5.h),
+          child: FaIcon(
+            context.isArabic ? IconsManager.caretLeft : IconsManager.caretRight,
+            textDirection: TextDirection.ltr,
+            size: 16.sp,
+          ),
         ),
         8.horizontalSpace,
         Flexible(

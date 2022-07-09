@@ -29,7 +29,7 @@ class CardHeaderSubtitle extends StatelessWidget {
 
   Padding _buildDot() {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 4.w),
+      padding: EdgeInsets.only(right: 4.w, left: 4.w, bottom: 4.h),
       child: Icon(IconsManager.dot, size: 4.sp, color: ColorManager.black),
     );
   }
@@ -98,7 +98,18 @@ class CardHeaderSubtitle extends StatelessWidget {
               flex: 20,
               child: Text(numberFormat.format(views), style: style),
             )
-          ]
+          ],_buildDot(),
+           3.horizontalSpace,
+          true? Tooltip(
+            message: "هذه المراجعة موثقة بنسبة 33%",
+            child: Padding(
+              padding:  EdgeInsets.only(bottom: 5.h),
+              child: Icon(Icons.check_circle,
+              color: ColorManager.blue,
+              size: 16.sp,
+                  ),
+            ),
+          ): SizedBox(),
         ],
       ),
     );
