@@ -307,5 +307,7 @@
   "enterAValidRefCode": "Enter a valid referral code",
   "rankingOfUsersInTheCompetition": "Ranking of users in the competition",
   "doYouReallyWantToLeave": "Do you really want to leave?",
-  "thisWillCauseTheDataYouEnteredToBeErased": "This will cause the data you entered to be erased"
+  "thisWillCauseTheDataYouEnteredToBeErased": "This will cause the data you entered to be erased",
+  "yes": "Yes",
+  "no": "No"
 }

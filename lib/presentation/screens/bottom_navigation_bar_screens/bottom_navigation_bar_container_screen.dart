@@ -27,6 +27,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/get_my_use
 import 'package:urrevs_ui_mobile/presentation/state_management/states/give_points_to_user_state.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/bottom_navigation_bar.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/prompts/confirmation_dialog.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 class BottomNavBarIndeces {
@@ -96,9 +97,19 @@ class _BottomNavigationBarContainerScreenState
     );
   }
 
-  void _setCurrentIndex(int i) => setState(() {
-        _currentIndex = i;
-      });
+  void _setCurrentIndex(int i) async {
+    if (_currentIndex == BottomNavBarIndeces.postingSubscreen) {
+      bool? leave = await showDialog(
+        context: context,
+        builder: (context) => ConfirmationDialog(
+          title: LocaleKeys.doYouReallyWantToLeave.tr(),
+          content: LocaleKeys.thisWillCauseTheDataYouEnteredToBeErased.tr(),
+        ),
+      );
+      if (leave != true) return;
+    }
+    setState(() => _currentIndex = i);
+  }
 
   void _handlePostLink(PendingDynamicLinkData dynamicLinkData) {
     Map<String, String> queries = dynamicLinkData.link.queryParameters;

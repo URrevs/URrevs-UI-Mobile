@@ -307,5 +307,7 @@
   "enterAValidRefCode": "ادخل كود دعوة صحيح",
   "rankingOfUsersInTheCompetition": "ترتيب المستخدمين في المسابقة",
   "doYouReallyWantToLeave": "هل حقا تريد المغادرة؟",
-  "thisWillCauseTheDataYouEnteredToBeErased": "هذا سوف يتسبب في مسح البيانات التي أدخلتها"
+  "thisWillCauseTheDataYouEnteredToBeErased": "هذا سوف يتسبب في مسح البيانات التي أدخلتها",
+  "yes": "نعم",
+  "no": "لا"
 }

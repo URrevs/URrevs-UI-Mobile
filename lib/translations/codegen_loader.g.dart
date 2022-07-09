@@ -321,7 +321,11 @@ class CodegenLoader extends AssetLoader{
   "contentIsUnavailable": "هذا المحتوى غير متاح حاليا",
   "dateOfOwnershipPrecedesDateOfIssue": "تاريخ الامتلاك المدخل يسبق تاريخ اصدار الهاتف",
   "enterAValidRefCode": "ادخل كود دعوة صحيح",
-  "rankingOfUsersInTheCompetition": "ترتيب المستخدمين في المسابقة"
+  "rankingOfUsersInTheCompetition": "ترتيب المستخدمين في المسابقة",
+  "doYouReallyWantToLeave": "هل حقا تريد المغادرة؟",
+  "thisWillCauseTheDataYouEnteredToBeErased": "هذا سوف يتسبب في مسح البيانات التي أدخلتها",
+  "yes": "نعم",
+  "no": "لا"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -630,7 +634,11 @@ static const Map<String,dynamic> en = {
   "contentIsUnavailable": "Content is not available right now",
   "dateOfOwnershipPrecedesDateOfIssue": "The date of ownership entered precedes the date of issue of the phone",
   "enterAValidRefCode": "Enter a valid referral code",
-  "rankingOfUsersInTheCompetition": "Ranking of users in the competition"
+  "rankingOfUsersInTheCompetition": "Ranking of users in the competition",
+  "doYouReallyWantToLeave": "Do you really want to leave?",
+  "thisWillCauseTheDataYouEnteredToBeErased": "This will cause the data you entered to be erased",
+  "yes": "Yes",
+  "no": "No"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

@@ -307,5 +307,9 @@ abstract class  LocaleKeys {
   static const dateOfOwnershipPrecedesDateOfIssue = 'dateOfOwnershipPrecedesDateOfIssue';
   static const enterAValidRefCode = 'enterAValidRefCode';
   static const rankingOfUsersInTheCompetition = 'rankingOfUsersInTheCompetition';
+  static const doYouReallyWantToLeave = 'doYouReallyWantToLeave';
+  static const thisWillCauseTheDataYouEnteredToBeErased = 'thisWillCauseTheDataYouEnteredToBeErased';
+  static const yes = 'yes';
+  static const no = 'no';
 
 }

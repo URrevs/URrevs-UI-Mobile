@@ -30,6 +30,7 @@ import 'package:urrevs_ui_mobile/presentation/widgets/fields/datepicker_field.da
 import 'package:urrevs_ui_mobile/presentation/widgets/fields/search_text_field.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/fields/txt_field.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/company_fields_loading.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/prompts/confirmation_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/referral_code_help_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/search_results_menu.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/stars_counter.dart';
@@ -262,7 +263,7 @@ class _PostingReviewSubscreenState
   SliverAppBar _buildStarsCounterBar() {
     return SliverAppBar(
       elevation: 1,
-
+      automaticallyImplyLeading: false,
       forceElevated: true,
       pinned: true,
       // snap: true,

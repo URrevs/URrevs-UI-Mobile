@@ -7,6 +7,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/posting_screen/subscreens/posting_question_subscreen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/subscreens/posting_screen/subscreens/posting_review_subscreen.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/app_bars.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/prompts/confirmation_dialog.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 class PostingScreenArgs {
@@ -47,9 +48,21 @@ class _PostingScreenState extends State<PostingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBars.appBarWithTitle(context: context, title: appBarText),
-      body: body,
+    return WillPopScope(
+      onWillPop: () async {
+        bool? leave = await showDialog<bool>(
+          context: context,
+          builder: (context) => ConfirmationDialog(
+            title: LocaleKeys.doYouReallyWantToLeave.tr(),
+            content: LocaleKeys.thisWillCauseTheDataYouEnteredToBeErased.tr(),
+          ),
+        );
+        return leave ?? false;
+      },
+      child: Scaffold(
+        appBar: AppBars.appBarWithTitle(context: context, title: appBarText),
+        body: body,
+      ),
     );
   }
 }
