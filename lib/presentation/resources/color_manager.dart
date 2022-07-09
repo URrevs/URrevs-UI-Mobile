@@ -94,6 +94,11 @@ class ColorManager {
         dark: Color(0xffE4E6EB), // facebook text white
       ).pickColor();
 
+  static Color get snackbarTextColor => ColorPair(
+        light: Color.fromARGB(255, 5, 5, 5),
+        dark: Color.fromARGB(255, 5, 5, 5),
+      ).pickColor();
+
   static Color get hintColor => ColorPair(
         light: Color.fromARGB(255, 5, 5, 5),
         dark: Color(0xffB0B3B8), // facebook icons and hint
@@ -107,6 +112,11 @@ class ColorManager {
   static Color get white => ColorPair(
         light: Colors.white,
         dark: Color(0xff242526), // facebook cards color
+      ).pickColor();
+
+  static Color get elevatedButtonTextColor => ColorPair(
+        light: Colors.white,
+        dark: Colors.white,
       ).pickColor();
 
   static Color get transparent => ColorPair(

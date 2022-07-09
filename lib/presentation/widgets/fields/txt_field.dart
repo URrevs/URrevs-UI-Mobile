@@ -14,6 +14,7 @@ class TxtField extends StatelessWidget {
     this.hasErrorMsg = false,
     this.extraValidation,
     this.maxLines,
+    this.textInputAction,
     this.errorMaxLines = 1,
     this.validator,
   }) : super(key: key);
@@ -25,6 +26,7 @@ class TxtField extends StatelessWidget {
   final String errorMsg;
   final bool hasErrorMsg;
   final int? maxLines;
+  final TextInputAction? textInputAction;
   final String? Function(String)? extraValidation;
   final int errorMaxLines;
   final String? Function(String?)? validator;
@@ -37,6 +39,8 @@ class TxtField extends StatelessWidget {
     return TextFormField(
       maxLines: maxLines,
       keyboardType: keyboardType,
+      textInputAction: textInputAction,
+      keyboardAppearance: Brightness.dark,
       cursorColor: ColorManager.black,
       textAlignVertical: TextAlignVertical.center,
       controller: textController,

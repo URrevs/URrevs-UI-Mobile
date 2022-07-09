@@ -305,5 +305,7 @@
   "contentIsUnavailable": "Content is not available right now",
   "dateOfOwnershipPrecedesDateOfIssue": "The date of ownership entered precedes the date of issue of the phone",
   "enterAValidRefCode": "Enter a valid referral code",
-  "rankingOfUsersInTheCompetition": "Ranking of users in the competition"
+  "rankingOfUsersInTheCompetition": "Ranking of users in the competition",
+  "doYouReallyWantToLeave": "Do you really want to leave?",
+  "thisWillCauseTheDataYouEnteredToBeErased": "This will cause the data you entered to be erased"
 }

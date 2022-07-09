@@ -56,13 +56,13 @@ class LeaderboardScreenBanner extends ConsumerWidget {
                       text: Text(
                         LocaleKeys.howToCollectPoints.tr(),
                         style: TextStyleManager.s14w700.copyWith(
-                          color: ColorManager.white,
+                          color: ColorManager.elevatedButtonTextColor,
                         ),
                       ),
                       icon: Icon(
                         IconsManager.howTowin,
                         size: 28.sp,
-                        color: ColorManager.white,
+                        color: ColorManager.elevatedButtonTextColor,
                       ),
                       reverseIcon: true,
                       onPressed: () {
@@ -78,13 +78,13 @@ class LeaderboardScreenBanner extends ConsumerWidget {
                       text: Text(
                         LocaleKeys.inviteFriends.tr(),
                         style: TextStyleManager.s14w700.copyWith(
-                          color: ColorManager.white,
+                          color: ColorManager.elevatedButtonTextColor,
                         ),
                       ),
                       icon: Icon(
                         IconsManager.inviteFriends,
                         size: 28.sp,
-                        color: ColorManager.white,
+                        color: ColorManager.elevatedButtonTextColor,
                       ),
                       reverseIcon: false,
                       onPressed: () {

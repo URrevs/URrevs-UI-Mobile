@@ -64,7 +64,7 @@ class AppNumericValues {
   static int get expandedMaxLetters => 1200;
 
   static int get interactionsMaxLetters => 50;
-  static int get fullPointsCharsNum => 200;
+  static int get fullPointsCharsNum => 1200;
 }
 
 class AppDuration {

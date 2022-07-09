@@ -96,7 +96,9 @@ class _BottomNavigationBarContainerScreenState
     );
   }
 
-  void _setCurrentIndex(int i) => setState(() => _currentIndex = i);
+  void _setCurrentIndex(int i) => setState(() {
+        _currentIndex = i;
+      });
 
   void _handlePostLink(PendingDynamicLinkData dynamicLinkData) {
     Map<String, String> queries = dynamicLinkData.link.queryParameters;

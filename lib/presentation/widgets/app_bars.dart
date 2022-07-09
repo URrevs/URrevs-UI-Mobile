@@ -17,22 +17,24 @@ class AppBars {
     required BuildContext context,
     required String? imageUrl,
     required bool isReversed,
+    bool removeSearchButton = false,
   }) {
     return <Widget>[
-      InkWell(
-        onTap: () {
-          Navigator.of(context).pushNamed(SearchScreen.routeName);
-        },
-        child: CircleAvatar(
-          radius: 18.r,
-          backgroundColor: ColorManager.appBarIconBackground,
-          child: Icon(
-            IconsManager.search,
-            color: ColorManager.black,
-            size: 30.sp,
+      if (!removeSearchButton)
+        InkWell(
+          onTap: () {
+            Navigator.of(context).pushNamed(SearchScreen.routeName);
+          },
+          child: CircleAvatar(
+            radius: 18.r,
+            backgroundColor: ColorManager.appBarIconBackground,
+            child: Icon(
+              IconsManager.search,
+              color: ColorManager.black,
+              size: 30.sp,
+            ),
           ),
         ),
-      ),
       Padding(
         padding: isReversed
             ? EdgeInsets.only(

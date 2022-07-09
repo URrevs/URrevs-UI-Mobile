@@ -261,9 +261,9 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
   Widget build(BuildContext context) {
     _addAcceptedAnswerListener();
     return Scaffold(
-      appBar: AppBars.appBarWithActions(
+      appBar: AppBars.appBarWithTitle(
         context: context,
-        imageUrl: ref.currentUser!.picture,
+        title: '',
       ),
       resizeToAvoidBottomInset: true,
       body: SafeArea(
@@ -533,6 +533,8 @@ class _FullscreenPostScreenState extends ConsumerState<FullscreenPostScreen> {
     ref.listen(addInteractionProvider(_addInteractionProviderParams),
         (previous, next) {
       if (next is AddInteractionLoadedState) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(LocaleKeys.postedSuccessfully.tr())));
         if (_idOfInteractionRepliedTo == null) {
           late DirectInteraction interaction;
           if (_postType == PostType.phoneReview ||
