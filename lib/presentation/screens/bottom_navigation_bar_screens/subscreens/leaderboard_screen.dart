@@ -162,7 +162,7 @@ class _LeaderboardSubscreenState extends ConsumerState<LeaderboardSubscreen> {
                 indent: 10.w,
                 endIndent: 10.w,
               ),
-              itemCount: 10,
+              itemCount: users.length,
               itemBuilder: (context, index) {
                 final user = users[index];
                 return LeaderboardEntryData(

@@ -305,5 +305,7 @@
   "contentIsUnavailable": "هذا المحتوى غير متاح حاليا",
   "dateOfOwnershipPrecedesDateOfIssue": "تاريخ الامتلاك المدخل يسبق تاريخ اصدار الهاتف",
   "enterAValidRefCode": "ادخل كود دعوة صحيح",
-  "rankingOfUsersInTheCompetition": "ترتيب المستخدمين في المسابقة"
+  "rankingOfUsersInTheCompetition": "ترتيب المستخدمين في المسابقة",
+  "doYouReallyWantToLeave": "هل حقا تريد المغادرة؟",
+  "thisWillCauseTheDataYouEnteredToBeErased": "هذا سوف يتسبب في مسح البيانات التي أدخلتها"
 }

@@ -20,6 +20,8 @@ class ThemeManager {
 
   static ThemeData get light => ThemeData(
         brightness: Brightness.light,
+        // used by month picker package although it is deprecated
+        accentColor: ColorManager.blue,
         toggleableActiveColor: ColorManager.blue,
         cardColor: ColorManager.white,
         dialogBackgroundColor: ColorManager.white,
@@ -70,7 +72,7 @@ class ThemeManager {
           backgroundColor: ColorManager.snackBarGrey,
           behavior: SnackBarBehavior.floating,
           contentTextStyle: TextStyleManager.s16w500.copyWith(
-            color: ColorManager.black,
+            color: ColorManager.snackbarTextColor,
             fontFamily: FontConstants.tajawal,
           ),
           shape: RoundedRectangleBorder(
@@ -99,6 +101,8 @@ class ThemeManager {
 
   static ThemeData get dark => ThemeData(
         brightness: Brightness.dark,
+        // used by month picker package although it is deprecated
+        accentColor: ColorManager.blue,
         toggleableActiveColor: ColorManager.blue,
         cardColor: ColorManager.white,
         tabBarTheme: TabBarTheme(
@@ -153,7 +157,7 @@ class ThemeManager {
           backgroundColor: ColorManager.snackBarGrey,
           behavior: SnackBarBehavior.floating,
           contentTextStyle: TextStyleManager.s16w500.copyWith(
-            color: ColorManager.black,
+            color: ColorManager.snackbarTextColor,
             fontFamily: FontConstants.tajawal,
           ),
           shape: RoundedRectangleBorder(

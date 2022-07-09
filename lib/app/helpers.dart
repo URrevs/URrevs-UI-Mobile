@@ -9,7 +9,7 @@ void launchUrlWithCustomTabs(String stringUrl) async {
       customTabsOption: CustomTabsOption(
         toolbarColor: ColorManager.white,
         enableDefaultShare: true,
-        enableUrlBarHiding: true,
+        enableUrlBarHiding: false,
         showPageTitle: true,
         animation: CustomTabsSystemAnimation.fade(),
         extraCustomTabs: const <String>[

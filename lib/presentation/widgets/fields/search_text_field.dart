@@ -88,6 +88,7 @@ class _SearchTextFieldState extends ConsumerState<SearchTextField> {
               .read(searchProvider(_providerParams).notifier)
               .returnToInitialState();
           if (widget.onClear != null) widget.onClear!();
+          _focusNode.requestFocus();
         },
         icon: Icon(
           FontAwesomeIcons.xmark,

@@ -145,10 +145,7 @@ class _PostingReviewSubscreenState
       }
     });
 
-    productNameController = TextEditingController()
-      ..addListener(() {
-        setState(() => givePoints[0] = productNameController.text.isNotEmpty);
-      });
+    productNameController = TextEditingController();
     usedSinceController = TextEditingController()
       ..addListener(() {
         setState(() => givePoints[1] = usedSinceController.text.isNotEmpty);
@@ -237,7 +234,10 @@ class _PostingReviewSubscreenState
 
   void _chooseSearchResult(SearchResult searchResult) {
     productNameController.text = searchResult.name;
-    setState(() => _chosenSearchResult = searchResult);
+    setState(() {
+      _chosenSearchResult = searchResult;
+      givePoints[0] = true;
+    });
     ref
         .read(getPhoneManufacturingCompanyProvider(
                 _manufacturingCompanyProviderParams)
@@ -262,7 +262,7 @@ class _PostingReviewSubscreenState
   SliverAppBar _buildStarsCounterBar() {
     return SliverAppBar(
       elevation: 1,
-      
+
       forceElevated: true,
       pinned: true,
       // snap: true,
@@ -280,7 +280,11 @@ class _PostingReviewSubscreenState
 
   @override
   Widget build(BuildContext context) {
-    //bool productSelected = ref.watch(productSelectedProvider);
+    ref.listen(searchProvider(_searchProviderParams), (previous, next) {
+      if (next is SearchInitialState) {
+        setState(() => givePoints[0] = false);
+      }
+    });
     return Form(
       key: _formKey,
       child: CustomScrollView(
@@ -381,10 +385,11 @@ class _PostingReviewSubscreenState
                   TxtField(
                     textController: likedAboutProductController,
                     hintText: LocaleKeys.pros.tr(),
-                    keyboardType: TextInputType.text,
+                    keyboardType: TextInputType.multiline,
                     fillColor: ColorManager.textFieldGrey,
                     errorMsg: LocaleKeys.likedAboutProductErrorMsg.tr(),
                     hasErrorMsg: true,
+                    textInputAction: TextInputAction.newline,
                   ),
                   SizedBox(height: 20.h),
                   // what do you hate about this product
@@ -397,10 +402,11 @@ class _PostingReviewSubscreenState
                   TxtField(
                     textController: hatedAboutProductController,
                     hintText: LocaleKeys.cons.tr(),
-                    keyboardType: TextInputType.text,
+                    keyboardType: TextInputType.multiline,
                     fillColor: ColorManager.textFieldGrey,
                     errorMsg: LocaleKeys.hateAboutProductErrorMsg.tr(),
                     hasErrorMsg: true,
+                    textInputAction: TextInputAction.newline,
                   ),
                   SizedBox(height: 40.h),
                   _buildCompanyFields(),
@@ -635,10 +641,11 @@ class _PostingReviewSubscreenState
         TxtField(
           textController: likedAboutCompanyController,
           hintText: LocaleKeys.pros.tr(),
-          keyboardType: TextInputType.text,
+          keyboardType: TextInputType.multiline,
           fillColor: ColorManager.textFieldGrey,
           errorMsg: LocaleKeys.likedAboutManufacturerErrorMsg.tr(),
           hasErrorMsg: true,
+          textInputAction: TextInputAction.newline,
         ),
         SizedBox(height: 20.h),
         // what do you hate about the manufacturer
@@ -651,10 +658,11 @@ class _PostingReviewSubscreenState
         TxtField(
           textController: hatedAboutCompanyController,
           hintText: LocaleKeys.cons.tr(),
-          keyboardType: TextInputType.text,
+          keyboardType: TextInputType.multiline,
           fillColor: ColorManager.textFieldGrey,
           errorMsg: LocaleKeys.hatedAboutManufacturerErrorMsg.tr(),
           hasErrorMsg: true,
+          textInputAction: TextInputAction.newline,
         ),
         SizedBox(height: 20.h),
       ],

@@ -124,7 +124,7 @@ class CompetitionBanner extends ConsumerWidget {
                       icon: Icon(
                         IconsManager.howTowin,
                         size: 28.sp,
-                        color: ColorManager.white,
+                        color: ColorManager.elevatedButtonTextColor,
                       ),
                       reverseIcon: true,
                       width: 25.w,
@@ -145,7 +145,7 @@ class CompetitionBanner extends ConsumerWidget {
                       icon: Icon(
                         IconsManager.inviteFriends,
                         size: 28.sp,
-                        color: ColorManager.white,
+                        color: ColorManager.elevatedButtonTextColor,
                       ),
                       width: 50.w,
                       reverseIcon: false,
