@@ -33,6 +33,38 @@ class PostNotifier extends StateNotifier<Post> {
         }
       });
     }
+
+    // code for synchronizing both phone and company reviews (requires phoneId
+    // to be in the company review)
+
+    // if (post is PhoneReview || post is CompanyReview) {
+    //   String userId, targetId;
+    //   if (post is PhoneReview) {
+    //     userId = post.userId;
+    //     targetId = post.targetId;
+    //   } else {
+    //     post as CompanyReview;
+    //     userId = post.userId;
+    //     targetId = post.phoneId;
+    //   }
+    //   VerifyProviderParams _verifyProviderParams = VerifyProviderParams(
+    //     phoneId: targetId,
+    //     userId: userId,
+    //   );
+    //   ref.listen(verifyProvider(_verifyProviderParams), (previous, next) {
+    //     if (next is VerifyLoadedState) {
+    //       final currentState = state;
+    //       if (currentState is PhoneReview) {
+    //         state = currentState.copyWith(
+    //             verificationRatio: next.verificationRatio);
+    //       } else {
+    //         currentState as CompanyReview;
+    //         state = currentState.copyWith(
+    //             verificationRatio: next.verificationRatio);
+    //       }
+    //     }
+    //   });
+    // }
   }
 
   final AutoDisposeStateNotifierProviderRef ref;

@@ -513,6 +513,7 @@ CompanyReviewSubResponse _$CompanyReviewSubResponseFromJson(
       pros: json['pros'] as String,
       cons: json['cons'] as String,
       liked: json['liked'] as bool,
+      verificationRatio: (json['verificationRatio'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$CompanyReviewSubResponseToJson(
@@ -543,6 +544,7 @@ Map<String, dynamic> _$CompanyReviewSubResponseToJson(
   val['pros'] = instance.pros;
   val['cons'] = instance.cons;
   val['liked'] = instance.liked;
+  val['verificationRatio'] = instance.verificationRatio;
   return val;
 }
 

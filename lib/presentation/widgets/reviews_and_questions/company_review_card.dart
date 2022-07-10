@@ -297,6 +297,7 @@ class CompanyReviewCard extends ConsumerWidget {
                   targetType: TargetType.company,
                   postContentType: PostContentType.review,
                   postId: reviewId,
+                  verificationRatio: companyReview.verificationRatio,
                 ),
                 10.verticalSpace,
                 ReviewCardBody(

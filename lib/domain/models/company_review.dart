@@ -18,6 +18,7 @@ class CompanyReview extends Post {
   final String pros;
   final String cons;
   final bool liked;
+  final double verificationRatio;
   const CompanyReview({
     required String id,
     required this.type,
@@ -36,6 +37,7 @@ class CompanyReview extends Post {
     required this.pros,
     required this.cons,
     required this.liked,
+    required this.verificationRatio,
   }) : super(id: id);
 
   @override
@@ -58,6 +60,7 @@ class CompanyReview extends Post {
     String? pros,
     String? cons,
     bool? liked,
+    double? verificationRatio,
   }) {
     return CompanyReview(
       id: id,
@@ -77,6 +80,7 @@ class CompanyReview extends Post {
       pros: pros ?? this.pros,
       cons: cons ?? this.cons,
       liked: liked ?? this.liked,
+      verificationRatio: verificationRatio ?? this.verificationRatio,
     );
   }
 
@@ -98,5 +102,6 @@ class CompanyReview extends Post {
         cons: 'dummy',
         liked: false,
         corresPhoneRev: 'dummy',
+        verificationRatio: 0,
       );
 }

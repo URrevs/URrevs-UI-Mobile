@@ -644,6 +644,7 @@ class CompanyReviewSubResponse {
   String pros;
   String cons;
   bool liked;
+  double verificationRatio;
 
   CompanyReviewSubResponse({
     required this.id,
@@ -663,6 +664,7 @@ class CompanyReviewSubResponse {
     required this.pros,
     required this.cons,
     required this.liked,
+    required this.verificationRatio,
   });
 
   CompanyReview get companyReviewModel => CompanyReview(
@@ -683,6 +685,7 @@ class CompanyReviewSubResponse {
         pros: pros,
         cons: cons,
         liked: liked,
+        verificationRatio: verificationRatio,
       );
 
   factory CompanyReviewSubResponse.fromJson(Map<String, Object?> json) =>
