@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:urrevs_ui_mobile/domain/models/phone.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/app_elevations.dart';
@@ -9,12 +10,15 @@ import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/posting_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/verify_state.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/circular_rating_indicator.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/reviews_and_questions/card_body/card_body_rating_block.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 /// A card showing a rating overview for a product or a company according to the flag [isProduct].
-class RatingOverviewCard extends StatelessWidget {
+class RatingOverviewCard extends ConsumerWidget {
   const RatingOverviewCard({
     Key? key,
     this.productId,
@@ -25,13 +29,16 @@ class RatingOverviewCard extends StatelessWidget {
     this.scores,
     required this.viewsCounter,
     required this.isProduct,
+    required this.verificationRatio,
   })  : assert(
           !(isProduct && generalProductRating == null),
           'if the card represents a product, a general product rating should be provided',
         ),
+        assert(!(isProduct && verificationRatio == null)),
         super(key: key);
 
   /// The id of the product.
+  /// can be null when phone specs is not loaded
   final String? productId;
 
   /// The name of the product.
@@ -53,6 +60,7 @@ class RatingOverviewCard extends StatelessWidget {
 
   /// Flag to determine if the card is in the product profile screen.
   final bool isProduct;
+  final double? verificationRatio;
 
   /// The rating criteria.
   final List<String> _ratingCriteria = const [
@@ -64,10 +72,78 @@ class RatingOverviewCard extends StatelessWidget {
     LocaleKeys.battery,
   ];
 
-  bool get setAsOwnedDisabled => productId == null || (owned != null && owned!);
+  bool get buttonDisabled =>
+      productId == null || (owned == true && verificationRatio != 0);
+
+  String get buttonText {
+    if (owned != true) {
+      return LocaleKeys.setAsOwnedPhone.tr();
+    } else if (verificationRatio == 0) {
+      return LocaleKeys.verifyPhone.tr();
+    } else {
+      return LocaleKeys.ownedPhone.tr();
+    }
+  }
+
+  IconData get buttonIcon {
+    if (owned != true) {
+      return IconsManager.addToOwnedProducts;
+    } else {
+      return Icons.check;
+    }
+  }
+
+  VoidCallback? onPressingButton(
+      BuildContext context, WidgetRef ref, VerifyProviderParams? params) {
+    if (productId == null) return null;
+    if (owned != true) {
+      return () {
+        Navigator.of(context).pushNamed(
+          PostingScreen.routeName,
+          arguments: PostingScreenArgs(
+            postContentType: PostContentType.review,
+            phone: Phone(
+              id: productId!,
+              name: productName,
+            ),
+          ),
+        );
+      };
+    } else if (verificationRatio == 0) {
+      return () {
+        // params would not be null if productId is not null
+        ref.read(verifyProvider(params!).notifier).verifyPhone();
+      };
+    } else {
+      return null;
+    }
+  }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
+    VerifyProviderParams? params;
+    if (productId != null) {
+      params = VerifyProviderParams(
+        phoneId: productId!,
+        userId: ref.currentUser!.id,
+      );
+      ref.listen(verifyProvider(params), (previous, next) {
+        if (next is VerifyLoadedState &&
+            next.verificationRatio == 0 &&
+            ModalRoute.of(context)!.isCurrent) {
+          ScaffoldMessenger.of(context).clearSnackBars();
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(LocaleKeys
+                  .youMustOpenTheApplicationFromTheDeviceYouWantToVerifyYourReviewOnIt
+                  .tr()),
+              duration: Duration(seconds: 6),
+            ),
+          );
+        }
+      });
+    }
+
     NumberFormat numberFormat =
         NumberFormat.compact(locale: context.locale.languageCode);
     return Card(
@@ -132,7 +208,7 @@ class RatingOverviewCard extends StatelessWidget {
                   fit: BoxFit.scaleDown,
                   child: Container(
                     decoration: ShapeDecoration(
-                      color: setAsOwnedDisabled
+                      color: buttonDisabled
                           ? ColorManager.grey.withOpacity(0.35)
                           : ColorManager.blue.withOpacity(0.35),
                       shape: RoundedRectangleBorder(
@@ -142,34 +218,21 @@ class RatingOverviewCard extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(16.r),
                       child: TextButton(
-                          onPressed: setAsOwnedDisabled
-                              ? null
-                              : () {
-                                  Navigator.of(context).pushNamed(
-                                    PostingScreen.routeName,
-                                    arguments: PostingScreenArgs(
-                                      postContentType: PostContentType.review,
-                                      phone: Phone(
-                                        id: productId!,
-                                        name: productName,
-                                      ),
-                                    ),
-                                  );
-                                },
+                          onPressed: onPressingButton(context, ref, params),
                           child: Row(
                             children: [
                               Icon(
-                                IconsManager.addToOwnedProducts,
+                                buttonIcon,
                                 size: AppSize.s28,
-                                color: setAsOwnedDisabled
+                                color: buttonDisabled
                                     ? ColorManager.black.withOpacity(0.6)
                                     : ColorManager.black,
                               ),
                               SizedBox(width: 5.w),
                               Text(
-                                LocaleKeys.setAsOwnedPhone.tr(),
+                                buttonText,
                                 style: TextStyleManager.s14w400.copyWith(
-                                    color: setAsOwnedDisabled
+                                    color: buttonDisabled
                                         ? ColorManager.black.withOpacity(0.6)
                                         : ColorManager.black),
                               ),

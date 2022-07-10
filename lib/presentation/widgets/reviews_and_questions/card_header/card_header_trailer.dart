@@ -119,7 +119,10 @@ class _CardHeaderTrailerState extends ConsumerState<CardHeaderTrailer> {
       }
     });
     ref.listen(verifyProvider(_verifyProviderParams), (previous, next) {
-      if (next is VerifyLoadedState && next.verificationRatio == 0) {
+      if (next is VerifyLoadedState &&
+          next.verificationRatio == 0 &&
+          ModalRoute.of(context)!.isCurrent) {
+        ScaffoldMessenger.of(context).clearSnackBars();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(LocaleKeys

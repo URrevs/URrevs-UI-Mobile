@@ -319,5 +319,6 @@
   "youShouldVerifyYourOwnProductsByOpeningThePlatformThroughThePhoneYouWantToVerify": "You should verify your own products by opening the platform through the phone you want to verify",
   "verifyYourProducts": "Verify your products",
   "thisPhoneIsVerifiedBy": "This phone is verified by",
-  "thisElementIsAlreadyVerified": "This element is already verified"
+  "thisElementIsAlreadyVerified": "This element is already verified",
+  "ownedPhone": "Owned phone"
 }

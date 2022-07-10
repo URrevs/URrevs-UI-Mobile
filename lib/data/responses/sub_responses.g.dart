@@ -303,6 +303,7 @@ PhoneStatsSubResponse _$PhoneStatsSubResponseFromJson(
       callQuality: json['callQuality'] as num,
       battery: json['battery'] as num,
       owned: json['owned'] as bool,
+      verificationRatio: (json['verificationRatio'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$PhoneStatsSubResponseToJson(
@@ -318,6 +319,7 @@ Map<String, dynamic> _$PhoneStatsSubResponseToJson(
       'callQuality': instance.callQuality,
       'battery': instance.battery,
       'owned': instance.owned,
+      'verificationRatio': instance.verificationRatio,
     };
 
 CompanyStatsSubResponse _$CompanyStatsSubResponseFromJson(

@@ -11,6 +11,7 @@ class PhoneStats extends Equatable {
   final int callQuality;
   final int battery;
   final bool owned;
+  final double verificationRatio;
   const PhoneStats({
     required this.views,
     required this.generalRating,
@@ -22,8 +23,37 @@ class PhoneStats extends Equatable {
     required this.callQuality,
     required this.battery,
     required this.owned,
+    required this.verificationRatio,
   });
 
   @override
   List<Object?> get props => [];
+
+  PhoneStats copyWith({
+    int? views,
+    double? generalRating,
+    double? companyRating,
+    int? uiRating,
+    int? manufacturingQuality,
+    int? valueForMoney,
+    int? camera,
+    int? callQuality,
+    int? battery,
+    bool? owned,
+    double? verificationRatio,
+  }) {
+    return PhoneStats(
+      views: views ?? this.views,
+      generalRating: generalRating ?? this.generalRating,
+      companyRating: companyRating ?? this.companyRating,
+      uiRating: uiRating ?? this.uiRating,
+      manufacturingQuality: manufacturingQuality ?? this.manufacturingQuality,
+      valueForMoney: valueForMoney ?? this.valueForMoney,
+      camera: camera ?? this.camera,
+      callQuality: callQuality ?? this.callQuality,
+      battery: battery ?? this.battery,
+      owned: owned ?? this.owned,
+      verificationRatio: verificationRatio ?? this.verificationRatio,
+    );
+  }
 }

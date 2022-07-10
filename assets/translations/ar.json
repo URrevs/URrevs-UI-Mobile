@@ -319,5 +319,6 @@
   "youShouldVerifyYourOwnProductsByOpeningThePlatformThroughThePhoneYouWantToVerify": "يجب ان تقوم بتوثيق منتاجاتك الممتلكة عن طريق فتح المنصة من خلال الهاتف المراد توثيقه",
   "verifyYourProducts": "وثق منتجاتك",
   "thisPhoneIsVerifiedBy": "هذا الهاتف موثق بنسبة",
-  "thisElementIsAlreadyVerified": "هذا العنصر تم توثيقه"
+  "thisElementIsAlreadyVerified": "هذا العنصر تم توثيقه",
+  "ownedPhone": "هاتف ممتلك"
 }

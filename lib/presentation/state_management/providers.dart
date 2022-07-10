@@ -194,7 +194,7 @@ final getPhoneSpecsProvider = StateNotifierProvider.autoDispose.family<
 final getPhoneStatisticalInfoProvider = StateNotifierProvider.autoDispose
     .family<GetPhoneStatisticalInfoNotifier, GetPhoneStatisticalInfoState,
             GetPhoneStatisticalInfoProviderParams>(
-        (ref, params) => GetPhoneStatisticalInfoNotifier());
+        (ref, params) => GetPhoneStatisticalInfoNotifier(ref: ref));
 
 final indicateUserComparedBetweenTwoPhonesProvider =
     StateNotifierProvider.autoDispose<

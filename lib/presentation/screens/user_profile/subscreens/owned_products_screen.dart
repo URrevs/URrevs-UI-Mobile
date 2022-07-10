@@ -206,14 +206,16 @@ class _OwnedPhoneTileState extends ConsumerState<OwnedPhoneTile> {
       context: context,
     );
     ref.listen(verifyProvider(_verifyProviderParams), (previous, next) {
-      if (next is VerifyLoadedState && next.verificationRatio == 0) {
+      if (next is VerifyLoadedState &&
+          next.verificationRatio == 0 &&
+          ModalRoute.of(context)!.isCurrent) {
+        ScaffoldMessenger.of(context).clearSnackBars();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(
-              LocaleKeys
-                  .youMustOpenTheApplicationFromTheDeviceYouWantToVerifyYourReviewOnIt
-                  .tr(),
-            ),
+            content: Text(LocaleKeys
+                .youMustOpenTheApplicationFromTheDeviceYouWantToVerifyYourReviewOnIt
+                .tr()),
+            duration: Duration(seconds: 6),
           ),
         );
       }

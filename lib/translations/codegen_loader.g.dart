@@ -335,7 +335,8 @@ class CodegenLoader extends AssetLoader{
   "youShouldVerifyYourOwnProductsByOpeningThePlatformThroughThePhoneYouWantToVerify": "يجب ان تقوم بتوثيق منتاجاتك الممتلكة عن طريق فتح المنصة من خلال الهاتف المراد توثيقه",
   "verifyYourProducts": "وثق منتجاتك",
   "thisPhoneIsVerifiedBy": "هذا الهاتف موثق بنسبة",
-  "thisElementIsAlreadyVerified": "هذا العنصر تم توثيقه"
+  "thisElementIsAlreadyVerified": "هذا العنصر تم توثيقه",
+  "ownedPhone": "هاتف ممتلك"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -658,7 +659,8 @@ static const Map<String,dynamic> en = {
   "youShouldVerifyYourOwnProductsByOpeningThePlatformThroughThePhoneYouWantToVerify": "You should verify your own products by opening the platform through the phone you want to verify",
   "verifyYourProducts": "Verify your products",
   "thisPhoneIsVerifiedBy": "This phone is verified by",
-  "thisElementIsAlreadyVerified": "This element is already verified"
+  "thisElementIsAlreadyVerified": "This element is already verified",
+  "ownedPhone": "Owned phone"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

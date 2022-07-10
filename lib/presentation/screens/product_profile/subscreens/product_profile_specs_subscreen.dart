@@ -314,6 +314,7 @@ class _ProductProfileSpecsSubscreenState
       ],
       viewsCounter: state.info.views,
       isProduct: true,
+      verificationRatio: state.info.verificationRatio,
     );
   }
 }
