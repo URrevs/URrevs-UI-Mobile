@@ -51,6 +51,7 @@ class ServerErrorMessages {
   static const String answerNotFound = 'answer not found';
   static const String questionOrAnswerNotFound = 'question or answer not found';
   static const String parentNotFound = 'parent not found';
+  static const String alreadyVerified = 'already verified';
   // static const String trackAlreadyHated = 'track already hated';
   // static const String trackAlreadySeemored = 'track already seemored';
   // static const String trackAlreadyFullscreened = 'track already fullscreened';
@@ -112,6 +113,8 @@ class ServerErrorMessages {
             LocaleKeys.thereIsAnActiveCompetition.tr(),
         ServerErrorMessages.pastDate:
             LocaleKeys.dateOfOwnershipPrecedesDateOfIssue.tr(),
+        ServerErrorMessages.alreadyVerified:
+            LocaleKeys.thisElementIsAlreadyVerified.tr(),
       };
 
   static List<String> get _noResultFailures => [

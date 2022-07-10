@@ -318,5 +318,6 @@
   "youMustOpenTheApplicationFromTheDeviceYouWantToVerifyYourReviewOnIt": "You must open the application from the device you want to verify your review on it",
   "youShouldVerifyYourOwnProductsByOpeningThePlatformThroughThePhoneYouWantToVerify": "You should verify your own products by opening the platform through the phone you want to verify",
   "verifyYourProducts": "Verify your products",
-  "thisPhoneIsVerifiedBy": "This phone is verified by"
+  "thisPhoneIsVerifiedBy": "This phone is verified by",
+  "thisElementIsAlreadyVerified": "This element is already verified"
 }
