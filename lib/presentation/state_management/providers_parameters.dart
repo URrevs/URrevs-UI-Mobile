@@ -318,6 +318,19 @@ class CloseReportProviderParams extends Equatable {
   List<Object?> get props => [reportId];
 }
 
+class VerifyProviderParams extends Equatable {
+  final String phoneId;
+  final String userId;
+
+  const VerifyProviderParams({
+    required this.phoneId,
+    required this.userId,
+  });
+
+  @override
+  List<Object?> get props => [phoneId, userId];
+}
+
 class GetLatestCompetitionProviderParams extends NotSyncedProviderParams {
   GetLatestCompetitionProviderParams();
 }

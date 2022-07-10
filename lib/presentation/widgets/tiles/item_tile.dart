@@ -12,7 +12,8 @@ import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 /// A widget that displays the name and category of a product, on tapping it routes you to the item profile.
 class ItemTile extends StatelessWidget {
   const ItemTile({
-    required this.title,
+    this.title,
+    this.titleWidget,
     this.subtitle,
     this.iconData,
     this.imageUrl,
@@ -21,10 +22,12 @@ class ItemTile extends StatelessWidget {
     this.trailing,
     Key? key,
   })  : assert(iconData == null || imageUrl == null),
+        assert(title != null || titleWidget != null),
+        assert(title == null || titleWidget == null),
         super(key: key);
 
   /// The name of the item.
-  final String title;
+  final String? title;
 
   /// The type of the item.
   final String? subtitle;
@@ -41,15 +44,18 @@ class ItemTile extends StatelessWidget {
 
   final Widget? trailing;
 
+  final Widget? titleWidget;
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         ListTile(
-          title: Text(
-            title,
-            style: TextStyleManager.s20w700,
-          ),
+          title: titleWidget ??
+              Text(
+                title!,
+                style: TextStyleManager.s20w700,
+              ),
           onTap: onTap,
           textColor: ColorManager.black,
           iconColor: ColorManager.buttonGrey,

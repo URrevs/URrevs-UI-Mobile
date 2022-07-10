@@ -1,4 +1,5 @@
 import 'package:urrevs_ui_mobile/domain/models/post.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 
 class PhoneReview extends Post {
@@ -24,6 +25,7 @@ class PhoneReview extends Post {
   final String pros;
   final String cons;
   final bool liked;
+  final double verificationRatio;
   const PhoneReview({
     required String id,
     required this.type,
@@ -48,7 +50,18 @@ class PhoneReview extends Post {
     required this.pros,
     required this.cons,
     required this.liked,
+    required this.verificationRatio,
   }) : super(id: id);
+
+  VerificationStatus get verificationStatus {
+    if (verificationRatio == 0) {
+      return VerificationStatus.unverified;
+    } else if (verificationRatio == -1) {
+      return VerificationStatus.iphone;
+    } else {
+      return VerificationStatus.verified;
+    }
+  }
 
   List<int> get scores {
     return [
@@ -88,6 +101,7 @@ class PhoneReview extends Post {
     String? pros,
     String? cons,
     bool? liked,
+    double? verificationRatio,
   }) {
     return PhoneReview(
       id: id,
@@ -113,6 +127,7 @@ class PhoneReview extends Post {
       pros: pros ?? this.pros,
       cons: cons ?? this.cons,
       liked: liked ?? this.liked,
+      verificationRatio: verificationRatio ?? this.verificationRatio,
     );
   }
 
@@ -140,5 +155,6 @@ class PhoneReview extends Post {
         pros: 'dummy',
         cons: 'dummy',
         liked: false,
+        verificationRatio: 33.33,
       );
 }

@@ -174,3 +174,5 @@ extension ReportTypeExtension on ReportType {
 }
 
 enum ReportStatus { open, closed }
+
+enum VerificationStatus { verified, unverified, iphone }

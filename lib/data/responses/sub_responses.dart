@@ -113,14 +113,20 @@ class PhoneSubResponse {
   String id;
   String type;
   String name;
+  double? verificationRatio;
 
   PhoneSubResponse({
     required this.id,
     required this.type,
     required this.name,
+    required this.verificationRatio,
   });
 
-  Phone get phoneModel => Phone(id: id, name: name);
+  Phone get phoneModel => Phone(
+        id: id,
+        name: name,
+        verificationRatio: verificationRatio,
+      );
 
   factory PhoneSubResponse.fromJson(Map<String, Object?> json) =>
       _$PhoneSubResponseFromJson(json);
@@ -465,6 +471,7 @@ class PhoneReviewSubResponse {
   String pros;
   String cons;
   bool liked;
+  double verificationRatio;
 
   PhoneReviewSubResponse({
     required this.id,
@@ -490,6 +497,7 @@ class PhoneReviewSubResponse {
     required this.pros,
     required this.cons,
     required this.liked,
+    required this.verificationRatio,
   });
 
   PhoneReview get phoneReviewModel => PhoneReview(
@@ -516,6 +524,7 @@ class PhoneReviewSubResponse {
         pros: pros,
         cons: cons,
         liked: liked,
+        verificationRatio: verificationRatio,
       );
 
   factory PhoneReviewSubResponse.fromJson(Map<String, Object?> json) =>
@@ -549,6 +558,7 @@ class PhoneReviewForAddPhoneReviewSubResponse {
   int battery;
   String pros;
   String cons;
+  double verificationRatio;
 
   PhoneReviewForAddPhoneReviewSubResponse({
     required this.id,
@@ -573,6 +583,7 @@ class PhoneReviewForAddPhoneReviewSubResponse {
     required this.battery,
     required this.pros,
     required this.cons,
+    required this.verificationRatio,
   });
 
   PhoneReview get phoneReviewModel => PhoneReview(
@@ -599,6 +610,7 @@ class PhoneReviewForAddPhoneReviewSubResponse {
         pros: pros,
         cons: cons,
         liked: false,
+        verificationRatio: verificationRatio,
       );
 
   factory PhoneReviewForAddPhoneReviewSubResponse.fromJson(

@@ -167,7 +167,6 @@ class GetPostsListNotifier extends StateNotifier<GetPostsListState> {
   }
 
   void _addLikeListenersToPosts(List<Post> fetchedPosts) {
-    print('likes listeners added to posts');
     // add listeners to like providers of the fetched posts
     for (Post post in fetchedPosts) {
       final params = LikeProviderParams(

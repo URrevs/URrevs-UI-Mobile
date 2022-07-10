@@ -94,14 +94,25 @@ PhoneSubResponse _$PhoneSubResponseFromJson(Map<String, dynamic> json) =>
       id: json['_id'] as String,
       type: json['type'] as String,
       name: json['name'] as String,
+      verificationRatio: (json['verificationRatio'] as num?)?.toDouble(),
     );
 
-Map<String, dynamic> _$PhoneSubResponseToJson(PhoneSubResponse instance) =>
-    <String, dynamic>{
-      '_id': instance.id,
-      'type': instance.type,
-      'name': instance.name,
-    };
+Map<String, dynamic> _$PhoneSubResponseToJson(PhoneSubResponse instance) {
+  final val = <String, dynamic>{
+    '_id': instance.id,
+    'type': instance.type,
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('verificationRatio', instance.verificationRatio);
+  return val;
+}
 
 CompanySubResponse _$CompanySubResponseFromJson(Map<String, dynamic> json) =>
     CompanySubResponse(
@@ -373,6 +384,7 @@ PhoneReviewSubResponse _$PhoneReviewSubResponseFromJson(
       pros: json['pros'] as String,
       cons: json['cons'] as String,
       liked: json['liked'] as bool,
+      verificationRatio: (json['verificationRatio'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$PhoneReviewSubResponseToJson(
@@ -409,6 +421,7 @@ Map<String, dynamic> _$PhoneReviewSubResponseToJson(
   val['pros'] = instance.pros;
   val['cons'] = instance.cons;
   val['liked'] = instance.liked;
+  val['verificationRatio'] = instance.verificationRatio;
   return val;
 }
 
@@ -438,6 +451,7 @@ PhoneReviewForAddPhoneReviewSubResponse
           battery: json['battery'] as int,
           pros: json['pros'] as String,
           cons: json['cons'] as String,
+          verificationRatio: (json['verificationRatio'] as num).toDouble(),
         );
 
 Map<String, dynamic> _$PhoneReviewForAddPhoneReviewSubResponseToJson(
@@ -473,6 +487,7 @@ Map<String, dynamic> _$PhoneReviewForAddPhoneReviewSubResponseToJson(
   val['battery'] = instance.battery;
   val['pros'] = instance.pros;
   val['cons'] = instance.cons;
+  val['verificationRatio'] = instance.verificationRatio;
   return val;
 }
 

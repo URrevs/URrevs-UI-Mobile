@@ -309,5 +309,14 @@
   "doYouReallyWantToLeave": "Do you really want to leave?",
   "thisWillCauseTheDataYouEnteredToBeErased": "This will cause the data you entered to be erased",
   "yes": "Yes",
-  "no": "No"
+  "no": "No",
+  "thisReviewIsVerifiedBy": "This review is verified by",
+  "thisReviewIsFromAnApplePhone": "This review is from an Apple phone",
+  "verifyPhone": "Verify phone",
+  "verifyReview": "Verify review",
+  "thisPhoneHasBeenAddedToOwnedProductsThroughAnApplePhone": "This phone has been added to owned products through an Apple phone",
+  "youMustOpenTheApplicationFromTheDeviceYouWantToVerifyYourReviewOnIt": "You must open the application from the device you want to verify your review on it",
+  "youShouldVerifyYourOwnProductsByOpeningThePlatformThroughThePhoneYouWantToVerify": "You should verify your own products by opening the platform through the phone you want to verify",
+  "verifyYourProducts": "Verify your products",
+  "thisPhoneIsVerifiedBy": "This phone is verified by"
 }

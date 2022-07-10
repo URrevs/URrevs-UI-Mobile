@@ -309,5 +309,14 @@
   "doYouReallyWantToLeave": "هل حقا تريد المغادرة؟",
   "thisWillCauseTheDataYouEnteredToBeErased": "هذا سوف يتسبب في مسح البيانات التي أدخلتها",
   "yes": "نعم",
-  "no": "لا"
+  "no": "لا",
+  "thisReviewIsVerifiedBy": "هذه المراجعة موثقة بنسبة",
+  "thisReviewIsFromAnApplePhone": "هذه المراجعة من احدي هواتف أبل",
+  "verifyPhone": "طلب توثيق الهاتف",
+  "verifyReview": "طلب توثيق المراجعة",
+  "thisPhoneHasBeenAddedToOwnedProductsThroughAnApplePhone": "تمت إضافة هذا الهاتف للمنتجات الممتلكة من خلال هاتف أبل",
+  "youMustOpenTheApplicationFromTheDeviceYouWantToVerifyYourReviewOnIt": "يجب ان تقوم بفتح التطبيق من خلال الجهاز الذي تريد توثيق مراجعته",
+  "youShouldVerifyYourOwnProductsByOpeningThePlatformThroughThePhoneYouWantToVerify": "يجب ان تقوم بتوثيق منتاجاتك الممتلكة عن طريق فتح المنصة من خلال الهاتف المراد توثيقه",
+  "verifyYourProducts": "وثق منتجاتك",
+  "thisPhoneIsVerifiedBy": "هذا الهاتف موثق بنسبة"
 }

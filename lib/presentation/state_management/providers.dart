@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:urrevs_ui_mobile/domain/failure.dart';
 import 'package:urrevs_ui_mobile/domain/models/direct_interaction.dart';
+import 'package:urrevs_ui_mobile/domain/models/phone.dart';
 import 'package:urrevs_ui_mobile/domain/models/post.dart';
 import 'package:urrevs_ui_mobile/domain/models/reply_model.dart';
 import 'package:urrevs_ui_mobile/domain/models/user.dart';
@@ -11,7 +12,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/authent
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/companies_notifiers/get_all_companies_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/get_current_user_image_url_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/get_info_about_latest_update_notifier.dart';
-import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/get_my_owned_phones_notifier.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/get_owned_phones_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/get_my_profile_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/leaderboard_notifiers/add_competition_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/leaderboard_notifiers/get_lastest_competition_notifier.dart';
@@ -39,6 +40,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/simple_
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/simple_state_notifiers/reply_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/theme_mode_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/update_targets_from_source_notifier.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/verify_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/authentication_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/companies_states/get_all_companies_state.dart';
@@ -85,6 +87,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/states/get_the_pr
 import 'package:urrevs_ui_mobile/presentation/state_management/states/give_points_to_user_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/search_states/search_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/update_targets_from_source_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/verify_state.dart';
 import 'package:urrevs_ui_mobile/presentation/utils/states_util.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/error_widgets/partial_error_widget.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/interactions/reply.dart';
@@ -135,7 +138,7 @@ final getOwnedPhonesProvider = StateNotifierProvider.autoDispose.family<
         GetOwnedPhonesNotifier,
         GetOwnedPhonesState,
         GetOwnedPhonesProviderParams>(
-    (ref, params) => GetOwnedPhonesNotifier(userId: params.userId));
+    (ref, params) => GetOwnedPhonesNotifier(userId: params.userId, ref: ref));
 
 final updateTargetsFromSourceProvider = StateNotifierProvider.autoDispose<
     UpdateTargetsFromSourceNotifier,
@@ -360,11 +363,15 @@ final closeReportProvider = StateNotifierProvider.autoDispose
     .family<CloseReportNotifier, CloseReportState, CloseReportProviderParams>(
         (ref, params) => CloseReportNotifier(report: params.report));
 
+final verifyProvider = StateNotifierProvider.autoDispose
+    .family<VerifyNotifier, VerifyState, VerifyProviderParams>(
+        (ref, params) => VerifyNotifier(phoneId: params.phoneId));
+
 // posts and interactions providers
 
 final postProvider = StateNotifierProvider.autoDispose
     .family<PostNotifier, Post, PostProviderParams>((ref, params) {
-  return PostNotifier(post: params.post);
+  return PostNotifier(post: params.post, ref: ref);
 });
 final directInteractionsProvider = StateNotifierProvider.autoDispose.family<
     DirectInteractionNotifier,
@@ -420,15 +427,22 @@ extension WidgetRefListeners on WidgetRef {
         controller.error = null;
       }
       if (next is LoadedState && next is InfiniteScrollingState<T>) {
+        /// the part of rounds ended was before the part of controller's
+        /// items list
+        /// i moved the items list part above to solve an issue (i wanted
+        /// to be able to change the list content even after rounds have been
+        /// ended)
+
+        List<T> items =
+            (next as InfiniteScrollingState<T>).infiniteScrollingItems;
+        controller.itemList = items;
+
         bool roundsEnded = (next as InfiniteScrollingState<T>).roundsEnded;
         if (roundsEnded) {
           controller.itemList ??= <T>[];
           controller.nextPageKey = null;
           return;
         }
-        List<T> items =
-            (next as InfiniteScrollingState<T>).infiniteScrollingItems;
-        controller.itemList = items;
       }
     });
   }

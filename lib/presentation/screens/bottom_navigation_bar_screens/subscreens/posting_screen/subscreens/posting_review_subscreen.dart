@@ -17,6 +17,7 @@ import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/text_style_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/fullscreen_post_screen.dart';
+import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/owned_products_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/user_profile/subscreens/posted_posts_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reviews_states/add_phone_review_state.dart';
@@ -495,6 +496,25 @@ class _PostingReviewSubscreenState
             ),
           ),
         );
+        if (next.phoneReview.verificationRatio == 0) {
+          message = LocaleKeys
+              .youShouldVerifyYourOwnProductsByOpeningThePlatformThroughThePhoneYouWantToVerify
+              .tr();
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(message),
+              action: SnackBarAction(
+                label: LocaleKeys.seePost.tr(),
+                onPressed: () {
+                  Navigator.of(context).pushNamed(
+                    OwnedProductsScreen.routeName,
+                    arguments: OwnedProductsScreenArgs(userId: null),
+                  );
+                },
+              ),
+            ),
+          );
+        }
         _emptyFields();
       }
     });

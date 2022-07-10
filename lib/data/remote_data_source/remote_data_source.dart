@@ -152,6 +152,12 @@ abstract class RemoteDataSource {
     @Path() String phoneId,
   );
 
+  @PUT('/phones/{phoneId}/verify')
+  Future<VerifyResponse> verifyPhone(
+    @Path() String phoneId,
+    @Header(HttpHeaders.userAgentHeader) String userAgentHeader,
+  );
+
   @POST('/reviews/phone')
   Future<AddPhoneReviewResponse> addPhoneReview(
     @Body() AddPhoneReviewRequest request,
@@ -362,6 +368,12 @@ abstract class RemoteDataSource {
   Future<UserPressesFullscreenInCompanyReviewResponse>
       userPressesFullscreenInCompanyReview(
     @Path() String reviewId,
+  );
+
+  @PUT('/reviews/phone/{reviewId}/verify')
+  Future<VerifyResponse> verifyPhoneReview(
+    @Path() String reviewId,
+    @Header(HttpHeaders.userAgentHeader) String userAgentHeader,
   );
 
   @POST('/questions/phone')

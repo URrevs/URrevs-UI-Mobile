@@ -140,7 +140,7 @@ class _LeaderboardSubscreenState extends ConsumerState<LeaderboardSubscreen> {
       children: [
         Text(
           competition?.inProgress == true
-              ? LocaleKeys.rankingOfUsersInTheCompetition.tr()
+              ? LocaleKeys.rankingOfUsersInTheCompetition.tr() + ':'
               : LocaleKeys.usersRanking.tr(),
           style: TextStyleManager.s18w700,
         ),

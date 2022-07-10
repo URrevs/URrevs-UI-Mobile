@@ -77,6 +77,7 @@ class _ProductProfileScreenState extends ConsumerState<ProductProfileScreen>
     Phone phone = Phone(
       id: widget.screenArgs.phoneId,
       name: widget.screenArgs.phoneName,
+      verificationRatio: null,
     );
     switch (_tabController.index) {
       case 0: //reviews

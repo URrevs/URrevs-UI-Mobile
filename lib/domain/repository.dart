@@ -119,12 +119,14 @@ class Repository {
     return null;
   }
 
-  Future<String?> get _webUserAgent async {
+  Future<String> get _webUserAgent async {
     try {
       await FlutterUserAgent.init();
-      return FlutterUserAgent.webViewUserAgent;
-    } on PlatformException {
-      return null;
+      final userAgent = FlutterUserAgent.webViewUserAgent;
+      if (userAgent == null) throw Exception();
+      return userAgent;
+    } catch (e) {
+      return '';
     }
   }
 
@@ -356,11 +358,19 @@ class Repository {
     });
   }
 
+  Future<Either<Failure, double>> verifyPhone(String phoneId) {
+    return _tryAndCatch(() async {
+      final response =
+          await _remoteDataSource.verifyPhone(phoneId, await _webUserAgent);
+      return response.verificationRatio;
+    });
+  }
+
   Future<Either<Failure, AddPhoneReviewReturnedVals>> addPhoneReview(
       AddPhoneReviewRequest request) {
     return _tryAndCatch(() async {
       final response = await _remoteDataSource.addPhoneReview(
-          request, await _webUserAgent ?? '');
+          request, await _webUserAgent);
       return response.addPhoneReviewReturnedVals;
     });
   }
@@ -624,6 +634,14 @@ class Repository {
       String reviewId) {
     return _tryAndCatch(() async {
       await _remoteDataSource.userPressesFullscreenInCompanyReview(reviewId);
+    });
+  }
+
+  Future<Either<Failure, double>> verifyPhoneReview(String reviewId) {
+    return _tryAndCatch(() async {
+      final response = await _remoteDataSource.verifyPhoneReview(
+          reviewId, await _webUserAgent);
+      return response.verificationRatio;
     });
   }
 

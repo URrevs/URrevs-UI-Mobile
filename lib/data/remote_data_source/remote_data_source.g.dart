@@ -415,6 +415,23 @@ class _RemoteDataSource implements RemoteDataSource {
   }
 
   @override
+  Future<VerifyResponse> verifyPhone(phoneId, userAgentHeader) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'user-agent': userAgentHeader};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<VerifyResponse>(
+            Options(method: 'PUT', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/phones/${phoneId}/verify',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = VerifyResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<AddPhoneReviewResponse> addPhoneReview(
       request, userAgentHeader) async {
     const _extra = <String, dynamic>{};
@@ -1061,6 +1078,23 @@ class _RemoteDataSource implements RemoteDataSource {
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value =
         UserPressesFullscreenInCompanyReviewResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<VerifyResponse> verifyPhoneReview(reviewId, userAgentHeader) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'user-agent': userAgentHeader};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<VerifyResponse>(
+            Options(method: 'PUT', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/reviews/phone/${reviewId}/verify',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = VerifyResponse.fromJson(_result.data!);
     return value;
   }
 

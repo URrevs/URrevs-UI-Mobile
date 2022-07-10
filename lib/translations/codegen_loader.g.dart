@@ -325,7 +325,16 @@ class CodegenLoader extends AssetLoader{
   "doYouReallyWantToLeave": "هل حقا تريد المغادرة؟",
   "thisWillCauseTheDataYouEnteredToBeErased": "هذا سوف يتسبب في مسح البيانات التي أدخلتها",
   "yes": "نعم",
-  "no": "لا"
+  "no": "لا",
+  "thisReviewIsVerifiedBy": "هذه المراجعة موثقة بنسبة",
+  "thisReviewIsFromAnApplePhone": "هذه المراجعة من احدي هواتف أبل",
+  "verifyPhone": "طلب توثيق الهاتف",
+  "verifyReview": "طلب توثيق المراجعة",
+  "thisPhoneHasBeenAddedToOwnedProductsThroughAnApplePhone": "تمت إضافة هذا الهاتف للمنتجات الممتلكة من خلال هاتف أبل",
+  "youMustOpenTheApplicationFromTheDeviceYouWantToVerifyYourReviewOnIt": "يجب ان تقوم بفتح التطبيق من خلال الجهاز الذي تريد توثيق مراجعته",
+  "youShouldVerifyYourOwnProductsByOpeningThePlatformThroughThePhoneYouWantToVerify": "يجب ان تقوم بتوثيق منتاجاتك الممتلكة عن طريق فتح المنصة من خلال الهاتف المراد توثيقه",
+  "verifyYourProducts": "وثق منتجاتك",
+  "thisPhoneIsVerifiedBy": "هذا الهاتف موثق بنسبة"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -638,7 +647,16 @@ static const Map<String,dynamic> en = {
   "doYouReallyWantToLeave": "Do you really want to leave?",
   "thisWillCauseTheDataYouEnteredToBeErased": "This will cause the data you entered to be erased",
   "yes": "Yes",
-  "no": "No"
+  "no": "No",
+  "thisReviewIsVerifiedBy": "This review is verified by",
+  "thisReviewIsFromAnApplePhone": "This review is from an Apple phone",
+  "verifyPhone": "Verify phone",
+  "verifyReview": "Verify review",
+  "thisPhoneHasBeenAddedToOwnedProductsThroughAnApplePhone": "This phone has been added to owned products through an Apple phone",
+  "youMustOpenTheApplicationFromTheDeviceYouWantToVerifyYourReviewOnIt": "You must open the application from the device you want to verify your review on it",
+  "youShouldVerifyYourOwnProductsByOpeningThePlatformThroughThePhoneYouWantToVerify": "You should verify your own products by opening the platform through the phone you want to verify",
+  "verifyYourProducts": "Verify your products",
+  "thisPhoneIsVerifiedBy": "This phone is verified by"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

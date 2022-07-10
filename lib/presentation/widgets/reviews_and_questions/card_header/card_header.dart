@@ -23,6 +23,7 @@ class CardHeader extends StatelessWidget {
     required this.postId,
     required this.targetType,
     required this.postContentType,
+    this.verificationRatio,
     this.usedInReportCard = false,
   })  : assert(usedInReportCard || targetType != null),
         assert(usedInReportCard || postId != null),
@@ -55,6 +56,7 @@ class CardHeader extends StatelessWidget {
   final TargetType? targetType;
   final PostContentType? postContentType;
   final bool usedInReportCard;
+  final double? verificationRatio;
 
   @override
   Widget build(BuildContext context) {
@@ -89,6 +91,7 @@ class CardHeader extends StatelessWidget {
                   postedDate: postedDate,
                   usedSinceDate: usedSinceDate,
                   views: views,
+                  verificationRatio: verificationRatio,
                 ),
               ],
             ),
@@ -99,6 +102,8 @@ class CardHeader extends StatelessWidget {
               postId: postId!,
               targetType: targetType!,
               userId: userId,
+              targetId: targetId,
+              verificationRatio: verificationRatio,
             ),
         ],
       ),

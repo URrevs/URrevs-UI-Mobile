@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:urrevs_ui_mobile/app/app.dart';
 import 'package:urrevs_ui_mobile/app/dependency_injection.dart';
@@ -26,6 +27,8 @@ void main() async {
 
     final PendingDynamicLinkData? initialLink =
         await FirebaseDynamicLinks.instance.getInitialLink();
+
+    await dotenv.load();
 
     runApp(
       EasyLocalization(

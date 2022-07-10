@@ -4,8 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:urrevs_ui_mobile/app/extensions.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/color_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/enums.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/icons_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/language_manager.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/verified_mark.dart';
 
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
@@ -16,6 +18,7 @@ class CardHeaderSubtitle extends StatelessWidget {
     required this.postedDate,
     required this.usedSinceDate,
     required this.views,
+    required this.verificationRatio,
   }) : super(key: key);
 
   /// The date where the review was posted.
@@ -27,11 +30,23 @@ class CardHeaderSubtitle extends StatelessWidget {
   /// How many times this review was viewed.
   final int? views;
 
+  final double? verificationRatio;
+
   Padding _buildDot() {
     return Padding(
       padding: EdgeInsets.only(right: 4.w, left: 4.w, bottom: 4.h),
       child: Icon(IconsManager.dot, size: 4.sp, color: ColorManager.black),
     );
+  }
+
+  VerificationStatus get verificationStatus {
+    if (verificationRatio == 0 || verificationRatio == null) {
+      return VerificationStatus.unverified;
+    } else if (verificationRatio == -1) {
+      return VerificationStatus.iphone;
+    } else {
+      return VerificationStatus.verified;
+    }
   }
 
   @override
@@ -98,18 +113,15 @@ class CardHeaderSubtitle extends StatelessWidget {
               flex: 20,
               child: Text(numberFormat.format(views), style: style),
             )
-          ],_buildDot(),
-           3.horizontalSpace,
-          true? Tooltip(
-            message: "هذه المراجعة موثقة بنسبة 33%",
-            child: Padding(
-              padding:  EdgeInsets.only(bottom: 5.h),
-              child: Icon(Icons.check_circle,
-              color: ColorManager.blue,
-              size: 16.sp,
-                  ),
+          ],
+          if (verificationStatus != VerificationStatus.unverified) ...[
+            _buildDot(),
+            3.horizontalSpace,
+            VerifiedMark(
+              verificationRatio: verificationRatio!,
+              isPhone: false,
             ),
-          ): SizedBox(),
+          ],
         ],
       ),
     );

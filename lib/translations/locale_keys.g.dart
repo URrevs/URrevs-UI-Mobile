@@ -311,5 +311,14 @@ abstract class  LocaleKeys {
   static const thisWillCauseTheDataYouEnteredToBeErased = 'thisWillCauseTheDataYouEnteredToBeErased';
   static const yes = 'yes';
   static const no = 'no';
+  static const thisReviewIsVerifiedBy = 'thisReviewIsVerifiedBy';
+  static const thisReviewIsFromAnApplePhone = 'thisReviewIsFromAnApplePhone';
+  static const verifyPhone = 'verifyPhone';
+  static const verifyReview = 'verifyReview';
+  static const thisPhoneHasBeenAddedToOwnedProductsThroughAnApplePhone = 'thisPhoneHasBeenAddedToOwnedProductsThroughAnApplePhone';
+  static const youMustOpenTheApplicationFromTheDeviceYouWantToVerifyYourReviewOnIt = 'youMustOpenTheApplicationFromTheDeviceYouWantToVerifyYourReviewOnIt';
+  static const youShouldVerifyYourOwnProductsByOpeningThePlatformThroughThePhoneYouWantToVerify = 'youShouldVerifyYourOwnProductsByOpeningThePlatformThroughThePhoneYouWantToVerify';
+  static const verifyYourProducts = 'verifyYourProducts';
+  static const thisPhoneIsVerifiedBy = 'thisPhoneIsVerifiedBy';
 
 }

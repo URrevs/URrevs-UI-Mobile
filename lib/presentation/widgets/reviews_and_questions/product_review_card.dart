@@ -317,6 +317,7 @@ class ProductReviewCard extends ConsumerWidget {
                   targetType: TargetType.phone,
                   postContentType: PostContentType.review,
                   postId: reviewId,
+                  verificationRatio: review.verificationRatio,
                 ),
                 10.verticalSpace,
                 ReviewCardBody(

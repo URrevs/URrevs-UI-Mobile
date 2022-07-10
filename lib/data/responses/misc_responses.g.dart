@@ -47,3 +47,15 @@ Map<String, dynamic> _$GetPostsForHomeScreenResponseToJson(
   writeNotNull('total', instance.postsIds);
   return val;
 }
+
+VerifyResponse _$VerifyResponseFromJson(Map<String, dynamic> json) =>
+    VerifyResponse(
+      success: json['success'] as bool,
+      verificationRatio: (json['verificationRatio'] as num).toDouble(),
+    );
+
+Map<String, dynamic> _$VerifyResponseToJson(VerifyResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'verificationRatio': instance.verificationRatio,
+    };

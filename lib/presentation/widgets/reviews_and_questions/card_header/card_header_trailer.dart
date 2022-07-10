@@ -12,6 +12,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/providers.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/providers_parameters.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/authentication_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/reports_states/report_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/verify_state.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/send_report_dialog.dart';
 
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
@@ -19,18 +20,22 @@ import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 /// Builds the trailing part of the header.
 /// It contains a [PopupMenuButton] that shows "I don't like this"
 class CardHeaderTrailer extends ConsumerStatefulWidget {
-  const CardHeaderTrailer({
-    Key? key,
-    required this.postId,
-    required this.targetType,
-    required this.postContentType,
-    required this.userId,
-  }) : super(key: key);
+  const CardHeaderTrailer(
+      {Key? key,
+      required this.postId,
+      required this.targetType,
+      required this.postContentType,
+      required this.userId,
+      required this.targetId,
+      required this.verificationRatio})
+      : super(key: key);
 
   final String postId;
   final TargetType targetType;
   final PostContentType postContentType;
   final String userId;
+  final String targetId;
+  final double? verificationRatio;
 
   @override
   ConsumerState<CardHeaderTrailer> createState() => _CardHeaderTrailerState();
@@ -56,6 +61,11 @@ class _CardHeaderTrailerState extends ConsumerState<CardHeaderTrailer> {
     parentPostId: null,
   );
 
+  late final VerifyProviderParams _verifyProviderParams = VerifyProviderParams(
+    phoneId: widget.targetId,
+    userId: widget.userId,
+  );
+
   void _onPressingIDontLikeThis() {
     controller.hideMenu();
     ref
@@ -78,6 +88,21 @@ class _CardHeaderTrailerState extends ConsumerState<CardHeaderTrailer> {
     );
   }
 
+  void _onPressingVerify() {
+    controller.hideMenu();
+    ref
+        .read(verifyProvider(_verifyProviderParams).notifier)
+        .verifyPhoneReview(widget.postId);
+  }
+
+  bool get showVerify =>
+      widget.userId == ref.currentUser?.id &&
+      widget.postContentType == PostContentType.review &&
+      widget.targetType == TargetType.phone &&
+      widget.verificationRatio == 0;
+
+  bool get showReportAndDontLike => widget.userId != ref.currentUser?.id;
+
   @override
   Widget build(BuildContext context) {
     ref.addErrorListener(
@@ -93,58 +118,116 @@ class _CardHeaderTrailerState extends ConsumerState<CardHeaderTrailer> {
         );
       }
     });
-    final authState =
-        ref.watch(authenticationProvider) as AuthenticationLoadedState;
-    if (authState.user.id == widget.userId) {
-      return SizedBox();
-    }
-    return CustomPopupMenu(
-      controller: controller,
-      pressType: PressType.singleClick,
-      verticalMargin: -6.h,
-      barrierColor: ColorManager.transparent,
-      showArrow: false,
-      menuBuilder: () => Card(
-        elevation: AppElevations.ev3,
-        shadowColor: ColorManager.grey,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.r),
-        ),
-        child: Padding(
-          padding: EdgeInsets.all(8.sp),
-          child: SizedBox(
-            width: 170.w,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                InkWell(
-                  onTap: _onPressingIDontLikeThis,
-                  borderRadius: BorderRadius.circular(15.r),
-                  child: Text(
-                    LocaleKeys.iDontLikeThis.tr(),
-                    style: TextStyleManager.s16w700,
-                    textAlign: TextAlign.center,
+    ref.listen(verifyProvider(_verifyProviderParams), (previous, next) {
+      if (next is VerifyLoadedState && next.verificationRatio == 0) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(LocaleKeys
+                .youMustOpenTheApplicationFromTheDeviceYouWantToVerifyYourReviewOnIt
+                .tr()),
+            duration: Duration(seconds: 6),
+          ),
+        );
+      }
+    });
+    if (showReportAndDontLike) {
+      return CustomPopupMenu(
+        controller: controller,
+        pressType: PressType.singleClick,
+        verticalMargin: -6.h,
+        barrierColor: ColorManager.transparent,
+        showArrow: false,
+        menuBuilder: () => Card(
+          elevation: AppElevations.ev3,
+          shadowColor: ColorManager.grey,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.r),
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(8.sp),
+            child: SizedBox(
+              width: 170.w,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  InkWell(
+                    onTap: _onPressingIDontLikeThis,
+                    borderRadius: BorderRadius.circular(15.r),
+                    child: Text(
+                      LocaleKeys.iDontLikeThis.tr(),
+                      style: TextStyleManager.s16w700,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
-                ),
-                5.verticalSpace,
-                Divider(),
-                5.verticalSpace,
-                InkWell(
-                  onTap: _onPressingReport,
-                  borderRadius: BorderRadius.circular(15.r),
-                  child: Text(
-                    LocaleKeys.report.tr(),
-                    style: TextStyleManager.s16w700,
-                    textAlign: TextAlign.center,
+                  5.verticalSpace,
+                  Divider(),
+                  5.verticalSpace,
+                  InkWell(
+                    onTap: _onPressingReport,
+                    borderRadius: BorderRadius.circular(15.r),
+                    child: Text(
+                      LocaleKeys.report.tr(),
+                      style: TextStyleManager.s16w700,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
-                ),
-              ],
+                  if (widget.userId == ref.currentUser?.id &&
+                      widget.postContentType == PostContentType.review &&
+                      widget.targetType == TargetType.phone &&
+                      widget.verificationRatio == 0) ...[
+                    5.verticalSpace,
+                    Divider(),
+                    5.verticalSpace,
+                    InkWell(
+                      onTap: _onPressingVerify,
+                      borderRadius: BorderRadius.circular(15.r),
+                      child: Text(
+                        LocaleKeys.verifyReview.tr(),
+                        style: TextStyleManager.s16w700,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ],
+                ],
+              ),
             ),
           ),
         ),
-      ),
-      child: Icon(IconsManager.more, size: 26.sp),
-    );
+        child: Icon(IconsManager.more, size: 26.sp),
+      );
+    } else if (showVerify) {
+      return CustomPopupMenu(
+        controller: controller,
+        pressType: PressType.singleClick,
+        verticalMargin: -6.h,
+        barrierColor: ColorManager.transparent,
+        showArrow: false,
+        menuBuilder: () => Card(
+          elevation: AppElevations.ev3,
+          shadowColor: ColorManager.grey,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.r),
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(8.sp),
+            child: SizedBox(
+              width: 170.w,
+              child: InkWell(
+                onTap: _onPressingVerify,
+                borderRadius: BorderRadius.circular(15.r),
+                child: Text(
+                  LocaleKeys.verifyReview.tr(),
+                  style: TextStyleManager.s16w700,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+          ),
+        ),
+        child: Icon(IconsManager.more, size: 26.sp),
+      );
+    }
+    return SizedBox();
   }
 
   @override

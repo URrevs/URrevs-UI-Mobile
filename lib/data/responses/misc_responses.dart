@@ -75,3 +75,17 @@ class GetPostsForHomeScreenResponse extends BaseResponse {
   @override
   Map<String, dynamic> toJson() => _$GetPostsForHomeScreenResponseToJson(this);
 }
+
+@JsonSerializable()
+class VerifyResponse extends BaseResponse {
+  double verificationRatio;
+  VerifyResponse({
+    required bool success,
+    required this.verificationRatio,
+  }) : super(success: success);
+
+  factory VerifyResponse.fromJson(Map<String, Object?> json) =>
+      _$VerifyResponseFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$VerifyResponseToJson(this);
+}
