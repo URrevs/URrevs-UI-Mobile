@@ -33,6 +33,7 @@ import 'package:urrevs_ui_mobile/presentation/widgets/fields/txt_field.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/loading_widgets/company_fields_loading.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/confirmation_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/prompts/referral_code_help_dialog.dart';
+import 'package:urrevs_ui_mobile/presentation/widgets/prompts/review_encouragement_dialog.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/search_results_menu.dart';
 import 'package:urrevs_ui_mobile/presentation/widgets/stars_counter.dart';
 import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
@@ -273,9 +274,17 @@ class _PostingReviewSubscreenState
       collapsedHeight: 50.h,
       expandedHeight: 50.h,
       backgroundColor: ColorManager.transparent,
-      flexibleSpace: Container(
-        decoration: BoxDecoration(color: ColorManager.backgroundGrey),
-        child: StarsCounter(percentage: _percentage),
+      flexibleSpace: GestureDetector(
+        onTap: () {
+          showDialog(
+            context: context,
+            builder: (context) => ReviewEncouragementDialog(),
+          );
+        },
+        child: Container(
+          decoration: BoxDecoration(color: ColorManager.backgroundGrey),
+          child: StarsCounter(percentage: _percentage),
+        ),
       ),
     );
   }
@@ -504,7 +513,7 @@ class _PostingReviewSubscreenState
             SnackBar(
               content: Text(message),
               action: SnackBarAction(
-                label: LocaleKeys.seePost.tr(),
+                label: LocaleKeys.myProducts.tr(),
                 onPressed: () {
                   Navigator.of(context).pushNamed(
                     OwnedProductsScreen.routeName,

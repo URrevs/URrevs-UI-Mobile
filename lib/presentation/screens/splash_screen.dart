@@ -5,6 +5,7 @@ import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:urrevs_ui_mobile/presentation/resources/values_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/authentication_screen.dart';
 import 'package:urrevs_ui_mobile/presentation/screens/bottom_navigation_bar_screens/bottom_navigation_bar_container_screen.dart';
 
@@ -98,8 +99,20 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       }
     });
     return Scaffold(
-      body: Center(
-        child: URrevsLogo(),
+      body: Padding(
+        padding: AppEdgeInsets.screenPadding,
+        child: Column(
+          children: [
+            Expanded(
+              child: Center(
+                child: URrevsLogo(),
+              ),
+            ),
+            Center(
+              child: CircularProgressIndicator(),
+            )
+          ],
+        ),
       ),
     );
   }

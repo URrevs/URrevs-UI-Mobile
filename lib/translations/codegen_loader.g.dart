@@ -336,7 +336,8 @@ class CodegenLoader extends AssetLoader{
   "verifyYourProducts": "وثق منتجاتك",
   "thisPhoneIsVerifiedBy": "هذا الهاتف موثق بنسبة",
   "thisElementIsAlreadyVerified": "هذا العنصر تم توثيقه",
-  "ownedPhone": "هاتف ممتلك"
+  "ownedPhone": "هاتف ممتلك",
+  "myProducts": "My products"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -660,7 +661,8 @@ static const Map<String,dynamic> en = {
   "verifyYourProducts": "Verify your products",
   "thisPhoneIsVerifiedBy": "This phone is verified by",
   "thisElementIsAlreadyVerified": "This element is already verified",
-  "ownedPhone": "Owned phone"
+  "ownedPhone": "Owned phone",
+  "myProducts": "منتجاتي"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

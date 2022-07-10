@@ -28,7 +28,7 @@ class MyCustomEnMessages implements timeago.LookupMessages {
   @override
   String months(int months) => '${months}mo';
   @override
-  String aboutAYear(int year) => '${year}y';
+  String aboutAYear(int year) => '${year}mo';
   @override
   String years(int years) => '${years}y';
   @override

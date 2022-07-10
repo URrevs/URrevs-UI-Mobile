@@ -322,5 +322,6 @@ abstract class  LocaleKeys {
   static const thisPhoneIsVerifiedBy = 'thisPhoneIsVerifiedBy';
   static const thisElementIsAlreadyVerified = 'thisElementIsAlreadyVerified';
   static const ownedPhone = 'ownedPhone';
+  static const myProducts = 'myProducts';
 
 }
