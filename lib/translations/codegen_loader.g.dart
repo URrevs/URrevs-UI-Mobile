@@ -337,7 +337,12 @@ class CodegenLoader extends AssetLoader{
   "thisPhoneIsVerifiedBy": "هذا الهاتف موثق بنسبة",
   "thisElementIsAlreadyVerified": "هذا العنصر تم توثيقه",
   "ownedPhone": "هاتف ممتلك",
-  "myProducts": "My products"
+  "myProducts": "My products",
+  "deleteAccount": "طلب حذف الحساب",
+  "cancelDeleteAccountRequest": "الغاء طلب حذف الحساب",
+  "thisWillCauseYourAccountToBeErasedAndYouWillNotBeAbleToRecoverItAgain": "سوف يتسبب ذلك في مسح حسابك ولن تستطيع استرداده مرة اخرى",
+  "areYouSure": "هل أنت متأكد",
+  "yourRequestWillBeReviewedAndProcessedAsSoonAsPossible": "سوف يتم مراجعة طلبك وتنفيذه في اقرب"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -662,7 +667,12 @@ static const Map<String,dynamic> en = {
   "thisPhoneIsVerifiedBy": "This phone is verified by",
   "thisElementIsAlreadyVerified": "This element is already verified",
   "ownedPhone": "Owned phone",
-  "myProducts": "منتجاتي"
+  "myProducts": "منتجاتي",
+  "deleteAccount": "Delete account",
+  "cancelDeleteAccountRequest": "Cancel delete account request",
+  "thisWillCauseYourAccountToBeErasedAndYouWillNotBeAbleToRecoverItAgain": "This will cause your account to be erased and you will not be able to recover it again",
+  "areYouSure": "Are you sure",
+  "yourRequestWillBeReviewedAndProcessedAsSoonAsPossible": "Your request will be reviewed and processed as soon as possible"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

@@ -321,5 +321,10 @@
   "thisPhoneIsVerifiedBy": "This phone is verified by",
   "thisElementIsAlreadyVerified": "This element is already verified",
   "ownedPhone": "Owned phone",
-  "myProducts": "منتجاتي"
+  "myProducts": "منتجاتي",
+  "deleteAccount": "Delete account",
+  "cancelDeleteAccountRequest": "Cancel delete account request",
+  "thisWillCauseYourAccountToBeErasedAndYouWillNotBeAbleToRecoverItAgain": "This will cause your account to be erased and you will not be able to recover it again",
+  "areYouSure": "Are you sure",
+  "yourRequestWillBeReviewedAndProcessedAsSoonAsPossible": "Your request will be reviewed and processed as soon as possible"
 }

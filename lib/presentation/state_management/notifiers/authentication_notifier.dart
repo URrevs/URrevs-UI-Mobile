@@ -22,6 +22,7 @@ class AuthenticationNotifier extends StateNotifier<AuthenticationState> {
         user: returnedVals.user,
         refCode: returnedVals.refCode,
         admin: returnedVals.admin,
+        requestedDelete: returnedVals.requestedDelete,
       );
     });
   }
@@ -40,6 +41,8 @@ class AuthenticationNotifier extends StateNotifier<AuthenticationState> {
         user: returnedVals.user,
         refCode: returnedVals.refCode,
         admin: returnedVals.admin,
+        requestedDelete: returnedVals.requestedDelete,
+        
       );
     });
   }
@@ -58,6 +61,7 @@ class AuthenticationNotifier extends StateNotifier<AuthenticationState> {
         user: returnedVals.user,
         refCode: returnedVals.refCode,
         admin: returnedVals.admin,
+        requestedDelete: returnedVals.requestedDelete,
       );
     });
   }

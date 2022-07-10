@@ -20,6 +20,7 @@ class ItemTile extends StatelessWidget {
     required this.onTap,
     this.showDivider = false,
     this.trailing,
+    this.color,
     Key? key,
   })  : assert(iconData == null || imageUrl == null),
         assert(title != null || titleWidget != null),
@@ -46,6 +47,8 @@ class ItemTile extends StatelessWidget {
 
   final Widget? titleWidget;
 
+  final Color? color;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -68,7 +71,7 @@ class ItemTile extends StatelessWidget {
                 )
               : null,
           leading: iconData != null
-              ? Icon(iconData, size: 40.sp)
+              ? Icon(iconData, size: 40.sp, color: color)
               : Avatar(
                   imageUrl: imageUrl,
                   radius: AppRadius.companyLogo,

@@ -30,6 +30,7 @@ class AuthenticationResponse extends BaseResponse {
       refCode: userSubResponse.refCode,
       exp: exp,
       admin: admin,
+      requestedDelete: userSubResponse.requestedDelete,
     );
   }
 

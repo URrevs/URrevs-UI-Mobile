@@ -13,6 +13,7 @@ UserSubResponse _$UserSubResponseFromJson(Map<String, dynamic> json) =>
       picture: json['picture'] as String?,
       points: json['points'] as int,
       refCode: json['refCode'] as String,
+      requestedDelete: json['requestedDelete'] as bool,
     );
 
 Map<String, dynamic> _$UserSubResponseToJson(UserSubResponse instance) {
@@ -30,6 +31,7 @@ Map<String, dynamic> _$UserSubResponseToJson(UserSubResponse instance) {
   writeNotNull('picture', instance.picture);
   val['points'] = instance.points;
   val['refCode'] = instance.refCode;
+  val['requestedDelete'] = instance.requestedDelete;
   return val;
 }
 

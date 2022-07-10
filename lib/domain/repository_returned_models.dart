@@ -21,11 +21,13 @@ class AuthReturnedVals {
   String refCode;
   int exp;
   bool admin;
+  bool requestedDelete;
   AuthReturnedVals({
     required this.user,
     required this.refCode,
     required this.exp,
     required this.admin,
+    required this.requestedDelete,
   });
 }
 

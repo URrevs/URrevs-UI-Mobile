@@ -10,6 +10,7 @@ import 'package:urrevs_ui_mobile/domain/models/user.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/strings_manager.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/authentication_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/companies_notifiers/get_all_companies_notifier.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/delete_data_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/get_current_user_image_url_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/get_info_about_latest_update_notifier.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/notifiers/get_owned_phones_notifier.dart';
@@ -45,6 +46,7 @@ import 'package:urrevs_ui_mobile/presentation/state_management/providers_paramet
 import 'package:urrevs_ui_mobile/presentation/state_management/states/authentication_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/companies_states/get_all_companies_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/companies_states/get_company_statistical_info_state.dart';
+import 'package:urrevs_ui_mobile/presentation/state_management/states/delete_data_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_current_user_image_url_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_info_about_latest_update_state.dart';
 import 'package:urrevs_ui_mobile/presentation/state_management/states/get_owned_phones_state.dart';
@@ -366,6 +368,13 @@ final closeReportProvider = StateNotifierProvider.autoDispose
 final verifyProvider = StateNotifierProvider.autoDispose
     .family<VerifyNotifier, VerifyState, VerifyProviderParams>(
         (ref, params) => VerifyNotifier(phoneId: params.phoneId));
+
+final deleteDataProvider =
+    StateNotifierProvider<DeleteDataNotifier, DeleteDataState>((ref) =>
+        DeleteDataNotifier(
+            requestedInitialState:
+                (ref.watch(authenticationProvider) as AuthenticationLoadedState)
+                    .requestedDelete));
 
 // posts and interactions providers
 

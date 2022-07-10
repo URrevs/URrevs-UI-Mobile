@@ -1021,6 +1021,18 @@ class Repository {
     });
   }
 
+  Future<Either<Failure, void>> undoDeleteData() {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.undoDeleteData();
+    });
+  }
+
+  Future<Either<Failure, void>> deleteData() {
+    return _tryAndCatch(() async {
+      await _remoteDataSource.deleteData();
+    });
+  }
+
   Future<Either<Failure, void>> reportPhoneReview(
       String reviewId, ReportSocialItemRequest request) {
     return _tryAndCatch(() async {

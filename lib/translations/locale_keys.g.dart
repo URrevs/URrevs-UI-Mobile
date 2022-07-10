@@ -323,5 +323,10 @@ abstract class  LocaleKeys {
   static const thisElementIsAlreadyVerified = 'thisElementIsAlreadyVerified';
   static const ownedPhone = 'ownedPhone';
   static const myProducts = 'myProducts';
+  static const deleteAccount = 'deleteAccount';
+  static const cancelDeleteAccountRequest = 'cancelDeleteAccountRequest';
+  static const thisWillCauseYourAccountToBeErasedAndYouWillNotBeAbleToRecoverItAgain = 'thisWillCauseYourAccountToBeErasedAndYouWillNotBeAbleToRecoverItAgain';
+  static const areYouSure = 'areYouSure';
+  static const yourRequestWillBeReviewedAndProcessedAsSoonAsPossible = 'yourRequestWillBeReviewedAndProcessedAsSoonAsPossible';
 
 }

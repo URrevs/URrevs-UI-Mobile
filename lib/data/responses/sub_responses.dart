@@ -27,6 +27,7 @@ class UserSubResponse {
   String? picture;
   int points;
   String refCode;
+  bool requestedDelete;
 
   UserSubResponse({
     required this.id,
@@ -34,6 +35,7 @@ class UserSubResponse {
     this.picture,
     required this.points,
     required this.refCode,
+    required this.requestedDelete,
   });
 
   User get userModel => User(

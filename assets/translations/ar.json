@@ -321,5 +321,10 @@
   "thisPhoneIsVerifiedBy": "هذا الهاتف موثق بنسبة",
   "thisElementIsAlreadyVerified": "هذا العنصر تم توثيقه",
   "ownedPhone": "هاتف ممتلك",
-  "myProducts": "My products"
+  "myProducts": "My products",
+  "deleteAccount": "طلب حذف الحساب",
+  "cancelDeleteAccountRequest": "الغاء طلب حذف الحساب",
+  "thisWillCauseYourAccountToBeErasedAndYouWillNotBeAbleToRecoverItAgain": "سوف يتسبب ذلك في مسح حسابك ولن تستطيع استرداده مرة اخرى",
+  "areYouSure": "هل أنت متأكد",
+  "yourRequestWillBeReviewedAndProcessedAsSoonAsPossible": "سوف يتم مراجعة طلبك وتنفيذه في اقرب"
 }

@@ -20,10 +20,12 @@ class AuthenticationLoadedState extends AuthenticationState {
   final User user;
   final String refCode;
   final bool admin;
+  final bool requestedDelete;
   AuthenticationLoadedState({
     required this.user,
     required this.refCode,
     required this.admin,
+    required this.requestedDelete,
   });
   @override
   List<Object?> get props => [];

@@ -603,8 +603,16 @@ abstract class RemoteDataSource {
   @GET('/competitions/rank')
   Future<GetMyRankInCompetitionResponse> getMyRankInCompetition();
 
+  // MISC API
+
   @GET('/home/recommended')
   Future<GetPostsForHomeScreenResponse> getPostsForHomeScreen();
+
+  @PUT('/misc/mydata/delete/undo')
+  Future<BaseResponse> undoDeleteData();
+
+  @POST('/misc/mydata/delete')
+  Future<BaseResponse> deleteData();
 
   // REPORTS API
   @POST('/reports/review/phone/{reviewId}')
