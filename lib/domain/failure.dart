@@ -53,6 +53,9 @@ class ServerErrorMessages {
   static const String questionOrAnswerNotFound = 'question or answer not found';
   static const String parentNotFound = 'parent not found';
   static const String alreadyVerified = 'already verified';
+  static const String notAMobileDevice = 'not a mobile device';
+  static const String userAlreadyLoggedInUsingMobileBefore =
+      'user already logged in using mobile before';
   // static const String trackAlreadyHated = 'track already hated';
   // static const String trackAlreadySeemored = 'track already seemored';
   // static const String trackAlreadyFullscreened = 'track already fullscreened';
@@ -116,6 +119,9 @@ class ServerErrorMessages {
             LocaleKeys.dateOfOwnershipPrecedesDateOfIssue.tr(),
         ServerErrorMessages.alreadyVerified:
             LocaleKeys.thisElementIsAlreadyVerified.tr(),
+        ServerErrorMessages.notAMobileDevice: notAMobileDevice,
+        ServerErrorMessages.userAlreadyLoggedInUsingMobileBefore:
+            userAlreadyLoggedInUsingMobileBefore,
       };
 
   static List<String> get _noResultFailures => [
@@ -142,6 +148,8 @@ class ServerErrorMessages {
         noLikes,
         alreadyAccepted,
         notAccepted,
+        notAMobileDevice,
+        userAlreadyLoggedInUsingMobileBefore,
         // trackAlreadyHated,
         // trackAlreadySeemored,
         // trackAlreadyFullscreened,
@@ -278,8 +286,7 @@ extension DioErrorFailure on DioError {
       name: 'dio_error',
       parameters: {
         'status_code': response?.statusCode,
-        'data': response?.data,
-        'error': toString(),
+        'data': response?.data.toString(),
       },
     );
     switch (type) {
