@@ -54,6 +54,7 @@ class ServerErrorMessages {
   static const String parentNotFound = 'parent not found';
   static const String alreadyVerified = 'already verified';
   static const String notAMobileDevice = 'not a mobile device';
+  static const String tooManyUnverified = 'too many unverified';
   static const String userAlreadyLoggedInUsingMobileBefore =
       'user already logged in using mobile before';
   // static const String trackAlreadyHated = 'track already hated';
@@ -122,6 +123,9 @@ class ServerErrorMessages {
         ServerErrorMessages.notAMobileDevice: notAMobileDevice,
         ServerErrorMessages.userAlreadyLoggedInUsingMobileBefore:
             userAlreadyLoggedInUsingMobileBefore,
+        ServerErrorMessages.tooManyUnverified: LocaleKeys
+            .reviewYourPhoneCurrentlyInUseOrVerifyYourUnverifiedReviews
+            .tr(),
       };
 
   static List<String> get _noResultFailures => [
