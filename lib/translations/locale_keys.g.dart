@@ -330,5 +330,6 @@ abstract class  LocaleKeys {
   static const yourRequestWillBeReviewedAndProcessedAsSoonAsPossible = 'yourRequestWillBeReviewedAndProcessedAsSoonAsPossible';
   static const retry = 'retry';
   static const deleteRequestIsCancelledSuccessfully = 'deleteRequestIsCancelledSuccessfully';
+  static const reviewYourPhoneCurrentlyInUseOrVerifyYourUnverifiedReviews = 'reviewYourPhoneCurrentlyInUseOrVerifyYourUnverifiedReviews';
 
 }

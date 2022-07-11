@@ -179,7 +179,7 @@ class CodegenLoader extends AssetLoader{
   "disclaimer": "السعر والمواصفات قد لا تكون دقيقة.",
   "markedAsAcceptedPrompt": "الشخص الذي طرح السؤال قام بتحديد هذه الاجابة كأفضل اجابة مقبولة علي سؤاله.",
   "referralCodeHelpPrompt": "قم بادخال كود الدعوة الخاص بمن دعاك للموقع.\nعند استخدامك لكود الدعوة الخاص بصديقك سوف تحصل انت وصديقك علي نقاط المساعدة.",
-  "howToWinPrompt": "تستطيع تجميع نقاط المساعدة عن طريق الاتي:\n1. قم بارسال رابط الدعوة الخاص بك لاصدقائك، وعندما يقوموا بنشر مراجعات خاصة بهم سوف تحصل انت وأصدقائك علي نقاط المساعدة.\n2. عند قيامك باضافة مراجعة علي منتجاتك، كلما كانت مراجعتك مميزة ومليئة بالتفاصيل سوف تحصل علي نقاط مساعدة أكثر.\n3. عند قيامك بالرد علي اسئلة المستتخدمين المطروحة علي منتجاتك الممتلكة، في حالة قبول صاحب السؤال ردك كاجابة مفيدة له.\nعند حصولك علي اعجاب علي مراجعاتك أو أسئلتك المطروحة.\n4. عند حصولك علي تصويت علي اجاباتك عن الاسئلة المطروحة علي منتجاتك الممتلكة.\n5. عند قيامك بتسجيل دخولك عن طريق ",
+  "howToWinPrompt": "تستطيع تجميع نقاط المساعدة عن طريق الاتي:\n1. قم بارسال رابط الدعوة الخاص بك لاصدقائك، وعندما يقوموا بنشر مراجعات خاصة بهم سوف تحصل انت وأصدقائك علي نقاط المساعدة.\n2. عند قيامك باضافة مراجعة علي منتجاتك، كلما كانت مراجعتك مميزة ومليئة بالتفاصيل سوف تحصل علي نقاط مساعدة أكثر.\n3. عند قيامك بالرد علي اسئلة المستتخدمين المطروحة علي منتجاتك الممتلكة، في حالة قبول صاحب السؤال ردك كاجابة مفيدة له.\n4. عند حصولك علي اعجاب علي مراجعاتك أو أسئلتك المطروحة.\n5. عند حصولك علي تصويت علي اجاباتك عن الاسئلة المطروحة علي منتجاتك الممتلكة.\n6. عند قيامك بتوثيق مراجعتك علي منتج ممتلك عن طريق فتح المنصة من خلال هذا المنتج ثم توثيق امتلاكك له من صفحة المنتجات الممتلكة.\n7. عند قيامك بتسجيل دخولك عن طريق ",
   "howToWinPromptTitle": "يمكنك الربح عن طريق تجميع اكبر عدد من نقاط المساعدة خلال مدة المسابقة.",
   "ourMobileApp": "تطبيقنا المحمول.",
   "howToWinPrompt2": "بعد انتهاء مدة المسابقة سوف يحصل اصحاب المراكز الاولي علي جوائز.",
@@ -344,7 +344,8 @@ class CodegenLoader extends AssetLoader{
   "areYouSure": "هل أنت متأكد",
   "yourRequestWillBeReviewedAndProcessedAsSoonAsPossible": "سوف يتم مراجعة طلبك وتنفيذه في اقرب وقت",
   "retry": "إعادة المحاولة",
-  "deleteRequestIsCancelledSuccessfully": "تم الغاء الطلب بنجاح"
+  "deleteRequestIsCancelledSuccessfully": "تم الغاء الطلب بنجاح",
+  "reviewYourPhoneCurrentlyInUseOrVerifyYourUnverifiedReviews": "راجع هاتفك المستخدم حالياً أو قم بتوثيق مراجعاتك الغير موثقة"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -507,11 +508,11 @@ static const Map<String,dynamic> en = {
   "addACompetition": "Add a compeition",
   "theLastCompetitionTookPlaceIn": "The last competition took place in",
   "competitionPrize": "Contest's prize:",
-  "reviewEncouragement": "The more unique and detailed your review, the more points you will get.",
+  "reviewEncouragement": "The more unique and detailed your review is, the more points you will get.",
   "disclaimer": "Price and specifications may not be accurate.",
   "markedAsAcceptedPrompt": "The person who asked the question selected this answer as the best acceptable answer to their question.",
   "referralCodeHelpPrompt": "Enter the invitation code for the person who invited you to the platform.\nWhen you use your friend's invitation code, you and your friend will get help points.",
-  "howToWinPrompt": "You can collect help points by:\n1. Send your invite link to your friends, and when they post reviews of thei products, you and your friends will get helping points.\n2. When you add a review to your products, the more unique and detailed your review will be, the more points you will get.\n3. When you respond to users' questions about your owned products, after the question owner accepts your response as a useful answer to him.\n4. When you get admiration for your reviews or questions asked.\n5. When you get a vote on your answers to the questions asked about your owned products.\n6. When you log in with  ",
+  "howToWinPrompt": "You can collect help points by:\n1. Send your invite link to your friends, and when they post reviews of thei products, you and your friends will get helping points.\n2. When you add a review to your products, the more unique and detailed your review will be, the more points you will get.\n3. When you respond to users' questions about your owned products, after the question owner accepts your response as a useful answer to him.\n4. When you get likes or upvotes for your reviews or questions asked.\n5. When you get a vote on your answers to the questions asked about your owned products.\n6. When you verify your review on a owned product by opening the platform through this product and then verifying your ownership of it from the owned products screen.\n7. When you log in with  ",
   "howToWinPromptTitle": "You can win by accumulating the largest number of help points during the competition.",
   "ourMobileApp": "Our Mobile App.",
   "howToWinPrompt2": "After the competition ends, the first place winners will receive prizes.",
@@ -676,7 +677,8 @@ static const Map<String,dynamic> en = {
   "areYouSure": "Are you sure",
   "yourRequestWillBeReviewedAndProcessedAsSoonAsPossible": "Your request will be reviewed and processed as soon as possible",
   "retry": "Retry",
-  "deleteRequestIsCancelledSuccessfully": "Delete request is cancelled successfully"
+  "deleteRequestIsCancelledSuccessfully": "Delete request is cancelled successfully",
+  "reviewYourPhoneCurrentlyInUseOrVerifyYourUnverifiedReviews": "Review your phone currently in use or verify your unverified reviews"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }
