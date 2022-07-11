@@ -129,7 +129,8 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
 
   List<Widget> get otherUserProfileListItems => [
         ItemTile(
-          title: LocaleKeys.reviews.tr(),
+          title: LocaleKeys.reviews.tr()[0].toUpperCase() +
+              LocaleKeys.reviews.tr().substring(1),
           iconData: Icons.rate_review_outlined,
           onTap: () {
             Navigator.of(context).pushNamed(
