@@ -69,11 +69,14 @@ class _AuthenticationScreenState extends ConsumerState<AuthenticationScreen> {
               horizontal: 15.w,
               vertical: 12.h,
             ),
-            textStyle: TextStyleManager.s14w700.copyWith(
+          ),
+          child: Text(
+            LocaleKeys.toggleLanguageButtonText.tr(),
+            style: TextStyleManager.s14w700.copyWith(
               fontFamily: FontConstants.tajawal,
+              color: ColorManager.elevatedButtonTextColor,
             ),
           ),
-          child: Text(LocaleKeys.toggleLanguageButtonText.tr()),
         ),
       ),
     );
