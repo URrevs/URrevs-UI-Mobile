@@ -419,7 +419,7 @@ static const Map<String,dynamic> en = {
   "tabBarReview": "Review",
   "tabBarReviews": "Reviews",
   "tabBarSpecs": "Specs",
-  "tabBarQuestionsAndAnswers": "Questions and Answers",
+  "tabBarQuestionsAndAnswers": "Q & A",
   "addOwnedProduct": "Add owned product",
   "addQuestion": "Add question",
   "addReview": "Add review",
