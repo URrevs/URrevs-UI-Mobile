@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -495,6 +496,7 @@ class _PostingReviewSubscreenState
     ref.listen(addPhoneReviewProvider(_addReviewProviderParams),
         (previous, next) {
       if (next is AddPhoneReviewLoadedState) {
+        FirebaseAnalytics.instance.logEvent(name: 'adding_review');
         String message =
             '${LocaleKeys.postedSuccessfully.tr()}. ${LocaleKeys.youHaveEarned.tr()} ${next.earnedPoints} ${LocaleKeys.point.tr()}';
         ScaffoldMessenger.of(context).showSnackBar(

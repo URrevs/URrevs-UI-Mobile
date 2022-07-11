@@ -144,12 +144,12 @@ class _CardFooterButtonBarState extends ConsumerState<CardFooterButtonBar> {
         postContentType: widget.postType.postContentType,
       );
       ref.read(postProvider(_postProviderParams).notifier).incrementShares();
-      FirebaseAnalytics.instance.logShare(
-        contentType: widget.postType.name,
-        itemId: widget.postId,
-        method: 'unknown',
-      );
     }
+    FirebaseAnalytics.instance.logShare(
+      contentType: widget.postType.name,
+      itemId: widget.postId,
+      method: 'unknown',
+    );
   }
 
   @override

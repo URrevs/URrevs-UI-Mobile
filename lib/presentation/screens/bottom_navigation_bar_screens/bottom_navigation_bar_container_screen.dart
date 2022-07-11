@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
@@ -48,10 +49,8 @@ class BottomNavigationBarContainerScreenArgs {
 }
 
 class BottomNavigationBarContainerScreen extends ConsumerStatefulWidget {
-  BottomNavigationBarContainerScreen(this.screenArgs, {Key? key})
-      : super(key: key) {
-    print('in bottom nav bar screne constructor');
-  }
+  const BottomNavigationBarContainerScreen(this.screenArgs, {Key? key})
+      : super(key: key);
 
   final BottomNavigationBarContainerScreenArgs screenArgs;
 
@@ -98,6 +97,9 @@ class _BottomNavigationBarContainerScreenState
   }
 
   void _setCurrentIndex(int i) async {
+    if (_currentIndex == BottomNavBarIndeces.homeSubscreen) {
+      FirebaseAnalytics.instance.logEvent(name: 'home_screen_view');
+    }
     if (_currentIndex == BottomNavBarIndeces.postingSubscreen) {
       bool? leave = await showDialog(
         context: context,
@@ -171,7 +173,7 @@ class _BottomNavigationBarContainerScreenState
   @override
   void initState() {
     super.initState();
-    print('entered initState');
+    FirebaseAnalytics.instance.logEvent(name: 'home_screen_view');
     Future.delayed(
       Duration.zero,
       ref.read(givePointsToUserProvider.notifier).givePointsToUser,

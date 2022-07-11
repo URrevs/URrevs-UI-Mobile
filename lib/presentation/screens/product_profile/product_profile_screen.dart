@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -118,6 +119,7 @@ class _ProductProfileScreenState extends ConsumerState<ProductProfileScreen>
   @override
   void initState() {
     super.initState();
+    FirebaseAnalytics.instance.logEvent(name: 'product_profile_view');
     _tabController = TabController(length: 3, vsync: this, initialIndex: 1);
     _tabController.addListener(() => setState(() {}));
   }

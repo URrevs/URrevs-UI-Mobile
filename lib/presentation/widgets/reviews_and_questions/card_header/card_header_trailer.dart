@@ -1,4 +1,5 @@
 import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -111,6 +112,7 @@ class _CardHeaderTrailerState extends ConsumerState<CardHeaderTrailer> {
     );
     ref.listen(reportProvider(_reportPostProviderParams), (previous, next) {
       if (next is ReportLoadedState) {
+        FirebaseAnalytics.instance.logEvent(name: 'verify_review');
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(LocaleKeys.successfullyReported.tr()),

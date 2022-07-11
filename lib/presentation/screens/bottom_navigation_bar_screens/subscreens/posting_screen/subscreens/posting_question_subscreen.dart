@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -150,6 +151,7 @@ class _PostingQuestionSubscreenState
     );
     ref.listen(addQuestionProvider, (previous, next) {
       if (next is AddQuestionLoadedState) {
+        FirebaseAnalytics.instance.logEvent(name: 'adding_question');
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(LocaleKeys.postedSuccessfully.tr()),

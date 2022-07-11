@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -53,6 +54,7 @@ class InvitationCodeDialog extends StatelessWidget {
         await FirebaseDynamicLinks.instance.buildShortLink(dynamicLinkParams);
 
     Share.shareWithResult(dynamicLink.shortUrl.toString());
+    FirebaseAnalytics.instance.logEvent(name: 'share_referral_code');
   }
 
   @override
