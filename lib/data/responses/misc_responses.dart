@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:urrevs_ui_mobile/app/branch_vars.dart';
 
 import 'package:urrevs_ui_mobile/data/responses/sub_responses.dart';
 import 'package:urrevs_ui_mobile/domain/models/company_review.dart';
@@ -50,9 +51,11 @@ class GetPostsForHomeScreenResponse extends BaseResponse {
     ];
 
     // handle the case where total field is not sent
-    // if (postsIds == null) {
-    //   return allPosts..shuffle();
-    // }
+    if (BranchVars.isProduction) {
+      if (postsIds == null) {
+        return allPosts..shuffle();
+      }
+    }
 
     List<Post> arrangedPosts = [];
 
