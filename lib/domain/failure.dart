@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
@@ -273,6 +274,14 @@ extension DioErrorFailure on DioError {
   String? get statusMessage => response?.data['status'];
 
   Failure get failure {
+    FirebaseAnalytics.instance.logEvent(
+      name: 'dio_error',
+      parameters: {
+        'status_code': response?.statusCode,
+        'data': response?.data,
+        'error': toString(),
+      },
+    );
     switch (type) {
       case DioErrorType.connectTimeout:
         return RetryFailure(LocaleKeys.connectionTimedOut.tr());
@@ -283,6 +292,14 @@ extension DioErrorFailure on DioError {
       case DioErrorType.cancel:
         return Failure(LocaleKeys.requestWasCancelled.tr());
       case DioErrorType.other:
+        FirebaseCrashlytics.instance.recordError(
+          'Unknown network error',
+          StackTrace.current,
+          fatal: true,
+          information: [
+            DiagnosticsNode.message(toString()),
+          ],
+        );
         debugPrint(toString());
         return RetryFailure(LocaleKeys.unknownNetworkError.tr());
       case DioErrorType.response:

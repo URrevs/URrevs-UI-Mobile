@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 class PartialErrorWidget extends StatelessWidget {
   const PartialErrorWidget({
@@ -17,11 +19,11 @@ class PartialErrorWidget extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Partial error widget'),
+            Text(LocaleKeys.somethingWentWrong.tr()),
             if (retryLastRequest)
               ElevatedButton(
                 onPressed: onRetry,
-                child: Text('Retry'),
+                child: Text(LocaleKeys.retry.tr()),
               ),
           ],
         ),

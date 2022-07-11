@@ -119,6 +119,11 @@ class ColorManager {
         dark: Colors.white,
       ).pickColor();
 
+  static Color get competitionBannerTextColor => ColorPair(
+        light: Colors.white,
+        dark: Colors.white,
+      ).pickColor();
+
   static Color get transparent => ColorPair(
         light: Colors.transparent,
         dark: Colors.transparent,

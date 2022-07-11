@@ -53,13 +53,15 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       if (FirebaseAuth.instance.currentUser != null) {
         ref.read(authenticationProvider.notifier).loginToOurBackend();
       } else {
-        Navigator.of(context).pushNamedAndRemoveUntil(
-          AuthenticationScreen.routeName,
-          (route) => false,
-          arguments: AuthenticationScreenArgs(
-            initialLink: _initialLink,
-          ),
-        );
+        Timer(Duration(seconds: 1), () {
+          Navigator.of(context).pushNamedAndRemoveUntil(
+            AuthenticationScreen.routeName,
+            (route) => false,
+            arguments: AuthenticationScreenArgs(
+              initialLink: _initialLink,
+            ),
+          );
+        });
       }
     });
   }

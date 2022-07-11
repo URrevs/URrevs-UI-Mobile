@@ -64,7 +64,7 @@ class DatePickerField extends StatelessWidget {
         } else {
           showMonthPicker(
             context: context,
-            firstDate: DateTime(2007, 1),
+            firstDate: DateTime(2007, 6),
             lastDate: DateTime(DateTime.now().year, DateTime.now().month),
             initialDate: DateTime(DateTime.now().year, DateTime.now().month),
             locale: Localizations.localeOf(context),

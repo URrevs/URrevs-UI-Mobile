@@ -55,7 +55,10 @@ class GradButton extends StatelessWidget {
                     child: icon)
                 : icon,
             SizedBox(width: 5),
-            text,
+            Padding(
+              padding: EdgeInsets.only(top: 6.h),
+              child: text,
+            ),
           ],
         ),
       ),

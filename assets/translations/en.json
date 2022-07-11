@@ -298,7 +298,7 @@
   "hideContent": "Hide content",
   "additionalInfoShallBeEntered": "Additional Info shall be entered when choosing \"other\" as a complaint reason",
   "successfullyReported": "Successfully reported",
-  "itemsNotFound": "Items not found",
+  "itemsNotFound": "No items found",
   "noNewCompaniesFound": "No new companies found",
   "noNewProductsFound": "No new products found",
   "userIsAdminOrDoesntExist": "This user is an admin or doesn't exist",
@@ -321,10 +321,12 @@
   "thisPhoneIsVerifiedBy": "This phone is verified by",
   "thisElementIsAlreadyVerified": "This element is already verified",
   "ownedPhone": "Owned phone",
-  "myProducts": "منتجاتي",
+  "myProducts": "My products",
   "deleteAccount": "Delete account",
   "cancelDeleteAccountRequest": "Cancel delete account request",
   "thisWillCauseYourAccountToBeErasedAndYouWillNotBeAbleToRecoverItAgain": "This will cause your account to be erased and you will not be able to recover it again",
   "areYouSure": "Are you sure",
-  "yourRequestWillBeReviewedAndProcessedAsSoonAsPossible": "Your request will be reviewed and processed as soon as possible"
+  "yourRequestWillBeReviewedAndProcessedAsSoonAsPossible": "Your request will be reviewed and processed as soon as possible",
+  "retry": "Retry",
+  "deleteRequestIsCancelledSuccessfully": "Delete request is cancelled successfully"
 }

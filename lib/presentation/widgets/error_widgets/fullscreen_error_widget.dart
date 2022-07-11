@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 class FullscreenErrorWidget extends StatelessWidget {
   const FullscreenErrorWidget({
@@ -17,11 +19,11 @@ class FullscreenErrorWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Fullscreen error widget'),
+          Text(LocaleKeys.somethingWentWrong.tr()),
           if (retryLastRequest)
             ElevatedButton(
               onPressed: onRetry,
-              child: Text('Retry'),
+              child: Text(LocaleKeys.retry.tr()),
             ),
         ],
       ),

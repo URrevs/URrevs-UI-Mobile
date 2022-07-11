@@ -141,7 +141,7 @@ class InvitationCodeDialog extends StatelessWidget {
                     icon: Icon(
                       IconsManager.share,
                       size: 23.sp,
-                      color: ColorManager.white,
+                      color: ColorManager.elevatedButtonTextColor,
                     ),
                     width: 325.w,
                     reverseIcon: false,

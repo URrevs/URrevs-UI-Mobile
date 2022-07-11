@@ -31,16 +31,30 @@ class InteractionBodyText extends StatelessWidget {
   /// A function that is invoked to set the expanded state of the parent.
   final void Function(bool) setExpandedState;
 
+  bool get exceedingLineBreakLimit {
+    int lineBreaks = interactionText.split('').fold<int>(0, (total, char) {
+      if (char == '\n') return total + 1;
+      return total;
+    });
+    return lineBreaks >= AppNumericValues.interactionsMaxLines;
+  }
+
   bool get interactionTextCut =>
       !expanded &&
-      interactionText.length > AppNumericValues.interactionsMaxLetters;
+      (interactionText.length > AppNumericValues.interactionsMaxLetters ||
+          exceedingLineBreakLimit);
 
   bool get noNeedForExpansion =>
-      interactionText.length <= AppNumericValues.interactionsMaxLetters;
+      interactionText.length <= AppNumericValues.interactionsMaxLetters &&
+      !exceedingLineBreakLimit;
 
   String cutText(String text) {
     if (expanded) {
       return text;
+    }
+    if (indexOfLineBreakExceedingLimit != null) {
+      String substr = text.substring(0, indexOfLineBreakExceedingLimit);
+      return substr + "...";
     }
     if (text.length > AppNumericValues.interactionsMaxLetters) {
       String substr =
@@ -62,6 +76,15 @@ class InteractionBodyText extends StatelessWidget {
       onPressed: onTappingAnswerInCard,
       child: Text(seeMoreButtonText, style: TextStyleManager.s15w800),
     );
+  }
+
+  int? get indexOfLineBreakExceedingLimit {
+    int lineBreaks = 0;
+    for (int i = 0; i < interactionText.length; i++) {
+      if (interactionText[i] == '\n') lineBreaks++;
+      if (lineBreaks == AppNumericValues.interactionsMaxLines) return i;
+    }
+    return null;
   }
 
   @override

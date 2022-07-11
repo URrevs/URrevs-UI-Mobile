@@ -461,6 +461,17 @@ class _PostingReviewSubscreenState
                           hintText: LocaleKeys.invitationCode.tr(),
                           keyboardType: TextInputType.text,
                           fillColor: ColorManager.textFieldGrey,
+                          hasErrorMsg: true,
+                          errorMaxLines: 2,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) return null;
+                            if (RegExp(r'^[Uu][Rr][1-9][0-9]*$')
+                                .hasMatch(value)) {
+                              return null;
+                            }
+                            return LocaleKeys.theEnteredReferralCodeIsInvalid
+                                .tr();
+                          },
                         ),
                       ),
                     ),
@@ -539,7 +550,7 @@ class _PostingReviewSubscreenState
             height: 16.sp,
             width: 16.sp,
             child: CircularProgressIndicator(
-              color: ColorManager.white,
+              color: ColorManager.elevatedButtonTextColor,
               strokeWidth: 3,
             ),
           ),

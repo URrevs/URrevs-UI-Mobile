@@ -337,12 +337,14 @@ class CodegenLoader extends AssetLoader{
   "thisPhoneIsVerifiedBy": "هذا الهاتف موثق بنسبة",
   "thisElementIsAlreadyVerified": "هذا العنصر تم توثيقه",
   "ownedPhone": "هاتف ممتلك",
-  "myProducts": "My products",
+  "myProducts": "منتجاتي",
   "deleteAccount": "طلب حذف الحساب",
   "cancelDeleteAccountRequest": "الغاء طلب حذف الحساب",
   "thisWillCauseYourAccountToBeErasedAndYouWillNotBeAbleToRecoverItAgain": "سوف يتسبب ذلك في مسح حسابك ولن تستطيع استرداده مرة اخرى",
   "areYouSure": "هل أنت متأكد",
-  "yourRequestWillBeReviewedAndProcessedAsSoonAsPossible": "سوف يتم مراجعة طلبك وتنفيذه في اقرب"
+  "yourRequestWillBeReviewedAndProcessedAsSoonAsPossible": "سوف يتم مراجعة طلبك وتنفيذه في اقرب وقت",
+  "retry": "إعادة المحاولة",
+  "deleteRequestIsCancelledSuccessfully": "تم الغاء الطلب بنجاح"
 };
 static const Map<String,dynamic> en = {
   "urrevs": "URrevs",
@@ -644,7 +646,7 @@ static const Map<String,dynamic> en = {
   "hideContent": "Hide content",
   "additionalInfoShallBeEntered": "Additional Info shall be entered when choosing \"other\" as a complaint reason",
   "successfullyReported": "Successfully reported",
-  "itemsNotFound": "Items not found",
+  "itemsNotFound": "No items found",
   "noNewCompaniesFound": "No new companies found",
   "noNewProductsFound": "No new products found",
   "userIsAdminOrDoesntExist": "This user is an admin or doesn't exist",
@@ -667,12 +669,14 @@ static const Map<String,dynamic> en = {
   "thisPhoneIsVerifiedBy": "This phone is verified by",
   "thisElementIsAlreadyVerified": "This element is already verified",
   "ownedPhone": "Owned phone",
-  "myProducts": "منتجاتي",
+  "myProducts": "My products",
   "deleteAccount": "Delete account",
   "cancelDeleteAccountRequest": "Cancel delete account request",
   "thisWillCauseYourAccountToBeErasedAndYouWillNotBeAbleToRecoverItAgain": "This will cause your account to be erased and you will not be able to recover it again",
   "areYouSure": "Are you sure",
-  "yourRequestWillBeReviewedAndProcessedAsSoonAsPossible": "Your request will be reviewed and processed as soon as possible"
+  "yourRequestWillBeReviewedAndProcessedAsSoonAsPossible": "Your request will be reviewed and processed as soon as possible",
+  "retry": "Retry",
+  "deleteRequestIsCancelledSuccessfully": "Delete request is cancelled successfully"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

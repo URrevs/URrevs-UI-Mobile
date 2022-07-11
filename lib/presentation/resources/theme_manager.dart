@@ -42,7 +42,7 @@ class ThemeManager {
         ),
         floatingActionButtonTheme: FloatingActionButtonThemeData(
           backgroundColor: ColorManager.blue,
-          foregroundColor: ColorManager.white,
+          foregroundColor: ColorManager.elevatedButtonTextColor,
           extendedTextStyle: TextStyleManager.s14w700.copyWith(
             fontFamily: FontConstants.tajawal,
           ),
@@ -127,7 +127,7 @@ class ThemeManager {
         ),
         floatingActionButtonTheme: FloatingActionButtonThemeData(
           backgroundColor: ColorManager.blue,
-          foregroundColor: ColorManager.white,
+          foregroundColor: ColorManager.elevatedButtonTextColor,
           extendedTextStyle: TextStyleManager.s14w700.copyWith(
             fontFamily: FontConstants.tajawal,
           ),

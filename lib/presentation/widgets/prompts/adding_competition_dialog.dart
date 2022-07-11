@@ -247,7 +247,7 @@ class _AddingCompetitionDialogState
               height: 16.sp,
               width: 16.sp,
               child: CircularProgressIndicator(
-                color: ColorManager.white,
+                color: ColorManager.elevatedButtonTextColor,
                 strokeWidth: 3,
               ),
             ),

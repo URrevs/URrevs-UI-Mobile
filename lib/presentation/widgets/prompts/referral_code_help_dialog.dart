@@ -18,7 +18,6 @@ class ReferralCodeHelpDialog extends StatelessWidget {
       hasTitle: false,
       content: SizedBox(
         width: 170.w,
-        height: 115.h,
         child: Text(
     LocaleKeys.referralCodeHelpPrompt.tr(),
     style: TextStyleManager.s16w500,

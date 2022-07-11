@@ -104,7 +104,7 @@ class _OwnedProductsScreenState extends ConsumerState<OwnedProductsScreen>
       fabIcon: Icon(FontAwesomeIcons.plus, size: AppSize.s16),
       body: PagedListView(
         pagingController: _pagingController,
-        padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 10.h),
+        padding: AppEdgeInsets.screenPadding,
         builderDelegate: PagedChildBuilderDelegate<Phone>(
           itemBuilder: (context, phone, index) {
             return OwnedPhoneTile(
@@ -236,6 +236,7 @@ class _OwnedPhoneTileState extends ConsumerState<OwnedPhoneTile> {
             VerifiedMark(
               verificationRatio: widget.phone.verificationRatio!,
               isPhone: true,
+              size: 20.sp,
             ),
           ]
         ],

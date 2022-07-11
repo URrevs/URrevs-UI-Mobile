@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:urrevs_ui_mobile/translations/locale_keys.g.dart';
 
 class HorizontalListErrorWidget extends StatelessWidget {
   const HorizontalListErrorWidget({
@@ -18,11 +20,11 @@ class HorizontalListErrorWidget extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Something went wrong'),
+            Text(LocaleKeys.somethingWentWrong.tr()),
             if (retryLastRequest)
               ElevatedButton(
                 onPressed: onRetry,
-                child: Text('Retry'),
+                child: Text(LocaleKeys.retry.tr()),
               ),
           ],
         ),

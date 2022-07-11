@@ -321,10 +321,12 @@
   "thisPhoneIsVerifiedBy": "هذا الهاتف موثق بنسبة",
   "thisElementIsAlreadyVerified": "هذا العنصر تم توثيقه",
   "ownedPhone": "هاتف ممتلك",
-  "myProducts": "My products",
+  "myProducts": "منتجاتي",
   "deleteAccount": "طلب حذف الحساب",
   "cancelDeleteAccountRequest": "الغاء طلب حذف الحساب",
   "thisWillCauseYourAccountToBeErasedAndYouWillNotBeAbleToRecoverItAgain": "سوف يتسبب ذلك في مسح حسابك ولن تستطيع استرداده مرة اخرى",
   "areYouSure": "هل أنت متأكد",
-  "yourRequestWillBeReviewedAndProcessedAsSoonAsPossible": "سوف يتم مراجعة طلبك وتنفيذه في اقرب"
+  "yourRequestWillBeReviewedAndProcessedAsSoonAsPossible": "سوف يتم مراجعة طلبك وتنفيذه في اقرب وقت",
+  "retry": "إعادة المحاولة",
+  "deleteRequestIsCancelledSuccessfully": "تم الغاء الطلب بنجاح"
 }

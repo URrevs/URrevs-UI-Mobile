@@ -74,7 +74,7 @@ class CompetitionBanner extends ConsumerWidget {
                       textAlign: TextAlign.center,
                       text: TextSpan(
                         style: TextStyleManager.s22w500.copyWith(
-                          color: ColorManager.white,
+                          color: ColorManager.competitionBannerTextColor,
                           fontFamily: FontConstants.tajawal,
                         ),
                         children: [
@@ -88,7 +88,8 @@ class CompetitionBanner extends ConsumerWidget {
                                 prizeName,
                                 style: TextStyleManager.s22w900.copyWith(
                                   decoration: TextDecoration.underline,
-                                  color: ColorManager.white,
+                                  color:
+                                      ColorManager.competitionBannerTextColor,
                                   fontFamily: FontConstants.tajawal,
                                 ),
                               ),
@@ -233,7 +234,7 @@ class _CompetitionDeadlineState extends State<CompetitionDeadline> {
         _remainingTime,
         textAlign: TextAlign.center,
         style: TextStyleManager.s22w500.copyWith(
-          color: ColorManager.white,
+          color: ColorManager.competitionBannerTextColor,
           fontFamily: FontConstants.tajawal,
         ),
       ),

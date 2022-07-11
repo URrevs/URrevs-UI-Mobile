@@ -71,11 +71,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   ItemTile _buildDeleteDataTile() {
     ref.addErrorListener(provider: deleteDataProvider, context: context);
     ref.listen(deleteDataProvider, (previous, next) {
-      if (next is DeleteDataLoadedState && next.requested) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(LocaleKeys
-                .yourRequestWillBeReviewedAndProcessedAsSoonAsPossible
-                .tr())));
+      if (next is DeleteDataLoadedState) {
+        String message = next.requested
+            ? LocaleKeys.yourRequestWillBeReviewedAndProcessedAsSoonAsPossible
+                .tr()
+            : LocaleKeys.deleteRequestIsCancelledSuccessfully.tr();
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(message)));
       }
     });
     final state = ref.watch(deleteDataProvider);

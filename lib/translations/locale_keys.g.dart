@@ -328,5 +328,7 @@ abstract class  LocaleKeys {
   static const thisWillCauseYourAccountToBeErasedAndYouWillNotBeAbleToRecoverItAgain = 'thisWillCauseYourAccountToBeErasedAndYouWillNotBeAbleToRecoverItAgain';
   static const areYouSure = 'areYouSure';
   static const yourRequestWillBeReviewedAndProcessedAsSoonAsPossible = 'yourRequestWillBeReviewedAndProcessedAsSoonAsPossible';
+  static const retry = 'retry';
+  static const deleteRequestIsCancelledSuccessfully = 'deleteRequestIsCancelledSuccessfully';
 
 }

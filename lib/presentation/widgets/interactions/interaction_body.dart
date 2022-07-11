@@ -64,16 +64,26 @@ class InteractionBody extends ConsumerStatefulWidget {
 class _InteractionBodyState extends ConsumerState<InteractionBody> {
   bool _expanded = false;
 
+  bool get exceedingLineBreakLimit {
+    int lineBreaks = widget.replyText.split('').fold<int>(0, (total, char) {
+      if (char == '\n') return total + 1;
+      return total;
+    });
+    return lineBreaks >= AppNumericValues.interactionsMaxLines;
+  }
+
   /// Returns a boolean value representing whether the whole question text
   /// us shown or substrings of it.
   bool get textCut =>
-      widget.replyText.length > AppNumericValues.interactionsMaxLetters;
+      widget.replyText.length > AppNumericValues.interactionsMaxLetters ||
+      exceedingLineBreakLimit;
 
   /// Returns true when the card is at a state in which we don't need to make
   /// an expansion. This state is when the question text
   /// length is less than or equal collapsedMaxLetters.
   bool get noNeedForExpansion =>
-      widget.replyText.length <= AppNumericValues.interactionsMaxLetters;
+      widget.replyText.length <= AppNumericValues.interactionsMaxLetters &&
+      !exceedingLineBreakLimit;
 
   bool get isAnswer => widget.interactionType == InteractionType.answer;
 
