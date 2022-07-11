@@ -5,4 +5,6 @@ class BranchVars {
   static const String webDomain = 'urrevstest.netlify.app';
   static const String uriPrefix = 'https://urevs.page.link';
   static const String mockApiUrl = 'http://10.0.2.2:3000/';
+  static const bool isDevelopment = true;
+  static const bool isProduction = !isDevelopment;
 }
