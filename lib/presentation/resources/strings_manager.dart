@@ -1,5 +1,6 @@
 import 'package:faker/faker.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:urrevs_ui_mobile/app/branch_vars.dart';
 import 'package:urrevs_ui_mobile/app/extensions.dart';
 
 class StringsManager {
@@ -20,12 +21,14 @@ class StringsManager {
   static const String longestCompanyName = 'Sony Ericsson';
   static const String prizeImageLink =
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVmqetlFGRGEri6eONcKzyUluyk5LGFNNDXA&usqp=CAU';
-  static const String webDomain = 'urrevstest.netlify.app';
-  static const String uriPrefix = 'https://urevs.page.link';
+  static const String webDomain = BranchVars.webDomain;
+  static const String uriPrefix = BranchVars.uriPrefix;
   static const String packageName = 'com.urrevs.urrevsmobile';
   static const String awsBackendApi = 'https://urrevs.com/api';
-  static const String currentBackendApi = awsBackendApi;
-  static const String mockApiUrl = 'http://10.0.2.2:3000/';
+  static const String herokuBackendApi =
+      'https://urrevs-api-dev-mobile.herokuapp.com/';
+  static const String currentBackendApi = BranchVars.currentBackendApi;
+  static const String mockApiUrl = BranchVars.mockApiUrl;
 
   static String termsAndConditionsUrl(bool isArabic) => isArabic
       ? 'https://docs.google.com/document/d/e/2PACX-1vTG4kawFFmI0ku7erJPGiOlrp6gYW4Ybj-_qHFMSlTWqgI2dSTPYZPTraZh2MMzqxMn7KmZVL0QiOqJ/pub'
