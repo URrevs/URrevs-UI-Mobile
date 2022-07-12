@@ -62,8 +62,12 @@ class BottomNavigationBarContainerScreen extends ConsumerStatefulWidget {
 }
 
 class _BottomNavigationBarContainerScreenState
-    extends ConsumerState<BottomNavigationBarContainerScreen> {
+    extends ConsumerState<BottomNavigationBarContainerScreen>
+    with SingleTickerProviderStateMixin {
   late final StreamSubscription<PendingDynamicLinkData> _dynLinkSubs;
+
+  late final TabController _tabController =
+      TabController(vsync: this, length: 2);
 
   late int _currentIndex = widget.screenArgs.screenIndex;
 
@@ -76,7 +80,8 @@ class _BottomNavigationBarContainerScreenState
       case BottomNavBarIndeces.allProductsSubscreen:
         return AllProductsSubscreen();
       case BottomNavBarIndeces.postingSubscreen:
-        return PostingSubscreen(refCode: _refCode);
+        return PostingSubscreen(
+            refCode: _refCode, tabController: _tabController);
       case BottomNavBarIndeces.homeSubscreen:
         return HomeSubscreen();
       case BottomNavBarIndeces.leaderboardSubscreen:
@@ -93,6 +98,7 @@ class _BottomNavigationBarContainerScreenState
       context: context,
       showTabBar: showTabBar,
       imageUrl: ref.currentUser!.picture,
+      controller: _tabController,
     );
   }
 
@@ -160,6 +166,7 @@ class _BottomNavigationBarContainerScreenState
       while (!ModalRoute.of(context)!.isCurrent) {
         Navigator.of(context).pop();
       }
+      _tabController.animateTo(0);
       setState(() {
         _refCode = refCode;
         _currentIndex = BottomNavBarIndeces.postingSubscreen;
@@ -216,15 +223,12 @@ class _BottomNavigationBarContainerScreenState
         );
       }
     });
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: appBar,
-        body: SafeArea(child: currentPage),
-        bottomNavigationBar: BottomNavBar(
-          currentIndex: _currentIndex,
-          onTap: _setCurrentIndex,
-        ),
+    return Scaffold(
+      appBar: appBar,
+      body: SafeArea(child: currentPage),
+      bottomNavigationBar: BottomNavBar(
+        currentIndex: _currentIndex,
+        onTap: _setCurrentIndex,
       ),
     );
   }

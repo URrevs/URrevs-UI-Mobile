@@ -66,6 +66,7 @@ class AppBars {
     required BuildContext context,
     required bool showTabBar,
     required String? imageUrl,
+    required TabController controller,
   }) {
     return PreferredSize(
       preferredSize: Size.fromHeight(showTabBar ? 45.h + 45.h : 45.h),
@@ -88,6 +89,7 @@ class AppBars {
             ? PreferredSize(
                 preferredSize: Size.fromHeight(35.h),
                 child: TabBar(
+                  controller: controller,
                   tabs: [
                     Tab(text: LocaleKeys.tabBarReview.tr()),
                     Tab(text: LocaleKeys.tabBarQuestion.tr()),
