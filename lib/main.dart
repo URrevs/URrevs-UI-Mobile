@@ -20,7 +20,6 @@ void main() async {
     WidgetsFlutterBinding.ensureInitialized();
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp(
-      name: BranchVars.firebaseAppName,
       options: DefaultFirebaseOptions.currentPlatform,
     );
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
