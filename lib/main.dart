@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:urrevs_ui_mobile/app/app.dart';
+import 'package:urrevs_ui_mobile/app/branch_vars.dart';
 import 'package:urrevs_ui_mobile/app/dependency_injection.dart';
 import 'package:urrevs_ui_mobile/firebase_options.dart';
 import 'package:urrevs_ui_mobile/presentation/resources/assets_manager.dart';
@@ -19,6 +20,7 @@ void main() async {
     WidgetsFlutterBinding.ensureInitialized();
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp(
+      name: BranchVars.firebaseAppName,
       options: DefaultFirebaseOptions.currentPlatform,
     );
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
