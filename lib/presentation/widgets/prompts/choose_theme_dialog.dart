@@ -57,18 +57,6 @@ class _ChooseThemeModeState extends ConsumerState<ChooseThemeModeDialog> {
               ),
             ),
           ),
-          RadioListTile<ThemeMode>(
-            value: ThemeMode.system,
-            groupValue: _themeMode,
-            onChanged: _setThemeMode,
-            visualDensity: VisualDensity(horizontal: -4, vertical: -4),
-            title: Text(
-              LocaleKeys.systemTheme.tr(),
-              style: TextStyleManager.s16w400.copyWith(
-                color: ColorManager.black,
-              ),
-            ),
-          ),
         ],
       ),
     );

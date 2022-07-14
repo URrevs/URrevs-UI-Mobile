@@ -308,7 +308,8 @@ extension DioErrorFailure on DioError {
           StackTrace.current,
           fatal: true,
           information: [
-            DiagnosticsNode.message(toString()),
+            DiagnosticsNode.message('message: $message'),
+            DiagnosticsNode.message('error: $error'),
           ],
         );
         debugPrint(toString());
