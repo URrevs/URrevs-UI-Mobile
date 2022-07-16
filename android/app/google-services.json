@@ -127,22 +127,6 @@
           }
         },
         {
-          "client_id": "1037779383625-8nrmbam61p305pm4p7gk8nj7kqpd9em4.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.urrevs.urrevsmobile",
-            "certificate_hash": "82901674d464509e1c60349e66172e8763d4c852"
-          }
-        },
-        {
-          "client_id": "1037779383625-h0t2fghi5sm4jrjpovhs77idjg9nbjlc.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.urrevs.urrevsmobile",
-            "certificate_hash": "30ff2fdd9977513425d42697eabae6d01cbb5327"
-          }
-        },
-        {
           "client_id": "1037779383625-i46rhqhdrtl8hkbn15qhgr77nn9jbv17.apps.googleusercontent.com",
           "client_type": 3
         }
