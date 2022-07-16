@@ -3,3 +3,5 @@ flutter pub run easy_localization:generate -f keys -S "assets/translations" -O "
 flutter pub run build_runner build --delete-conflicting-outputs
 
 flutter build apk
+
+git merge --no-ff --no-commit dev
