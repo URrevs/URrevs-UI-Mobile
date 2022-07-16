@@ -23,7 +23,7 @@ class StringsManager {
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVmqetlFGRGEri6eONcKzyUluyk5LGFNNDXA&usqp=CAU';
   static const String webDomain = BranchVars.webDomain;
   static const String uriPrefix = BranchVars.uriPrefix;
-  static const String packageName = 'com.urrevs.urrevsmobile';
+  static const String packageName = BranchVars.packageName;
   static const String awsBackendApi = 'https://urrevs.com/api';
   static const String herokuBackendApi =
       'https://urrevs-api-dev-mobile.herokuapp.com/';
