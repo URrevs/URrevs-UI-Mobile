@@ -599,7 +599,7 @@ static const Map<String,dynamic> en = {
   "theEnteredReferralCodeIsInvalid": "The entered referral code is invalid.",
   "writeAReply": "Write a reply",
   "tillCompetitionEnds": "till competition ends",
-  "day": "da",
+  "day": "day",
   "hour": "hour",
   "minute": "minute",
   "lessThanAMinute": "Less than a minute",
