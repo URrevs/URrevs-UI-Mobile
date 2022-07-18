@@ -303,14 +303,11 @@ extension DioErrorFailure on DioError {
       case DioErrorType.cancel:
         return Failure(LocaleKeys.requestWasCancelled.tr());
       case DioErrorType.other:
+        FirebaseCrashlytics.instance.log('message: $message');
         FirebaseCrashlytics.instance.recordError(
           'Unknown network error',
           StackTrace.current,
           fatal: true,
-          information: [
-            DiagnosticsNode.message('message: $message'),
-            DiagnosticsNode.message('error: $error'),
-          ],
         );
         debugPrint(toString());
         return RetryFailure(LocaleKeys.unknownNetworkError.tr());
